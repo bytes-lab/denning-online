@@ -4,7 +4,6 @@ materialAdmin
 
 
         $stateProvider
-        
             //------------------------------
             // HOME
             //------------------------------
@@ -12,6 +11,37 @@ materialAdmin
             .state ('home', {
                 url: '/home',
                 templateUrl: 'views/home.html',
+                resolve: {
+                    loadPlugin: function($ocLazyLoad) {
+                        return $ocLazyLoad.load ([
+                            {
+                                name: 'css',
+                                insertBefore: '#app-level',
+                                files: [
+                                    'vendors/bower_components/fullcalendar/dist/fullcalendar.min.css',
+                                ]
+                            },
+                            {
+                                name: 'vendors',
+                                insertBefore: '#app-level-js',
+                                files: [
+                                    'vendors/sparklines/jquery.sparkline.min.js',
+                                    'vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js',
+                                    'vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js'
+                                ]
+                            }
+                        ])
+                    }
+                }
+            })        
+
+            //------------------------------
+            // OVERVIEW
+            //------------------------------
+
+            .state ('overview', {
+                url: '/overview',
+                templateUrl: 'views/overview.html',
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([
