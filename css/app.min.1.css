@@ -10595,17 +10595,20 @@ h6 small,
   }
 }
 
-#header-2 .search {
+#header .search {
   margin-bottom: 25px;
+  position: absolute;
+  left: 254px;
+  width: calc(100% - 520px);
 }
 
 @media (max-width: 767px) {
-  #header-2 .search {
+  #header .search {
     padding: 0 20px;
   }
 }
 
-#header-2 .search input[type="text"] {
+#header .search input[type="text"] {
   width: 100%;
   background: transparent;
   border: 0;
@@ -10616,33 +10619,33 @@ h6 small,
   padding: 6px 0 6px 30px;
 }
 
-#header-2 .search input[type="text"]::-moz-placeholder {
+#header .search input[type="text"]::-moz-placeholder {
   color: #ffffff;
   opacity: 1;
 }
 
-#header-2 .search input[type="text"]:-ms-input-placeholder {
+#header .search input[type="text"]:-ms-input-placeholder {
   color: #ffffff;
 }
 
-#header-2 .search input[type="text"]::-webkit-input-placeholder {
+#header .search input[type="text"]::-webkit-input-placeholder {
   color: #ffffff;
 }
 
-#header-2 .search:after {
+#header .search:after {
   background: #ffeb3b;
 }
 
-#header-2 .search .fg-line {
-  max-width: 500px;
+#header .search .fg-line {
+  /*max-width: 500px;*/
   position: relative;
 }
 
-#header-2 .search .fg-line:after {
+#header .search .fg-line:after {
   background: #ffeb3b;
 }
 
-#header-2 .search .fg-line:before {
+#header .search .fg-line:before {
   content: '\f1c3';
   font-family: 'Material-Design-Iconic-Font';
   position: absolute;

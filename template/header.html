@@ -10,11 +10,17 @@
     <li class="logo hidden-xs">
         <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)">Denning Online</a>
     </li>
-
+    <li>
+        <div class="search">
+            <div class="fg-line">
+                <input type="text" class="form-control" placeholder="Search for matters, contacts, properties ...">
+            </div>
+        </div>
+    </li>
     <li class="pull-right">
-        <ul class="top-menu">
-            <li id="top-search">
-                <a href="" data-ng-click="hctrl.openSearch()"><i class="tm-icon zmdi zmdi-search"></i></a>
+        <ul class="top-menu">            
+            <li style="margin-right: 30px;">
+                <a href=""><i class="tm-icon zmdi zmdi-filter-list"></i></a>
             </li>
             <li class="dropdown" uib-dropdown>
                 <a uib-dropdown-toggle href="">
