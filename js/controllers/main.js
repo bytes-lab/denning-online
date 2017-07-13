@@ -67,9 +67,6 @@ materialAdmin
             this.currentSkin = color;
         }
 
-
-
-
         var self = this;
 
         self.states        = [];
@@ -80,6 +77,7 @@ materialAdmin
         self.newState = newState;
         self.searchRes = {};
         self.selectedItem = '';
+        
         function newState(state) {
         }
 

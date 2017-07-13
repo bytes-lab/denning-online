@@ -24,13 +24,12 @@
                   md-item-text="item.display"
                   md-min-length="0"
                   ng-keypress="mactrl.searchKeyPressed($event)"
-                  placeholder="What is your favorite US state?">
+                  placeholder="Search for matters, contacts, properties ...">
                 <md-item-template>
                   <span md-highlight-text="mactrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
                 </md-item-template>
                 <md-not-found>
-                  No states matching "{{mactrl.searchText}}" were found.
-                  <a ng-click="mactrl.newState(mactrl.searchText)">Create a new one!</a>
+                  No results matching "{{mactrl.searchText}}" were found.
                 </md-not-found>
               </md-autocomplete>
             </div>
@@ -38,38 +37,8 @@
     </li>
     <li class="pull-right">
         <ul class="top-menu">            
-            <li style="margin-right: 15px;">
+            <li style="margin-right: 46px; min-width: 36px;">
                 <a href=""><i class="tm-icon zmdi zmdi-filter-list"></i></a>
-            </li>
-            <li class="dropdown" uib-dropdown>
-                <a uib-dropdown-toggle href="">
-                    <i class="tm-icon zmdi zmdi-email"></i>
-                    <i class="tmn-counts">6</i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
-                    <div class="listview">
-                        <div class="lv-header">
-                            Messages
-                        </div>
-                        <div class="lv-body">
-                            <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">{{ w.user }}</div>
-                                        <small class="lv-small">{{ w.text }}</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <a class="lv-footer" href="">View All</a>
-                    </div>
-                </div>
             </li>
             <li class="dropdown" uib-dropdown>
                 <a uib-dropdown-toggle href="">
