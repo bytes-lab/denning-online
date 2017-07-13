@@ -14,7 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-animate": "^1.4.8",
+    "angular-animate": "1.4.8",
+    "angular-chosen-localytics": "~1.0.7",
     "angular-bootstrap": "~0.14.3",
     "angular-farbtastic": "*",
     "angular-loading-bar": "~0.8.0",
@@ -47,11 +48,10 @@
     "summernote": "~0.6.7",
     "sweetalert": "~1.0.1",
     "Waves": "waves#~0.7.4",
-    "angular": "^1.6.5",
-    "ng-table": "~1",
-    "angular-material": "^1.1.4"
+    "angular": "1.4.7",
+    "ng-table": "~1"
   },
   "resolutions": {
-    "angular": "1.6.5"
+    "angular": "1.4.7"
   }
 }

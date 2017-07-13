@@ -3,7 +3,7 @@ materialAdmin
     // Base controller for common functions
     // =========================================================================
 
-    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService){
+    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q){
         //Welcome Message
         growlService.growl('Welcome back Mallinda!', 'inverse')
         
@@ -66,6 +66,107 @@ materialAdmin
         this.skinSwitch = function (color) {
             this.currentSkin = color;
         }
+
+
+
+
+        var self = this;
+
+        self.states        = [];
+        self.querySearch   = querySearch;
+        self.selectedItemChange = selectedItemChange;
+        self.searchTextChange   = searchTextChange;
+        self.searchKeyPressed = searchKeyPressed;
+        self.newState = newState;
+        self.searchRes = {};
+        self.selectedItem = '';
+        function newState(state) {
+        }
+
+        // ******************************
+        // Internal methods
+        // ******************************
+
+        /**
+         * Search for states... use $timeout to simulate
+         * remote dataservice call.
+         */
+
+        function searchKeyPressed(events, item) {
+            if(event.which == 13){
+                
+                selectedItemChange(self.selectedItem);
+            }
+        }
+        function querySearch (query) {
+
+            deferred = $q.defer();
+            if (query.trim() == ''){
+                $timeout( function () {deferred.resolve( [] )});
+                return deferred.promise;
+            }
+
+            // $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+
+            $http.get('http://43.252.215.81/denningwcf/v1/generalSearch/keyword?search=' + query)
+            .then(function(resp){
+                var results = [];
+                resp.data.forEach(function(item){
+                    results.push({
+                        value: item.keyword,
+                        display: item.keyword
+                    })
+                });
+                deferred.resolve( results ); 
+
+            })
+            return deferred.promise;
+        }
+
+        function searchTextChange(text) {
+          // $log.info('Text changed to ' + text);
+        }
+
+        function selectedItemChange(item) {
+            if(angular.isUndefined(item))
+                return;
+          $http.get('http://43.252.215.81/denningwcf/v2/generalSearch?search=' + item.value +'&category=2&isAutoComplete=1')
+            .then(function(resp){
+                self.searchRes = resp.data;
+                console.log(resp.data);
+            });
+        }
+
+        /**
+         * Build `states` list of key/value pairs
+         */ 
+        function loadAll() {
+
+            
+
+          // return allStates.split(/, +/g).map( function (state) {
+          //   return {
+          //     value: state.toLowerCase(),
+          //     display: state
+          //   };
+          // });
+        }
+
+        /**
+         * Create filter function for a query string
+         */
+        function createFilterFor(query) {
+          var lowercaseQuery = angular.lowercase(query);
+
+          return function filterFn(state) {
+            return (state.value.indexOf(lowercaseQuery) === 0);
+          };
+
+        }
+
+
+
+
     
     })
 

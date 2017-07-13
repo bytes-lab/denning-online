@@ -10599,7 +10599,7 @@ h6 small,
   margin-bottom: 25px;
   position: absolute;
   left: 254px;
-  width: calc(100% - 520px);
+  width: calc(100% - 505px);
 }
 
 @media (max-width: 767px) {

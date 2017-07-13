@@ -13,13 +13,32 @@
     <li>
         <div class="search">
             <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Search for matters, contacts, properties ...">
+                <!-- <input type="text" class="form-control" placeholder="Search for matters, contacts, properties ..."> -->
+                <md-autocomplete
+                  ng-disabled="false"
+                  md-selected-item="mactrl.selectedItem"
+                  md-search-text-change="mactrl.searchTextChange(mactrl.searchText)"
+                  md-search-text="mactrl.searchText"
+                  md-selected-item-change="mactrl.selectedItemChange(item)"
+                  md-items="item in mactrl.querySearch(mactrl.searchText)"
+                  md-item-text="item.display"
+                  md-min-length="0"
+                  ng-keypress="mactrl.searchKeyPressed($event)"
+                  placeholder="What is your favorite US state?">
+                <md-item-template>
+                  <span md-highlight-text="mactrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+                </md-item-template>
+                <md-not-found>
+                  No states matching "{{mactrl.searchText}}" were found.
+                  <a ng-click="mactrl.newState(mactrl.searchText)">Create a new one!</a>
+                </md-not-found>
+              </md-autocomplete>
             </div>
         </div>
     </li>
     <li class="pull-right">
         <ul class="top-menu">            
-            <li style="margin-right: 30px;">
+            <li style="margin-right: 15px;">
                 <a href=""><i class="tm-icon zmdi zmdi-filter-list"></i></a>
             </li>
             <li class="dropdown" uib-dropdown>
