@@ -33,14 +33,11 @@
                 </md-not-found>
               </md-autocomplete>
               <md-card ng-show="mactrl.showFilterCategory" style="margin: 0px" >
-                <section layout="row" layout-wrap layout-padding>
-                    <section flex="33"  ng-repeat="item in mactrl.searchFilterCategories">
-
-                        <md-checkbox ng-model="item.checked" aria-label="item.Category" ng-true-value="true" ng-false-value="false" class="" >
-                        {{item.Category}}
-                        </md-checkbox>
-                    </section>
-                </section>
+                <md-radio-group ng-model="mactrl.selectedSearchCategory" ng-init="mactrl.selectedSearchCategory=0" layout-wrap layout="row" layout-padding>
+                    <md-radio-button flex="30"  ng-repeat="item in mactrl.searchFilterCategories" ng-value="item.ID">
+                    {{item.Category}}
+                    </md-radio-button>
+                </md-radio-group>
               </md-card>
             <!-- </div> -->
         </div>

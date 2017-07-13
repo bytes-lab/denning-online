@@ -8,9 +8,7 @@ materialAdmin
             return $http.get('http://43.252.215.81/denningwcf/v1/generalSearch/category')
             .then(function(resp){
                 return resp.data;
-
             })
-            
         }
     }])
 

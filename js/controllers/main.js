@@ -72,14 +72,10 @@ materialAdmin
         searchFilterService.getFilter().then(function(data){
             self.searchFilterCategories = [];
             data.forEach(function(item){
-                var newItem = angular.copy(item);
-                item.checked = false;
                 self.searchFilterCategories.push(item);
             })
-
         })
         
-
         self.states        = [];
         self.querySearch   = querySearch;
         self.selectedItemChange = selectedItemChange;
@@ -102,12 +98,12 @@ materialAdmin
          */
 
         function searchKeyPressed(events, item) {
-            if(event.which == 13){
-                
+            if(event.which == 13){                
                 selectedItemChange(self.selectedItem);
             }
         }
         function querySearch (query) {
+            self.showFilterCategory = false;
 
             deferred = $q.defer();
             if (query.trim() == ''){
@@ -137,9 +133,11 @@ materialAdmin
         }
 
         function selectedItemChange(item) {
+            self.showFilterCategory = false;
+
             if(angular.isUndefined(item))
                 return;
-          $http.get('http://43.252.215.81/denningwcf/v2/generalSearch?search=' + item.value +'&category=2&isAutoComplete=1')
+            $http.get('http://43.252.215.81/denningwcf/v2/generalSearch?search=' + item.value +'&category=' + self.selectedSearchCategory + '&isAutoComplete=1')
             .then(function(resp){
                 self.searchRes = resp.data;
                 console.log(resp.data);
