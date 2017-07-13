@@ -5,7 +5,7 @@ materialAdmin
 
     .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchFilterService){
         //Welcome Message
-        growlService.growl('Welcome back Mallinda!', 'inverse')
+        growlService.growl('Welcome back Jason!', 'inverse')
         
         
         // Detact Mobile Browser
@@ -80,9 +80,10 @@ materialAdmin
         self.querySearch   = querySearch;
         self.selectedItemChange = selectedItemChange;
         self.searchTextChange   = searchTextChange;
-        self.searchKeyPressed = searchKeyPressed;
+        self.searchKeyPressed   = searchKeyPressed;
+        self.searchFilterChange = searchFilterChange;
         self.newState = newState;
-        self.searchRes = {};
+        self.searchRes = [];
         self.selectedItem = '';
 
         function newState(state) {
@@ -102,7 +103,14 @@ materialAdmin
                 selectedItemChange(self.selectedItem);
             }
         }
+
+        function searchFilterChange() {
+            self.showFilterCategory = false;
+            selectedItemChange(self.selectedItem);
+        }
+
         function querySearch (query) {
+
             self.showFilterCategory = false;
 
             deferred = $q.defer();
@@ -110,8 +118,6 @@ materialAdmin
                 $timeout( function () {deferred.resolve( [] )});
                 return deferred.promise;
             }
-
-            // $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
 
             $http.get('http://43.252.215.81/denningwcf/v1/generalSearch/keyword?search=' + query)
             .then(function(resp){
@@ -129,7 +135,9 @@ materialAdmin
         }
 
         function searchTextChange(text) {
-          // $log.info('Text changed to ' + text);
+            // console.log('Text changed to ' + text);
+            if (text.trim() == '')
+                self.searchRes = [];
         }
 
         function selectedItemChange(item) {
@@ -137,10 +145,25 @@ materialAdmin
 
             if(angular.isUndefined(item))
                 return;
+
             $http.get('http://43.252.215.81/denningwcf/v2/generalSearch?search=' + item.value +'&category=' + self.selectedSearchCategory + '&isAutoComplete=1')
             .then(function(resp){
-                self.searchRes = resp.data;
-                console.log(resp.data);
+
+                self.searchRes = resp.data.map(function(item){
+                    var newItem = angular.copy(item);
+                    try {
+                        newItem.parseJSON = JSON.parse(item.JSON);
+                    } catch(err) {
+                        newItem.parseJSON = '';
+                    }
+                    
+                    return newItem;
+                });
+
+                if ($state.current.name != 'search')
+                    $state.go('search');
+
+                console.log(self.searchRes);
             });
         }
 

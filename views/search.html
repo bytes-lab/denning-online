@@ -1,0 +1,33 @@
+<header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+    <aside id="chat" data-ng-include="'template/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
+    <section id="content">
+
+        <div class="container">
+          <md-card ng-if="mactrl.searchRes.length">
+          <md-list flex>       
+            <div ng-repeat="item in mactrl.searchRes">     
+                <md-list-item class="md-3-line" ng-click="null" ng-if="item.parseJSON!=''" style="padding: 10px;">
+                  <!-- <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" /> -->
+                  <div class="md-list-item-text" layout="column">
+                    <h3 ng-repeat="entry in item.parseJSON" ng-if="entry.value!='' && $first">
+                        {{entry.label}}: {{entry.value}}
+                    </h3>
+                    <p ng-repeat="entry in item.parseJSON" ng-if="entry.value!='' && !$first">
+                        {{entry.label}}: {{entry.value}}
+                    </p>
+                  </div>
+                </md-list-item>
+                <md-divider ng-if="!$last"></md-divider>
+            </div>
+          </md-list>           
+          </md-card>
+        </div>
+    </section>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>
