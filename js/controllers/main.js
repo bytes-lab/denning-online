@@ -3,7 +3,7 @@ materialAdmin
     // Base controller for common functions
     // =========================================================================
 
-    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q){
+    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchFilterService){
         //Welcome Message
         growlService.growl('Welcome back Mallinda!', 'inverse')
         
@@ -18,6 +18,8 @@ materialAdmin
             left: false,
             right: false
         }
+        // FilterList;
+        this.searchFilterCategories = [];
 
         // By default template has a boxed layout
         this.layoutType = localStorage.getItem('ma-layout-status');
@@ -66,8 +68,17 @@ materialAdmin
         this.skinSwitch = function (color) {
             this.currentSkin = color;
         }
-
         var self = this;
+        searchFilterService.getFilter().then(function(data){
+            self.searchFilterCategories = [];
+            data.forEach(function(item){
+                var newItem = angular.copy(item);
+                item.checked = false;
+                self.searchFilterCategories.push(item);
+            })
+
+        })
+        
 
         self.states        = [];
         self.querySearch   = querySearch;
@@ -77,7 +88,7 @@ materialAdmin
         self.newState = newState;
         self.searchRes = {};
         self.selectedItem = '';
-        
+
         function newState(state) {
         }
 

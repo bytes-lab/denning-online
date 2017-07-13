@@ -1,4 +1,18 @@
 materialAdmin
+    // =========================================================================
+    // Search Filter Data
+    // =========================================================================
+
+    .service('searchFilterService', ['$http', function($http){
+        this.getFilter = function() {
+            return $http.get('http://43.252.215.81/denningwcf/v1/generalSearch/category')
+            .then(function(resp){
+                return resp.data;
+
+            })
+            
+        }
+    }])
 
     // =========================================================================
     // Header Messages and Notifications list Data

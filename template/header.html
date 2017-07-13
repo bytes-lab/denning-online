@@ -12,7 +12,7 @@
     </li>
     <li>
         <div class="search">
-            <div class="fg-line">
+            <!-- <div class="fg-line"> -->
                 <!-- <input type="text" class="form-control" placeholder="Search for matters, contacts, properties ..."> -->
                 <md-autocomplete
                   ng-disabled="false"
@@ -32,13 +32,23 @@
                   No results matching "{{mactrl.searchText}}" were found.
                 </md-not-found>
               </md-autocomplete>
-            </div>
+              <md-card ng-show="mactrl.showFilterCategory" style="margin: 0px" >
+                <section layout="row" layout-wrap layout-padding>
+                    <section flex="33"  ng-repeat="item in mactrl.searchFilterCategories">
+
+                        <md-checkbox ng-model="item.checked" aria-label="item.Category" ng-true-value="true" ng-false-value="false" class="" >
+                        {{item.Category}}
+                        </md-checkbox>
+                    </section>
+                </section>
+              </md-card>
+            <!-- </div> -->
         </div>
     </li>
     <li class="pull-right">
         <ul class="top-menu">            
             <li style="margin-right: 46px; min-width: 36px;">
-                <a href=""><i class="tm-icon zmdi zmdi-filter-list"></i></a>
+                <a href="" ng-click="mactrl.showFilterCategory = !mactrl.showFilterCategory"><i class="tm-icon zmdi zmdi-filter-list"></i></a>
             </li>
             <li class="dropdown" uib-dropdown>
                 <a uib-dropdown-toggle href="">
