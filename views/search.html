@@ -14,7 +14,7 @@
                 <md-list-item class="md-3-line" ng-click="null" ng-if="item.parseJSON!=''" style="padding: 10px;">
                   <!-- <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" /> -->
                   <div class="md-list-item-text" layout="column">
-                    <h3 style="color: purple; font-style: bold;">{{ item.Title }}</h3>
+                    <h3 style="color: purple; font-weight: 700;">{{ item.Title }}</h3>
                     <p ng-repeat="entry in item.parseJSON" ng-if="entry.value!=''">
                         {{entry.label}}: {{entry.value}}
                     </p>

@@ -144,6 +144,7 @@ materialAdmin
 
         function searchTextChange(text) {
             // console.log('Text changed to ' + text);
+            self.selectedSearchCategory = 0;
             if (text.trim() == '')
                 self.searchRes = [];
         }
