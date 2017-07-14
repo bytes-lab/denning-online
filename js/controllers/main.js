@@ -3,7 +3,15 @@ materialAdmin
     // Base controller for common functions
     // =========================================================================
 
-    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchFilterService){
+    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchFilterService, $rootScope, Auth){
+
+        $rootScope.isAuthenticated = function () {
+            return Auth.isAuthenticated();
+        };
+        $rootScope.logout = function () {
+             Auth.logout();
+        };
+
         //Welcome Message
         growlService.growl('Welcome back Jason!', 'inverse')
         
@@ -146,7 +154,7 @@ materialAdmin
             if(angular.isUndefined(item))
                 return;
 
-            $http.get('http://43.252.215.81/denningwcf/v2/generalSearch?search=' + item.value +'&category=' + self.selectedSearchCategory + '&isAutoComplete=1')
+            $http.get('http://43.252.215.81/denningwcf/v1/generalSearch?search=' + item.value +'&category=' + self.selectedSearchCategory + '&isAutoComplete=1')
             .then(function(resp){
 
                 self.searchRes = resp.data.map(function(item){
@@ -199,7 +207,32 @@ materialAdmin
 
     
     })
+    .controller('loginCtrl', ['$rootScope', '$scope', 'Auth', '$window', function ($rootScope, $scope, Auth, $window) {
 
+        // $scope.toggleForgetPassword = function () {
+        //     $scope.forgetPassword = !$scope.forgetPassword;
+        // };
+
+        // $scope.removeAlert = function () {
+        //     $scope.loginAlert = null;
+        // };
+        var self = this;
+        self.login = 1;
+        self.register = 0;
+        self.forgot = 0;
+
+        self.doLogin = function (userData) {
+
+            return Auth.login(userData.email, userData.password)
+                .catch(function (err) {
+                    //err
+                })
+                .then(function () {
+                    // $state.go('home');
+                })
+        }
+
+    }])
 
     // =========================================================================
     // Header
@@ -418,20 +451,6 @@ materialAdmin
 
     })
 
-
-
-    //=================================================
-    // LOGIN
-    //=================================================
-
-    .controller('loginCtrl', function(){
-        
-        //Status
-    
-        this.login = 1;
-        this.register = 0;
-        this.forgot = 0;
-    })
 
 
     //=================================================

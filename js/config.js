@@ -5,6 +5,16 @@ materialAdmin
 
         $stateProvider
             //------------------------------
+            // LOGIN
+            //------------------------------
+
+            .state ('login', {
+                url: '/login',
+                controller: 'loginCtrl as lctrl',
+                templateUrl: 'views/login.html'                
+            })        
+
+            //------------------------------
             // HOME
             //------------------------------
 

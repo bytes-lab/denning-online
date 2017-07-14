@@ -12976,17 +12976,17 @@ a.thumbnail.active {
   margin-left: -50px;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.18);
 }
-body.login-content {
+.login-content {
   text-align: center;
 }
-body.login-content:after {
+.login-content:after {
   content: "";
   vertical-align: middle;
   display: inline-block;
   width: 1px;
   height: 100%;
 }
-body.login-content:before {
+.login-content:before {
   height: 50%;
   width: 100%;
   position: absolute;
