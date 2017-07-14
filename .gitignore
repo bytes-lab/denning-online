@@ -1,2 +1,2 @@
-/bower_components/*
-/vendors/bower_components/*
+#/bower_components/*
+#/vendors/bower_components/*

@@ -1,0 +1,15 @@
+{
+  "name": "angular-farbtastic",
+  "main": "./angular-farbtastic.js",
+  "dependencies": {},
+  "homepage": "https://github.com/schartier/angular-farbtastic",
+  "_release": "fddd579cb0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "fddd579cb07a1bab17dec27173a9d073a2322cb2"
+  },
+  "_source": "https://github.com/schartier/angular-farbtastic.git",
+  "_target": "*",
+  "_originalSource": "angular-farbtastic"
+}
