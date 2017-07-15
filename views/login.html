@@ -1,6 +1,10 @@
 <!-- Login -->
 <div class="login-content">
     <div class="lc-block" id="l-login" data-ng-class="{ 'toggled': lctrl.login === 1 }" data-ng-if="lctrl.login === 1">
+        <div ng-if="lctrl.errorMessage != ''" style="color: red">  
+            {{lctrl.errorMessage}}
+        </div>
+
         <div class="input-group m-b-20">
             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
             <div class="fg-line">

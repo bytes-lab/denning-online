@@ -5,13 +5,6 @@ materialAdmin
 
     .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchFilterService, $rootScope, Auth){
 
-        $rootScope.isAuthenticated = function () {
-            return Auth.isAuthenticated();
-        };
-        $rootScope.logout = function () {
-             Auth.logout();
-        };
-
         //Welcome Message
         growlService.growl('Welcome back Jason!', 'inverse')
         
@@ -41,7 +34,24 @@ materialAdmin
                 this.sidebarToggle.left = false;
             }
         }
-        
+        //Login Funcs
+
+        $rootScope.isAuthenticated = function () {
+            return Auth.isAuthenticated();
+        };
+        $rootScope.logout = function () {
+            Auth.logout();
+            $state.go('login');
+        };
+
+        this.isAuthenticated = function () {
+            return Auth.isAuthenticated();
+        };
+        this.logout = function () {
+            Auth.logout();
+            $state.go('login');
+        };
+
         //Listview Search (Check listview pages)
         this.listviewSearchStat = false;
         
@@ -208,7 +218,7 @@ materialAdmin
 
     
     })
-    .controller('loginCtrl', ['$rootScope', '$scope', 'Auth', '$window', function ($rootScope, $scope, Auth, $window) {
+    .controller('loginCtrl', ['$rootScope', '$scope', 'Auth', '$window', '$state', function ($rootScope, $scope, Auth, $window, $state) {
 
         // $scope.toggleForgetPassword = function () {
         //     $scope.forgetPassword = !$scope.forgetPassword;
@@ -221,15 +231,15 @@ materialAdmin
         self.login = 1;
         self.register = 0;
         self.forgot = 0;
-
+        self.errorMessage = '';
         self.doLogin = function (userData) {
 
             return Auth.login(userData.email, userData.password)
                 .catch(function (err) {
-                    //err
+                    self.errorMessage = err.message;
                 })
                 .then(function () {
-                    // $state.go('home');
+                    $state.go('home');
                 })
         }
 

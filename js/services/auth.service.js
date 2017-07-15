@@ -1,27 +1,139 @@
 angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout', '$q', function($http, $window, $timeout, $q) {
     var service = {};
     service.rememberMe = false;
-
+    service.fakeUser = {
+        "catBussiness": [],
+        "catDenning": [
+            {
+                "APIServer": "http://43.252.215.81/",
+                "LawFirm": {
+                    "IDNo": "Advocates & Solicitors",
+                    "IDType": 0,
+                    "address": {
+                        "city": "Kuala Lumpur",
+                        "country": "",
+                        "fullAddress": "Suite A, 300-0-5, OBD Garden Tower Condo, Jalan Desa Utama, Taman Desa, 58100 Kuala Lumpur, Wilayah Persekutuan",
+                        "line1": "Suite A, 300-0-5, ",
+                        "line2": "OBD Garden Tower Condo, ",
+                        "line3": "Jalan Desa Utama, Taman Desa, ",
+                        "postcode": "58100",
+                        "state": "Wilayah Persekutuan"
+                    },
+                    "code": 8005,
+                    "emailAddress": "ho.mogan@hotmail.com",
+                    "name": "Ho Mogan & Nor`Aini",
+                    "phoneFax": "(03)7982-3392",
+                    "phoneHome": "(03)7982-3192",
+                    "phoneMobile": "",
+                    "phoneOffice": "(03)7982-9350",
+                    "title": "Messr.",
+                    "webSite": null
+                },
+                "category": "denning",
+                "errorMsg": "",
+                "isActive": true,
+                "nextPaymentDate": "/Date(1488297600000+0800)/"
+            },
+            {
+                "APIServer": "http://43.252.215.163/",
+                "LawFirm": {
+                    "IDNo": null,
+                    "IDType": 0,
+                    "address": {
+                        "city": "K. Terengganu",
+                        "country": "",
+                        "fullAddress": "No. 221-D, 1st FloorJalan Sultan Zainal Abidin20000 K. Terengganu, Terengganu",
+                        "line1": "No. 221-D, 1st Floor",
+                        "line2": "Jalan Sultan Zainal Abidin",
+                        "line3": "",
+                        "postcode": "20000",
+                        "state": "Terengganu"
+                    },
+                    "code": 6,
+                    "emailAddress": " ",
+                    "name": "Denning Test Data",
+                    "phoneFax": "(00)9631-633",
+                    "phoneHome": "(00)9626-622",
+                    "phoneMobile": null,
+                    "phoneOffice": "(00)9622-169",
+                    "title": null,
+                    "webSite": " "
+                },
+                "category": "denning",
+                "errorMsg": "",
+                "isActive": true,
+                "nextPaymentDate": "/Date(1488297600000+0800)/"
+            }
+        ],
+        "catPersonal": [
+            {
+                "APIServer": "http://43.252.215.81/",
+                "LawFirm": {
+                    "IDNo": "Advocates & Solicitors",
+                    "IDType": 0,
+                    "address": {
+                        "city": "Kuala Lumpur",
+                        "country": "",
+                        "fullAddress": "Suite A, 300-0-5, OBD Garden Tower Condo, Jalan Desa Utama, Taman Desa, 58100 Kuala Lumpur, Wilayah Persekutuan",
+                        "line1": "Suite A, 300-0-5, ",
+                        "line2": "OBD Garden Tower Condo, ",
+                        "line3": "Jalan Desa Utama, Taman Desa, ",
+                        "postcode": "58100",
+                        "state": "Wilayah Persekutuan"
+                    },
+                    "code": 8005,
+                    "emailAddress": "ho.mogan@hotmail.com",
+                    "name": "Ho Mogan & Nor`Aini",
+                    "phoneFax": "(03)7982-3392",
+                    "phoneHome": "(03)7982-3192",
+                    "phoneMobile": "",
+                    "phoneOffice": "(03)7982-9350",
+                    "title": "Messr.",
+                    "webSite": null
+                },
+                "category": "Personal",
+                "errorMsg": "",
+                "isActive": true,
+                "nextPaymentDate": "/Date(1488297600000+0800)/"
+            }
+        ],
+        "email": "jingpiow@hotmail.com",
+        "hpNumber": "+60122868758",
+        "lockMinute": 0,
+        "name": "jingpiow",
+        "sessionID": "9e5e16a5-c632-498c-accd-0d34e8ccfe3c",
+        "status": "success - proceed to Home Page.",
+        "statusCode": 200,
+        "userType": "denning"
+    }
     service.login = function(email, pass) {
         var deferred = $q.defer();
-
-        $http({
-            method: 'POST',
-            url: 'http://denningsoft.dlinkddns.com/denningwcf/v1/signIn',
-            data: JSON.stringify({email: email, password: pass}),
-            headers: {
-                "Accept": "application/json",
-                // "Content-Type": "application/json",
-                // "X-Login-Ajax-call": 'true',
-                // "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}"
-            }
-        }).then(function(response) {
-            if (response.data == 'ok') {
-                // success
+        $timeout(function(){
+            if ( email == 'demo@demo' && pass == "demo") {
+                deferred.resolve({data: service.fakeUser});
             } else {
-                // failed
+                deferred.reject({
+                    message: 'wrong credential'
+                });
             }
-        });
+        }, 1000)
+        // $http({
+        //     method: 'POST',
+        //     url: 'http://denningsoft.dlinkddns.com/denningwcf/v1/signIn',
+        //     data: JSON.stringify({email: email, password: pass}),
+        //     headers: {
+        //         "Accept": "application/json",
+        //         // "Content-Type": "application/json",
+        //         // "X-Login-Ajax-call": 'true',
+        //         // "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}"
+        //     }
+        // }).then(function(response) {
+        //     if (response.data == 'ok') {
+        //         // success
+        //     } else {
+        //         // failed
+        //     }
+        // });
 
         // $http.post('http://denningsoft.dlinkddns.com/denningwcf/v1/signIn', 
         //     {
@@ -51,6 +163,19 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
         //     .catch(function(error){
         //         console.log(error);
         //     })
+
+        return deferred.promise
+        .then(function(response) {
+            // response.data.logintimestamp = new Date().getTime() / 1000;
+            // response.data.expTimeInSec = 1000000;
+            // response.data.rememberMe = service.rememberMe;
+            return response.data;
+            
+        })
+        .then(function(info) {
+            service.setUserInfo(info);
+            return info;
+        });
     };
 
     service.setUserInfo = function(info) {
@@ -69,7 +194,8 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
 
     service.isAuthenticated = function() {
         var info = this.getUserInfo();
-        return info && ((info.logintimestamp + info.expTimeInSec) > new Date().getTime() / 1000);
+        // return info && ((info.logintimestamp + info.expTimeInSec) > new Date().getTime() / 1000);
+        return info.sessionID;
     };
 
 

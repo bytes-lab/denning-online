@@ -9,6 +9,9 @@ materialAdmin
             //------------------------------
 
             .state ('login', {
+                data: {
+                    access: '?'
+                },
                 url: '/login',
                 controller: 'loginCtrl as lctrl',
                 templateUrl: 'views/login.html'                
@@ -19,6 +22,9 @@ materialAdmin
             //------------------------------
 
             .state ('home', {
+                data: {
+                    access: '@'
+                },
                 url: '/home',
                 templateUrl: 'views/home.html'                
             })        
@@ -28,6 +34,9 @@ materialAdmin
             //------------------------------
 
             .state ('search', {
+                data: {
+                    access: '@'
+                },
                 url: '/search',
                 templateUrl: 'views/search.html'                
             })        
@@ -37,6 +46,9 @@ materialAdmin
             //------------------------------
 
             .state ('overview', {
+                data: {
+                    access: '@'
+                },
                 url: '/overview',
                 templateUrl: 'views/overview.html',
                 resolve: {
