@@ -16,7 +16,6 @@ materialAdmin
                     event.preventDefault();
                     return $state.go('home');
                 }
-
             }
         });
     });

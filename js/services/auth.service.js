@@ -109,11 +109,11 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
     service.login = function(email, pass) {
         var deferred = $q.defer();
         $timeout(function(){
-            if ( email == 'demo@demo' && pass == "demo") {
+            if ( email == 'demo@demo.com' && pass == "demo") {
                 deferred.resolve({data: service.fakeUser});
             } else {
                 deferred.reject({
-                    message: 'wrong credential'
+                    message: 'Your credential is not correct. Please try again.'
                 });
             }
         }, 1000)

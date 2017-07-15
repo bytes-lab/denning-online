@@ -243,6 +243,11 @@ materialAdmin
                 })
         }
 
+        self.searchKeyPressed = function(events) {
+            if(event.which == 13){                
+                self.doLogin(self.user);
+            }
+        }
     }])
 
     // =========================================================================
