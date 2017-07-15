@@ -458,6 +458,7 @@ materialAdmin
         
             .state ('pages.profile', {
                 url: '/profile',
+                controller: 'profileCtrl as pctrl',
                 templateUrl: 'views/profile.html'
             })
         
@@ -489,36 +490,6 @@ materialAdmin
                     }
                 }
             })
-
-            .state ('pages.profile.profile-photos', {
-                url: '/profile-photos',
-                templateUrl: 'views/profile-photos.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/lightgallery/light-gallery/css/lightGallery.css'
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-        
-            .state ('pages.profile.profile-connections', {
-                url: '/profile-connections',
-                templateUrl: 'views/profile-connections.html'
-            })
-        
         
             //-------------------------------
         

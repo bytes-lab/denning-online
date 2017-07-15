@@ -1,40 +1,5 @@
 <div class="pmb-block">
     <div class="pmbb-header">
-        <h2><i class="zmdi zmdi-equalizer m-r-5"></i> Summary</h2>
-
-        <ul class="actions" data-ng-if="pctrl.editSummary === 0">
-            <li class="dropdown" uib-dropdown>
-                <a href="" uib-dropdown-toggle>
-                    <i class="zmdi zmdi-more-vert"></i>
-                </a>
-
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a data-ng-click="pctrl.editSummary = 1" href="">Edit</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="pmbb-body p-l-30">
-        <div class="pmbb-view" data-ng-if="pctrl.editSummary === 0">
-            {{ pctrl.profileSummary }}
-        </div>
-
-        <form data-ng-submit="pctrl.submit('profileSummary', 'Profile Summary')" class="pmbb-edit" data-ng-if="pctrl.editSummary === 1">
-            <div class="fg-line">
-                <textarea data-ng-model="pctrl.profileSummary" class="form-control" rows="5" placeholder="Summary...">Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna, ornare sit amet mollis eu, aliquet ac ligula. Nullam dolor metus, suscipit ac imperdiet nec, consectetur sed ex. Sed cursus porttitor leo.</textarea>
-            </div>
-            <div class="m-t-10">
-                <button class="btn btn-primary btn-sm" type="submit">Save</button>
-                <button class="btn btn-link btn-sm" data-ng-click="pctrl.editSummary = 0" >Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div class="pmb-block">
-    <div class="pmbb-header">
         <h2><i class="zmdi zmdi-person m-r-5"></i> Basic Information</h2>
 
         <ul class="actions" data-ng-if="pctrl.editInfo === 0">
@@ -55,19 +20,15 @@
         <div class="pmbb-view" data-ng-if="pctrl.editInfo === 0">
             <dl class="dl-horizontal">
                 <dt>Full Name</dt>
-                <dd>{{ pctrl.fullName }}</dd>
+                <dd>{{ pctrl.profile.fullName }}</dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt>Gender</dt>
-                <dd>{{ pctrl.gender }}</dd>
+                <dt>ID #</dt>
+                <dd>{{ pctrl.profile.ID }}</dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt>Birthday</dt>
-                <dd>{{ pctrl.birthDay }}</dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt>Martial Status</dt>
-                <dd>{{ pctrl.martialStatus }}</dd>
+                <dt>Position</dt>
+                <dd>{{ pctrl.profile.position }}</dd>
             </dl>
         </div>
 
@@ -76,40 +37,24 @@
                 <dt class="p-t-10">Full Name</dt>
                 <dd>
                     <div class="fg-line">
-                        <input data-ng-model="pctrl.fullName" type="text" class="form-control" value="{{ pctrl.fullName }}" placeholder="eg. Mallinda Hollaway">
+                        <input ng-model="pctrl.profile.fullName" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
                     </div>
 
                 </dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Gender</dt>
+                <dt class="p-t-10">ID #</dt>
                 <dd>
                     <div class="fg-line">
-                        <select class="form-control">
-                            <option>Female</option>
-                            <option>Male</option>
-                            <option>Other</option>
-                        </select>
+                        <input type='text' class="form-control" ng-model="pctrl.profile.ID" placeholder="UA203453">
                     </div>
                 </dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Birthday</dt>
-                <dd>
-                    <div class="dtp-container dropdown fg-line">
-                        <input type='text' class="form-control" data-dt-picker="DD/MM/YYYY" uib-dropdown-toggle placeholder="eg. 23/06/1988">
-                    </div>
-                </dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt class="p-t-10">Martial Status</dt>
+                <dt class="p-t-10">Position</dt>
                 <dd>
                     <div class="fg-line">
-                        <select class="form-control">
-                            <option>Single</option>
-                            <option>Married</option>
-                            <option>Other</option>
-                        </select>
+                        <input type='text' class="form-control" ng-model="pctrl.profile.position" placeholder="Lawyer">
                     </div>
                 </dd>
             </dl>
@@ -125,7 +70,7 @@
 
 <div class="pmb-block">
     <div class="pmbb-header">
-        <h2><i class="zmdi zmdi-phone m-r-5"></i> Contact Information</h2>
+        <h2><i class="zmdi zmdi-phone m-r-5"></i> Firm Information</h2>
 
         <ul class="actions" data-ng-if="pctrl.editContact === 0">
             <li class="dropdown" uib-dropdown>
@@ -143,22 +88,90 @@
     </div>
     <div class="pmbb-body p-l-30">
         <div class="pmbb-view" data-ng-if="pctrl.editContact === 0">
-            <dl class="dl-horizontal">
-                <dt>Mobile Phone</dt>
-                <dd>{{ pctrl.mobileNumber }}</dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt>Email Address</dt>
-                <dd>{{ pctrl.emailAddress }}</dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt>Twitter</dt>
-                <dd>{{ pctrl.twitter }}</dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt>Skype</dt>
-                <dd>{{ pctrl.skype }}</dd>
-            </dl>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>Name</dt>
+                    <dd>{{ pctrl.profile.firmName }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Initials</dt>
+                    <dd>{{ pctrl.profile.initials }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Description</dt>
+                    <dd>{{ pctrl.profile.description1 }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Address1</dt>
+                    <dd>{{ pctrl.profile.address1 }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Address2</dt>
+                    <dd>{{ pctrl.profile.address2 }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Address3</dt>
+                    <dd>{{ pctrl.profile.address3 }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Postcode</dt>
+                    <dd>{{ pctrl.profile.postcode }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>State</dt>
+                    <dd>{{ pctrl.profile.state }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>City</dt>
+                    <dd>{{ pctrl.profile.city }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Country</dt>
+                    <dd>{{ pctrl.profile.country }}</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>Phone1</dt>
+                    <dd>{{ pctrl.profile.phone1 }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Phone2</dt>
+                    <dd>{{ pctrl.profile.phone2 }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Fax1</dt>
+                    <dd>{{ pctrl.profile.fax1 }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Fax2</dt>
+                    <dd>{{ pctrl.profile.fax2 }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Website</dt>
+                    <dd>{{ pctrl.profile.website }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>IRD Branch</dt>
+                    <dd>{{ pctrl.profile.IRDBranch }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>GST Registered</dt>
+                    <dd>{{ pctrl.profile.GSTRegistered }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>GSTRate</dt>
+                    <dd>{{ pctrl.profile.GSTRate }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Registration No</dt>
+                    <dd>{{ pctrl.profile.RegistrationNo }}</dd>
+                </dl>            
+                <dl class="dl-horizontal">
+                    <dt>Register Date</dt>
+                    <dd>{{ pctrl.profile.RegisterDate }}</dd>
+                </dl>            
+            </div>
         </div>
 
         <form data-ng-submit="pctrl.submit('profileContact', 'Profile Contact Information')" class="pmbb-edit" data-ng-if="pctrl.editContact === 1">
