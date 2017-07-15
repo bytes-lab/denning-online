@@ -458,6 +458,9 @@ materialAdmin
         
             .state ('pages.profile', {
                 url: '/profile',
+                data: {
+                    access: '@'
+                },
                 controller: 'profileCtrl as pctrl',
                 templateUrl: 'views/profile.html'
             })
