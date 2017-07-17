@@ -23,7 +23,7 @@
                   md-items="item in mactrl.querySearch(mactrl.searchText)"
                   md-item-text="item.display"
                   md-min-length="0"
-                  md-autoselect="true"
+                  md-autoselect="false"
                   ng-keypress="mactrl.searchKeyPressed($event)"
                   placeholder="Search for matters, contacts, properties ...">
                 <md-item-template>
@@ -46,7 +46,7 @@
     <li class="pull-right">
         <ul class="top-menu">            
             <li style="margin-right: 46px; min-width: 36px;">
-                <a href="" ng-click="mactrl.showFilterCategory = !mactrl.showFilterCategory"><i class="tm-icon zmdi zmdi-filter-list"></i></a>
+                <a href="" ng-click="mactrl.showFilterCategory = !mactrl.showFilterCategory" id="search_filter"><i class="tm-icon zmdi zmdi-filter-list"></i></a>
             </li>
             <li class="dropdown" uib-dropdown>
                 <a uib-dropdown-toggle href="">

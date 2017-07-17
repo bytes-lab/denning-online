@@ -123,7 +123,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
         //     data: JSON.stringify({email: email, password: pass}),
         //     headers: {
         //         "Accept": "application/json",
-        //         // "Content-Type": "application/json",
+        //         "Content-Type": "application/json",
         //         // "X-Login-Ajax-call": 'true',
         //         // "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}"
         //     }

@@ -103,6 +103,7 @@ materialAdmin
         self.newState = newState;
         self.searchRes = [];
         self.selectedItem = '';
+        self.currentText = '';
 
         function newState(state) {
         }
@@ -118,13 +119,16 @@ materialAdmin
 
         function searchKeyPressed(events, item) {
             if(event.which == 13){                
-                selectedItemChange(self.selectedItem);
+                // hide list for not keyword
+                $('#search_filter').focus();
+                // self.selectedItem = self.currentText; - event occur
+                selectedItemChange(self.selectedItem || self.currentText);
             }
         }
 
         function searchFilterChange() {
             self.showFilterCategory = false;
-            selectedItemChange(self.selectedItem);
+            selectedItemChange(self.selectedItem || self.currentText);
         }
 
         function querySearch (query) {
@@ -155,6 +159,7 @@ materialAdmin
         function searchTextChange(text) {
             // console.log('Text changed to ' + text);
             self.selectedSearchCategory = 0;
+            self.currentText = {value: text, display: text};
             if (text.trim() == '')
                 self.searchRes = [];
         }
