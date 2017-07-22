@@ -138,6 +138,14 @@ materialAdmin
                 controller: 'contactEditCtrl as vm',
                 templateUrl: 'views/contact_edit.html'
             })
+            .state ('contacts.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'contactEditCtrl as vm',
+                templateUrl: 'views/contact_edit.html'
+            })
 
             //------------------------------
             // TYPOGRAPHY

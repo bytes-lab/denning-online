@@ -39,12 +39,14 @@ materialAdmin
 
     .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state) {
         var self = this;
-        
-        contactService.getItem($stateParams.id)
-        .then(function(item){
-            self.contact = item;
-        });
-
+        if($stateParams.id) {
+            contactService.getItem($stateParams.id)
+            .then(function(item){
+                self.contact = item;
+            });
+        } else {
+            self.contact = {};
+        }
         self.save = save;
 
         function save() {

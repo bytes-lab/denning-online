@@ -495,8 +495,12 @@ materialAdmin
 
             $timeout(function(){
                 var idx = service.contacts.map(function(c) {return c.new_ic; }).indexOf(contact.new_ic);
-                service.contacts[idx] = contact;
-                deferred.resolve(contact);
+                if(idx != -1) {
+                    service.contacts[idx] = contact;
+                    deferred.resolve(contact);
+                } else {
+                    service.contacts.push(contact);
+                }
                 //defered.reject(new Error('dd'));
             }, 100);
 
