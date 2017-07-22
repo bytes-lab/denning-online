@@ -25,14 +25,14 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.id = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.id_type = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.username = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.contact = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.id, this.name, this.email, this.username, this.contact;
+                    return this.new_ic, this.id_type, this.name, this.email, this.phone3;
                 }
             })      
         }
