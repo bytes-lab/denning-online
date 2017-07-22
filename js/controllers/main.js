@@ -108,15 +108,6 @@ materialAdmin
         function newState(state) {
         }
 
-        // ******************************
-        // Internal methods
-        // ******************************
-
-        /**
-         * Search for states... use $timeout to simulate
-         * remote dataservice call.
-         */
-
         function searchKeyPressed(events, item) {
             if(event.which == 13){                
                 // hide list for not keyword

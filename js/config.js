@@ -1,3 +1,12 @@
+// materialAdmin.config(['$httpProvider', function ($httpProvider) {
+//   //Reset headers to avoid OPTIONS request (aka preflight)
+//   $httpProvider.defaults.headers.common = {};
+//   $httpProvider.defaults.headers.post = {};
+//   $httpProvider.defaults.headers.put = {};
+//   $httpProvider.defaults.headers.patch = {};
+//   $httpProvider.defaults.headers.options = {};
+// }]);
+
 materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/home");
@@ -99,6 +108,36 @@ materialAdmin
                 templateUrl: 'views/mainmenu-on-top.html'
             })
 
+
+            //------------------------------
+            // CONTACTS
+            //------------------------------
+        
+            .state ('contacts', {
+                data: {
+                    access: '@'
+                },                
+                url: '/contacts',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('contacts.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'contactListCtrl as vm',
+                templateUrl: 'views/contact_list.html'
+            })
+
+            .state ('contacts.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'contactEditCtrl as vm',
+                templateUrl: 'views/contact_edit.html'
+            })
 
             //------------------------------
             // TYPOGRAPHY
