@@ -454,6 +454,7 @@ materialAdmin
         service.getList = getList;
         service.getItem = getItem;
         service.save = save;
+        service.delete = delete_;
 
         function getList() {
             var deferred = $q.defer();
@@ -507,6 +508,21 @@ materialAdmin
             return deferred.promise;
         }
 
+        function delete_(contact) {
+            var deferred = $q.defer();
+
+            $timeout(function(){
+                var idx = service.contacts.map(function(c) {return c.new_ic; }).indexOf(contact.new_ic);
+                if(idx != -1) {
+                    service.contacts.splice(idx, 1);
+                    deferred.resolve(contact);
+                } else {
+                    defered.reject(new Error('There is no such contact'));
+                }
+            }, 100);
+
+            return deferred.promise;
+        }
         return service;
         
     }])

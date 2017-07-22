@@ -1,7 +1,8 @@
 materialAdmin
-    .controller('contactListCtrl', function($filter, $sce, NgTableParams, contactService) {
+    .controller('contactListCtrl', function($filter, $sce, $uibModal, NgTableParams, contactService) {
         var self = this;
         self.dataReady = false;
+        self.openDelete = openDelete;
 
         contactService.getList().then(function(data) {
             self.data = data;
@@ -35,10 +36,54 @@ materialAdmin
                 }
             })      
         }
+
+        self.modalContent = 'Are you sure to delete the contract?';
+    
+        //Create Modal
+        function modalInstances(animation, size, backdrop, keyboard, contact) {
+            var modalInstance = $uibModal.open({
+                animation: animation,
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                backdrop: backdrop,
+                keyboard: keyboard,
+                resolve: {
+                    contact: function () {
+                        return contact;
+                    }
+                }
+            
+            });
+        }
+        //Prevent Outside Click
+        function openDelete(contact) {
+            modalInstances(true, '', 'static', true, contact)
+        };        
+    })
+
+    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, contactService, $state) {
+        $scope.ok = function () {
+            contactService.delete(contact).then(function(contact) {
+                $state.reload();
+            })
+            .catch(function(err){
+                //Handler
+
+                //$scope.formname.contactInfo.$error.push({meessage:''});
+            });
+            $modalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
     })
 
     .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state) {
         var self = this;
+        self.save = save;
+
         if($stateParams.id) {
             contactService.getItem($stateParams.id)
             .then(function(item){
@@ -47,7 +92,6 @@ materialAdmin
         } else {
             self.contact = {};
         }
-        self.save = save;
 
         function save() {
             contactService.save(self.contact).then(function(contact) {
