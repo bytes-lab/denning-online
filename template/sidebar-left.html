@@ -78,36 +78,27 @@
             <a href="" toggle-submenu><i class="zmdi zmdi-swap-alt"></i>Tracking</a>
             <ul>
                 <li><a data-ui-sref-active="active" data-ui-sref="user-interface.ui-bootstrap" data-ng-click="mactrl.sidebarStat($event)">UI Bootstrap</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.colors" data-ng-click="mactrl.sidebarStat($event)">Colors</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.animations" data-ng-click="mactrl.sidebarStat($event)">Animations</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.box-shadow" data-ng-click="mactrl.sidebarStat($event)">Box Shadow</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.buttons" data-ng-click="mactrl.sidebarStat($event)">Buttons</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.icons" data-ng-click="mactrl.sidebarStat($event)">Icons</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.alerts" data-ng-click="mactrl.sidebarStat($event)">Alerts</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.preloaders" data-ng-click="mactrl.sidebarStat($event)">Preloaders</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.notifications-dialogs" data-ng-click="mactrl.sidebarStat($event)">Notifications & Dialogs</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.media" data-ng-click="mactrl.sidebarStat($event)">Media</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.other-components" data-ng-click="mactrl.sidebarStat($event)">Others</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="user-interface.colors" data-ng-click="mactrl.sidebarStat($event)">Colors</a></li>                
             </ul>
         </li>
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('charts') }">
             <a href="" toggle-submenu><i class="zmdi zmdi-view-list"></i>Listing</a>
             <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.flot-charts" data-ng-click="mactrl.sidebarStat($event)">Occupation</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">IRD Branch</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">City</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Staff</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Bank</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Bank CAC</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Bank Attorney</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Legal Firm</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Judge</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Land Office</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Building</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Project</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Mukim</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">Loan Type</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="mactrl.sidebarStat($event)">CKHT</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="occupations.list" data-ng-click="mactrl.sidebarStat($event)">Occupation</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="IRD-branches.list" data-ng-click="mactrl.sidebarStat($event)">IRD Branch</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="cities.list" data-ng-click="mactrl.sidebarStat($event)">City</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="staffs.list" data-ng-click="mactrl.sidebarStat($event)">Staff</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="banks.list" data-ng-click="mactrl.sidebarStat($event)">Bank</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="bank-CACs.list" data-ng-click="mactrl.sidebarStat($event)">Bank CAC</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="bank-attornys.list" data-ng-click="mactrl.sidebarStat($event)">Bank Attorney</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="legal-firms.list" data-ng-click="mactrl.sidebarStat($event)">Legal Firm</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="judges.list" data-ng-click="mactrl.sidebarStat($event)">Judge</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="land-offices.list" data-ng-click="mactrl.sidebarStat($event)">Land Office</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="buildings.list" data-ng-click="mactrl.sidebarStat($event)">Building</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="projects.list" data-ng-click="mactrl.sidebarStat($event)">Project</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="mukims.list" data-ng-click="mactrl.sidebarStat($event)">Mukim</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="loan-types.list" data-ng-click="mactrl.sidebarStat($event)">Loan Type</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="CKHTs.list" data-ng-click="mactrl.sidebarStat($event)">CKHT</a></li>
             </ul>
         </li>
 

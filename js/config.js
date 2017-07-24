@@ -104,29 +104,6 @@ materialAdmin
                 templateUrl: 'views/matterform_edit.html'
             })
 
-            //------------------------------
-            // HEADERS
-            //------------------------------
-            .state ('headers', {
-                url: '/headers',
-                templateUrl: 'views/common-2.html'
-            })
-
-            .state('headers.textual-menu', {
-                url: '/textual-menu',
-                templateUrl: 'views/textual-menu.html'
-            })
-
-            .state('headers.image-logo', {
-                url: '/image-logo',
-                templateUrl: 'views/image-logo.html'
-            })
-
-            .state('headers.mainmenu-on-top', {
-                url: '/mainmenu-on-top',
-                templateUrl: 'views/mainmenu-on-top.html'
-            })
-
 
             //------------------------------
             // CONTACTS
@@ -146,7 +123,7 @@ materialAdmin
                 },                
                 url: '/',
                 controller: 'contactListCtrl as vm',
-                templateUrl: 'views/contact_list.html'
+                templateUrl: 'views/contact-list.html'
             })
 
             .state ('contacts.edit', {
@@ -155,7 +132,7 @@ materialAdmin
                 },                
                 url: '/edit/:id',
                 controller: 'contactEditCtrl as vm',
-                templateUrl: 'views/contact_edit.html'
+                templateUrl: 'views/contact-edit.html'
             })
             .state ('contacts.new', {
                 data: {
@@ -163,463 +140,593 @@ materialAdmin
                 },                
                 url: '/edit/new',
                 controller: 'contactEditCtrl as vm',
-                templateUrl: 'views/contact_edit.html'
-            })
-
-            //------------------------------
-            // TYPOGRAPHY
-            //------------------------------
-        
-            .state ('typography', {
-                url: '/typography',
-                templateUrl: 'views/typography.html'
+                templateUrl: 'views/contact-edit.html'
             })
 
 
             //------------------------------
-            // WIDGETS
+            // OCCUPATIONS
             //------------------------------
         
-            .state ('widgets', {
-                url: '/widgets',
-                templateUrl: 'views/common.html'
-            })
-
-            .state ('widgets.widgets', {
-                url: '/widgets',
-                templateUrl: 'views/widgets.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/mediaelement/build/mediaelementplayer.css',
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/mediaelement/build/mediaelement-and-player.js',
-                                    'vendors/bower_components/autosize/dist/autosize.min.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-
-            .state ('widgets.widget-templates', {
-                url: '/widget-templates',
-                templateUrl: 'views/widget-templates.html',
-            })
-
-
-            //------------------------------
-            // TABLES
-            //------------------------------
-        
-            .state ('tables', {
-                url: '/tables',
-                templateUrl: 'views/common.html'
-            })
-            
-            .state ('tables.tables', {
-                url: '/tables',
-                templateUrl: 'views/tables.html'
-            })
-            
-            .state ('tables.data-table', {
-                url: '/data-table',
-                templateUrl: 'views/data-table.html'
-            })
-
-        
-            //------------------------------
-            // FORMS
-            //------------------------------
-            .state ('form', {
-                url: '/form',
-                templateUrl: 'views/common.html'
-            })
-
-            .state ('form.basic-form-elements', {
-                url: '/basic-form-elements',
-                templateUrl: 'views/form-elements.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/autosize/dist/autosize.min.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-
-            .state ('form.form-components', {
-                url: '/form-components',
-                templateUrl: 'views/form-components.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/nouislider/jquery.nouislider.css',
-                                    'vendors/farbtastic/farbtastic.css',
-                                    'vendors/bower_components/summernote/dist/summernote.css',
-                                    'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
-                                    'vendors/bower_components/chosen/chosen.min.css'
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/input-mask/input-mask.min.js',
-                                    'vendors/bower_components/nouislider/jquery.nouislider.min.js',
-                                    'vendors/bower_components/moment/min/moment.min.js',
-                                    'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
-                                    'vendors/bower_components/summernote/dist/summernote.min.js',
-                                    'vendors/fileinput/fileinput.min.js',
-                                    'vendors/bower_components/chosen/chosen.jquery.js',
-                                    'vendors/bower_components/angular-chosen-localytics/chosen.js',
-                                    'vendors/bower_components/angular-farbtastic/angular-farbtastic.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-        
-            .state ('form.form-examples', {
-                url: '/form-examples',
-                templateUrl: 'views/form-examples.html'
-            })
-        
-            .state ('form.form-validations', {
-                url: '/form-validations',
-                templateUrl: 'views/form-validations.html'
-            })
-        
-            
-            //------------------------------
-            // USER INTERFACE
-            //------------------------------
-        
-            .state ('user-interface', {
-                url: '/user-interface',
-                templateUrl: 'views/common.html'
-            })
-        
-            .state ('user-interface.ui-bootstrap', {
-                url: '/ui-bootstrap',
-                templateUrl: 'views/ui-bootstrap.html'
-            })
-
-            .state ('user-interface.colors', {
-                url: '/colors',
-                templateUrl: 'views/colors.html'
-            })
-
-            .state ('user-interface.animations', {
-                url: '/animations',
-                templateUrl: 'views/animations.html'
-            })
-        
-            .state ('user-interface.box-shadow', {
-                url: '/box-shadow',
-                templateUrl: 'views/box-shadow.html'
-            })
-        
-            .state ('user-interface.buttons', {
-                url: '/buttons',
-                templateUrl: 'views/buttons.html'
-            })
-        
-            .state ('user-interface.icons', {
-                url: '/icons',
-                templateUrl: 'views/icons.html'
-            })
-        
-            .state ('user-interface.alerts', {
-                url: '/alerts',
-                templateUrl: 'views/alerts.html'
-            })
-
-            .state ('user-interface.preloaders', {
-                url: '/preloaders',
-                templateUrl: 'views/preloaders.html'
-            })
-
-            .state ('user-interface.notifications-dialogs', {
-                url: '/notifications-dialogs',
-                templateUrl: 'views/notification-dialog.html'
-            })
-        
-            .state ('user-interface.media', {
-                url: '/media',
-                templateUrl: 'views/media.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/mediaelement/build/mediaelementplayer.css',
-                                    'vendors/bower_components/lightgallery/light-gallery/css/lightGallery.css'
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/mediaelement/build/mediaelement-and-player.js',
-                                    'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-        
-            .state ('user-interface.other-components', {
-                url: '/other-components',
-                templateUrl: 'views/other-components.html'
-            })
-            
-        
-            //------------------------------
-            // CHARTS
-            //------------------------------
-            
-            .state ('charts', {
-                url: '/charts',
-                templateUrl: 'views/common.html'
-            })
-
-            .state ('charts.flot-charts', {
-                url: '/flot-charts',
-                templateUrl: 'views/flot-charts.html',
-            })
-
-            .state ('charts.other-charts', {
-                url: '/other-charts',
-                templateUrl: 'views/other-charts.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/sparklines/jquery.sparkline.min.js',
-                                    'vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js',
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-        
-        
-            //------------------------------
-            // CALENDAR
-            //------------------------------
-            
-            .state ('calendar', {
-                url: '/calendar',
-                templateUrl: 'views/calendar.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/fullcalendar/dist/fullcalendar.min.css',
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/moment/min/moment.min.js',
-                                    'vendors/bower_components/fullcalendar/dist/fullcalendar.min.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-        
-        
-            //------------------------------
-            // PHOTO GALLERY
-            //------------------------------
-            
-             .state ('photo-gallery', {
-                url: '/photo-gallery',
-                templateUrl: 'views/common.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/lightgallery/light-gallery/css/lightGallery.css'
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-
-            //Default
-        
-            .state ('photo-gallery.photos', {
-                url: '/photos',
-                templateUrl: 'views/photos.html'
-            })
-        
-            //Timeline
-    
-            .state ('photo-gallery.timeline', {
-                url: '/timeline',
-                templateUrl: 'views/photo-timeline.html'
-            })
-        
-        
-            //------------------------------
-            // GENERIC CLASSES
-            //------------------------------
-            
-            .state ('generic-classes', {
-                url: '/generic-classes',
-                templateUrl: 'views/generic-classes.html'
-            })
-        
-            
-            //------------------------------
-            // PAGES
-            //------------------------------
-            
-            .state ('pages', {
-                url: '/pages',
-                templateUrl: 'views/common.html'
-            })
-            
-        
-            //Profile
-        
-            .state ('pages.profile', {
-                url: '/profile',
+            .state ('occupations', {
                 data: {
                     access: '@'
-                },
-                controller: 'profileCtrl as pctrl',
-                templateUrl: 'views/profile.html'
+                },                
+                url: '/occupations',
+                templateUrl: 'views/common.html'
             })
-        
-            .state ('pages.profile.profile-about', {
-                url: '/profile-about',
-                templateUrl: 'views/profile-about.html'
+                      
+            .state ('occupations.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'occupationListCtrl as vm',
+                templateUrl: 'views/occupation-list.html'
             })
-        
-            .state ('pages.profile.profile-timeline', {
-                url: '/profile-timeline',
-                templateUrl: 'views/profile-timeline.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/lightgallery/light-gallery/css/lightGallery.css'
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
+
+            .state ('occupations.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'occupationEditCtrl as vm',
+                templateUrl: 'views/occupation-edit.html'
             })
-        
-            //-------------------------------
-        
-            .state ('pages.listview', {
-                url: '/listview',
-                templateUrl: 'views/list-view.html'
-            })
-        
-            .state ('pages.messages', {
-                url: '/messages',
-                templateUrl: 'views/messages.html'
-            })
-        
-            .state ('pages.pricing-table', {
-                url: '/pricing-table',
-                templateUrl: 'views/pricing-table.html'
-            })
-        
-            .state ('pages.contacts', {
-                url: '/contacts',
-                templateUrl: 'views/contacts.html'
-            })
-        
-            .state ('pages.invoice', {
-                url: '/invoice',
-                templateUrl: 'views/invoice.html'
-            })
-                                
-            .state ('pages.wall', {
-                url: '/wall',
-                templateUrl: 'views/wall.html',
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'vendors',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/autosize/dist/autosize.min.js',
-                                    'vendors/bower_components/lightgallery/light-gallery/css/lightGallery.css'
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/mediaelement/build/mediaelement-and-player.js',
-                                    'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
-            })
-            
+            .state ('occupations.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'occupationEditCtrl as vm',
+                templateUrl: 'views/occupation-edit.html'
+            })         
+
+
             //------------------------------
-            // BREADCRUMB DEMO
+            // IRD-branches
             //------------------------------
-            .state ('breadcrumb-demo', {
-                url: '/breadcrumb-demo',
-                templateUrl: 'views/breadcrumb-demo.html'
+        
+            .state ('IRD-branches', {
+                data: {
+                    access: '@'
+                },                
+                url: '/IRD-branches',
+                templateUrl: 'views/common.html'
             })
+                      
+            .state ('IRD-branches.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'IRDBranchListCtrl as vm',
+                templateUrl: 'views/IRD-branch-list.html'
+            })
+
+            .state ('IRD-branches.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'IRDBranchEditCtrl as vm',
+                templateUrl: 'views/IRD-branch-edit.html'
+            })
+            .state ('IRD-branches.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'IRDBranchEditCtrl as vm',
+                templateUrl: 'views/IRD-branch-edit.html'
+            })  
+
+
+            //------------------------------
+            // CITIES
+            //------------------------------
+        
+            .state ('cities', {
+                data: {
+                    access: '@'
+                },                
+                url: '/cities',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('cities.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'cityListCtrl as vm',
+                templateUrl: 'views/city-list.html'
+            })
+
+            .state ('cities.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'cityEditCtrl as vm',
+                templateUrl: 'views/city-edit.html'
+            })
+            .state ('cities.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'cityEditCtrl as vm',
+                templateUrl: 'views/city-edit.html'
+            })  
+
+
+            //------------------------------
+            // STAFFS
+            //------------------------------
+        
+            .state ('staffs', {
+                data: {
+                    access: '@'
+                },                
+                url: '/staffs',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('staffs.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'staffListCtrl as vm',
+                templateUrl: 'views/staff-list.html'
+            })
+
+            .state ('staffs.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'staffEditCtrl as vm',
+                templateUrl: 'views/staff-edit.html'
+            })
+            .state ('staffs.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'staffEditCtrl as vm',
+                templateUrl: 'views/staff-edit.html'
+            })  
+
+
+            //------------------------------
+            // BANKS
+            //------------------------------
+        
+            .state ('banks', {
+                data: {
+                    access: '@'
+                },                
+                url: '/banks',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('banks.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'bankListCtrl as vm',
+                templateUrl: 'views/bank-list.html'
+            })
+
+            .state ('banks.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'bankEditCtrl as vm',
+                templateUrl: 'views/bank-edit.html'
+            })
+            .state ('banks.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'bankEditCtrl as vm',
+                templateUrl: 'views/bank-edit.html'
+            })  
+
+
+            //------------------------------
+            // bank-CACs
+            //------------------------------
+        
+            .state ('bank-CACs', {
+                data: {
+                    access: '@'
+                },                
+                url: '/bank-CACs',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('bank-CACs.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'bankCACListCtrl as vm',
+                templateUrl: 'views/bank-CAC-list.html'
+            })
+
+            .state ('bank-CACs.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'bankCACEditCtrl as vm',
+                templateUrl: 'views/bank-CAC-edit.html'
+            })
+            .state ('bank-CACs.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'bankCACEditCtrl as vm',
+                templateUrl: 'views/bank-CAC-edit.html'
+            })  
+
+                          
+            //------------------------------
+            // BANK-ATTORNEYS
+            //------------------------------
+        
+            .state ('bank-attorneys', {
+                data: {
+                    access: '@'
+                },                
+                url: '/bank-attorneys',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('bank-attorneys.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'bankAttorneyListCtrl as vm',
+                templateUrl: 'views/bank-attorney-list.html'
+            })
+
+            .state ('bank-attorneys.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'bankAttorneyEditCtrl as vm',
+                templateUrl: 'views/bank-attorney-edit.html'
+            })
+            .state ('bank-attorneys.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'bankAttorneyEditCtrl as vm',
+                templateUrl: 'views/bank-attorney-edit.html'
+            })  
+
+
+            //------------------------------
+            // LEGAL-FIRMS
+            //------------------------------
+        
+            .state ('legal-firms', {
+                data: {
+                    access: '@'
+                },                
+                url: '/legal-firms',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('legal-firms.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'legalFirmListCtrl as vm',
+                templateUrl: 'views/legal-firm-list.html'
+            })
+
+            .state ('legal-firms.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'legalFirmEditCtrl as vm',
+                templateUrl: 'views/legal-firm-edit.html'
+            })
+            .state ('legal-firms.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'legalFirmEditCtrl as vm',
+                templateUrl: 'views/legal-firm-edit.html'
+            })              
+
+
+            //------------------------------
+            // JUDGES
+            //------------------------------
+        
+            .state ('judges', {
+                data: {
+                    access: '@'
+                },                
+                url: '/judges',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('judges.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'judgeListCtrl as vm',
+                templateUrl: 'views/judge-list.html'
+            })
+
+            .state ('judges.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'judgeEditCtrl as vm',
+                templateUrl: 'views/judge-edit.html'
+            })
+            .state ('judges.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'judgeEditCtrl as vm',
+                templateUrl: 'views/judge-edit.html'
+            })  
+
+
+            //------------------------------
+            // LAND-OFFICES
+            //------------------------------
+        
+            .state ('land-offices', {
+                data: {
+                    access: '@'
+                },                
+                url: '/land-offices',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('land-offices.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'landOfficeListCtrl as vm',
+                templateUrl: 'views/land-office-list.html'
+            })
+
+            .state ('land-offices.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'landOfficeEditCtrl as vm',
+                templateUrl: 'views/land-office-edit.html'
+            })
+            .state ('land-offices.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'landOfficeEditCtrl as vm',
+                templateUrl: 'views/land-office-edit.html'
+            })  
+
+
+                                                                                                                           //------------------------------
+            // BUILDINGS
+            //------------------------------
+        
+            .state ('buildings', {
+                data: {
+                    access: '@'
+                },                
+                url: '/buildings',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('buildings.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'buildingListCtrl as vm',
+                templateUrl: 'views/building-list.html'
+            })
+
+            .state ('buildings.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'buildingEditCtrl as vm',
+                templateUrl: 'views/building-edit.html'
+            })
+            .state ('buildings.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'buildingEditCtrl as vm',
+                templateUrl: 'views/building-edit.html'
+            })  
+
+
+            //------------------------------
+            // PROJECTS
+            //------------------------------
+        
+            .state ('projects', {
+                data: {
+                    access: '@'
+                },                
+                url: '/projects',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('projects.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'projectListCtrl as vm',
+                templateUrl: 'views/project-list.html'
+            })
+
+            .state ('projects.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'projectEditCtrl as vm',
+                templateUrl: 'views/project-edit.html'
+            })
+            .state ('projects.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'projectEditCtrl as vm',
+                templateUrl: 'views/project-edit.html'
+            })  
+
+
+            //------------------------------
+            // MUKIMS
+            //------------------------------
+        
+            .state ('mukims', {
+                data: {
+                    access: '@'
+                },                
+                url: '/mukims',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('mukims.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'mukimListCtrl as vm',
+                templateUrl: 'views/mukim-list.html'
+            })
+
+            .state ('mukims.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'mukimEditCtrl as vm',
+                templateUrl: 'views/mukim-edit.html'
+            })
+            .state ('mukims.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'mukimEditCtrl as vm',
+                templateUrl: 'views/mukim-edit.html'
+            })  
+
+
+            //------------------------------
+            // LOAN-TYPES
+            //------------------------------
+        
+            .state ('loan-types', {
+                data: {
+                    access: '@'
+                },                
+                url: '/loan-types',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('loan-types.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'loanTypeListCtrl as vm',
+                templateUrl: 'views/loan-type-list.html'
+            })
+
+            .state ('loan-types.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'loanTypeEditCtrl as vm',
+                templateUrl: 'views/loan-type-edit.html'
+            })
+            .state ('loan-types.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'loanTypeEditCtrl as vm',
+                templateUrl: 'views/loan-type-edit.html'
+            })  
+
+
+            //------------------------------
+            // CKHTs
+            //------------------------------
+        
+            .state ('CKHTs', {
+                data: {
+                    access: '@'
+                },                
+                url: '/CKHTs',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('CKHTs.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'CKHTListCtrl as vm',
+                templateUrl: 'views/CKHT-list.html'
+            })
+
+            .state ('CKHTs.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'CKHTEditCtrl as vm',
+                templateUrl: 'views/CKHT-edit.html'
+            })
+            .state ('CKHTs.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'CKHTEditCtrl as vm',
+                templateUrl: 'views/CKHT-edit.html'
+            })                                                  
     });
 
 materialAdmin
