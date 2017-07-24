@@ -1,0 +1,53 @@
+body {
+  margin: 20px
+}
+
+.formly-field {
+  margin-bottom:16px;
+}
+
+.tab-pane {
+  padding: 20px;
+}
+
+.what {
+  color: blue;
+}
+
+.attr-label {
+  border: 0; 
+  background: #f5f5f5;  
+  width: 180px;
+  -webkit-box-shadow: none; 
+}
+
+.short-label {
+  width: 50px;
+}
+
+.short-btn {
+  padding: 6px 8px;
+}
+
+.group-label {
+  border: 0; 
+  -webkit-box-shadow: none; 
+  border-radius: 0px;
+  color: white;
+  background: #00bcd4;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.group {
+  background: #f5f5f5;
+  padding-bottom: 5px;
+  //border: 1px solid;  
+}
+
+.formly-field-group {
+}
+
+.formly-field {
+  margin-bottom: 5px;
+}

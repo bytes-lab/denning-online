@@ -86,6 +86,51 @@ materialAdmin
 
 
             //------------------------------
+            // MATTER FORM
+            //------------------------------
+            .state ('matterforms', {
+                data: {
+                    access: '@'
+                },                
+                url: '/matterforms',
+                templateUrl: 'views/common.html'
+            })
+
+            .state ('matterforms.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit',
+                controller: 'matterformEditCtrl as vm',
+                templateUrl: 'views/matterform_edit.html',
+
+                resolve: {
+                    loadPlugin: function($ocLazyLoad) {
+                        return $ocLazyLoad.load ([
+                            {
+                                name: 'css',
+                                insertBefore: '#app-level',
+                                files: [
+                                    'css/bootstrap.css',
+                                    'css/formly.css'
+                                ]
+                            },
+                            {
+                                name: 'vendors',
+                                insertBefore: '#app-level-js',
+                                files: [
+                                    'vendors/angular-formly/api-check.js',
+                                    'vendors/angular-formly/ui-bootstrap-tpls.js',
+                                    'vendors/angular-formly/formly.js',
+                                    'vendors/angular-formly/angular-formly-templates-bootstrap.js'
+                                ]
+                            }
+                        ])
+                    }
+                }
+            })
+
+            //------------------------------
             // HEADERS
             //------------------------------
             .state ('headers', {
