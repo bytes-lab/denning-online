@@ -11,7 +11,6 @@ materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/home");
 
-
         $stateProvider
             //------------------------------
             // LOGIN
@@ -102,32 +101,7 @@ materialAdmin
                 },                
                 url: '/edit',
                 controller: 'matterformEditCtrl as vm',
-                templateUrl: 'views/matterform_edit.html',
-
-                resolve: {
-                    loadPlugin: function($ocLazyLoad) {
-                        return $ocLazyLoad.load ([
-                            {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'css/bootstrap.css',
-                                    'css/formly.css'
-                                ]
-                            },
-                            {
-                                name: 'vendors',
-                                insertBefore: '#app-level-js',
-                                files: [
-                                    'vendors/angular-formly/api-check.js',
-                                    'vendors/angular-formly/ui-bootstrap-tpls.js',
-                                    'vendors/angular-formly/formly.js',
-                                    'vendors/angular-formly/angular-formly-templates-bootstrap.js'
-                                ]
-                            }
-                        ])
-                    }
-                }
+                templateUrl: 'views/matterform_edit.html'
             })
 
             //------------------------------
@@ -647,3 +621,145 @@ materialAdmin
                 templateUrl: 'views/breadcrumb-demo.html'
             })
     });
+
+materialAdmin
+    .run(function(formlyConfig) {
+        var attributes = [
+            'date-disabled',
+            'custom-class',
+            'show-weeks',
+            'starting-day',
+            'init-date',
+            'min-mode',
+            'max-mode',
+            'format-day',
+            'format-month',
+            'format-year',
+            'format-day-header',
+            'format-day-title',
+            'format-month-title',
+            'year-range',
+            'shortcut-propagation',
+            'datepicker-popup',
+            'show-button-bar',
+            'current-text',
+            'clear-text',
+            'close-text',
+            'close-on-date-selection',
+            'datepicker-append-to-body'
+        ];
+
+        var bindings = [
+            'datepicker-mode',
+            'min-date',
+            'max-date'
+        ];
+            
+        var ngModelAttrs = {};
+
+        angular.forEach(attributes, function(attr) {
+            ngModelAttrs[camelize(attr)] = {attribute: attr};
+        });
+
+        angular.forEach(bindings, function(binding) {
+            ngModelAttrs[camelize(binding)] = {bound: binding};
+        });
+            
+        function camelize(string) {
+            string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
+                return chr ? chr.toUpperCase() : '';
+            });
+            // Ensure 1st char is always lowercase
+            return string.replace(/^([A-Z])/, function(match, chr) {
+                return chr ? chr.toLowerCase() : '';
+            });
+        }        
+            
+        // set templates here
+        formlyConfig.setType({
+            name: 'price_w_currency',
+            templateUrl: 'price_w_currency.html'
+        });
+        
+        formlyConfig.setType({
+            name: 'group_label',
+            templateUrl: 'group_label.html'
+        });
+        
+        formlyConfig.setType({
+            name: 'text',
+            templateUrl: 'text.html'
+        });
+        
+        // contact attribute
+        formlyConfig.setType({
+            name: 'contact',
+            templateUrl: 'contact.html',
+            controller: ['$scope', function ($scope) {
+            $scope.contacts = [{
+              id: 1,
+              name: 'Ho Thong Mee'
+            },
+            {
+              id: 2,
+              name: 'Yan Dong Ho'
+            },
+            {
+              id: 3,
+              name: 'Choe Sin Nyom'
+            },
+            {
+              id: 232,
+              name: 'Kim Ju Il'
+            }];
+          }]      
+        });
+        
+        // legal firm attribute
+        formlyConfig.setType({
+          name: 'legalFirm',
+          templateUrl: 'legalFirm.html',
+          controller: ['$scope', function ($scope) {
+            $scope.legalFirms = [{
+              id: 1,
+              name: 'Denning IT SDN. BHD.'
+            },
+            {
+              id: 2,
+              name: 'Frenchis Tech'
+            },
+            {
+              id: 3,
+              name: 'Woo Thin Hook'
+            },
+            {
+              id: 232,
+              name: 'Abu Bin Baker'
+            }];
+          }]      
+        });
+        
+        formlyConfig.setType({
+          name: 'datepicker',
+          templateUrl:  'datepicker.html',
+          wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+          defaultOptions: {
+            ngModelAttrs: ngModelAttrs,
+            templateOptions: {
+              datepickerOptions: {
+                format: 'MM.dd.yyyy',
+                initDate: new Date()
+              }
+            }
+          },
+          controller: ['$scope', function ($scope) {
+            $scope.datepicker = {};
+      
+            $scope.datepicker.opened = false;    
+
+            $scope.datepicker.open = function ($event) {
+              $scope.datepicker.opened = !$scope.datepicker.opened;
+            };
+          }]
+        });    
+  });

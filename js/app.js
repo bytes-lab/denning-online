@@ -7,6 +7,8 @@ var materialAdmin = angular.module('materialAdmin', [
     'oc.lazyLoad',
     'nouislider',
     'ngTable',
-    'ngMaterial'
+    'ngMaterial',
+    'formly', 
+    'formlyBootstrap'
 ])
  

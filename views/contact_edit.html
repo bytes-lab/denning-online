@@ -248,8 +248,8 @@
             </div>            
             <div class="clearfix"></div>
 
-            <h4 class="m-t-25">GST Information</h4>
-            <div class="row">
+            <h4 class="m-t-25" ng-click="vm.showGST=!vm.showGST">GST Information</h4>
+            <div class="row" ng-show="vm.showGST">
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
                         <div class="checkbox">
@@ -299,8 +299,8 @@
             </div>   
             <div class="clearfix"></div>
 
-            <h4 class="m-t-25">Company Information</h4>
-            <div class="row">
+            <h4 class="m-t-25" ng-click="vm.showCompany=!vm.showCompany">Company Information</h4>
+            <div class="row" ng-show="vm.showCompany">
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
                         <dt class="p-t-10">Office Address</dt>
