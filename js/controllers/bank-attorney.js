@@ -25,22 +25,19 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.id_type = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.bank = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.state = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.new_ic, this.id_type, this.name, this.email, this.phone3;
+                    return this.name, this.ic, this.bank, this.state;
                 }
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the contract?';
-    
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
+        function modalInstances(animation, size, backdrop, keyboard, bankAttorney) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
@@ -49,28 +46,28 @@ materialAdmin
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    contact: function () {
-                        return contact;
+                    bankAttorney: function () {
+                        return bankAttorney;
                     }
                 }
             
             });
         }
         //Prevent Outside Click
-        function openDelete(contact) {
-            modalInstances(true, '', 'static', true, contact)
+        function openDelete(bankAttorney) {
+            modalInstances(true, '', 'static', true, bankAttorney)
         };        
     })
 
-    .controller('bankAttorneyDeleteModalCtrl', function ($scope, $modalInstance, contact, bankAttorneyService, $state) {
+    .controller('bankAttorneyDeleteModalCtrl', function ($scope, $modalInstance, bankAttorney, bankAttorneyService, $state) {
         $scope.ok = function () {
-            bankAttorneyService.delete(contact).then(function(contact) {
+            bankAttorneyService.delete(bankAttorney).then(function(bankAttorney) {
                 $state.reload();
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.bankAttorneyInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
@@ -87,21 +84,21 @@ materialAdmin
         if($stateParams.id) {
             bankAttorneyService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.bankAttorney = item;
             });
         } else {
-            self.contact = {};
+            self.bankAttorney = {};
         }
 
         function save() {
-            bankAttorneyService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
+            bankAttorneyService.save(self.bankAttorney).then(function(bankAttorney) {
+                self.bankAttorney = bankAttorney;
+                $state.go('bank-attorneys.list');
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.bankAttorneyInfo.$error.push({meessage:''});
             });
         }
     })
