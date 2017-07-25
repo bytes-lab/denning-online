@@ -4,14 +4,22 @@
         <div class="card-body card-padding">
             <div class="clearfix"></div>
 
-            <h4 class="m-t-25">Land Office Information</h4>
+            <h4 class="m-t-25">Land PTG Information</h4>
             <div class="row">
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Land Administrator</dt>
+                        <dt class="p-t-10">Branch</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.landOffice.land_admin" type="text" class="form-control" placeholder="">
+                                <input ng-model="vm.landPTG.branch" type="text" class="form-control" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Registrar</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input ng-model="vm.landPTG.registrar" type="text" class="form-control" placeholder="">
                             </div>
                         </dd>
                     </dl>
@@ -19,7 +27,7 @@
                         <dt class="p-t-10">Address (Line 1)</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.landOffice.address1" type="text" class="form-control" placeholder="">
+                                <input ng-model="vm.landPTG.address1" type="text" class="form-control" placeholder="">
                             </div>
                         </dd>
                     </dl>
@@ -27,7 +35,7 @@
                         <dt class="p-t-10">Address (Line 2)</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.address2" placeholder="UA203453">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.address2" placeholder="UA203453">
                             </div>
                         </dd>
                     </dl>
@@ -35,7 +43,7 @@
                         <dt class="p-t-10">Address (Line 3)</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.address3" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.address3" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -43,7 +51,7 @@
                         <dt class="p-t-10">Postcode</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.landOffice.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+                                <input ng-model="vm.landPTG.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
                             </div>
 
                         </dd>
@@ -52,7 +60,7 @@
                         <dt class="p-t-10">Town</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.town" placeholder="UA203453">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.town" placeholder="UA203453">
                             </div>
                         </dd>
                     </dl>
@@ -60,7 +68,7 @@
                         <dt class="p-t-10">State</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.state" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.state" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -70,7 +78,7 @@
                         <dt class="p-t-10">District</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.landOffice.district" type="text" class="form-control" placeholder="">
+                                <input ng-model="vm.landPTG.district" type="text" class="form-control" placeholder="">
                             </div>
                         </dd>
                     </dl>
@@ -78,7 +86,7 @@
                         <dt class="p-t-10">Phone 1</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.phone1" placeholder="UA203453">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.phone1" placeholder="UA203453">
                             </div>
                         </dd>
                     </dl>
@@ -86,7 +94,7 @@
                         <dt class="p-t-10">Phone 2</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.phone2" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.phone2" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -94,7 +102,7 @@
                         <dt class="p-t-10">Contact Person</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.landOffice.contact_person" type="text" class="form-control" placeholder="">
+                                <input ng-model="vm.landPTG.contact_person" type="text" class="form-control" placeholder="">
                             </div>
 
                         </dd>
@@ -103,7 +111,7 @@
                         <dt class="p-t-10">Fax</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.fax" placeholder="UA203453">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.fax" placeholder="UA203453">
                             </div>
                         </dd>
                     </dl>
@@ -111,7 +119,7 @@
                         <dt class="p-t-10">Email</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.email" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.email" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -119,7 +127,7 @@
                         <dt class="p-t-10">Website</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.landOffice.website" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.landPTG.website" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -130,7 +138,7 @@
             <div class="row">     
                 <div class="col-md-10">
                     <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" data-ui-sref="land-offices.list" data-ng-click="vm.editInfo = 0" >Cancel</a>
+                        <a class="btn btn-link btn-sm pull-right m-l-10" data-ui-sref="land-PTGs.list" data-ng-click="vm.editInfo = 0" >Cancel</a>
                         <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
                     </div>        
                 </div>

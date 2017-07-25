@@ -573,7 +573,45 @@ materialAdmin
             })  
 
 
-                                                                                                                           //------------------------------
+            //------------------------------
+            // LAND-PTGS
+            //------------------------------
+        
+            .state ('land-PTGs', {
+                data: {
+                    access: '@'
+                },                
+                url: '/land-PTGs',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('land-PTGs.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'landPTGListCtrl as vm',
+                templateUrl: 'views/land-PTG-list.html'
+            })
+
+            .state ('land-PTGs.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'landPTGEditCtrl as vm',
+                templateUrl: 'views/land-PTG-edit.html'
+            })
+            .state ('land-PTGs.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'landPTGEditCtrl as vm',
+                templateUrl: 'views/land-PTG-edit.html'
+            })  
+
+                                                                                                                                       //------------------------------
             // BUILDINGS
             //------------------------------
         

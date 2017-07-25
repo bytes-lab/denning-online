@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="block-header">
-        <h2>home/land office</h2>
+        <h2>home/land PTG</h2>
 
         <ul class="actions m-t-20 hidden-xs">
             <li class="dropdown" uib-dropdown>
@@ -11,7 +11,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a ui-sref="land-offices.new">Add a new Land Office</a>
+                        <a ui-sref="land-PTGs.new">Add a new Land PTG</a>
                     </li>
                 </ul>
             </li>
@@ -20,18 +20,18 @@
     
     <div class="card">
         <div class="card-header">
-            <h2>Land Office List</h2>
+            <h2>Land PTG List</h2>
         </div>
                 
         <div class="card-body">
             <div class="table-responsive" ng-if="vm.dataReady" > 
                 <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
                     <tr ng-repeat="w in $data">
-                        <td data-title="'Land Administrator'" filter="{ 'land_admin': 'text' }" sortable="'land_admin'">
-                            {{ w.land_admin }}
+                        <td data-title="'Branch'" filter="{ 'branch': 'text' }" sortable="'branch'">
+                            {{ w.branch }}
                         </td>
-                        <td data-title="'Town'" filter="{ 'town': 'text' }" sortable="'town'">
-                            {{ w.town }}
+                        <td data-title="'Registrar'" filter="{ 'registrar': 'text' }" sortable="'registrar'">
+                            {{ w.registrar }}
                         </td>                        
                         <td data-title="'Email'" filter="{ 'email': 'text' }" sortable="'email'">
                             {{ w.email }}
@@ -40,7 +40,7 @@
                             {{ w.phone1 }}
                         </td>
                         <td data-title="'Actions'">
-                            <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="land-offices.edit({id:w.id})"><i class="zmdi zmdi-edit"></i></a>
+                            <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="land-PTGs.edit({id:w.id})"><i class="zmdi zmdi-edit"></i></a>
                             <a class="btn btn-warning" ng-click="vm.openDelete(w)"><i class="zmdi zmdi-delete"></i></a>
                         </td>
                     </tr>
@@ -52,10 +52,10 @@
 
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
-        <h4 class="modal-title">Delete a land office</h4>
+        <h4 class="modal-title">Delete a land PTG</h4>
     </div>
     <div class="modal-body">
-        <p>Are you sure to delete the land office?</p>
+        <p>Are you sure to delete the land PTG?</p>
     </div>
     <div class="modal-footer">
         <button class="btn btn-link" ng-click="ok()">OK</button>
