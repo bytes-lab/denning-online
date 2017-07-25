@@ -25,22 +25,21 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.id_type = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.branch = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.town = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.phone1 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.fax = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.new_ic, this.id_type, this.name, this.email, this.phone3;
+                    return this.branch, this.town, this.phone1, this.fax;
                 }
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the contract?';
+        self.modalContent = 'Are you sure to delete the IRD Branch?';
     
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
+        function modalInstances(animation, size, backdrop, keyboard, IRDBranch) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
@@ -49,28 +48,28 @@ materialAdmin
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    contact: function () {
-                        return contact;
+                    IRDBranch: function () {
+                        return IRDBranch;
                     }
                 }
             
             });
         }
         //Prevent Outside Click
-        function openDelete(contact) {
-            modalInstances(true, '', 'static', true, contact)
+        function openDelete(IRDBranch) {
+            modalInstances(true, '', 'static', true, IRDBranch)
         };        
     })
 
-    .controller('IRDBranchDeleteModalCtrl', function ($scope, $modalInstance, contact, IRDBranchService, $state) {
+    .controller('IRDBranchDeleteModalCtrl', function ($scope, $modalInstance, IRDBranch, IRDBranchService, $state) {
         $scope.ok = function () {
-            IRDBranchService.delete(contact).then(function(contact) {
+            IRDBranchService.delete(IRDBranch).then(function(IRDBranch) {
                 $state.reload();
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.IRDBranchInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
@@ -87,21 +86,21 @@ materialAdmin
         if($stateParams.id) {
             IRDBranchService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.IRDBranch = item;
             });
         } else {
-            self.contact = {};
+            self.IRDBranch = {};
         }
 
         function save() {
-            IRDBranchService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
+            IRDBranchService.save(self.IRDBranch).then(function(IRDBranch) {
+                self.IRDBranch = IRDBranch;
+                $state.go('IRD-branches.list');
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.IRDBranchInfo.$error.push({meessage:''});
             });
         }
     })
