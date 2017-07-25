@@ -25,22 +25,21 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.id_type = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.city = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.postcode = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.state = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.country = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.new_ic, this.id_type, this.name, this.email, this.phone3;
+                    return this.city, this.postcode, this.state, this.country;
                 }
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the contract?';
+        self.modalContent = 'Are you sure to delete the city?';
     
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
+        function modalInstances(animation, size, backdrop, keyboard, city) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
@@ -49,28 +48,28 @@ materialAdmin
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    contact: function () {
-                        return contact;
+                    city: function () {
+                        return city;
                     }
                 }
             
             });
         }
         //Prevent Outside Click
-        function openDelete(contact) {
-            modalInstances(true, '', 'static', true, contact)
+        function openDelete(city) {
+            modalInstances(true, '', 'static', true, city)
         };        
     })
 
-    .controller('cityDeleteModalCtrl', function ($scope, $modalInstance, contact, cityService, $state) {
+    .controller('cityDeleteModalCtrl', function ($scope, $modalInstance, city, cityService, $state) {
         $scope.ok = function () {
-            cityService.delete(contact).then(function(contact) {
+            cityService.delete(city).then(function(city) {
                 $state.reload();
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.cityInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
@@ -87,21 +86,21 @@ materialAdmin
         if($stateParams.id) {
             cityService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.city = item;
             });
         } else {
-            self.contact = {};
+            self.city = {};
         }
 
         function save() {
-            cityService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
+            cityService.save(self.city).then(function(city) {
+                self.city = city;
+                $state.go('cities.list');
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.cityInfo.$error.push({meessage:''});
             });
         }
     })
