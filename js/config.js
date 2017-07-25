@@ -535,6 +535,44 @@ materialAdmin
 
 
             //------------------------------
+            // COURTS
+            //------------------------------
+        
+            .state ('courts', {
+                data: {
+                    access: '@'
+                },                
+                url: '/courts',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('courts.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'courtListCtrl as vm',
+                templateUrl: 'views/court-list.html'
+            })
+
+            .state ('courts.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'courtEditCtrl as vm',
+                templateUrl: 'views/court-edit.html'
+            })
+            .state ('courts.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'courtEditCtrl as vm',
+                templateUrl: 'views/court-edit.html'
+            })  
+
+            //------------------------------
             // LAND-OFFICES
             //------------------------------
         

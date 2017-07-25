@@ -1,10 +1,10 @@
 materialAdmin
-    .controller('contactListCtrl', function($filter, $sce, $uibModal, NgTableParams, contactService) {
+    .controller('courtListCtrl', function($filter, $sce, $uibModal, NgTableParams, courtService) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
 
-        contactService.getList().then(function(data) {
+        courtService.getList().then(function(data) {
             self.data = data;
             self.dataReady = true;
             initializeTable();
@@ -25,51 +25,49 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.type_eng = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.type_mal = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.place = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.phone1 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.new_ic, this.name, this.email, this.phone3;
+                    return this.type_eng, this.type_mal, this.place, this.phone1;
                 }
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the contract?';
-    
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
+        function modalInstances(animation, size, backdrop, keyboard, court) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                controller: 'courtDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    contact: function () {
-                        return contact;
+                    court: function () {
+                        return court;
                     }
                 }
             
             });
         }
         //Prevent Outside Click
-        function openDelete(contact) {
-            modalInstances(true, '', 'static', true, contact)
+        function openDelete(court) {
+            modalInstances(true, '', 'static', true, court)
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, contactService, $state) {
+    .controller('courtDeleteModalCtrl', function ($scope, $modalInstance, court, courtService, $state) {
         $scope.ok = function () {
-            contactService.delete(contact).then(function(contact) {
+            courtService.delete(court).then(function(court) {
                 $state.reload();
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.courtInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
@@ -79,28 +77,28 @@ materialAdmin
         };
     })
 
-    .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state) {
+    .controller('courtEditCtrl', function($filter, $stateParams, courtService, $state) {
         var self = this;
         self.save = save;
 
         if($stateParams.id) {
-            contactService.getItem($stateParams.id)
+            courtService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.court = item;
             });
         } else {
-            self.contact = {};
+            self.court = {};
         }
 
         function save() {
-            contactService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
+            courtService.save(self.court).then(function(court) {
+                self.court = court;
+                $state.go('courts.list');
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.courtInfo.$error.push({meessage:''});
             });
         }
     })
