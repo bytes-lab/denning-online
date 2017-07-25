@@ -25,22 +25,19 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.id_type = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.title1 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.title2 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.position = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.new_ic, this.id_type, this.name, this.email, this.phone3;
+                    return this.name, this.title1, this.title2, this.position;
                 }
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the contract?';
-    
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
+        function modalInstances(animation, size, backdrop, keyboard, judge) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
@@ -49,28 +46,28 @@ materialAdmin
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    contact: function () {
-                        return contact;
+                    judge: function () {
+                        return judge;
                     }
                 }
             
             });
         }
         //Prevent Outside Click
-        function openDelete(contact) {
-            modalInstances(true, '', 'static', true, contact)
+        function openDelete(judge) {
+            modalInstances(true, '', 'static', true, judge)
         };        
     })
 
-    .controller('judgeDeleteModalCtrl', function ($scope, $modalInstance, contact, judgeService, $state) {
+    .controller('judgeDeleteModalCtrl', function ($scope, $modalInstance, judge, judgeService, $state) {
         $scope.ok = function () {
-            judgeService.delete(contact).then(function(contact) {
+            judgeService.delete(judge).then(function(judge) {
                 $state.reload();
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.judgeInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
@@ -87,21 +84,21 @@ materialAdmin
         if($stateParams.id) {
             judgeService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.judge = item;
             });
         } else {
-            self.contact = {};
+            self.judge = {};
         }
 
         function save() {
-            judgeService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
+            judgeService.save(self.judge).then(function(judge) {
+                self.judge = judge;
+                $state.go('judges.list');
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.judgeInfo.$error.push({meessage:''});
             });
         }
     })

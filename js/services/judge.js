@@ -9,11 +9,11 @@ materialAdmin
             {
                 "id": 10238,
                 "name": "Marc Barnes",
-                "email": "marc.barnes54@example.com",
-                "new_ic": "760105-06-2540",
-                "phone3": "(382)-122-5003",
+                "title1": "marc.barnes54@example.com",
+                "id": "760105-06-2540",
+                "position": "(382)-122-5003",
 
-                "id_type": "New + Old IC",
+                "title2": "New + Old IC",
                 "old_ic": "A33440078",
                 "title": "Mr.",
                 "address1": " 178, Kampung Baru,",
@@ -47,7 +47,7 @@ materialAdmin
                 "director1": "",
                 "director2": "",
                 "secretary": "",
-                "contact_person": "Contact Me",
+                "judge_person": "Contact Me",
                 "spouse_name": "",
                 "spouse_occupation": "",
                 "race": "",
@@ -77,158 +77,158 @@ materialAdmin
             {   
                 "id": 10243,
                 "name": "Glen Curtis",
-                "email": "glen.curtis11@example.com",
-                "new_ic": "760105-06-2520",
-                "id_type": "New + Old IC",
-                "phone3": "(477)-981-4948"
+                "title1": "glen.curtis11@example.com",
+                "id": "760105-06-2520",
+                "title2": "New + Old IC",
+                "position": "(477)-981-4948"
             },
             {
                 "id": 10248,
                 "name": "Beverly Gonzalez",
-                "email": "beverly.gonzalez54@example.com",
-                "new_ic": "760105-06-2330",
-                "id_type": "New + Old IC",
-                "phone3": "(832)-255-5161"
+                "title1": "beverly.gonzalez54@example.com",
+                "id": "760105-06-2330",
+                "title2": "New + Old IC",
+                "position": "(832)-255-5161"
             },
             {
                 "id": 10253,
                 "name": "Yvonne Chavez",
-                "email": "yvonne.chavez@example.com",
-                "new_ic": "760105-32-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(477)-446-3715"
+                "title1": "yvonne.chavez@example.com",
+                "id": "760105-32-2540",
+                "title2": "New + Old IC",
+                "position": "(477)-446-3715"
             },
             {
                 "id": 10234,
                 "name": "Melinda Mitchelle",
-                "email": "melinda@example.com",
-                "new_ic": "778805-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(813)-716-4996"
+                "title1": "melinda@example.com",
+                "id": "778805-06-2540",
+                "title2": "New + Old IC",
+                "position": "(813)-716-4996"
                 
             },
             {
                 "id": 10239,
                 "name": "Shannon Bradley",
-                "email": "shannon.bradley42@example.com",
-                "new_ic": "2120105-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(774)-291-9928"
+                "title1": "shannon.bradley42@example.com",
+                "id": "2120105-06-2540",
+                "title2": "New + Old IC",
+                "position": "(774)-291-9928"
             },
             {
                 "id": 10244,
                 "name": "Virgil Kim",
-                "email": "virgil.kim81@example.com",
-                "new_ic": "760005-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(219)-181-7898"
+                "title1": "virgil.kim81@example.com",
+                "id": "760005-06-2540",
+                "title2": "New + Old IC",
+                "position": "(219)-181-7898"
             },
             {
                 "id": 10249,
                 "name": "Letitia Robertson",
-                "email": "letitia.rober@example.com",
-                "new_ic": "540105-06-2540",
-                "phone3": "(647)-209-4589"
+                "title1": "letitia.rober@example.com",
+                "id": "540105-06-2540",
+                "position": "(647)-209-4589"
             },
             {
                 "id": 10237,
                 "name": "Claude King",
-                "email": "claude.king22@example.com",
-                "new_ic": "98105-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(657)-988-8701"
+                "title1": "claude.king22@example.com",
+                "id": "98105-06-2540",
+                "title2": "New + Old IC",
+                "position": "(657)-988-8701"
             },
             {
                 "id": 10242,
                 "name": "Roland Craig",
-                "email": "roland.craig47@example.com",
-                "new_ic": "767105-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(932)-935-9471"
+                "title1": "roland.craig47@example.com",
+                "id": "767105-06-2540",
+                "title2": "New + Old IC",
+                "position": "(932)-935-9471"
             },
             {
                 "id": 10247,
                 "name": "Colleen Parker",
-                "email": "colleen.parker38@example.com",
-                "new_ic": "762225-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(857)-459-2792"
+                "title1": "colleen.parker38@example.com",
+                "id": "762225-06-2540",
+                "title2": "New + Old IC",
+                "position": "(857)-459-2792"
             },
             {
                 "id": 10252,
                 "name": "Leah Jensen",
-                "email": "leah.jensen27@example.com",
-                "new_ic": "76087-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(861)-275-4686"
+                "title1": "leah.jensen27@example.com",
+                "id": "76087-06-2540",
+                "title2": "New + Old IC",
+                "position": "(861)-275-4686"
             },
             {
                 "id": 10236,
                 "name": "Harold Martinez",
-                "email": "martinez67@example.com",
-                "new_ic": "960105-96-2520",
-                "id_type": "New + Old IC",
-                "phone3": "(836)-634-9133"
+                "title1": "martinez67@example.com",
+                "id": "960105-96-2520",
+                "title2": "New + Old IC",
+                "position": "(836)-634-9133"
             },
             {
                 "id": 10241,
                 "name": "Keith Lowe",
-                "email": "keith.lowe96@example.com",
-                "new_ic": "760105-06-2550",
-                "id_type": "New + Old IC",
-                "phone3": "(778)-787-3100"
+                "title1": "keith.lowe96@example.com",
+                "id": "760105-06-2550",
+                "title2": "New + Old IC",
+                "position": "(778)-787-3100"
             },
             {
                 "id": 10246,
                 "name": "Charles Walker",
-                "email": "charles.walker90@example.com",
-                "new_ic": "760105-26-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(486)-440-4716"
+                "title1": "charles.walker90@example.com",
+                "id": "760105-26-2540",
+                "title2": "New + Old IC",
+                "position": "(486)-440-4716"
             },
             {
                 "id": 10251,
                 "name": "Lillie Curtis",
-                "email": "lillie.curtis12@example.com",
-                "new_ic": "760605-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(342)-510-2258"
+                "title1": "lillie.curtis12@example.com",
+                "id": "760605-06-2540",
+                "title2": "New + Old IC",
+                "position": "(342)-510-2258"
             },
             {
                 "id": 10235,
                 "name": "Genesis Reynolds",
-                "email": "genesis@example.com",
-                "new_ic": "760105-07-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(339)-375-1858"
+                "title1": "genesis@example.com",
+                "id": "760105-07-2540",
+                "title2": "New + Old IC",
+                "position": "(339)-375-1858"
             },
             {
                 "id": 10240,
                 "name": "Oscar Palmer",
-                "email": "oscar.palmer24@example.com",
-                "new_ic": "760105-76-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(544)-270-9912"
+                "title1": "oscar.palmer24@example.com",
+                "id": "760105-76-2540",
+                "title2": "New + Old IC",
+                "position": "(544)-270-9912"
             },
             {
                 "id": 10245,
                 "name": "Lena Bishop",
-                "email": "Lena Bishop",
-                "new_ic": "550105-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(177)-521-1556"
+                "title1": "Lena Bishop",
+                "id": "550105-06-2540",
+                "title2": "New + Old IC",
+                "position": "(177)-521-1556"
             },
             {
                 "id": 10250,
                 "name": "Kent Nguyen",
-                "email": "kent.nguyen34@example.com",
-                "new_ic": "460105-06-2540",
-                "id_type": "New + Old IC",
-                "phone3": "(506)-533-6801"
+                "title1": "kent.nguyen34@example.com",
+                "id": "460105-06-2540",
+                "title2": "New + Old IC",
+                "position": "(506)-533-6801"
             }
         ];
 
-        service.contacts = null;
+        service.judges = null;
         service.getList = getList;
         service.getItem = getItem;
         service.save = save;
@@ -237,31 +237,31 @@ materialAdmin
         function getList() {
             var deferred = $q.defer();
 
-            if(service.contacts)
-                deferred.resolve(service.contacts);
+            if(service.judges)
+                deferred.resolve(service.judges);
             else
                 $timeout(function(){
                     deferred.resolve(fakedata);
-                    service.contacts = fakedata;                
+                    service.judges = fakedata;                
                 }, 100);
             return deferred.promise;
         }  
 
-        function getItem(new_ic) {
+        function getItem(id) {
 
             var deferred = $q.defer();
 
             $timeout(function(){
-                if (!service.contacts) {
-                    service.contacts = fakedata;
+                if (!service.judges) {
+                    service.judges = fakedata;
                 }
-                var item = service.contacts.filter(function(c){
-                    return c.new_ic == new_ic;
+                var item = service.judges.filter(function(c){
+                    return c.id == id;
                 });
                 if (item.length == 1)
                     deferred.resolve(item[0]);
                 else
-                    deferred.resolve(new Error('No Item with the new_ic'));
+                    deferred.resolve(new Error('No Item with the id'));
                 
                 
             }, 100);
@@ -269,16 +269,16 @@ materialAdmin
             return deferred.promise;
         }
 
-        function save(contact) {
+        function save(judge) {
             var deferred = $q.defer();
 
             $timeout(function(){
-                var idx = service.contacts.map(function(c) {return c.new_ic; }).indexOf(contact.new_ic);
+                var idx = service.judges.map(function(c) {return c.id; }).indexOf(judge.id);
                 if(idx != -1) {
-                    service.contacts[idx] = contact;
-                    deferred.resolve(contact);
+                    service.judges[idx] = judge;
+                    deferred.resolve(judge);
                 } else {
-                    service.contacts.push(contact);
+                    service.judges.push(judge);
                 }
                 //defered.reject(new Error('dd'));
             }, 100);
@@ -286,16 +286,16 @@ materialAdmin
             return deferred.promise;
         }
 
-        function delete_(contact) {
+        function delete_(judge) {
             var deferred = $q.defer();
 
             $timeout(function(){
-                var idx = service.contacts.map(function(c) {return c.new_ic; }).indexOf(contact.new_ic);
+                var idx = service.judges.map(function(c) {return c.id; }).indexOf(judge.id);
                 if(idx != -1) {
-                    service.contacts.splice(idx, 1);
-                    deferred.resolve(contact);
+                    service.judges.splice(idx, 1);
+                    deferred.resolve(judge);
                 } else {
-                    defered.reject(new Error('There is no such contact'));
+                    defered.reject(new Error('There is no such judge'));
                 }
             }, 100);
 
