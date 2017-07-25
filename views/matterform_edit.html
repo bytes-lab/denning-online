@@ -63,10 +63,10 @@
     <div style="display: flex;">
     <input id="{{::id}}-label" name="{{::id}}-label" class="form-control attr-label short-label" ng-model="model[options.key+'-label']" ng-value="options.templateOptions.label" />        
     <select class="form-control" ng-model="model[options.key]" style="width:300px;">
-      <option ng-repeat="item in contacts" ng-value="item.id">{{item.name}}</option>
+      <option ng-repeat="item in contacts" ng-value="item.id">{{item.id}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</option>
     </select>
-    <input id="{{::id}}-share" name="{{::id}}" class="form-control" ng-model="model[options.key+'-share']" ng-if="to.share" style="width: 100px;" />
     <a class="btn btn-primary short-btn"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+    <input id="{{::id}}-share" name="{{::id}}" class="form-control" ng-model="model[options.key+'-share']" ng-if="to.share" style="width: 100px;" placeholder="   share" />
     </div>
   </div>
 </script>
