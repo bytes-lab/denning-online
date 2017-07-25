@@ -25,22 +25,21 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.id_type = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.firm_name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.title = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.phone2 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.new_ic, this.id_type, this.name, this.email, this.phone3;
+                    return this.firm_name, this.title, this.email, this.phone2;
                 }
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the contract?';
+        self.modalContent = 'Are you sure to delete the legal firm?';
     
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
+        function modalInstances(animation, size, backdrop, keyboard, legalFirm) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
@@ -49,28 +48,28 @@ materialAdmin
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    contact: function () {
-                        return contact;
+                    legalFirm: function () {
+                        return legalFirm;
                     }
                 }
             
             });
         }
         //Prevent Outside Click
-        function openDelete(contact) {
-            modalInstances(true, '', 'static', true, contact)
+        function openDelete(legalFirm) {
+            modalInstances(true, '', 'static', true, legalFirm)
         };        
     })
 
-    .controller('legalFirmDeleteModalCtrl', function ($scope, $modalInstance, contact, legalFirmService, $state) {
+    .controller('legalFirmDeleteModalCtrl', function ($scope, $modalInstance, legalFirm, legalFirmService, $state) {
         $scope.ok = function () {
-            legalFirmService.delete(contact).then(function(contact) {
+            legalFirmService.delete(legalFirm).then(function(legalFirm) {
                 $state.reload();
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.legalFirmInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
@@ -87,21 +86,21 @@ materialAdmin
         if($stateParams.id) {
             legalFirmService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.legalFirm = item;
             });
         } else {
-            self.contact = {};
+            self.legalFirm = {};
         }
 
         function save() {
-            legalFirmService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
+            legalFirmService.save(self.legalFirm).then(function(legalFirm) {
+                self.legalFirm = legalFirm;
+                $state.go('legal-firms.list');
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.legalFirmInfo.$error.push({meessage:''});
             });
         }
     })
