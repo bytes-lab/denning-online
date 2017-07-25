@@ -25,22 +25,19 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.id_type = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.code = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    this.phone = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.new_ic, this.id_type, this.name, this.email, this.phone3;
+                    return this.code, this.name, this.email, this.phone;
                 }
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the contract?';
-    
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
+        function modalInstances(animation, size, backdrop, keyboard, bank) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
@@ -49,28 +46,28 @@ materialAdmin
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    contact: function () {
-                        return contact;
+                    bank: function () {
+                        return bank;
                     }
                 }
             
             });
         }
         //Prevent Outside Click
-        function openDelete(contact) {
-            modalInstances(true, '', 'static', true, contact)
+        function openDelete(bank) {
+            modalInstances(true, '', 'static', true, bank)
         };        
     })
 
-    .controller('bankDeleteModalCtrl', function ($scope, $modalInstance, contact, bankService, $state) {
+    .controller('bankDeleteModalCtrl', function ($scope, $modalInstance, bank, bankService, $state) {
         $scope.ok = function () {
-            bankService.delete(contact).then(function(contact) {
+            bankService.delete(bank).then(function(bank) {
                 $state.reload();
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.bankInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
@@ -87,21 +84,21 @@ materialAdmin
         if($stateParams.id) {
             bankService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.bank = item;
             });
         } else {
-            self.contact = {};
+            self.bank = {};
         }
 
         function save() {
-            bankService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
+            bankService.save(self.bank).then(function(bank) {
+                self.bank = bank;
+                $state.go('banks.list');
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.bankInfo.$error.push({meessage:''});
             });
         }
     })
