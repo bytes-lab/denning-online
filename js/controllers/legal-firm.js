@@ -1,10 +1,10 @@
 materialAdmin
-    .controller('contactListCtrl', function($filter, $sce, $uibModal, NgTableParams, contactService) {
+    .controller('legalFirmListCtrl', function($filter, $sce, $uibModal, NgTableParams, legalFirmService) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
 
-        contactService.getList().then(function(data) {
+        legalFirmService.getList().then(function(data) {
             self.data = data;
             self.dataReady = true;
             initializeTable();
@@ -44,7 +44,7 @@ materialAdmin
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                controller: 'legalFirmDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
@@ -62,9 +62,9 @@ materialAdmin
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, contactService, $state) {
+    .controller('legalFirmDeleteModalCtrl', function ($scope, $modalInstance, contact, legalFirmService, $state) {
         $scope.ok = function () {
-            contactService.delete(contact).then(function(contact) {
+            legalFirmService.delete(contact).then(function(contact) {
                 $state.reload();
             })
             .catch(function(err){
@@ -80,12 +80,12 @@ materialAdmin
         };
     })
 
-    .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state) {
+    .controller('legalFirmEditCtrl', function($filter, $stateParams, legalFirmService, $state) {
         var self = this;
         self.save = save;
 
         if($stateParams.id) {
-            contactService.getItem($stateParams.id)
+            legalFirmService.getItem($stateParams.id)
             .then(function(item){
                 self.contact = item;
             });
@@ -94,7 +94,7 @@ materialAdmin
         }
 
         function save() {
-            contactService.save(self.contact).then(function(contact) {
+            legalFirmService.save(self.contact).then(function(contact) {
                 self.contact = contact;
                 $state.go('contacts.list');
             })

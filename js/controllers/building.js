@@ -1,10 +1,10 @@
 materialAdmin
-    .controller('contactListCtrl', function($filter, $sce, $uibModal, NgTableParams, contactService) {
+    .controller('buildingListCtrl', function($filter, $sce, $uibModal, NgTableParams, buildingService) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
 
-        contactService.getList().then(function(data) {
+        buildingService.getList().then(function(data) {
             self.data = data;
             self.dataReady = true;
             initializeTable();
@@ -44,7 +44,7 @@ materialAdmin
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                controller: 'buildingDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
@@ -62,9 +62,9 @@ materialAdmin
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, contactService, $state) {
+    .controller('buildingDeleteModalCtrl', function ($scope, $modalInstance, contact, buildingService, $state) {
         $scope.ok = function () {
-            contactService.delete(contact).then(function(contact) {
+            buildingService.delete(contact).then(function(contact) {
                 $state.reload();
             })
             .catch(function(err){
@@ -80,12 +80,12 @@ materialAdmin
         };
     })
 
-    .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state) {
+    .controller('buildingEditCtrl', function($filter, $stateParams, buildingService, $state) {
         var self = this;
         self.save = save;
 
         if($stateParams.id) {
-            contactService.getItem($stateParams.id)
+            buildingService.getItem($stateParams.id)
             .then(function(item){
                 self.contact = item;
             });
@@ -94,7 +94,7 @@ materialAdmin
         }
 
         function save() {
-            contactService.save(self.contact).then(function(contact) {
+            buildingService.save(self.contact).then(function(contact) {
                 self.contact = contact;
                 $state.go('contacts.list');
             })

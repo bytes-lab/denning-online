@@ -1,10 +1,10 @@
 materialAdmin
-    .controller('cityListCtrl', function($filter, $sce, $uibModal, NgTableParams, cityService) {
+    .controller('landOfficeListCtrl', function($filter, $sce, $uibModal, NgTableParams, landOfficeService) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
 
-        cityService.getList().then(function(data) {
+        landOfficeService.getList().then(function(data) {
             self.data = data;
             self.dataReady = true;
             initializeTable();
@@ -44,7 +44,7 @@ materialAdmin
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'cityDeleteModalCtrl',
+                controller: 'landOfficeDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
@@ -62,9 +62,9 @@ materialAdmin
         };        
     })
 
-    .controller('cityDeleteModalCtrl', function ($scope, $modalInstance, contact, cityService, $state) {
+    .controller('landOfficeDeleteModalCtrl', function ($scope, $modalInstance, contact, landOfficeService, $state) {
         $scope.ok = function () {
-            cityService.delete(contact).then(function(contact) {
+            landOfficeService.delete(contact).then(function(contact) {
                 $state.reload();
             })
             .catch(function(err){
@@ -80,12 +80,12 @@ materialAdmin
         };
     })
 
-    .controller('cityEditCtrl', function($filter, $stateParams, cityService, $state) {
+    .controller('landOfficeEditCtrl', function($filter, $stateParams, landOfficeService, $state) {
         var self = this;
         self.save = save;
 
         if($stateParams.id) {
-            cityService.getItem($stateParams.id)
+            landOfficeService.getItem($stateParams.id)
             .then(function(item){
                 self.contact = item;
             });
@@ -94,7 +94,7 @@ materialAdmin
         }
 
         function save() {
-            cityService.save(self.contact).then(function(contact) {
+            landOfficeService.save(self.contact).then(function(contact) {
                 self.contact = contact;
                 $state.go('contacts.list');
             })

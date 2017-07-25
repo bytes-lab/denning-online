@@ -144,6 +144,45 @@ materialAdmin
             })
 
 
+
+            //------------------------------
+            // PROPERTIES
+            //------------------------------
+        
+            .state ('properties', {
+                data: {
+                    access: '@'
+                },                
+                url: '/properties',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('properties.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'propertyListCtrl as vm',
+                templateUrl: 'views/property-list.html'
+            })
+
+            .state ('properties.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'propertyEditCtrl as vm',
+                templateUrl: 'views/property-edit.html'
+            })
+            .state ('properties.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'propertyEditCtrl as vm',
+                templateUrl: 'views/property-edit.html'
+            })
+            
             //------------------------------
             // OCCUPATIONS
             //------------------------------

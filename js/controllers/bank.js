@@ -1,10 +1,10 @@
 materialAdmin
-    .controller('contactListCtrl', function($filter, $sce, $uibModal, NgTableParams, contactService) {
+    .controller('bankListCtrl', function($filter, $sce, $uibModal, NgTableParams, bankService) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
 
-        contactService.getList().then(function(data) {
+        bankService.getList().then(function(data) {
             self.data = data;
             self.dataReady = true;
             initializeTable();
@@ -44,7 +44,7 @@ materialAdmin
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                controller: 'bankDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
@@ -62,9 +62,9 @@ materialAdmin
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, contactService, $state) {
+    .controller('bankDeleteModalCtrl', function ($scope, $modalInstance, contact, bankService, $state) {
         $scope.ok = function () {
-            contactService.delete(contact).then(function(contact) {
+            bankService.delete(contact).then(function(contact) {
                 $state.reload();
             })
             .catch(function(err){
@@ -80,12 +80,12 @@ materialAdmin
         };
     })
 
-    .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state) {
+    .controller('bankEditCtrl', function($filter, $stateParams, bankService, $state) {
         var self = this;
         self.save = save;
 
         if($stateParams.id) {
-            contactService.getItem($stateParams.id)
+            bankService.getItem($stateParams.id)
             .then(function(item){
                 self.contact = item;
             });
@@ -94,7 +94,7 @@ materialAdmin
         }
 
         function save() {
-            contactService.save(self.contact).then(function(contact) {
+            bankService.save(self.contact).then(function(contact) {
                 self.contact = contact;
                 $state.go('contacts.list');
             })

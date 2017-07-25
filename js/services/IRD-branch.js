@@ -3,7 +3,7 @@ materialAdmin
     // Contacts
     // =========================================================================
     
-    .service('contactService', ['$q', '$timeout',function($q, $timeout){
+    .service('IRDBranchService', ['$q', '$timeout',function($q, $timeout){
         var service = {};
         var fakedata = [
             {

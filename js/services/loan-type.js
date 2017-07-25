@@ -3,7 +3,7 @@ materialAdmin
     // Contacts
     // =========================================================================
     
-    .service('contactService', ['$q', '$timeout',function($q, $timeout){
+    .service('loanTypeService', ['$q', '$timeout',function($q, $timeout){
         var service = {};
         var fakedata = [
             {

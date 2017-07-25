@@ -3,7 +3,7 @@ materialAdmin
     // Contacts
     // =========================================================================
     
-    .service('bankCACService', ['$q', '$timeout',function($q, $timeout){
+    .service('propertyService', ['$q', '$timeout',function($q, $timeout){
         var service = {};
         var fakedata = [
             {
