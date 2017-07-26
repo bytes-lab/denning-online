@@ -62,16 +62,18 @@
   <div class="form-group" ng-repeat="party in getNumber(cntParty) track by $index">
     <div style="display: flex;">
       <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
-      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="model[options.key+'party'+$index]" style="width:300px;">
+      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="model[options.key+'_party_'+$index]" style="width:300px;">
         <option ng-repeat="item in contacts" ng-value="item.id">{{item.id}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</option>
       </select>
       <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: model[options.key+'party'+$index]})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-      <input id="{{::id}}-share" name="{{::id}}" class="form-control" ng-model="model[options.key+'-share']" ng-if="to.share" style="width: 100px;" placeholder="   share" />
+      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="model[options.key+'_share_'+$index]" ng-if="to.share" style="width: 100px;padding-left: 10px;" placeholder="Share" />
     </div>
   </div>
-  <a class="btn btn-primary short-btn" ng-click="addParty()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-  <a class="btn btn-primary short-btn" ng-click="removeParty()"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
-  <a class="btn btn-primary short-btn" target="_new" data-ui-sref="contacts.edit">Add a new party</a>
+  <div style="margin-bottom: 16px;">
+    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+    <a class="btn btn-primary short-btn" ng-click="removeParty()"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
+    <a class="btn btn-primary short-btn" style="margin-left: 80px;" target="_new" data-ui-sref="contacts.edit">Add a new party</a>
+  </div>
 </script>
 
 <script type="text/ng-template" id="legalFirm.html">

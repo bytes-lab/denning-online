@@ -15,10 +15,14 @@
   background: #f5f5f5;  
   width: 180px;
   -webkit-box-shadow: none; 
+  padding-left: 10px !important;
 }
 
 .short-label {
-  width: 50px;
+  width: 36px;
+  margin: 0px;
+  padding-left: 10px !important;
+  padding-top: 6px !important; 
 }
 
 .short-btn {
@@ -33,6 +37,7 @@
   background: #00bcd4;
   font-weight: 500;
   font-size: 20px;
+  padding-left: 16px !important;
 }
 
 .group {
