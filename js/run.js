@@ -97,24 +97,33 @@ materialAdmin
                     return new Array(num);   
                 }
 
-                $scope.cntParty = 1;
+                $scope.model[$scope.options.key] = [
+                {
+                  "party": "",
+                  "share": ""
+                }];
+
+                console.log($scope.options.key);
 
                 $scope.addParty = function() {
-                    $scope.cntParty = $scope.cntParty + 1
+                    $scope.model[$scope.options.key].push({
+                        "party": "",
+                        "share": ""
+                    })
                 }
 
-                $scope.removeParty = function() {
-                    if ($scope.cntParty > 1)
-                        $scope.cntParty = $scope.cntParty - 1
+                $scope.removeParty = function(idx) {
+                    if ($scope.model[$scope.options.key].length > 1)
+                        $scope.model[$scope.options.key].splice(idx, 1);
                 }
 
                 $scope.contacts = [
                     {
-                      id: '654814-54-15614',
+                      id: '654814-54-1514',
                       name: 'Ho Thong Mee'
                     },
                     {
-                      id: '463456-63-52345',
+                      id: '463456-63-5235',
                       name: 'Yan Dong Ho'
                     },
                     {
@@ -122,7 +131,7 @@ materialAdmin
                       name: 'Choe Sin Nyom'
                     },
                     {
-                      id: '245325-67-94151',
+                      id: '245325-67-9151',
                       name: 'Kim Ju Il'
                     }
                 ];

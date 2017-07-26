@@ -52,3 +52,10 @@
 .formly-field {
   margin-bottom: 5px;
 }
+
+.nav-tabs a, .nav-tabs > .uib-tab.active > a:focus, .nav-tabs > .uib-tab.active > a:hover {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border-color: #ddd #ddd transparent #ddd;
+}

@@ -59,19 +59,19 @@
 </script>
 
 <script type="text/ng-template" id="contact.html">  
-  <div class="form-group" ng-repeat="party in getNumber(cntParty) track by $index">
+  <div class="form-group" ng-repeat="party in model[options.key]">
     <div style="display: flex;">
       <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
-      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="model[options.key+'_party_'+$index]" style="width:300px;">
+      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="party.party" style="width:300px;">
         <option ng-repeat="item in contacts" ng-value="item.id">{{item.id}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</option>
       </select>
-      <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: model[options.key+'party'+$index]})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="model[options.key+'_share_'+$index]" ng-if="to.share" style="width: 100px;padding-left: 10px;" placeholder="Share" />
+      <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: party.party})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 100px;padding-left: 10px;" placeholder="Share" />
+      <a class="btn btn-danger short-btn" ng-click="removeParty($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
     </div>
   </div>
   <div style="margin-bottom: 16px;">
     <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-    <a class="btn btn-primary short-btn" ng-click="removeParty()"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
     <a class="btn btn-primary short-btn" style="margin-left: 80px;" target="_new" data-ui-sref="contacts.edit">Add a new party</a>
   </div>
 </script>
