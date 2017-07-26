@@ -30,17 +30,14 @@
                         <td data-title="'Firm Name'" filter="{ 'name': 'text' }" sortable="'name'">
                             {{ w.name }}
                         </td>
-                        <td data-title="'Title'" filter="{ 'title': 'text' }" sortable="'title'">
-                            {{ w.title }}
-                        </td>
-                        <td data-title="'Email'" filter="{ 'email': 'text' }" sortable="'email'">
+                        <td data-title="'Email'" filter="{ 'emailAddress': 'text' }" sortable="'emailAddress'">
                             {{ w.emailAddress }}
                         </td>
                         <td data-title="'Phone Home'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
                             {{ w.phoneHome }}
                         </td>
                         <td data-title="'Actions'">
-                            <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="legal-firms.edit({id:w.id})"><i class="zmdi zmdi-edit"></i></a>
+                            <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="legal-firms.edit({id:w.code})"><i class="zmdi zmdi-edit"></i></a>
                             <a class="btn btn-warning" ng-click="vm.openDelete(w)"><i class="zmdi zmdi-delete"></i></a>
                         </td>
                     </tr>

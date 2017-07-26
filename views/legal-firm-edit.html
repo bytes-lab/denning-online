@@ -11,7 +11,7 @@
                         <dt class="p-t-10">Firm Name</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.legalFirm.firm_name" type="text" class="form-control" placeholder="">
+                                <input ng-model="vm.legalFirm.name" type="text" class="form-control" placeholder="">
                             </div>
                         </dd>
                     </dl>
@@ -43,7 +43,7 @@
                         <dt class="p-t-10">Address (Line 1)</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.legalFirm.address1" type="text" class="form-control" placeholder="">
+                                <input ng-model="vm.legalFirm.address.line1" type="text" class="form-control" placeholder="">
                             </div>
                         </dd>
                     </dl>
@@ -51,7 +51,7 @@
                         <dt class="p-t-10">Address (Line 2)</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.address2" placeholder="UA203453">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line2" placeholder="UA203453">
                             </div>
                         </dd>
                     </dl>
@@ -59,7 +59,7 @@
                         <dt class="p-t-10">Address (Line 3)</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.address3" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line3" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -67,7 +67,7 @@
                         <dt class="p-t-10">Postcode</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.legalFirm.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+                                <input ng-model="vm.legalFirm.address.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
                             </div>
 
                         </dd>
@@ -76,7 +76,7 @@
                         <dt class="p-t-10">Town</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.town" placeholder="UA203453">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.address.city" placeholder="UA203453">
                             </div>
                         </dd>
                     </dl>
@@ -86,7 +86,7 @@
                         <dt class="p-t-10">State</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.state" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.address.state" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -94,23 +94,23 @@
                         <dt class="p-t-10">Country</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.legalFirm.country" type="text" class="form-control" placeholder="">
+                                <input ng-model="vm.legalFirm.address.country" type="text" class="form-control" placeholder="">
                             </div>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone 1</dt>
+                        <dt class="p-t-10">Phone Home</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.phone1" placeholder="UA203453">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneHome" placeholder="UA203453">
                             </div>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone 2</dt>
+                        <dt class="p-t-10">Phone Office</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.phone2" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneOffice" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -118,7 +118,7 @@
                         <dt class="p-t-10">Phone (Mobile)</dt>
                         <dd>
                             <div class="fg-line">
-                                <input ng-model="vm.legalFirm.phone3" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+                                <input ng-model="vm.legalFirm.phoneMobile" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
                             </div>
 
                         </dd>
@@ -127,7 +127,7 @@
                         <dt class="p-t-10">Fax</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.fax" placeholder="UA203453">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneFax" placeholder="UA203453">
                             </div>
                         </dd>
                     </dl>
@@ -135,7 +135,7 @@
                         <dt class="p-t-10">Email</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.email" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.emailAddress" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>
@@ -143,7 +143,7 @@
                         <dt class="p-t-10">Website</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.legalFirm.website" placeholder="Lawyer">
+                                <input type='text' class="form-control" ng-model="vm.legalFirm.webSite" placeholder="Lawyer">
                             </div>
                         </dd>
                     </dl>

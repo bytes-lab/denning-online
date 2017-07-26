@@ -25,19 +25,13 @@ materialAdmin
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
 
-                    this.firm_name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.title = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone2 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-
+                    this.data = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.firm_name, this.title, this.email, this.phone2;
+                    return this.data;
                 }
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the legal firm?';
-    
         //Create Modal
         function modalInstances(animation, size, backdrop, keyboard, legalFirm) {
             var modalInstance = $uibModal.open({
