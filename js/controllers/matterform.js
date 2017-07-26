@@ -40,37 +40,6 @@ materialAdmin
 	            }
 	          },
 	          {
-	            key: 'vendor2',
-	            type: 'contact',         
-	            templateOptions: {
-	              label: '2.'
-	            }
-	          },
-	          {
-	            key: 'vendor3',
-	            type: 'contact', 
-	            templateOptions: {
-	              share: true,
-	              label: '3.'
-	            }
-	          },
-	          {
-	            key: 'vendor4',
-	            type: 'contact', 
-	            templateOptions: {
-	              share: true,
-	              label: '4.'
-	            }
-	          },
-	          {
-	            key: 'vendor5',
-	            type: 'contact', 
-	            templateOptions: {
-	              share: true,
-	              label: '5.'
-	            }
-	          },
-	          {
 	            key: 'vendor-solicitor',
 	            type: 'legalFirm', 
 	            templateOptions: {

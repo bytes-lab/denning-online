@@ -58,17 +58,20 @@
   </p>
 </script>
 
-<script type="text/ng-template" id="contact.html">
-  <div class="form-group">
+<script type="text/ng-template" id="contact.html">  
+  <div class="form-group" ng-repeat="party in getNumber(cntParty) track by $index">
     <div style="display: flex;">
-    <input id="{{::id}}-label" name="{{::id}}-label" class="form-control attr-label short-label" ng-model="model[options.key+'-label']" ng-value="options.templateOptions.label" />        
-    <select class="form-control" ng-model="model[options.key]" style="width:300px;">
-      <option ng-repeat="item in contacts" ng-value="item.id">{{item.id}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</option>
-    </select>
-    <a class="btn btn-primary short-btn"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-    <input id="{{::id}}-share" name="{{::id}}" class="form-control" ng-model="model[options.key+'-share']" ng-if="to.share" style="width: 100px;" placeholder="   share" />
+      <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
+      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="model[options.key+'party'+$index]" style="width:300px;">
+        <option ng-repeat="item in contacts" ng-value="item.id">{{item.id}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</option>
+      </select>
+      <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: model[options.key+'party'+$index]})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+      <input id="{{::id}}-share" name="{{::id}}" class="form-control" ng-model="model[options.key+'-share']" ng-if="to.share" style="width: 100px;" placeholder="   share" />
     </div>
   </div>
+  <a class="btn btn-primary short-btn" ng-click="addParty()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+  <a class="btn btn-primary short-btn" ng-click="removeParty()"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
+  <a class="btn btn-primary short-btn" target="_new" data-ui-sref="contacts.edit">Add a new party</a>
 </script>
 
 <script type="text/ng-template" id="legalFirm.html">

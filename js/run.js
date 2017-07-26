@@ -93,23 +93,40 @@ materialAdmin
             name: 'contact',
             templateUrl: 'contact.html',
             controller: ['$scope', function ($scope) {
-            $scope.contacts = [{
-              id: '654814-54-15614',
-              name: 'Ho Thong Mee'
-            },
-            {
-              id: '463456-63-52345',
-              name: 'Yan Dong Ho'
-            },
-            {
-              id: '871816-55-65813',
-              name: 'Choe Sin Nyom'
-            },
-            {
-              id: '245325-67-94151',
-              name: 'Kim Ju Il'
-            }];
-          }]      
+                $scope.getNumber = function(num) {
+                    return new Array(num);   
+                }
+
+                $scope.cntParty = 1;
+
+                $scope.addParty = function() {
+                    $scope.cntParty = $scope.cntParty + 1
+                }
+
+                $scope.removeParty = function() {
+                    if ($scope.cntParty > 1)
+                        $scope.cntParty = $scope.cntParty - 1
+                }
+
+                $scope.contacts = [
+                    {
+                      id: '654814-54-15614',
+                      name: 'Ho Thong Mee'
+                    },
+                    {
+                      id: '463456-63-52345',
+                      name: 'Yan Dong Ho'
+                    },
+                    {
+                      id: '760105-26-2540',
+                      name: 'Choe Sin Nyom'
+                    },
+                    {
+                      id: '245325-67-94151',
+                      name: 'Kim Ju Il'
+                    }
+                ];
+            }]      
         });
         
         // legal firm attribute
