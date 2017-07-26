@@ -92,7 +92,7 @@ materialAdmin
         formlyConfig.setType({
             name: 'contact',
             templateUrl: 'contact.html',
-            controller: ['$scope', function ($scope) {
+            controller: ['$scope', 'legalFirmService', function ($scope, legalFirmService) {
                 $scope.getNumber = function(num) {
                     return new Array(num);   
                 }
@@ -103,7 +103,11 @@ materialAdmin
                   "share": ""
                 }];
 
-                console.log($scope.options.key);
+                $scope.solicitor = {};                
+
+                $scope.changeSolicitor = function(item) {
+                    $scope.solicitor = item;                    
+                }
 
                 $scope.addParty = function() {
                     $scope.model[$scope.options.key].push({
@@ -135,6 +139,11 @@ materialAdmin
                       name: 'Kim Ju Il'
                     }
                 ];
+
+                legalFirmService.getList().then(function(data) {
+                    $scope.legalFirms = data;
+                    self.dataReady = true;
+                });                     
             }]      
         });
         
