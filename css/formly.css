@@ -2,10 +2,6 @@
   margin-bottom:16px;
 }
 
-.tab-pane {
-  padding: 20px;
-}
-
 .what {
   color: blue;
 }
@@ -36,7 +32,7 @@
   color: white;
   background: #00bcd4;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 15px;
   padding-left: 16px !important;
 }
 
@@ -53,9 +49,20 @@
   margin-bottom: 5px;
 }
 
-.nav-tabs a, .nav-tabs > .uib-tab.active > a:focus, .nav-tabs > .uib-tab.active > a:hover {
+/* TAB stylesheet */
+.nav-tabs a {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-tabs .active a, .nav-tabs > .uib-tab.active > a:focus, .nav-tabs > .uib-tab.active > a:hover {
     color: #555;
     cursor: default;
     background-color: #fff;
-    border-color: #ddd #ddd transparent #ddd;
+    border-color: #ddd #ddd #fff #ddd !important;
 }
+
