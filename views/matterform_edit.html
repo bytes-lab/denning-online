@@ -61,11 +61,11 @@
   <div class="form-group col-md-12" ng-repeat="party in model[options.key]">
     <div style="display: flex;">
       <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
-      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="party.party" style="width:80%;">
+      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="party.party" style="width:75%;">
         <option ng-repeat="item in contacts" ng-value="item.IDNo">{{item.IDNo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</option>
       </select>
       <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: party.party})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 80px;padding-left: 10px;" placeholder="Share" />
+      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
       <a class="btn btn-danger short-btn" ng-click="removeParty($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
     </div>
   </div>

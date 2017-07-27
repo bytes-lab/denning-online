@@ -23,7 +23,11 @@
   width: 180px;
   margin: 0px;
   -webkit-box-shadow: none; 
+}
+
+input.form-control, label.form-control, select.form-control {
   padding-left: 10px !important;
+  padding-right: 10px !important;
 }
 
 .short-label {
