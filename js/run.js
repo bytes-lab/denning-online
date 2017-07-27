@@ -103,8 +103,6 @@ materialAdmin
                 $scope.representChange = function() {
                     $scope.model[$scope.options.key+'_solicitor'] = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};                    
                 }
-                // $scope.model[$scope.options.key+'_solicitor'] = $scope.userInfo.catPersonal[0].LawFirm;
-                console.log($scope.userInfo.catPersonal[0].LawFirm);
                 
                 $scope.model[$scope.options.key] = [
                 {
