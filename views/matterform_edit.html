@@ -77,12 +77,12 @@
     <div style="display: flex;">
       <label class="form-control attr-label">Solicitor</label>
       <select class="form-control" ng-model="model[options.key+'_solicitor']" style="width:45%;">
-        <option ng-repeat="item in legalFirms" ng-value="item">{{item.name}}</option>
+        <option ng-repeat="item in legalFirms" ng-value="item" ng-selected="model[options.key+'_solicitor'].code == item.code">{{item.name}}</option>
       </select>
       <a class="btn btn-primary short-btn" target="_new" ui-sref="legal-firms.edit({id: model[options.key+'_solicitor'].code})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
       <div class="checkbox" style="margin: 6px 0 6px 18px;">
           <label>
-              <input type="checkbox" ng-model="vm.occupation.favourite">
+              <input type="checkbox" ng-model="represent_this" ng-click="representChange()">
               <i class="input-helper"></i>
               Representing this party
           </label>

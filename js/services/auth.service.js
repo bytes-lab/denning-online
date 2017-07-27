@@ -81,7 +81,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
                         "postcode": "58100",
                         "state": "Wilayah Persekutuan"
                     },
-                    "code": 8005,
+                    "code": "68005",
                     "emailAddress": "ho.mogan@hotmail.com",
                     "name": "Ho Mogan & Nor`Aini",
                     "phoneFax": "(03)7982-3392",
