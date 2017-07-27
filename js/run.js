@@ -92,7 +92,7 @@ materialAdmin
         formlyConfig.setType({
             name: 'contact',
             templateUrl: 'contact.html',
-            controller: ['$scope', 'legalFirmService', function ($scope, legalFirmService) {
+            controller: ['$scope', 'legalFirmService', 'contactService', function ($scope, legalFirmService, contactService) {
                 $scope.getNumber = function(num) {
                     return new Array(num);   
                 }
@@ -121,28 +121,12 @@ materialAdmin
                         $scope.model[$scope.options.key].splice(idx, 1);
                 }
 
-                $scope.contacts = [
-                    {
-                      id: '654814-54-1514',
-                      name: 'Ho Thong Mee'
-                    },
-                    {
-                      id: '463456-63-5235',
-                      name: 'Yan Dong Ho'
-                    },
-                    {
-                      id: '760105-26-2540',
-                      name: 'Choe Sin Nyom'
-                    },
-                    {
-                      id: '245325-67-9151',
-                      name: 'Kim Ju Il'
-                    }
-                ];
+                contactService.getList().then(function(data) {
+                    $scope.contacts = data;
+                });                     
 
                 legalFirmService.getList().then(function(data) {
                     $scope.legalFirms = data;
-                    self.dataReady = true;
                 });                     
             }]      
         });
