@@ -13,16 +13,30 @@
   margin-bottom:16px;
 }
 
-.what {
-  color: blue;
-}
-
 .attr-label {
   border: 0; 
   background: #f5f5f5;  
   width: 180px;
   margin: 0px;
   -webkit-box-shadow: none; 
+}
+
+.attr-label-v1 {
+  border: 0; 
+  padding-top: 5px !important;
+  background: #f5f5f5;  
+  width: 100px;
+  margin: 0px 5px 0px 15px;
+  -webkit-box-shadow: none; 
+}
+
+.button-group {
+  margin: 0 50px 50px 0;
+}
+
+.button-group a {
+  margin: 6px !important;
+  width: 90px;
 }
 
 input.form-control, label.form-control, select.form-control {

@@ -145,8 +145,95 @@ materialAdmin
             controller: ['$scope', function ($scope) {
                 legalFirmService.getList().then(function(data) {
                     $scope.legalFirms = data;
-                    self.dataReady = true;
+                    $scope.dataReady = true;
                 });                     
+            }]      
+        });
+
+        // gen-doc attribute
+        formlyConfig.setType({
+            name: 'gen-doc',
+            templateUrl: 'gen-doc.html',
+            controller: ['$scope', '$filter', 'NgTableParams', 'templateService', function ($scope, $filter, NgTableParams, templateService) {
+                $scope.categories = [
+                    'Letter',
+                    'Forms',
+                    'Agreement'
+                ];
+
+                $scope.types = [
+                    {
+                        "strCategory": "Letters",
+                        "strTypeCode": "L01",
+                        "strTypeName": "Client"
+                    },
+                    {
+                        "strCategory": "Letters",
+                        "strTypeCode": "L02",
+                        "strTypeName": "Purchaser"
+                    },
+                    {
+                        "strCategory": "Letters",
+                        "strTypeCode": "L03",
+                        "strTypeName": "Borrower"
+                    },
+                    {
+                        "strCategory": "Letters",
+                        "strTypeCode": "L04",
+                        "strTypeName": "Vendor"
+                    },
+                    {
+                        "strCategory": "Letters",
+                        "strTypeCode": "L05",
+                        "strTypeName": "Developer"
+                    },
+                    {
+                        "strCategory": "Letters",
+                        "strTypeCode": "L06",
+                        "strTypeName": "Bank Branch"
+                    },
+                    {
+                        "strCategory": "Letters",
+                        "strTypeCode": "L06a",
+                        "strTypeName": "Bank Document Centre"
+                    }
+                ];
+
+                $scope.sources = [
+                    'All',
+                    'Online',
+                    'User'
+                ];
+
+                $scope.dataReady = false;
+
+                templateService.getList().then(function(data) {
+                    $scope.data = data;
+                    $scope.dataReady = true;
+                    initializeTable();
+                });        
+                
+                function initializeTable () {
+                    //Filtering
+                    $scope.tableFilter = new NgTableParams({
+                        page: 1,            // show first page
+                        count: 10,
+                        sorting: {
+                            name: 'asc'     // initial sorting
+                        }
+                    }, {
+                        total: $scope.data.length, // length of data
+                        getData: function(params) {
+                            // use build-in angular filter
+                            var orderedData = params.filter() ? $filter('filter')($scope.data, params.filter()) : $scope.data;
+                            orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+
+                            this.data = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                            params.total(orderedData.length); // set total for recalc pagination
+                            return this.data;
+                        }
+                    })      
+                }
             }]      
         });
         

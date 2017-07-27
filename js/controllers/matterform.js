@@ -25,6 +25,24 @@ materialAdmin
         
         vm.tabs = [
             {
+                "label": "Generate Document",
+                "groups": [
+                    {
+                        "key": "gen-docs-group",
+                        "label": "Template",
+                        "attrs": [
+                            {
+                                "key": "template",
+                                "type": "gen-doc",
+                                "templateOptions": {
+                                    "share": true,
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "label": "File Information",
                 "groups": [
                     {
@@ -49,24 +67,6 @@ materialAdmin
                                 "type": "contact",
                                 "templateOptions": {
                                     "share": false
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "label": "Bank Information",
-                "groups": [
-                    {
-                        "key": "loan-group",
-                        "label": "Loan Information",
-                        "attrs": [
-                            {
-                                "key": "vendor11",
-                                "type": "contact",
-                                "templateOptions": {
-                                    "share": true,
                                 }
                             }
                         ]
