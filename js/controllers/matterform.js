@@ -33,10 +33,7 @@ materialAdmin
                         "attrs": [
                             {
                                 "key": "template",
-                                "type": "gen-doc",
-                                "templateOptions": {
-                                    "share": true,
-                                }
+                                "type": "gen-doc"
                             }
                         ]
                     }

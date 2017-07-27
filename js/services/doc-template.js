@@ -6,86 +6,70 @@ materialAdmin
     .service('templateService', ['$q', '$timeout', '$http', function($q, $timeout, $http){
         var service = {};
 
-        function getList() {
-            if (service.templates) {
+        function getCategories() {
+            if (service.categories) {
                 var deferred = $q.defer();
-                deferred.resolve(service.templates);
+                deferred.resolve(service.categories);
                 return deferred.promise;
             } else {
-                return $http.get('data/cboTemplate-fileno=2000-1077-Online=all-category=Forms-Type=F01')
+                return $http.get('data/cbotemplatecategory.only')
                 .then(function(resp){
-                    service.templates = resp.data;                
+                    service.categories = resp.data;                
                     return resp.data;
                 })                
             }
         }
 
-        service.templates = null;
-        service.getList = getList;
-        service.getItem = getItem;
-        service.save = save;
-        service.delete = delete_;
-
-        function getItem(code) {
-            if(service.templates) {
-                var deferred = $q.defer();
-
-                $timeout(function(){
-                    var item = service.templates.filter(function(c){
-                        return c.code == code;
-                    });
-                    if (item.length == 1)
-                        deferred.resolve(item[0]);
-                    else
-                        deferred.reject(new Error('No Item with the code'));
-                }, 100);
-                return deferred.promise;
-
+        function getTypes(category) {
+            var deferred = $q.defer();
+            
+            if (category == 'Forms' || category == 'Letters') {
+                if (service.types[category]) {
+                    deferred.resolve(service.types[category]);
+                    return deferred.promise;
+                } else {
+                    return $http.get('data/cbotemplatecategory-filter='+category)
+                    .then(function(resp){
+                        service.types[category] = resp.data;                
+                        return resp.data;
+                    })                
+                }
             } else {
-                return getList().then(function(data){
-                    var item = service.templates.filter(function(c){
-                        return c.code == code;
-                    });
-                    if (item.length == 1)
-                        return item[0];
-                    else
-                        throw new Error('No such item');
-                });
+                deferred.resolve([]);
+                return deferred.promise;                
             }
         }
 
-        function save(template) {
+        function getTemplates(category, type, source) {
             var deferred = $q.defer();
+            var url = 'cboTemplate-fileno=2000-1077-Online='+source.toLowerCase()+'-category='+category+'-Type='+type;
+            var allow_urls = ['cboTemplate-fileno=2000-1077-Online=user-category=Forms-Type=F01',
+                 'cboTemplate-fileno=2000-1077-Online=all-category=Letters-Type=L01',
+                 'cboTemplate-fileno=2000-1077-Online=online-category=Letters-Type=L01',
+                 'cboTemplate-fileno=2000-1077-Online=user-category=Letters-Type=L01'];
 
-            $timeout(function(){
-                var idx = service.templates.map(function(c) {return c.code; }).indexOf(template.code);
-                if(idx != -1) {
-                    service.templates[idx] = template;
-                    deferred.resolve(template);
+            if (allow_urls.indexOf(url) != -1) {           
+                if (service.templates[url]) {
+                    deferred.resolve(service.templates[url]);
+                    return deferred.promise;
                 } else {
-                    service.templates.push(template);
+                    return $http.get('data/'+url)
+                    .then(function(resp){
+                        service.templates[url] = resp.data;                
+                        return resp.data;
+                    })                
                 }
-                //defered.reject(new Error('dd'));
-            }, 100);
-
-            return deferred.promise;
+            } else {
+                deferred.resolve([]);
+                return deferred.promise;                
+            }
         }
 
-        function delete_(template) {
-            var deferred = $q.defer();
+        service.templates = {};
+        service.types = {};
+        service.getCategories = getCategories;
+        service.getTypes = getTypes;
+        service.getTemplates = getTemplates;
 
-            $timeout(function(){
-                var idx = service.templates.map(function(c) {return c.code; }).indexOf(template.code);
-                if(idx != -1) {
-                    service.templates.splice(idx, 1);
-                    deferred.resolve(template);
-                } else {
-                    defered.reject(new Error('There is no such legal firm'));
-                }
-            }, 100);
-
-            return deferred.promise;
-        }
-        return service;
-        
+        return service;        
     }])

@@ -121,15 +121,15 @@
   <div class="form-group">
     <div style="display: flex; margin-bottom: 20px;">
       <label class="form-control attr-label-v1">Category</label>
-      <select class="form-control" ng-model="model[options.key+'_category']" style="width:40%;">
+      <select class="form-control" ng-model="model[options.key+'_category']" ng-change="updateType()" style="width:40%;">
         <option ng-repeat="item in categories" ng-value="item">{{item}}</option>
       </select>
       <label class="form-control attr-label-v1">Type</label>
-      <select class="form-control" ng-model="model[options.key+'_category']" style="width:65%;">
+      <select class="form-control" ng-model="model[options.key+'_type']" ng-change="updateTemplates()" style="width:65%;">
         <option ng-repeat="item in types" ng-value="item.strTypeCode">{{item.strTypeCode}}&nbsp;&nbsp;&nbsp;{{item.strTypeName}}</option>
       </select>
       <label class="form-control attr-label-v1">Source</label>
-      <select class="form-control" ng-model="model[options.key+'_category']" style="width:40%; margin-right: 20px;">
+      <select class="form-control" ng-model="model[options.key+'_source']" ng-change="updateTemplates()" style="width:40%; margin-right: 20px;">
         <option ng-repeat="item in sources" ng-value="item">{{item}}</option>
       </select>
     </div>

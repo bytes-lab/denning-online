@@ -155,63 +155,32 @@ materialAdmin
             name: 'gen-doc',
             templateUrl: 'gen-doc.html',
             controller: ['$scope', '$filter', 'NgTableParams', 'templateService', function ($scope, $filter, NgTableParams, templateService) {
-                $scope.categories = [
-                    'Letter',
-                    'Forms',
-                    'Agreement'
-                ];
+                templateService.getCategories().then(function(data) {
+                    $scope.categories = data;
+                });        
 
-                $scope.types = [
-                    {
-                        "strCategory": "Letters",
-                        "strTypeCode": "L01",
-                        "strTypeName": "Client"
-                    },
-                    {
-                        "strCategory": "Letters",
-                        "strTypeCode": "L02",
-                        "strTypeName": "Purchaser"
-                    },
-                    {
-                        "strCategory": "Letters",
-                        "strTypeCode": "L03",
-                        "strTypeName": "Borrower"
-                    },
-                    {
-                        "strCategory": "Letters",
-                        "strTypeCode": "L04",
-                        "strTypeName": "Vendor"
-                    },
-                    {
-                        "strCategory": "Letters",
-                        "strTypeCode": "L05",
-                        "strTypeName": "Developer"
-                    },
-                    {
-                        "strCategory": "Letters",
-                        "strTypeCode": "L06",
-                        "strTypeName": "Bank Branch"
-                    },
-                    {
-                        "strCategory": "Letters",
-                        "strTypeCode": "L06a",
-                        "strTypeName": "Bank Document Centre"
+                $scope.updateType = function() {
+                    templateService.getTypes($scope.model[$scope.options.key+'_category']).then(function(data) {
+                        $scope.types = data;
+                    });        
+                }
+
+                $scope.updateTemplates = function() {
+                    $scope.dataReady = false;
+                    if ($scope.model[$scope.options.key+'_category'] && $scope.model[$scope.options.key+'_type'] && $scope.model[$scope.options.key+'_source']) {
+                        templateService.getTemplates($scope.model[$scope.options.key+'_category'], $scope.model[$scope.options.key+'_type'], $scope.model[$scope.options.key+'_source']).then(function(data) {
+                            $scope.data = data;
+                            $scope.dataReady = true;
+                            initializeTable();
+                        });                                
                     }
-                ];
+                }
 
                 $scope.sources = [
                     'All',
                     'Online',
                     'User'
                 ];
-
-                $scope.dataReady = false;
-
-                templateService.getList().then(function(data) {
-                    $scope.data = data;
-                    $scope.dataReady = true;
-                    initializeTable();
-                });        
                 
                 function initializeTable () {
                     //Filtering
