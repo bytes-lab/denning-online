@@ -11659,8 +11659,8 @@ a.lv-footer:hover {
 }
 
 .tab-content {
-  /*padding: 20px 0;*/
-  padding: 0;
+  padding: 12px 5px;
+  /*padding: 0;*/
 }
 
 .card {

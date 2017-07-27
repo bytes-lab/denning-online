@@ -1,3 +1,14 @@
+.preview {
+  border: 2px solid lightgrey; 
+  padding: 20px;
+  min-height: 100px; 
+  overflow: hidden;
+}
+
+.no-padding {
+  padding: 0;
+}
+
 .formly-field {
   margin-bottom:16px;
 }
@@ -40,7 +51,10 @@
 .group {
   background: #f5f5f5;
   padding-bottom: 5px;
-  //border: 1px solid;  
+  min-height: 100px;
+  overflow: hidden;  
+  margin-bottom: 25px;
+  /*border: 1px solid;  */
 }
 
 .formly-field-group {
