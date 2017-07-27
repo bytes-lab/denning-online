@@ -76,7 +76,7 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Solicitor</label>
-      <select class="form-control" ng-model="model[options.key+'_solicitor']" style="width:50%;">
+      <select class="form-control" ng-model="model[options.key+'_solicitor']" style="width:45%;">
         <option ng-repeat="item in legalFirms" ng-value="item">{{item.name}}</option>
       </select>
       <a class="btn btn-primary short-btn" target="_new" ui-sref="legal-firms.edit({id: model[options.key+'_solicitor'].code})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
@@ -87,31 +87,30 @@
               Representing this party
           </label>
       </div>
-
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Firm Tel / Fax / Email</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].phoneHome" style="width:50%;">
+      <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].phoneHome" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Firm Location</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].address.fullAddress" style="width:50%;">
+      <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].address.fullAddress" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Staff in Charge</label>
-      <input type="text" class="form-control" ng-model="model[options.key+'_staff']" style="width:50%;">
+      <input type="text" class="form-control" ng-model="model[options.key+'_staff']" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Solicitor Ref.</label>
-      <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:50%;">
+      <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
     </div>
   </div>
 </script>
