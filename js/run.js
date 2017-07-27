@@ -149,26 +149,14 @@ materialAdmin
         
         // legal firm attribute
         formlyConfig.setType({
-          name: 'legalFirm',
-          templateUrl: 'legalFirm.html',
-          controller: ['$scope', function ($scope) {
-            $scope.legalFirms = [{
-              id: 1,
-              name: 'Denning IT SDN. BHD.'
-            },
-            {
-              id: 2,
-              name: 'Frenchis Tech'
-            },
-            {
-              id: 3,
-              name: 'Woo Thin Hook'
-            },
-            {
-              id: 232,
-              name: 'Abu Bin Baker'
-            }];
-          }]      
+            name: 'legalFirm',
+            templateUrl: 'legalFirm.html',
+            controller: ['$scope', function ($scope) {
+                legalFirmService.getList().then(function(data) {
+                    $scope.legalFirms = data;
+                    self.dataReady = true;
+                });                     
+            }]      
         });
         
         formlyConfig.setType({

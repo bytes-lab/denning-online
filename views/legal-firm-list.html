@@ -27,7 +27,10 @@
             <div class="table-responsive" ng-if="vm.dataReady" > 
                 <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
                     <tr ng-repeat="w in $data">
-                        <td data-title="'Firm Name'" filter="{ 'name': 'text' }" sortable="'name'">
+                        <td data-title="'Title'" filter="{ 'title': 'text' }" sortable="'title'">
+                            {{ w.title }}
+                        </td>
+                        <td data-title="'Name'" filter="{ 'name': 'text' }" sortable="'name'">
                             {{ w.name }}
                         </td>
                         <td data-title="'Email'" filter="{ 'emailAddress': 'text' }" sortable="'emailAddress'">
