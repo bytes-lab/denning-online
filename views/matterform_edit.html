@@ -16,7 +16,7 @@
               <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
                 <uib-tabset>
                   <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
-                    <div ng-repeat="group in tab.groups" class="col-md-8 no-padding">    
+                    <div ng-repeat="group in tab.groups" class="col-md-9 no-padding">    
                       <div class="group">
                         <div class="form-group">
                           <input id="{{group.key}}-label" name="{{group.key}}-label" class="form-control group-label" ng-model="vm.model[group.key+'-label']" ng-value="group.label" />
