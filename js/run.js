@@ -92,11 +92,13 @@ materialAdmin
         formlyConfig.setType({
             name: 'contact',
             templateUrl: 'contact.html',
-            controller: ['$scope', 'legalFirmService', 'contactService', function ($scope, legalFirmService, contactService) {
+            controller: ['$scope', 'legalFirmService', 'contactService', 'Auth', function ($scope, legalFirmService, contactService, Auth) {
                 $scope.getNumber = function(num) {
                     return new Array(num);   
                 }
 
+                console.log(Auth.getUserInfo());
+                
                 $scope.model[$scope.options.key] = [
                 {
                   "party": "",

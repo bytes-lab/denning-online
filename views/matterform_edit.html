@@ -62,7 +62,7 @@
     <div style="display: flex;">
       <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
       <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="party.party" style="width:75%;">
-        <option ng-repeat="item in contacts" ng-value="item.IDNo">{{item.IDNo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</option>
+        <option ng-repeat="item in contacts" ng-value="item.IDNo">{{item.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.IDNo}}</option>
       </select>
       <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: party.party})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
       <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
@@ -70,8 +70,8 @@
     </div>
   </div>
   <div style="margin-bottom: 30px;">
-    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-    <a class="btn btn-primary short-btn" style="margin-left: 80px;" target="_new" data-ui-sref="contacts.edit">Add a new party</a>
+    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party</a>
+    <!-- <a class="btn btn-primary short-btn" style="margin-left: 80px;" target="_new" data-ui-sref="contacts.edit">Add a new party</a> -->
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
