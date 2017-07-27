@@ -60,10 +60,10 @@
 
 <!-- CONTACT GROUP -->
 <script type="text/ng-template" id="contact.html">  
-  <div class="form-group" ng-repeat="party in model[options.key]">
+  <div class="form-group col-md-12" ng-repeat="party in model[options.key]">
     <div style="display: flex;">
       <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
-      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="party.party" style="width:300px;">
+      <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="party.party" style="width:80%;">
         <option ng-repeat="item in contacts" ng-value="item.IDNo">{{item.IDNo}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</option>
       </select>
       <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: party.party})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
