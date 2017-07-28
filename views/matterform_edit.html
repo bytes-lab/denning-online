@@ -65,13 +65,13 @@
       <select class="form-control" id="{{::id}}_party_{{$index}}" ng-model="party.party" style="width:75%;">
         <option ng-repeat="item in contacts" ng-value="item.code">{{item.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.IDNo}}</option>
       </select>
-      <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: party.party})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+      <a class="btn btn-primary short-btn" target="_new" ui-sref="contacts.edit({id: party.party})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span></a>
       <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
-      <a class="btn btn-danger short-btn" ng-click="removeParty($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+      <a class="btn btn-danger short-btn" ng-click="removeParty($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span></a>
     </div>
   </div>
   <div style="margin-bottom: 30px;">
-    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party</a>
+    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()" title="Add a new party to group"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party</a>
     <!-- <a class="btn btn-primary short-btn" style="margin-left: 80px;" target="_new" data-ui-sref="contacts.edit">Add a new party</a> -->
   </div>
   <div class="form-group col-md-12">
@@ -80,7 +80,7 @@
       <select class="form-control" ng-model="model[options.key+'_solicitor']" style="width:45%;">
         <option ng-repeat="item in legalFirms" ng-value="item" ng-selected="model[options.key+'_solicitor'].code == item.code">{{item.name}}</option>
       </select>
-      <a class="btn btn-primary short-btn" target="_new" ui-sref="legal-firms.edit({id: model[options.key+'_solicitor'].code})"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+      <a class="btn btn-primary short-btn" target="_new" ui-sref="legal-firms.edit({id: model[options.key+'_solicitor'].code})" title="See detail of solicitor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
       <div class="checkbox" style="margin: 6px 0 6px 18px;">
           <label>
               <input type="checkbox" ng-model="represent_this" ng-click="representChange()">

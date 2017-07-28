@@ -25,21 +25,6 @@ materialAdmin
         
         vm.tabs = [
             {
-                "label": "Generate Document",
-                "groups": [
-                    {
-                        "key": "gen-docs-group",
-                        "label": "Template",
-                        "attrs": [
-                            {
-                                "key": "template",
-                                "type": "gen-doc"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "label": "File Information",
                 "groups": [
                     {
@@ -65,6 +50,21 @@ materialAdmin
                                 "templateOptions": {
                                     "share": false
                                 }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "label": "Generate Document",
+                "groups": [
+                    {
+                        "key": "gen-docs-group",
+                        "label": "Template",
+                        "attrs": [
+                            {
+                                "key": "template",
+                                "type": "gen-doc"
                             }
                         ]
                     }
