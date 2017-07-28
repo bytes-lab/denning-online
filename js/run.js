@@ -92,7 +92,7 @@ materialAdmin
         formlyConfig.setType({
             name: 'contact',
             templateUrl: 'contact.html',
-            controller: ['$scope', 'legalFirmService', 'contactService', 'Auth', function ($scope, legalFirmService, contactService, Auth) {
+            controller: ['$scope', 'legalFirmService', 'contactService', 'Auth', '$uibModal', function ($scope, legalFirmService, contactService, Auth, $uibModal) {
                 $scope.getNumber = function(num) {
                     return new Array(num);   
                 }
@@ -134,7 +134,26 @@ materialAdmin
 
                 legalFirmService.getList().then(function(data) {
                     $scope.legalFirms = data;
-                });                     
+                });          
+
+                //Create Modal
+                $scope.createContact = function() {
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'views/contact-edit.html',
+                        controller: 'contactCreateModalCtrl',
+                        controllerAs: 'vm',
+                        size: 'lg',
+                        backdrop: 'static',
+                        keyboard: true,
+                        resolve: {
+                            contact: function () {
+                                return {};
+                            }
+                        }            
+                    });
+                }
+
             }]      
         });
         

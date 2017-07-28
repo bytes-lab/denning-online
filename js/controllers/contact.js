@@ -36,8 +36,6 @@ materialAdmin
             })      
         }
 
-        self.modalContent = 'Are you sure to delete the contract?';
-    
         //Create Modal
         function modalInstances(animation, size, backdrop, keyboard, contact) {
             var modalInstance = $uibModal.open({
@@ -51,10 +49,10 @@ materialAdmin
                     contact: function () {
                         return contact;
                     }
-                }
-            
+                }            
             });
         }
+
         //Prevent Outside Click
         function openDelete(contact) {
             modalInstances(true, '', 'static', true, contact)
@@ -76,17 +74,20 @@ materialAdmin
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
+            $state.go('contacts.list');
         };
     })
 
     .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state) {
         var self = this;
         self.save = save;
+        self.cancel = cancel;
+        self.isDialog = false;
 
         if($stateParams.id) {
             contactService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.contact = angular.copy(item);
             });
         } else {
             self.contact = {};
@@ -99,8 +100,32 @@ materialAdmin
             })
             .catch(function(err){
                 //Handler
-
-                //$scope.formname.contactInfo.$error.push({meessage:''});
             });
         }
+
+        function cancel() {
+            $state.go('contacts.list');            
+        }
+    })
+
+    .controller('contactCreateModalCtrl', function ($modalInstance, contact, contactService) {
+        var self = this;
+        self.save = save;
+        self.cancel = cancel;
+        self.isDialog = true;
+
+        function save() {
+
+            // contactService.delete(contact).then(function(contact) {
+            //     $state.reload();
+            // })
+            // .catch(function(err){
+            //     //Handler
+            // });
+            $modalInstance.close();
+        };
+
+        function cancel() {
+            $modalInstance.dismiss('cancel');
+        };
     })
