@@ -73,7 +73,7 @@ materialAdmin
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $modalInstance.close();
             $state.go('contacts.list');
         };
     })
@@ -109,19 +109,30 @@ materialAdmin
         }
     })
 
-    .controller('contactCreateModalCtrl', function ($modalInstance, contact, viewMode, contactService, $scope) {
+    .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, initContacts, contactService, $scope) {
         var self = this;
         self.save = save;
         self.cancel = cancel;
         self.isDialog = true;
         self.viewMode = viewMode;
-        self.contact = contact;
+        self.party = party;
+        self.initContacts = initContacts;
+
+        if (viewMode) {
+            contactService.getItem(party.party)
+            .then(function(item){
+                self.contact = item;
+            });                                    
+        } else {
+            self.contact = {};
+        }
 
         function save() {
             contactService.save(self.contact).then(function(contact) {
                 self.contact = contact;
-                console.log($scope.party);
-                $modalInstance.close();
+                // self.initContacts();
+                self.party.party = contact.code;
+                $modalInstance.close(contact);
             })
             .catch(function(err){
                 //Handler
@@ -129,6 +140,6 @@ materialAdmin
         };
 
         function cancel() {
-            $modalInstance.dismiss('cancel');
+            $modalInstance.close();
         };
     })

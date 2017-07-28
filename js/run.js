@@ -93,6 +93,8 @@ materialAdmin
             name: 'contact',
             templateUrl: 'contact.html',
             controller: ['$scope', 'legalFirmService', 'contactService', 'Auth', '$uibModal', function ($scope, legalFirmService, contactService, Auth, $uibModal) {
+                initContacts();
+
                 $scope.getNumber = function(num) {
                     return new Array(num);   
                 }
@@ -123,9 +125,9 @@ materialAdmin
                     })
                 }
 
-                $scope.viewContact = function(contactCode) {
-                    if (contactCode) {
-                        $scope.contactDialog(contactCode, true);
+                $scope.viewContact = function(party) {
+                    if (party.party) {
+                        $scope.contactDialog(party, true);
                     } else {
                         alert('Please select a party.')
                     }
@@ -136,16 +138,18 @@ materialAdmin
                         $scope.model[$scope.options.key].splice(idx, 1);
                 }
 
-                contactService.getList().then(function(data) {
-                    $scope.contacts = data;
-                });                     
+                function initContacts() {
+                    contactService.getList().then(function(data) {
+                        $scope.contacts = data;
+                    });                                         
+                }
 
                 legalFirmService.getList().then(function(data) {
                     $scope.legalFirms = data;
                 });          
 
                 //Create Modal
-                $scope.contactDialog = function(contactCode, viewMode) {
+                $scope.contactDialog = function(party, viewMode) {
                     var modalInstance = $uibModal.open({
                         animation: true,
                         templateUrl: 'views/contact-edit.html',
@@ -155,19 +159,17 @@ materialAdmin
                         backdrop: 'static',
                         keyboard: true,
                         resolve: {
-                            contact: function () {
-                                if (viewMode) {
-                                    return contactService.getItem(contactCode)
-                                            .then(function(item){
-                                                return item;
-                                            });                                    
-                                } else {
-                                    return {};
-                                }
-                            },
-                            viewMode: viewMode
+                            viewMode: viewMode,
+                            party: party,
+                            initContacts: function(){
+                                return initContacts;
+                            }
                         }            
                     });
+
+                    modalInstance.result.then(function(contact){
+                        $scope.contacts.push(contact);
+                    })
                 }
 
             }]      
