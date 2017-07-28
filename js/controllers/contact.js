@@ -83,11 +83,12 @@ materialAdmin
         self.save = save;
         self.cancel = cancel;
         self.isDialog = false;
+        self.viewMode = false;  // for edit / create
 
         if($stateParams.id) {
             contactService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = angular.copy(item);
+                self.contact = angular.copy(item);  // important
             });
         } else {
             self.contact = {};
@@ -108,21 +109,23 @@ materialAdmin
         }
     })
 
-    .controller('contactCreateModalCtrl', function ($modalInstance, contact, contactService) {
+    .controller('contactCreateModalCtrl', function ($modalInstance, contact, viewMode, contactService, $scope) {
         var self = this;
         self.save = save;
         self.cancel = cancel;
         self.isDialog = true;
+        self.viewMode = viewMode;
+        self.contact = contact;
 
         function save() {
-
-            // contactService.delete(contact).then(function(contact) {
-            //     $state.reload();
-            // })
-            // .catch(function(err){
-            //     //Handler
-            // });
-            $modalInstance.close();
+            contactService.save(self.contact).then(function(contact) {
+                self.contact = contact;
+                console.log($scope.party);
+                $modalInstance.close();
+            })
+            .catch(function(err){
+                //Handler
+            });
         };
 
         function cancel() {

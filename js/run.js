@@ -123,6 +123,14 @@ materialAdmin
                     })
                 }
 
+                $scope.viewContact = function(contactCode) {
+                    if (contactCode) {
+                        $scope.contactDialog(contactCode, true);
+                    } else {
+                        alert('Please select a party.')
+                    }
+                }
+
                 $scope.removeParty = function(idx) {
                     if ($scope.model[$scope.options.key].length > 1)
                         $scope.model[$scope.options.key].splice(idx, 1);
@@ -137,7 +145,7 @@ materialAdmin
                 });          
 
                 //Create Modal
-                $scope.createContact = function() {
+                $scope.contactDialog = function(contactCode, viewMode) {
                     var modalInstance = $uibModal.open({
                         animation: true,
                         templateUrl: 'views/contact-edit.html',
@@ -148,8 +156,16 @@ materialAdmin
                         keyboard: true,
                         resolve: {
                             contact: function () {
-                                return {};
-                            }
+                                if (viewMode) {
+                                    return contactService.getItem(contactCode)
+                                            .then(function(item){
+                                                return item;
+                                            });                                    
+                                } else {
+                                    return {};
+                                }
+                            },
+                            viewMode: viewMode
                         }            
                     });
                 }

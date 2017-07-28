@@ -138,7 +138,7 @@ materialAdmin
                 data: {
                     access: '@'
                 },                
-                url: '/edit/new',
+                url: '/edit/',
                 controller: 'contactEditCtrl as vm',
                 templateUrl: 'views/contact-edit.html'
             })

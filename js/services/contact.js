@@ -58,11 +58,13 @@ materialAdmin
                 var idx = service.contacts.map(function(c) {return c.code; }).indexOf(contact.code);
                 if(idx != -1) {
                     service.contacts[idx] = contact;
-                    deferred.resolve(contact);
                 } else {
+                    // should be done on server side
+                    contact.code = Math.floor(Math.random() * 1000 + 1);
                     service.contacts.push(contact);
                 }
-                //defered.reject(new Error('dd'));
+
+                deferred.resolve(contact);
             }, 100);
 
             return deferred.promise;
