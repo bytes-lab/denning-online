@@ -146,6 +146,45 @@ materialAdmin
 
 
             //------------------------------
+            // BILLING ITEMS
+            //------------------------------
+        
+            .state ('billingitems', {
+                data: {
+                    access: '@'
+                },                
+                url: '/billingitems',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('billingitems.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'billingitemListCtrl as vm',
+                templateUrl: 'views/billingitem-list.html'
+            })
+
+            .state ('billingitems.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'billingitemEditCtrl as vm',
+                templateUrl: 'views/billingitem-edit.html'
+            })
+            .state ('billingitems.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'billingitemEditCtrl as vm',
+                templateUrl: 'views/billingitem-edit.html'
+            })
+
+
+            //------------------------------
             // PROPERTIES
             //------------------------------
         
