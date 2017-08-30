@@ -27,30 +27,30 @@
         </ul>
     </div>
 
-    <ul class="main-menu">
-        
+    <ul class="main-menu">        
         <li data-ui-sref-active="active">
             <a data-ui-sref="overview" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-view-dashboard"></i> Overview</a>
         </li>
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('headers') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-view-compact"></i> Add <small>( Matter, Contact, Property... )</small></a>
-
-            <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="headers.textual-menu" data-ng-click="mactrl.sidebarStat($event)">Matter</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="matterforms.edit" data-ng-click="mactrl.sidebarStat($event)">Matter Form</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="contacts.list" data-ng-click="mactrl.sidebarStat($event)">Contact</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="properties.list" data-ng-click="mactrl.sidebarStat($event)">Property</a></li>
-            </ul>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="matterforms.edit" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-file-text"></i> Matter</a>
         </li>
         <li data-ui-sref-active="active">
-            <a data-ui-sref="typography" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-format-underlined"></i> Document</a>
+            <a data-ui-sref="contacts.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-folder-person"></i> Contact</a>
         </li>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="properties.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-layers"></i> Property</a>
+        </li>
+
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('widgets') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-widgets"></i> Billing</a>
+            <a href="" toggle-submenu><i class="zmdi zmdi-money"></i> Billing</a>
 
             <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widget-templates" data-ng-click="mactrl.sidebarStat($event)">Templates</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widgets" data-ng-click="mactrl.sidebarStat($event)">Widgets</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widget-templates" data-ng-click="mactrl.sidebarStat($event)">Bill Items</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widgets" data-ng-click="mactrl.sidebarStat($event)">Preset Bills</a></li>
+                <!-- <li><hr/></li> -->
+                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widgets" data-ng-click="mactrl.sidebarStat($event)">Quotation</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widgets" data-ng-click="mactrl.sidebarStat($event)">Tax Invoice</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widgets" data-ng-click="mactrl.sidebarStat($event)">Receipt</a></li>                
             </ul>
         </li>
         
@@ -107,13 +107,6 @@
         <li data-ui-sref-active="active">
             <a data-ui-sref="calendar" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-share"></i> Shared</a>
         </li>
-        
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('photo-gallery') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-local-post-office"></i>Denning Delivery</a>
-            <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="photo-gallery.photos" data-ng-click="mactrl.sidebarStat($event)">Default</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="photo-gallery.timeline" data-ng-click="mactrl.sidebarStat($event)">Timeline</a></li>
-            </ul>
-        </li>
+
     </ul>
 </div>
