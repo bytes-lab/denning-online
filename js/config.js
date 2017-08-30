@@ -184,6 +184,167 @@ materialAdmin
             })
 
 
+
+            //------------------------------
+            // QUOTATIONS
+            //------------------------------
+        
+            .state ('quotations', {
+                data: {
+                    access: '@'
+                },                
+                url: '/quotations',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('quotations.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'quotationListCtrl as vm',
+                templateUrl: 'views/quotation-list.html'
+            })
+
+            .state ('quotations.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'quotationEditCtrl as vm',
+                templateUrl: 'views/quotation-edit.html'
+            })
+            .state ('quotations.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'quotationEditCtrl as vm',
+                templateUrl: 'views/quotation-edit.html'
+            })
+
+
+
+            //------------------------------
+            // INVOICES
+            //------------------------------
+        
+            .state ('invoices', {
+                data: {
+                    access: '@'
+                },                
+                url: '/invoices',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('invoices.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'invoiceListCtrl as vm',
+                templateUrl: 'views/invoice-list.html'
+            })
+
+            .state ('invoices.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'invoiceEditCtrl as vm',
+                templateUrl: 'views/invoice-edit.html'
+            })
+            .state ('invoices.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'invoiceEditCtrl as vm',
+                templateUrl: 'views/invoice-edit.html'
+            })
+
+
+
+            //------------------------------
+            // RECEIPTS
+            //------------------------------
+        
+            .state ('receipts', {
+                data: {
+                    access: '@'
+                },                
+                url: '/receipts',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('receipts.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'receiptListCtrl as vm',
+                templateUrl: 'views/receipt-list.html'
+            })
+
+            .state ('receipts.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'receiptEditCtrl as vm',
+                templateUrl: 'views/receipt-edit.html'
+            })
+            .state ('receipts.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'receiptEditCtrl as vm',
+                templateUrl: 'views/receipt-edit.html'
+            })
+
+
+
+            //------------------------------
+            // PRESET BILLS
+            //------------------------------
+        
+            .state ('presetbills', {
+                data: {
+                    access: '@'
+                },                
+                url: '/presetbills',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('presetbills.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'presetbillListCtrl as vm',
+                templateUrl: 'views/presetbill-list.html'
+            })
+
+            .state ('presetbills.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'presetbillEditCtrl as vm',
+                templateUrl: 'views/presetbill-edit.html'
+            })
+            .state ('presetbills.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'presetbillEditCtrl as vm',
+                templateUrl: 'views/presetbill-edit.html'
+            })
+
+
+
             //------------------------------
             // PROPERTIES
             //------------------------------
