@@ -1,5 +1,5 @@
 materialAdmin
-    .controller('contactListCtrl', function($filter, $sce, $uibModal, NgTableParams, contactService) {
+    .controller('contactListCtrl', function($filter, $uibModal, NgTableParams, contactService) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
@@ -85,7 +85,7 @@ materialAdmin
         self.isDialog = false;
         self.viewMode = false;  // for edit / create
 
-        if($stateParams.id) {
+        if ($stateParams.id) {
             contactService.getItem($stateParams.id)
             .then(function(item){
                 self.contact = angular.copy(item);  // important

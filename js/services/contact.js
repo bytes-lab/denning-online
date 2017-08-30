@@ -29,19 +29,22 @@ materialAdmin
         function getItem(code) {
             if(service.contacts) {
                 var deferred = $q.defer();
-                var item = service.contacts.filter(function(c){
+                var item = service.contacts.filter(function(c) {
                     return c.code == code;
                 });
+
                 if (item.length == 1)
                     deferred.resolve(item[0]);
                 else
                     deferred.reject(new Error('No Item with the code'));
+
                 return deferred.promise;
             } else {
-                return getList().then(function(data){
-                    var item = service.contacts.filter(function(c){
+                return getList().then(function(data) {
+                    var item = service.contacts.filter(function(c) {
                         return c.code == code;
                     });
+
                     if (item.length == 1)
                         return item[0];
                     else
@@ -50,12 +53,11 @@ materialAdmin
             }
         }
 
-
         function save(contact) {
             var deferred = $q.defer();
 
             $timeout(function(){
-                var idx = service.contacts.map(function(c) {return c.code; }).indexOf(contact.code);
+                var idx = service.contacts.map(function(c) { return c.code; }).indexOf(contact.code);
                 if(idx != -1) {
                     service.contacts[idx] = contact;
                 } else {
@@ -64,6 +66,7 @@ materialAdmin
                     service.contacts.push(contact);
                 }
 
+                // @@ send post request to server to save the item
                 deferred.resolve(contact);
             }, 100);
 
@@ -74,13 +77,14 @@ materialAdmin
             var deferred = $q.defer();
 
             $timeout(function(){
-                var idx = service.contacts.map(function(c) {return c.code; }).indexOf(contact.code);
+                var idx = service.contacts.map(function(c) { return c.code; }).indexOf(contact.code);
                 if(idx != -1) {
                     service.contacts.splice(idx, 1);
                     deferred.resolve(contact);
                 } else {
                     defered.reject(new Error('There is no such contact'));
                 }
+                // @@ send delete request to server to delete the item
             }, 100);
 
             return deferred.promise;
