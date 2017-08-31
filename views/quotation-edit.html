@@ -9,11 +9,11 @@
         <div class="card-body card-padding">
             <div class="clearfix"></div>
 
-            <h4>Personal Information</h4>
+            <h4>Basic Information</h4>
             <div class="row">
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">ID Type</dt>
+                        <dt class="p-t-10">Quotation No</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.idType.code" placeholder="New IC">
@@ -21,7 +21,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">ID No</dt>
+                        <dt class="p-t-10">File No</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.IDNo" placeholder="UA203453">
@@ -29,7 +29,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Old IC</dt>
+                        <dt class="p-t-10">File Name</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.old_ic" placeholder="">
@@ -37,7 +37,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Full Name</dt>
+                        <dt class="p-t-10">Quotation To</dt>
                         <dd>
                             <div class="fg-line">
                                 <input ng-model="vm.contact.name" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
@@ -46,7 +46,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Title</dt>
+                        <dt class="p-t-10">Quotation Matter</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.title" placeholder="Mr.
@@ -55,25 +55,17 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Citizenship</dt>
+                        <dt class="p-t-10">State</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.citizenship" placeholder="">
                             </div>
                         </dd>
                     </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Date of Birth</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.dateBirth" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
                 </div>
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Marital Status</dt>
+                        <dt class="p-t-10">Reference No</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.marital_status" placeholder="">
@@ -81,7 +73,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">No. of Children</dt>
+                        <dt class="p-t-10">Preset Code</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.num_children" placeholder="">
@@ -89,7 +81,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Occupation</dt>
+                        <dt class="p-t-10">Quotation Date</dt>
                         <dd>
                             <div class="fg-line">
                                 <input ng-model="vm.contact.occupation" type="text" class="form-control" placeholder="">
@@ -98,7 +90,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Tax File No.</dt>
+                        <dt class="p-t-10">Property</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
@@ -106,7 +98,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">IRD Branch</dt>
+                        <dt class="p-t-10">Property Count</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.IRD_branch" placeholder="">
@@ -114,7 +106,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Customer Type</dt>
+                        <dt class="p-t-10">Adjusted Value</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.customer_type" placeholder="">
@@ -122,23 +114,31 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Government Department</dt>
+                        <dt class="p-t-10">Purchase Price</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.government_department" placeholder="">
                             </div>
                         </dd>
                     </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Loan Amount</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input type='text' class="form-control" ng-model="vm.contact.government_department" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>                
                 </div>                
             </div>
 
             <div class="clearfix"></div>
 
-            <h4 class="m-t-25">Quotation Information</h4>
+            <h4 class="m-t-25">Quotation Analysis</h4>
             <div class="row">
-                <div class="col-md-6 p-l-25">
+                <div class="col-md-11 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 1)</dt>
+                        <dt class="p-t-10">Professional Fees</dt>
                         <dd>
                             <div class="fg-line">
                                 <input ng-model="vm.contact.address.line1" type="text" class="form-control" placeholder="">
@@ -146,7 +146,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 2)</dt>
+                        <dt class="p-t-10">Disb. with GST</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.address.line2" placeholder="">
@@ -154,7 +154,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 3)</dt>
+                        <dt class="p-t-10">Disbursement</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.contact.address.line3" placeholder="">
@@ -162,199 +162,38 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Postcode</dt>
+                        <dt class="p-t-10">Total</dt>
                         <dd>
                             <div class="fg-line">
                                 <input ng-model="vm.contact.address.postcode" type="text" class="form-control" placeholder="">
                             </div>
 
                         </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Town</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.address.city" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.address.state" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Country</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.address.country" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone Home</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.phoneHome" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone Mobile</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.phoneMobile" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone Office</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.phoneOffice" type="text" class="form-control" placeholder="">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Fax</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.phoneFax" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Email</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.emailAddress" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Website</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.webSite" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-
-                </div>                
-            </div>            
-            <div class="clearfix"></div>
-
-            <h4 class="m-t-25" ng-click="vm.showGST=!vm.showGST">GST Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showGST"></i><i class="zmdi zmdi-minus" ng-if="vm.showGST"></i></h4>
-            <div class="row" ng-show="vm.showGST">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="vm.contact.GST_status_verified">
-                                <i class="input-helper"></i>
-                                GST Status Verified
-                            </label>
-                        </div>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="vm.contact.GST_registered">
-                                <i class="input-helper"></i>
-                                GST Registered
-                            </label>
-                        </div>
                     </dl>                    
                 </div>
-                <div class="col-md-6 p-l-25">
+                            
+            </div>            
+            <div class="clearfix"></div>
+            <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Remark&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
+            <div class="row" ng-show="vm.showRemark">
+                <div class="col-md-10 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Last GST Status Verified Date</dt>
+                        <dt class="p-t-10">Remark</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.last_GST_status_verified_date" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">GST Reg. No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.GST_reg_no" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">RMCD Approval No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.RMCD_approval_no" type="text" class="form-control" placeholder="">
+                                <textarea class="form-control" rows="5" placeholder=""></textarea>
                             </div>
                         </dd>
                     </dl>
                 </div>                
             </div>   
-            <div class="clearfix"></div>
-
-            <h4 class="m-t-25" ng-click="vm.showCompany=!vm.showCompany">Company Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCompany"></i><i class="zmdi zmdi-minus" ng-if="vm.showCompany"></i></h4>
-            <div class="row" ng-show="vm.showCompany">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Office Address</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.office_address" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Director 1</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.director1" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Director 2</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.director2" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-             
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Secretray</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.secretary" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Quotation Person</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.contact_person" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    
-                </div>                
-            </div>          
+     
             <div class="row">     
                 <div class="col-md-10" ng-if="!vm.viewMode">
                     <div class="m-t-30">
                         <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
+                        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()">Save</a>
+                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Convert Tax Invoice</a>
                     </div>        
                 </div>
                 <div class="col-md-10" ng-if="vm.viewMode">
