@@ -78,14 +78,48 @@ materialAdmin
         self.cancel = cancel;
         self.isDialog = false;
         self.viewMode = false;  // for edit / create
+        self.states = [
+            'Common',
+            'Johor',
+            'Kedah',
+            'Kelantan',
+            'Kuala Lumpur',
+            'Malacca',
+            'Negeri Sembilan',
+            'Pahang',
+            'Perak',
+            'Perlis',
+            'Penang',
+            'Sabah',
+            'Sarawk',
+            'Selangor',
+            'Terengganu'
+        ];
 
+        self.categories = [
+            'Conveyancing',
+            'Agreement',
+            'Litigation',
+            'Will',
+            'Estate Admin',
+            'Tenancy',
+            'Discharge of Charge',
+            'Divorce',
+            'Corporate Secretarial',
+            'General',
+            'Common'
+        ];
         if ($stateParams.id) {
             presetbillService.getItem($stateParams.id)
             .then(function(item){
                 self.presetbill = angular.copy(item);  // important
             });
         } else {
-            self.presetbill = {};
+            self.presetbill = {
+                code: 'P' + Math.floor(Math.random() * 1000 + 1),
+                state: 'Common',
+                category: 'Conveyancing',
+            };
         }
 
         function save() {
