@@ -76,8 +76,47 @@ materialAdmin
         var self = this;
         self.save = save;
         self.cancel = cancel;
+        self.get_code = get_code;
         self.isDialog = false;
         self.viewMode = false;  // for edit / create
+        self.types = [
+            'Professional Fee',
+            'Disbursement',
+            'Disb. with GST',
+            'Service Tax'
+        ];
+
+        self.states = [
+            'Common',
+            'Johor',
+            'Kedah',
+            'Kelantan',
+            'Kuala Lumpur',
+            'Malacca',
+            'Negeri Sembilan',
+            'Pahang',
+            'Perak',
+            'Perlis',
+            'Penang',
+            'Sabah',
+            'Sarawk',
+            'Selangor',
+            'Terengganu'
+        ];
+
+        self.categories = [
+            'Conveyancing',
+            'Agreement',
+            'Litigation',
+            'Will',
+            'Estate Admin',
+            'Tenancy',
+            'Discharge of Charge',
+            'Divorce',
+            'Corporate Secretarial',
+            'General',
+            'Common'
+        ];
 
         if ($stateParams.id) {
             billingitemService.getItem($stateParams.id)
@@ -85,7 +124,29 @@ materialAdmin
                 self.billingitem = angular.copy(item);  // important
             });
         } else {
-            self.billingitem = {};
+            self.billingitem = {
+                type: self.types[0],
+                code: 'F' + Math.floor(Math.random() * 1000 + 1),
+                priority: 1,
+                state: 'Common',
+                category: 'Conveyancing',
+                invoice: {
+                    price: 0.00,
+                    unit: 1.00
+                },
+                voucher: {
+                    price: 0.00,
+                    unit: 0.00
+                }
+            };
+        }
+
+        function get_code() {
+            if ($stateParams.id) 
+                return;
+            // get from server
+            var idx = self.types.map(function(c) { return c; }).indexOf(self.billingitem.type);
+            self.billingitem.code = 'FDGS'[idx] + Math.floor(Math.random() * 1000 + 1);
         }
 
         function save() {
