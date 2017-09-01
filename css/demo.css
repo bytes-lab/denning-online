@@ -159,3 +159,13 @@
     margin-right: 25px;
     vertical-align: top;
 }
+
+.chat_frame {
+    width: 360px;
+    position: absolute;
+    top: 68px;
+    height: calc(100% - 70px);
+    right: 0;
+    margin-left: auto;   
+    border: 1px solid #cbcbcb;
+}
