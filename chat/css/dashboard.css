@@ -80,6 +80,7 @@
     flex-direction: column;
     flex: 1 1 100%;
     overflow: hidden;
+    margin-top: 10px;
 }
 
 .sidebar__tabs {
