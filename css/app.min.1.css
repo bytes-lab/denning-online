@@ -15349,3 +15349,16 @@ a.thumbnail.active {
   border-bottom: 1px solid #E5E5E5;
   border-radius: 0;
 }
+
+.btn-group-category .btn {
+  width: 190px;
+  border-right: 3px solid #ebebeb;
+}
+
+.btn-group-category .btn:last-child {
+  border-right: none;
+}
+
+.btn-group-category .btn-info:hover:hover, .btn-group-category .btn-info:focus:hover, .btn-group-category .btn-info.focus:hover, .btn-group-category .btn-info:active:hover, .open > .dropdown-toggle.btn-info:hover, .btn-info:hover:focus, .btn-info:focus:focus, .btn-info.focus:focus, .btn-info:active:focus, .open > .dropdown-toggle.btn-info:focus, .btn-info:hover.focus, .btn-info:focus.focus, .btn-info.focus.focus, .btn-info:active.focus, .open > .dropdown-toggle.btn-info.focus {
+  border-color: #ebebeb;
+}
