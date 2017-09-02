@@ -4,11 +4,14 @@ materialAdmin
     // =========================================================================
 
     .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchFilterService, $rootScope, Auth){
-
+        var self = this;
         //Welcome Message
         growlService.growl('Welcome back Jason!', 'inverse')
         
-        
+        $scope.loadChat = { 
+            render: false
+        };
+
         // Detact Mobile Browser
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
            angular.element('html').addClass('ismobile');
@@ -41,6 +44,7 @@ materialAdmin
         };
         $rootScope.logout = function () {
             Auth.logout();
+            self.sidebarToggle.right = false;
             $state.go('login');
         };
 
@@ -49,6 +53,8 @@ materialAdmin
         };
         this.logout = function () {
             Auth.logout();
+            self.sidebarToggle.right = false;
+            $scope.loadChat.render = false;
             $state.go('login');
         };
 
@@ -86,7 +92,7 @@ materialAdmin
         this.skinSwitch = function (color) {
             this.currentSkin = color;
         }
-        var self = this;
+
         searchFilterService.getFilter().then(function(data){
             self.searchFilterCategories = [];
             data.forEach(function(item){
@@ -208,11 +214,7 @@ materialAdmin
           };
 
         }
-
-
-
-
-    
+   
     })
     .controller('loginCtrl', function ($rootScope, $scope, Auth, $window, $state, legalFirmService) {
 
@@ -255,9 +257,8 @@ materialAdmin
     // =========================================================================
     // Header
     // =========================================================================
-    .controller('headerCtrl', function($timeout, messageService){
-
-
+    .controller('headerCtrl', function($timeout, $scope, messageService){
+        $scope.loadChat.render = true;
         // Top Search
         this.openSearch = function(){
             angular.element('#header').addClass('search-toggled');

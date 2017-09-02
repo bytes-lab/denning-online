@@ -164,8 +164,9 @@
     width: 360px;
     position: absolute;
     top: 68px;
-    height: calc(100% - 70px);
+    height: calc(100vh - 70px);
     right: 0;
     margin-left: auto;   
     border: 1px solid #cbcbcb;
+    z-index: 5;
 }

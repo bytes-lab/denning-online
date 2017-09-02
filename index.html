@@ -29,7 +29,7 @@
     <body class="sw-toggled">
         
         <data ui-view></data>
-        <iframe class="chat_frame" src="/denning-online/chat/index.html" ng-show="mactrl.sidebarToggle.right"></iframe>
+        <iframe class="chat_frame" src="/denning-online/chat/index.html" ng-if="loadChat.render" ng-show="mactrl.sidebarToggle.right"></iframe>
         <!-- Core -->
         <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
 

@@ -9,8 +9,9 @@ Login.prototype.init = function(){
     var self = this;
 
     return new Promise(function(resolve, reject) {
+        var saved_user = JSON.parse(localStorage.getItem('userInfo'));
         var user = {
-            login: 'yanhongho@hotmail.com',
+            login: saved_user.email,
             // login: 'tmho@hotmail.com',
             password: 'denningIT'
         };
