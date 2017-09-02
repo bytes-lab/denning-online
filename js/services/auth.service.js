@@ -195,7 +195,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
     service.isAuthenticated = function() {
         var info = this.getUserInfo();
         // return info && ((info.logintimestamp + info.expTimeInSec) > new Date().getTime() / 1000);
-        return info.sessionID;
+        return info && info.sessionID;
     };
 
 

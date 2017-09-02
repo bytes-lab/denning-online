@@ -6,7 +6,7 @@ materialAdmin
     .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchFilterService, $rootScope, Auth){
         var self = this;
         //Welcome Message
-        growlService.growl('Welcome back Jason!', 'inverse')
+        // growlService.growl('Welcome back Jason!', 'inverse')
         
         $scope.loadChat = { 
             render: false
