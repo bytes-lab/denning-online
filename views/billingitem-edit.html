@@ -43,7 +43,20 @@
                         <dt class="p-t-10">Inherit from</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.billingitem.inherit" placeholder="">
+                                  <md-autocomplete
+                                      md-selected-item="vm.billingitem.inherit"
+                                      md-search-text="searchText"
+                                      md-items="item in vm.queryBillItems(searchText)"
+                                      md-item-text="item.code"
+                                      md-min-length="1"
+                                      md-autoselect="false"
+                                      class="default-input"
+                                      style="widtha:72%">
+                                    <md-item-template>
+                                      <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+                                      <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
+                                    </md-item-template>
+                                  </md-autocomplete>                                
                             </div>
                         </dd>
                     </dl>

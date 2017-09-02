@@ -162,7 +162,7 @@
 
 .chat_frame {
     width: 360px;
-    position: absolute;
+    position: fixed;
     top: 68px;
     height: calc(100vh - 70px);
     right: 0;

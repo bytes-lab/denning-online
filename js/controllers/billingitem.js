@@ -77,6 +77,7 @@ materialAdmin
         self.save = save;
         self.cancel = cancel;
         self.get_code = get_code;
+        self.queryBillItems = queryBillItems;
         self.isDialog = false;
         self.viewMode = false;  // for edit / create
         self.types = [
@@ -117,6 +118,16 @@ materialAdmin
             'General',
             'Common'
         ];
+
+        billingitemService.getList().then(function(data) {
+            self.data = data;
+        });        
+
+        function queryBillItems(searchText) {
+            return self.data.filter(function(c) {
+                return c.code.search(new RegExp(searchText, "i")) > -1;
+            });
+        }
 
         if ($stateParams.id) {
             billingitemService.getItem($stateParams.id)
