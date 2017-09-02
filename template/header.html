@@ -14,7 +14,7 @@
         <div class="search">
             <!-- <div class="fg-line"> -->
                 <!-- <input type="text" class="form-control" placeholder="Search for matters, contacts, properties ..."> -->
-                <md-autocomplete
+              <md-autocomplete
                   ng-disabled="false"
                   md-selected-item="mactrl.selectedItem"
                   md-search-text-change="mactrl.searchTextChange(mactrl.searchText)"
@@ -22,7 +22,7 @@
                   md-selected-item-change="mactrl.selectedItemChange(item)"
                   md-items="item in mactrl.querySearch(mactrl.searchText)"
                   md-item-text="item.display"
-                  md-min-length="0"
+                  md-min-length="1"
                   md-autoselect="false"
                   ng-keypress="mactrl.searchKeyPressed($event)"
                   placeholder="Search for matters, contacts, properties ...">

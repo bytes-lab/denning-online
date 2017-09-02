@@ -144,6 +144,12 @@ materialAdmin
                     });                                         
                 }
 
+                $scope.queryContacts = function(searchText) {
+                    return $scope.contacts.filter(function(c) {
+                        return c.name.search(new RegExp(searchText, "i")) > -1 || c.IDNo.search(new RegExp(searchText, "i")) > -1;
+                    });                    
+                }
+
                 legalFirmService.getList().then(function(data) {
                     $scope.legalFirms = data;
                 });          

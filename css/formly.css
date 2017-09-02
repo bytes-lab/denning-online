@@ -99,3 +99,19 @@ input.form-control, label.form-control, select.form-control {
     border-color: #ddd #ddd #fff #ddd !important;
 }
 
+md-autocomplete.default-input {
+    height: 30px;
+}
+
+md-autocomplete.default-input md-autocomplete-wrap {
+    height: 30px;
+}
+
+md-autocomplete.default-input input:not(.md-input) {
+    height: 30px;
+}
+
+.col-1 {
+    width: 300px;
+    display: inline-block;
+}
