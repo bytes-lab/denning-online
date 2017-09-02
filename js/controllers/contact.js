@@ -113,7 +113,7 @@ materialAdmin
         self.initContacts = initContacts;
 
         if (viewMode) {
-            contactService.getItem(party.party)
+            contactService.getItem(party.party.code)
             .then(function(item){
                 self.contact = item;
             });                                    

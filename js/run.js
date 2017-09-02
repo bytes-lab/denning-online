@@ -127,6 +127,7 @@ materialAdmin
 
                 $scope.viewContact = function(party) {
                     if (party.party) {
+                        console.log(party);
                         $scope.contactDialog(party, true);
                     } else {
                         alert('Please select a party.')
