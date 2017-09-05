@@ -104,7 +104,37 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
         "sessionID": "9e5e16a5-c632-498c-accd-0d34e8ccfe3c",
         "status": "success - proceed to Home Page.",
         "statusCode": 200,
-        "userType": "denning"
+        "userType": "denning",
+        "priority": {
+            "matter": {
+                "list": true,
+                "create": false,
+                "read": true,
+                "update": false,
+                "delete": true
+            },
+            "contact": {
+                "list": true,
+                "create": true,
+                "read": true,
+                "update": false,
+                "delete": true
+            },
+            "property": {
+                "list": true,
+                "create": false,
+                "read": true,
+                "update": false,
+                "delete": true
+            },
+            "quotation": {
+                "list": true,
+                "create": false,
+                "read": true,
+                "update": false,
+                "delete": true
+            },
+        }
     }
     service.login = function(email, pass) {
         var deferred = $q.defer();

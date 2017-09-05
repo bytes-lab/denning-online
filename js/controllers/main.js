@@ -51,6 +51,9 @@ materialAdmin
         this.isAuthenticated = function () {
             return Auth.isAuthenticated();
         };
+
+        this.userInfo = Auth.getUserInfo();
+        
         this.logout = function () {
             Auth.logout();
             self.sidebarToggle.right = false;

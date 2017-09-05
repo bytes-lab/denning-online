@@ -1,8 +1,9 @@
 materialAdmin
-    .controller('contactListCtrl', function($filter, $uibModal, NgTableParams, contactService) {
+    .controller('contactListCtrl', function($filter, $uibModal, NgTableParams, contactService, Auth) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
+        self.userInfo = Auth.getUserInfo();
 
         contactService.getList().then(function(data) {
             self.data = data;
@@ -72,13 +73,14 @@ materialAdmin
         };
     })
 
-    .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state) {
+    .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state, Auth) {
         var self = this;
         self.save = save;
         self.cancel = cancel;
         self.isDialog = false;
         self.viewMode = false;  // for edit / create
-
+        self.userInfo = Auth.getUserInfo();
+        
         if ($stateParams.id) {
             contactService.getItem($stateParams.id)
             .then(function(item){
