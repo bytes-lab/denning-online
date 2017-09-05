@@ -24,23 +24,53 @@
         </div>
                 
         <div class="card-body">
-            <div class="table-responsive" ng-if="vm.dataReady" > 
-                <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+            <div class="table-responsive" ng-if="vm.dataReady" style="white-space:nowrap; overflow: auto;"> 
+                <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true" style="display:block;overflow-x:scroll;">
                     <tr ng-repeat="w in $data">
+                        <td data-title="'Q No'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
+                            {{ w.documentNo }}
+                        </td>
                         <td data-title="'Date'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
-                            {{ w.IDNo }}
+                            {{ w.documentNo }}
                         </td>
                         <td data-title="'File No.1'" filter="{ 'name': 'text' }" sortable="'name'">
-                            {{ w.name }}
+                            {{ w.fileNo }}
                         </td>
                         <td data-title="'File No.2'" filter="{ 'phoneMobile': 'text' }" sortable="'phoneMobile'">
-                            {{ w.phoneMobile }}
-                        </td>
-                        <td data-title="'Quotation'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
-                            {{ w.phoneHome }}
+                            {{ w.fileNo }}
                         </td>
                         <td data-title="'Quotation To'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
-                            {{ w.phoneHome }}
+                            {{ w.issueToName }}
+                        </td>
+                        <td data-title="'Fees'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.documentNo }}
+                        </td>
+                        <td data-title="'Disb (GST)'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.fileNo }}
+                        </td>
+                        <td data-title="'Disb'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.documentNo }}
+                        </td>
+                        <td data-title="'GST'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.fileNo }}
+                        </td>
+                        <td data-title="'Total'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.documentNo }}
+                        </td>
+                        <td data-title="'Tax Invoice'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.propertyTitle }}
+                        </td>
+                        <td data-title="'Clerk'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.fileNo }}
+                        </td>
+                        <td data-title="'LA'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.propertyTitle }}
+                        </td>
+                        <td data-title="'Partner'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.propertyTitle }}
+                        </td>
+                        <td data-title="'Issued by'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                            {{ w.issueBy }}
                         </td>
                         <td data-title="'Actions'">
                             <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="quotations.edit({id:w.code})"><i class="zmdi zmdi-edit"></i></a>
