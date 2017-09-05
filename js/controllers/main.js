@@ -8,8 +8,9 @@ materialAdmin
         //Welcome Message
         // growlService.growl('Welcome back Jason!', 'inverse')
         
-        $scope.loadChat = { 
-            render: false
+        $scope.app = { 
+            loadChat: false,
+            userInfo: null
         };
 
         // Detact Mobile Browser
@@ -52,12 +53,10 @@ materialAdmin
             return Auth.isAuthenticated();
         };
 
-        this.userInfo = Auth.getUserInfo();
-        
         this.logout = function () {
             Auth.logout();
             self.sidebarToggle.right = false;
-            $scope.loadChat.render = false;
+            $scope.app.loadChat = false;
             $state.go('login');
         };
 
@@ -260,8 +259,10 @@ materialAdmin
     // =========================================================================
     // Header
     // =========================================================================
-    .controller('headerCtrl', function($timeout, $scope, messageService){
-        $scope.loadChat.render = true;
+    .controller('headerCtrl', function($timeout, $scope, messageService, Auth){
+        $scope.app.loadChat = true;
+        $scope.app.userInfo = Auth.getUserInfo();
+
         // Top Search
         this.openSearch = function(){
             angular.element('#header').addClass('search-toggled');

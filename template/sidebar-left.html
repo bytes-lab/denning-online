@@ -31,13 +31,13 @@
         <li data-ui-sref-active="active">
             <a data-ui-sref="overview" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-view-dashboard"></i> Overview</a>
         </li>
-        <li data-ui-sref-active="active" ng-if="mactrl.userInfo.priority.matter.list">
+        <li data-ui-sref-active="active" ng-if="app.userInfo.priority.matter.list">
             <a data-ui-sref="matterforms.edit" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-file-text"></i> Matter</a>
         </li>
-        <li data-ui-sref-active="active" ng-if="mactrl.userInfo.priority.contact.list">
+        <li data-ui-sref-active="active" ng-if="app.userInfo.priority.contact.list">
             <a data-ui-sref="contacts.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-folder-person"></i> Contact</a>
         </li>
-        <li data-ui-sref-active="active" ng-if="mactrl.userInfo.priority.property.list">
+        <li data-ui-sref-active="active" ng-if="app.userInfo.priority.property.list">
             <a data-ui-sref="properties.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-layers"></i> Property</a>
         </li>
 
@@ -48,7 +48,7 @@
                 <li><a data-ui-sref-active="active" data-ui-sref="billingitems.list" data-ng-click="mactrl.sidebarStat($event)">Bill Items</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="presetbills.list" data-ng-click="mactrl.sidebarStat($event)">Preset Bills</a></li>
                 <!-- <li><hr/></li> -->
-                <li ng-if="mactrl.userInfo.priority.quotation.list"><a data-ui-sref-active="active" data-ui-sref="quotations.list" data-ng-click="mactrl.sidebarStat($event)">Quotation</a></li>
+                <li ng-if="app.userInfo.priority.quotation.list"><a data-ui-sref-active="active" data-ui-sref="quotations.list" data-ng-click="mactrl.sidebarStat($event)">Quotation</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="invoices.list" data-ng-click="mactrl.sidebarStat($event)">Tax Invoice</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="receipts.list" data-ng-click="mactrl.sidebarStat($event)">Receipt</a></li>                
             </ul>

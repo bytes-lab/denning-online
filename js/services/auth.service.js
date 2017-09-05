@@ -114,11 +114,11 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
                 "delete": true
             },
             "contact": {
-                "list": true,
-                "create": true,
+                "list": false,
+                "create": false,
                 "read": true,
                 "update": false,
-                "delete": true
+                "delete": false
             },
             "property": {
                 "list": true,
