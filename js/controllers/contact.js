@@ -1,9 +1,10 @@
 materialAdmin
-    .controller('contactListCtrl', function($filter, $uibModal, NgTableParams, contactService, Auth) {
+    .controller('contactListCtrl', function($filter, $uibModal, NgTableParams, contactService, Auth, $state) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
         self.userInfo = Auth.getUserInfo();
+        self.clickHandler = clickHandler;
 
         contactService.getList().then(function(data) {
             self.data = data;
@@ -11,6 +12,10 @@ materialAdmin
             initializeTable();
         });        
         
+        function clickHandler(item) {
+            $state.go('contacts.edit', {'id': item.code});
+        }
+
         function initializeTable () {
             //Filtering
             self.tableFilter = new NgTableParams({

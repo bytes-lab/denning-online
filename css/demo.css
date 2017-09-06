@@ -170,3 +170,8 @@
     border: 1px solid #cbcbcb;
     z-index: 5;
 }
+
+a.new_object {
+    margin-left: 100px;
+    height: 32px;
+}

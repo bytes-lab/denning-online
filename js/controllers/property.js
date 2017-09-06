@@ -1,8 +1,9 @@
 materialAdmin
-    .controller('propertyListCtrl', function($filter, $sce, $uibModal, NgTableParams, propertyService) {
+    .controller('propertyListCtrl', function($filter, $sce, $uibModal, NgTableParams, propertyService, $state) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
+        self.clickHandler = clickHandler;
 
         propertyService.getList().then(function(data) {
             self.data = data;
@@ -10,6 +11,10 @@ materialAdmin
             initializeTable();
         });        
         
+        function clickHandler(item) {
+            $state.go('properties.edit', {'id': item.new_ic});
+        }
+
         function initializeTable () {
             //Filtering
             self.tableFilter = new NgTableParams({

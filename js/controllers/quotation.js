@@ -1,8 +1,9 @@
 materialAdmin
-    .controller('quotationListCtrl', function($filter, $uibModal, NgTableParams, quotationService) {
+    .controller('quotationListCtrl', function($filter, $uibModal, NgTableParams, quotationService, $state) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
+        self.clickHandler = clickHandler;
 
         quotationService.getList().then(function(data) {
             self.data = data;
@@ -10,6 +11,10 @@ materialAdmin
             initializeTable();
         });        
         
+        function clickHandler(item) {
+            $state.go('quotations.edit', {'id': item.code});
+        }
+
         function initializeTable () {
             //Filtering
             self.tableFilter = new NgTableParams({
