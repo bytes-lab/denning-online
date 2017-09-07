@@ -40,7 +40,7 @@ materialAdmin
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                controller: 'QuotationDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
@@ -58,7 +58,7 @@ materialAdmin
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, quotation, quotationService, $state) {
+    .controller('QuotationDeleteModalCtrl', function ($scope, $modalInstance, quotation, quotationService, $state) {
         $scope.ok = function () {
             quotationService.delete(quotation).then(function(quotation) {
                 $state.reload();

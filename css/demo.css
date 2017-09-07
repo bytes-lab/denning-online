@@ -175,3 +175,13 @@ a.new_object {
     margin-left: 100px;
     height: 32px;
 }
+
+a.top_button {
+    margin-left: 10px;
+    height: 28px;
+}
+
+a.top_button_first {
+    margin-left: 25vw;
+    height: 28px;
+}

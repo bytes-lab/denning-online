@@ -35,7 +35,7 @@ materialAdmin
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                controller: 'ReceiptDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
@@ -53,7 +53,7 @@ materialAdmin
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, receipt, receiptService, $state) {
+    .controller('ReceiptDeleteModalCtrl', function ($scope, $modalInstance, receipt, receiptService, $state) {
         $scope.ok = function () {
             receiptService.delete(receipt).then(function(receipt) {
                 $state.reload();

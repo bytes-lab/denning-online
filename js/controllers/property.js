@@ -61,7 +61,8 @@ materialAdmin
             });
         }
         //Prevent Outside Click
-        function openDelete(contact) {
+        function openDelete(event, contact) {
+            event.stopPropagation();
             modalInstances(true, '', 'static', true, contact)
         };        
     })

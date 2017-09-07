@@ -35,7 +35,7 @@ materialAdmin
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                controller: 'PresetbillDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
@@ -53,7 +53,7 @@ materialAdmin
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, presetbill, presetbillService, $state) {
+    .controller('PresetbillDeleteModalCtrl', function ($scope, $modalInstance, presetbill, presetbillService, $state) {
         $scope.ok = function () {
             presetbillService.delete(presetbill).then(function(presetbill) {
                 $state.reload();

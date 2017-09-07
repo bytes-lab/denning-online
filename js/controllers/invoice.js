@@ -35,7 +35,7 @@ materialAdmin
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                controller: 'InvoiceDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
@@ -53,7 +53,7 @@ materialAdmin
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, invoice, invoiceService, $state) {
+    .controller('InvoiceDeleteModalCtrl', function ($scope, $modalInstance, invoice, invoiceService, $state) {
         $scope.ok = function () {
             invoiceService.delete(invoice).then(function(invoice) {
                 $state.reload();
