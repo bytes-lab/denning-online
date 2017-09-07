@@ -221,7 +221,7 @@ materialAdmin
                 } else {
                     service.cities.push(city);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -236,7 +236,7 @@ materialAdmin
                     service.cities.splice(idx, 1);
                     deferred.resolve(city);
                 } else {
-                    defered.reject(new Error('There is no such city'));
+                    deferred.reject(new Error('There is no such city'));
                 }
             }, 100);
 

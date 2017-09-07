@@ -48,21 +48,28 @@ materialAdmin
                 resolve: {
                     contact: function () {
                         return contact;
+                    },
+                    on_list: function () {
+                        return true;
                     }
                 }            
             });
         }
 
         //Prevent Outside Click
-        function openDelete(contact) {
+        function openDelete(event, contact) {
+            event.stopPropagation();
             modalInstances(true, '', 'static', true, contact)
         };        
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, contactService, $state) {
+    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, on_list, contactService, $state) {
         $scope.ok = function () {
             contactService.delete(contact).then(function(contact) {
-                $state.reload();
+                if (on_list)
+                    $state.reload();
+                else
+                    $state.go('contacts.list');
             })
             .catch(function(err){
                 //Handler
@@ -74,18 +81,21 @@ materialAdmin
 
         $scope.cancel = function () {
             $modalInstance.close();
-            $state.go('contacts.list');
+            if (on_list)
+                $state.go('contacts.list');
         };
     })
 
-    .controller('contactEditCtrl', function($filter, $stateParams, contactService, $state, Auth) {
+    .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth) {
         var self = this;
         self.save = save;
         self.cancel = cancel;
         self.isDialog = false;
         self.viewMode = false;  // for edit / create
         self.userInfo = Auth.getUserInfo();
-        
+        self.openDelete = openDelete;
+        self.can_edit = false;
+
         if ($stateParams.id) {
             contactService.getItem($stateParams.id)
             .then(function(item){
@@ -108,6 +118,32 @@ materialAdmin
         function cancel() {
             $state.go('contacts.list');            
         }
+
+        //Create Modal
+        function modalInstances1(animation, size, backdrop, keyboard, contact) {
+            var modalInstance = $uibModal.open({
+                animation: animation,
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                backdrop: backdrop,
+                keyboard: keyboard,
+                resolve: {
+                    contact: function () {
+                        return contact;
+                    }, 
+                    on_list: function () {
+                        return false;
+                    }
+                }            
+            });
+        }
+
+        //Prevent Outside Click
+        function openDelete(event, contact) {
+            event.stopPropagation();
+            modalInstances1(true, '', 'static', true, contact)
+        };        
     })
 
     .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, initContacts, contactService, $scope) {

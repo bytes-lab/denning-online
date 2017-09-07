@@ -280,7 +280,7 @@ materialAdmin
                 } else {
                     service.judges.push(judge);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -295,7 +295,7 @@ materialAdmin
                     service.judges.splice(idx, 1);
                     deferred.resolve(judge);
                 } else {
-                    defered.reject(new Error('There is no such judge'));
+                    deferred.reject(new Error('There is no such judge'));
                 }
             }, 100);
 

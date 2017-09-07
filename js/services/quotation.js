@@ -82,7 +82,7 @@ materialAdmin
                     service.quotations.splice(idx, 1);
                     deferred.resolve(quotation);
                 } else {
-                    defered.reject(new Error('There is no such quotation'));
+                    deferred.reject(new Error('There is no such quotation'));
                 }
                 // @@ send delete request to server to delete the item
             }, 100);

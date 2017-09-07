@@ -220,7 +220,7 @@ materialAdmin
                 } else {
                     service.banks.push(bank);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -235,7 +235,7 @@ materialAdmin
                     service.banks.splice(idx, 1);
                     deferred.resolve(bank);
                 } else {
-                    defered.reject(new Error('There is no such bank'));
+                    deferred.reject(new Error('There is no such bank'));
                 }
             }, 100);
 

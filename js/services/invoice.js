@@ -82,7 +82,7 @@ materialAdmin
                     service.invoices.splice(idx, 1);
                     deferred.resolve(invoice);
                 } else {
-                    defered.reject(new Error('There is no such invoice'));
+                    deferred.reject(new Error('There is no such invoice'));
                 }
                 // @@ send delete request to server to delete the item
             }, 100);

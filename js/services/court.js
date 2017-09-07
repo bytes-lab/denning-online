@@ -219,7 +219,7 @@ materialAdmin
                 } else {
                     service.courts.push(court);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -234,7 +234,7 @@ materialAdmin
                     service.courts.splice(idx, 1);
                     deferred.resolve(court);
                 } else {
-                    defered.reject(new Error('There is no such court'));
+                    deferred.reject(new Error('There is no such court'));
                 }
             }, 100);
 

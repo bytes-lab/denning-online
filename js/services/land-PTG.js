@@ -220,7 +220,7 @@ materialAdmin
                 } else {
                     service.landPTGs.push(landPTG);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -235,7 +235,7 @@ materialAdmin
                     service.landPTGs.splice(idx, 1);
                     deferred.resolve(landPTG);
                 } else {
-                    defered.reject(new Error('There is no such landPTG'));
+                    deferred.reject(new Error('There is no such landPTG'));
                 }
             }, 100);
 

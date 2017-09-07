@@ -219,7 +219,7 @@ materialAdmin
                 } else {
                     service.landOffices.push(landOffice);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -234,7 +234,7 @@ materialAdmin
                     service.landOffices.splice(idx, 1);
                     deferred.resolve(landOffice);
                 } else {
-                    defered.reject(new Error('There is no such landOffice'));
+                    deferred.reject(new Error('There is no such landOffice'));
                 }
             }, 100);
 

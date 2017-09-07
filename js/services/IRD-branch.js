@@ -228,7 +228,7 @@ materialAdmin
                 } else {
                     service.IRDBranches.push(IRDBranch);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -243,7 +243,7 @@ materialAdmin
                     service.IRDBranches.splice(idx, 1);
                     deferred.resolve(IRDBranch);
                 } else {
-                    defered.reject(new Error('There is no such IRDBranch'));
+                    deferred.reject(new Error('There is no such IRDBranch'));
                 }
             }, 100);
 

@@ -82,7 +82,7 @@ materialAdmin
                     service.presetbills.splice(idx, 1);
                     deferred.resolve(presetbill);
                 } else {
-                    defered.reject(new Error('There is no such presetbill'));
+                    deferred.reject(new Error('There is no such presetbill'));
                 }
                 // @@ send delete request to server to delete the item
             }, 100);

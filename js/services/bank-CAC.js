@@ -198,7 +198,7 @@ materialAdmin
                 } else {
                     service.bank_CACs.push(bank_CAC);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -213,7 +213,7 @@ materialAdmin
                     service.bank_CACs.splice(idx, 1);
                     deferred.resolve(bank_CAC);
                 } else {
-                    defered.reject(new Error('There is no such bank_CAC'));
+                    deferred.reject(new Error('There is no such bank_CAC'));
                 }
             }, 100);
 

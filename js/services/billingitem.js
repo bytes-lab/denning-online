@@ -82,7 +82,7 @@ materialAdmin
                     service.billingitems.splice(idx, 1);
                     deferred.resolve(billingitem);
                 } else {
-                    defered.reject(new Error('There is no such billingitem'));
+                    deferred.reject(new Error('There is no such billingitem'));
                 }
                 // @@ send delete request to server to delete the item
             }, 100);

@@ -195,7 +195,7 @@ materialAdmin
                 } else {
                     service.occupations.push(occupation);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -210,7 +210,7 @@ materialAdmin
                     service.occupations.splice(idx, 1);
                     deferred.resolve(occupation);
                 } else {
-                    defered.reject(new Error('There is no such occupation'));
+                    deferred.reject(new Error('There is no such occupation'));
                 }
             }, 100);
 

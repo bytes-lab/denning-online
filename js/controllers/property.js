@@ -44,7 +44,7 @@ materialAdmin
         self.modalContent = 'Are you sure to delete the contract?';
     
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
+        function modalInstances(animation, size, backdrop, keyboard, property) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
@@ -53,23 +53,23 @@ materialAdmin
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    contact: function () {
-                        return contact;
+                    property: function () {
+                        return property;
                     }
                 }
             
             });
         }
         //Prevent Outside Click
-        function openDelete(event, contact) {
+        function openDelete(event, property) {
             event.stopPropagation();
-            modalInstances(true, '', 'static', true, contact)
+            modalInstances(true, '', 'static', true, property)
         };        
     })
 
-    .controller('propertyDeleteModalCtrl', function ($scope, $modalInstance, contact, propertyService, $state) {
+    .controller('propertyDeleteModalCtrl', function ($scope, $modalInstance, property, propertyService, $state) {
         $scope.ok = function () {
-            propertyService.delete(contact).then(function(contact) {
+            propertyService.delete(property).then(function(property) {
                 $state.reload();
             })
             .catch(function(err){
@@ -92,16 +92,16 @@ materialAdmin
         if($stateParams.id) {
             propertyService.getItem($stateParams.id)
             .then(function(item){
-                self.contact = item;
+                self.property = item;
             });
         } else {
-            self.contact = {};
+            self.property = {};
         }
 
         function save() {
-            propertyService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
+            propertyService.save(self.property).then(function(property) {
+                self.property = property;
+                $state.go('properties.list');
             })
             .catch(function(err){
                 //Handler

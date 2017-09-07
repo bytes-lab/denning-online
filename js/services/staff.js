@@ -280,7 +280,7 @@ materialAdmin
                 } else {
                     service.contacts.push(contact);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -295,7 +295,7 @@ materialAdmin
                     service.contacts.splice(idx, 1);
                     deferred.resolve(contact);
                 } else {
-                    defered.reject(new Error('There is no such contact'));
+                    deferred.reject(new Error('There is no such contact'));
                 }
             }, 100);
 

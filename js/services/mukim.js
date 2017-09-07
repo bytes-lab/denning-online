@@ -219,7 +219,7 @@ materialAdmin
                 } else {
                     service.mukims.push(mukim);
                 }
-                //defered.reject(new Error('dd'));
+                //deferred.reject(new Error('dd'));
             }, 100);
 
             return deferred.promise;
@@ -234,7 +234,7 @@ materialAdmin
                     service.mukims.splice(idx, 1);
                     deferred.resolve(mukim);
                 } else {
-                    defered.reject(new Error('There is no such mukim'));
+                    deferred.reject(new Error('There is no such mukim'));
                 }
             }, 100);
 

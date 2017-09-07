@@ -82,7 +82,7 @@ materialAdmin
                     service.contacts.splice(idx, 1);
                     deferred.resolve(contact);
                 } else {
-                    defered.reject(new Error('There is no such contact'));
+                    deferred.reject(new Error('There is no such contact'));
                 }
                 // @@ send delete request to server to delete the item
             }, 100);
