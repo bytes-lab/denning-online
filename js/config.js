@@ -1042,5 +1042,34 @@ materialAdmin
                 controller: 'CKHTEditCtrl as vm',
                 templateUrl: 'views/CKHT-edit.html'
             })                                                  
+
+            //------------------------------
+            // CALENDAR
+            //------------------------------
+
+            .state ('calendar', {
+                url: '/calendar',
+                templateUrl: 'views/calendar.html',
+                resolve: {
+                    loadPlugin: function($ocLazyLoad) {
+                        return $ocLazyLoad.load ([
+                            {
+                                name: 'css',
+                                insertBefore: '#app-level',
+                                files: [
+                                    'vendors/bower_components/fullcalendar/dist/fullcalendar.min.css',
+                                ]
+                            },
+                            {
+                                name: 'vendors',
+                                files: [
+                                    'vendors/bower_components/moment/min/moment.min.js',
+                                    'vendors/bower_components/fullcalendar/dist/fullcalendar.min.js'
+                                ]
+                            }
+                        ])
+                    }
+                }
+            })            
     });
 
