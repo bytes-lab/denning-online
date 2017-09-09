@@ -75,16 +75,14 @@ materialAdmin
 
         $scope.cancel = function () {
             $modalInstance.close();
-            $state.go('courtdiaries.list');
+            $state.go('courtdiary');
         };
     })
 
-    .controller('courtdiaryEditCtrl', function($filter, $stateParams, courtdiaryService, $state) {
+    .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, courtdiaryService, $state, Auth) {
         var self = this;
         self.save = save;
         self.cancel = cancel;
-        self.isDialog = false;
-        self.viewMode = false;  // for edit / create
         self.userInfo = Auth.getUserInfo();
         self.openDelete = openDelete;
         self.can_edit = false;
@@ -101,7 +99,7 @@ materialAdmin
         function save() {
             courtdiaryService.save(self.courtdiary).then(function(courtdiary) {
                 self.courtdiary = courtdiary;
-                $state.go('courtdiaries.list');
+                $state.go('courtdiary');
             })
             .catch(function(err){
                 //Handler
@@ -109,7 +107,7 @@ materialAdmin
         }
 
         function cancel() {
-            $state.go('courtdiaries.list');            
+            $state.go('courtdiary');            
         }
 
         //Create Modal
