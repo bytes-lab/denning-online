@@ -134,6 +134,13 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
                 "update": false,
                 "delete": true
             },
+            "courtdiary": {
+                "list": true,
+                "create": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
         }
     }
     service.login = function(email, pass) {

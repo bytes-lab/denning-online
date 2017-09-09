@@ -185,3 +185,8 @@ a.top_button_first {
     margin-left: 25vw;
     height: 28px;
 }
+
+#calendar {
+    width: 64%;
+    margin: auto;
+}

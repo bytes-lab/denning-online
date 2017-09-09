@@ -1044,12 +1044,15 @@ materialAdmin
             })                                                  
 
             //------------------------------
-            // CALENDAR
+            // COURT DIARY
             //------------------------------
 
-            .state ('calendar', {
-                url: '/calendar',
-                templateUrl: 'views/calendar.html',
+            .state ('courtdiary', {
+                data: {
+                    access: '@'
+                },
+                url: '/courtdiary',
+                templateUrl: 'views/courtdiary-list.html',
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([
@@ -1070,6 +1073,30 @@ materialAdmin
                         ])
                     }
                 }
-            })            
+            })        
+        
+            .state ('courtdiaries', {
+                data: {
+                    access: '@'
+                },                
+                url: '/courtdiaries',
+                templateUrl: 'views/common.html'
+            })                      
+            .state ('courtdiaries.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'courtdiaryEditCtrl as vm',
+                templateUrl: 'views/courtdiary-edit.html'
+            })
+            .state ('courtdiaries.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'courtdiaryEditCtrl as vm',
+                templateUrl: 'views/courtdiary-edit.html'
+            })  
     });
 

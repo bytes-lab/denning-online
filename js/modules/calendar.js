@@ -105,82 +105,82 @@ materialAdmin
                     //Add Events
                     events: [
                         {
-                            title: 'Hangout with friends',
+                            title: 'Court',
                             start: new Date(y, m, 1),
                             allDay: true,
-                            className: 'bgm-cyan'
+                            className: 'bgm-green'
                         },
                         {
-                            title: 'Meeting with client',
+                            title: 'Office',
                             start: new Date(y, m, 10),
                             allDay: true,
-                            className: 'bgm-red'
+                            className: 'bgm-orange'
                         },
                         {
-                            title: 'Repeat Event',
+                            title: 'Personal',
                             start: new Date(y, m, 18),
                             allDay: true,
                             className: 'bgm-blue'
                         },
                         {
-                            title: 'Semester Exam',
+                            title: 'Court',
                             start: new Date(y, m, 20),
                             allDay: true,
                             className: 'bgm-green'
                         },
                         {
-                            title: 'Soccor match',
+                            title: 'Office',
                             start: new Date(y, m, 5),
                             allDay: true,
-                            className: 'bgm-purple'
+                            className: 'bgm-orange'
                         },
                         {
-                            title: 'Coffee time',
+                            title: 'Office',
                             start: new Date(y, m, 21),
                             allDay: true,
                             className: 'bgm-orange'
                         },
                         {
-                            title: 'Job Interview',
+                            title: 'Personal',
                             start: new Date(y, m, 5),
                             allDay: true,
-                            className: 'bgm-dark'
+                            className: 'bgm-blue'
                         },
                         {
-                            title: 'IT Meeting',
+                            title: 'Court',
                             start: new Date(y, m, 5),
                             allDay: true,
-                            className: 'bgm-cyan'
+                            className: 'bgm-green'
                         },
                         {
-                            title: 'Brunch at Beach',
+                            title: 'Personal',
                             start: new Date(y, m, 1),
                             allDay: true,
-                            className: 'bgm-purple'
+                            className: 'bgm-blue'
                         },
                         {
-                            title: 'Live TV Show',
+                            title: 'Office',
                             start: new Date(y, m, 15),
                             allDay: true,
                             className: 'bgm-orange'
                         },
                         {
-                            title: 'Software Conference',
+                            title: 'Personal',
                             start: new Date(y, m, 25),
                             allDay: true,
                             className: 'bgm-blue'
                         },
                         {
-                            title: 'Coffee time',
+                            title: 'Office',
                             start: new Date(y, m, 30),
                             allDay: true,
                             className: 'bgm-orange'
                         },
                         {
-                            title: 'Job Interview',
+                            title: 'Court',
                             start: new Date(y, m, 30),
                             allDay: true,
-                            className: 'bgm-dark'
+                            className: 'bgm-green'
                         },
                     ],
 

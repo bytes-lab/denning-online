@@ -2830,8 +2830,8 @@
 }
 
 #calendar .fc-toolbar {
-  height: 300px;
-  background-image: url('../img/cal-header.jpg');
+  height: 50px;
+  /*background-image: url('../img/cal-header.jpg');*/
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -2852,7 +2852,7 @@
 }
 
 #calendar .fc-toolbar .fc-center {
-  margin-top: 238px;
+  margin-top: -12px;
   position: relative;
 }
 
