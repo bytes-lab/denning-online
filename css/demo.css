@@ -102,19 +102,19 @@
 .bs-item {
     background: #fff;
     margin-bottom: 30px;
-    height: 100px;
+    /*height: 100px;*/
     text-align: center;
     font-size: 14px;
     border-radius: 2px;
 }
 
-.bs-item:before {
+/*.bs-item:before {
     display: inline-block;
     content: "";
     height: 100px;
     width: 1px;
     vertical-align: middle;
-}
+}*/
 
 .btn-colors > .btn {
     min-width: 112px;
@@ -189,4 +189,14 @@ a.top_button_first {
 #calendar {
     width: 64%;
     margin: auto;
+}
+
+.box-title {
+    font-size: 16px;
+    text-align: right;
+}
+
+.box-title-detail {
+    font-size: 36px;
+    text-align: right;
 }
