@@ -1175,5 +1175,32 @@ materialAdmin
                 controller: 'spapresetclEditCtrl as vm',
                 templateUrl: 'views/spa-preset-checklist-edit.html'
             })                        
+
+
+            //------------------------------
+            // SPA CHECKLIST CALENDAR
+            //------------------------------
+
+            .state ('spa-checklist-calendar', {
+                data: {
+                    access: '@'
+                },
+                url: '/spa-checklist-calendar',
+                templateUrl: 'views/spa-checklist-calendar.html',
+                controller: 'spapresetclListCtrl as vm',
+                resolve: {
+                    loadPlugin: function($ocLazyLoad) {
+                        return $ocLazyLoad.load ([
+                            {
+                                name: 'css',
+                                insertBefore: '#app-level',
+                                files: [
+                                    'vendors/bower_components/fullcalendar/dist/fullcalendar.min.css',
+                                ]
+                            },
+                        ])
+                    }
+                }
+            })            
     });
 
