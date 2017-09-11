@@ -86,7 +86,7 @@ materialAdmin
         };
     })
 
-    .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth) {
+    .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth) {
         var self = this;
         self.save = save;
         self.cancel = cancel;

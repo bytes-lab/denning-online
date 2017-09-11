@@ -1,0 +1,216 @@
+<div ng-class="vm.isDialog ? '' : 'container'">
+
+    <div class="card">
+        <div class="card-header">
+            <h2>SPA Checklist Item Edit</h2>
+            <a class="btn bgm-cyan btn-sm top_button_first" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.spaclitem.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn btn-primary btn-sm top_button_first" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.spaclitem.update && vm.can_edit">Save</a>
+            <a class="btn btn-danger btn-sm top_button" type="submit" ng-click="vm.openDelete($event, vm.spaclitem)" ng-if="vm.userInfo.priority.spaclitem.delete">delete</a>
+            <a class="btn btn-default btn-sm m-l-10" ng-click="vm.cancel()" >Cancel</a>
+        </div>
+                
+        <div class="card-body card-padding">
+            <div class="clearfix"></div>
+
+            <h4>SPA Checklist Item Information</h4>
+            <div class="row">
+                <div class="col-md-6 p-l-25">
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Item Type</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <div class="select">
+                                    <select class="form-control" ng-change="vm.get_code()" ng-model="vm.billingitem.type" ng-options="v for v in vm.types">
+                                    </select>                                
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Item Code</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input type='text' class="form-control" ng-model="vm.billingitem.code" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Description</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <textarea class="form-control" rows="3" ng-model="vm.billingitem.description" placeholder=""></textarea>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Inherit from</dt>
+                        <dd>
+                            <div class="fg-line">
+                                  <md-autocomplete
+                                      md-selected-item="vm.billingitem.inherit"
+                                      md-search-text="searchText"
+                                      md-items="item in vm.queryBillItems(searchText)"
+                                      md-item-text="item.code"
+                                      md-min-length="1"
+                                      md-autoselect="false"
+                                      class="default-input"
+                                      style="widtha:72%">
+                                    <md-item-template>
+                                      <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+                                      <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
+                                    </md-item-template>
+                                  </md-autocomplete>                                
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal" ng-if="vm.billingitem.type == vm.types[0]">
+                        <dt class="p-t-10">Is Primary Fee</dt>
+                        <dd>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="vm.billingitem.is_primary">
+                                    <i class="input-helper"></i>
+                                    
+                                </label>
+                            </div>
+                        </dd>
+                    </dl>                    
+                </div>
+                <div class="col-md-6 p-l-25">
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">State</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <div class="select">
+                                    <select class="form-control" ng-model="vm.billingitem.state" ng-options="v for v in vm.states">
+                                    </select>                                                                
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Category</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <div class="select">
+                                    <select class="form-control" ng-model="vm.billingitem.category" ng-options="v for v in vm.categories">
+                                    </select>                                
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Priority</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input ng-model="vm.billingitem.priority" type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </dd>
+                    </dl>                    
+                </div>                
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-6 p-l-25">
+                    <h4 class="m-t-25" style="margin-left:-10px;">GST Setting for Tax Invoice (Customer)</h4>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Supply Tax Code</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input ng-model="self.billingitem.invoice.code" type="text" class="form-control" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Default Price (RM)</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input type='number' class="form-control" ng-model="vm.billingitem.invoice.price" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Default Unit</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input type='number' class="form-control" ng-model="vm.billingitem.invoice.unit" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>          
+                    <dl class="dl-horizontal">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="self.billingitem.not_applicable">
+                                <i class="input-helper"></i>
+                                Not Applicable
+                            </label>
+                        </div>
+                    </dl>                                                                    
+                </div>
+                <div class="col-md-6 p-l-25">
+                    <h4 class="m-t-25" style="margin-left:-10px;">GST Setting for Voucher (Supplier)</h4>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Purchase Tax Code</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input type='text' ng-disabled="vm.billingitem.type == vm.types[0]" class="form-control" ng-model="self.billingitem.voucher.code" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Default Cost (RM)</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input type='number' ng-disabled="vm.billingitem.type == vm.types[0]" class="form-control" ng-model="vm.billingitem.voucher.price" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Default Unit</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input type='number' ng-disabled="vm.billingitem.type == vm.types[0]" class="form-control" ng-model="vm.billingitem.voucher.unit" placeholder="">
+                            </div>
+
+                        </dd>
+                    </dl>
+  
+                </div>                
+            </div>            
+            <div class="clearfix"></div>
+
+            <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Remark&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
+            <div class="row" ng-show="vm.showRemark">
+                <div class="col-md-10 p-l-25">
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Remark</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <textarea class="form-control" rows="5" placeholder=""></textarea>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>                
+            </div>   
+            <div class="clearfix"></div>
+       
+            <div class="row">     
+                <div class="col-md-10">
+                    <div class="m-t-30">
+                        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
+                        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.spaclitem)" ng-if="vm.userInfo.priority.spaclitem.delete">Delete</a>
+                        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.spaclitem.update && vm.can_edit">Save</a>
+                        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.spaclitem.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+
+                    </div>        
+                </div>               
+            </div>
+        </div>
+    </div>
+         
+</div>
+
+

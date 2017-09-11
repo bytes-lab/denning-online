@@ -141,6 +141,34 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
                 "update": true,
                 "delete": true
             },
+            "spaclitem": {
+                "list": true,
+                "create": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "spapresetcl": {
+                "list": true,
+                "create": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "litigationclitem": {
+                "list": true,
+                "create": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "litigationpresetcl": {
+                "list": true,
+                "create": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
         }
     }
     service.login = function(email, pass) {

@@ -1098,5 +1098,44 @@ materialAdmin
                 controller: 'courtdiaryEditCtrl as vm',
                 templateUrl: 'views/courtdiary-edit.html'
             })  
+
+
+            //------------------------------
+            // SPA CHECKLIST ITEMS
+            //------------------------------
+        
+            .state ('spaclitems', {
+                data: {
+                    access: '@'
+                },                
+                url: '/spaclitem',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('spaclitems.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'spaclitemListCtrl as vm',
+                templateUrl: 'views/spa-checklist-item-list.html'
+            })
+
+            .state ('spaclitems.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'spaclitemEditCtrl as vm',
+                templateUrl: 'views/spa-checklist-item-edit.html'
+            })
+            .state ('spaclitems.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'spaclitemEditCtrl as vm',
+                templateUrl: 'views/spa-checklist-item-edit.html'
+            })            
     });
 
