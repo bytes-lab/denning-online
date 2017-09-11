@@ -1108,7 +1108,7 @@ materialAdmin
                 data: {
                     access: '@'
                 },                
-                url: '/spaclitem',
+                url: '/spaclitems',
                 templateUrl: 'views/common.html'
             })
                       
@@ -1137,5 +1137,43 @@ materialAdmin
                 controller: 'spaclitemEditCtrl as vm',
                 templateUrl: 'views/spa-checklist-item-edit.html'
             })            
+
+            //------------------------------
+            // SPA PRESET CHECKLISTS
+            //------------------------------
+        
+            .state ('spapresetcls', {
+                data: {
+                    access: '@'
+                },                
+                url: '/spapresetcls',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('spapresetcls.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'spapresetclListCtrl as vm',
+                templateUrl: 'views/spa-preset-checklist-list.html'
+            })
+
+            .state ('spapresetcls.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'spapresetclEditCtrl as vm',
+                templateUrl: 'views/spa-preset-checklist-edit.html'
+            })
+            .state ('spapresetcls.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'spapresetclEditCtrl as vm',
+                templateUrl: 'views/spa-preset-checklist-edit.html'
+            })                        
     });
 

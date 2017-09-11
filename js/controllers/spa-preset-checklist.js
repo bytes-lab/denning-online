@@ -1,19 +1,19 @@
 materialAdmin
-    .controller('spaclitemListCtrl', function($filter, $uibModal, NgTableParams, spaclitemService, $state, Auth) {
+    .controller('spapresetclListCtrl', function($filter, $uibModal, NgTableParams, spapresetclService, $state, Auth) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
         self.userInfo = Auth.getUserInfo();
         self.clickHandler = clickHandler;
 
-        spaclitemService.getList().then(function(data) {
+        spapresetclService.getList().then(function(data) {
             self.data = data;
             self.dataReady = true;
             initializeTable();
         });        
         
         function clickHandler(item) {
-            $state.go('spaclitems.edit', {'id': item.code});
+            $state.go('spapresetcls.edit', {'id': item.code});
         }
 
         function initializeTable () {
@@ -37,41 +37,41 @@ materialAdmin
         }
 
         //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, spaclitem) {
+        function modalInstances(animation, size, backdrop, keyboard, spapresetcl) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'SPAclitemDeleteModalCtrl',
+                controller: 'SPApresetclDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    spaclitem: function () {
-                        return spaclitem;
+                    spapresetcl: function () {
+                        return spapresetcl;
                     },
                     on_list: function () {
                         return true;
-                    }
+                    }                    
                 }            
             });
         }
 
         //Prevent Outside Click
-        function openDelete(event, spaclitem) {
+        function openDelete(event, spapresetcl) {
             event.stopPropagation();
-            modalInstances(true, '', 'static', true, spaclitem)
+            modalInstances(true, '', 'static', true, spapresetcl)
         };        
     })
 
-    .controller('SPAclitemDeleteModalCtrl', function ($scope, $modalInstance, spaclitem, spaclitemService, $state, on_list) {
+    .controller('SPApresetclDeleteModalCtrl', function ($scope, $modalInstance, spapresetcl, spapresetclService, $state, on_list) {
         $scope.ok = function () {
-            spaclitemService.delete(spaclitem).then(function(spaclitem) {
+            spapresetclService.delete(spapresetcl).then(function(spapresetcl) {
                 $state.reload();
             })
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.spaclitemInfo.$error.push({meessage:''});
+                //$scope.formname.spapresetclInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
@@ -79,11 +79,11 @@ materialAdmin
         $scope.cancel = function () {
             $modalInstance.close();
             if (on_list)
-                $state.go('spaclitems.list');
+                $state.go('spapresetcls.list');
         };
     })
 
-    .controller('spaclitemEditCtrl', function($filter, $stateParams, spaclitemService, $state, Auth, $uibModal) {
+    .controller('spapresetclEditCtrl', function($filter, $stateParams, spapresetclService, $state, Auth, $uibModal) {
         var self = this;
         self.save = save;
         self.cancel = cancel;
@@ -132,7 +132,7 @@ materialAdmin
             'Common'
         ];
 
-        spaclitemService.getList().then(function(data) {
+        spapresetclService.getList().then(function(data) {
             self.data = data;
         });        
 
@@ -143,12 +143,12 @@ materialAdmin
         }
 
         if ($stateParams.id) {
-            spaclitemService.getItem($stateParams.id)
+            spapresetclService.getItem($stateParams.id)
             .then(function(item){
-                self.spaclitem = angular.copy(item);  // important
+                self.spapresetcl = angular.copy(item);  // important
             });
         } else {
-            self.spaclitem = {
+            self.spapresetcl = {
                 type: self.types[0],
                 code: 'F' + Math.floor(Math.random() * 1000 + 1),
                 priority: 1,
@@ -169,14 +169,14 @@ materialAdmin
             if ($stateParams.id) 
                 return;
             // get from server
-            var idx = self.types.map(function(c) { return c; }).indexOf(self.spaclitem.type);
-            self.spaclitem.code = 'FDGS'[idx] + Math.floor(Math.random() * 1000 + 1);
+            var idx = self.types.map(function(c) { return c; }).indexOf(self.spapresetcl.type);
+            self.spapresetcl.code = 'FDGS'[idx] + Math.floor(Math.random() * 1000 + 1);
         }
 
         function save() {
-            spaclitemService.save(self.spaclitem).then(function(spaclitem) {
-                self.spaclitem = spaclitem;
-                $state.go('spaclitems.list');
+            spapresetclService.save(self.spapresetcl).then(function(spapresetcl) {
+                self.spapresetcl = spapresetcl;
+                $state.go('spapresetcls.list');
             })
             .catch(function(err){
                 //Handler
@@ -184,21 +184,21 @@ materialAdmin
         }
 
         function cancel() {
-            $state.go('spaclitems.list');            
+            $state.go('spapresetcls.list');            
         }
 
         //Create Modal
-        function modalInstances1(animation, size, backdrop, keyboard, spaclitem) {
+        function modalInstances1(animation, size, backdrop, keyboard, spapresetcl) {
             var modalInstance = $uibModal.open({
                 animation: animation,
                 templateUrl: 'myModalContent.html',
-                controller: 'SPAclitemDeleteModalCtrl',
+                controller: 'SPApresetclDeleteModalCtrl',
                 size: size,
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    spaclitem: function () {
-                        return spaclitem;
+                    spapresetcl: function () {
+                        return spapresetcl;
                     }, 
                     on_list: function () {
                         return false;
@@ -208,8 +208,8 @@ materialAdmin
         }
 
         //Prevent Outside Click
-        function openDelete(event, spaclitem) {
+        function openDelete(event, spapresetcl) {
             event.stopPropagation();
-            modalInstances1(true, '', 'static', true, spaclitem)
+            modalInstances1(true, '', 'static', true, spapresetcl)
         };            
     })
