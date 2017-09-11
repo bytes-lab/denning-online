@@ -25,6 +25,26 @@ materialAdmin
         
         vm.tabs = [
             {
+                "label": "Matter",
+                "groups": [
+                    {
+                        "key": "file-info",
+                        "label": "File Information",
+                        "attrs": [
+                            {
+                                "key": "matter1",
+                                "type": "file",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "label": "Parties with Solicitors",
                 "groups": [
                     {
@@ -309,6 +329,21 @@ materialAdmin
                     }
                 ]
             },
+            {
+                "label": "Case",
+                "groups": [
+                    {
+                        "key": "case-info",
+                        "label": "Case Information",
+                        "attrs": [
+                            {
+                                "key": "case1",
+                                "type": "case"
+                            }
+                        ]
+                    }
+                ]
+            },            
             {
                 "label": "Generate Document",
                 "groups": [
