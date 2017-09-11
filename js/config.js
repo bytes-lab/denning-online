@@ -1202,5 +1202,32 @@ materialAdmin
                     }
                 }
             })            
+
+            //------------------------------
+            // LITIGATION CHECKLIST CALENDAR
+            //------------------------------
+
+            .state ('litigation-checklist-calendar', {
+                data: {
+                    access: '@'
+                },
+                url: '/litigation-checklist-calendar',
+                templateUrl: 'views/litigation-checklist-calendar.html',
+                controller: 'spapresetclListCtrl as vm',
+                resolve: {
+                    loadPlugin: function($ocLazyLoad) {
+                        return $ocLazyLoad.load ([
+                            {
+                                name: 'css',
+                                insertBefore: '#app-level',
+                                files: [
+                                    'vendors/bower_components/fullcalendar/dist/fullcalendar.min.css',
+                                ]
+                            },
+                        ])
+                    }
+                }
+            })            
+
     });
 

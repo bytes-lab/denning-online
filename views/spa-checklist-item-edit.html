@@ -16,18 +16,7 @@
             <div class="row">
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Item Type</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <div class="select">
-                                    <select class="form-control" ng-change="vm.get_code()" ng-model="vm.billingitem.type" ng-options="v for v in vm.types">
-                                    </select>                                
-                                </div>
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Item Code</dt>
+                        <dt class="p-t-10">Task Code</dt>
                         <dd>
                             <div class="fg-line">
                                 <input type='text' class="form-control" ng-model="vm.billingitem.code" placeholder="">
@@ -43,7 +32,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Inherit from</dt>
+                        <dt class="p-t-10">From Date</dt>
                         <dd>
                             <div class="fg-line">
                                   <md-autocomplete
@@ -78,17 +67,6 @@
                 </div>
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <div class="select">
-                                    <select class="form-control" ng-model="vm.billingitem.state" ng-options="v for v in vm.states">
-                                    </select>                                                                
-                                </div>
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
                         <dt class="p-t-10">Category</dt>
                         <dd>
                             <div class="fg-line">
@@ -100,7 +78,7 @@
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Priority</dt>
+                        <dt class="p-t-10">Estimated Time</dt>
                         <dd>
                             <div class="fg-line">
                                 <input ng-model="vm.billingitem.priority" type="text" class="form-control" placeholder="">
