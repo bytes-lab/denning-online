@@ -146,13 +146,14 @@ materialAdmin
         };        
     })
 
-    .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, initContacts, contactService, $scope) {
+    .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, initContacts, contactService, $scope, Auth) {
         var self = this;
         self.save = save;
         self.cancel = cancel;
         self.isDialog = true;
         self.viewMode = viewMode;
         self.party = party;
+        self.userInfo = Auth.getUserInfo();
         self.initContacts = initContacts;
 
         if (viewMode) {

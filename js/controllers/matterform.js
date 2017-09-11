@@ -25,30 +25,284 @@ materialAdmin
         
         vm.tabs = [
             {
-                "label": "File Information",
+                "label": "Parties with Solicitors",
                 "groups": [
                     {
                         "key": "vendor-group",
-                        "label": "Vendor Information",
+                        "label": "Party w/ Solicitors Group 1 Information",
                         "attrs": [
                             {
-                                "key": "vendor1",
+                                "key": "party1",
                                 "type": "contact",
                                 "templateOptions": {
-                                    "share": true
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": true
                                 }
                             }
                         ]
                     },
                     {
                         "key": "purchaser-group",
-                        "label": "Purchaser Information",
+                        "label": "Party w/ Solicitors Group 2 Information",
                         "attrs": [
                             {
                                 "key": "purchaser1",
                                 "type": "contact",
                                 "templateOptions": {
-                                    "share": false
+                                    "share": false,
+                                    "solicitor": true,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group3",
+                        "label": "Party w/ Solicitors Group 3 Information",
+                        "attrs": [
+                            {
+                                "key": "party3",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group4",
+                        "label": "Party w/ Solicitors Group 4 Information",
+                        "attrs": [
+                            {
+                                "key": "party4",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group5",
+                        "label": "Party w/ Solicitors Group 5 Information",
+                        "attrs": [
+                            {
+                                "key": "party5",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group6",
+                        "label": "Party w/ Solicitors Group 6 Information",
+                        "attrs": [
+                            {
+                                "key": "party6",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group7",
+                        "label": "Party w/ Solicitors Group 7 Information",
+                        "attrs": [
+                            {
+                                "key": "party7",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "label": "Parties without Solicitors",
+                "groups": [
+                    {
+                        "key": "vendor-group11",
+                        "label": "Party Group 1 Information",
+                        "attrs": [
+                            {
+                                "key": "party11",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "purchaser-group11",
+                        "label": "Party Group 2 Information",
+                        "attrs": [
+                            {
+                                "key": "purchaser11",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": false,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group31",
+                        "label": "Party Group 3 Information",
+                        "attrs": [
+                            {
+                                "key": "party31",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group41",
+                        "label": "Party Group 4 Information",
+                        "attrs": [
+                            {
+                                "key": "party41",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group51",
+                        "label": "Party Group 5 Information",
+                        "attrs": [
+                            {
+                                "key": "party51",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group61",
+                        "label": "Party Group 6 Information",
+                        "attrs": [
+                            {
+                                "key": "party61",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group71",
+                        "label": "Party Group 7 Information",
+                        "attrs": [
+                            {
+                                "key": "party71",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "label": "Solicitors",
+                "groups": [
+                    {
+                        "key": "vendor-group111",
+                        "label": "Solicitors Group 1 Information",
+                        "attrs": [
+                            {
+                                "key": "party12",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "purchaser-group111",
+                        "label": "Solicitors Group 2 Information",
+                        "attrs": [
+                            {
+                                "key": "purchaser12",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": false,
+                                    "solicitor": true,
+                                    "party": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group13",
+                        "label": "Solicitors Group 3 Information",
+                        "attrs": [
+                            {
+                                "key": "party13",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "vendor-group14",
+                        "label": "Solicitors Group 4 Information",
+                        "attrs": [
+                            {
+                                "key": "party14",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": true,
+                                    "party": false
                                 }
                             }
                         ]
