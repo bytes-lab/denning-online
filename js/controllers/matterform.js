@@ -371,7 +371,38 @@ materialAdmin
                                 "type": "loan"
                             }
                         ]
+                    },
+                    {
+                        "key": "borrower-group",
+                        "label": "Borrower Information",
+                        "attrs": [
+                            {
+                                "key": "borrower",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "key": "guaranter-group",
+                        "label": "Guaranter Information",
+                        "attrs": [
+                            {
+                                "key": "guaranter",
+                                "type": "contact",
+                                "templateOptions": {
+                                    "share": true,
+                                    "solicitor": false,
+                                    "party": true
+                                }
+                            }
+                        ]
                     }
+
                 ]
             },  
             {
