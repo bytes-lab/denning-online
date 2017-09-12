@@ -105,79 +105,79 @@ materialAdmin
                     //Add Events
                     events: [
                         {
-                            title: 'Court',
+                            title: 'Court (2)',
                             start: new Date(y, m, 1),
                             allDay: true,
                             className: 'bgm-green'
                         },
                         {
-                            title: 'Office',
+                            title: 'Office (1)',
                             start: new Date(y, m, 10),
                             allDay: true,
                             className: 'bgm-orange'
                         },
                         {
-                            title: 'Personal',
+                            title: 'Personal (5)',
                             start: new Date(y, m, 18),
                             allDay: true,
                             className: 'bgm-blue'
                         },
                         {
-                            title: 'Court',
+                            title: 'Court (3)',
                             start: new Date(y, m, 20),
                             allDay: true,
                             className: 'bgm-green'
                         },
                         {
-                            title: 'Office',
+                            title: 'Office (2)',
                             start: new Date(y, m, 5),
                             allDay: true,
                             className: 'bgm-orange'
                         },
                         {
-                            title: 'Office',
+                            title: 'Office (4)',
                             start: new Date(y, m, 21),
                             allDay: true,
                             className: 'bgm-orange'
                         },
                         {
-                            title: 'Personal',
+                            title: 'Personal (3)',
                             start: new Date(y, m, 5),
                             allDay: true,
                             className: 'bgm-blue'
                         },
                         {
-                            title: 'Court',
+                            title: 'Court (2)',
                             start: new Date(y, m, 5),
                             allDay: true,
                             className: 'bgm-green'
                         },
                         {
-                            title: 'Personal',
+                            title: 'Personal (7)',
                             start: new Date(y, m, 1),
                             allDay: true,
                             className: 'bgm-blue'
                         },
                         {
-                            title: 'Office',
+                            title: 'Office (1)',
                             start: new Date(y, m, 15),
                             allDay: true,
                             className: 'bgm-orange'
                         },
                         {
-                            title: 'Personal',
+                            title: 'Personal (2)',
                             start: new Date(y, m, 25),
                             allDay: true,
                             className: 'bgm-blue'
                         },
                         {
-                            title: 'Office',
+                            title: 'Office (6)',
                             start: new Date(y, m, 30),
                             allDay: true,
                             className: 'bgm-orange'
                         },
                         {
-                            title: 'Court',
+                            title: 'Court (2)',
                             start: new Date(y, m, 30),
                             allDay: true,
                             className: 'bgm-green'

@@ -21,7 +21,8 @@ materialAdmin
         // By default Sidbars are hidden in boxed layout and in wide layout only the right sidebar is hidden.
         this.sidebarToggle = {
             left: false,
-            right: false
+            right: false,
+            task: false
         }
         // FilterList;
         this.searchFilterCategories = [];

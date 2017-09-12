@@ -3,7 +3,8 @@
 <section id="main">
     <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
 
-    <section id="content" style="padding-right: 268px;">
+    <aside id="chat" data-ng-include src="'template/task.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.task === true }"></aside>
+    <section id="content">
 
         <div class="container">
             <div class="block-header">
@@ -397,7 +398,7 @@
             </div>
 
         </div>
-        <aside id="sidebar" class="toggled" style="right: 0;">
+<!--         <aside id="sidebar" class="toggled" style="right: 0;">
             <div id="calendar-widget" data-full-calendar></div>      
             <div class="p-5 p-l-15">
                 <h5 class="text-uppercase f-400">Curabitur lobortis</h5>
@@ -407,7 +408,7 @@
                 <h5 class="text-uppercase f-400 c-green">Curabitur lobortis</h5>
                 <p class="text-muted">Nullam consectetur dolor nec ullamcorper finibus. Quisque a porta mauris, non venenatis mi. Pellentesque habitant morbi tristique</p>                  
             </div>
-        </aside>
+        </aside> -->
 
         </section>
 </section>
