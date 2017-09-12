@@ -45,7 +45,7 @@ materialAdmin
                 ]
             },
             {
-                "label": "Parties with Solicitors",
+                "label": "Parties-S",
                 "groups": [
                     {
                         "key": "vendor-group",
@@ -155,7 +155,7 @@ materialAdmin
                 ]
             },
             {
-                "label": "Parties without Solicitors",
+                "label": "Parties",
                 "groups": [
                     {
                         "key": "vendor-group11",
