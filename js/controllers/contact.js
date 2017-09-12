@@ -146,15 +146,13 @@ materialAdmin
         };        
     })
 
-    .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, initContacts, contactService, $scope, Auth) {
+    .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, contactService, $scope, Auth) {
         var self = this;
         self.save = save;
         self.cancel = cancel;
         self.isDialog = true;
         self.viewMode = viewMode;
-        self.party = party;
         self.userInfo = Auth.getUserInfo();
-        self.initContacts = initContacts;
 
         if (viewMode) {
             contactService.getItem(party.party.code)
@@ -167,9 +165,6 @@ materialAdmin
 
         function save() {
             contactService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                // self.initContacts();
-                self.party.party = contact.code;
                 $modalInstance.close(contact);
             })
             .catch(function(err){

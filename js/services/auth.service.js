@@ -120,6 +120,13 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
                 "update": true,
                 "delete": true
             },
+            "legalfirm": {
+                "list": true,
+                "create": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
             "property": {
                 "list": true,
                 "create": true,

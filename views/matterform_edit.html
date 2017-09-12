@@ -67,7 +67,7 @@
           md-selected-item="party.party"
           md-search-text="searchText"
           md-items="item in queryContacts(searchText)"
-          md-item-text="item.name+' ( '+item.IDNo+' )'"
+          md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
           md-min-length="1"
           md-autoselect="false"
           class="default-input"
@@ -79,7 +79,7 @@
       </md-autocomplete>
 
       <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(party, false)"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span></a>
-      <a class="btn btn-primary short-btn" target="_new" ng-click="viewContact(party)"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span></a>
+      <a class="btn btn-primary short-btn" ng-click="viewContact(party)"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span></a>
       <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
       <a class="btn btn-danger short-btn" ng-click="removeParty($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span></a>
     </div>
@@ -92,10 +92,23 @@
     <div class="form-group col-md-12">
       <div style="display: flex;">
         <label class="form-control attr-label">Solicitor</label>
-        <select class="form-control" ng-model="model[options.key+'_solicitor']" style="width:45%;">
-          <option ng-repeat="item in legalFirms" ng-value="item" ng-selected="model[options.key+'_solicitor'].code == item.code">{{item.name}}</option>
-        </select>
-        <a class="btn btn-primary short-btn" target="_new" ui-sref="legal-firms.edit({id: model[options.key+'_solicitor'].code})" title="See detail of solicitor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+
+        <md-autocomplete
+            md-selected-item="model[options.key+'_solicitor'].party"
+            md-search-text="q_lf"
+            md-items="item in queryLFs(q_lf)"
+            md-item-text="item.name ? item.name+' ( '+item.code+' )': ' '"
+            md-min-length="1"
+            md-autoselect="false"
+            class="default-input"
+            style="width:45%">
+          <md-item-template>
+            <span md-highlight-text="q_lf" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+            <span md-highlight-text="q_lf" md-highlight-flags="i">{{item.code}}</span>
+          </md-item-template>
+        </md-autocomplete>
+        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="legalfirmDialog(model[options.key+'_solicitor'], false)"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new legal firm and choose it"></span></a>
+        <a class="btn btn-primary short-btn" ng-click="viewLegalFirm(model[options.key+'_solicitor'])" title="See detail of solicitor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
         <div class="checkbox" style="margin: 6px 0 6px 18px;">
             <label>
                 <input type="checkbox" ng-model="represent_this" ng-click="representChange()">
@@ -328,6 +341,152 @@
     <div class="form-group col-md-12">
       <div style="display: flex;">
         <label class="form-control attr-label">Judge</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>    
+  </div>
+</script>
+
+<script type="text/ng-template" id="price.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Purchase Price</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Earnest Deposit</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Balance Deposit</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Total Deposit</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Balance Purchase Price</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">GST</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">GST Price Value</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>    
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Purchase Price</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>    
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Court A</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Court B</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>    
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Court C</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>    
+  </div>
+</script>
+
+<script type="text/ng-template" id="loan.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Type of Loan</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Type of Finacing</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Term Loan Amount</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Total Deposit</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Balance Purchase Price</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">GST</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">GST Price Value</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>    
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Purchase Price</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>    
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Court A</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Court B</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>    
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Court C</label>
         <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
       </div>
     </div>    

@@ -62,10 +62,10 @@ materialAdmin
                 var idx = service.legalFirms.map(function(c) {return c.code; }).indexOf(legalFirm.code);
                 if(idx != -1) {
                     service.legalFirms[idx] = legalFirm;
-                    deferred.resolve(legalFirm);
                 } else {
                     service.legalFirms.push(legalFirm);
                 }
+                deferred.resolve(legalFirm);
                 //deferred.reject(new Error('dd'));
             }, 100);
 

@@ -98,3 +98,33 @@ materialAdmin
             });
         }
     })
+    .controller('lfCreateModalCtrl', function ($modalInstance, lf, viewMode, legalFirmService, $scope, Auth) {
+        var self = this;
+        self.save = save;
+        self.cancel = cancel;
+        self.isDialog = true;
+        self.viewMode = viewMode;
+        self.userInfo = Auth.getUserInfo();
+
+        if (viewMode) {
+            legalFirmService.getItem(lf.party.code)
+            .then(function(item){
+                self.legalFirm = item;
+            });                                    
+        } else {
+            self.legalFirm = {};
+        }
+
+        function save() {
+            legalFirmService.save(self.legalFirm).then(function(legalFirm) {
+                $modalInstance.close(legalFirm);
+            })
+            .catch(function(err){
+                //Handler
+            });
+        };
+
+        function cancel() {
+            $modalInstance.close();
+        };
+    })

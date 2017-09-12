@@ -343,7 +343,37 @@ materialAdmin
                         ]
                     }
                 ]
-            },            
+            },
+            {
+                "label": "Price",
+                "groups": [
+                    {
+                        "key": "price-info",
+                        "label": "Price Information",
+                        "attrs": [
+                            {
+                                "key": "price1",
+                                "type": "price"
+                            }
+                        ]
+                    }
+                ]
+            },              
+            {
+                "label": "Loan",
+                "groups": [
+                    {
+                        "key": "loan-info",
+                        "label": "Loan Information",
+                        "attrs": [
+                            {
+                                "key": "loan1",
+                                "type": "loan"
+                            }
+                        ]
+                    }
+                ]
+            },  
             {
                 "label": "Generate Document",
                 "groups": [
