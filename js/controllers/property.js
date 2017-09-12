@@ -1,9 +1,10 @@
 materialAdmin
-    .controller('propertyListCtrl', function($filter, $sce, $uibModal, NgTableParams, propertyService, $state) {
+    .controller('propertyListCtrl', function($filter, $sce, $uibModal, NgTableParams, propertyService, $state, Auth) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
         self.clickHandler = clickHandler;
+        self.userInfo = Auth.getUserInfo();
 
         propertyService.getList().then(function(data) {
             self.data = data;
@@ -55,6 +56,9 @@ materialAdmin
                 resolve: {
                     property: function () {
                         return property;
+                    }, 
+                    on_list: function () {
+                        return true;
                     }
                 }
             
@@ -75,19 +79,27 @@ materialAdmin
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.propertyInfo.$error.push({meessage:''});
             });
             $modalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $modalInstance.close();
+            if (on_list)
+                $state.go('propertys.list');            
         };
     })
 
-    .controller('propertyEditCtrl', function($filter, $stateParams, propertyService, $state) {
+    .controller('propertyEditCtrl', function($filter, $stateParams, propertyService, $state, Auth, $uibModal) {
         var self = this;
         self.save = save;
+        self.cancel = cancel;
+        self.isDialog = false;
+        self.viewMode = false;  // for edit / create
+        self.userInfo = Auth.getUserInfo();
+        self.openDelete = openDelete;
+        self.can_edit = false;
 
         if($stateParams.id) {
             propertyService.getItem($stateParams.id)
@@ -106,7 +118,38 @@ materialAdmin
             .catch(function(err){
                 //Handler
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
+                //$scope.formname.propertyInfo.$error.push({meessage:''});
             });
         }
+
+        function cancel() {
+            $state.go('properties.list');            
+        }
+
+        //Create Modal
+        function modalInstances1(animation, size, backdrop, keyboard, property) {
+            var modalInstance = $uibModal.open({
+                animation: animation,
+                templateUrl: 'myModalContent.html',
+                controller: 'propertyDeleteModalCtrl',
+                size: size,
+                backdrop: backdrop,
+                keyboard: keyboard,
+                resolve: {
+                    property: function () {
+                        return property;
+                    }, 
+                    on_list: function () {
+                        return false;
+                    }
+                }            
+            });
+        }
+
+        //Prevent Outside Click
+        function openDelete(event, property) {
+            event.stopPropagation();
+            modalInstances1(true, '', 'static', true, property)
+        };        
+
     })

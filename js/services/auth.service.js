@@ -132,7 +132,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
                 "create": true,
                 "read": true,
                 "update": false,
-                "delete": true
+                "delete": false
             },
             "quotation": {
                 "list": true,

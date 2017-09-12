@@ -182,7 +182,7 @@ a.top_button {
 }
 
 a.top_button_first {
-    margin-left: 25vw;
+    margin-left: 25vw !important;
     height: 28px;
 }
 

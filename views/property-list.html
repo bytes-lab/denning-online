@@ -31,8 +31,8 @@
                             {{ w.email }}
                         </td>
                         <td data-title="'Actions'">
-                            <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="properties.edit({id:w.new_ic})"><i class="zmdi zmdi-edit"></i></a>
-                            <a class="btn btn-warning" ng-click="vm.openDelete($event, w)"><i class="zmdi zmdi-delete"></i></a>
+                            <a class="btn btn-primary" ng-if="!w.$edit" ng-if="vm.userInfo.priority.property.read" ui-sref="properties.edit({id:w.new_ic})"><i class="zmdi zmdi-edit"></i></a>
+                            <a class="btn btn-warning" ng-if="vm.userInfo.priority.property.delete" ng-click="vm.openDelete($event, w)"><i class="zmdi zmdi-delete"></i></a>
                         </td>
                     </tr>
                 </table>
