@@ -141,28 +141,8 @@ materialAdmin
                 return deferred.promise;
             }
 
-            // $http.get('http://43.252.215.81/denningwcf/v1/generalSearch/keyword?search=' + query)
-            // .then(function(resp){
-            //     var results = [];
-            //     resp.data.forEach(function(item){
-            //         results.push({
-            //             value: item.keyword,
-            //             display: item.keyword
-            //         })
-            //     });
-            //     deferred.resolve( results ); 
-
-            // })
-
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8000/denningwcf/v1/generalSearch/keyword?search=' + query,
-                headers: {
-                    "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea",
-                    "webuser-id": "SkySea@denning.com.my"
-                }
-            }).then(function(resp) {
+            $http.get('http://43.252.215.81/online/denningwcf/v1/generalSearch/keyword?ssid=testdenningOnline&uid=onlinedev@denning.com.my&search=' + query)
+            .then(function(resp){
                 var results = [];
                 resp.data.forEach(function(item){
                     results.push({
@@ -171,7 +151,8 @@ materialAdmin
                     })
                 });
                 deferred.resolve( results ); 
-            });         
+
+            })      
                
             return deferred.promise;
         }
@@ -190,15 +171,7 @@ materialAdmin
             if(angular.isUndefined(item))
                 return;
 
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8000/denningwcf/v1/generalSearch?search=' + item.value +'&category=' + self.selectedSearchCategory + '&isAutoComplete=1',
-                headers: {
-                    "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea",
-                    "webuser-id": "SkySea@denning.com.my"
-                }
-            })            
+            $http.get('http://43.252.215.81/online/denningwcf/v1/generalSearch?ssid=testdenningOnline&uid=onlinedev@denning.com.my&search=' + item.value +'&category=' + self.selectedSearchCategory + '&isAutoComplete=1')                  
             .then(function(resp){
 
                 self.searchRes = resp.data.map(function(item){
