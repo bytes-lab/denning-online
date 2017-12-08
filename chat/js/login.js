@@ -5,13 +5,19 @@ function Login() {
     this.isLogin = false;
 }
 
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
 Login.prototype.init = function(){
     var self = this;
 
     return new Promise(function(resolve, reject) {
         var saved_user = JSON.parse(localStorage.getItem('userInfo'));
+        var email = getURLParameter('uid');
+
         var user = {
-            login: saved_user.email,
+            login: email || saved_user.email,
             // login: 'tmho@hotmail.com',
             password: 'denningIT'
         };

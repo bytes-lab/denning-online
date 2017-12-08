@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>QuickBlox chat code sample</title>
+    <title>Denning Online Chat</title>
     <link rel="shortcut icon" href="https://quickblox.com/favicon.ico">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
@@ -27,7 +27,7 @@
                         <a href="https://quickblox.com/" class="login__logo">
                             <img src="./img/qb-logo.svg" alt="QuickBlox">]
                         </a>
-                        <h1>Quickblox Chat Sample</h1>
+                        <h1>Denning Online Chat</h1>
                         <h3>Please enter your username and user group.
                             Users within the same group will be able
                             to communicate, create chats with each other
@@ -36,8 +36,8 @@
 
                     <form name="loginForm" class="login__form">
                         <div class="login_form__row">
-                            <label for="userName">User name</label>
-                            <input type="text" id="userName" name="userName"/>
+                            <label for="userName">Email</label>
+                            <input type="email" id="userName" name="userName"/>
                         </div>
                         <div class="login_form__row">
                             <label for="userGroup">User group</label>
@@ -51,13 +51,7 @@
                     </form>
                 </div>
                 <div class="login__footer">
-                    <div class="footer__logo_wrap">
-                        <a href="https://quickblox.com/" class="footer__logo">
-                            <img src="./img/qblogo-grey.svg" alt="QuickBlox">
-                        </a>
-                        <p>by QuickBlox</p>
-                    </div>
-                    <span class="footer__version">v. <%= version %></span>
+                    
                 </div>
             </div>
         </div>
@@ -311,7 +305,7 @@
     <script src="./js/listeners.js" defer></script>
     <script src="./js/helpers.js" defer></script>
     <script src="./js/app.js" defer></script>
-    <script src="./js/login.js" defer></script>
+    <script src="./js/login.js?a=1" defer></script>
     <script src="js/route.js" defer></script>
 </body>
 </html>
