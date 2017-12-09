@@ -3,11 +3,7 @@
 function Login() {
     this.isLoginPageRendered = false;
     this.isLogin = false;
-    this.standalone = true;
-}
-
-function getURLParameter(name) {
-  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+    this.standalone = !helpers.inIframe();
 }
 
 Login.prototype.init = function(){
@@ -15,7 +11,7 @@ Login.prototype.init = function(){
 
     return new Promise(function(resolve, reject) {
         var saved_user = JSON.parse(localStorage.getItem('userInfo'));
-        var email = getURLParameter('uid');
+        var email = helpers.getURLParameter('uid');
 
         var user = {
             email: email || saved_user.email,
@@ -26,7 +22,6 @@ Login.prototype.init = function(){
             app.room = user.tag_list;
             self.login(user)
                 .then(function(){
-                    self.standalone = saved_user.standalone;
                     resolve(true);
                 }).catch(function(error){
                 reject(error);
@@ -119,14 +114,12 @@ Login.prototype.setListeners = function(){
 
         var user = {
             email: loginForm.email.value.trim(),
-            password: loginForm.password.value.trim(),
-            standalone: true
+            password: loginForm.password.value.trim()
         };
 
         localStorage.setItem('userInfo', JSON.stringify(user));
 
         self.login(user).then(function(){
-            // self.standalone = true;
             router.navigate('/dashboard');
         }).catch(function(error){
             alert('Please check email and password again!');

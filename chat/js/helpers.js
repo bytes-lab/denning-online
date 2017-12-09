@@ -292,4 +292,16 @@ Helpers.prototype.getUui = function(){
     return uid;
 };
 
+Helpers.prototype.inIframe = function() {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+};
+
+Helpers.prototype.getURLParameter = function(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
 var helpers = new Helpers();
