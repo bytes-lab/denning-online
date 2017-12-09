@@ -108,6 +108,38 @@ Login.prototype.setListeners = function(){
         formInputs = [loginForm.userName, loginForm.userGroup],
         loginBtn = loginForm.login_submit;
 
+
+    loginForm.addEventListener('submit', function(e){
+        e.preventDefault();
+
+        if(loginForm.hasAttribute('disabled')){
+            return false;
+        } else {
+            loginForm.setAttribute('disabled', true);
+        }
+
+        var userName = loginForm.userName.value.trim(),
+            userGroup = loginForm.userGroup.value.trim();
+
+        var user = {
+            login: helpers.getUui(),
+            password: 'webAppPass',
+            full_name: userName,
+            tag_list: userGroup
+        };
+
+        localStorage.setItem('user', JSON.stringify(user));
+
+        self.login(user).then(function(){
+            router.navigate('/dashboard');
+        }).catch(function(error){
+            alert('lOGIN ERROR\n open console to get more info');
+            loginBtn.removeAttribute('disabled');
+            console.error(error);
+            loginForm.login_submit.innerText = 'LOGIN';
+        });
+    });
+
     // add event listeners for each input;
     _.each(formInputs, function(i){
         i.addEventListener('focus', function(e){
