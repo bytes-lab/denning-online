@@ -33,7 +33,8 @@ App.prototype.renderDashboard = function (activeTabName) {
     var self = this,
         renderParams = {
             user: self.user,
-            tabName: ''
+            tabName: '',
+            standalone: loginModule.standalone
         };
 
     if(activeTabName){
@@ -60,7 +61,7 @@ App.prototype.renderDashboard = function (activeTabName) {
         loginModule.isLogin = false;
         app.isDashboardLoaded = false;
 
-        localStorage.removeItem('user');
+        localStorage.removeItem('userInfo');
         helpers.clearCache();
         QB.chat.disconnect();
         router.navigate('#!/login');

@@ -3,6 +3,7 @@
 function Login() {
     this.isLoginPageRendered = false;
     this.isLogin = false;
+    this.standalone = true;
 }
 
 function getURLParameter(name) {
@@ -18,7 +19,6 @@ Login.prototype.init = function(){
 
         var user = {
             email: email || saved_user.email,
-            // login: 'tmho@hotmail.com',
             password: 'denningIT'
         };
 
@@ -26,6 +26,7 @@ Login.prototype.init = function(){
             app.room = user.tag_list;
             self.login(user)
                 .then(function(){
+                    self.standalone = saved_user.standalone;
                     resolve(true);
                 }).catch(function(error){
                 reject(error);
@@ -107,7 +108,6 @@ Login.prototype.setListeners = function(){
         formInputs = [loginForm.email, loginForm.password],
         loginBtn = loginForm.login_submit;
 
-
     loginForm.addEventListener('submit', function(e){
         e.preventDefault();
 
@@ -119,12 +119,14 @@ Login.prototype.setListeners = function(){
 
         var user = {
             email: loginForm.email.value.trim(),
-            password: loginForm.password.value.trim()
+            password: loginForm.password.value.trim(),
+            standalone: true
         };
 
         localStorage.setItem('userInfo', JSON.stringify(user));
 
         self.login(user).then(function(){
+            // self.standalone = true;
             router.navigate('/dashboard');
         }).catch(function(error){
             alert('Please check email and password again!');

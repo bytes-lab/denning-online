@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Denning Online</title>
 
+        <link rel="shortcut icon" href="img/favicon.ico">
         <!-- Vendor CSS -->
         <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
         <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
@@ -27,9 +28,8 @@
     </head>
 
     <body class="sw-toggled">
-        
         <data ui-view></data>
-        <iframe class="chat_frame" src="/chat/index.html" ng-if="app.loadChat" ng-show="mactrl.sidebarToggle.right"></iframe>
+        <iframe class="chat_frame" src="/denning-online/chat/index.html" ng-if="app.loadChat" ng-show="mactrl.sidebarToggle.right"></iframe>
         <!-- Core -->
         <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
 

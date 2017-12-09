@@ -59,8 +59,19 @@
             <div class="content j-content">
             </div>
             <div class="sidebar j-sidebar active">
-                <div class="sidebar__inner">
-                    <a href="#" class="logout j-logout" style="display: none;">logout</a>
+                <div class="sidebar__inner">                    
+                    <div class="sidebar__header" <% standalone === true ? '' : print('style="display: none;"') %>>
+                        <a href="#" class="dashboard__logo">
+                            <img src="./img/favicon.ico" alt="Denning Chat">
+                        </a>
+                        <div class="dashboard__status_wrap">
+                            <h2 class="dashboard__title">Denning</h2>
+                            <p class="dashboard__status j-dashboard_status">
+                                Logged in as <%- user.name %>
+                            </p>
+                        </div>
+                        <a href="#" class="logout j-logout">logout</a>
+                    </div>
                     <div class="sidebar__content">
                         <ul class="sidebar__tabs">
                             <li class="sidebar__tab">
