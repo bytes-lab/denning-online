@@ -122,7 +122,7 @@ Login.prototype.setListeners = function(){
             password: loginForm.password.value.trim()
         };
 
-        // localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('userInfo', JSON.stringify(user));
 
         self.login(user).then(function(){
             router.navigate('/dashboard');

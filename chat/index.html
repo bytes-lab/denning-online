@@ -67,11 +67,27 @@
                     <div class="sidebar__content">
                         <ul class="sidebar__tabs">
                             <li class="sidebar__tab">
-                                <a href="#" class="sidebar__tab_link j-sidebar__tab_link <% tabName === "chat" ? print('active') : '' %>" data-type="chat">chats</a>
+                                <a href="#" class="sidebar__tab_link j-sidebar__tab_link <% tabName === "chat" ? print('active') : '' %>" data-type="chat">
+                                    <i class="material-icons">chat_bubble_outline</i>
+                                    <div style="margin-top: -19px;font-size: 12px;">Chats</div>
+                                </a>
                             </li>
-                            <li class="sidebar__tab m-sidebar__tab_new">
+                            <li class="sidebar__tab">
                                 <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__create_dialog m-sidebar__tab_link_new" data-type="create">
-                                    <i class="material-icons">add_circle_outline</i>
+                                    <i class="material-icons">star_border</i>
+                                    <div style="margin-top: -19px;font-size: 12px;">Favourite</div>
+                                </a>
+                            </li>
+                            <li class="sidebar__tab">
+                                <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__create_dialog m-sidebar__tab_link_new" data-type="create">
+                                    <i class="material-icons">people_outline</i>
+                                    <div style="margin-top: -19px;font-size: 12px;">Group</div>
+                                </a>
+                            </li>
+                            <li class="sidebar__tab">
+                                <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__create_dialog m-sidebar__tab_link_new" data-type="create">
+                                    <i class="material-icons">perm_identity</i>
+                                    <div style="margin-top: -19px;font-size: 12px;">Contact</div>
                                 </a>
                             </li>
                         </ul>
