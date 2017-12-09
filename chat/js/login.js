@@ -17,7 +17,7 @@ Login.prototype.init = function(){
         var email = getURLParameter('uid');
 
         var user = {
-            login: email || saved_user.email,
+            email: email || saved_user.email,
             // login: 'tmho@hotmail.com',
             password: 'denningIT'
         };
@@ -46,7 +46,7 @@ Login.prototype.login = function (user) {
         }
         QB.createSession(function(csErr, csRes) {
             var userRequiredParams = {
-                'login':user.login,
+                'email':user.email,
                 'password': user.password
             };
             if (csErr) {
@@ -55,7 +55,7 @@ Login.prototype.login = function (user) {
                 app.token = csRes.token;
                 QB.login(userRequiredParams, function(loginErr, loginUser){
                     if(loginErr) {                        
-                        alert('Login Failed');
+                        loginError(loginErr);
                     } else {
                         loginSuccess(loginUser);
                     }
@@ -81,7 +81,6 @@ Login.prototype.login = function (user) {
         function loginError(error){
             self.renderLoginPage();
             console.error(error);
-            alert(error + "\n" + error.detail);
             reject(error);
         }
     });
@@ -105,7 +104,7 @@ Login.prototype.renderLoadingPage = function(){
 Login.prototype.setListeners = function(){
     var self = this,
         loginForm = document.forms.loginForm,
-        formInputs = [loginForm.userName, loginForm.userGroup],
+        formInputs = [loginForm.email, loginForm.password],
         loginBtn = loginForm.login_submit;
 
 
@@ -118,22 +117,17 @@ Login.prototype.setListeners = function(){
             loginForm.setAttribute('disabled', true);
         }
 
-        var userName = loginForm.userName.value.trim(),
-            userGroup = loginForm.userGroup.value.trim();
-
         var user = {
-            login: helpers.getUui(),
-            password: 'webAppPass',
-            full_name: userName,
-            tag_list: userGroup
+            email: loginForm.email.value.trim(),
+            password: loginForm.password.value.trim()
         };
 
-        localStorage.setItem('user', JSON.stringify(user));
+        // localStorage.setItem('user', JSON.stringify(user));
 
         self.login(user).then(function(){
             router.navigate('/dashboard');
         }).catch(function(error){
-            alert('lOGIN ERROR\n open console to get more info');
+            alert('Please check email and password again!');
             loginBtn.removeAttribute('disabled');
             console.error(error);
             loginForm.login_submit.innerText = 'LOGIN';
@@ -161,9 +155,9 @@ Login.prototype.setListeners = function(){
         });
 
         i.addEventListener('input', function(){
-            var userName = loginForm.userName.value.trim(),
-                userGroup = loginForm.userGroup.value.trim();
-            if(userName.length >=3 && userGroup.length >= 3){
+            var email = loginForm.email.value.trim(),
+                password = loginForm.password.value.trim();
+            if(email.length >=3 && password.length >= 3){
                 loginBtn.removeAttribute('disabled');
             } else {
                 loginBtn.setAttribute('disabled', true);
