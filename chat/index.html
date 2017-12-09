@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Denning Online Chat</title>
-    <link rel="shortcut icon" href="https://quickblox.com/favicon.ico">
+    <link rel="shortcut icon" href="./img/favicon.ico">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,13 +25,10 @@
                 <div class="login__inner">
                     <div class="login__top">
                         <a href="https://quickblox.com/" class="login__logo">
-                            <img src="./img/qb-logo.svg" alt="QuickBlox">]
+                            <img src="./img/favicon.ico" alt="Denning Chat">]
                         </a>
                         <h1>Denning Online Chat</h1>
-                        <h3>Please enter your email in Denning 360.<br>
-                            Users within the same group will be able
-                            to communicate, create chats with each other
-                        </h3>
+                        <h3>Please enter your credential for Denning 360.</h3>
                     </div>
 
                     <form name="loginForm" class="login__form">
@@ -69,25 +66,25 @@
                             <li class="sidebar__tab">
                                 <a href="#" class="sidebar__tab_link j-sidebar__tab_link <% tabName === "chat" ? print('active') : '' %>" data-type="chat">
                                     <i class="material-icons">chat_bubble_outline</i>
-                                    <div style="margin-top: -19px;font-size: 12px;">Chats</div>
+                                    <div class="tab-label">Chats</div>
                                 </a>
                             </li>
                             <li class="sidebar__tab">
-                                <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__create_dialog m-sidebar__tab_link_new" data-type="create">
+                                <a href="#!/favourite" class="sidebar__tab_link j-sidebar__tab_link <% tabName === "favourite" ? print('active') : '' %>" data-type="favourite">
                                     <i class="material-icons">star_border</i>
-                                    <div style="margin-top: -19px;font-size: 12px;">Favourite</div>
+                                    <div class="tab-label">Favourite</div>
                                 </a>
                             </li>
                             <li class="sidebar__tab">
                                 <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__create_dialog m-sidebar__tab_link_new" data-type="create">
                                     <i class="material-icons">people_outline</i>
-                                    <div style="margin-top: -19px;font-size: 12px;">Group</div>
+                                    <div class="tab-label">Group</div>
                                 </a>
                             </li>
                             <li class="sidebar__tab">
-                                <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__create_dialog m-sidebar__tab_link_new" data-type="create">
+                                <a href="#!/contact" class="sidebar__tab_link j-sidebar__tab_link <% tabName === "contact" ? print('active') : '' %>" data-type="contact">
                                     <i class="material-icons">perm_identity</i>
-                                    <div style="margin-top: -19px;font-size: 12px;">Contact</div>
+                                    <div class="tab-label">Contact</div>
                                 </a>
                             </li>
                         </ul>

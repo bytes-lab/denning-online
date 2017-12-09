@@ -110,6 +110,11 @@
     text-align: center;
 }
 
+.tab-label {
+    margin-top: -19px;
+    font-size: 12px;
+}
+
 .sidebar__tab_link i {
     display: block;
     line-height:40px;
@@ -127,6 +132,7 @@
 
 .sidebar__tab_link:hover,
 .sidebar__tab_link.active {
+    color: #18C942;
     box-shadow: inset 0 -2px 0 0 #18C942;
 }
 

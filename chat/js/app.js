@@ -57,18 +57,13 @@ App.prototype.renderDashboard = function (activeTabName) {
     listeners.setListeners();
 
     logoutBtn.addEventListener('click', function () {
-        QB.users.delete(app.user.id, function(err, user){
-            if (!user) {
-                console.error('Can\'t delete user by id: '+app.user.id+' ', err);
-            }
-            loginModule.isLogin = false;
-            app.isDashboardLoaded = false;
+        loginModule.isLogin = false;
+        app.isDashboardLoaded = false;
 
-            localStorage.removeItem('user');
-            helpers.clearCache();
-            QB.chat.disconnect();
-            router.navigate('#!/login');
-        });
+        localStorage.removeItem('user');
+        helpers.clearCache();
+        QB.chat.disconnect();
+        router.navigate('#!/login');
     });
 
     this.tabSelectInit();
