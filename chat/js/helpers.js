@@ -302,6 +302,14 @@ Helpers.prototype.inIframe = function() {
 
 Helpers.prototype.getURLParameter = function(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [null, ''])[1].replace(/\+/g, '%20')) || null;
-}
+};
+
+Helpers.prototype.encrypt = function(str) {
+    return sjcl.encrypt("2398f9Y(*HF#*F)QD#", str).replace(/,/g,",\n");
+};
+
+Helpers.prototype.decrypt = function(str) {
+    return sjcl.decrypt("2398f9Y(*HF#*F)QD#", str);
+};
 
 var helpers = new Helpers();

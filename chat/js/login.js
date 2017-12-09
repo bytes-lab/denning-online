@@ -11,11 +11,10 @@ Login.prototype.init = function(){
 
     return new Promise(function(resolve, reject) {
         var saved_user = JSON.parse(localStorage.getItem('userInfo'));
-        var email = helpers.getURLParameter('uid');
 
         var user = {
-            email: email || saved_user.email,
-            password: 'denningIT'
+            email: saved_user.email,
+            password: helpers.decrypt(saved_user.sppid)
         };
 
         if(user && !app.user){
@@ -117,7 +116,12 @@ Login.prototype.setListeners = function(){
             password: loginForm.password.value.trim()
         };
 
-        localStorage.setItem('userInfo', JSON.stringify(user));
+        var puser = {
+            email: user.email,
+            sppid: helpers.encrypt(user.password)
+        }
+
+        localStorage.setItem('userInfo', JSON.stringify(puser));
 
         self.login(user).then(function(){
             router.navigate('/dashboard');
