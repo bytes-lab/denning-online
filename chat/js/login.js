@@ -3,7 +3,6 @@
 function Login() {
     this.isLoginPageRendered = false;
     this.isLogin = false;
-    this.standalone = !helpers.inIframe();
 }
 
 Login.prototype.init = function(){

@@ -34,7 +34,7 @@ App.prototype.renderDashboard = function (activeTabName) {
         renderParams = {
             user: self.user,
             tabName: '',
-            standalone: loginModule.standalone
+            standalone: !helpers.inIframe()
         };
 
     if(activeTabName){
