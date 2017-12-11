@@ -75,29 +75,7 @@ User.prototype.getUsersByIds = function (userList) {
 };
 
 User.prototype.getUsers = function () {
-    var self = this,
-        // params = {
-        //     tags: app.user.user_tags,
-        //     per_page: 100
-        // };
-
-        params = {
-            filter: { 
-                field: 'email', 
-                param: 'in', 
-                value: [
-                    'tmho@hotmail.com',
-                    'yanhongho@hotmail.com',
-                    'rajeshsingh@denning.com.my', 
-                    'jingpiow@hotmail.com', 
-                    'staffb1clerk1@gmail.com', 
-                    'staffb1clerk2@gmail.com', 
-                    'ehc2082@hotmail.com',
-                    'appdev@denning.com.my',
-                    'jason.5001001@gmail.com'
-                ]
-            }
-        };
+    var self = this;
 
     var get_email = function(user_emails) {
         return new Promise(function(resolve, reject) {
@@ -133,22 +111,6 @@ User.prototype.getUsers = function () {
             }
         });            
     });
-
-
-    // return new Promise(function(resolve, reject){
-    //     QB.users.listUsers(params, function (err, responce) {
-    //     // QB.users.get(params, function (err, responce) {
-    //         if (err) {
-    //             reject(err);
-    //         }
-
-    //         var userList = responce.items.map(function(data){
-    //             return self.addToCache(data.user);
-    //         });
-
-    //         resolve(userList);
-    //     });
-    // })
 };
 
 User.prototype.buildUserItem = function (user) {
