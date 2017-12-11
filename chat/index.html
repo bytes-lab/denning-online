@@ -102,6 +102,7 @@
                             </li>
                         </ul>
                         <input type="text" name="search" class="search j-search" placeholder="Search">
+                        <div class="j-more_feature"></div>
                         <ul class="sidebar__dilog_list j-sidebar__dilog_list">
                         </ul>
                     </div>
@@ -289,6 +290,14 @@
             <div class="user__details">
                 <p class="firm__name"><%- firm.firmName %></p>
             </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_contactFilter">
+        <div class="pill">
+            <button>All</button>
+            <button>Coworkers</button>
+            <button>Clients</button>
         </div>
     </script>
 

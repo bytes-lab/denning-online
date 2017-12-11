@@ -17,6 +17,7 @@ function App(config) {
     this.page = document.querySelector('#page');
     this.sidebar = null;
     this.content = null;
+    this.moreFeautrePanel = null;
     this.userListConteiner = null;
     this.init(this._config);
     this.loading = true;
@@ -50,6 +51,7 @@ App.prototype.renderDashboard = function (activeTabName) {
     self.isDashboardLoaded = true;
     self.content = document.querySelector('.j-content');
     self.sidebar = document.querySelector('.j-sidebar');
+    self.moreFeautrePanel = document.querySelector('.j-more_feature');
 
     dialogModule.init();
 
@@ -97,6 +99,7 @@ App.prototype.tabSelectInit = function () {
 };
 
 App.prototype.loadChatList = function (tab) {
+    var self = this;
     return new Promise(function(resolve, reject){
         var tabs = document.querySelectorAll('.j-sidebar__tab_link');
         // remove all listeners
@@ -131,7 +134,11 @@ App.prototype.loadChatList = function (tab) {
         helpers.clearView(dialogModule.dialogsListContainer);
         dialogModule.dialogsListContainer.classList.remove('full');
 
+        helpers.clearView(self.moreFeautrePanel);
+
         if (tab.dataset.type == 'contact') {
+            self.moreFeautrePanel.innerHTML = helpers.fillTemplate('tpl_contactFilter')
+
             userModule.loadUsers(tab.dataset.type).then(function(users) {
                 resolve(users);
             }).catch(function(error){
