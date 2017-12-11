@@ -17,12 +17,18 @@ User.prototype.loadUsers = function() {
         dialogModule.dialogsListContainer.classList.add('loading');
 
         self.getUsers().then(function(userList){
-            _.each(userList, function(user){
-                self.buildUserItem(self._cache[user.id], false);
+            _.each(self.denningUsers.client.concat(self.denningUsers.staff), function(firm){
+                self.buildFirmItem(firm);
+                _.each(firm.users, function(user) {
+                    var _user = _.findWhere(self._cache, {email: user.email});
+                    if (_user) {
+                        console.log(_user);
+                        self.buildUserItem(_user, false);    
+                    }
+                })
             });
             dialogModule.dialogsListContainer.classList.remove('loading');
         }).catch(function(error){
-            self.userListConteiner.classList.remove('loading');
             dialogModule.dialogsListContainer.classList.remove('loading');
         });
 
@@ -126,6 +132,7 @@ User.prototype.getUsers = function () {
     };
 
     return new Promise(function(resolve, reject) {
+        self._cache = {};
         jQuery.ajax({
             type: 'get',
             url: '/denning-online/data/chat_user?122',
