@@ -8,13 +8,20 @@ function Login() {
 Login.prototype.init = function(){
     var self = this;
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {        
         var saved_user = JSON.parse(localStorage.getItem('userInfo'));
 
-        var user = {
-            email: saved_user.email,
-            password: helpers.decrypt(saved_user.sppid)
-        };
+        if (saved_user) {
+            var user = {
+                email: saved_user.email,
+                password: helpers.decrypt(saved_user.sppid)
+            };            
+        } else {
+            var user = {
+                email: helpers.getURLParameter('uid'),
+                password: helpers.getURLParameter('sppid') || 'denningIT'
+            };                        
+        }
 
         if(user && !app.user){
             app.room = user.tag_list;

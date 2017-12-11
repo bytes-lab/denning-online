@@ -93,7 +93,8 @@ User.prototype.getUsers = function () {
                     'staffb1clerk1@gmail.com', 
                     'staffb1clerk2@gmail.com', 
                     'ehc2082@hotmail.com',
-                    'appdev@denning.com.my'
+                    'appdev@denning.com.my',
+                    'jason.5001001@gmail.com'
                 ]
             }
         };

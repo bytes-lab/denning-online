@@ -158,7 +158,6 @@ Helpers.prototype.getMessageStatus = function(message){
         status = !deleveredToOcuupants ? 'not delivered yet' :
             readedByOcuupants ? 'seen' : 'delivered';
 
-
     return status;
 };
 
