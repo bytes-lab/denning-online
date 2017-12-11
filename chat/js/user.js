@@ -32,6 +32,7 @@ User.prototype.addToCache = function(user) {
     if (!self._cache[id]) {
         self._cache[id] = {
             name: user.full_name || user.login || 'Unknown user (' + id + ')',
+            email: user.email,
             id: id,
             color: _.random(1, 10),
             last_request_at: user.last_request_at

@@ -57,6 +57,8 @@ Dialog.prototype.loadDialogs = function (type) {
 
         if (type === 'chat') {
             filter['type[in]'] = [CONSTANTS.DIALOG_TYPES.CHAT, CONSTANTS.DIALOG_TYPES.GROUPCHAT].join(',');
+        } else if(type === 'favourite') {
+            filter.type = CONSTANTS.DIALOG_TYPES.GROUPCHAT;
         } else {
             filter.type = CONSTANTS.DIALOG_TYPES.PUBLICCHAT;
         }
