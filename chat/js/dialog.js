@@ -69,7 +69,8 @@ Dialog.prototype.loadDialogs = function (type) {
             }
 
             var dialogs = resDialogs.items;
-
+            self._cache = {};
+            
             _.each(dialogs, function (dialog) {
                 if (!self._cache[dialog._id]) {
                     self._cache[dialog._id] = helpers.compileDialogParams(dialog);

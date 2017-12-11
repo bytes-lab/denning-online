@@ -99,6 +99,10 @@ App.prototype.tabSelectInit = function () {
 App.prototype.loadChatList = function (tab) {
     return new Promise(function(resolve, reject){
         var tabs = document.querySelectorAll('.j-sidebar__tab_link');
+        // remove all listeners
+        var _search = document.querySelector('.j-search');
+        var search = _search.cloneNode(true);
+        _search.parentNode.replaceChild(search, _search);
 
         if (tab.classList.contains('active')) {
             return false;
@@ -109,6 +113,12 @@ App.prototype.loadChatList = function (tab) {
         });
 
         tab.classList.add('active');
+
+        search.addEventListener('keyup', function (e) {
+            console.log('#########');
+            console.log(tab.dataset.type);
+            console.log(search.value);
+        });
 
         helpers.clearView(dialogModule.dialogsListContainer);
         dialogModule.dialogsListContainer.classList.remove('full');
