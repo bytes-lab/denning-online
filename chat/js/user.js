@@ -99,20 +99,56 @@ User.prototype.getUsers = function () {
             }
         };
 
-    return new Promise(function(resolve, reject){
-        QB.users.listUsers(params, function (err, responce) {
-        // QB.users.get(params, function (err, responce) {
-            if (err) {
-                reject(err);
+    var get_email = function(user_emails) {
+        return new Promise(function(resolve, reject) {
+            params = {
+                filter: { 
+                    field: 'email', 
+                    param: 'in', 
+                    value: JSON.parse(user_emails)
+                }
             }
 
-            var userList = responce.items.map(function(data){
-                return self.addToCache(data.user);
-            });
+            QB.users.listUsers(params, function (err, responce) {
+                if (err) {
+                    reject(err);
+                }
 
-            resolve(userList);
-        });
-    })
+                var userList = responce.items.map(function(data){
+                    return self.addToCache(data.user);
+                });
+
+                resolve(userList);
+            });        
+        })
+    };
+
+    return new Promise(function(resolve, reject) {
+        jQuery.ajax({
+            type: 'get',
+            url: '/denning-online/data/chat_user1',
+            data: {},
+            success: function(users) {
+                resolve(get_email(users));
+            }
+        });            
+    });
+
+
+    // return new Promise(function(resolve, reject){
+    //     QB.users.listUsers(params, function (err, responce) {
+    //     // QB.users.get(params, function (err, responce) {
+    //         if (err) {
+    //             reject(err);
+    //         }
+
+    //         var userList = responce.items.map(function(data){
+    //             return self.addToCache(data.user);
+    //         });
+
+    //         resolve(userList);
+    //     });
+    // })
 };
 
 User.prototype.buildUserItem = function (user) {
