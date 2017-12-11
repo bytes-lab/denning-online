@@ -79,7 +79,7 @@ User.prototype.getUsers = function () {
 
     var get_email = function(user_emails) {
         return new Promise(function(resolve, reject) {
-            params = {
+            var params = {
                 filter: { 
                     field: 'email', 
                     param: 'in', 
