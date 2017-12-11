@@ -704,3 +704,9 @@
     background-position: left center;
     background-position-x: -11px;
 }
+
+.firm__name {
+    font-size: 16px;
+    line-height: 22px;
+    margin: 3px 0;
+}
