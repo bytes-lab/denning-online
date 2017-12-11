@@ -692,3 +692,15 @@
         display: none;
     }
 }
+
+.search {
+    margin: 15px 12px;
+    line-height: 30px;
+    border-radius: 14px;
+    border: 1px solid #bbb;
+    padding-left: 36px;
+    background-image: url('http://i47.tinypic.com/r02vbq.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: -11px;
+}
