@@ -29,7 +29,7 @@ User.prototype.loadUsers = function(userType, keyword) {
 
 User.prototype._loadUsers = function(userType, keyword) {
     var self = this;
-    userType = userType.replace("contact", "client staff").split(" ");
+    userType = userType.replace("contact", "staff client").split(" ");
     _.each(userType, function(user_type) {
         _.each(self.denningUsers[user_type], function(firm){
             var users = _.filter(self._cache, function(user) {

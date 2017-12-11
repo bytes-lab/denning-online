@@ -89,7 +89,7 @@
                                 </a>
                             </li>
                             <li class="sidebar__tab">
-                                <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__create_dialog m-sidebar__tab_link_new" data-type="create">
+                                <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__tab_link <% tabName === "group" ? print('active') : '' %>" data-type="group">
                                     <i class="material-icons">people_outline</i>
                                     <div class="tab-label">Groups</div>
                                 </a>
