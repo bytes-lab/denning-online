@@ -16,11 +16,16 @@ User.prototype.initGettingUsers = function () {
 
     self.userListConteiner.classList.add('loading');
 
+    helpers.clearView(dialogModule.dialogsListContainer);
+    dialogModule.dialogsListContainer.classList.remove('full');
+    dialogModule.dialogsListContainer.classList.add('loading');
+
     self.getUsers().then(function(userList){
         _.each(userList, function(user){
             self.buildUserItem(self._cache[user.id]);
         });
         self.userListConteiner.classList.remove('loading');
+        dialogModule.dialogsListContainer.classList.remove('loading');
     }).catch(function(error){
         self.userListConteiner.classList.remove('loading');
     });
@@ -147,6 +152,7 @@ User.prototype.buildUserItem = function (user) {
     });
     
     self.userListConteiner.appendChild(elem);
+    dialogModule.dialogsListContainer.appendChild(elem);
 };
 
 var userModule = new User();
