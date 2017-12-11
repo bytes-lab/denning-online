@@ -311,4 +311,16 @@ Helpers.prototype.decrypt = function(str) {
     return sjcl.decrypt("2398f9Y(*HF#*F)QD#", str);
 };
 
+Helpers.prototype.getEmails = function(denningUsers) {
+    var users_ = [];
+    _.each(denningUsers, function(users, key) {
+        _.each(users, function(_users) {
+            _.each(_users.users, function(user) {
+                users_.push(user.email)
+            })
+        });
+    })
+    return _.uniq(users_)
+};
+
 var helpers = new Helpers();

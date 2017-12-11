@@ -5,6 +5,8 @@ function User() {
 
     this.userListConteiner = null;
     this.content = null;
+
+    this.denningUsers = null;
 }
 
 User.prototype.initGettingUsers = function () {
@@ -77,13 +79,13 @@ User.prototype.getUsersByIds = function (userList) {
 User.prototype.getUsers = function () {
     var self = this;
 
-    var get_email = function(user_emails) {
+    var get_qb_users = function() {
         return new Promise(function(resolve, reject) {
             var params = {
                 filter: { 
                     field: 'email', 
                     param: 'in', 
-                    value: JSON.parse(user_emails)
+                    value: helpers.getEmails(self.denningUsers)
                 }
             }
 
@@ -104,10 +106,11 @@ User.prototype.getUsers = function () {
     return new Promise(function(resolve, reject) {
         jQuery.ajax({
             type: 'get',
-            url: '/denning-online/data/chat_user1',
+            url: '/denning-online/data/chat_user?122',
             data: {},
             success: function(users) {
-                resolve(get_email(users));
+                self.denningUsers = JSON.parse(users);
+                resolve(get_qb_users());
             }
         });            
     });
