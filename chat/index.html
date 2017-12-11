@@ -284,6 +284,14 @@
         </div>
     </script>
 
+    <script type="text/template" id="tpl_firm">
+        <div class="user__item ">
+            <div class="user__details">
+                <p class="user__name"><%- firm.firmName %></p>
+            </div>
+        </div>
+    </script>
+
     <script type="text/template" id="tpl_message__typing">
         <div class="message__wrap m-typing j-istyping" id="is__typing">
             <% _.each(users, function(user){  %>

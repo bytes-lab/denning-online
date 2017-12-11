@@ -145,6 +145,12 @@ User.prototype.getUsers = function () {
     });
 };
 
+User.prototype.buildFirmItem = function(firm) {
+    var userTpl = helpers.fillTemplate('tpl_firm', {firm: firm}),
+        elem = helpers.toHtml(userTpl)[0];
+    dialogModule.dialogsListContainer.appendChild(elem);        
+}
+
 User.prototype.buildUserItem = function (user, is_create) {
     var self = this,
         userItem = JSON.parse(JSON.stringify(user));
