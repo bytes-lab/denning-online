@@ -710,3 +710,34 @@
     line-height: 22px;
     margin: 3px 0;
 }
+
+.pill {
+    margin: 5px 15px;
+    cursor: pointer;    
+}
+
+.filter-item {
+    display: inline-block;
+    width: 40%;
+    color: red;
+    background-color: white;
+    margin: 0 -3px;
+    text-align: center;
+    border: 1px solid;
+    padding: 7px 0px;
+}
+
+.filter-item.active, .filter-item:hover {
+    color: white;
+    background-color: red;
+}
+
+.filter-item:first-child {
+    border-radius: 8px 0 0 8px;
+    width: 30%;
+}
+
+.filter-item:last-child {
+    border-radius: 0 8px 8px 0;
+    width: 30%;
+}

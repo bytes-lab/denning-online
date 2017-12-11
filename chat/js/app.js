@@ -138,6 +138,17 @@ App.prototype.loadChatList = function (tab) {
 
         if (tab.dataset.type == 'contact') {
             self.moreFeautrePanel.innerHTML = helpers.fillTemplate('tpl_contactFilter')
+            var filterItems = document.querySelectorAll('.filter-item');
+            _.each(filterItems, function (item) {
+                item.addEventListener('click', function (e) {
+                    _.each(filterItems, function (elem) {
+                        elem.classList.remove('active');
+                    });
+
+                    item.classList.add('active');
+                    userModule.loadUsers(item.dataset.type);
+                });
+            });
 
             userModule.loadUsers(tab.dataset.type).then(function(users) {
                 resolve(users);
