@@ -9,7 +9,7 @@ function User() {
     this.denningUsers = null;
 }
 
-User.prototype.loadUsers = function(userType) {
+User.prototype.loadUsers = function(userType, keyword) {
     var self = this;
     return new Promise(function(resolve, reject){
         helpers.clearView(dialogModule.dialogsListContainer);
@@ -17,25 +17,32 @@ User.prototype.loadUsers = function(userType) {
         dialogModule.dialogsListContainer.classList.add('loading');
 
         self.getUsers().then(function(userList){
-            userType = userType.replace("contact", "client staff").split(" ");
-            _.each(userType, function(user_type) {
-                _.each(self.denningUsers[user_type], function(firm){
-                    self.buildFirmItem(firm);
-                    _.each(firm.users, function(user) {
-                        var _user = _.findWhere(self._cache, {email: user.email});
-                        if (_user) {
-                            console.log(_user);
-                            self.buildUserItem(_user, false);    
-                        }
-                    })
-                });
-            });
+            self._loadUsers(userType, keyword);
             dialogModule.dialogsListContainer.classList.remove('loading');
         }).catch(function(error){
             dialogModule.dialogsListContainer.classList.remove('loading');
         });
 
         resolve();
+    });
+};
+
+User.prototype._loadUsers = function(userType, keyword) {
+    var self = this;
+    userType = userType.replace("contact", "client staff").split(" ");
+    _.each(userType, function(user_type) {
+        _.each(self.denningUsers[user_type], function(firm){
+            var users = _.filter(self._cache, function(user) {
+                return user.name.match(new RegExp(keyword, "i")) && _.where(firm.users, {email: user.email}).length;
+            })
+
+            if (users.length) {
+                self.buildFirmItem(firm);
+                _.each(users, function(user) {
+                    self.buildUserItem(user, false);    
+                });
+            }
+        });
     });
 };
 

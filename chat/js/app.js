@@ -102,10 +102,6 @@ App.prototype.loadChatList = function (tab) {
     var self = this;
     return new Promise(function(resolve, reject){
         var tabs = document.querySelectorAll('.j-sidebar__tab_link');
-        // remove all listeners
-        var _search = document.querySelector('.j-search');
-        var search = _search.cloneNode(true);
-        _search.parentNode.replaceChild(search, _search);
 
         if (tab.classList.contains('active')) {
             return false;
@@ -117,18 +113,30 @@ App.prototype.loadChatList = function (tab) {
 
         tab.classList.add('active');
 
+        // remove all listeners
+        var _search = document.querySelector('.j-search');
+        var search = _search.cloneNode(true);
+        _search.parentNode.replaceChild(search, _search);
+
         search.value = '';
         search.addEventListener('keyup', function (e) {
-            var dialogs = _.filter(dialogModule._cache, function(dialog) {
-                return dialog.name.match(new RegExp(search.value, "i"));
-            })
+            if (tab.dataset.type == 'chat' || tab.dataset.type == 'favourite') {
+                var dialogs = _.filter(dialogModule._cache, function(dialog) {
+                    return dialog.name.match(new RegExp(search.value, "i"));
+                })
 
-            helpers.clearView(dialogModule.dialogsListContainer);
-            dialogModule.dialogsListContainer.classList.remove('full');
+                helpers.clearView(dialogModule.dialogsListContainer);
+                dialogModule.dialogsListContainer.classList.remove('full');
 
-            _.each(dialogs, function (dialog) {
-                dialogModule.renderDialog(dialogModule._cache[dialog._id]);
-            });
+                _.each(dialogs, function (dialog) {
+                    dialogModule.renderDialog(dialogModule._cache[dialog._id]);
+                });                
+            } else {
+                var type = document.querySelector('.filter-item.active').dataset.type;
+                helpers.clearView(dialogModule.dialogsListContainer);
+                dialogModule.dialogsListContainer.classList.remove('full');
+                userModule._loadUsers(type, search.value);
+            }
         });
 
         helpers.clearView(dialogModule.dialogsListContainer);
@@ -146,11 +154,12 @@ App.prototype.loadChatList = function (tab) {
                     });
 
                     item.classList.add('active');
-                    userModule.loadUsers(item.dataset.type);
+                    var keyword = document.querySelector('.j-search').value;
+                    userModule.loadUsers(item.dataset.type, keyword);
                 });
             });
 
-            userModule.loadUsers(tab.dataset.type).then(function(users) {
+            userModule.loadUsers(tab.dataset.type, '.*').then(function(users) {
                 resolve(users);
             }).catch(function(error){
                 reject(error);
