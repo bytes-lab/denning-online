@@ -114,10 +114,18 @@ App.prototype.loadChatList = function (tab) {
 
         tab.classList.add('active');
 
+        search.value = '';
         search.addEventListener('keyup', function (e) {
-            console.log('#########');
-            console.log(tab.dataset.type);
-            console.log(search.value);
+            var dialogs = _.filter(dialogModule._cache, function(dialog) {
+                return dialog.name.match(new RegExp(search.value, "i"));
+            })
+
+            helpers.clearView(dialogModule.dialogsListContainer);
+            dialogModule.dialogsListContainer.classList.remove('full');
+
+            _.each(dialogs, function (dialog) {
+                dialogModule.renderDialog(dialogModule._cache[dialog._id]);
+            });
         });
 
         helpers.clearView(dialogModule.dialogsListContainer);
