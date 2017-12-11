@@ -131,11 +131,19 @@ App.prototype.loadChatList = function (tab) {
         helpers.clearView(dialogModule.dialogsListContainer);
         dialogModule.dialogsListContainer.classList.remove('full');
 
-        dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
-            resolve(dialogs);
-        }).catch(function(error){
-            reject(error);
-        });
+        if (tab.dataset.type == 'contact') {
+            userModule.loadUsers(tab.dataset.type).then(function(users) {
+                resolve(users);
+            }).catch(function(error){
+                reject(error);
+            });            
+        } else {
+            dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
+                resolve(dialogs);
+            }).catch(function(error){
+                reject(error);
+            });            
+        }
     });
 };
 

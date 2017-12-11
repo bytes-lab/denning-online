@@ -9,6 +9,27 @@ function User() {
     this.denningUsers = null;
 }
 
+User.prototype.loadUsers = function() {
+    var self = this;
+    return new Promise(function(resolve, reject){
+        helpers.clearView(dialogModule.dialogsListContainer);
+        dialogModule.dialogsListContainer.classList.remove('full');
+        dialogModule.dialogsListContainer.classList.add('loading');
+
+        self.getUsers().then(function(userList){
+            _.each(userList, function(user){
+                self.buildUserItem(self._cache[user.id], false);
+            });
+            dialogModule.dialogsListContainer.classList.remove('loading');
+        }).catch(function(error){
+            self.userListConteiner.classList.remove('loading');
+            dialogModule.dialogsListContainer.classList.remove('loading');
+        });
+
+        resolve();
+    });
+};
+
 User.prototype.initGettingUsers = function () {
     var self = this;
     self.content = document.querySelector('.j-content');
@@ -16,16 +37,11 @@ User.prototype.initGettingUsers = function () {
 
     self.userListConteiner.classList.add('loading');
 
-    helpers.clearView(dialogModule.dialogsListContainer);
-    dialogModule.dialogsListContainer.classList.remove('full');
-    dialogModule.dialogsListContainer.classList.add('loading');
-
     self.getUsers().then(function(userList){
         _.each(userList, function(user){
-            self.buildUserItem(self._cache[user.id]);
+            self.buildUserItem(self._cache[user.id], true);
         });
         self.userListConteiner.classList.remove('loading');
-        dialogModule.dialogsListContainer.classList.remove('loading');
     }).catch(function(error){
         self.userListConteiner.classList.remove('loading');
     });
@@ -122,7 +138,7 @@ User.prototype.getUsers = function () {
     });
 };
 
-User.prototype.buildUserItem = function (user) {
+User.prototype.buildUserItem = function (user, is_create) {
     var self = this,
         userItem = JSON.parse(JSON.stringify(user));
 
@@ -133,26 +149,29 @@ User.prototype.buildUserItem = function (user) {
     var userTpl = helpers.fillTemplate('tpl_newGroupChatUser', {user: userItem}),
         elem = helpers.toHtml(userTpl)[0];
     
-    elem.addEventListener('click', function () {
-        if (elem.classList.contains('disabled')) return;
+    if (is_create) {
+        elem.addEventListener('click', function () {
+            if (elem.classList.contains('disabled')) return;
 
-        elem.classList.toggle('selected');
+            elem.classList.toggle('selected');
+            
+            if (self.userListConteiner.querySelectorAll('.selected').length > 1) {
+                document.forms.create_dialog.create_dialog_submit.disabled = false;
+            } else {
+                document.forms.create_dialog.create_dialog_submit.disabled = true;
+            }
+
+            if (self.userListConteiner.querySelectorAll('.selected').length >= 3) {
+                document.forms.create_dialog.dialog_name.disabled = false;
+            } else {
+                document.forms.create_dialog.dialog_name.disabled = true;
+            }
+        });
         
-        if (self.userListConteiner.querySelectorAll('.selected').length > 1) {
-            document.forms.create_dialog.create_dialog_submit.disabled = false;
-        } else {
-            document.forms.create_dialog.create_dialog_submit.disabled = true;
-        }
-
-        if (self.userListConteiner.querySelectorAll('.selected').length >= 3) {
-            document.forms.create_dialog.dialog_name.disabled = false;
-        } else {
-            document.forms.create_dialog.dialog_name.disabled = true;
-        }
-    });
-    
-    self.userListConteiner.appendChild(elem);
-    dialogModule.dialogsListContainer.appendChild(elem);
+        self.userListConteiner.appendChild(elem);
+    } else {
+        dialogModule.dialogsListContainer.appendChild(elem);        
+    }
 };
 
 var userModule = new User();
