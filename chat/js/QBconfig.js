@@ -19,7 +19,7 @@ var QBconfig = {
 };
 
 var appConfig = {
-    dilogsPerRequers: 15,
+    dilogsPerRequers: 1000,
     messagesPerRequest: 50,
     usersPerRequest: 15,
     typingTimeout: 3 // 3 seconds
