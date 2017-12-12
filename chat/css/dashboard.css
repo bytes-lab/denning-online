@@ -743,8 +743,8 @@
 }
 
 .new-group {
-    padding: 10px 26px;
-    font-size: 28px;
+    padding: 10px 21px;
+    font-size: 22px;
 }
 
 .new-group a {
@@ -753,5 +753,5 @@
 }
 
 .new-group i {
-    font-size: 27px;
+    font-size: 23px;
 }
