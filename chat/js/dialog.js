@@ -87,9 +87,10 @@ Dialog.prototype._loadDialogs = function (type, keyword, group) {
         if (group == 'staff' || group == 'client') {
             var isGroup = false;
             _.each(dialog.users, function(user_id) {
-                isGroup = isGroup || userModule.isGroupUser(user_id, group);
+                if (user_id != app.user.id)
+                    isGroup = isGroup || userModule.isGroupUser(user_id, group);
             });            
-            
+
             ret = ret && isGroup;
         }
 

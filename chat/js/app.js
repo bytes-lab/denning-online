@@ -155,7 +155,7 @@ App.prototype.loadChatList = function (tab) {
                     userModule.loadUsers(item.dataset.type, keyword);
                 } else if (tab.dataset.type == 'chat' || tab.dataset.type == 'group') {
                     helpers.clearView(dialogModule.dialogsListContainer);
-                    
+
                     var keyword = document.querySelector('.j-search').value;
                     dialogModule._loadDialogs(tab.dataset.type, keyword, item.dataset.type)
                 }
@@ -176,6 +176,10 @@ App.prototype.loadChatList = function (tab) {
                 dialogModule._loadDialogs(tab.dataset.type);
             } else {
                 // retrieve dialogs from server
+                if (!userModule.denningUsers) {
+                    userModule.getUsers();
+                }
+
                 dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
                     resolve(dialogs);
                 }).catch(function(error){
