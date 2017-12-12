@@ -327,7 +327,7 @@ Message.prototype.renderMessage = function (message, setAsFirst) {
                 }
             });
             images[i].addEventListener('error', function (e) {
-                console.log(e);
+                console.log(e); // check here @@@
                 var img = e.target,
                     errorMessageTpl = helpers.fillTemplate('tpl_attachmentLoadError'),
                     errorElem = helpers.toHtml(errorMessageTpl)[0];
