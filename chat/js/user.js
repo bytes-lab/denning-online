@@ -145,7 +145,7 @@ User.prototype.getUsers = function () {
         self._cache = {};
         jQuery.ajax({
             type: 'get',
-            url: '/denning-online/data/chat_user?12',
+            url: '/data/chat_user?12',
             data: {},
             success: function(users) {
                 self.denningUsers = JSON.parse(users);
@@ -199,8 +199,6 @@ User.prototype.buildUserItem = function (user, is_create) {
                 occupants_ids: userItem.id
             };
 
-            console.log('########');
-            console.log(params);
             dialogModule.createDialog(params);            
         });
 
