@@ -323,4 +323,23 @@ Helpers.prototype.getEmails = function(denningUsers) {
     return _.uniq(users_)
 };
 
+Helpers.prototype.showNotification = function (message) {
+    if (!Notification) {
+        alert('Desktop notifications not available in your browser. Try Chromium.'); 
+        return;
+    }
+
+    if (Notification.permission !== "granted")
+        Notification.requestPermission();
+    else {
+        var notification = new Notification(dialogModule._cache[message.dialog_id].name, {
+            icon: './img/favicon.ico',
+            body: message.body,
+    });
+
+    notification.onclick = function () {
+        window.open("#!/dialog/"+message.dialog_id);      
+    };    
+  }
+}
 var helpers = new Helpers();

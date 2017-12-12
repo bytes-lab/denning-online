@@ -31,6 +31,8 @@ Listeners.prototype.onMessageListener = function (userId, message) {
         messageModule.sendDeliveredStatus(msg._id, userId, msg.chat_dialog_id);
     }
 
+    helpers.showNotification(message);
+
     if (dialog) {
         dialog.messages.unshift(msg);
         dialogModule.changeLastMessagePreview(msg.chat_dialog_id, msg);
