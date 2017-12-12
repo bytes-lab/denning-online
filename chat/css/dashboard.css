@@ -741,3 +741,17 @@
     border-radius: 0 8px 8px 0;
     width: 30%;
 }
+
+.new-group {
+    padding: 10px 26px;
+    font-size: 28px;
+}
+
+.new-group a {
+    text-decoration: none;
+    color: #18C942;
+}
+
+.new-group i {
+    font-size: 27px;
+}

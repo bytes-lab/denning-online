@@ -57,7 +57,7 @@ Dialog.prototype.loadDialogs = function (type) {
 
         if (type === 'chat') {
             filter['type[in]'] = [CONSTANTS.DIALOG_TYPES.CHAT, CONSTANTS.DIALOG_TYPES.GROUPCHAT].join(',');
-        } else if(type === 'favourite') {
+        } else if(type === 'group') {
             filter.type = CONSTANTS.DIALOG_TYPES.GROUPCHAT;
         } else {
             filter.type = CONSTANTS.DIALOG_TYPES.PUBLICCHAT;
@@ -70,7 +70,7 @@ Dialog.prototype.loadDialogs = function (type) {
 
             var dialogs = resDialogs.items;
             self._cache = {};
-            
+
             _.each(dialogs, function (dialog) {
                 if (!self._cache[dialog._id]) {
                     self._cache[dialog._id] = helpers.compileDialogParams(dialog);

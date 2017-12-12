@@ -120,7 +120,7 @@ App.prototype.loadChatList = function (tab) {
 
         search.value = '';
         search.addEventListener('keyup', function (e) {
-            if (tab.dataset.type == 'chat' || tab.dataset.type == 'favourite') {
+            if (tab.dataset.type == 'chat' || tab.dataset.type == 'group') {
                 var dialogs = _.filter(dialogModule._cache, function(dialog) {
                     return dialog.name.match(new RegExp(search.value, "i"));
                 })
@@ -165,6 +165,10 @@ App.prototype.loadChatList = function (tab) {
                 reject(error);
             });            
         } else {
+            if (tab.dataset.type == 'group') {
+                self.moreFeautrePanel.innerHTML = helpers.fillTemplate('tpl_newGroup')
+            }
+
             dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
                 resolve(dialogs);
             }).catch(function(error){
