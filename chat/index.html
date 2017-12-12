@@ -232,7 +232,9 @@
                         <% if (message.attachments.length) { %>
                         <div class="message__attachments_wtap">
                             <% _.each(message.attachments, function(attachment){ %>
+                            <a href="<%= attachment.src %>" target="_blank">
                                 <img src="<%= attachment.src %>" alt="attachment" class="message_attachment">
+                            </a>
                             <% }); %>                            
                         </div>
                         <% } %>
