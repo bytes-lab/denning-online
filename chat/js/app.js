@@ -147,24 +147,24 @@ App.prototype.loadChatList = function (tab) {
         dialogModule.dialogsListContainer.classList.remove('full');
 
         helpers.clearView(self.moreFeautrePanel);
+        self.moreFeautrePanel.innerHTML = helpers.fillTemplate('tpl_contactFilter')
+
+        var filterItems = document.querySelectorAll('.filter-item');
+        _.each(filterItems, function (item) {
+            item.addEventListener('click', function (e) {
+                _.each(filterItems, function (elem) {
+                    elem.classList.remove('active');
+                });
+
+                item.classList.add('active');
+                if (tab.dataset.type == 'contact') {
+                    var keyword = document.querySelector('.j-search').value;
+                    userModule.loadUsers(item.dataset.type, keyword);
+                }
+            });
+        });                
 
         if (tab.dataset.type == 'contact' || tab.dataset.type == 'favourite') {
-            if (tab.dataset.type == 'contact') {
-                self.moreFeautrePanel.innerHTML = helpers.fillTemplate('tpl_contactFilter')
-                var filterItems = document.querySelectorAll('.filter-item');
-                _.each(filterItems, function (item) {
-                    item.addEventListener('click', function (e) {
-                        _.each(filterItems, function (elem) {
-                            elem.classList.remove('active');
-                        });
-
-                        item.classList.add('active');
-                        var keyword = document.querySelector('.j-search').value;
-                        userModule.loadUsers(item.dataset.type, keyword);
-                    });
-                });                
-            }
-
             userModule.loadUsers(tab.dataset.type, '.*').then(function(users) {
                 resolve(users);
             }).catch(function(error){
@@ -172,7 +172,8 @@ App.prototype.loadChatList = function (tab) {
             });            
         } else {
             if (tab.dataset.type == 'group') {
-                self.moreFeautrePanel.innerHTML = helpers.fillTemplate('tpl_newGroup')
+                var elem = helpers.toHtml(helpers.fillTemplate('tpl_newGroup'))[0]
+                self.moreFeautrePanel.appendChild(elem);
             }
 
             dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
