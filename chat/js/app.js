@@ -252,7 +252,7 @@ App.prototype.buildCreateDialogTpl = function () {
 App.prototype.backToDialog = function (e) {
     var self = this;
     self.sidebar.classList.add('active');
-    document.querySelector('.j-sidebar__create_dialog').classList.remove('active');
+    // document.querySelector('.j-sidebar__create_dialog').classList.remove('active');
     
     if (dialogModule.dialogId) {
         router.navigate('/dialog/' + dialogModule.dialogId);

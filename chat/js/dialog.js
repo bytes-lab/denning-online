@@ -214,7 +214,7 @@ Dialog.prototype.renderMessages = function (dialogId) {
     var self = this,
         dialog = self._cache[dialogId];
 
-    document.querySelector('.j-sidebar__create_dialog').classList.remove('active');
+    // document.querySelector('.j-sidebar__create_dialog').classList.remove('active');
 
     if (!document.forms.send_message) {
         helpers.clearView(this.content);
