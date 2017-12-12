@@ -193,7 +193,7 @@ User.prototype.buildUserItem = function (user, is_create) {
         
         self.userListConteiner.appendChild(elem);
     } else {
-        elem.addEventListener('click', function () {
+        elem.addEventListener('dblclick', function () {
             var params = {
                 type: 3,
                 occupants_ids: userItem.id
