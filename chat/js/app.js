@@ -132,7 +132,11 @@ App.prototype.loadChatList = function (tab) {
                     dialogModule.renderDialog(dialogModule._cache[dialog._id]);
                 });                
             } else {
-                var type = document.querySelector('.filter-item.active').dataset.type;
+                var type = document.querySelector('.j-sidebar__tab_link.active').dataset.type;
+                if (type == 'contact') {
+                    type = document.querySelector('.filter-item.active').dataset.type;                    
+                }
+                
                 helpers.clearView(dialogModule.dialogsListContainer);
                 dialogModule.dialogsListContainer.classList.remove('full');
                 userModule._loadUsers(type, search.value);
@@ -144,20 +148,22 @@ App.prototype.loadChatList = function (tab) {
 
         helpers.clearView(self.moreFeautrePanel);
 
-        if (tab.dataset.type == 'contact') {
-            self.moreFeautrePanel.innerHTML = helpers.fillTemplate('tpl_contactFilter')
-            var filterItems = document.querySelectorAll('.filter-item');
-            _.each(filterItems, function (item) {
-                item.addEventListener('click', function (e) {
-                    _.each(filterItems, function (elem) {
-                        elem.classList.remove('active');
-                    });
+        if (tab.dataset.type == 'contact' || tab.dataset.type == 'favourite') {
+            if (tab.dataset.type == 'contact') {
+                self.moreFeautrePanel.innerHTML = helpers.fillTemplate('tpl_contactFilter')
+                var filterItems = document.querySelectorAll('.filter-item');
+                _.each(filterItems, function (item) {
+                    item.addEventListener('click', function (e) {
+                        _.each(filterItems, function (elem) {
+                            elem.classList.remove('active');
+                        });
 
-                    item.classList.add('active');
-                    var keyword = document.querySelector('.j-search').value;
-                    userModule.loadUsers(item.dataset.type, keyword);
-                });
-            });
+                        item.classList.add('active');
+                        var keyword = document.querySelector('.j-search').value;
+                        userModule.loadUsers(item.dataset.type, keyword);
+                    });
+                });                
+            }
 
             userModule.loadUsers(tab.dataset.type, '.*').then(function(users) {
                 resolve(users);

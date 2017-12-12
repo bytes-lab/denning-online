@@ -145,7 +145,7 @@ User.prototype.getUsers = function () {
         self._cache = {};
         jQuery.ajax({
             type: 'get',
-            url: '/denning-online/data/chat_user?122',
+            url: '/denning-online/data/chat_user?12',
             data: {},
             success: function(users) {
                 self.denningUsers = JSON.parse(users);
