@@ -193,6 +193,17 @@ User.prototype.buildUserItem = function (user, is_create) {
         
         self.userListConteiner.appendChild(elem);
     } else {
+        elem.addEventListener('click', function () {
+            var params = {
+                type: 3,
+                occupants_ids: userItem.id
+            };
+
+            console.log('########');
+            console.log(params);
+            dialogModule.createDialog(params);            
+        });
+
         dialogModule.dialogsListContainer.appendChild(elem);        
     }
 };
