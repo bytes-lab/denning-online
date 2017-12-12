@@ -76,13 +76,23 @@ Dialog.prototype.loadDialogs = function (type) {
     });
 };
 
-Dialog.prototype._loadDialogs = function (type, keyword) {
+Dialog.prototype._loadDialogs = function (type, keyword, group) {
     var self = this;
     var dialogs = _.filter(self._cache, function(dialog) {
         var ret = dialog.name.match(new RegExp(keyword, "i"))
 
         if (type == 'group')
-            ret = ret && (dialog.type == 2);    // group
+            ret = ret && (dialog.type == 2);    // group chat
+
+        if (group == 'staff' || group == 'client') {
+            var isGroup = false;
+            _.each(dialog.users, function(user_id) {
+                isGroup = isGroup || userModule.isGroupUser(user_id, group);
+            });            
+            
+            ret = ret && isGroup;
+        }
+
         return ret;
     })
 

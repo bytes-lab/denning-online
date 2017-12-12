@@ -149,9 +149,15 @@ App.prototype.loadChatList = function (tab) {
                 });
 
                 item.classList.add('active');
+
                 if (tab.dataset.type == 'contact') {
                     var keyword = document.querySelector('.j-search').value;
                     userModule.loadUsers(item.dataset.type, keyword);
+                } else if (tab.dataset.type == 'chat' || tab.dataset.type == 'group') {
+                    helpers.clearView(dialogModule.dialogsListContainer);
+                    
+                    var keyword = document.querySelector('.j-search').value;
+                    dialogModule._loadDialogs(tab.dataset.type, keyword, item.dataset.type)
                 }
             });
         });                

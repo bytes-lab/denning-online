@@ -46,6 +46,14 @@ User.prototype._loadUsers = function(userType, keyword) {
     });
 };
 
+User.prototype.isGroupUser = function(user_id, user_type) {
+    var ret = 0;
+    _.each(self.denningUsers[user_type], function(firm){
+        ret += _.where(firm.users, {email: self._cache[user_id].email}).length;
+    });
+    return ret;
+};
+
 User.prototype.initGettingUsers = function () {
     var self = this;
     self.content = document.querySelector('.j-content');
