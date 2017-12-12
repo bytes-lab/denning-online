@@ -730,6 +730,7 @@
 .filter-item.active, .filter-item:hover {
     color: white;
     background-color: red;
+    padding: 8px 1px;
 }
 
 .filter-item:first-child {
