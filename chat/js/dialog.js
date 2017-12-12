@@ -44,9 +44,10 @@ Dialog.prototype.loadDialogs = function (type) {
     var self = this,
         filter = {
             limit: self.limit,
-            skip: self.dialogsListContainer.querySelectorAll('.j-dialog__item').length,
+            skip: 0,
             sort_desc: "updated_at"
         };
+        filter['type[in]'] = [CONSTANTS.DIALOG_TYPES.CHAT, CONSTANTS.DIALOG_TYPES.GROUPCHAT].join(',');
 
     return new Promise(function(resolve, reject){
         if (!app.checkInternetConnection()) {
@@ -55,43 +56,49 @@ Dialog.prototype.loadDialogs = function (type) {
 
         self.dialogsListContainer.classList.add('loading');
 
-        if (type === 'chat') {
-            filter['type[in]'] = [CONSTANTS.DIALOG_TYPES.CHAT, CONSTANTS.DIALOG_TYPES.GROUPCHAT].join(',');
-        } else if(type === 'group') {
-            filter.type = CONSTANTS.DIALOG_TYPES.GROUPCHAT;
-        } else {
-            filter.type = CONSTANTS.DIALOG_TYPES.PUBLICCHAT;
-        }
-
         QB.chat.dialog.list(filter, function (err, resDialogs) {
             if (err) {
                 reject(err);
             }
 
-            var dialogs = resDialogs.items;
             self._cache = {};
 
-            _.each(dialogs, function (dialog) {
+            _.each(resDialogs.items, function (dialog) {
                 if (!self._cache[dialog._id]) {
                     self._cache[dialog._id] = helpers.compileDialogParams(dialog);
                 }
-
-                self.renderDialog(self._cache[dialog._id]);
             });
 
-            if (self.dialogId) {
-                var dialogElem = document.getElementById(self.dialogId);
-                if (dialogElem) dialogElem.classList.add('selected');
-            }
-
-            if (dialogs.length < self.limit) {
-                self.dialogsListContainer.classList.add('full');
-            }
-            self.dialogsListContainer.classList.remove('loading');
+            self._loadDialogs(type);
 
             resolve();
         });
     });
+};
+
+Dialog.prototype._loadDialogs = function (type, keyword) {
+    var self = this;
+    var dialogs = _.filter(self._cache, function(dialog) {
+        var ret = dialog.name.match(new RegExp(keyword, "i"))
+
+        if (type == 'group')
+            ret = ret && (dialog.type == 2);    // group
+        return ret;
+    })
+
+    _.each(dialogs, function (dialog) {
+        self.renderDialog(dialog);
+    });
+
+    if (self.dialogId) {
+        var dialogElem = document.getElementById(self.dialogId);
+        if (dialogElem) dialogElem.classList.add('selected');
+    }
+
+    if (dialogs.length < self.limit) {
+        self.dialogsListContainer.classList.add('full');
+    }
+    self.dialogsListContainer.classList.remove('loading');
 };
 
 Dialog.prototype.renderDialog = function (dialog, setAsFirst) {

@@ -120,25 +120,17 @@ App.prototype.loadChatList = function (tab) {
 
         search.value = '';
         search.addEventListener('keyup', function (e) {
+            helpers.clearView(dialogModule.dialogsListContainer);
+            dialogModule.dialogsListContainer.classList.remove('full');
+
             if (tab.dataset.type == 'chat' || tab.dataset.type == 'group') {
-                var dialogs = _.filter(dialogModule._cache, function(dialog) {
-                    return dialog.name.match(new RegExp(search.value, "i"));
-                })
-
-                helpers.clearView(dialogModule.dialogsListContainer);
-                dialogModule.dialogsListContainer.classList.remove('full');
-
-                _.each(dialogs, function (dialog) {
-                    dialogModule.renderDialog(dialogModule._cache[dialog._id]);
-                });                
+                dialogModule._loadDialogs(tab.dataset.type, search.value);   
             } else {
                 var type = document.querySelector('.j-sidebar__tab_link.active').dataset.type;
                 if (type == 'contact') {
                     type = document.querySelector('.filter-item.active').dataset.type;                    
                 }
                 
-                helpers.clearView(dialogModule.dialogsListContainer);
-                dialogModule.dialogsListContainer.classList.remove('full');
                 userModule._loadUsers(type, search.value);
             }
         });
@@ -174,13 +166,16 @@ App.prototype.loadChatList = function (tab) {
             if (tab.dataset.type == 'group') {
                 var elem = helpers.toHtml(helpers.fillTemplate('tpl_newGroup'))[0]
                 self.moreFeautrePanel.appendChild(elem);
+                // filter group
+                dialogModule._loadDialogs(tab.dataset.type);
+            } else {
+                // retrieve dialogs from server
+                dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
+                    resolve(dialogs);
+                }).catch(function(error){
+                    reject(error);
+                });            
             }
-
-            dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
-                resolve(dialogs);
-            }).catch(function(error){
-                reject(error);
-            });            
         }
     });
 };
