@@ -67,9 +67,6 @@ router.on({
         }
 
         function _renderNewDialogTmp(){
-            // var createDialogTab = document.querySelector('.j-sidebar__create_dialog');
-
-            // createDialogTab.classList.add('active');
             app.sidebar.classList.remove('active');
 
             app.buildCreateDialogTpl();
