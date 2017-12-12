@@ -385,6 +385,7 @@ Dialog.prototype.createDialog = function (params) {
                 var tab = document.querySelector('.j-sidebar__tab_link[data-type="chat"]');
                 app.loadChatList(tab).then(function () {
                     self.renderDialog(self._cache[id], true);
+                    router.navigate('/dialog/' + id);
                 }).catch(function(error){
                     console.error(error);
                 });
