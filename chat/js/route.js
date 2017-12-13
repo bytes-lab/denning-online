@@ -44,6 +44,8 @@ router.on({
         } else {
             app.renderDashboard('chat');
             dialogModule.loadDialogs('chat');
+            var tab = document.querySelector('.j-sidebar__tab_link[data-type="chat"]');
+            app.loadChatList(tab);
         }
     },
     '/dialog/create': function(){

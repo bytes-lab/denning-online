@@ -84,7 +84,7 @@ App.prototype.loadWelcomeTpl = function () {
 App.prototype.tabSelectInit = function () {
     var self = this,
         tabs = document.querySelectorAll('.j-sidebar__tab_link');
-    
+
     _.each(tabs, function (item) {
         item.addEventListener('click', function (e) {
             e.preventDefault();
@@ -160,7 +160,7 @@ App.prototype.loadChatList = function (tab) {
                     dialogModule._loadDialogs(tab.dataset.type, keyword, item.dataset.type)
                 }
             });
-        });                
+        });
 
         if (tab.dataset.type == 'contact' || tab.dataset.type == 'favourite') {
             userModule.loadUsers(tab.dataset.type, '.*').then(function(users) {
@@ -176,10 +176,6 @@ App.prototype.loadChatList = function (tab) {
                 dialogModule._loadDialogs(tab.dataset.type);
             } else {
                 // retrieve dialogs from server
-                if (!userModule.denningUsers) {
-                    userModule.getUsers();
-                }
-
                 dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
                     resolve(dialogs);
                 }).catch(function(error){
