@@ -176,10 +176,10 @@ App.prototype.loadChatList = function (tab) {
                 dialogModule._loadDialogs(tab.dataset.type);
             } else {
                 // retrieve dialogs from server
-                if (!userModule.denningUsers) {
+                if (!userModule.denningUsers || _.size(userModule._cache) < 2) {
                     userModule.getUsers();
                 }
-                
+
                 dialogModule.loadDialogs(tab.dataset.type).then(function(dialogs) {
                     resolve(dialogs);
                 }).catch(function(error){
