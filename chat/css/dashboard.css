@@ -1,5 +1,5 @@
 .dashboard {
-    max-width: 990px;
+    max-width: 1100px;
     border-top: none;
     border: 1px solid #DADFE1;
     margin: 0 auto;
@@ -684,7 +684,7 @@
 
 @media screen and (min-width: 880px) {
     .sidebar {
-        flex: 1 0 260px;
+        flex: 1 0 350px;
         position: static;
         left: 100%;
     }
@@ -718,13 +718,17 @@
 
 .filter-item {
     display: inline-block;
-    width: 40%;
+    width: 23%;
     color: red;
     background-color: white;
     margin: 0 -3px;
     text-align: center;
     border: 1px solid;
     padding: 7px 0px;
+}
+
+.filter-item:nth-child(2) {
+    width: 31%;
 }
 
 .filter-item.active, .filter-item:hover {
@@ -735,12 +739,10 @@
 
 .filter-item:first-child {
     border-radius: 8px 0 0 8px;
-    width: 30%;
 }
 
 .filter-item:last-child {
     border-radius: 0 8px 8px 0;
-    width: 30%;
 }
 
 .new-group {
