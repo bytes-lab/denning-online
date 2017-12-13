@@ -34,7 +34,6 @@ router.on({
                     return;
                 }
                 app.renderDashboard('favourite');
-                dialogModule.loadDialogs('chat');
                 // for binding listeners
                 var tab = document.querySelector('.j-sidebar__tab_link[data-type="chat"]');
                 app.loadChatList(tab);
@@ -46,7 +45,6 @@ router.on({
             app.sidebar.classList.add('active');
         } else {
             app.renderDashboard('favourite');
-            dialogModule.loadDialogs('chat');
             var tab = document.querySelector('.j-sidebar__tab_link[data-type="chat"]');
             app.loadChatList(tab);
         }

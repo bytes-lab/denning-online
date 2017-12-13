@@ -24,20 +24,6 @@ Dialog.prototype.init = function () {
     self.sidebar = document.querySelector('.j-sidebar');
     self.dialogsListContainer = document.querySelector('.j-sidebar__dilog_list');
     self.content = document.querySelector('.j-content');
-
-    // self.dialogsListContainer.addEventListener('scroll', function loadMoreDialogs() {
-    //     var container = self.dialogsListContainer,
-    //         position = container.scrollHeight - (container.scrollTop + container.offsetHeight);
-
-    //     if (container.classList.contains('full')) {
-    //         return false;
-    //     }
-
-    //     if (position <= 50 && !container.classList.contains('loading')) {
-    //         var type = document.querySelector('.j-sidebar__tab_link.active').dataset.type;
-    //         self.loadDialogs(type);
-    //     }
-    // });
 };
 
 Dialog.prototype.loadDialogs = function (type) {
@@ -114,9 +100,9 @@ Dialog.prototype._loadDialogs = function (type, keyword, group) {
         if (dialogElem) dialogElem.classList.add('selected');
     }
 
-    if (dialogs.length < self.limit) {
-        self.dialogsListContainer.classList.add('full');
-    }
+    // if (dialogs.length < self.limit) {
+    //     self.dialogsListContainer.classList.add('full');
+    // }
     self.dialogsListContainer.classList.remove('loading');
 };
 

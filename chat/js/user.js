@@ -85,6 +85,9 @@ User.prototype.addToCache = function(user) {
             last_request_at: user.last_request_at
         };
     } else {
+        if (!self._cache[id].email)
+            self._cache[id].email = user.email;
+        
         self._cache[id].last_request_at = user.last_request_at;
     }
 
