@@ -33,8 +33,11 @@ router.on({
                     router.navigate('/login');
                     return;
                 }
-                app.renderDashboard('chat');
+                app.renderDashboard('favourite');
                 dialogModule.loadDialogs('chat');
+                // for binding listeners
+                var tab = document.querySelector('.j-sidebar__tab_link[data-type="chat"]');
+                app.loadChatList(tab);
             }).catch(function() {
                router.navigate('/login');
             });
@@ -42,7 +45,7 @@ router.on({
             app.loadWelcomeTpl();
             app.sidebar.classList.add('active');
         } else {
-            app.renderDashboard('chat');
+            app.renderDashboard('favourite');
             dialogModule.loadDialogs('chat');
             var tab = document.querySelector('.j-sidebar__tab_link[data-type="chat"]');
             app.loadChatList(tab);

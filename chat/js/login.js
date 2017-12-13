@@ -23,7 +23,7 @@ Login.prototype.init = function(){
             };                        
         }
 
-        if(user && !app.user){
+        if(user.email && !app.user){
             app.room = user.tag_list;
             self.login(user)
                 .then(function(){
