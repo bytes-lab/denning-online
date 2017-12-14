@@ -157,6 +157,8 @@ User.prototype.getUsers = function () {
 
     return new Promise(function(resolve, reject) {
         self._cache = {};
+        self._cache[app.user.id] = app.user;
+        
         var base_url = 'http://denningsoft.dlinkddns.com/denningwcf/online/v2/chat/contact?ssid={334E910C-CC68-4784-9047-0F23D37C9CF9}&uid=';
         jQuery.ajax({
             type: 'get',
