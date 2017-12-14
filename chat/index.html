@@ -58,8 +58,6 @@
 
     <script type="text/template" id="tpl_dashboardContainer">
         <div class="dashboard">
-            <div class="content j-content">
-            </div>
             <div class="sidebar j-sidebar active">
                 <div class="sidebar__inner">                    
                     <div class="sidebar__header" <% standalone === true ? '' : print('style="display: none;"') %>>
@@ -107,6 +105,8 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div class="content j-content">
             </div>
         </div>
     </script>
