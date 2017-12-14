@@ -366,7 +366,6 @@
     color: #4A4A4A;
     overflow: hidden;
     white-space: pre-line;
-    word-break: break-all;
 }
 
 .message__text a {
