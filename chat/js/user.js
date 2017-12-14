@@ -137,7 +137,8 @@ User.prototype.getUsers = function () {
                     field: 'email', 
                     param: 'in', 
                     value: helpers.getEmails(self.denningUsers)
-                }
+                },
+                per_page: 10000
             }
 
             QB.users.listUsers(params, function (err, responce) {
