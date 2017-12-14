@@ -285,6 +285,9 @@ Message.prototype.renderMessage = function (message, setAsFirst) {
             helpers.fillMessageBody(message.message || '') :
             helpers.fillMessageBody(message.body || '');
 
+        console.debug('#######');
+        console.debug(message.attachments);
+        
         messagesHtml = helpers.fillTemplate('tpl_message', {
             message: {
                 status: message.status,
