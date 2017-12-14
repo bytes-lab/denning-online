@@ -233,7 +233,20 @@
                         <div class="message__attachments_wtap">
                             <% _.each(message.attachments, function(attachment){ %>
                             <a href="<%= attachment.src %>" target="_blank">
-                                <img src="<%= attachment.src %>" alt="attachment" class="message_attachment">
+                                <p><%= attachment.name %></p>
+                                <% if (attachment.type.indexOf('image') != -1) { %>
+                                    <img src="<%= attachment.src %>" alt="attachment" class="message_attachment">
+                                <% } else if (attachment.type.indexOf('audio') != -1) { %>
+                                    <img src="./img/audio.png" alt="attachment" class="message_attachment icon">
+                                <% } else if (attachment.type.indexOf('pdf') != -1) { %>
+                                    <img src="./img/pdf.png" alt="attachment" class="message_attachment icon">                                
+                                <% } else if (attachment.type.indexOf('word') != -1) { %>
+                                    <img src="./img/word.png" alt="attachment" class="message_attachment icon">                                
+                                <% } else if (attachment.type.indexOf('video') != -1) { %>
+                                    <img src="./img/video.ico" alt="attachment" class="message_attachment icon">
+                                <% } else { %>
+                                    <img src="./img/file.ico" alt="attachment" class="message_attachment icon">
+                                <% } %>
                             </a>
                             <% }); %>                            
                         </div>

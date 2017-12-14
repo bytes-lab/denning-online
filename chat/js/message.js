@@ -107,7 +107,10 @@ Message.prototype.submitSendMessage = function (dialogId) {
         msg.extension.attachments = [];
 
         for (var attach in attachments) {
-            msg.extension.attachments.push({id: attach, type: CONSTANTS.ATTACHMENT.TYPE});
+            msg.extension.attachments.push({id: attach, 
+                                            type: attachments[attach].type,
+                                            name: attachments[attach].name
+                                           });
         }
 
         msg.body = CONSTANTS.ATTACHMENT.BODY;
@@ -374,6 +377,7 @@ Message.prototype.prepareToUpload = function (e) {
 
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
+        console.debug(file.type);
         self.uploadFilesAndGetIds(file, dialogId);
     }
 
@@ -401,8 +405,12 @@ Message.prototype.uploadFilesAndGetIds = function (file, dialogId) {
             alert('ERROR: ' + err.detail);
         } else {
             preview.remove();
-
-            dialogModule._cache[dialogId].draft.attachments[response.uid] = helpers.getSrcFromAttachmentId(response.uid);
+            // jks
+            dialogModule._cache[dialogId].draft.attachments[response.uid] = { 
+                src: helpers.getSrcFromAttachmentId(response.uid),
+                type: file.type,
+                name: file.name
+            };
 
             self.submitSendMessage(dialogId);
         }

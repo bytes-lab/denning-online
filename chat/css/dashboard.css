@@ -395,6 +395,12 @@
     margin: 0 0 5px 0;
 }
 
+.message_attachment.icon {
+    width: 100%;
+    max-width: 98px;
+    margin-top: 10px;
+}
+
 .message_attachment.loaded {
     position: static;
     visibility: visible;
@@ -441,6 +447,7 @@
     overflow: hidden;
     color: #778594;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .attach_btn i {
