@@ -30,14 +30,8 @@ materialAdmin
                     // use build-in angular filter
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
                     orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-
-                    this.new_ic = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone3 = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-
                     params.total(orderedData.length); // set total for recalc pagination
-                    return this.new_ic, this.name, this.email, this.phone3;
+                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }
             })      
         }
