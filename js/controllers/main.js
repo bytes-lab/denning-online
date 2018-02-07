@@ -449,42 +449,12 @@ materialAdmin
     // Profile
     //=================================================
 
-    .controller('profileCtrl', function(growlService){
+    .controller('profileCtrl', function(growlService, Auth){
         
         //Get Profile Information from profileService Service
         
         //User
-        this.profile = {
-            fullName: "Jason Chan",
-            ID: "ER4352342523",
-            position: "Scenior Lawyer",
-            email: "ad@min.com",
-            
-            firmName: "Damadram Mariah & Associates",
-            initials: "DMA",
-            description1 : "Nice company",
-            description2 : "I love here",
-            address1: "No.73 B, 1st Floor",
-            address2: "Jalan Sultan Yusuff,",
-            address3: "",
-            postcode: "30000",
-            state: "Perak",
-            city: "Ipoh",
-            country: "Malaysia",
-            phone1: "(05)2410-258",
-            phone2: "",
-            phone3: "",
-            fax1: "(05)2410-259",
-            fax2: "",
-            webSite: "",
-            IRDBranch: "BR-cow",
-            GSTRegistered: "",
-            GSTRate: 6,
-            RegistrationNo: "IR-4235234",
-            RegisterDate: "12/21/2015",
-            EffectiveDate: "1/1/2016",
-            TaxablePeriod: "6 months"
-        }
+        this.profile = Auth.getUserInfo();
 
         //Edit
         this.editSummary = 0;
