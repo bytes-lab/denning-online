@@ -18,39 +18,31 @@ materialAdmin
                 deferred.resolve(service.contacts);
                 return deferred.promise;
             } else {
-                return $http.get('data/contacts.json')
-                .then(function(resp){
+                return $http({
+                    method: 'GET',
+                    url: 'http://43.252.215.81/denningwcf/v1/party',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "webuser-sessionid": "testdenningSkySea"
+                    }
+                }).then(function(resp) {
                     service.contacts = resp.data;                
                     return resp.data;
-                })                
+                });    
             }
         }
 
         function getItem(code) {
-            if(service.contacts) {
-                var deferred = $q.defer();
-                var item = service.contacts.filter(function(c) {
-                    return c.code == code;
-                });
-
-                if (item.length == 1)
-                    deferred.resolve(item[0]);
-                else
-                    deferred.reject(new Error('No Item with the code'));
-
-                return deferred.promise;
-            } else {
-                return getList().then(function(data) {
-                    var item = service.contacts.filter(function(c) {
-                        return c.code == code;
-                    });
-
-                    if (item.length == 1)
-                        return item[0];
-                    else
-                        throw new Error('No such item');
-                });
-            }
+            return $http({
+                method: 'GET',
+                url: 'http://43.252.215.81/denningwcf/v1/app/contact/'+code,
+                headers: {
+                    "Content-Type": "application/json",
+                    "webuser-sessionid": "testdenningSkySea"
+                }
+            }).then(function(resp) {
+                return resp.data;
+            });    
         }
 
         function save(contact) {
