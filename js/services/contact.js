@@ -47,6 +47,8 @@ materialAdmin
 
         function save(contact) {
             var deferred = $q.defer();
+            delete contact.regex;
+            console.log(contact);
 
             $timeout(function(){
                 var idx = service.contacts.map(function(c) { return c.code; }).indexOf(contact.code);

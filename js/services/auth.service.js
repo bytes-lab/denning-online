@@ -180,32 +180,29 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
     }
     service.login = function(email, pass) {
         var deferred = $q.defer();
-        $timeout(function(){
-            if ( email == 'demo@demo.com' && pass == "demo") {
-                deferred.resolve({data: service.fakeUser});
-            } else {
-                deferred.reject({
-                    message: 'Your credential is not correct. Please try again.'
-                });
-            }
-        }, 1000)
-        // $http({
-        //     method: 'POST',
-        //     url: 'http://denningsoft.dlinkddns.com/denningwcf/v1/signIn',
-        //     data: JSON.stringify({email: email, password: pass}),
-        //     headers: {
-        //         "Accept": "application/json",
-        //         "Content-Type": "application/json",
-        //         // "X-Login-Ajax-call": 'true',
-        //         // "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}"
-        //     }
-        // }).then(function(response) {
-        //     if (response.data == 'ok') {
-        //         // success
+        // $timeout(function(){
+        //     if ( email == 'demo@demo.com' && pass == "demo") {
+        //         deferred.resolve({data: service.fakeUser});
         //     } else {
-        //         // failed
+        //         deferred.reject({
+        //             message: 'Your credential is not correct. Please try again.'
+        //         });
         //     }
-        // });
+        // }, 1000)
+        return $http({
+            method: 'POST',
+            url: 'http://43.252.215.163:8313/denningapi/v1/signIn',
+            data: JSON.stringify({email: email, password: pass}),
+            headers: {
+                "Content-Type": "application/json",
+                "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}"
+            }
+        }).then(function(response) {
+            return response.data;
+        }).then(function(info) {
+            service.setUserInfo(info);
+            return info;
+        });
 
         // $http.post('http://denningsoft.dlinkddns.com/denningwcf/v1/signIn', 
         //     {
