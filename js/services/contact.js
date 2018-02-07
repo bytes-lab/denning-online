@@ -13,23 +13,17 @@ materialAdmin
         service.delete = delete_;
 
         function getList() {
-            if (service.contacts) {
-                var deferred = $q.defer();
-                deferred.resolve(service.contacts);
-                return deferred.promise;
-            } else {
-                return $http({
-                    method: 'GET',
-                    url: 'http://43.252.215.81/denningwcf/v1/party',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "webuser-sessionid": "testdenningSkySea"
-                    }
-                }).then(function(resp) {
-                    service.contacts = resp.data;                
-                    return resp.data;
-                });    
-            }
+            return $http({
+                method: 'GET',
+                url: 'http://43.252.215.81/denningwcf/v1/party',
+                headers: {
+                    "Content-Type": "application/json",
+                    "webuser-sessionid": "testdenningSkySea"
+                }
+            }).then(function(resp) {
+                service.contacts = resp.data;                
+                return resp.data;
+            });    
         }
 
         function getItem(code) {
@@ -46,25 +40,20 @@ materialAdmin
         }
 
         function save(contact) {
-            var deferred = $q.defer();
-            delete contact.regex;
-            console.log(contact);
+            var method = contact.code ? 'PUT': 'POST';
+            delete contact.relatedMatter;
 
-            $timeout(function(){
-                var idx = service.contacts.map(function(c) { return c.code; }).indexOf(contact.code);
-                if(idx != -1) {
-                    service.contacts[idx] = contact;
-                } else {
-                    // should be done on server side
-                    contact.code = Math.floor(Math.random() * 1000 + 1);
-                    service.contacts.push(contact);
-                }
-
-                // @@ send post request to server to save the item
-                deferred.resolve(contact);
-            }, 100);
-
-            return deferred.promise;
+            return $http({
+                method: method,
+                url: 'http://43.252.215.81/denningwcf/v1/app/contact',
+                headers: {
+                    "Content-Type": "application/json",
+                    "webuser-sessionid": "testdenningSkySea"
+                },
+                data: contact
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
         function delete_(contact) {
