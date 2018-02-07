@@ -178,8 +178,20 @@ materialAdmin
             if(angular.isUndefined(item))
                 return;
 
-            $http.get('http://43.252.215.81/online/denningwcf/v1/generalSearch?ssid=testdenningOnline&uid=onlinedev@denning.com.my&search=' + item.value +'&category=' + self.selectedSearchCategory + '&isAutoComplete=1')                  
-            .then(function(resp){
+
+            $http({
+                method: 'GET',
+                url: 'http://43.252.215.81/denningwcf/v1/generalSearch',
+                headers: {
+                    "Content-Type": "application/json",
+                    "webuser-sessionid": "testdenningSkySea"
+                }, 
+                params: {
+                    search: item.value,
+                    category: self.selectedSearchCategory,
+                    isAutoComplete: 1
+                }
+            }).then(function(resp) {
 
                 self.searchRes = resp.data.map(function(item){
                     var newItem = angular.copy(item);
@@ -194,10 +206,7 @@ materialAdmin
 
                 if ($state.current.name != 'search')
                     $state.go('search');
-
-                console.log(self.searchRes);
-            });
-         
+            });         
         }
 
         /**
