@@ -141,8 +141,17 @@ materialAdmin
                 return deferred.promise;
             }
 
-            $http.get('http://43.252.215.81/online/denningwcf/v1/generalSearch/keyword?ssid=testdenningOnline&uid=onlinedev@denning.com.my&search=' + query)
-            .then(function(resp){
+            $http({
+                method: 'GET',
+                url: 'http://43.252.215.81/denningwcf/v1/generalSearch/keyword',
+                headers: {
+                    "Content-Type": "application/json",
+                    "webuser-sessionid": "testdenningSkySea"
+                }, 
+                params: {
+                    search: query
+                }
+            }).then(function(resp) {
                 var results = [];
                 resp.data.forEach(function(item){
                     results.push({
@@ -151,9 +160,7 @@ materialAdmin
                     })
                 });
                 deferred.resolve( results ); 
-
-            })      
-               
+            });
             return deferred.promise;
         }
 
