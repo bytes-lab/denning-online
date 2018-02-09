@@ -221,6 +221,11 @@ materialAdmin
           // });
         }
 
+        self.navItem = function(item) {
+            if (item.Title.indexOf('Contact') == 0) {
+                $state.go('contacts.edit', {id: item.code});
+            }
+        }
         /**
          * Create filter function for a query string
          */

@@ -9,7 +9,7 @@
           <md-card ng-if="mactrl.searchRes.length">
           <md-list flex>       
             <div ng-repeat="item in mactrl.searchRes">     
-                <md-list-item class="md-3-line" ng-click="null" ng-if="item.parseJSON!=''" style="padding: 10px;">
+                <md-list-item class="md-3-line" ng-click="mactrl.navItem(item)" ng-if="item.parseJSON!=''" style="padding: 10px;">
                   <!-- <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" /> -->
                   <div class="md-list-item-text" layout="column">
                     <h3 style="color: purple; font-size: 24px; font-weight: 500; margin: 10px 0;">{{ item.Title }}</h3>
