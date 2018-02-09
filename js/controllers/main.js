@@ -113,6 +113,11 @@ materialAdmin
         self.searchRes = [];
         self.selectedItem = '';
         self.currentText = '';
+        self.headers = {
+              "Content-Type": "application/json",
+              "webuser-sessionid": "testdenningSkySea",
+              "webuser-id": "online@denning.com.my"
+           };
 
         function newState(state) {
         }
@@ -144,10 +149,7 @@ materialAdmin
             $http({
                 method: 'GET',
                 url: 'http://43.252.215.81/denningwcf/v1/generalSearch/keyword',
-                headers: {
-                    "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea"
-                }, 
+                headers: self.headers, 
                 params: {
                     search: query
                 }
@@ -178,21 +180,16 @@ materialAdmin
             if(angular.isUndefined(item))
                 return;
 
-
             $http({
                 method: 'GET',
                 url: 'http://43.252.215.81/denningwcf/v1/generalSearch',
-                headers: {
-                    "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea"
-                }, 
+                headers: self.headers, 
                 params: {
                     search: item.value,
                     category: self.selectedSearchCategory,
                     isAutoComplete: 1
                 }
             }).then(function(resp) {
-
                 self.searchRes = resp.data.map(function(item){
                     var newItem = angular.copy(item);
                     try {

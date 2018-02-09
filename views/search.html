@@ -12,10 +12,23 @@
                 <md-list-item class="md-3-line" ng-click="null" ng-if="item.parseJSON!=''" style="padding: 10px;">
                   <!-- <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" /> -->
                   <div class="md-list-item-text" layout="column">
-                    <h3 style="color: purple; font-weight: 700;">{{ item.Title }}</h3>
+                    <h3 style="color: purple; font-size: 24px; font-weight: 500; margin: 10px 0;">{{ item.Title }}</h3>
                     <p ng-repeat="entry in item.parseJSON" ng-if="entry.value!=''">
                         {{entry.label}}: {{entry.value}}
                     </p>
+                    <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Contact')==0" style="margin-left: -8px;">
+                      <md-button class="md-raised md-warn">Related Matters</md-button>
+                      <md-button class="md-raised md-warn">Contact Folder</md-button>
+                      <md-button class="md-raised md-warn">Upload</md-button>
+                    </section>
+                    <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('File No')==0" style="margin-left: -8px;">
+                      <md-button class="md-raised md-warn">File Folder</md-button>
+                      <md-button class="md-raised md-warn">Accounts</md-button>
+                      <md-button class="md-raised md-warn">File Note</md-button>
+                      <md-button class="md-raised md-warn">Payment Record</md-button>
+                      <md-button class="md-raised md-warn">Template</md-button>
+                      <md-button class="md-raised md-warn">Upload</md-button>
+                    </section>
                   </div>
                 </md-list-item>
                 <md-divider ng-if="!$last"></md-divider>

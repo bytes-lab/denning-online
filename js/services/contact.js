@@ -11,15 +11,17 @@ materialAdmin
         service.getItem = getItem;
         service.save = save;
         service.delete = delete_;
+        service.headers = {
+                              "Content-Type": "application/json",
+                              "webuser-sessionid": "testdenningSkySea",
+                              "webuser-id": "online@denning.com.my"
+                           };
 
         function getList() {
             return $http({
                 method: 'GET',
                 url: 'http://43.252.215.81/denningwcf/v1/party',
-                headers: {
-                    "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea"
-                }
+                headers: service.headers
             }).then(function(resp) {
                 service.contacts = resp.data;                
                 return resp.data;
@@ -30,10 +32,7 @@ materialAdmin
             return $http({
                 method: 'GET',
                 url: 'http://43.252.215.81/denningwcf/v1/app/contact/'+code,
-                headers: {
-                    "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea"
-                }
+                headers: service.headers
             }).then(function(resp) {
                 return resp.data;
             });    
@@ -46,10 +45,7 @@ materialAdmin
             return $http({
                 method: method,
                 url: 'http://43.252.215.81/denningwcf/v1/app/contact',
-                headers: {
-                    "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea"
-                },
+                headers: service.headers,
                 data: contact
             }).then(function(response) {
                 return response.data;
