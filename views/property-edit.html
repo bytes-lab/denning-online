@@ -2,14 +2,19 @@
 
     <div class="card">
         <div class="card-header" style="display: flex;">
-            <h2 ng-if="!vm.viewMode">Property Edit</h2>
-            <h2 ng-if="vm.viewMode">Property Detail</h2>
-            <div ng-if="!vm.viewMode">
-                <a class="btn bgm-cyan btn-sm top_button_first" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.property.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-                <a class="btn btn-primary btn-sm top_button_first" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.property.update && vm.can_edit">Save</a>
-                <a class="btn btn-danger btn-sm top_button" ng-class="vm.userInfo.priority.property.update ? '': 'top_button_first'" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.property.delete">delete</a>
-                <a class="btn btn-default btn-sm m-l-10" ng-class="(vm.userInfo.priority.property.update || vm.userInfo.priority.property.delete) ? '': 'top_button_first'" ng-click="vm.cancel()" >Cancel</a>
+            <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
+                <h2 style="display: inline;" ng-if="!vm.viewMode">Property Edit</h2>
+                <h2 style="display: inline;" ng-if="vm.viewMode">Property Detail</h2>
+                <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
+                <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.property)" ng-if="vm.userInfo.priority.property.delete">Delete</a>
+                <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.property.update && vm.can_edit">Save</a>
+                <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.property.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>   
             </div>
+            <div class="col-md-10" ng-if="vm.viewMode">
+                <div class="m-t-30">
+                    <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+                </div>        
+            </div>            
         </div>
                 
         <div class="card-body card-padding">

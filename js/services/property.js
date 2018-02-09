@@ -29,7 +29,7 @@ materialAdmin
         function getItem(code) {
             return $http({
                 method: 'GET',
-                url: 'http://43.252.215.81/denningwcf/v1/app/propertie/'+code,
+                url: 'http://43.252.215.81/denningwcf/v1/app/property/'+code,
                 headers: {
                     "Content-Type": "application/json",
                     "webuser-sessionid": "testdenningSkySea"
@@ -39,33 +39,33 @@ materialAdmin
             });    
         }
 
-        function save(propertie) {
-            var method = propertie.code ? 'PUT': 'POST';
-            delete propertie.relatedMatter;
+        function save(property) {
+            var method = property.code ? 'PUT': 'POST';
+            delete property.relatedMatter;
 
             return $http({
                 method: method,
-                url: 'http://43.252.215.81/denningwcf/v1/app/propertie',
+                url: 'http://43.252.215.81/denningwcf/v1/property',
                 headers: {
                     "Content-Type": "application/json",
                     "webuser-sessionid": "testdenningSkySea"
                 },
-                data: propertie
+                data: property
             }).then(function(response) {
                 return response.data;
             });
         }
 
-        function delete_(propertie) {
+        function delete_(property) {
             var deferred = $q.defer();
 
             $timeout(function(){
-                var idx = service.properties.map(function(c) { return c.code; }).indexOf(propertie.code);
+                var idx = service.properties.map(function(c) { return c.code; }).indexOf(property.code);
                 if(idx != -1) {
                     service.properties.splice(idx, 1);
-                    deferred.resolve(propertie);
+                    deferred.resolve(property);
                 } else {
-                    deferred.reject(new Error('There is no such propertie'));
+                    deferred.reject(new Error('There is no such property'));
                 }
                 // @@ send delete request to server to delete the item
             }, 100);

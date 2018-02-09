@@ -13,7 +13,7 @@ materialAdmin
         });        
         
         function clickHandler(item) {
-            $state.go('properties.edit', {'id': item.new_ic});
+            $state.go('properties.edit', {'id': item.code});
         }
 
         function initializeTable () {
@@ -96,8 +96,7 @@ materialAdmin
         self.can_edit = false;
 
         if($stateParams.id) {
-            propertyService.getItem($stateParams.id)
-            .then(function(item){
+            propertyService.getItem($stateParams.id).then(function(item){
                 self.property = item;
             });
         } else {
@@ -108,11 +107,6 @@ materialAdmin
             propertyService.save(self.property).then(function(property) {
                 self.property = property;
                 $state.go('properties.list');
-            })
-            .catch(function(err){
-                //Handler
-
-                //$scope.formname.propertyInfo.$error.push({meessage:''});
             });
         }
 
