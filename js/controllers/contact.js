@@ -94,7 +94,19 @@ materialAdmin
         self.viewMode = false;  // for edit / create
         self.userInfo = Auth.getUserInfo();
         self.openDelete = openDelete;
-        self.can_edit = false;
+        self.queryIDTypes = queryIDTypes;
+        self.can_edit = false;        
+        self.IDTypes = [];
+
+        contactService.getIDTypeList().then(function(data) {
+            self.IDTypes = data;
+        });
+
+        function queryIDTypes(searchText) {
+            return self.IDTypes.filter(function(c) {
+                return c.description.search(new RegExp(searchText, "i")) > -1;
+            });
+        }
 
         if ($stateParams.id) {
             contactService.getItem($stateParams.id)

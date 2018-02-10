@@ -9,6 +9,7 @@ materialAdmin
         service.contacts = null;
         service.getList = getList;
         service.getItem = getItem;
+        service.getIDTypeList = getIDTypeList;
         service.save = save;
         service.delete = delete_;
         service.headers = {
@@ -32,6 +33,16 @@ materialAdmin
             return $http({
                 method: 'GET',
                 url: 'http://43.252.215.81/denningwcf/v1/app/contact/'+code,
+                headers: service.headers
+            }).then(function(resp) {
+                return resp.data;
+            });    
+        }
+
+        function getIDTypeList() {
+            return $http({
+                method: 'GET',
+                url: 'http://43.252.215.81/denningwcf/v1/IDType',
                 headers: service.headers
             }).then(function(resp) {
                 return resp.data;
