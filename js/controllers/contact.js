@@ -98,6 +98,7 @@ materialAdmin
         self.can_edit = false;        
         self.IDTypes = [];
         self.Salutations = [];
+        self.IRDBranches = [];
 
         contactService.getIDTypeList().then(function(data) {
             self.IDTypes = data;
@@ -105,6 +106,10 @@ materialAdmin
 
         contactService.getSalutationList().then(function(data) {
             self.Salutations = data;
+        });
+
+        contactService.getIRDBranchList().then(function(data) {
+            self.IRDBranches = data;
         });
 
         function queryFields(field, searchText) {

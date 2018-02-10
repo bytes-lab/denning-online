@@ -11,6 +11,7 @@ materialAdmin
         service.getItem = getItem;
         service.getIDTypeList = getIDTypeList;
         service.getSalutationList = getSalutationList;
+        service.getIRDBranchList = getIRDBranchList;
         service.save = save;
         service.delete = delete_;
         service.headers = {
@@ -60,11 +61,22 @@ materialAdmin
             });    
         }
 
+        function getIRDBranchList() {
+            return $http({
+                method: 'GET',
+                url: 'http://43.252.215.81/denningwcf/v1/IRDBranch',
+                headers: service.headers
+            }).then(function(resp) {
+                return resp.data;
+            });    
+        }        
+
         function save(contact) {
             var method = contact.code ? 'PUT': 'POST';
             delete contact.relatedMatter;
             contact.title = contact.title.description;
-            
+            // contact.irdBranch = contact.irdBranch.description;
+
             console.log(contact);
 
             return $http({

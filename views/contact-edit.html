@@ -251,7 +251,18 @@
                         <dt class="p-t-10">IRD Branch</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.IRD_branch" placeholder="">
+                                <md-autocomplete
+                                    ng-disabled="!vm.can_edit"
+                                    md-selected-item="vm.contact.irdBranch"
+                                    md-search-text="iq"
+                                    md-items="item in vm.queryFields('IRDBranches', iq)"
+                                    md-item-text="item.description"
+                                    md-min-length="0"
+                                    class="default-input">
+                                    <md-item-template>
+                                        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
+                                    </md-item-template>
+                                </md-autocomplete>  
                             </div>
                         </dd>
                     </dl>
