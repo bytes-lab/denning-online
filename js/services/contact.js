@@ -12,10 +12,10 @@ materialAdmin
         service.save = save;
         service.delete = delete_;
         service.headers = {
-                              "Content-Type": "application/json",
-                              "webuser-sessionid": "testdenningSkySea",
-                              "webuser-id": "online@denning.com.my"
-                           };
+            "Content-Type": "application/json",
+            "webuser-sessionid": "testdenningSkySea",
+            "webuser-id": "online@denning.com.my"
+        };
 
         function getList() {
             return $http({

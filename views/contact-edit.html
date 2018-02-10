@@ -47,6 +47,8 @@
                             </div>
                         </dd>
                     </dl>
+                </div>
+                <div class="col-md-6 p-l-25">                    
                     <dl class="dl-horizontal">
                         <dt class="p-t-10">Full Name</dt>
                         <dd>
@@ -65,82 +67,7 @@
                             </div>
                         </dd>
                     </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Citizenship</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.citizenship" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Date of Birth</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
                 </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Marital Status</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.marital_status" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">No. of Children</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.num_children" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Occupation</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.occupation" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Tax File No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">IRD Branch</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.IRD_branch" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Customer Type</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.customer_type" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Government Department</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.government_department" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
             </div>
 
             <div class="clearfix"></div>
@@ -261,105 +188,76 @@
             </div>            
             <div class="clearfix"></div>
 
-            <h4 class="m-t-25" ng-click="vm.showGST=!vm.showGST">GST Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showGST"></i><i class="zmdi zmdi-minus" ng-if="vm.showGST"></i></h4>
-            <div class="row" ng-show="vm.showGST">
+            <h4>Other Information</h4>
+            <div class="row">
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-readonly="!vm.can_edit" ng-model="vm.contact.GST_status_verified">
-                                <i class="input-helper"></i>
-                                GST Status Verified
-                            </label>
-                        </div>
+                        <dt class="p-t-10">Citizenship</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.citizenship" placeholder="">
+                            </div>
+                        </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-readonly="!vm.can_edit" ng-model="vm.contact.GST_registered">
-                                <i class="input-helper"></i>
-                                GST Registered
-                            </label>
-                        </div>
-                    </dl>                    
+                        <dt class="p-t-10">Date of Birth</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input ng-model="vm.contact.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt class="p-t-10">Occupation</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <input ng-model="vm.contact.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </dd>
+                    </dl>
                 </div>
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Last GST Status Verified Date</dt>
+                        <dt class="p-t-10">Tax File No.</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.last_GST_status_verified_date" placeholder="">
+                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
                             </div>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">GST Reg. No.</dt>
+                        <dt class="p-t-10">IRD Branch</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.GST_reg_no" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">RMCD Approval No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.RMCD_approval_no" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.IRD_branch" placeholder="">
                             </div>
                         </dd>
                     </dl>
                 </div>                
-            </div>   
-            <div class="clearfix"></div>
-
+            </div>
             <h4 class="m-t-25" ng-click="vm.showCompany=!vm.showCompany">Company Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCompany"></i><i class="zmdi zmdi-minus" ng-if="vm.showCompany"></i></h4>
             <div class="row" ng-show="vm.showCompany">
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Office Address</dt>
+                        <dt class="p-t-10">Registered Office</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.office_address" placeholder="">
+                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
                             </div>
                         </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Director 1</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.director1" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Director 2</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.director2" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
+                    </dl>                    
              
                 </div>
                 <div class="col-md-6 p-l-25">
                     <dl class="dl-horizontal">
-                        <dt class="p-t-10">Secretray</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.secretary" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Contact Person</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.contact_person" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    
-                </div>                
+                        <div class="toggle-switch disabled" data-ts-color="green">
+                            <label for="ts4" class="ts-label">Invite To Denning</label>
+                            <input id="ts4" ng-model="vm.contact.InviteToDenning" type="checkbox" hidden="hidden">
+                            <label for="ts4" class="ts-helper"></label>
+                        </div>
+                    </dl>                    
+                </div>
             </div>          
             <div class="row">     
                 <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
