@@ -94,16 +94,21 @@ materialAdmin
         self.viewMode = false;  // for edit / create
         self.userInfo = Auth.getUserInfo();
         self.openDelete = openDelete;
-        self.queryIDTypes = queryIDTypes;
+        self.queryFields = queryFields;
         self.can_edit = false;        
         self.IDTypes = [];
+        self.Salutations = [];
 
         contactService.getIDTypeList().then(function(data) {
             self.IDTypes = data;
         });
 
-        function queryIDTypes(searchText) {
-            return self.IDTypes.filter(function(c) {
+        contactService.getSalutationList().then(function(data) {
+            self.Salutations = data;
+        });
+
+        function queryFields(field, searchText) {
+            return self[field].filter(function(c) {
                 return c.description.search(new RegExp(searchText, "i")) > -1;
             });
         }

@@ -30,8 +30,8 @@
                                 <md-autocomplete
                                     ng-disabled="!vm.can_edit"
                                     md-selected-item="vm.contact.idType"
-                                    md-search-text="searchText"
-                                    md-items="item in vm.queryIDTypes(searchText)"
+                                    md-search-text="q"
+                                    md-items="item in vm.queryFields('IDTypes', q)"
                                     md-item-text="item.description"
                                     md-min-length="0"
                                     class="default-input">
@@ -64,8 +64,18 @@
                         <dt class="p-t-10">Title</dt>
                         <dd>
                             <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.title" placeholder="Mr.
-                                ">
+                                <md-autocomplete
+                                    ng-disabled="!vm.can_edit"
+                                    md-selected-item="vm.contact.title"
+                                    md-search-text="searchText"
+                                    md-items="item in vm.queryFields('Salutations', searchText)"
+                                    md-item-text="item.description"
+                                    md-min-length="0"
+                                    class="default-input">
+                                    <md-item-template>
+                                        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
+                                    </md-item-template>
+                                </md-autocomplete>                                                                
                             </div>
                         </dd>
                     </dl>

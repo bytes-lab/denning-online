@@ -10,6 +10,7 @@ materialAdmin
         service.getList = getList;
         service.getItem = getItem;
         service.getIDTypeList = getIDTypeList;
+        service.getSalutationList = getSalutationList;
         service.save = save;
         service.delete = delete_;
         service.headers = {
@@ -49,9 +50,22 @@ materialAdmin
             });    
         }
 
+        function getSalutationList() {
+            return $http({
+                method: 'GET',
+                url: 'http://43.252.215.81/denningwcf/v1/Salutation',
+                headers: service.headers
+            }).then(function(resp) {
+                return resp.data;
+            });    
+        }
+
         function save(contact) {
             var method = contact.code ? 'PUT': 'POST';
             delete contact.relatedMatter;
+            contact.title = contact.title.description;
+            
+            console.log(contact);
 
             return $http({
                 method: method,
