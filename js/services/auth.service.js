@@ -80,7 +80,8 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
             url: 'http://43.252.215.163:8313/denningapi/v1/signIn',
             headers: {
                 "Content-Type": "application/json",
-                "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}"
+                "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}",
+                "webuser-id": "online@denning.com.my"
             },
             data: {
                 "ipWAN": "121.196.213.102",
