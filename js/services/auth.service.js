@@ -89,15 +89,47 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
                 "OS": "Windows 10",
                 "device": "laptop",
                 "deviceName": "laptop01",
-                "MAC": "44:78:3e:94:a0:e5",
+                "MAC": "44:78:3e:94:a2:e10",
                 "email": email, 
                 "password": pass
             }
         }).then(function(response) {
             return response.data;
         }).then(function(info) {
-            info.priority = service.demoPriority;
-            service.setUserInfo(info);
+            if (info.statusCode == 200) {
+                info.priority = service.demoPriority;
+                service.setUserInfo(info);
+            }
+            return info;
+        });
+    };
+
+    service.tac = function(email, tac) {
+        return $http({
+            method: 'POST',
+            url: 'http://43.252.215.163:8313/denningapi/v1/SMS/newDevice',
+            headers: {
+                "Content-Type": "application/json",
+                "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}",
+                "webuser-id": "online@denning.com.my"
+            },
+            data: {
+                "ipWAN": "121.196.213.102",
+                "ipLAN": "192.168.0.101",
+                "OS": "Windows 10",
+                "device": "laptop",
+                "deviceName": "laptop01",
+                "MAC": "44:78:3e:94:a2:e10",
+                "email": email, 
+                "activationCode": tac
+            }
+        }).then(function(response) {
+            return response.data;
+        }).then(function(info) {
+            if (info.statusCode == 200) {
+                info.priority = service.demoPriority;
+                service.setUserInfo(info);
+            }
             return info;
         });
     };

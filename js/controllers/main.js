@@ -240,32 +240,38 @@ materialAdmin
    
     })
     .controller('loginCtrl', function ($rootScope, $scope, Auth, $window, $state, legalFirmService) {
-
-        // $scope.toggleForgetPassword = function () {
-        //     $scope.forgetPassword = !$scope.forgetPassword;
-        // };
-
-        // $scope.removeAlert = function () {
-        //     $scope.loginAlert = null;
-        // };
         var self = this;
         self.login = 1;
         self.register = 0;
         self.forgot = 0;
         self.verification = 0;
         self.errorMessage = '';
-
+        
         legalFirmService.getList().then(function(data) {
             self.legalFirms = data;
         });        
             
         self.doLogin = function (userData) {
-
             return Auth.login(userData.email, userData.password)
                 .catch(function (err) {
                     self.errorMessage = err.message;
                 })
-                .then(function () {
+                .then(function (res) {
+                    if (res.statusCode == 250) {
+                        self.verification = 1;
+                        self.login = 0;
+                    } else {
+                        $state.go('home');
+                    }
+                })
+        }
+
+        self.checkTAC = function(userData) {
+            return Auth.tac(userData.email, userData.tac)
+                .catch(function (err) {
+                    self.errorMessage = "TAC is not correct.";
+                })
+                .then(function (res) {
                     $state.go('home');
                 })
         }
@@ -301,7 +307,6 @@ materialAdmin
         this.user = messageService.text;
 
         this.messageResult = messageService.getMessage(this.img, this.user, this.text);
-
 
         //Clear Notification
         this.clearNotification = function($event) {
