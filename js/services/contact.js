@@ -3,7 +3,7 @@ materialAdmin
     // Contacts
     // =========================================================================
     
-    .service('contactService', ['$q', '$timeout', '$http', function($q, $timeout, $http) {
+    .service('contactService', function($q, $timeout, $http, Auth) {
         var service = {};
 
         service.contacts = null;
@@ -16,7 +16,7 @@ materialAdmin
         service.delete = delete_;
         service.headers = {
             "Content-Type": "application/json",
-            "webuser-sessionid": "testdenningSkySea",
+            "webuser-sessionid": Auth.isAuthenticated(),
             "webuser-id": "online@denning.com.my"
         };
 
@@ -26,7 +26,7 @@ materialAdmin
                 url: 'http://43.252.215.81/denningwcf/v1/party',
                 headers: service.headers
             }).then(function(resp) {
-                service.contacts = resp.data;                
+                service.contacts = resp.data;
                 return resp.data;
             });    
         }
@@ -68,8 +68,8 @@ materialAdmin
                 headers: service.headers
             }).then(function(resp) {
                 return resp.data;
-            });    
-        }        
+            });
+        }
 
         function save(contact) {
             var method = contact.code ? 'PUT': 'POST';
@@ -106,5 +106,4 @@ materialAdmin
             return deferred.promise;
         }
         return service;
-        
-    }])
+    })

@@ -3,7 +3,7 @@ materialAdmin
     // Properties
     // =========================================================================
     
-    .service('propertyService', function($q, $timeout, $http) {
+    .service('propertyService', function($q, $timeout, $http, Auth) {
         var service = {};
 
         service.properties = null;
@@ -13,7 +13,7 @@ materialAdmin
         service.delete = delete_;
         service.headers = {
                     "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea",
+                    "webuser-sessionid": Auth.isAuthenticated(),
                     "webuser-id": "online@denning.com.my"
                 };
 

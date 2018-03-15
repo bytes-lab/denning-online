@@ -73,26 +73,49 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
             "delete": true
         }
     };
+    service.headers = {
+        "Content-Type": "application/json",
+        "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}",
+        "webuser-id": "online@denning.com.my"
+    };
 
+    new Fingerprint2().get(function(result, components) {
+        service.preData = {
+            "ipWAN": "121.196.213.102",
+            "ipLAN": "192.168.0.101",
+            "OS": "Windows 10",
+            "device": "laptop",
+            "deviceName": "laptop01",
+            "MAC": result
+        };
+    });
+    
     service.login = function(email, pass) {
+        data = angular.copy(service.preData);
+        data.email = email;
+        data.password = pass;
+
         return $http({
             method: 'POST',
             url: 'http://43.252.215.163:8313/denningapi/v1/signIn',
-            headers: {
-                "Content-Type": "application/json",
-                "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}",
-                "webuser-id": "online@denning.com.my"
-            },
-            data: {
-                "ipWAN": "121.196.213.102",
-                "ipLAN": "192.168.0.101",
-                "OS": "Windows 10",
-                "device": "laptop",
-                "deviceName": "laptop01",
-                "MAC": "44:78:3e:94:a2:e10",
-                "email": email, 
-                "password": pass
-            }
+            headers: service.headers,
+            data: data
+        }).then(function(response) {
+            return response.data;
+        });
+    };
+
+    service.staffLogin = function(email, pass, sessionID) {
+        data = angular.copy(service.preData);
+        data.email = email;
+        data.password = pass;
+        data.sessionID = sessionID;
+
+        return $http({
+            method: 'POST',
+            url: 'http://43.252.215.81/denningwcf/v1/app/staffLogin',
+            headers: service.headers,
+            data: data
         }).then(function(response) {
             return response.data;
         }).then(function(info) {
@@ -105,32 +128,17 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
     };
 
     service.tac = function(email, tac) {
+        data = angular.copy(service.preData);
+        data.email = email;
+        data.activationCode = tac;
+
         return $http({
             method: 'POST',
             url: 'http://43.252.215.163:8313/denningapi/v1/SMS/newDevice',
-            headers: {
-                "Content-Type": "application/json",
-                "webuser-sessionid": "{334E910C-CC68-4784-9047-0F23D37C9CF9}",
-                "webuser-id": "online@denning.com.my"
-            },
-            data: {
-                "ipWAN": "121.196.213.102",
-                "ipLAN": "192.168.0.101",
-                "OS": "Windows 10",
-                "device": "laptop",
-                "deviceName": "laptop01",
-                "MAC": "44:78:3e:94:a2:e10",
-                "email": email, 
-                "activationCode": tac
-            }
+            headers: service.headers,
+            data: data
         }).then(function(response) {
             return response.data;
-        }).then(function(info) {
-            if (info.statusCode == 200) {
-                info.priority = service.demoPriority;
-                service.setUserInfo(info);
-            }
-            return info;
         });
     };
 
@@ -150,20 +158,13 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
 
     service.isAuthenticated = function() {
         var info = this.getUserInfo();
-        // return info && ((info.logintimestamp + info.expTimeInSec) > new Date().getTime() / 1000);
-        return info && info.sessionID;
+        if (info && info.sessionID) {
+            return info.sessionID;
+        } else {
+            return '';
+        }
     };
 
-
-    service.restartSession = function() {
-        var info = this.getUserInfo();
-        info.logintimestamp = new Date().getTime() / 1000;
-    };
-
-    service.getSessionId = function() {
-        var info = this.getUserInfo();
-        return info && info.sessionId;
-    };
     service.logout = function() {
         service.setUserInfo({});
     };

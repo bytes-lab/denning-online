@@ -115,7 +115,7 @@ materialAdmin
         self.currentText = '';
         self.headers = {
               "Content-Type": "application/json",
-              "webuser-sessionid": "testdenningSkySea",
+              "webuser-sessionid": '{334E910C-CC68-4784-9047-0F23D37C9CF9}',
               "webuser-id": "online@denning.com.my"
            };
 
@@ -126,7 +126,6 @@ materialAdmin
             if(event.which == 13){                
                 // hide list for not keyword
                 $('#search_filter').focus();
-                // self.selectedItem = self.currentText; - event occur
                 selectedItemChange(self.selectedItem || self.currentText);
             }
         }
@@ -146,6 +145,8 @@ materialAdmin
                 return deferred.promise;
             }
 
+            self.headers['webuser-sessionid'] = Auth.isAuthenticated();
+            
             $http({
                 method: 'GET',
                 url: 'http://43.252.215.81/denningwcf/v1/generalSearch/keyword',
@@ -257,13 +258,20 @@ materialAdmin
                     self.errorMessage = err.message;
                 })
                 .then(function (res) {
+                    userData.sessionID = res.sessionID;
                     if (res.statusCode == 250) {
                         self.verification = 1;
                         self.login = 0;
                     } else {
-                        $state.go('home');
+                        Auth.staffLogin(userData.email, userData.password, userData.sessionID)
+                        .catch(function (err) {
+                            self.errorMessage = err.message;
+                        })
+                        .then(function (res) {
+                            $state.go('home');
+                        });
                     }
-                })
+                });
         }
 
         self.checkTAC = function(userData) {
@@ -272,7 +280,13 @@ materialAdmin
                     self.errorMessage = "TAC is not correct.";
                 })
                 .then(function (res) {
-                    $state.go('home');
+                    Auth.staffLogin(userData.email, userData.password, userData.sessionID)
+                    .catch(function (err) {
+                        self.errorMessage = err.message;
+                    })
+                    .then(function (res) {
+                        $state.go('home');
+                    });
                 })
         }
 
