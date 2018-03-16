@@ -101,6 +101,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
             headers: service.headers,
             data: data
         }).then(function(response) {
+            service.userInfo = response.data;
             return response.data;
         });
     };
@@ -120,8 +121,8 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
             return response.data;
         }).then(function(info) {
             if (info.statusCode == 200) {
-                info.priority = service.demoPriority;
-                service.setUserInfo(info);
+                service.userInfo.priority = service.demoPriority;
+                service.setUserInfo(service.userInfo);
             }
             return info;
         });
@@ -138,6 +139,8 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
             headers: service.headers,
             data: data
         }).then(function(response) {
+            service.userInfo = response.data;
+            service.userInfo.sessionID = tac;
             return response.data;
         });
     };
@@ -146,28 +149,32 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
         if ($window.localStorage) {
             $window.localStorage.setItem('userInfo', angular.toJson(info));
         }
-        service.info = info;
+        service.userInfo = info;
     };
 
     service.getUserInfo = function() {
-        if (!service.info && $window.localStorage) {
-            service.info = angular.fromJson($window.localStorage.getItem('userInfo'));
+        if (!service.userInfo && $window.localStorage) {
+            service.userInfo = angular.fromJson($window.localStorage.getItem('userInfo'));
         }
-        return service.info;
+        return service.userInfo;
     };
 
     service.isAuthenticated = function() {
+        // return http header for further api call for successful login
+        // return null for non-authorized
         var info = this.getUserInfo();
         if (info && info.sessionID) {
-            return info.sessionID;
-        } else {
-            return '';
-        }
+            return {
+                "Content-Type": "application/json",
+                "webuser-sessionid": info.sessionID,
+                "webuser-id": info.email
+            };
+        } 
+        return '';
     };
 
     service.logout = function() {
         service.setUserInfo({});
     };
     return service;
-
 }]);

@@ -112,12 +112,7 @@ materialAdmin
         self.newState = newState;
         self.searchRes = [];
         self.selectedItem = '';
-        self.currentText = '';
-        self.headers = {
-              "Content-Type": "application/json",
-              "webuser-sessionid": '{334E910C-CC68-4784-9047-0F23D37C9CF9}',
-              "webuser-id": "online@denning.com.my"
-           };
+        self.currentText = '';        
 
         function newState(state) {
         }
@@ -145,12 +140,10 @@ materialAdmin
                 return deferred.promise;
             }
 
-            self.headers['webuser-sessionid'] = Auth.isAuthenticated();
-            
             $http({
                 method: 'GET',
                 url: 'http://43.252.215.81/denningwcf/v1/generalSearch/keyword',
-                headers: self.headers, 
+                headers: Auth.isAuthenticated(), 
                 params: {
                     search: query
                 }
@@ -184,7 +177,7 @@ materialAdmin
             $http({
                 method: 'GET',
                 url: 'http://43.252.215.81/denningwcf/v1/generalSearch',
-                headers: self.headers, 
+                headers: Auth.isAuthenticated(), 
                 params: {
                     search: item.value,
                     category: self.selectedSearchCategory,

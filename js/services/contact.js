@@ -14,11 +14,7 @@ materialAdmin
         service.getIRDBranchList = getIRDBranchList;
         service.save = save;
         service.delete = delete_;
-        service.headers = {
-            "Content-Type": "application/json",
-            "webuser-sessionid": Auth.isAuthenticated(),
-            "webuser-id": "online@denning.com.my"
-        };
+        service.headers = Auth.isAuthenticated();
 
         function getList() {
             return $http({
