@@ -80,6 +80,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
     };
 
     new Fingerprint2().get(function(result, components) {
+        console.log(components);
         service.preData = {
             "ipWAN": "121.196.213.102",
             "ipLAN": "192.168.0.101",
@@ -106,11 +107,32 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
         });
     };
 
-    service.staffLogin = function(email, pass, sessionID) {
+    service.tac = function(email, tac) {
         data = angular.copy(service.preData);
         data.email = email;
+        data.activationCode = tac;
+
+        return $http({
+            method: 'POST',
+            url: 'http://43.252.215.163:8313/denningapi/v1/SMS/newDevice',
+            headers: service.headers,
+            data: data
+        }).then(function(response) {
+            var tEmail = service.userInfo.email,
+                tSessionID = service.userInfo.sessionID;
+
+            service.userInfo = response.data;
+            service.userInfo.email = tEmail;
+            service.userInfo.sessionID = tSessionID;
+            return response.data;
+        });
+    };
+
+    service.staffLogin = function(pass) {
+        data = angular.copy(service.preData);
+        data.email = service.userInfo.email;
+        data.sessionID = service.userInfo.sessionID;
         data.password = pass;
-        data.sessionID = sessionID;
 
         return $http({
             method: 'POST',
@@ -125,23 +147,6 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
                 service.setUserInfo(service.userInfo);
             }
             return info;
-        });
-    };
-
-    service.tac = function(email, tac) {
-        data = angular.copy(service.preData);
-        data.email = email;
-        data.activationCode = tac;
-
-        return $http({
-            method: 'POST',
-            url: 'http://43.252.215.163:8313/denningapi/v1/SMS/newDevice',
-            headers: service.headers,
-            data: data
-        }).then(function(response) {
-            service.userInfo = response.data;
-            service.userInfo.sessionID = tac;
-            return response.data;
         });
     };
 

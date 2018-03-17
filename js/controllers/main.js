@@ -251,12 +251,11 @@ materialAdmin
                     self.errorMessage = err.message;
                 })
                 .then(function (res) {
-                    userData.sessionID = res.sessionID;
                     if (res.statusCode == 250) {
                         self.verification = 1;
                         self.login = 0;
                     } else {
-                        Auth.staffLogin(userData.email, userData.password, userData.sessionID)
+                        Auth.staffLogin(userData.password)
                         .catch(function (err) {
                             self.errorMessage = err.message;
                         })
@@ -273,7 +272,7 @@ materialAdmin
                     self.errorMessage = "TAC is not correct.";
                 })
                 .then(function (res) {
-                    Auth.staffLogin(userData.email, userData.password, userData.sessionID)
+                    Auth.staffLogin(userData.password)
                     .catch(function (err) {
                         self.errorMessage = err.message;
                     })
