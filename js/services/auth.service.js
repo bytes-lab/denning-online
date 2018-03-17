@@ -80,7 +80,6 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
     };
 
     new Fingerprint2().get(function(result, components) {
-        console.log(components);
         service.preData = {
             "ipWAN": "121.196.213.102",
             "ipLAN": "192.168.0.101",

@@ -1,12 +1,3 @@
-// materialAdmin.config(['$httpProvider', function ($httpProvider) {
-//   //Reset headers to avoid OPTIONS request (aka preflight)
-//   $httpProvider.defaults.headers.common = {};
-//   $httpProvider.defaults.headers.post = {};
-//   $httpProvider.defaults.headers.put = {};
-//   $httpProvider.defaults.headers.patch = {};
-//   $httpProvider.defaults.headers.options = {};
-// }]);
-
 materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/home");
@@ -34,7 +25,7 @@ materialAdmin
                     access: '@'
                 },
                 url: '/home',
-                templateUrl: 'views/home.html'                
+                templateUrl: 'views/home.html'
             })        
 
             //------------------------------
@@ -63,19 +54,11 @@ materialAdmin
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([
                             {
-                                name: 'css',
-                                insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/fullcalendar/dist/fullcalendar.min.css',
-                                ]
-                            },
-                            {
                                 name: 'vendors',
                                 insertBefore: '#app-level-js',
                                 files: [
                                     'vendors/sparklines/jquery.sparkline.min.js',
-                                    'vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js',
-                                    'vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js'
+                                    'vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js'
                                 ]
                             }
                         ])
@@ -1228,6 +1211,5 @@ materialAdmin
                     }
                 }
             })            
-
     });
 
