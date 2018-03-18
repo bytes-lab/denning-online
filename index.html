@@ -29,6 +29,8 @@
 
     <body class="sw-toggled">
         <data ui-view></data>
+        <iframe class="chat_frame" style="border: none;" ng-src="{{app.chat_url}}" ng-show="mactrl.sidebarToggle.right"></iframe>
+
         <!-- Core -->
         <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
 
