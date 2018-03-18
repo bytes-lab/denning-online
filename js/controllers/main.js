@@ -22,7 +22,8 @@ materialAdmin
         this.sidebarToggle = {
             left: false,
             right: false,
-            task: false
+            task: false,
+            border: 'border-line'
         }
         // FilterList;
         this.searchFilterCategories = [];
