@@ -19,13 +19,13 @@ materialAdmin
         function initializeTable () {
             //Filtering
             self.tableFilter = new NgTableParams({
-                page: 1,            // show first page
+                page: 1,                    // show first page
                 count: 10,
                 sorting: {
-                    name: 'asc'     // initial sorting
+                    name: 'asc'             // initial sorting
                 }
             }, {
-                total: self.data.length, // length of data
+                total: self.data.length,    // length of data
                 getData: function(params) {
                     // use built-in angular filter
                     var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
