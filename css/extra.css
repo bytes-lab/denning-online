@@ -1,0 +1,9 @@
+.table-div {
+    white-space:nowrap; 
+    overflow: auto;
+}
+
+.table-list {
+    display:block;
+    overflow-x:scroll;
+}
