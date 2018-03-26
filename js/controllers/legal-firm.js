@@ -3,6 +3,11 @@ materialAdmin
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
+        self.clickHandler = clickHandler;
+
+        function clickHandler(item) {
+            $state.go('legal-firms.edit', {'id': item.code});
+        }
 
         legalFirmService.getList().then(function(data) {
             self.data = data;

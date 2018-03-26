@@ -242,9 +242,9 @@ materialAdmin
         self.verification = 0;
         self.errorMessage = '';
         
-        legalFirmService.getList().then(function(data) {
-            self.legalFirms = data;
-        });        
+        // legalFirmService.getList().then(function(data) {
+        //     self.legalFirms = data;
+        // });        
             
         self.doLogin = function (userData) {
             return Auth.login(userData.email, userData.password)
