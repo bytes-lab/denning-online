@@ -1,14 +1,19 @@
 materialAdmin
-  .controller('landPTGListCtrl', function($filter, $sce, $uibModal, NgTableParams, landPTGService) {
+  .controller('landPTGListCtrl', function($filter, $sce, $uibModal, NgTableParams, landPTGService, $state) {
     var self = this;
     self.dataReady = false;
     self.openDelete = openDelete;
+    self.clickHandler = clickHandler;
 
     landPTGService.getList().then(function(data) {
       self.data = data;
       self.dataReady = true;
       initializeTable();
     });    
+
+    function clickHandler(item) {
+      $state.go('land-PTGs.edit', {'id': item.code});
+    }
     
     function initializeTable () {
       //Filtering
