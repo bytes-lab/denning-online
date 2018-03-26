@@ -1,5 +1,5 @@
 materialAdmin
-    .controller('legalFirmListCtrl', function($filter, $sce, $uibModal, NgTableParams, legalFirmService) {
+    .controller('legalFirmListCtrl', function($filter, $sce, $uibModal, NgTableParams, legalFirmService, $state) {
         var self = this;
         self.dataReady = false;
         self.openDelete = openDelete;
