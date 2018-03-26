@@ -96,10 +96,11 @@
                 <li><a data-ui-sref-active="active" data-ui-sref="litigation-checklist-calendar" data-ng-click="mactrl.sidebarStat($event)">Litigation Checklist Calendar</a></li>                                
             </ul>
         </li>
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('land-PTGs') }">
+        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('land-PTGs') || mactrl.$state.includes('bank-branches') || mactrl.$state.includes('legal-firms') || mactrl.$state.includes('land-offices') || mactrl.$state.includes('courts') || mactrl.$state.includes('IRD-branches') }">
             <a href="" toggle-submenu><i class="zmdi zmdi-view-list"></i>Listing</a>
             <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="banks.list" data-ng-click="mactrl.sidebarStat($event)">Bank</a></li>
+                <!-- <li><a data-ui-sref-active="active" data-ui-sref="banks.list" data-ng-click="mactrl.sidebarStat($event)">Bank</a></li> -->
+                <li><a data-ui-sref-active="active" data-ui-sref="bank-branches.list" data-ng-click="mactrl.sidebarStat($event)">Bank Branch</a></li>                
                 <li><a data-ui-sref-active="active" data-ui-sref="bank-CACs.list" data-ng-click="mactrl.sidebarStat($event)">Bank CAC</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="bank-attorneys.list" data-ng-click="mactrl.sidebarStat($event)">Bank Attorney</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="buildings.list" data-ng-click="mactrl.sidebarStat($event)">Building</a></li>

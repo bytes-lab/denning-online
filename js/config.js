@@ -562,6 +562,45 @@ materialAdmin
 
 
             //------------------------------
+            // BANK BRANCHES
+            //------------------------------
+        
+            .state ('bank-branches', {
+                data: {
+                    access: '@'
+                },                
+                url: '/bank-branches',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('bank-branches.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'bankBranchListCtrl as vm',
+                templateUrl: 'views/bank-branch-list.html'
+            })
+
+            .state ('bank-branches.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'bankBranchEditCtrl as vm',
+                templateUrl: 'views/bank-branch-edit.html'
+            })
+            .state ('bank-branches.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/new',
+                controller: 'bankBranchEditCtrl as vm',
+                templateUrl: 'views/bank-branch-edit.html'
+            })  
+
+
+            //------------------------------
             // bank-CACs
             //------------------------------
         
