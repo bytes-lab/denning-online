@@ -1,136 +1,157 @@
 <div class="container">
-
-    <div class="card">
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <h4 class="m-t-25">IRD Branch Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Branch</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.IRDBranch.branch" type="text" class="form-control" placeholder="Kuantan">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 1)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.IRDBranch.address1" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 2)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.IRDBranch.address2" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 3)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.IRDBranch.address3" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Postcode</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.IRDBranch.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Town</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.IRDBranch.town" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="vm.occupation.GST_status_verified">
-                                <i class="input-helper"></i>
-                                Add to Favourites
-                            </label>
-                        </div>
-                    </dl>
-                    
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.IRDBranch.state" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Country</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.IRDBranch.country" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone Office 1</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone1" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone Office 2</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone2" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Fax</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.IRDBranch.fax" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Contact Persion</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.IRDBranch.contact_person" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>            
-            <div class="clearfix"></div>
-            
-            <div class="row">     
-                <div class="col-md-10">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" data-ui-sref="IRD-branches.list" data-ng-click="vm.editInfo = 0" >Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
-                    </div>        
-                </div>
-            </div>
+  <div class="card">
+    <div class="card-header" style="display: flex;">
+      <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
+        <h2 style="display: inline;" ng-if="!vm.viewMode">IRB Branch Edit</h2>
+        <h2 style="display: inline;" ng-if="vm.viewMode">IRB Branch Detail</h2>
+        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.irbbranch)" ng-if="vm.userInfo.priority.irbbranch.delete">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.irbbranch.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.irbbranch.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+      </div>
+      <div class="col-md-10" ng-if="vm.viewMode">
+        <div class="m-t-30">
+          <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
         </div>
+      </div>
     </div>
-         
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+
+      <h4 class="m-t-25">IRD Branch Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Branch</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.IRDBranch.branch" type="text" class="form-control" placeholder="Kuantan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 1)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.IRDBranch.address1" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 2)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.address2" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 3)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.address3" placeholder="Lawyer">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.IRDBranch.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Town</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.town" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.occupation.GST_status_verified">
+                <i class="input-helper"></i>
+                Add to Favourites
+              </label>
+            </div>
+          </dl>
+          
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.state" placeholder="Lawyer">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.IRDBranch.country" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Office 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone1" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Office 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone2" placeholder="Lawyer">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Fax</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.fax" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Contact Persion</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.contact_person" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>        
+      </div>      
+      <div class="clearfix"></div>
+      
+      <div class="row">
+        <div class="col-md-10" ng-if="!vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.irbbranch.delete">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.irbbranch.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.irbbranch.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          </div>
+        </div>
+        <div class="col-md-10" ng-if="vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+     
 </div>
 
 
