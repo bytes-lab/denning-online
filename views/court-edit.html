@@ -1,153 +1,173 @@
 <div class="container">
-
-    <div class="card">
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <h4 class="m-t-25">Court Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Type in English</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.court.type_eng" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Type in Malay</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.court.type_mal" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Place</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.court.place" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 1)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.court.address1" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 2)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.court.address2" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 3)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.court.address3" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Postcode</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.court.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="vm.court.favourite">
-                                <i class="input-helper"></i>
-                                Add to Favourites
-                            </label>
-                        </div>
-                    </dl>
-                    
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Town</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.court.town" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.court.state" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone 1</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.court.phone1" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone 2</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.court.phone2" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Registrar</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.court.registrar" type="text" class="form-control" placeholder="">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Fax</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.court.fax" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Judge</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.court.judge" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>            
-     
-            <div class="row">     
-                <div class="col-md-10">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" data-ui-sref="land-offices.list" data-ng-click="vm.editInfo = 0" >Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
-                    </div>        
-                </div>
-            </div>
+  <div class="card">
+    <div class="card-header" style="display: flex;">
+      <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
+        <h2 style="display: inline;" ng-if="!vm.viewMode">Court Edit</h2>
+        <h2 style="display: inline;" ng-if="vm.viewMode">Court Detail</h2>
+        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.court)" ng-if="vm.userInfo.priority.court.delete">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.court.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.court.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+      </div>
+      <div class="col-md-10" ng-if="vm.viewMode">
+        <div class="m-t-30">
+          <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
         </div>
+      </div>
+    </div>    
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+
+      <h4 class="m-t-25">Court Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Type in English</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.court.type_eng" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Type in Malay</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.court.type_mal" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Place</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.court.place" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 1)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.court.address1" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 2)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.court.address2" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 3)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.court.address3" placeholder="Lawyer">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.court.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.court.favourite">
+                <i class="input-helper"></i>
+                Add to Favourites
+              </label>
+            </div>
+          </dl>
+          
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Town</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.court.town" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.court.state" placeholder="Lawyer">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.court.phone1" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.court.phone2" placeholder="Lawyer">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Registrar</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.court.registrar" type="text" class="form-control" placeholder="">
+              </div>
+
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Fax</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.court.fax" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Judge</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.court.judge" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>        
+      </div>      
+      <div class="row">
+        <div class="col-md-10" ng-if="!vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.court.delete">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.court.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.court.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          </div>
+        </div>
+        <div class="col-md-10" ng-if="vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+          </div>
+        </div>
+      </div>
     </div>
-         
+  </div>
+     
 </div>
 
 
