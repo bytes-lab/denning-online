@@ -19,7 +19,7 @@ materialAdmin
       //Filtering
       self.tableFilter = new NgTableParams({
         page: 1,      // show first page
-        count: 30,
+        count: 25,
         sorting: {
           name: 'asc'   // initial sorting
         }

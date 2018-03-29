@@ -46,10 +46,10 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
     },
     "court": {
       "list": true,
-      "create": true,
+      "create": false,
       "read": true,
-      "update": true,
-      "delete": true
+      "update": false,
+      "delete": false
     },
     "irbbranch": {
       "list": true,
