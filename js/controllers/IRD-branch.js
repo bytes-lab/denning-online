@@ -38,12 +38,11 @@ materialAdmin
 
   .controller('IRDBranchEditCtrl', function($filter, $stateParams, IRDBranchService, $state, Auth) {
     var self = this;
-    self.save = save;
     self.cancel = cancel;
     self.isDialog = false;
     self.viewMode = true;   // only for view
-    self.userInfo = Auth.getUserInfo();
     self.can_edit = false;
+    self.userInfo = Auth.getUserInfo();
 
     if($stateParams.id) {
       IRDBranchService.getItem($stateParams.id)
@@ -52,18 +51,6 @@ materialAdmin
       });
     } else {
       self.IRDBranch = {};
-    }
-
-    function save() {
-      IRDBranchService.save(self.IRDBranch).then(function(IRDBranch) {
-        self.IRDBranch = IRDBranch;
-        $state.go('IRD-branches.list');
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.IRDBranchInfo.$error.push({meessage:''});
-      });
     }
 
     function cancel() {

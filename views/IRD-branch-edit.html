@@ -4,81 +4,28 @@
       <div class="clearfix"></div>
       <h4 class="m-t-25">IRB Branch Information</h4>
       <div class="row">
-        <div class="col-md-6 p-l-25">
+        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Branch</dt>
+            <dt class="p-t-10">Code</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.branch" type="text" class="form-control" placeholder="Kuantan">
+                <input ng-model="vm.IRDBranch.code" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 1)</dt>
+            <dt class="p-t-10">Description</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.address1" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.IRDBranch.description" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 2)</dt>
+            <dt class="p-t-10">Email</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.address2" placeholder="UA203453">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 3)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.address3" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.IRDBranch.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-              </div>
-
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Town</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.town" placeholder="UA203453">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="vm.occupation.GST_status_verified">
-                <i class="input-helper"></i>
-                Add to Favourites
-              </label>
-            </div>
-          </dl>
-          
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.state" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.IRDBranch.country" type="text" class="form-control" placeholder="">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.emailAddress">
               </div>
             </dd>
           </dl>
@@ -86,7 +33,7 @@
             <dt class="p-t-10">Phone Office 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone1" placeholder="UA203453">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone1">
               </div>
             </dd>
           </dl>
@@ -94,7 +41,7 @@
             <dt class="p-t-10">Phone Office 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone2" placeholder="Lawyer">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone2">
               </div>
             </dd>
           </dl>
@@ -102,20 +49,78 @@
             <dt class="p-t-10">Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.fax" placeholder="UA203453">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.phoneFax">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Contact Persion</dt>
+            <dt class="p-t-10">Website</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.contact_person" placeholder="">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.webSite">
+              </div>
+            </dd>
+          </dl>                
+        </div>
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.IRDBranch.address.country" type="text" class="form-control">
               </div>
             </dd>
           </dl>
-        </div>        
-      </div>      
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.address.state">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.IRDBranch.address.postcode" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">City</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.address.city">
+              </div>
+            </dd>
+          </dl>              
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 1)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.IRDBranch.address.line1" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 2)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.address.line2">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 3)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.IRDBranch.address.line3">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
       <div class="clearfix"></div>
       
       <div class="row">
