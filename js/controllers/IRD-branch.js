@@ -2,11 +2,10 @@ materialAdmin
   .controller('IRDBranchListCtrl', function($filter, $sce, $uibModal, NgTableParams, IRDBranchService, $state, Auth) {
     var self = this;
     self.dataReady = false;
-    self.openDelete = openDelete;
     self.clickHandler = clickHandler;
     self.userInfo = Auth.getUserInfo();
 
-    IRDBranchService.getList().then(function(data) {
+    IRDBranchService.getList(1, 100).then(function(data) {
       self.data = data;
       self.dataReady = true;
       initializeTable();
@@ -20,7 +19,7 @@ materialAdmin
       //Filtering
       self.tableFilter = new NgTableParams({
         page: 1,      // show first page
-        count: 10,
+        count: 30,
         sorting: {
           name: 'asc'   // initial sorting
         }
@@ -34,49 +33,7 @@ materialAdmin
           return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
         }
       })    
-    }
-
-    self.modalContent = 'Are you sure to delete the IRD Branch?';
-  
-    //Create Modal
-    function modalInstances(animation, size, backdrop, keyboard, IRDBranch) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'IRDBranchDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          IRDBranch: function () {
-            return IRDBranch;
-          }
-        }
-      
-      });
-    }
-    //Prevent Outside Click
-    function openDelete(IRDBranch) {
-      modalInstances(true, '', 'static', true, IRDBranch)
-    };    
-  })
-
-  .controller('IRDBranchDeleteModalCtrl', function ($scope, $modalInstance, IRDBranch, IRDBranchService, $state) {
-    $scope.ok = function () {
-      IRDBranchService.delete(IRDBranch).then(function(IRDBranch) {
-        $state.reload();
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.IRDBranchInfo.$error.push({meessage:''});
-      });
-      $modalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
+    } 
   })
 
   .controller('IRDBranchEditCtrl', function($filter, $stateParams, IRDBranchService, $state, Auth) {
@@ -84,9 +41,8 @@ materialAdmin
     self.save = save;
     self.cancel = cancel;
     self.isDialog = false;
-    self.viewMode = false;  // for edit / create
+    self.viewMode = true;   // only for view
     self.userInfo = Auth.getUserInfo();
-    self.openDelete = openDelete;
     self.can_edit = false;
 
     if($stateParams.id) {
@@ -112,31 +68,5 @@ materialAdmin
 
     function cancel() {
       $state.go('IRD-branches.list');      
-    }
-
-    //Create Modal
-    function modalInstances1(animation, size, backdrop, keyboard, property) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'propertyDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          property: function () {
-            return property;
-          }, 
-          on_list: function () {
-            return false;
-          }
-        }      
-      });
-    }
-
-    //Prevent Outside Click
-    function openDelete(event, property) {
-      event.stopPropagation();
-      modalInstances1(true, '', 'static', true, property)
-    };        
+    }     
   })

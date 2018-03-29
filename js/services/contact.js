@@ -21,7 +21,9 @@ materialAdmin
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/party',
         headers: service.headers
-      }).then(function(resp) {
+      }).then(function(data, status, headers, config) {
+        console.log(data.headers('server'));
+        console.log(data, status, headers, config);
         service.contacts = resp.data;
         return resp.data;
       });  

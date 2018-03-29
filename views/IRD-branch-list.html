@@ -9,7 +9,7 @@
         <div class="col-md-8">
           <h2>IRD Branch List</h2>        
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" ng-if="vm.userInfo.priority.irbbranch.new">
           <a ui-sref="IRD-branches.new" class="btn bgm-cyan pull-right"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New IRD Branch</a>
         </div>
       </div>
@@ -47,16 +47,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/ng-template" id="myModalContent.html">
-  <div class="modal-header">
-    <h4 class="modal-title">Delete an IRD Branch</h4>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure to delete the IRD Branch?</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-link" ng-click="ok()">OK</button>
-    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-  </div>
-</script>
