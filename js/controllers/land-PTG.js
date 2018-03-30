@@ -4,7 +4,7 @@ materialAdmin
     self.dataReady = false;
     self.clickHandler = clickHandler;
 
-    landPTGService.getList().then(function(data) {
+    landPTGService.getList(1, 500).then(function(data) {
       self.data = data;
       self.dataReady = true;
       initializeTable();
@@ -17,15 +17,13 @@ materialAdmin
     function initializeTable () {
       //Filtering
       self.tableFilter = new NgTableParams({
-        page: 1,      // show first page
+        page: 1,      
         count: 25,
         sorting: {
-          name: 'asc'   // initial sorting
+          name: 'asc' 
         }
       }, {
-        total: self.data.length, // length of data
         getData: function(params) {
-          // use build-in angular filter
           var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
           orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
           params.total(orderedData.length); // set total for recalc pagination
@@ -45,6 +43,6 @@ materialAdmin
     });
 
     function cancel() {
-      $state.go('land-offices.list');      
+      $state.go('land-PTGs.list');      
     }
   })
