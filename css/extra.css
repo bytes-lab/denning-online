@@ -7,3 +7,19 @@
     display:block;
     overflow-x:scroll;
 }
+
+.ng-table-fixed-column-35 {
+    width: 35%; 
+}
+
+.ng-table-fixed-column-30 {
+    width: 30%; 
+}
+
+.ng-table-fixed-column-25 {
+    width: 25%; 
+}
+
+.ng-table-fixed-column-20 {
+    width: 20%; 
+}
