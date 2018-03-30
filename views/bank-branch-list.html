@@ -8,9 +8,6 @@
         <div class="col-md-8">
           <h2>Bank Branch List</h2>
         </div>
-        <div class="col-md-4">
-          <a ui-sref="bank-branches.new" class="btn bgm-cyan pull-right"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New Bank Branch</a>
-        </div>
       </div>
     </div>
 
@@ -39,26 +36,9 @@
             <td data-title="'Email'" filter="{ 'emailAddress': 'text' }" sortable="'emailAddress'">
               {{ w.emailAddress }}
             </td>            
-            <td data-title="'Actions'">
-              <a class="btn btn-primary" ng-if="vm.userInfo.priority.contact.read"  ui-sref="bank-branches.edit({id:w.code})"><i class="zmdi zmdi-edit"></i></a>
-              <a class="btn btn-warning" ng-click="vm.openDelete($event, w)" ng-if="vm.userInfo.priority.contact.delete"><i class="zmdi zmdi-delete"></i></a>
-            </td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 </div>
-
-<script type="text/ng-template" id="myModalContent.html">
-  <div class="modal-header">
-    <h4 class="modal-title">Delete a contract</h4>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure to delete the contract?</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-link" ng-click="ok()">OK</button>
-    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-  </div>
-</script>

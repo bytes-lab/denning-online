@@ -2,7 +2,6 @@ materialAdmin
   .controller('legalFirmListCtrl', function($filter, $sce, $uibModal, NgTableParams, legalFirmService, $state) {
     var self = this;
     self.dataReady = false;
-    self.openDelete = openDelete;
     self.clickHandler = clickHandler;
 
     function clickHandler(item) {
@@ -19,7 +18,7 @@ materialAdmin
       //Filtering
       self.tableFilter = new NgTableParams({
         page: 1,      // show first page
-        count: 10,
+        count: 25,
         sorting: {
           name: 'asc'   // initial sorting
         }
@@ -35,58 +34,14 @@ materialAdmin
           return this.data;
         }
       })    
-    }
-
-    //Create Modal
-    function modalInstances(animation, size, backdrop, keyboard, legalFirm) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'legalFirmDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          legalFirm: function () {
-            return legalFirm;
-          }
-        }
-      
-      });
-    }
-    //Prevent Outside Click
-    function openDelete(legalFirm) {
-      modalInstances(true, '', 'static', true, legalFirm)
-    };    
-  })
-
-  .controller('legalFirmDeleteModalCtrl', function ($scope, $modalInstance, legalFirm, legalFirmService, $state) {
-    $scope.ok = function () {
-      legalFirmService.delete(legalFirm).then(function(legalFirm) {
-        $state.reload();
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.legalFirmInfo.$error.push({meessage:''});
-      });
-      $modalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
+    }  
   })
 
   .controller('legalFirmEditCtrl', function($filter, $stateParams, legalFirmService, $state, Auth) {
     var self = this;
-    self.userInfo = Auth.getUserInfo();    
-    self.save = save;
     self.cancel = cancel;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
-    self.userInfo = Auth.getUserInfo();
-    self.openDelete = openDelete;
     self.can_edit = false;
 
     if($stateParams.id) {
@@ -100,48 +55,9 @@ materialAdmin
 
     function cancel() {
       $state.go('legal-firms.list');      
-    }
-
-    function save() {
-      legalFirmService.save(self.legalFirm).then(function(legalFirm) {
-        self.legalFirm = legalFirm;
-        $state.go('legal-firms.list');
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.legalFirmInfo.$error.push({meessage:''});
-      });
-    }
-
-
-    //Create Modal
-    function modalInstances1(animation, size, backdrop, keyboard, property) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'propertyDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          property: function () {
-            return property;
-          }, 
-          on_list: function () {
-            return false;
-          }
-        }      
-      });
-    }
-
-    //Prevent Outside Click
-    function openDelete(event, property) {
-      event.stopPropagation();
-      modalInstances1(true, '', 'static', true, property)
-    };    
-
+    }  
   })
+
   .controller('lfCreateModalCtrl', function ($modalInstance, lf, viewMode, legalFirmService, $scope, Auth) {
     var self = this;
     self.save = save;

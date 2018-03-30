@@ -2,7 +2,6 @@ materialAdmin
   .controller('landPTGListCtrl', function($filter, $sce, $uibModal, NgTableParams, landPTGService, $state) {
     var self = this;
     self.dataReady = false;
-    self.openDelete = openDelete;
     self.clickHandler = clickHandler;
 
     landPTGService.getList().then(function(data) {
@@ -19,7 +18,7 @@ materialAdmin
       //Filtering
       self.tableFilter = new NgTableParams({
         page: 1,      // show first page
-        count: 10,
+        count: 25,
         sorting: {
           name: 'asc'   // initial sorting
         }
@@ -33,71 +32,19 @@ materialAdmin
           return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
         }
       })    
-    }
-
-    //Create Modal
-    function modalInstances(animation, size, backdrop, keyboard, landPTG) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'landPTGDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          landPTG: function () {
-            return landPTG;
-          }
-        }
-      
-      });
-    }
-    //Prevent Outside Click
-    function openDelete(landPTG) {
-      modalInstances(true, '', 'static', true, landPTG)
-    };    
-  })
-
-  .controller('landPTGDeleteModalCtrl', function ($scope, $modalInstance, landPTG, landPTGService, $state) {
-    $scope.ok = function () {
-      landPTGService.delete(landPTG).then(function(landPTG) {
-        $state.reload();
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.landPTGInfo.$error.push({meessage:''});
-      });
-      $modalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
+    }  
   })
 
   .controller('landPTGEditCtrl', function($filter, $stateParams, landPTGService, $state) {
     var self = this;
-    self.save = save;
+    self.cancel = cancel;
 
-    if($stateParams.id) {
-      landPTGService.getItem($stateParams.id)
-      .then(function(item){
-        self.landPTG = item;
-      });
-    } else {
-      self.landPTG = {};
-    }
+    landPTGService.getItem($stateParams.id)
+    .then(function(item){
+      self.landPTG = item;
+    });
 
-    function save() {
-      landPTGService.save(self.landPTG).then(function(landPTG) {
-        self.landPTG = landPTG;
-        $state.go('land-PTGs.list');
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.landPTGInfo.$error.push({meessage:''});
-      });
+    function cancel() {
+      $state.go('land-offices.list');      
     }
   })
