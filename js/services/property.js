@@ -13,14 +13,14 @@ materialAdmin
     service.delete = delete_;
     service.headers = Auth.isAuthenticated();
 
-    function getList() {
+    function getList(page, pagesize, keyword) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/property?search=ho',
+        url: 'http://43.252.215.81/denningwcf/v1/property?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: service.headers
       }).then(function(resp) {
         service.properties = resp.data;
-        return resp.data;
+        return resp;
       });  
     }
 

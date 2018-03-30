@@ -1,43 +1,36 @@
 materialAdmin
-  .controller('propertyListCtrl', function($filter, $sce, $uibModal, NgTableParams, propertyService, $state, Auth) {
+  .controller('propertyListCtrl', function($sce, $uibModal, NgTableParams, propertyService, $state, Auth) {
     var self = this;
     self.dataReady = false;
     self.openDelete = openDelete;
     self.clickHandler = clickHandler;
     self.userInfo = Auth.getUserInfo();
+    self.search = search;
+    self.keyword = '';
 
-    propertyService.getList().then(function(data) {
-      self.data = data;
-      self.dataReady = true;
-      initializeTable();
-    });    
-    
     function clickHandler(item) {
       $state.go('properties.edit', {'id': item.code});
     }
 
-    function initializeTable () {
-      //Filtering
-      self.tableFilter = new NgTableParams({
-        page: 1,      // show first page
-        count: 10,
-        sorting: {
-          name: 'asc'   // initial sorting
-        }
-      }, {
-        total: self.data.length, // length of data
-        getData: function(params) {
-          // use build-in angular filter
-          var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-          orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-          params.total(orderedData.length); // set total for recalc pagination
-          return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-        }
-      })    
+    self.tableFilter = new NgTableParams({
+      page: 1,      // show first page
+      count: 25,
+      sorting: {
+        name: 'asc'   // initial sorting
+      }
+    }, {
+      getData: function(params) {
+        return propertyService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    })    
+
+    function search() {
+      self.tableFilter.reload();
     }
 
-    self.modalContent = 'Are you sure to delete the contract?';
-  
     //Create Modal
     function modalInstances(animation, size, backdrop, keyboard, property) {
       var modalInstance = $uibModal.open({
