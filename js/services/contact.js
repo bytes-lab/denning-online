@@ -16,16 +16,14 @@ materialAdmin
     service.delete = delete_;
     service.headers = Auth.isAuthenticated();
 
-    function getList() {
+    function getList(page, pagesize, keyword) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/party',
+        url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: service.headers
-      }).then(function(data, status, headers, config) {
-        console.log(data.headers('server'));
-        console.log(data, status, headers, config);
+      }).then(function(resp) {
         service.contacts = resp.data;
-        return resp.data;
+        return resp;
       });  
     }
 

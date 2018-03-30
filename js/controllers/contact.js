@@ -1,38 +1,35 @@
 materialAdmin
-  .controller('contactListCtrl', function($filter, $uibModal, NgTableParams, contactService, Auth, $state) {
+  .controller('contactListCtrl', function($uibModal, NgTableParams, contactService, Auth, $state) {
     var self = this;
-    self.dataReady = false;
     self.openDelete = openDelete;
     self.userInfo = Auth.getUserInfo();
     self.clickHandler = clickHandler;
-    
+    self.search = search;
+    self.keyword = '';
+
     function clickHandler(item) {
       $state.go('contacts.edit', {'id': item.code});
     }
 
     self.tableFilter = new NgTableParams({
-      // page: 1,          // show first page
-      // count: 10,
-      // sorting: {
-      //   name: 'asc'       // initial sorting
-      // }
+      page: 1,          // show first page
+      count: 25,
+      sorting: {
+        name: 'asc'       // initial sorting
+      }
     }, {
       getData: function(params) {
-        console.log('###########');
-        contactService.getList().then(function(data) {
-          params.total(self.data.length),  // length of data
-          self.dataReady = true;
-          return data;
-        });    
-
-        // // use built-in angular filter
-        // var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-        // orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-        // params.total(orderedData.length); // set total for recalc pagination
-        // return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+        return contactService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
       }
     })    
 
+    function search() {
+      self.tableFilter.reload();
+    }
+    
     //Create Modal
     function modalInstances(animation, size, backdrop, keyboard, contact) {
       var modalInstance = $uibModal.open({
