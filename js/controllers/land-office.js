@@ -8,7 +8,7 @@ materialAdmin
       $state.go('land-offices.edit', {'id': item.code});
     }
 
-    landOfficeService.getList().then(function(data) {
+    landOfficeService.getList(1, 500).then(function(data) {
       self.data = data;
       self.dataReady = true;
       initializeTable();
@@ -23,15 +23,11 @@ materialAdmin
           name: 'asc'   // initial sorting
         }
       }, {
-        total: self.data.length, // length of data
         getData: function(params) {
-          // use build-in angular filter
           var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
           orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-
-          this.data = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
           params.total(orderedData.length); // set total for recalc pagination
-          return this.data;
+          return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
         }
       })    
     }   
@@ -40,9 +36,6 @@ materialAdmin
   .controller('landOfficeEditCtrl', function($filter, $stateParams, landOfficeService, $state, Auth) {
     var self = this;
     self.cancel = cancel;
-    self.isDialog = false;
-    self.viewMode = false;  // for edit / create
-    self.can_edit = false;
 
     landOfficeService.getItem($stateParams.id)
     .then(function(item){

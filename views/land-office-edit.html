@@ -1,123 +1,31 @@
 <div class="container">
   <div class="card">
-    <div class="card-header" style="display: flex;">
-      <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
-        <h2 style="display: inline;" ng-if="!vm.viewMode">Land Office Edit</h2>
-        <h2 style="display: inline;" ng-if="vm.viewMode">Land Office Detail</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.landoffice)" ng-if="vm.userInfo.priority.landoffice.delete">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.landoffice.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.landoffice.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-      </div>
-      <div class="col-md-10" ng-if="vm.viewMode">
-        <div class="m-t-30">
-          <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-        </div>
-      </div>
-    </div>
-
     <div class="card-body card-padding">
       <div class="clearfix"></div>
       <h4 class="m-t-25">Land Office Information</h4>
       <div class="row">
-        <div class="col-md-6 p-l-25">
+        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Land Administrator</dt>
+            <dt class="p-t-10">Code</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.landOffice.land_admin" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.landOffice.code" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 1)</dt>
+            <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.landOffice.address1" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.landOffice.name" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 2)</dt>
+            <dt class="p-t-10">Title</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.address2" placeholder="UA203453">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 3)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.address3" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landOffice.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-              </div>
-
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Town</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.town" placeholder="UA203453">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.state" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">District</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landOffice.district" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone 1</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.phone1" placeholder="UA203453">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone 2</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.phone2" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Contact Person</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landOffice.contact_person" type="text" class="form-control" placeholder="">
-              </div>
-
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.fax" placeholder="UA203453">
+                <input ng-model="vm.landOffice.title" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -125,7 +33,39 @@
             <dt class="p-t-10">Email</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.email" placeholder="Lawyer">
+                <input type='text' class="form-control" ng-model="vm.landOffice.emailAddress">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Home</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.landOffice.phoneHome">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Mobile</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.landOffice.phoneMobile">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Office</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.landOffice.phoneOffice">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Fax</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.landOffice.phoneFax">
               </div>
             </dd>
           </dl>
@@ -133,24 +73,90 @@
             <dt class="p-t-10">Website</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landOffice.website" placeholder="Lawyer">
+                <input type='text' class="form-control" ng-model="vm.landOffice.webSite">
               </div>
             </dd>
           </dl>
-
-        </div>        
-      </div>      
-   
-      <div class="row">
-        <div class="col-md-10" ng-if="!vm.viewMode">
-          <div class="m-t-30">
-            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.landoffice.delete">Delete</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.landoffice.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.landoffice.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-          </div>
         </div>
-        <div class="col-md-10" ng-if="vm.viewMode">
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Birthday</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.landOffice.dateBirth" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Citizenship</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.landOffice.citizenship" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.landOffice.address.country" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.landOffice.address.state">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.landOffice.address.postcode" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">City</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.landOffice.address.city">
+              </div>
+            </dd>
+          </dl>              
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 1)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.landOffice.address.line1" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 2)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.landOffice.address.line2">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 3)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.landOffice.address.line3">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="row">
+        <div class="col-md-10">
           <div class="m-t-30">
             <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
           </div>
@@ -158,7 +164,4 @@
       </div>
     </div>
   </div>
-     
 </div>
-
-
