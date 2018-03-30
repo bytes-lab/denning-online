@@ -1,7 +1,6 @@
 materialAdmin
   .controller('contactListCtrl', function($uibModal, NgTableParams, contactService, Auth, $state) {
     var self = this;
-    self.openDelete = openDelete;
     self.userInfo = Auth.getUserInfo();
     self.clickHandler = clickHandler;
     self.search = search;
@@ -29,32 +28,6 @@ materialAdmin
     function search() {
       self.tableFilter.reload();
     }
-    
-    //Create Modal
-    function modalInstances(animation, size, backdrop, keyboard, contact) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          contact: function () {
-            return contact;
-          },
-          on_list: function () {
-            return true;
-          }
-        }      
-      });
-    }
-
-    //Prevent Outside Click
-    function openDelete(event, contact) {
-      event.stopPropagation();
-      modalInstances(true, '', 'static', true, contact)
-    };    
   })
 
   .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, on_list, contactService, $state) {
@@ -66,8 +39,6 @@ materialAdmin
           $state.go('contacts.list');
       })
       .catch(function(err){
-        //Handler
-
         //$scope.formname.contactInfo.$error.push({meessage:''});
       });
       $modalInstance.close();

@@ -2,7 +2,6 @@ materialAdmin
   .controller('propertyListCtrl', function($sce, $uibModal, NgTableParams, propertyService, $state, Auth) {
     var self = this;
     self.dataReady = false;
-    self.openDelete = openDelete;
     self.clickHandler = clickHandler;
     self.userInfo = Auth.getUserInfo();
     self.search = search;
@@ -30,32 +29,6 @@ materialAdmin
     function search() {
       self.tableFilter.reload();
     }
-
-    //Create Modal
-    function modalInstances(animation, size, backdrop, keyboard, property) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'propertyDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          property: function () {
-            return property;
-          }, 
-          on_list: function () {
-            return true;
-          }
-        }
-      
-      });
-    }
-    //Prevent Outside Click
-    function openDelete(event, property) {
-      event.stopPropagation();
-      modalInstances(true, '', 'static', true, property)
-    };    
   })
 
   .controller('propertyDeleteModalCtrl', function ($scope, $modalInstance, property, propertyService, $state) {
