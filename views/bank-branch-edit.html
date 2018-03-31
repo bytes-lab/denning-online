@@ -1,324 +1,278 @@
-<div ng-class="vm.isDialog ? '' : 'container'">
-
-    <div class="card">
-        <div class="card-header" style="display: flex;">
-            <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
-                <h2 style="display: inline;" ng-if="!vm.viewMode">Bank Branch Edit</h2>
-                <h2 style="display: inline;" ng-if="vm.viewMode">Bank Branch Detail</h2>
-                <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-                <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete">Delete</a>
-                <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-                <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>   
-            </div>
-            <div class="col-md-10" ng-if="vm.viewMode">
-                <div class="m-t-30">
-                    <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-                </div>        
-            </div>
+<div class="container">
+  <div class="card">
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+      <h4 class="m-t-25">Bank Branch Information</h4>
+      <div class="row">
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">ID No</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.IDNo" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.name" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Email</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.emailAddress">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Home</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.phoneHome">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Mobile</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.phoneMobile">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Office</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.phoneOffice">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Fax</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.phoneFax">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Website</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.webSite">
+              </div>
+            </dd>
+          </dl>
         </div>
-                
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <h4>Personal Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">ID Type</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <md-autocomplete
-                                    ng-disabled="!vm.can_edit"
-                                    md-selected-item="vm.bankBranch.idType"
-                                    md-search-text="q"
-                                    md-items="item in vm.queryFields('IDTypes', q)"
-                                    md-item-text="item.description"
-                                    md-min-length="0"
-                                    class="default-input">
-                                    <md-item-template>
-                                        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
-                                    </md-item-template>
-                                </md-autocomplete>                                                                
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">ID No</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.IDNo" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Old IC</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.old_ic" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">                    
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Title</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <md-autocomplete
-                                    ng-disabled="!vm.can_edit"
-                                    md-selected-item="vm.bankBranch.title"
-                                    md-search-text="searchText"
-                                    md-items="item in vm.queryFields('Salutations', searchText)"
-                                    md-item-text="item.description"
-                                    md-min-length="0"
-                                    class="default-input">
-                                    <md-item-template>
-                                        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
-                                    </md-item-template>
-                                </md-autocomplete>                                                                
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Name</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.bankBranch.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                </div>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <h4 class="m-t-25">Contact Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 1)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.bankBranch.address.line1" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 2)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.address.line2" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 3)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.address.line3" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Postcode</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.bankBranch.address.postcode" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Town</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.address.city" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.address.state" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Country</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.bankBranch.address.country" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone Home</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.phoneHome" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone Mobile</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.phoneMobile" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone Office</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.bankBranch.phoneOffice" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Fax</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.phoneFax" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Email</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.emailAddress" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Website</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.webSite" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-
-                </div>                
-            </div>            
-            <div class="clearfix"></div>
-
-            <h4>Other Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Citizenship</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.citizenship" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Date of Birth</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.bankBranch.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Occupation</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.bankBranch.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Tax File No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.taxFileNo" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">IRD Branch</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <md-autocomplete
-                                    ng-disabled="!vm.can_edit"
-                                    md-selected-item="vm.bankBranch.irdBranch"
-                                    md-search-text="iq"
-                                    md-items="item in vm.queryFields('IRDBranches', iq)"
-                                    md-item-text="item.description"
-                                    md-min-length="0"
-                                    class="default-input">
-                                    <md-item-template>
-                                        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
-                                    </md-item-template>
-                                </md-autocomplete>  
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>
-            <h4 class="m-t-25" ng-click="vm.showCompany=!vm.showCompany">Company Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCompany"></i><i class="zmdi zmdi-minus" ng-if="vm.showCompany"></i></h4>
-            <div class="row" ng-show="vm.showCompany">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Registered Office</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.bankBranch.registeredOffice" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>                    
-             
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <div class="toggle-switch disabled" data-ts-color="green">
-                            <label for="ts4" class="ts-label">Invite To Denning</label>
-                            <input id="ts4" ng-model="vm.bankBranch.InviteToDenning" type="checkbox" hidden="hidden">
-                            <label for="ts4" class="ts-helper"></label>
-                        </div>
-                    </dl>                    
-                </div>
-            </div>          
-            <div class="row">     
-                <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-                        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete">Delete</a>
-                        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-                        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-                    </div>        
-                </div>
-                <div class="col-md-10" ng-if="vm.viewMode">
-                    <div class="m-t-30">
-                        <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-                    </div>        
-                </div>
-            </div>
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.address.country" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.address.state">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.address.postcode" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">City</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.address.city">
+              </div>
+            </dd>
+          </dl>              
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 1)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.address.line1" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 2)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.address.line2">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 3)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.address.line3">
+              </div>
+            </dd>
+          </dl>
         </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showBank=!vm.showBank">Bank Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showBank"></i><i class="zmdi zmdi-minus" ng-if="vm.showBank"></i></h4>
+      <div class="row" ng-show="vm.showBank">
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">ID No</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.HQ.IDNo" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.HQ.name" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Email</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.emailAddress">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Home</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.phoneHome">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Mobile</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.phoneMobile">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Office</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.phoneOffice">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Fax</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.phoneFax">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Website</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.webSite">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank Brand</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.HQ.bankCode" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.HQ.address.country" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.address.state">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.HQ.address.postcode" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">City</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.address.city">
+              </div>
+            </dd>
+          </dl>              
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 1)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.bankBranch.HQ.address.line1" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 2)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.address.line2">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 3)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.bankBranch.HQ.address.line3">
+              </div>
+            </dd>
+          </dl>
+        </div>        
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="row">
+        <div class="col-md-10">
+          <div class="m-t-30">
+            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-
-<script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
-        <h4 class="modal-title">Delete a contract</h4>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure to delete the contract?</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-link" ng-click="ok()">OK</button>
-        <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-    </div>
-</script>
