@@ -1,57 +1,42 @@
 materialAdmin
-  .controller('legalFirmListCtrl', function($filter, $sce, $uibModal, NgTableParams, legalFirmService, $state) {
+  .controller('legalFirmListCtrl', function(NgTableParams, legalFirmService, $state) {
     var self = this;
-    self.dataReady = false;
+    self.search = search;
+    self.keyword = '';
     self.clickHandler = clickHandler;
 
     function clickHandler(item) {
       $state.go('legal-firms.edit', {'id': item.code});
     }
 
-    legalFirmService.getList().then(function(data) {
-      self.data = data;
-      self.dataReady = true;
-      initializeTable();
-    });    
-    
-    function initializeTable () {
-      //Filtering
-      self.tableFilter = new NgTableParams({
-        page: 1,      // show first page
-        count: 25,
-        sorting: {
-          name: 'asc'   // initial sorting
-        }
-      }, {
-        total: self.data.length, // length of data
-        getData: function(params) {
-          // use build-in angular filter
-          var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-          orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-
-          this.data = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-          params.total(orderedData.length); // set total for recalc pagination
-          return this.data;
-        }
-      })    
-    }  
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 25,
+      sorting: {
+        name: 'asc'
+      }
+    }, {
+      getData: function(params) {
+        return legalFirmService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    })
+  
+    function search() {
+      self.tableFilter.reload();
+    }
   })
 
-  .controller('legalFirmEditCtrl', function($filter, $stateParams, legalFirmService, $state, Auth) {
+  .controller('legalFirmEditCtrl', function($stateParams, legalFirmService, $state) {
     var self = this;
     self.cancel = cancel;
-    self.isDialog = false;
-    self.viewMode = false;  // for edit / create
-    self.can_edit = false;
 
-    if($stateParams.id) {
-      legalFirmService.getItem($stateParams.id)
-      .then(function(item){
-        self.legalFirm = item;
-      });
-    } else {
-      self.legalFirm = {};
-    }
+    legalFirmService.getItem($stateParams.id)
+    .then(function(item){
+      self.legalFirm = item;
+    });
 
     function cancel() {
       $state.go('legal-firms.list');      

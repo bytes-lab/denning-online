@@ -1,25 +1,22 @@
 materialAdmin
   // =========================================================================
-  // LEGAL FIRMS
+  // LEGAL FIRMS / SOLICITORS
   // =========================================================================
   
   .service('legalFirmService', function($q, $timeout, $http, Auth){
     var service = {};
-
     service.legalFirms = null;
     service.getList = getList;
     service.getItem = getItem;
-    service.save = save;
-    service.delete = delete_;
 
-    function getList() {
+    function getList(page, pagesize, keyword) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Solicitor',
+        url: 'http://43.252.215.81/denningwcf/v1/Solicitor?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         service.legalFirms = resp.data;
-        return resp.data;
+        return resp;
       });  
     }
 
@@ -32,39 +29,5 @@ materialAdmin
         return resp.data;
       });
     }
-
-    function save(legalFirm) {
-      var deferred = $q.defer();
-
-      $timeout(function(){
-        var idx = service.legalFirms.map(function(c) {return c.code; }).indexOf(legalFirm.code);
-        if(idx != -1) {
-          service.legalFirms[idx] = legalFirm;
-        } else {
-          service.legalFirms.push(legalFirm);
-        }
-        deferred.resolve(legalFirm);
-        //deferred.reject(new Error('dd'));
-      }, 100);
-
-      return deferred.promise;
-    }
-
-    function delete_(legalFirm) {
-      var deferred = $q.defer();
-
-      $timeout(function(){
-        var idx = service.legalFirms.map(function(c) {return c.code; }).indexOf(legalFirm.code);
-        if(idx != -1) {
-          service.legalFirms.splice(idx, 1);
-          deferred.resolve(legalFirm);
-        } else {
-          deferred.reject(new Error('There is no such legal firm'));
-        }
-      }, 100);
-
-      return deferred.promise;
-    }
     return service;
-    
   })

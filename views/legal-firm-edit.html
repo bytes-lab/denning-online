@@ -1,153 +1,23 @@
-<div ng-class="vm.isDialog ? '' : 'container'">
+<div class="container">
   <div class="card">
-    <div class="card-header" style="display: flex;">
-      <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
-        <h2 style="display: inline;" ng-if="!vm.viewMode">Legal Firm Edit</h2>
-        <h2 style="display: inline;" ng-if="vm.viewMode">Legal Firm Detail</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.property)" ng-if="vm.userInfo.priority.legalfirm.delete">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.legalfirm.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.legalfirm.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-      </div>
-      <div class="col-md-10" ng-if="vm.viewMode">
-        <div class="m-t-30">
-          <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-        </div>
-      </div>
-    </div>
-
     <div class="card-body card-padding">
+      <div class="clearfix"></div>
+      <h4 class="m-t-25">Legal Firm Information</h4>
       <div class="row">
-        <div class="col-md-6 p-l-25">
+        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Code</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.code" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.legalFirm.code" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Firm Name</dt>
+            <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.name" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Initials</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.initials" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Title</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.title" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Description</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.description" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 1)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.line1" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 2)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line2" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 3)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line3" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.postcode" type="text" class="form-control" placeholder="">
-              </div>
-
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Town</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.city" placeholder="">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.state" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.country" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Home</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneHome" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneOffice" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone (Mobile)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.phoneMobile" type="text" class="form-control" placeholder="">
-              </div>
-
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneFax" placeholder="">
+                <input ng-model="vm.legalFirm.name" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -155,7 +25,39 @@
             <dt class="p-t-10">Email</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.emailAddress" placeholder="">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.emailAddress">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Home</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneHome">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Mobile</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneMobile">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Office</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneOffice">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Fax</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneFax">
               </div>
             </dd>
           </dl>
@@ -163,44 +65,79 @@
             <dt class="p-t-10">Website</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.webSite" placeholder="">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.webSite">
               </div>
             </dd>
           </dl>
-
-        </div>        
-      </div>      
-      <div class="clearfix"></div>
-  
-      <div class="row">   
-        <div class="col-md-10" ng-if="!vm.viewMode">
-          <div class="m-t-30">
-            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.legalfirm.delete">Delete</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.legalfirm.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.legalfirm.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-          </div>    
         </div>
-        <div class="col-md-10" ng-if="vm.viewMode">
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.legalFirm.address.country" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.address.state">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.legalFirm.address.postcode" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">City</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.address.city">
+              </div>
+            </dd>
+          </dl>              
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 1)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.legalFirm.address.line1" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 2)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line2">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 3)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line3">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="row">
+        <div class="col-md-10">
           <div class="m-t-30">
             <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-          </div>    
+          </div>
         </div>
       </div>
     </div>
-  </div>     
+  </div>
 </div>
-
-<script type="text/ng-template" id="myModalContent.html">
-  <div class="modal-header">
-    <h4 class="modal-title">Delete a legal firm</h4>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure to delete the legal firm?</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-link" ng-click="ok()">OK</button>
-    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-  </div>
-</script>
-
