@@ -16,7 +16,7 @@ materialAdmin
     service.delete = delete_;
     service.headers = Auth.isAuthenticated();
 
-    function getList(page, pagesize, keyword) {
+    function getList(page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
