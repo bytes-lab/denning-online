@@ -89,6 +89,83 @@ materialAdmin
 
 
             //------------------------------
+            // MATTER CODE
+            //------------------------------
+        
+            .state ('matter-codes', {
+                data: {
+                    access: '@'
+                },                
+                url: '/matter-codes',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('matter-codes.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'matterCodeListCtrl as vm',
+                templateUrl: 'views/matter-code-list.html'
+            })
+
+            .state ('matter-codes.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'matterCodeEditCtrl as vm',
+                templateUrl: 'views/matter-code-edit.html'
+            })
+            .state ('matter-codes.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'matterCodeEditCtrl as vm',
+                templateUrl: 'views/matter-code-edit.html'
+            })
+
+
+            //------------------------------
+            // FILE MATTER
+            //------------------------------
+        
+            .state ('file-matters', {
+                data: {
+                    access: '@'
+                },                
+                url: '/file-matters',
+                templateUrl: 'views/common.html'
+            })
+                      
+            .state ('file-matters.list', {
+                data: {
+                    access: '@'
+                },                
+                url: '/',
+                controller: 'fileMatterListCtrl as vm',
+                templateUrl: 'views/file-matter-list.html'
+            })
+
+            .state ('file-matters.edit', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/:id',
+                controller: 'fileMatterCodeEditCtrl as vm',
+                templateUrl: 'views/file-matter-edit.html'
+            })
+            .state ('file-matters.new', {
+                data: {
+                    access: '@'
+                },                
+                url: '/edit/',
+                controller: 'fileMatterCodeEditCtrl as vm',
+                templateUrl: 'views/file-matter-edit.html'
+            })
+
+            //------------------------------
             // CONTACTS
             //------------------------------
         
