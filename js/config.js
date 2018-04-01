@@ -153,7 +153,7 @@ materialAdmin
                     access: '@'
                 },                
                 url: '/edit/:id',
-                controller: 'fileMatterCodeEditCtrl as vm',
+                controller: 'fileMatterEditCtrl as vm',
                 templateUrl: 'views/file-matter-edit.html'
             })
             .state ('file-matters.new', {
@@ -161,7 +161,7 @@ materialAdmin
                     access: '@'
                 },                
                 url: '/edit/',
-                controller: 'fileMatterCodeEditCtrl as vm',
+                controller: 'fileMatterEditCtrl as vm',
                 templateUrl: 'views/file-matter-edit.html'
             })
 

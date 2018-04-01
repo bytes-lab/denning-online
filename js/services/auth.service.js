@@ -9,6 +9,13 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
       "update": false,
       "delete": true
     },
+    "filematter": {
+      "list": true,
+      "create": true,
+      "read": true,
+      "update": true,
+      "delete": true
+    },
     "contact": {
       "list": true,
       "create": true,

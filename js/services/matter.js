@@ -16,10 +16,10 @@ materialAdmin
     service.delete = delete_;
     service.headers = Auth.isAuthenticated();
 
-    function getList(page, pagesize, keyword) {
+    function getList(page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'http://43.252.215.81/denningwcf/v1/matter/simpleList?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: service.headers
       }).then(function(resp) {
         service.contacts = resp.data;
@@ -30,7 +30,7 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/app/contact/'+code,
+        url: 'http://43.252.215.81/denningwcf/v1/app/matter/'+code,
         headers: service.headers
       }).then(function(resp) {
         return resp.data;
@@ -111,7 +111,7 @@ materialAdmin
     service.getItem = getItem;
     service.headers = Auth.isAuthenticated();
 
-    function getList(page, pagesize) {
+    function getList(page=1, pagesize=500) {
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/matter?type=all&page='+page+'&pagesize='+pagesize,
