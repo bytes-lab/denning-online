@@ -219,6 +219,8 @@ materialAdmin
         self.navItem = function(item) {
             if (item.Title.indexOf('Contact') == 0) {
                 $state.go('contacts.edit', {id: item.code});
+            } else if (item.Title.indexOf('File No')==0) {
+                $state.go('file-matters.edit', {id: item.key});
             }
         }
         /**

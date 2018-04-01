@@ -3,12 +3,12 @@
   <div class="card">
     <div class="card-header" style="display: flex;">
       <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
-        <h2 style="display: inline;" ng-if="!vm.viewMode">Contact Edit</h2>
-        <h2 style="display: inline;" ng-if="vm.viewMode">Contact Detail</h2>
+        <h2 style="display: inline;" ng-if="!vm.viewMode">File Matter Edit</h2>
+        <h2 style="display: inline;" ng-if="vm.viewMode">File Matter Detail</h2>
         <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>   
+        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.filematter)" ng-if="vm.userInfo.priority.filematter.delete">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.filematter.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.filematter.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>   
       </div>
       <div class="col-md-10" ng-if="vm.viewMode">
         <div class="m-t-30">
@@ -20,16 +20,32 @@
     <div class="card-body card-padding">
       <div class="clearfix"></div>
 
-      <h4>Personal Information</h4>
+      <h4>Primary Client</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">ID No</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.primaryClient.IDNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Email</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.primaryClient.dateBirth">
+              </div>
+            </dd>
+          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">ID Type</dt>
             <dd>
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.idType"
+                  md-selected-item="vm.filematter.idType"
                   md-search-text="q"
                   md-items="item in vm.queryFields('IDTypes', q)"
                   md-item-text="item.description"
@@ -42,11 +58,12 @@
               </div>
             </dd>
           </dl>
+
           <dl class="dl-horizontal">
-            <dt class="p-t-10">ID No</dt>
+            <dt class="p-t-10">Phone Mobile</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.IDNo" placeholder="UA203453">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.primaryClient.phoneMobile">
               </div>
             </dd>
           </dl>
@@ -54,7 +71,7 @@
             <dt class="p-t-10">Old IC</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.old_ic" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.old_ic" placeholder="">
               </div>
             </dd>
           </dl>
@@ -66,7 +83,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.title"
+                  md-selected-item="vm.filematter.title"
                   md-search-text="searchText"
                   md-items="item in vm.queryFields('Salutations', searchText)"
                   md-item-text="item.description"
@@ -83,7 +100,7 @@
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+                <input ng-model="vm.filematter.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
               </div>
 
             </dd>
@@ -93,14 +110,14 @@
 
       <div class="clearfix"></div>
 
-      <h4 class="m-t-25">Contact Information</h4>
+      <h4 class="m-t-25">File Matter Information</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Address (Line 1)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.address.line1" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.filematter.address.line1" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
             </dd>
           </dl>
@@ -108,7 +125,7 @@
             <dt class="p-t-10">Address (Line 2)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.address.line2" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.address.line2" placeholder="">
               </div>
             </dd>
           </dl>
@@ -116,7 +133,7 @@
             <dt class="p-t-10">Address (Line 3)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.address.line3" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.address.line3" placeholder="">
               </div>
             </dd>
           </dl>
@@ -124,7 +141,7 @@
             <dt class="p-t-10">Postcode</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.address.postcode" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.filematter.address.postcode" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
 
             </dd>
@@ -133,7 +150,7 @@
             <dt class="p-t-10">Town</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.address.city" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.address.city" placeholder="">
               </div>
             </dd>
           </dl>
@@ -141,7 +158,7 @@
             <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.address.state" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.address.state" placeholder="">
               </div>
             </dd>
           </dl>
@@ -149,7 +166,7 @@
             <dt class="p-t-10">Country</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.address.country" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.filematter.address.country" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
             </dd>
           </dl>
@@ -159,7 +176,7 @@
             <dt class="p-t-10">Phone Home</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.phoneHome" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.phoneHome" placeholder="">
               </div>
             </dd>
           </dl>
@@ -167,7 +184,7 @@
             <dt class="p-t-10">Phone Mobile</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.phoneMobile" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.phoneMobile" placeholder="">
               </div>
             </dd>
           </dl>
@@ -175,7 +192,7 @@
             <dt class="p-t-10">Phone Office</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.phoneOffice" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.filematter.phoneOffice" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
 
             </dd>
@@ -184,7 +201,7 @@
             <dt class="p-t-10">Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.phoneFax" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.phoneFax" placeholder="">
               </div>
             </dd>
           </dl>
@@ -192,7 +209,7 @@
             <dt class="p-t-10">Email</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.emailAddress" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.emailAddress" placeholder="">
               </div>
             </dd>
           </dl>
@@ -200,7 +217,7 @@
             <dt class="p-t-10">Website</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.webSite" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.webSite" placeholder="">
               </div>
             </dd>
           </dl>
@@ -216,7 +233,7 @@
             <dt class="p-t-10">Citizenship</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.citizenship" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.citizenship" placeholder="">
               </div>
             </dd>
           </dl>
@@ -224,7 +241,7 @@
             <dt class="p-t-10">Date of Birth</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.filematter.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
             </dd>
           </dl>
@@ -232,7 +249,7 @@
             <dt class="p-t-10">Occupation</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                <input ng-model="vm.filematter.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
 
             </dd>
@@ -243,7 +260,7 @@
             <dt class="p-t-10">Tax File No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.taxFileNo" placeholder="">
               </div>
             </dd>
           </dl>
@@ -253,7 +270,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.irdBranch"
+                  md-selected-item="vm.filematter.irdBranch"
                   md-search-text="iq"
                   md-items="item in vm.queryFields('IRDBranches', iq)"
                   md-item-text="item.description"
@@ -275,7 +292,7 @@
             <dt class="p-t-10">Registered Office</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.filematter.registeredOffice" placeholder="">
               </div>
             </dd>
           </dl>          
@@ -285,7 +302,7 @@
           <dl class="dl-horizontal">
             <div class="toggle-switch disabled" data-ts-color="green">
               <label for="ts4" class="ts-label">Invite To Denning</label>
-              <input id="ts4" ng-model="vm.contact.InviteToDenning" type="checkbox" hidden="hidden">
+              <input id="ts4" ng-model="vm.filematter.InviteToDenning" type="checkbox" hidden="hidden">
               <label for="ts4" class="ts-helper"></label>
             </div>
           </dl>          
@@ -295,9 +312,9 @@
         <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete">Delete</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.filematter)" ng-if="vm.userInfo.priority.filematter.delete">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.filematter.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.filematter.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
           </div>    
         </div>
         <div class="col-md-10" ng-if="vm.viewMode">

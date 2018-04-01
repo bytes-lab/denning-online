@@ -86,15 +86,15 @@ materialAdmin
     if ($stateParams.id) {
       fileMatterService.getItem($stateParams.id)
       .then(function(item){
-        self.contact = angular.copy(item);  // important
+        self.filematter = angular.copy(item);  // important
       });
     } else {
-      self.contact = {};
+      self.filematter = {};
     }
 
     function save() {
-      fileMatterService.save(self.contact).then(function(contact) {
-        self.contact = contact;
+      fileMatterService.save(self.filematter).then(function(contact) {
+        self.filematter = contact;
         $state.go('file-matters.list');
       })
       .catch(function(err){
@@ -144,14 +144,14 @@ materialAdmin
     if (viewMode) {
       fileMatterService.getItem(party.party.code)
       .then(function(item){
-        self.contact = item;
+        self.filematter = item;
       });                  
     } else {
-      self.contact = {};
+      self.filematter = {};
     }
 
     function save() {
-      fileMatterService.save(self.contact).then(function(contact) {
+      fileMatterService.save(self.filematter).then(function(contact) {
         $modalInstance.close(contact);
       })
       .catch(function(err){
