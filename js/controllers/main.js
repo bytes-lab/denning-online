@@ -218,11 +218,17 @@ materialAdmin
 
         self.navItem = function(item) {
             if (item.Title.indexOf('Contact') == 0) {
-                $state.go('contacts.edit', {id: item.code});
+                $state.go('contacts.edit', {id: item.key});
             } else if (item.Title.indexOf('File No')==0) {
                 $state.go('file-matters.edit', {id: item.key});
             }
         }
+
+        self.contactMatter = function(item) {
+            if (item.Title.indexOf('Contact') == 0) {
+                $state.go('contacts.matters', {id: item.key});
+            }
+        }        
         /**
          * Create filter function for a query string
          */

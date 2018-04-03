@@ -163,3 +163,37 @@ materialAdmin
       $modalInstance.close();
     };
   })
+
+  .controller('contactMatterCtrl', function($filter, $stateParams, NgTableParams, contactService, $state) {
+    var self = this;
+    self.dataReady = false;
+    self.clickHandler = clickHandler;
+    self.filter = true;
+
+    contactService.getItem($stateParams.id)
+    .then(function(item){
+      self.contact = item;
+      self.data = [];
+      angular.forEach(item.relatedMatter, function(value, key) {
+        self.data.push(angular.fromJson(value.JsonDesc));
+      })
+      initializeTable();
+    });
+
+    function clickHandler(item) {
+      $state.go('file-matters.edit', {'id': item.systemNo});
+    }
+    
+    function initializeTable () {
+      //Filtering
+      self.tableFilter = new NgTableParams({
+        page: 1,      
+        count: 25,
+        sorting: {
+          name: 'asc' 
+        }
+      }, {
+        dataset: self.data
+      })
+    }
+  })

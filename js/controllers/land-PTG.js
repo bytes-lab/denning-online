@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('landPTGListCtrl', function($filter, $sce, $uibModal, NgTableParams, landPTGService, $state) {
+  .controller('landPTGListCtrl', function(NgTableParams, landPTGService, $state) {
     var self = this;
     self.dataReady = false;
     self.clickHandler = clickHandler;
@@ -23,17 +23,12 @@ materialAdmin
           name: 'asc' 
         }
       }, {
-        getData: function(params) {
-          var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-          orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-          params.total(orderedData.length); // set total for recalc pagination
-          return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-        }
+        dataset: self.data
       })    
     }  
   })
 
-  .controller('landPTGEditCtrl', function($filter, $stateParams, landPTGService, $state) {
+  .controller('landPTGEditCtrl', function($stateParams, landPTGService, $state) {
     var self = this;
     self.cancel = cancel;
 
