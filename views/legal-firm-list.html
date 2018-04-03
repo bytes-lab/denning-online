@@ -19,6 +19,7 @@
           <div class="fg-line">
             <input type="text" class="form-control" placeholder="Search" ng-model="vm.keyword" ng-change="vm.search()">
           </div>
+          <span class="input-group-addon search-clear" ng-show="vm.keyword" ng-click="vm.keyword='';"><i class="zmdi zmdi-close"></i></span>
           <span class="input-group-addon last"><i class="zmdi zmdi-search"></i></span>
         </div>
       </div>
