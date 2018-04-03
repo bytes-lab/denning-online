@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('courtListCtrl', function($filter, $sce, $uibModal, NgTableParams, courtService, $state) {
+  .controller('courtListCtrl', function(NgTableParams, courtService, $state) {
     var self = this;
     self.dataReady = false;
     self.clickHandler = clickHandler;
@@ -23,17 +23,12 @@ materialAdmin
           name: 'asc'                           // initial sorting
         }
       }, {
-        getData: function(params) {
-          var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-          orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-          params.total(orderedData.length);     // set total for recalc pagination
-          return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-        }
+        dataset: self.data
       })
     } 
   })
 
-  .controller('courtEditCtrl', function($filter, $stateParams, courtService, $state) {
+  .controller('courtEditCtrl', function($stateParams, courtService, $state) {
     var self = this;
     self.cancel = cancel;
 

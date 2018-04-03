@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('bankBranchListCtrl', function($filter, $uibModal, NgTableParams, bankBranchService, Auth, $state) {
+  .controller('bankBranchListCtrl', function(NgTableParams, bankBranchService, $state) {
     var self = this;
     self.search = search;
     self.keyword = '';
@@ -29,7 +29,7 @@ materialAdmin
     }
   })
 
-  .controller('bankBranchEditCtrl', function($filter, $uibModal, $stateParams, bankBranchService, $state, Auth) {
+  .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state) {
     var self = this;
     self.cancel = cancel;
 

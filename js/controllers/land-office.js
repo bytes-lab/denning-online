@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('landOfficeListCtrl', function($filter, $sce, $uibModal, NgTableParams, landOfficeService, $state) {
+  .controller('landOfficeListCtrl', function(NgTableParams, landOfficeService, $state) {
     var self = this;
     self.dataReady = false;
     self.clickHandler = clickHandler;
@@ -23,17 +23,12 @@ materialAdmin
           name: 'asc'   // initial sorting
         }
       }, {
-        getData: function(params) {
-          var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-          orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-          params.total(orderedData.length); // set total for recalc pagination
-          return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-        }
+        dataset: self.data
       })    
     }   
   })
 
-  .controller('landOfficeEditCtrl', function($filter, $stateParams, landOfficeService, $state, Auth) {
+  .controller('landOfficeEditCtrl', function($stateParams, landOfficeService, $state) {
     var self = this;
     self.cancel = cancel;
 
