@@ -14,13 +14,13 @@
     </div>
 
     <div class="card-body">
-      <div class="col-sm-5 p-l-25">
+      <div class="col-sm-4 p-l-25">
         <div class="input-group input-group-lg">
+          <span class="input-group-addon search-icon"><i class="zmdi zmdi-search"></i></span>
           <div class="fg-line">
             <input type="text" class="form-control" placeholder="Search" ng-model="vm.keyword" ng-change="vm.search()">
           </div>
-          <span class="input-group-addon search-clear" ng-show="vm.keyword" ng-click="vm.keyword='';"><i class="zmdi zmdi-close"></i></span>
-          <span class="input-group-addon last"><i class="zmdi zmdi-search"></i></span>
+          <span class="input-group-addon search-clear" ng-show="vm.keyword" ng-click="vm.keyword='';vm.search();"><i class="zmdi zmdi-close"></i></span>
         </div>
       </div>
       <div class="clearfix"></div>      

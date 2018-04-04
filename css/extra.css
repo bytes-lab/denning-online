@@ -25,7 +25,13 @@
 }
 
 .input-group-addon.search-clear {
-    min-width: 18px;
+    min-width: 28px;
     padding: 10px 0;
     color: #999;	
+}
+
+.input-group-addon.search-icon {
+    padding-right: 5px;
+    padding-top: 6px;
+    font-size: 20px;
 }
