@@ -166,6 +166,26 @@ materialAdmin
       })
 
       //------------------------------
+      // FOLDERS
+      //------------------------------
+    
+      .state ('folders', {
+        data: {
+          access: '@'
+        },
+        url: '/folders',
+        templateUrl: 'views/common.html'
+      })
+      .state ('folders.list', {
+        data: {
+          access: '@'
+        },
+        url: '/:id/:type',
+        controller: 'folderListCtrl as vm',
+        templateUrl: 'views/folder-list.html'
+      })
+
+      //------------------------------
       // CONTACTS
       //------------------------------
     
