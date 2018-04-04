@@ -228,7 +228,15 @@ materialAdmin
             if (item.Title.indexOf('Contact') == 0) {
                 $state.go('contacts.matters', {id: item.key});
             }
-        }        
+        }
+
+        self.openFolder = function(item) {
+            if (item.Title.indexOf('Contact') == 0) {
+                $state.go('folders.list', {id: item.key, type: 'contact'});
+            } else if (item.Title.indexOf('File No')==0) {
+                $state.go('folders.list', {id: item.key, type: 'matter'});
+            }            
+        }
         /**
          * Create filter function for a query string
          */

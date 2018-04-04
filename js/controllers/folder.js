@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('folderListCtrl', function(NgTableParams, folderService, $state, Auth) {
+  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, $state, Auth) {
     var self = this;
     self.dataReady = false;
     self.clickHandler = clickHandler;
@@ -7,24 +7,43 @@ materialAdmin
     self.search = search;
     self.keyword = '';
 
-    function clickHandler(item) {
-      $state.go('properties.edit', {'id': item.code});
-    }
+    folderService.getList($stateParams.id, $stateParams.type).then(function(data) {
+      self.title = data.name;
+      self.data = [];
 
-    self.tableFilter = new NgTableParams({
-      page: 1,      // show first page
-      count: 25,
-      sorting: {
-        name: 'asc'   // initial sorting
-      }
-    }, {
-      getData: function(params) {
-        return propertyService.getList(params.page(), params.count(), self.keyword).then(function(data) {
-          params.total(data.headers('x-total-count'));
-          return data.data;
-        });
-      }
-    })    
+      angular.forEach(data.documents, function(value, key) {
+        value['folder'] = 'Files';
+        self.data.push(value);
+      })
+
+      angular.forEach(data.folders, function(folder, key) {
+        angular.forEach(folder.documents, function(value, key) {
+          value['folder'] = folder.name;
+          self.data.push(value);
+        })
+      })
+
+      self.dataReady = true;
+      initializeTable();
+    });    
+
+    function clickHandler(item) {
+      $state.go('land-PTGs.edit', {'id': item.code});
+    }
+    
+    function initializeTable () {
+      //Filtering
+      self.tableFilter = new NgTableParams({
+        page: 1,      
+        count: 5,
+        sorting: {
+          name: 'asc' 
+        },
+        group: "folder"
+      }, {
+        dataset: self.data
+      })
+    } 
 
     function search() {
       self.tableFilter.reload();

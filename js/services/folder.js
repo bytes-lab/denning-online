@@ -11,14 +11,21 @@ materialAdmin
     service.getItem = getItem;
     service.headers = Auth.isAuthenticated();
 
-    function getList(page=1, pagesize=25, keyword='') {
+    function getList(code, type) {
+      var url = 'http://43.252.215.81/denningwcf/v1/app/';
+      if (type == 'contact') {
+        url = url + 'contactFolder/'+code;
+      } else {
+        url = url + 'matter/'+code+'/fileFolder';
+      }
+
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: url,
         headers: service.headers
       }).then(function(resp) {
         service.contacts = resp.data;
-        return resp;
+        return resp.data;
       });  
     }
 

@@ -16,11 +16,11 @@
           </p>
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Contact')==0" style="margin-left: -8px;">
             <md-button class="md-raised md-warn" ng-click="mactrl.contactMatter(item)">Matters</md-button>
-            <md-button class="md-raised md-warn">Folder</md-button>
+            <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item)">Folder</md-button>
             <md-button class="md-raised md-warn">Upload</md-button>
           </section>
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('File No')==0" style="margin-left: -8px;">
-            <md-button class="md-raised md-warn">Folder</md-button>
+            <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item)">Folder</md-button>
             <md-button class="md-raised md-warn">Accounts</md-button>
             <md-button class="md-raised md-warn">Notes</md-button>
             <md-button class="md-raised md-warn">Payments</md-button>

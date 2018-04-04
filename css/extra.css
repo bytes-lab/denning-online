@@ -6,6 +6,15 @@
 .table-list {
     display:block;
     overflow-x:scroll;
+    cursor: pointer;
+}
+
+.ng-table-fixed-column-60 {
+    width: 60%; 
+}
+
+.ng-table-fixed-column-50 {
+    width: 50%; 
 }
 
 .ng-table-fixed-column-35 {
@@ -34,4 +43,8 @@
     padding-right: 5px;
     padding-top: 6px;
     font-size: 20px;
+}
+
+.ng-table-group-header {
+    display: none;
 }
