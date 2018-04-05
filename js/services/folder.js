@@ -4,12 +4,12 @@ materialAdmin
   // =========================================================================
   
   .service('folderService', function($http, Auth) {
-    var service = {};
+    var service = {
+      headers: Auth.isAuthenticated(),
+      getList: getList,
+      download: download
+    };
 
-    service.contacts = null;
-    service.getList = getList;
-    service.getItem = getItem;
-    service.headers = Auth.isAuthenticated();
 
     function getList(code, type) {
       var url = 'http://43.252.215.81/denningwcf/v1/app/';
@@ -24,18 +24,18 @@ materialAdmin
         url: url,
         headers: service.headers
       }).then(function(resp) {
-        service.contacts = resp.data;
         return resp.data;
       });  
     }
 
-    function getItem(code) {
+    function download(url) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/app/contact/'+code,
-        headers: service.headers
+        url: 'http://43.252.215.81/denningwcf/'+url,
+        headers: service.headers,
+        responseType: 'arraybuffer'
       }).then(function(resp) {
-        return resp.data;
+        return resp;
       });  
     }
 
