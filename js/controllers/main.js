@@ -230,6 +230,10 @@ materialAdmin
             }
         }
 
+        self.notes = function(item) {
+            $state.go('notes.list', {fileNo: item.key});
+        }
+
         self.openFolder = function(item) {
             if (item.Title.indexOf('Contact') == 0) {
                 $state.go('folders.list', {id: item.key, type: 'contact'});

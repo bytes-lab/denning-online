@@ -268,6 +268,44 @@ materialAdmin
       })
 
 
+      //------------------------------
+      // NOTES
+      //------------------------------
+    
+      .state ('notes', {
+        data: {
+          access: '@'
+        },        
+        url: '/notes',
+        templateUrl: 'views/common.html'
+      })
+            
+      .state ('notes.list', {
+        data: {
+          access: '@'
+        },        
+        url: '/:fileNo',
+        controller: 'noteListCtrl as vm',
+        templateUrl: 'views/note-list.html'
+      })
+
+      .state ('notes.edit', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/:id',
+        controller: 'noteEditCtrl as vm',
+        templateUrl: 'views/note-edit.html'
+      })
+      .state ('notes.new', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/',
+        controller: 'noteEditCtrl as vm',
+        templateUrl: 'views/note-edit.html'
+      })
+
 
       //------------------------------
       // QUOTATIONS
