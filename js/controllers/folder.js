@@ -5,8 +5,7 @@ materialAdmin
 
     self.dataReady = false;
     self.download = download;
-    self.clickHandler = clickHandler;
-    self.keyword = '';
+    self.clickHandler = clickHandler;    
 
     folderService.getList($stateParams.id, $stateParams.type).then(function(data) {
       self.title = data.name;
@@ -28,25 +27,35 @@ materialAdmin
       initializeTable();
     });
 
-    function download(file) {
+    function download(file, open=false) {
       folderService.download(file.URL).then(function(response) {
         var fileName = file.name + file.ext;
-        var contentType = response.headers('content-type');
+        var contentTypes = {
+          '.jpg': 'image/jpeg',
+          '.png': 'image/png'
+        };
+
+        var contentType = contentTypes[file.ext] || response.headers('content-type');
 
         try {
             var blob = new Blob([response.data], {type: contentType});
             //IE handles it differently than chrome/webkit
             if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                window.navigator.msSaveOrOpenBlob(blob, fileName);
+              window.navigator.msSaveOrOpenBlob(blob, fileName);
             } else {
-                var objectUrl = URL.createObjectURL(blob);
-                // window.open(objectUrl);
+              var objectUrl = URL.createObjectURL(blob);
+              var openFiles = ['.pdf', '.jpg', '.png'];
+
+              if (open && openFiles.indexOf(file.ext) > -1) {
+                window.open(objectUrl);                  
+              } else {
                 var anchor = angular.element('<a/>');
                 anchor.attr({
                    href: objectUrl,
                    target: '_blank',
                    download: fileName
-                })[0].click();        
+                })[0].click();                          
+              }
             }
         } catch (exc) {
             console.log("Save Blob method failed with the following exception.");

@@ -22,7 +22,7 @@
               </td>
             </tr>
             <tr ng-hide="group.$hideRows" ng-repeat="file in group.data" ng-repeat-end>
-              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="ng-table-fixed-column-60">
+              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="ng-table-fixed-column-60" ng-click="vm.download(file, true);">
                 <i class="zmdi zmdi-collection-pdf" ng-if="file.ext=='.pdf'"></i>
                 <i class="zmdi zmdi-collection-image" ng-if="file.ext=='.jpg' || file.ext=='.png'"></i>
                 <i class="zmdi zmdi-collection-text" ng-if="file.ext!='.pdf' && file.ext!='.jpg' && file.ext!='.png'"></i>&nbsp;
