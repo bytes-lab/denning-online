@@ -8,6 +8,7 @@ materialAdmin
     service.landPTGs = null;
     service.getList = getList;
     service.getItem = getItem;
+    service.save = save;
     service.headers = Auth.isAuthenticated();
 
     function getList(fileNo, page, pagesize) {
@@ -29,6 +30,25 @@ materialAdmin
       }).then(function(resp) {
         return resp.data;
       });    
+    }
+
+    function save(note) {
+      var method = note.code ? 'PUT': 'POST';
+      var note_ = {
+        code: note.code,
+        strFileNo: note.strFileNo,
+        dtDate: new Date(note.dtDate).toISOString().split('T')[0],
+        strNote: note.strNote
+      }
+
+      return $http({
+        method: method,
+        url: 'http://43.252.215.81/denningwcf/v1/table/Note',
+        headers: service.headers,
+        data: note_
+      }).then(function(response) {
+        return response.data;
+      });
     }
 
     return service;

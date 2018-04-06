@@ -49,7 +49,7 @@ materialAdmin
     function save() {
       noteService.save(self.note).then(function(note) {
         self.note = note;
-        $state.go('notes.list');
+        $state.go('notes.list', {'fileNo': $stateParams.fileNo});
       })
       .catch(function(err){
         //Handler
@@ -57,7 +57,7 @@ materialAdmin
     }
 
     function cancel() {
-      $state.go('notes.list', {'fileNo': $stateParams.fileNo});      
+      $state.go('notes.list', {'fileNo': $stateParams.fileNo});
     }
 
     $scope.open = function($event, opened) {
