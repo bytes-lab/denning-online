@@ -293,7 +293,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/:id',
+        url: '/:fileNo/edit/:id',
         controller: 'noteEditCtrl as vm',
         templateUrl: 'views/note-edit.html'
       })
@@ -301,7 +301,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/',
+        url: '/:fileNo/edit/',
         controller: 'noteEditCtrl as vm',
         templateUrl: 'views/note-edit.html'
       })

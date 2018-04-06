@@ -3,15 +3,17 @@ materialAdmin
     var self = this;
     self.dataReady = false;
     self.clickHandler = clickHandler;
+    self.fileNo = $stateParams.fileNo;
 
-    noteService.getList($stateParams.id, 1, 500).then(function(data) {
+    noteService.getList($stateParams.fileNo, 1, 500).then(function(data) {
+      self.fileName = data.length > 0 && (data[0].strFileNo+' ( '+data[0].strFileName+' )') || 'Note List';
       self.data = data;
       self.dataReady = true;
       initializeTable();
     });    
 
     function clickHandler(item) {
-      $state.go('notes.edit', {'id': item.code});
+      $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': item.code});
     }
     
     function initializeTable () {
@@ -28,16 +30,32 @@ materialAdmin
     }  
   })
 
-  .controller('noteEditCtrl', function($stateParams, noteService, $state) {
+  .controller('noteEditCtrl', function($stateParams, noteService, $state, Auth) {
     var self = this;
+    self.save = save;
     self.cancel = cancel;
+    self.userInfo = Auth.getUserInfo();
 
-    noteService.getItem($stateParams.id)
-    .then(function(item){
-      self.landPTG = item;
-    });
+    if ($stateParams.id) {
+      noteService.getItem($stateParams.id)
+      .then(function(item){
+        self.note = angular.copy(item);  // important
+      });
+    } else {
+      self.note = {strFileNo: $stateParams.fileNo};
+    }
+
+    function save() {
+      noteService.save(self.note).then(function(note) {
+        self.note = note;
+        $state.go('notes.list');
+      })
+      .catch(function(err){
+        //Handler
+      });
+    }
 
     function cancel() {
-      $state.go('notes.list');      
+      $state.go('notes.list', {'fileNo': $stateParams.fileNo});      
     }
   })

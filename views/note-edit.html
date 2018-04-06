@@ -2,128 +2,30 @@
   <div class="card">
     <div class="card-body card-padding">
       <div class="clearfix"></div>
-      <h4 class="m-t-25">Land PTG Information</h4>
+      <h4 class="m-t-25">Note Information</h4>
       <div class="row">
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Code</dt>
+            <dt class="p-t-10">File No</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.landPTG.code" type="text" class="form-control">
+                <input ng-model="vm.note.strFileNo" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Name</dt>
+            <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.landPTG.name" type="text" class="form-control">
+                <input ng-model="vm.note.dtDate" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Email</dt>
+            <dt class="p-t-10">Note</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.emailAddress">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Home</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.phoneHome">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Mobile</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.phoneMobile">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.phoneOffice">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.phoneFax">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Website</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.webSite">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-5 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landPTG.address.country" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.address.state">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landPTG.address.postcode" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">City</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.address.city">
-              </div>
-            </dd>
-          </dl>              
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 1)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landPTG.address.line1" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 2)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.address.line2">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 3)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.address.line3">
+                <textarea class="form-control p-l-10" rows="8" ng-model="vm.note.strNote" placeholder="notes here...."></textarea>
               </div>
             </dd>
           </dl>
@@ -131,11 +33,14 @@
       </div>
       <div class="clearfix"></div>
       
-      <div class="row">
-        <div class="col-md-10">
+      <div class="row">   
+        <div class="col-md-6 no-padding">
           <div class="m-t-30">
-            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-          </div>
+            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.note.delete">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.note.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.note.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          </div>    
         </div>
       </div>
     </div>
