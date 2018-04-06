@@ -31,7 +31,7 @@
                 {{ w.strNote }}
               </td>
               <td data-title="'Date'" filter="{ 'dtDate': 'text' }" sortable="'dtDate'">
-                {{ w.dtDate }}
+                {{ w.dtDate.split(' ')[0] }}
               </td>
             </tr>
             <tr ng-if="$data.length==0">

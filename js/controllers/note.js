@@ -30,7 +30,7 @@ materialAdmin
     }  
   })
 
-  .controller('noteEditCtrl', function($stateParams, noteService, $state, Auth) {
+  .controller('noteEditCtrl', function($stateParams, noteService, $state, Auth, $scope) {
     var self = this;
     self.save = save;
     self.cancel = cancel;
@@ -40,6 +40,7 @@ materialAdmin
       noteService.getItem($stateParams.id)
       .then(function(item){
         self.note = angular.copy(item);  // important
+        self.note.dtDate = item.dtDate.split(' ')[0];
       });
     } else {
       self.note = {strFileNo: $stateParams.fileNo};
@@ -58,4 +59,19 @@ materialAdmin
     function cancel() {
       $state.go('notes.list', {'fileNo': $stateParams.fileNo});      
     }
+
+    $scope.open = function($event, opened) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope[opened] = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yyyy',
+        startingDay: 1
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = 'yyyy-MM-dd';
   })

@@ -13,14 +13,16 @@
               </div>
             </dd>
           </dl>
+          <div class="date-picker" ng-class="{ 'is-opened': opened == true }">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.note.dtDate" type="text" class="form-control">
+                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.note.dtDate" is-open="opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
+          </div>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Note</dt>
             <dd>

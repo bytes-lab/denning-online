@@ -303,7 +303,29 @@ materialAdmin
         },        
         url: '/:fileNo/edit/',
         controller: 'noteEditCtrl as vm',
-        templateUrl: 'views/note-edit.html'
+        templateUrl: 'views/note-edit.html',
+        resolve: {
+          loadPlugin: function($ocLazyLoad) {
+            return $ocLazyLoad.load ([
+              {
+                name: 'css',
+                insertBefore: '#app-level',
+                files: [
+                  'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
+                ]
+              },
+              {
+                name: 'vendors',
+                files: [
+                  'vendors/input-mask/input-mask.min.js',
+                  'vendors/bower_components/nouislider/jquery.nouislider.min.js',
+                  'vendors/bower_components/moment/min/moment.min.js',
+                  'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+                ]
+              }
+            ])
+          }
+        }        
       })
 
 
