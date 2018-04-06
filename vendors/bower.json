@@ -22,6 +22,7 @@
     "angular-resource": "~1.4.8",
     "angular-ui-router": "ui-router#~0.4.2",
     "animate.css": "daneden/animate.css#~3.3.0",
+    "angular-base64-upload": "*",
     "autosize": "~3.0.6",
     "bootstrap-sweetalert": "~0.4.5",
     "bower": "*",

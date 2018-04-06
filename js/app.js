@@ -9,6 +9,7 @@ var materialAdmin = angular.module('materialAdmin', [
     'ngTable',
     'ngMaterial',
     'formly', 
-    'formlyBootstrap'
+    'formlyBootstrap',
+    'naif.base64'
 ])
  

@@ -13,6 +13,7 @@ materialAdmin
     service.getSalutationList = getSalutationList;
     service.getIRDBranchList = getIRDBranchList;
     service.save = save;
+    service.upload = upload;
     service.delete = delete_;
     service.headers = Auth.isAuthenticated();
 
@@ -62,6 +63,24 @@ materialAdmin
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/IRDBranch',
         headers: service.headers
+      }).then(function(resp) {
+        return resp.data;
+      });
+    }
+
+    function upload(info, type) {
+      var url = 'http://43.252.215.81/denningwcf/v1/app/';
+      if (type == 'contact') {
+        url = url + 'contactFolder';
+      } else {
+        url = url + 'matter/fileFolder';
+      }
+
+      return $http({
+        method: 'POST',
+        url: url,
+        headers: Auth.isAuthenticated(),
+        data: info
       }).then(function(resp) {
         return resp.data;
       });

@@ -17,7 +17,8 @@
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Contact')==0" style="margin-left: -8px;">
             <md-button class="md-raised md-warn" ng-click="mactrl.contactMatter(item)">Matters</md-button>
             <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item)">Folder</md-button>
-            <md-button class="md-raised md-warn">Upload</md-button>
+            <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'contact')">Upload</md-button>
+            <input type="file" class="hidden" ng-class="'contact-upload-'+item.key" ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
           </section>
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('File No')==0" style="margin-left: -8px;">
             <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item)">Folder</md-button>
@@ -25,7 +26,8 @@
             <md-button class="md-raised md-warn" ng-click="mactrl.notes(item)">Notes</md-button>
             <md-button class="md-raised md-warn">Payments</md-button>
             <md-button class="md-raised md-warn">Templates</md-button>
-            <md-button class="md-raised md-warn">Upload</md-button>
+            <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'matter')">Upload</md-button>
+            <input type="file" class="hidden" ng-class="'matter-upload-'+item.key" ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
           </section>
           </div>
         </md-list-item>
