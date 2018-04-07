@@ -267,6 +267,26 @@ materialAdmin
         templateUrl: 'views/billingitem-edit.html'
       })
 
+      //------------------------------
+      // PAYMENT RECORDS
+      //------------------------------
+    
+      .state ('payment-records', {
+        data: {
+          access: '@'
+        },        
+        url: '/payment-records',
+        templateUrl: 'views/common.html'
+      })
+            
+      .state ('payment-records.list', {
+        data: {
+          access: '@'
+        },        
+        url: '/:fileNo',
+        controller: 'paymentRecordListCtrl as vm',
+        templateUrl: 'views/payment-record-list.html'
+      })
 
       //------------------------------
       // NOTES

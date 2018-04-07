@@ -75,3 +75,47 @@ materialAdmin
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = 'yyyy-MM-dd';
   })
+
+  .controller('paymentRecordListCtrl', function($stateParams, NgTableParams, paymentRecordService, $state) {
+    var self = this;
+    self.dataReady = false;
+    self.fileNo = $stateParams.fileNo;
+
+    paymentRecordService.getList($stateParams.fileNo).then(function(data) {
+      self.title = 'Payment Records: '+data.strFileNo1+' ( '+data.strFilename+' )';
+      self.data = [];
+
+      angular.forEach(data.section1, function(value, key) {
+        value['folder'] = ' ';
+        value['strDescription'] = value['dtDatePaid'].split(' ')[0];
+        value['strValue'] = value['decAmount'];
+        self.data.push(value);
+      })
+
+      angular.forEach(data.section2, function(value, key) {
+        value['folder'] = '  ';
+        self.data.push(value);
+      })
+
+      angular.forEach(data.section3, function(value, key) {
+        value['folder'] = '   ';
+        self.data.push(value);
+      })
+
+      initializeTable();
+    });    
+
+    function initializeTable () {
+      //Filtering
+      self.tableFilter = new NgTableParams({
+        page: 1,      
+        sorting: {
+          name: 'asc' 
+        },
+        group: "folder"
+      }, {
+        dataset: self.data,
+        counts: []
+      })    
+    }  
+  })

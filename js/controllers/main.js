@@ -205,6 +205,10 @@ materialAdmin
     function loadAll() {      
     }
 
+    self.payments = function(item) {
+      $state.go('payment-records.list', {fileNo: item.key});
+    };
+
     self.upload = function(item, type) {
       var prefix = '.'+type+'-upload-';
       self.uploadType = type;

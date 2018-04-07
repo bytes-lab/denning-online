@@ -5,7 +5,6 @@ materialAdmin
   
   .service('noteService', function($http, Auth){
     var service = {};
-    service.landPTGs = null;
     service.getList = getList;
     service.getItem = getItem;
     service.save = save;
@@ -17,7 +16,6 @@ materialAdmin
         url: 'http://43.252.215.81/denningwcf/v1/table/Note?fileNo='+fileNo+'&page='+page+'&pagesize='+pagesize,
         headers: service.headers
       }).then(function(resp) {
-        service.contacts = resp.data;
         return resp.data;
       });  
     }
@@ -49,6 +47,28 @@ materialAdmin
       }).then(function(response) {
         return response.data;
       });
+    }
+
+    return service;
+  })
+
+  // =========================================================================
+  // Payment Records
+  // =========================================================================
+  
+  .service('paymentRecordService', function($http, Auth){
+    var service = {};
+    service.getList = getList;
+    service.headers = Auth.isAuthenticated();
+
+    function getList(fileNo) {
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/app/PaymentRecord/'+fileNo,
+        headers: service.headers
+      }).then(function(resp) {
+        return resp.data;
+      });  
     }
 
     return service;

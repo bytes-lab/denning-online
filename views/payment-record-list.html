@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-10">
+          <h2>{{ vm.title }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+      <div class="col-md-6 col-sm-7">
+        <div class="table-responsive table-div p-15 f-14"> 
+          <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
+            <tr class="ng-table-group" ng-repeat-start="group in $groups">
+              <td colspan="3">
+                <a href="" ng-click="group.$hideRows = !group.$hideRows">                  
+                  <strong ng-if="group.value!=' '">&nbsp;</strong>
+                </a>
+              </td>
+            </tr>
+            <tr ng-hide="group.$hideRows" ng-repeat="file in group.data" ng-repeat-end>
+              <td data-title="'Date Paid'" class="ng-table-fixed-column-40">
+                {{file.strDescription}}
+              </td>
+              <td data-title="'Paid to'" class="ng-table-fixed-column-50">
+                {{file.strPaidTo}}
+              </td>
+              <td data-title="'Amount'" class="ng-table-fixed-column-30">
+                {{file.strValue}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

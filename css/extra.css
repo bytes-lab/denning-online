@@ -17,6 +17,10 @@
     width: 50%; 
 }
 
+.ng-table-fixed-column-40 {
+    width: 40%; 
+}
+
 .ng-table-fixed-column-35 {
     width: 35%; 
 }
