@@ -9,15 +9,15 @@
     </div>
     <div class="card-body card-padding">
       <tabset>
-        <tab heading="Client" active="true" disable="false" ng-click="vm.set_category('client')">
+        <tab heading="Client" active="vm.category=='client'" disable="false" ng-click="vm.set_category('client')">
         </tab>
-        <tab heading="Disbursement" active="false" disable="false" ng-click="vm.set_category('disb')">
+        <tab heading="Disbursement" active="vm.category=='disb'" disable="false" ng-click="vm.set_category('disb')">
         </tab>
-        <tab heading="FD" active="false" disable="false" ng-click="vm.set_category('fd')">
+        <tab heading="FD" active="vm.category=='fd'" disable="false" ng-click="vm.set_category('fd')">
         </tab>
-        <tab heading="Advance" active="false" disable="false" ng-click="vm.set_category('advance')">
+        <tab heading="Advance" active="vm.category=='advance'" disable="false" ng-click="vm.set_category('advance')">
         </tab>
-        <tab heading="Other" active="false" disable="false" ng-click="vm.set_category('other')">
+        <tab heading="Other" active="vm.category=='other'" disable="false" ng-click="vm.set_category('other')">
         </tab>
         <tab heading="Receivable" active="false" disable="false" ng-click="vm.set_category('client')">
         </tab>

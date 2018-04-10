@@ -309,6 +309,15 @@ materialAdmin
         templateUrl: 'views/account-list-1.html'
       })
 
+      .state ('accounts.list2', {
+        data: {
+          access: '@'
+        },        
+        url: '/:fileNo/:category',
+        controller: 'accountList2Ctrl as vm',
+        templateUrl: 'views/account-list-2.html'
+      })
+
       //------------------------------
       // NOTES
       //------------------------------
