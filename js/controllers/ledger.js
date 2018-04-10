@@ -7,7 +7,12 @@ materialAdmin
     self.set_category = function(category) {
       self.dataReady = false;
       ledgerService.getList($stateParams.fileNo, category).then(function(data) {
-        self.data = data;
+        self.data = [];
+        angular.forEach(data, function(value, key) {
+          value['date'] = value['date'].split(' ')[0];
+          self.data.push(value);
+        });
+
         self.dataReady = true;
         initializeTable();
       });    
