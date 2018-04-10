@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>{{ vm.fileNo }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="card-body card-padding">
+      <tabset>
+        <tab heading="Client" active="true" disable="false" ng-click="vm.set_category('client')">
+        </tab>
+        <tab heading="Disbursement" active="false" disable="false" ng-click="vm.set_category('disb')">
+        </tab>
+        <tab heading="FD" active="false" disable="false" ng-click="vm.set_category('fd')">
+        </tab>
+        <tab heading="Advance" active="false" disable="false" ng-click="vm.set_category('advance')">
+        </tab>
+        <tab heading="Other" active="false" disable="false" ng-click="vm.set_category('other')">
+        </tab>
+        <tab heading="Receivable" active="false" disable="false" ng-click="vm.set_category('client')">
+        </tab>
+      </tabset>
+
+      <div class="table-responsive table-div" ng-if="vm.dataReady" > 
+        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list" show-filter="true">
+          <tr ng-repeat="w in $data">
+            <td data-title="'Date'" filter="{ 'date': 'text' }" sortable="'date'">
+              {{ w.date }}
+            </td>
+            <td data-title="'Transaction No'" filter="{ 'documentNo': 'text' }" sortable="'documentNo'">
+              {{ w.documentNo }}
+            </td>
+            <td data-title="'Bill No'" filter="{ 'taxInvoice': 'text' }" sortable="'taxInvoice'">
+              {{ w.taxInvoice }}
+            </td>
+            <td data-title="'Received / Paid'" filter="{ 'recdPaid': 'text' }" sortable="'recdPaid'">
+              {{ w.recdPaid }}
+            </td>
+            <td data-title="'Description'" filter="{ 'description': 'text' }" sortable="'description'">
+              {{ w.description }}
+            </td>
+            <td data-title="'Dr Amount'" filter="{ 'amountDR': 'text' }" sortable="'amountDR'">
+              {{ w.amountDR }}
+            </td>
+            <td data-title="'Cr Amount'" filter="{ 'amountCR': 'text' }" sortable="'amountCR'">
+              {{ w.amountCR }}
+            </td>
+            <td data-title="'Mode'" filter="{ 'paymentMode': 'text' }" sortable="'paymentMode'">
+              {{ w.paymentMode }}
+            </td>
+            <td data-title="'Bank a/c'" filter="{ 'bankAcc': 'text' }" sortable="'bankAcc'">
+              {{ w.bankAcc }}
+            </td>
+            <td data-title="'Issued by'" filter="{ 'issuedBy': 'text' }" sortable="'issuedBy'">
+              {{ w.issuedBy }}
+            </td>
+            <td data-title="'Updated by'" filter="{ 'emailAddress': 'text' }" sortable="'emailAddress'">
+              {{ w.emailAddress }}
+            </td>
+          </tr>
+          <tr ng-if="$data.length==0">
+            <td colspan="12">No record</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

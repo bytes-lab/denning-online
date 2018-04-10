@@ -289,6 +289,27 @@ materialAdmin
       })
 
       //------------------------------
+      // ACCOUNTS
+      //------------------------------
+    
+      .state ('accounts', {
+        data: {
+          access: '@'
+        },        
+        url: '/accounts',
+        templateUrl: 'views/common.html'
+      })
+            
+      .state ('accounts.list', {
+        data: {
+          access: '@'
+        },        
+        url: '/:fileNo',
+        controller: 'accountListCtrl as vm',
+        templateUrl: 'views/account-list.html'
+      })
+
+      //------------------------------
       // NOTES
       //------------------------------
     

@@ -21,7 +21,7 @@ materialAdmin
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
-        headers: service.headers
+        headers: Auth.isAuthenticated()
       }).then(function(resp) {
         service.contacts = resp.data;
         return resp;
@@ -91,8 +91,6 @@ materialAdmin
       delete contact.relatedMatter;
       contact.title = contact.title.description;
       // contact.irdBranch = contact.irdBranch.description;
-
-      console.log(contact);
 
       return $http({
         method: method,
