@@ -24,11 +24,12 @@ materialAdmin
       //Filtering
       self.tableFilter = new NgTableParams({
         page: 1,      
-        count: 25,
+        count: 5,
         sorting: {
           name: 'asc' 
         }
       }, {
+        counts: [],
         dataset: self.data
       })    
     }  

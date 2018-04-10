@@ -306,7 +306,7 @@ materialAdmin
         },        
         url: '/:fileNo',
         controller: 'accountListCtrl as vm',
-        templateUrl: 'views/account-list.html'
+        templateUrl: 'views/account-list-1.html'
       })
 
       //------------------------------

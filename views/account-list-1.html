@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body" id="profile-main">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="pmb-block">
+            <div class="pmbb-header">
+                <h2><i class="zmdi zmdi-person m-r-5"></i> Matter</h2>
+            </div>
+            <div class="pmbb-body p-l-30">
+              <div class="pmbb-view">
+                <dl class="dl-horizontal">
+                    <dt>File No</dt>
+                    <dd>{{ vm.fileNo }}</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>File Name</dt>
+                    <dd></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div class="pmb-block">
+            <div class="pmbb-header">
+                <h2><i class="zmdi zmdi-person m-r-5"></i> Ledger Summary</h2>
+            </div>
+            <div class="pmbb-body p-l-30">
+              <div class="pmbb-view">
+                <dl class="dl-horizontal">
+                    <dt>Client</dt>
+                    <dd>0.00</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Disbursment</dt>
+                    <dd>0.00</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>FD</dt>
+                    <dd>540.00</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Advance</dt>
+                    <dd>0.00</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Other</dt>
+                    <dd>0.00</dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Receivable</dt>
+                    <dd>0.00</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="col-md-9">
+            <div class="pmb-block">
+              <div class="pmbb-header">
+                  <h2><i class="zmdi zmdi-person m-r-5"></i> Qutations</h2>
+              </div>
+              <div class="pmbb-body">
+
+                <div class="table-responsive table-div" ng-if="vm.dataReady" > 
+                  <table ng-table="vm.tableFilter" class="table table-vmiddle table-list" show-filter="true">
+                    <tr ng-repeat="w in $data">
+                      <td data-title="'Date'">
+                        {{ w.date }}
+                      </td>
+                      <td data-title="'No'">
+                        {{ w.documentNo }}
+                      </td>
+                      <td data-title="'For'">
+                        {{ w.description }}
+                      </td>
+                      <td data-title="'Amount'">
+                        {{ w.recdPaid }}
+                      </td>
+                    </tr>
+                    <tr ng-if="$data.length==0">
+                      <td colspan="12">No record</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11">
+            <div class="pmb-block">
+              <div class="pmbb-header">
+                  <h2><i class="zmdi zmdi-person m-r-5"></i> Invoices</h2>
+              </div>
+              <div class="pmbb-body">
+
+                <div class="table-responsive table-div" ng-if="vm.dataReady" > 
+                  <table ng-table="vm.tableFilter" class="table table-vmiddle table-list" show-filter="true">
+                    <tr ng-repeat="w in $data">
+                      <td data-title="'Date'">
+                        {{ w.date }}
+                      </td>
+                      <td data-title="'No'" class="ng-table-fixed-column-20">
+                        {{ w.documentNo }}
+                      </td>
+                      <td data-title="'For'" class="ng-table-fixed-column-20">
+                        {{ w.description }}
+                      </td>
+                      <td data-title="'Amount'" class="ng-table-fixed-column-20">
+                        {{ w.recdPaid }}
+                      </td>
+                      <td data-title="'Paid'">
+                        {{ w.amountDR }}
+                      </td>
+                      <td data-title="'Balance'">
+                        {{ w.amountCR }}
+                      </td>                    
+                    </tr>
+                    <tr ng-if="$data.length==0">
+                      <td colspan="12">No record</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
