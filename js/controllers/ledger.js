@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, $state) {
+  .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, quotationService, $state) {
     var self = this;
     self.fileNo = $stateParams.fileNo;
     self.ledger_level2 = ledger_level2;
@@ -10,30 +10,21 @@ materialAdmin
       $state.go('accounts.list2', {'fileNo': $stateParams.fileNo, 'category': category});
     }
 
-    ledgerService.getList($stateParams.fileNo, 'client').then(function(data) {
-      self.data = [];
-      angular.forEach(data, function(value, key) {
-        value['date'] = value['date'].split(' ')[0];
-        self.data.push(value);
-      });
-
-      self.dataReady = true;
-      initializeTable();
+    self.quotationTable = new NgTableParams({
+      page: 1,      
+      count: 5,
+      sorting: {
+        name: 'asc' 
+      }
+    }, {
+      counts: [],
+      getData: function(params) {
+        return quotationService.getList(params.page(), params.count(), $stateParams.fileNo).then(function(data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
     });    
-
-    function initializeTable () {
-      //Filtering
-      self.tableFilter = new NgTableParams({
-        page: 1,      
-        count: 5,
-        sorting: {
-          name: 'asc' 
-        }
-      }, {
-        counts: [],
-        dataset: self.data
-      })    
-    }  
   })
 
   .controller('accountList2Ctrl', function($stateParams, NgTableParams, ledgerService, $state, $q) {
