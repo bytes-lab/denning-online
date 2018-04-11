@@ -52,3 +52,7 @@
 .ng-table-group-header {
     display: none;
 }
+
+.no-pager .ng-table-pager {
+    display: none;
+}

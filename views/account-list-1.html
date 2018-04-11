@@ -32,11 +32,11 @@
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('disb')">
                     <dt>Disbursement</dt>
-                    <dd>0.00</dd>
+                    <dd>540.00</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('fd')">
                     <dt>FD</dt>
-                    <dd>540.00</dd>
+                    <dd>0.00</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('advance')">
                     <dt>Advance</dt>
@@ -61,8 +61,8 @@
                   <h2 class="c-purple f-500">Quotations</h2>
               </div>
               <div class="pmbb-body">
-                <div class="table-responsive table-div"> 
-                  <table ng-table="vm.quotationTable" class="table table-vmiddle table-list" show-filter="true">
+                <div class="table-responsive table-div no-pager"> 
+                  <table ng-table="vm.quotationTable" class="table table-vmiddle" show-filter="true">
                     <tr ng-repeat="w in $data">
                       <td data-title="'Date'">
                         2017-03-15
@@ -91,27 +91,26 @@
                   <h2 class="c-purple f-500">Invoices</h2>
               </div>
               <div class="pmbb-body">
-
-                <div class="table-responsive table-div" ng-if="vm.dataReady" > 
-                  <table ng-table="vm.tableFilter" class="table table-vmiddle table-list" show-filter="true">
+                <div class="table-responsive table-div no-pager"> 
+                  <table ng-table="vm.invoiceTable" class="table table-vmiddle" show-filter="true">
                     <tr ng-repeat="w in $data">
                       <td data-title="'Date'">
-                        {{ w.date }}
+                        2011-05-03
                       </td>
                       <td data-title="'No'" class="ng-table-fixed-column-20">
-                        {{ w.documentNo }}
+                        {{ w.invoiceNo }}
                       </td>
                       <td data-title="'For'" class="ng-table-fixed-column-20">
-                        {{ w.description }}
+                        {{ w.fileName }}
                       </td>
                       <td data-title="'Amount'" class="ng-table-fixed-column-20">
-                        {{ w.recdPaid }}
+                        {{ w.amount }}
                       </td>
                       <td data-title="'Paid'">
-                        {{ w.amountDR }}
+                        {{ w.fileNo }}
                       </td>
                       <td data-title="'Balance'">
-                        {{ w.amountCR }}
+                        {{ w.fileNo }}
                       </td>                    
                     </tr>
                     <tr ng-if="$data.length==0">

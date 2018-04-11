@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, quotationService, $state) {
+  .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, quotationService, invoiceService, $state) {
     var self = this;
     self.fileNo = $stateParams.fileNo;
     self.ledger_level2 = ledger_level2;
@@ -24,7 +24,23 @@ materialAdmin
           return data.data;
         });
       }
-    });    
+    });
+
+    self.invoiceTable = new NgTableParams({
+      page: 1,      
+      count: 5,
+      sorting: {
+        name: 'asc' 
+      }
+    }, {
+      counts: [],
+      getData: function(params) {
+        return invoiceService.getList(params.page(), params.count(), $stateParams.fileNo).then(function(data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    });     
   })
 
   .controller('accountList2Ctrl', function($stateParams, NgTableParams, ledgerService, $state, $q) {
