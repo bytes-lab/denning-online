@@ -8,20 +8,21 @@
       </div>
     </div>
     <div class="card-body card-padding">
-      <tabset>
-        <tab heading="Client" active="vm.category=='client'" disable="false" ng-click="vm.set_category('client')">
-        </tab>
-        <tab heading="Disbursement" active="vm.category=='disb'" disable="false" ng-click="vm.set_category('disb')">
-        </tab>
-        <tab heading="FD" active="vm.category=='fd'" disable="false" ng-click="vm.set_category('fd')">
-        </tab>
-        <tab heading="Advance" active="vm.category=='advance'" disable="false" ng-click="vm.set_category('advance')">
-        </tab>
-        <tab heading="Other" active="vm.category=='other'" disable="false" ng-click="vm.set_category('other')">
-        </tab>
-        <tab heading="Receivable" active="false" disable="false" ng-click="vm.set_category('client')">
-        </tab>
-      </tabset>
+      <div class="p-t-15 p-b-15">
+        <label class="checkbox checkbox-inline m-r-20">
+          <input type="checkbox" ng-model="vm.select_all" 
+            ng-click="vm.toggleAll()">
+          <i class="input-helper"></i>
+          All
+        </label>
+        <label class="checkbox checkbox-inline m-r-20" ng-repeat="category in vm.all_categories">
+          <input type="checkbox" name="categories[]" 
+            ng-checked="vm.categories.indexOf(category.key) > -1"
+            ng-click="vm.toggleSelection(category.key)">
+          <i class="input-helper"></i>
+          {{ category.val }}
+        </label>
+      </div>
 
       <div class="table-responsive table-div" ng-if="vm.dataReady" > 
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list" show-filter="true">
