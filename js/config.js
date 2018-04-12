@@ -226,7 +226,7 @@ materialAdmin
           type: 'contact'          
         },
         url: '/:id/matters',
-        controller: 'contactMatterCtrl as vm',
+        controller: 'relatedMatterCtrl as vm',
         templateUrl: 'views/file-matter-list.html',
       })
 
@@ -576,6 +576,15 @@ materialAdmin
         url: '/edit/new',
         controller: 'propertyEditCtrl as vm',
         templateUrl: 'views/property-edit.html'
+      })
+      .state ('properties.matters', {
+        data: {
+          access: '@',
+          type: 'property'          
+        },
+        url: '/:id/matters',
+        controller: 'relatedMatterCtrl as vm',
+        templateUrl: 'views/file-matter-list.html',
       })
       
       //------------------------------

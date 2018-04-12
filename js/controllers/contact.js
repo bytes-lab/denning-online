@@ -164,13 +164,17 @@ materialAdmin
     };
   })
 
-  .controller('contactMatterCtrl', function($filter, $stateParams, NgTableParams, contactService, $state) {
+  .controller('relatedMatterCtrl', function($filter, $stateParams, NgTableParams, contactService, propertyService, $state) {
     var type = $state.$current.data.type;
     var self = this;
     self.clickHandler = clickHandler;
     self.filter = true;
 
-    contactService.getItem($stateParams.id).then(function(item) {
+    var service = contactService;
+    if (type == 'property')
+      service = propertyService;
+
+    service.getItem($stateParams.id).then(function(item) {
       self.data = [];
       angular.forEach(item.relatedMatter, function(value, key) {
         self.data.push(angular.fromJson(value.JsonDesc));
