@@ -213,12 +213,11 @@ materialAdmin
       var prefix = '.'+type+'-upload-';
       self.uploadType = type;
       self.item = item;
+      self.uploaded = 0;
       angular.element(prefix+item.key).click();
     };
 
     self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      console.log(file, fileObj, self.uploadType);
-
       var info = {
         "fileNo1": self.item.key,
         "documents":[
@@ -234,7 +233,10 @@ materialAdmin
       };
 
       contactService.upload(info, self.uploadType).then(function(res) {
-        alert('The file uploaded successfully.');
+        self.uploaded = self.uploaded + 1;
+        if (fileList.length == self.uploaded) {
+          alert('The file(s) uploaded successfully.');
+        }
       })
       .catch(function(err){
       });

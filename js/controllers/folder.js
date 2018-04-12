@@ -1,11 +1,10 @@
 materialAdmin
-  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, $state, Auth, $scope, $element) {
+  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
-    self.dataReady = false;
     self.download = download;
-    self.clickHandler = clickHandler;
+
     self.data = [];
     self.checkboxes = {
       checked: false,
@@ -59,7 +58,6 @@ materialAdmin
         })
       })
 
-      self.dataReady = true;
       initializeTable();
     });
 
@@ -100,10 +98,6 @@ materialAdmin
       })
     }
 
-    function clickHandler(item) {
-      $state.go('land-PTGs.edit', {'id': item.code});
-    }
-    
     function initializeTable () {
       //Filtering
       self.tableFilter = new NgTableParams({
@@ -116,5 +110,43 @@ materialAdmin
       }, {
         dataset: self.data
       })
+    }
+
+    self.upload = function() {
+      self.uploaded = 0;
+      angular.element('.file-upload').click();
+    };
+
+    self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
+
+      var info = {
+        "fileNo1": $stateParams.id,
+        "documents":[
+          {
+            "FileName": fileObj.filename,
+            "MimeType": fileObj.filetype,
+            "dateCreate": file.lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "dateModify": file.lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "fileLength": fileObj.filesize,
+            "base64": fileObj.base64
+          }
+        ]
+      };
+
+      contactService.upload(info, 'matter', fileOjects).then(function(res) {
+        self.uploaded = self.uploaded + 1;
+        if (fileList.length == self.uploaded) {
+          alert('The file(s) uploaded successfully.');
+          $state.reload();
+        }
+      })
+      .catch(function(err){
+      });
+    };
+
+    self.copy_file = function() {
+      if (angular.equals(self.checkboxes.items, {})) {
+        alert('Please select files to copy.');
+      }      
     }
   })
