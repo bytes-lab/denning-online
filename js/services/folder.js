@@ -15,7 +15,7 @@ materialAdmin
       var url = 'http://43.252.215.81/denningwcf/v1/app/';
       if (type == 'contact') {
         url = url + 'contactFolder/'+code;
-      } else {
+      } else if (type == 'matter') {
         url = url + 'matter/'+code+'/fileFolder';
       }
 

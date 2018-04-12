@@ -268,12 +268,8 @@ materialAdmin
       $state.go('accounts.list', {fileNo: item.key});
     }
     
-    self.openFolder = function(item) {
-      if (item.Title.indexOf('Contact') == 0) {
-        $state.go('folders.list', {id: item.key, type: 'contact'});
-      } else if (item.Title.indexOf('File No')==0) {
-        $state.go('folders.list', {id: item.key, type: 'matter'});
-      }      
+    self.openFolder = function(code, type) {
+      $state.go('folders.list', {id: code, type: type});
     }
     /**
      * Create filter function for a query string
@@ -284,9 +280,7 @@ materialAdmin
       return function filterFn(state) {
       return (state.value.indexOf(lowercaseQuery) === 0);
       };
-
     }
-   
   })
   .controller('loginCtrl', function ($rootScope, $scope, Auth, $window, $state, legalFirmService) {
     var self = this;
