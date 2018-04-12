@@ -32,7 +32,7 @@ materialAdmin
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/app/contact/'+code,
-        headers: service.headers
+        headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
       });  

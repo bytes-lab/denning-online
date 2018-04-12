@@ -222,11 +222,12 @@ materialAdmin
       })
       .state ('contacts.matters', {
         data: {
-          access: '@'
+          access: '@',
+          type: 'contact'          
         },
         url: '/:id/matters',
         controller: 'contactMatterCtrl as vm',
-        templateUrl: 'views/file-matter-list.html'
+        templateUrl: 'views/file-matter-list.html',
       })
 
       //------------------------------

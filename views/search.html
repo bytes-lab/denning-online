@@ -14,8 +14,14 @@
           <p ng-repeat="entry in item.parseJSON" ng-if="entry.value!=''">
             {{entry.label}}: {{entry.value}}
           </p>
+          <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Property')==0" style="margin-left: -8px;">
+            <md-button class="md-raised md-warn" ng-click="mactrl.relatedMatter(item.key, 'property')">Matters</md-button>
+            <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item)">Folder</md-button>
+            <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'property')">Upload</md-button>
+            <input type="file" class="hidden" ng-class="'property-upload-'+item.key" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
+          </section>
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Contact')==0" style="margin-left: -8px;">
-            <md-button class="md-raised md-warn" ng-click="mactrl.contactMatter(item)">Matters</md-button>
+            <md-button class="md-raised md-warn" ng-click="mactrl.relatedMatter(item.key, 'contact')">Matters</md-button>
             <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item)">Folder</md-button>
             <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'contact')">Upload</md-button>
             <input type="file" class="hidden" ng-class="'contact-upload-'+item.key" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
@@ -29,8 +35,8 @@
             <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'matter')">Upload</md-button>
             <input type="file" class="hidden" ng-class="'matter-upload-'+item.key" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
             <md-button class="md-raised md-warn">Calendar</md-button>
-            <md-button class="md-raised md-warn">Check List</md-button>
-            <md-button class="md-raised md-warn">File Tasks</md-button>
+            <md-button class="md-raised md-warn">Checklist</md-button>
+            <md-button class="md-raised md-warn">Tasks</md-button>
           </section>
           </div>
         </md-list-item>

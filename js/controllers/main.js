@@ -245,14 +245,18 @@ materialAdmin
     self.navItem = function(item) {
       if (item.Title.indexOf('Contact') == 0) {
         $state.go('contacts.edit', {id: item.key});
-      } else if (item.Title.indexOf('File No')==0) {
+      } else if (item.Title.indexOf('File No') == 0) {
         $state.go('file-matters.edit', {id: item.key});
+      } else if (item.Title.indexOf('Property') == 0) {
+        $state.go('properties.edit', {id: item.key});
       }
     }
 
-    self.contactMatter = function(item) {
-      if (item.Title.indexOf('Contact') == 0) {
-        $state.go('contacts.matters', {id: item.key});
+    self.relatedMatter = function(code, type) {
+      if (type == 'contact') {
+        $state.go('contacts.matters', {id: code});
+      } else if (type == 'property') {
+        $state.go('properties.matters', {id: code});
       }
     }
 

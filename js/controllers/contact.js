@@ -165,14 +165,12 @@ materialAdmin
   })
 
   .controller('contactMatterCtrl', function($filter, $stateParams, NgTableParams, contactService, $state) {
+    var type = $state.$current.data.type;
     var self = this;
-    self.dataReady = false;
     self.clickHandler = clickHandler;
     self.filter = true;
 
-    contactService.getItem($stateParams.id)
-    .then(function(item){
-      self.contact = item;
+    contactService.getItem($stateParams.id).then(function(item) {
       self.data = [];
       angular.forEach(item.relatedMatter, function(value, key) {
         self.data.push(angular.fromJson(value.JsonDesc));
@@ -185,7 +183,6 @@ materialAdmin
     }
     
     function initializeTable () {
-      //Filtering
       self.tableFilter = new NgTableParams({
         page: 1,      
         count: 25,

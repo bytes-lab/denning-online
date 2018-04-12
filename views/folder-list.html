@@ -6,7 +6,7 @@
   <div class="card">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
           <h2>{{ vm.title }}</h2>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files"><i class="zmdi zmdi-copy" ng-click="vm.copy_file()"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Share files"><i class="zmdi zmdi-share"></i></button>
@@ -19,7 +19,7 @@
 
     <div class="card-body">
       <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-10">
         <div class="table-responsive table-div p-15 f-14"> 
           <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
             <tr class="ng-table-group" ng-repeat-start="group in $groups">
