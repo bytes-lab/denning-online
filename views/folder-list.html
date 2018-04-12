@@ -8,9 +8,11 @@
       <div class="row">
         <div class="col-md-10">
           <h2>{{ vm.title }}</h2>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files"><i class="zmdi zmdi-copy" ng-click="vm.copy_file()"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Share files"><i class="zmdi zmdi-share"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files"><i class="zmdi zmdi-delete"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Attach files for email" ng-click="vm.attach_file()"><i class="zmdi zmdi-attachment-alt"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.copy_file()"><i class="zmdi zmdi-copy"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Move files" ng-click="vm.move_file()"><i class="zmdi zmdi-mail-send"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Share files" ng-click="vm.share_file()"><i class="zmdi zmdi-share"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.delete_file()"><i class="zmdi zmdi-delete"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.upload()"><i class="zmdi zmdi-upload"></i></button>
           <input type="file" class="file-upload hidden" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
         </div>        
@@ -44,10 +46,14 @@
               <td sortable="'date'" data-title="'Date'" class="ng-table-fixed-column-25">
                 {{file.date}}
               </td>
-              <td data-title="'Action'" class="f-18">
-                <i class="zmdi zmdi-edit" title="Rename"></i>
-                <i class="zmdi zmdi-download m-l-10" title="Download" ng-click="vm.download(file)"></i>
-                <i class="zmdi zmdi-collection-text m-l-10" title="Copy link"></i>
+              <td data-title="'Action'" class="f-16">
+                <button class="btn btn-default" title="Rename">
+                  <i class="zmdi zmdi-edit"></i>
+                </button>
+                <button class="btn btn-default m-l-5" title="Download" ng-click="vm.download(file)">
+                  <i class="zmdi zmdi-download"></i>
+                </button>
+                <button class="btn btn-default m-l-5" ngclipboard ngclipboard-success="vm.copySuccess(e);" data-clipboard-text="http://43.252.215.81/denningwcf/{{ file.URL }}" title="Copy link"><i class="zmdi zmdi-collection-text"></i></button>
               </td>
             </tr>
           </table>

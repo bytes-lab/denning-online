@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element) {
+  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element, growlService) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -148,5 +148,31 @@ materialAdmin
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to copy.');
       }      
+    }
+
+    self.move_file = function() {
+      if (angular.equals(self.checkboxes.items, {})) {
+        alert('Please select files to move.');
+      }      
+    }
+    self.share_file = function() {
+      if (angular.equals(self.checkboxes.items, {})) {
+        alert('Please select files to share.');
+      }      
+    }
+    self.delete_file = function() {
+      if (angular.equals(self.checkboxes.items, {})) {
+        alert('Please select files to delete.');
+      }      
+    }
+    self.attach_file = function() {
+      if (angular.equals(self.checkboxes.items, {})) {
+        alert('Please select files to attach.');
+      }      
+    }
+
+    self.copySuccess = function(e) {
+      e.clearSelection();
+      growlService.growl('Link copied successfully!', 'success'); 
     }
   })
