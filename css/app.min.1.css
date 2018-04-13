@@ -10599,13 +10599,40 @@ h6 small,
 #header .search {
   margin-bottom: 25px;
   position: absolute;
-  left: 254px;
   width: calc(100% - 604px);
+}
+
+@media (min-width: 992px) {
+  #header .search {
+    left: 255px;
+  }  
 }
 
 @media (max-width: 767px) {
   #header .search {
     padding: 0 20px;
+  }
+}
+
+.search-filter {
+  margin-right: 146px !important; 
+  min-width: 36px !important;
+}
+
+@media (max-width: 1024px) {
+  #header .search {
+    width: calc(100% - 494px);
+  }
+
+  .search-filter {
+    margin-right: 36px !important; 
+  }
+}
+
+@media (max-width: 991px) {
+  #header .search {
+    width: calc(100% - 416px);
+    left: 180px;
   }
 }
 

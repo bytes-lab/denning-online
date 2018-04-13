@@ -1,107 +1,107 @@
 <ul class="header-inner clearfix">
-    <li id="menu-trigger" data-target="mainmenu" data-toggle-sidebar data-model-left="mactrl.sidebarToggle.left" data-ng-class="{ 'open': mactrl.sidebarToggle.left === true }">
-        <div class="line-wrap">
-            <div class="line top"></div>
-            <div class="line center"></div>
-            <div class="line bottom"></div>  
-        </div>
-    </li>
+  <li id="menu-trigger" data-target="mainmenu" data-toggle-sidebar data-model-left="mactrl.sidebarToggle.left" data-ng-class="{ 'open': mactrl.sidebarToggle.left === true }">
+    <div class="line-wrap">
+      <div class="line top"></div>
+      <div class="line center"></div>
+      <div class="line bottom"></div>  
+    </div>
+  </li>
 
-    <li class="logo hidden-xs">
-        <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)">Denning Online</a>
-    </li>
-    <li>
-        <div class="search">
-            <!-- <div class="fg-line"> -->
-                <!-- <input type="text" class="form-control" placeholder="Search for matters, contacts, properties ..."> -->
-              <md-autocomplete
-                  ng-disabled="false"
-                  md-selected-item="mactrl.selectedItem"
-                  md-search-text-change="mactrl.searchTextChange(mactrl.searchText)"
-                  md-search-text="mactrl.searchText"
-                  md-selected-item-change="mactrl.selectedItemChange(item)"
-                  md-items="item in mactrl.querySearch(mactrl.searchText)"
-                  md-item-text="item.display"
-                  md-min-length="1"
-                  md-autoselect="false"
-                  ng-keypress="mactrl.searchKeyPressed($event)"
-                  placeholder="Search for matters, contacts, properties ...">
-                <md-item-template>
-                  <span md-highlight-text="mactrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-                </md-item-template>
-                <md-not-found>
-                  No results matching "{{mactrl.searchText}}" were found.
-                </md-not-found>
-              </md-autocomplete>
-              <md-card ng-show="mactrl.showFilterCategory" style="margin: 0px" >
-                <md-radio-group ng-model="mactrl.selectedSearchCategory" ng-init="mactrl.selectedSearchCategory=0" layout-wrap layout="row" layout-padding ng-change="mactrl.searchFilterChange()">
-                    <md-radio-button flex="20"  ng-repeat="item in mactrl.searchFilterCategories" ng-value="item.ID" style="margin-right: 0px">
-                    {{item.Category}}
-                    </md-radio-button>
-                </md-radio-group>
-              </md-card>
-            <!-- </div> -->
-        </div>
-    </li>
-    <li class="pull-right">
-        <ul class="top-menu">            
-            <li style="margin-right: 146px; min-width: 36px;">
-                <a href="" ng-click="mactrl.showFilterCategory = !mactrl.showFilterCategory" id="search_filter"><i class="tm-icon zmdi zmdi-filter-list"></i></a>
-            </li>
-            <li class="dropdown" uib-dropdown>
-                <a uib-dropdown-toggle href="">
-                    <i class="tm-icon zmdi zmdi-notifications"></i>
-                    <i class="tmn-counts">9</i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
-                    <div class="listview" id="notifications">
-                        <div class="lv-header">
-                            Notification
+  <li class="logo hidden-xs hidden-sm">
+    <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)">Denning Online</a>
+  </li>
+  <li class="logo hidden-md hidden-lg">
+    <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)">Denning</a>
+  </li>
+  <li>
+    <div class="search">
+      <md-autocomplete
+        ng-disabled="false"
+        md-selected-item="mactrl.selectedItem"
+        md-search-text-change="mactrl.searchTextChange(mactrl.searchText)"
+        md-search-text="mactrl.searchText"
+        md-selected-item-change="mactrl.selectedItemChange(item)"
+        md-items="item in mactrl.querySearch(mactrl.searchText)"
+        md-item-text="item.display"
+        md-min-length="1"
+        md-autoselect="false"
+        ng-keypress="mactrl.searchKeyPressed($event)"
+        placeholder="Search for matters, contacts, properties ...">
+        <md-item-template>
+          <span md-highlight-text="mactrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+        </md-item-template>
+        <md-not-found>
+          No results matching "{{mactrl.searchText}}" were found.
+        </md-not-found>
+      </md-autocomplete>
+      <md-card ng-show="mactrl.showFilterCategory" style="margin: 0px" >
+        <md-radio-group ng-model="mactrl.selectedSearchCategory" ng-init="mactrl.selectedSearchCategory=0" layout-wrap layout="row" layout-padding ng-change="mactrl.searchFilterChange()">
+          <md-radio-button flex="20"  ng-repeat="item in mactrl.searchFilterCategories" ng-value="item.ID" style="margin-right: 0px">
+          {{item.Category}}
+          </md-radio-button>
+        </md-radio-group>
+      </md-card>
+    </div>
+  </li>
+  <li class="pull-right">
+    <ul class="top-menu">      
+      <li class="search-filter">
+        <a href="" ng-click="mactrl.showFilterCategory = !mactrl.showFilterCategory" id="search_filter"><i class="tm-icon zmdi zmdi-filter-list"></i></a>
+      </li>
+      <li class="dropdown" uib-dropdown>
+        <a uib-dropdown-toggle href="">
+          <i class="tm-icon zmdi zmdi-notifications"></i>
+          <i class="tmn-counts">9</i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
+          <div class="listview" id="notifications">
+            <div class="lv-header">
+              Notification
 
-                            <ul class="actions">
-                                <li>
-                                    <a href="" data-ng-click="hctrl.clearNotification($event)">
-                                        <i class="zmdi zmdi-check-all"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="lv-body">
-                            <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">{{ w.user }}</div>
-                                        <small class="lv-small">{{ w.text }}</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <a class="lv-footer" href="">View Previous</a>
-                    </div>
-
+              <ul class="actions">
+                <li>
+                  <a href="" data-ng-click="hctrl.clearNotification($event)">
+                    <i class="zmdi zmdi-check-all"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="lv-body">
+              <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
+                <div class="media">
+                  <div class="pull-left">
+                    <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
+                  </div>
+                  <div class="media-body">
+                    <div class="lv-title">{{ w.user }}</div>
+                    <small class="lv-small">{{ w.text }}</small>
+                  </div>
                 </div>
-            </li>
-            <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.task" data-ng-class="{ 'open': mactrl.sidebarToggle.task === true }">
-                <a href=""><i class="tm-icon zmdi zmdi-view-list-alt"></i></a>
-            </li>
-           
-            <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
-                <a href=""><i class="tm-icon zmdi zmdi-comment-alt-text"></i></a>
-            </li>
-        </ul>
-    </li>
+              </a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <a class="lv-footer" href="">View Previous</a>
+          </div>
+
+        </div>
+      </li>
+      <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.task" data-ng-class="{ 'open': mactrl.sidebarToggle.task === true }">
+        <a href=""><i class="tm-icon zmdi zmdi-view-list-alt"></i></a>
+      </li>
+       
+      <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
+        <a href=""><i class="tm-icon zmdi zmdi-comment-alt-text"></i></a>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 <!-- Top Search Content -->
 <div id="top-search-wrap">
-    <div class="tsw-inner">
-        <i id="top-search-close" class="zmdi zmdi-arrow-left" data-ng-click="hctrl.closeSearch()"></i>
-        <input type="text">
-    </div>
+  <div class="tsw-inner">
+    <i id="top-search-close" class="zmdi zmdi-arrow-left" data-ng-click="hctrl.closeSearch()"></i>
+    <input type="text">
+  </div>
 </div>
