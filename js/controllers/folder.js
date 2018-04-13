@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element, growlService) {
+  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element, growlService, ngClipboard) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -168,7 +168,19 @@ materialAdmin
     self.attach_file = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to attach.');
-      }      
+        return;
+      }
+
+      var urls = '';
+      var ids = Object.keys(self.checkboxes.items);
+
+      angular.forEach(self.data, function(value, key) {
+        if (ids.indexOf(value.id.toString()) > -1) {
+          urls += 'http://43.252.215.81/denningwcf/' + value.URL + '\n';
+        }
+      })
+      ngClipboard.toClipboard(urls);
+      growlService.growl('Links copied successfully!', 'success');
     }
 
     self.copySuccess = function(e) {

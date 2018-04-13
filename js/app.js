@@ -11,6 +11,7 @@ var materialAdmin = angular.module('materialAdmin', [
     'formly', 
     'formlyBootstrap',
     'naif.base64',
-    'ngclipboard'
+    'ngclipboard',
+    'ngClipboard'
 ])
  
