@@ -104,7 +104,7 @@ materialAdmin
         page: 1,
         count: 5,
         sorting: {
-          name: 'asc' 
+          date: 'desc' 
         },
         group: "folder"
       }, {
