@@ -11,6 +11,16 @@ materialAdmin
       userInfo: null
     };
 
+    this.searchFilterFlex = 20;
+    var width = $(window).width();
+
+    if (width < 780)
+      this.searchFilterFlex = 50;
+    else if (width < 1300)
+      this.searchFilterFlex = 33;
+    else if (width < 1441)
+      this.searchFilterFlex = 25;
+
     // Detact Mobile Browser
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
        angular.element('html').addClass('ismobile');
@@ -25,7 +35,6 @@ materialAdmin
     }
     // FilterList;
     this.searchFilterCategories = [];
-
     // By default template has a boxed layout
     this.layoutType = localStorage.getItem('ma-layout-status');
     
