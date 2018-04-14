@@ -1,43 +1,40 @@
 <div class="container">
-    <div class="card">
-        <div class="card-body card-padding">
-            <h2>Form JSON</h2>
-            <div class="form-group" style="border: 2px solid lightgrey;">
-                <textarea class="form-control" rows="25" placeholder="Form JSON here..." ng-model="vm.textAreaModel">                  
-                </textarea>
-            </div>
+  <div class="card">
+    <div class="card-body card-padding">
+      <h2>Form JSON</h2>
+      <div class="form-group" style="border: 2px solid lightgrey;">
+          <textarea class="form-control" rows="25" placeholder="Form JSON here..." ng-model="vm.textAreaModel"></textarea>
+      </div>
 
-            <h2>Preview</h2>
-            <div class="preview">
-<!--               <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
-                <formly-form model="vm.model" fields="vm.fields" options="vm.options" form="vm.form">          
-                </formly-form>
-              </form>      
- -->
-              <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
-                <uib-tabset>
-                  <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
-                    <div ng-repeat="group in tab.groups" class="col-md-9 no-padding">    
-                      <div class="group">
-                        <div class="form-group">
-                          <input id="{{group.key}}-label" name="{{group.key}}-label" class="form-control group-label" ng-model="vm.model[group.key+'-label']" ng-value="group.label" />
-                        </div>
-                        <formly-form model="vm.model" fields="group.attrs" form="vm.form" options="group.options">
-                        </formly-form>
-                      </div>
-                    </div>
-                  </tab>
-                </tabset>
-                <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>
-                <button type="button" class="btn btn-default" ng-click="vm.resetAllForms()">Reset</button>
-                
-              </form>
-              
-            </div>
-            <h2>Form Data</h2>
-            <pre>{{vm.model | json}}</pre>
-        </div>
+      <h2>Preview</h2>
+      <div class="preview">
+        <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
+          <formly-form model="vm.model" fields="vm.fields" options="vm.options" form="vm.form">          
+          </formly-form>
+        </form>      
+
+        <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
+          <uib-tabset>
+            <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
+              <div ng-repeat="group in tab.groups" class="col-md-9 no-padding">    
+                <div class="group">
+                  <div class="form-group">
+                    <input id="{{group.key}}-label" name="{{group.key}}-label" class="form-control group-label" ng-model="vm.model[group.key+'-label']" ng-value="group.label" />
+                  </div>
+                  <formly-form model="vm.model" fields="group.attrs" form="vm.form" options="group.options">
+                  </formly-form>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+<!--                 <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>
+          <button type="button" class="btn btn-default" ng-click="vm.resetAllForms()">Reset</button> -->
+        </form>
+      </div>
+      <h2>Form Data</h2>
+      <pre>{{vm.model | json}}</pre>
     </div>
+  </div>
 </div>    
 
 <!-- Put custom templates here -->
@@ -52,7 +49,9 @@
             is-open="datepicker.opened"
             datepicker-options="to.datepickerOptions" />
     <span class="input-group-btn">
-        <button type="button" class="btn btn-default" ng-click="datepicker.open($event)" ng-disabled="to.disabled"><i class="glyphicon glyphicon-calendar"></i></button>
+      <button type="button" class="btn btn-default" ng-click="datepicker.open($event)" ng-disabled="to.disabled">
+        <i class="glyphicon glyphicon-calendar"></i>
+      </button>
     </span>
   </p>
 </script>
@@ -149,7 +148,9 @@
 <script type="text/ng-template" id="file.html">  
   <div class="form-group col-md-12" ng-repeat="party in model[options.key]" ng-if="to.party">
     <div style="display: flex;">
-      <label for="{{::id}}_party_{{$index}}" class="form-control attr-label">Primary Client {{ $index+1 }}</label>
+      <label for="{{::id}}_party_{{$index}}" class="form-control attr-label">
+        Primary Client {{ $index+1 }}
+      </label>
 
       <md-autocomplete
           md-selected-item="party.party"
@@ -166,30 +167,42 @@
         </md-item-template>
       </md-autocomplete>
 
-      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(party, false)"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span></a>
-      <a class="btn btn-primary short-btn" target="_new" ng-click="viewContact(party)"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span></a>
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(party, false)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
+      </a>
+      <a class="btn btn-primary short-btn" target="_new" ng-click="viewContact(party)">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+      </a>
       <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
-      <a class="btn btn-danger short-btn" ng-click="removeParty($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span></a>
+      <a class="btn btn-danger short-btn" ng-click="removeParty($index)">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span>
+      </a>
     </div>
   </div>
   <div style="margin-bottom: 30px;" ng-if="to.party">
-    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()" title="Add a new client to group"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new client</a>
-    <!-- <a class="btn btn-primary short-btn" style="margin-left: 80px;" target="_new" data-ui-sref="contacts.edit">Add a new party</a> -->
+    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()" title="Add a new client to group">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      &nbsp;&nbsp;Add a new client
+    </a>
   </div>
   <div ng-if="to.solicitor">
     <div class="form-group col-md-12">
       <div style="display: flex;">
         <label class="form-control attr-label">Ref 2 (Manual)</label>
         <select class="form-control" ng-model="model[options.key+'_solicitor']" style="width:45%;">
-          <option ng-repeat="item in legalFirms" ng-value="item" ng-selected="model[options.key+'_solicitor'].code == item.code">{{item.name}}</option>
+          <option ng-repeat="item in legalFirms" ng-value="item" ng-selected="model[options.key+'_solicitor'].code == item.code">
+            {{item.name}}
+          </option>
         </select>
-        <a class="btn btn-primary short-btn" target="_new" ui-sref="legal-firms.edit({id: model[options.key+'_solicitor'].code})" title="See detail of solicitor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+        <a class="btn btn-primary short-btn" target="_new" ui-sref="legal-firms.edit({id: model[options.key+'_solicitor'].code})" title="See detail of solicitor">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+        </a>
         <div class="checkbox" style="margin: 6px 0 6px 18px;">
-            <label>
-                <input type="checkbox" ng-model="represent_this" ng-click="representChange()">
-                <i class="input-helper"></i>
-                Representing this party
-            </label>
+          <label>
+            <input type="checkbox" ng-model="represent_this" ng-click="representChange()">
+            <i class="input-helper"></i>
+            Representing this party
+          </label>
         </div>
       </div>
     </div>
@@ -638,5 +651,5 @@
     <label for="{{::id}}">{{options.templateOptions.label}}</label>
     <input id="{{::id}}" name="{{::id}}" class="form-control" ng-model="model[options.key]" />
   </div>
-</script>    
+</script>
 

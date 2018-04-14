@@ -11,7 +11,7 @@ materialAdmin
     }
 
     self.tableFilter = new NgTableParams({
-      page: 1,          // show first page
+      page: 1,            // show first page
       count: 25,
       sorting: {
         name: 'asc'       // initial sorting
