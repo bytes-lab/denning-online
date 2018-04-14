@@ -5,7 +5,6 @@ materialAdmin
   
   .service('legalFirmService', function($q, $timeout, $http, Auth){
     var service = {};
-    service.legalFirms = null;
     service.getList = getList;
     service.getItem = getItem;
 
@@ -15,7 +14,6 @@ materialAdmin
         url: 'http://43.252.215.81/denningwcf/v1/Solicitor?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
-        service.legalFirms = resp.data;
         return resp;
       });  
     }

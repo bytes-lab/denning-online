@@ -237,15 +237,13 @@ materialAdmin
       name: 'file',
       templateUrl: 'file.html',
       controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        initContacts();
-
         $scope.getNumber = function(num) {
           return new Array(num);   
         }
 
         $scope.represent_this = false;
         $scope.userInfo = Auth.getUserInfo();
-
+        console.log($scope.userInfo);
         $scope.representChange = function() {
           $scope.model[$scope.options.key+'_solicitor'] = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};
         }
@@ -257,9 +255,8 @@ materialAdmin
         }];
 
         $scope.solicitor = {};        
-
         $scope.changeSolicitor = function(item) {
-          $scope.solicitor = item;          
+          $scope.solicitor = item;
         }
 
         $scope.addParty = function() {
@@ -282,21 +279,14 @@ materialAdmin
             $scope.model[$scope.options.key].splice(idx, 1);
         }
 
-        function initContacts() {
-          contactService.getList().then(function(data) {
-            $scope.contacts = data;
-          });                     
-        }
-
         $scope.queryContacts = function(searchText) {
           return getContacts(1, 10, searchText);
         }
 
-        legalFirmService.getList().then(function(data) {
-          $scope.legalFirms = data;
+        legalFirmService.getList().then(function(resp) {
+          $scope.legalFirms = resp.data;
         });      
 
-        //Create Modal
         $scope.contactDialog = function(party, viewMode) {
           var modalInstance = $uibModal.open({
             animation: true,
@@ -308,16 +298,9 @@ materialAdmin
             keyboard: true,
             resolve: {
               viewMode: viewMode,
-              party: party,
-              initContacts: function(){
-                return initContacts;
-              }
+              party: party
             }      
           });
-
-          modalInstance.result.then(function(contact){
-            $scope.contacts.push(contact);
-          })
         }
       }
     });    

@@ -130,10 +130,10 @@ materialAdmin
     function openDelete(event, contact) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, contact)
-    };    
+    };
   })
 
-  .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, contactService, $scope, Auth) {
+  .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, contactService, Auth) {
     var self = this;
     self.save = save;
     self.cancel = cancel;
@@ -145,7 +145,7 @@ materialAdmin
       contactService.getItem(party.party.code)
       .then(function(item){
         self.contact = item;
-      });                  
+      });
     } else {
       self.contact = {};
     }
@@ -155,7 +155,6 @@ materialAdmin
         $modalInstance.close(contact);
       })
       .catch(function(err){
-        //Handler
       });
     };
 
