@@ -176,7 +176,7 @@ materialAdmin
 
       angular.forEach(self.data, function(value, key) {
         if (ids.indexOf(value.id.toString()) > -1) {
-          urls += 'http://43.252.215.81/denningwcf/' + value.URL + '\n';
+          urls += value.name + value.ext + '\n';
         }
       })
       ngClipboard.toClipboard(urls);
