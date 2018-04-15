@@ -98,8 +98,7 @@ materialAdmin
     formlyConfig.setType({
       name: 'contact',
       templateUrl: 'contact.html',
-      controller: ['$scope', 'legalFirmService', 'contactService', 'Auth', '$uibModal', function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        initContacts();
+      controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
         initLFs();
 
         $scope.getNumber = function(num) {
@@ -157,16 +156,8 @@ materialAdmin
             $scope.model[$scope.options.key].splice(idx, 1);
         }
 
-        function initContacts() {
-          contactService.getList().then(function(data) {
-            $scope.contacts = data;
-          });                     
-        }
-
         $scope.queryContacts = function(searchText) {
-          return $scope.contacts.filter(function(c) {
-            return c && (c.name.search(new RegExp(searchText, "i")) > -1 || c.IDNo.search(new RegExp(searchText, "i")) > -1);
-          });          
+          return getContacts(1, 10, searchText);
         }
 
         function initLFs() {
@@ -228,8 +219,7 @@ materialAdmin
             }
           })
         }
-
-      }]    
+      }
     });
     
     // file attribute
@@ -243,7 +233,7 @@ materialAdmin
 
         $scope.represent_this = false;
         $scope.userInfo = Auth.getUserInfo();
-        console.log($scope.userInfo);
+
         $scope.representChange = function() {
           $scope.model[$scope.options.key+'_solicitor'] = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};
         }
