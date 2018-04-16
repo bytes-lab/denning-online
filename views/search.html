@@ -15,7 +15,7 @@
             {{entry.label}}: {{entry.value}}
           </p>
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Property')==0" style="margin-left: -8px;">
-            <div class="col-md-12 no-padding">
+            <div class="col-sm-12 no-padding">
               <md-button class="md-raised md-warn" ng-click="mactrl.relatedMatter(item.key, 'property')">Matters</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item.key, 'property')">Folder</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'property')">Upload</md-button>
@@ -23,7 +23,7 @@
             </div>
           </section>
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Contact')==0" style="margin-left: -8px;">
-            <div class="col-md-12 no-padding">
+            <div class="col-sm-12 no-padding">
               <md-button class="md-raised md-warn" ng-click="mactrl.relatedMatter(item.key, 'contact')">Matters</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item.key, 'contact')">Folder</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'contact')">Upload</md-button>
