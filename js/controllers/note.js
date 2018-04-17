@@ -42,10 +42,15 @@ materialAdmin
         self.fileName = item.strFileNo+' ( '+item.strFileName+' )';
         self.note = angular.copy(item);  // important
         self.note.dtDate = item.dtDate.split(' ')[0];
+        self.title = 'Note Information';
       });
     } else {
-      self.fileName = item.strFileNo;
-      self.note = {strFileNo: $stateParams.fileNo};
+      self.fileName = $stateParams.fileNo;
+      self.note = {
+        strFileNo: $stateParams.fileNo,
+        dtDate: new Date().toISOString().split('T')[0]
+      };
+      self.title = 'New Note';
     }
 
     function save() {

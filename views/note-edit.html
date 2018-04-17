@@ -3,40 +3,28 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md-8">
-          <div class="col-md-8">
-            <h2 class="c-purple f-500 f-20">{{ vm.fileName }}</h2>
-          </div>
+          <h2 class="c-purple f-500 f-20">{{ vm.fileName }}</h2>
         </div>
       </div>
     </div>
     <div class="card-body card-padding">
       <div class="clearfix"></div>
-      <h4 class="m-t-25">Note Information</h4>
+      <h4 class="m-t-25">{{ vm.title }}</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">File No</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.note.strFileNo" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <div class="date-picker" ng-class="{ 'is-opened': opened == true }">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.note.dtDate" is-open="opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input type="text" class="form-control" value="{{ vm.note.dtDate | date : 'dd-MM-yyyy' }}" ng-disabled="true" ng-required="true" />
               </div>
             </dd>
           </dl>
-          </div>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Note</dt>
             <dd>
               <div class="fg-line">
-                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.note.strNote" placeholder="notes here...."></textarea>
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.note.strNote" placeholder="type here...."></textarea>
               </div>
             </dd>
           </dl>
