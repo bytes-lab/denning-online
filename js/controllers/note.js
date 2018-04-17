@@ -39,10 +39,12 @@ materialAdmin
     if ($stateParams.id) {
       noteService.getItem($stateParams.id)
       .then(function(item){
+        self.fileName = item.strFileNo+' ( '+item.strFileName+' )';
         self.note = angular.copy(item);  // important
         self.note.dtDate = item.dtDate.split(' ')[0];
       });
     } else {
+      self.fileName = item.strFileNo;
       self.note = {strFileNo: $stateParams.fileNo};
     }
 
@@ -52,7 +54,6 @@ materialAdmin
         $state.go('notes.list', {'fileNo': $stateParams.fileNo});
       })
       .catch(function(err){
-        //Handler
       });
     }
 
@@ -72,8 +73,7 @@ materialAdmin
         startingDay: 1
     };
 
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = 'yyyy-MM-dd';
+    $scope.format = 'dd-MM-yyyy';
   })
 
   .controller('paymentRecordListCtrl', function($stateParams, NgTableParams, paymentRecordService, $state) {

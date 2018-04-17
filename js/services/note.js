@@ -36,7 +36,10 @@ materialAdmin
         code: note.code,
         strFileNo: note.strFileNo,
         dtDate: new Date(note.dtDate).toISOString().split('T')[0],
-        strNote: note.strNote
+        strNote: note.strNote,
+        clsEnteredBy: {
+          strName: note.clsEnteredBy.strName
+        }
       }
 
       return $http({
