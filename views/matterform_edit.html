@@ -85,14 +85,12 @@
     </div>
   </div>
   <div style="margin-bottom: 30px;" ng-if="to.party">
-    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()" title="Add a new party to group"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party</a>
-    <!-- <a class="btn btn-primary short-btn" style="margin-left: 80px;" target="_new" data-ui-sref="contacts.edit">Add a new party</a> -->
+    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()" title="Add a new party to group"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party</a>    
   </div>
   <div ng-if="to.solicitor">
     <div class="form-group col-md-12">
       <div style="display: flex;">
         <label class="form-control attr-label">Solicitor</label>
-
         <md-autocomplete
             md-selected-item="model[options.key+'_solicitor'].party"
             md-search-text="q_lf"
@@ -121,13 +119,13 @@
     <div class="form-group col-md-12">
       <div style="display: flex;">
         <label class="form-control attr-label">Firm Tel / Fax / Email</label>
-        <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].phoneHome" style="width:45%;">
+        <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].party.phoneHome" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div style="display: flex;">
         <label class="form-control attr-label">Firm Location</label>
-        <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].address.fullAddress" style="width:45%;">
+        <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].party.address.fullAddress" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12">

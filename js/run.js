@@ -20,7 +20,7 @@ materialAdmin
     });
   })
 
-  .run(function(formlyConfig, contactService) {
+  .run(function(formlyConfig, contactService, legalFirmService) {
     var attributes = [
       'date-disabled',
       'custom-class',
@@ -78,6 +78,12 @@ materialAdmin
       });
     }
 
+    function getSolicitors(page, pagesize, keyword) {
+      return legalFirmService.getList(page, pagesize, keyword).then(function(resp) {
+        return resp.data;
+      });
+    }
+
     // set templates here
     formlyConfig.setType({
       name: 'price_w_currency',
@@ -99,8 +105,6 @@ materialAdmin
       name: 'contact',
       templateUrl: 'contact.html',
       controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        initLFs();
-
         $scope.getNumber = function(num) {
           return new Array(num);   
         }
@@ -109,7 +113,8 @@ materialAdmin
         $scope.userInfo = Auth.getUserInfo();
 
         $scope.representChange = function() {
-          $scope.model[$scope.options.key+'_solicitor'] = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};          
+          $scope.represent_this = !$scope.represent_this;
+          $scope.model[$scope.options.key+'_solicitor'].party = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};
         }
         
         $scope.model[$scope.options.key] = [
@@ -122,10 +127,10 @@ materialAdmin
           party: {}
         };
 
-        $scope.solicitor = {};        
+        $scope.solicitor = {};
 
         $scope.changeSolicitor = function(item) {
-          $scope.solicitor = item;          
+          $scope.solicitor = item;
         }
 
         $scope.addParty = function() {
@@ -160,16 +165,8 @@ materialAdmin
           return getContacts(1, 10, searchText);
         }
 
-        function initLFs() {
-          legalFirmService.getList().then(function(data) {
-            $scope.legalFirms = data;
-          });                
-        }
-
         $scope.queryLFs = function(searchText) {
-          return $scope.legalFirms.filter(function(c) {
-            return c && (c.name.search(new RegExp(searchText, "i")) > -1 || c.code.search(new RegExp(searchText, "i")) > -1);
-          });          
+          return getSolicitors(1, 10, searchText);
         }
 
         //Create Contact Modal
@@ -191,7 +188,7 @@ materialAdmin
           modalInstance.result.then(function(contact){
             if (contact) {
               party.party = contact;
-              $scope.contacts.push(contact);              
+              $scope.contacts.push(contact);
             }
           })
         }
@@ -215,7 +212,7 @@ materialAdmin
           modalInstance.result.then(function(lf_){
             if (lf_) {
               lf.party = lf_;
-              $scope.legalFirms.push(lf_);              
+              $scope.legalFirms.push(lf_);
             }
           })
         }

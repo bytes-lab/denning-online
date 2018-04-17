@@ -3,7 +3,7 @@ materialAdmin
   // LEGAL FIRMS / SOLICITORS
   // =========================================================================
   
-  .service('legalFirmService', function($q, $timeout, $http, Auth){
+  .service('legalFirmService', function($http, Auth){
     var service = {};
     service.getList = getList;
     service.getItem = getItem;
