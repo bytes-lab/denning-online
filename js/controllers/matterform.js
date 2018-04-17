@@ -26,6 +26,9 @@ materialAdmin
     
     vm.tabs = [
       {
+        "label": "Summary",
+      },
+      {
         "label": "Matter",
         "groups": [
           {
@@ -405,7 +408,22 @@ materialAdmin
           }
 
         ]
-      },  
+      }, 
+      {
+        "label": "Property",
+      },
+      {
+        "label": "Bank",
+      },
+      {
+        "label": "$",
+      },
+      {
+        "label": "Date",
+      },
+      {
+        "label": "Text",
+      },
       {
         "label": "Generate Document",
         "groups": [
