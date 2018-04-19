@@ -1,75 +1,47 @@
 materialAdmin
-    // =========================================================================
-    // DOC TEMPLATE
-    // =========================================================================
-    
-    .service('templateService', ['$q', '$timeout', '$http', function($q, $timeout, $http){
-        var service = {};
+  // =========================================================================
+  // DOC TEMPLATE
+  // =========================================================================
+  
+  .service('templateService', function($http, Auth){
+    var service = {};
+    service.getCategories = getCategories;
+    service.getTypes = getTypes;
+    service.getTemplates = getTemplates;
 
-        function getCategories() {
-            if (service.categories) {
-                var deferred = $q.defer();
-                deferred.resolve(service.categories);
-                return deferred.promise;
-            } else {
-                return $http.get('data/cbotemplatecategory.only')
-                .then(function(resp){
-                    service.categories = resp.data;                
-                    return resp.data;
-                })                
-            }
-        }
+    function getCategories() {
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/Table/cbotemplatecategory/only',
+        headers: Auth.isAuthenticated()
+      }).then(function(resp) {
+        return resp.data;
+      });
+    }
 
-        function getTypes(category) {
-            var deferred = $q.defer();
-            
-            if (category == 'Forms' || category == 'Letters') {
-                if (service.types[category]) {
-                    deferred.resolve(service.types[category]);
-                    return deferred.promise;
-                } else {
-                    return $http.get('data/cbotemplatecategory-filter='+category)
-                    .then(function(resp){
-                        service.types[category] = resp.data;                
-                        return resp.data;
-                    })                
-                }
-            } else {
-                deferred.resolve([]);
-                return deferred.promise;                
-            }
-        }
+    function getTypes(category) {
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/Table/cbotemplatecategory?filter='+category,
+        headers: Auth.isAuthenticated()
+      }).then(function(resp) {
+        return resp.data;
+      });
+    }
 
-        function getTemplates(category, type, source) {
-            var deferred = $q.defer();
-            var url = 'cboTemplate-fileno=2000-1077-Online='+source.toLowerCase()+'-category='+category+'-Type='+type;
-            var allow_urls = ['cboTemplate-fileno=2000-1077-Online=user-category=Forms-Type=F01',
-                 'cboTemplate-fileno=2000-1077-Online=all-category=Letters-Type=L01',
-                 'cboTemplate-fileno=2000-1077-Online=online-category=Letters-Type=L01',
-                 'cboTemplate-fileno=2000-1077-Online=user-category=Letters-Type=L01'];
+    function getTemplates(category, type, source, fileNo) {
+      if (!fileNo) {
+        fileNo ='2000-1077';
+      }
+      
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/Table/cboTemplate?fileno='+fileNo+'&Online='+source.toLowerCase()+'&category='+category+'&Type='+type,
+        headers: Auth.isAuthenticated()
+      }).then(function(resp) {
+        return resp;
+      });
+    }
 
-            if (allow_urls.indexOf(url) != -1) {           
-                if (service.templates[url]) {
-                    deferred.resolve(service.templates[url]);
-                    return deferred.promise;
-                } else {
-                    return $http.get('data/'+url)
-                    .then(function(resp){
-                        service.templates[url] = resp.data;                
-                        return resp.data;
-                    })                
-                }
-            } else {
-                deferred.resolve([]);
-                return deferred.promise;                
-            }
-        }
-
-        service.templates = {};
-        service.types = {};
-        service.getCategories = getCategories;
-        service.getTypes = getTypes;
-        service.getTemplates = getTemplates;
-
-        return service;        
-    }])
+    return service;    
+  })

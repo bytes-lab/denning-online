@@ -591,7 +591,7 @@ materialAdmin
     formlyConfig.setType({
       name: 'gen-doc',
       templateUrl: 'gen-doc.html',
-      controller: ['$scope', '$filter', 'NgTableParams', 'templateService', function ($scope, $filter, NgTableParams, templateService) {
+      controller: function($scope, $filter, NgTableParams, templateService) {
         templateService.getCategories().then(function(data) {
           $scope.categories = data;
         });    
@@ -603,44 +603,30 @@ materialAdmin
         }
 
         $scope.updateTemplates = function() {
-          $scope.dataReady = false;
           if ($scope.model[$scope.options.key+'_category'] && $scope.model[$scope.options.key+'_type'] && $scope.model[$scope.options.key+'_source']) {
-            templateService.getTemplates($scope.model[$scope.options.key+'_category'], $scope.model[$scope.options.key+'_type'], $scope.model[$scope.options.key+'_source']).then(function(data) {
-              $scope.data = data;
-              $scope.dataReady = true;
-              initializeTable();
-            });                
+            $scope.tableFilter = new NgTableParams({
+              page: 1,            // show first page
+              count: 10,
+              sorting: {
+                name: 'asc'       // initial sorting
+              }
+            }, {
+              getData: function(params) {
+                return templateService.getTemplates($scope.model[$scope.options.key+'_category'], $scope.model[$scope.options.key+'_type'], $scope.model[$scope.options.key+'_source'], $scope.to.fileNo).then(function(data) {
+                  params.total(data.headers('x-total-count'));
+                  return data.data;
+                });
+              }
+            })    
           }
-        }
+        };
 
         $scope.sources = [
           'All',
           'Online',
           'User'
-        ];
-        
-        function initializeTable () {
-          //Filtering
-          $scope.tableFilter = new NgTableParams({
-            page: 1,      // show first page
-            count: 10,
-            sorting: {
-              name: 'asc'   // initial sorting
-            }
-          }, {
-            total: $scope.data.length, // length of data
-            getData: function(params) {
-              // use build-in angular filter
-              var orderedData = params.filter() ? $filter('filter')($scope.data, params.filter()) : $scope.data;
-              orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-
-              this.data = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-              params.total(orderedData.length); // set total for recalc pagination
-              return this.data;
-            }
-          })    
-        }
-      }]    
+        ];        
+      }
     });
     
     formlyConfig.setType({

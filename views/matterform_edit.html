@@ -571,29 +571,29 @@
         <option ng-repeat="item in sources" ng-value="item">{{item}}</option>
       </select>
     </div>
-    <div class="table-responsive" ng-if="dataReady" > 
-        <table ng-table="tableFilter" class="table table-striped table-vmiddle" show-filter="true">
-            <tr ng-repeat="w in $data">
-                <td data-title="'Code'" filter="{ 'code': 'text' }" sortable="'code'">
-                    {{ w.code }}
-                </td>
-                <td data-title="'Created At'" filter="{ 'dtCreatedDate': 'text' }" sortable="'dtCreatedDate'">
-                    {{ w.dtCreatedDate }}
-                </td>
-                <td data-title="'Description'" filter="{ 'strDescription': 'text' }" sortable="'strDescription'">
-                    {{ w.strDescription }}
-                </td>
-                <td data-title="'Version'" filter="{ 'intVersionID': 'text' }" sortable="'intVersionID'">
-                    {{ w.intVersionID }}
-                </td>
-                <td data-title="'Lang'" filter="{ 'strLangauge': 'text' }" sortable="'strLangauge'">
-                    {{ w.strLangauge }}
-                </td>
-                <td data-title="'Source'" filter="{ 'strSource': 'text' }" sortable="'strSource'">
-                    {{ w.strSource }}
-                </td>
-            </tr>
-        </table>
+    <div class="table-responsive"> 
+      <table ng-table="tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+        <tr ng-repeat="w in $data">
+          <td data-title="'Code'" filter="{ 'code': 'text' }" sortable="'code'">
+              {{ w.code }}
+          </td>
+          <td data-title="'Created At'" filter="{ 'dtCreatedDate': 'text' }" sortable="'dtCreatedDate'">
+              {{ w.dtCreatedDate }}
+          </td>
+          <td data-title="'Description'" filter="{ 'strDescription': 'text' }" sortable="'strDescription'">
+              {{ w.strDescription }}
+          </td>
+          <td data-title="'Version'" filter="{ 'intVersionID': 'text' }" sortable="'intVersionID'">
+              {{ w.intVersionID }}
+          </td>
+          <td data-title="'Lang'" filter="{ 'strLangauge': 'text' }" sortable="'strLangauge'">
+              {{ w.strLangauge }}
+          </td>
+          <td data-title="'Source'" filter="{ 'strSource': 'text' }" sortable="'strSource'">
+              {{ w.strSource }}
+          </td>
+        </tr>
+      </table>
     </div>    
     <div class="button-group">
       <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Upload</a>
