@@ -105,33 +105,31 @@ materialAdmin
       name: 'contact',
       templateUrl: 'contact.html',
       controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        $scope.getNumber = function(num) {
-          return new Array(num);   
-        }
-
         $scope.represent_this = false;
         $scope.userInfo = Auth.getUserInfo();
 
         $scope.representChange = function() {
           $scope.represent_this = !$scope.represent_this;
-          $scope.model[$scope.options.key+'_solicitor'].party = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};
+          if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
+            $scope.model[$scope.options.key+'_solicitor'].party = $scope.userInfo.catPersonal[0].LawFirm;
+          } else {
+            $scope.model[$scope.options.key+'_solicitor'].party = {};
+          }
         }
         
-        $scope.model[$scope.options.key] = [
-        {
-          "party": "",
-          "share": ""
-        }];
+        if (!$scope.model[$scope.options.key]) {
+          $scope.model[$scope.options.key] = [
+          {
+            "party": "",
+            "share": ""
+          }];          
+        }
 
         $scope.model[$scope.options.key+'_solicitor'] = {
           party: {}
         };
 
         $scope.solicitor = {};
-
-        $scope.changeSolicitor = function(item) {
-          $scope.solicitor = item;
-        }
 
         $scope.addParty = function() {
           $scope.model[$scope.options.key].push({
@@ -157,8 +155,9 @@ materialAdmin
         }
 
         $scope.removeParty = function(idx) {
-          if ($scope.model[$scope.options.key].length > 1)
+          if ($scope.model[$scope.options.key].length > 1) {
             $scope.model[$scope.options.key].splice(idx, 1);
+          }
         }
 
         $scope.queryContacts = function(searchText) {
@@ -186,7 +185,7 @@ materialAdmin
           });
 
           modalInstance.result.then(function(contact){
-            if (contact) {
+            if (contact) {  // should be integrated with service
               party.party = contact;
               $scope.contacts.push(contact);
             }
@@ -210,7 +209,7 @@ materialAdmin
           });
 
           modalInstance.result.then(function(lf_){
-            if (lf_) {
+            if (lf_) {  // should be integrated with service
               lf.party = lf_;
               $scope.legalFirms.push(lf_);
             }
@@ -232,7 +231,12 @@ materialAdmin
         $scope.userInfo = Auth.getUserInfo();
 
         $scope.representChange = function() {
-          $scope.model[$scope.options.key+'_solicitor'] = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};
+          $scope.represent_this = !$scope.represent_this;
+          if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
+            $scope.model[$scope.options.key+'_solicitor'].party = $scope.userInfo.catPersonal[0].LawFirm;
+          } else {
+            $scope.model[$scope.options.key+'_solicitor'].party = {};
+          }
         }
         
         $scope.model[$scope.options.key] = [

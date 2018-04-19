@@ -82,7 +82,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit',
+        url: '/edit/:fileNo',
         controller: 'matterformEditCtrl as vm',
         templateUrl: 'views/matterform_edit.html'
       })

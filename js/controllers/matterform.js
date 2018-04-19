@@ -1,23 +1,23 @@
 materialAdmin
-  .controller('matterformEditCtrl', function(formlyVersion, $scope) {
+  .controller('matterformEditCtrl', function($scope, $stateParams, fileMatterService) {
     var vm = this;
-    vm.onSubmit = onSubmit;
+    vm.onSubmit = onSubmit;    
 
-    // variable assignment
-    vm.author = { // optionally fill in your info below :-)
-      name: 'Kent C. Dodds',
-      url: 'https://twitter.com/kentcdodds' // a link to your twitter/github/blog/whatever
-    };
-    
-    vm.exampleTitle = 'Introduction';
-    vm.env = {
-      angularVersion: angular.version.full,
-      formlyVersion: formlyVersion
-    };
+    if ($stateParams.fileNo) {
+      fileMatterService.getItem($stateParams.fileNo)
+      .then(function(item){
+        vm.model = {
+          "party1": [
+            {
+              "party": item.primaryClient
+            }
+          ]
+        }
+      });
+    } else {
+      vm.model = {};
+    }
 
-    vm.model = {
-      awesome: true
-    };
     vm.options = {
       formState: {
       awesomeIsForced: false

@@ -7,7 +7,7 @@ materialAdmin
     self.keyword = '';
 
     function clickHandler(item) {
-      $state.go('matterforms.edit', {'id': item.systemNo});
+      $state.go('matterforms.edit', {'fileNo': item.systemNo});
     }
 
     self.tableFilter = new NgTableParams({
