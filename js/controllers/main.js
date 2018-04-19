@@ -273,6 +273,10 @@ materialAdmin
       $state.go('notes.list', {fileNo: item.key});
     }
 
+    self.templates = function(item) {
+      $state.go('matterforms.edit', {'fileNo': item.key});
+    }
+    
     self.accounts = function(item) {
       $state.go('accounts.list', {fileNo: item.key});
     }
