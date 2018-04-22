@@ -31,7 +31,8 @@ materialAdmin
   .controller('landOfficeEditCtrl', function($stateParams, landOfficeService, $state) {
     var self = this;
     self.cancel = cancel;
-
+    self.can_edit = $state.$current.data.can_edit;
+    
     landOfficeService.getItem($stateParams.id)
     .then(function(item){
       self.landOffice = item;

@@ -148,23 +148,6 @@ materialAdmin
         templateUrl: 'views/file-matter-list.html'
       })
 
-      .state ('file-matters.edit', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/:id',
-        controller: 'fileMatterEditCtrl as vm',
-        templateUrl: 'views/file-matter-edit.html'
-      })
-      .state ('file-matters.new', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/',
-        controller: 'fileMatterEditCtrl as vm',
-        templateUrl: 'views/file-matter-edit.html'
-      })
-
       //------------------------------
       // FOLDERS
       //------------------------------
@@ -214,16 +197,17 @@ materialAdmin
       })
       .state ('contacts.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },
-        url: '/edit/',
+        url: '/new/',
         controller: 'contactEditCtrl as vm',
         templateUrl: 'views/contact-edit.html'
       })
       .state ('contacts.matters', {
         data: {
           access: '@',
-          type: 'contact'          
+          type: 'contact'
         },
         url: '/:id/matters',
         controller: 'relatedMatterCtrl as vm',
@@ -305,7 +289,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/:fileNo',
+        url: '/:fileNo/:fileName',
         controller: 'accountListCtrl as vm',
         templateUrl: 'views/account-list-1.html'
       })
@@ -314,7 +298,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/:fileNo/:category',
+        url: '/:fileNo/:fileName/:category',
         controller: 'accountList2Ctrl as vm',
         templateUrl: 'views/account-list-2.html'
       })
@@ -334,8 +318,8 @@ materialAdmin
       .state ('notes.list', {
         data: {
           access: '@'
-        },        
-        url: '/:fileNo',
+        },
+        url: '/:fileNo/:fileName',
         controller: 'noteListCtrl as vm',
         templateUrl: 'views/note-list.html'
       })
@@ -343,16 +327,17 @@ materialAdmin
       .state ('notes.edit', {
         data: {
           access: '@'
-        },        
-        url: '/:fileNo/edit/:id',
+        },
+        url: '/:fileNo/:fileName/edit/:id',
         controller: 'noteEditCtrl as vm',
         templateUrl: 'views/note-edit.html'
       })
       .state ('notes.new', {
         data: {
-          access: '@'
-        },        
-        url: '/:fileNo/edit/',
+          access: '@',
+          can_edit: true
+        },
+        url: '/:fileNo/:fileName/new',
         controller: 'noteEditCtrl as vm',
         templateUrl: 'views/note-edit.html',
         resolve: {
@@ -571,9 +556,10 @@ materialAdmin
       })
       .state ('properties.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'propertyEditCtrl as vm',
         templateUrl: 'views/property-edit.html'
       })
@@ -1046,9 +1032,10 @@ materialAdmin
       })
       .state ('land-offices.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'landOfficeEditCtrl as vm',
         templateUrl: 'views/land-office-edit.html'
       })  
@@ -1085,9 +1072,10 @@ materialAdmin
       })
       .state ('land-PTGs.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'landPTGEditCtrl as vm',
         templateUrl: 'views/land-PTG-edit.html'
       })  

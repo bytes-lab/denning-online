@@ -2,12 +2,13 @@ materialAdmin
   .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, quotationService, invoiceService, $state) {
     var self = this;
     self.fileNo = $stateParams.fileNo;
+    self.fileName = $stateParams.fileName;
     self.ledger_level2 = ledger_level2;
     self.ledger_type = 0;
     self.dataReady = false;
 
     function ledger_level2(category) {
-      $state.go('accounts.list2', {'fileNo': $stateParams.fileNo, 'category': category});
+      $state.go('accounts.list2', {'fileNo': $stateParams.fileNo, 'fileName': self.fileName, 'category': category});
     }
 
     self.quotationTable = new NgTableParams({
@@ -46,6 +47,7 @@ materialAdmin
   .controller('accountList2Ctrl', function($stateParams, NgTableParams, ledgerService, $state, $q) {
     var self = this;
     self.fileNo = $stateParams.fileNo;
+    self.fileName = $stateParams.fileName;
     self.ledger_level2 = ledger_level2;
     self.toggleSelection = toggleSelection;
     self.toggleAll = toggleAll;

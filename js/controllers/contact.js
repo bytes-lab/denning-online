@@ -60,7 +60,7 @@ materialAdmin
     self.userInfo = Auth.getUserInfo();
     self.openDelete = openDelete;
     self.queryFields = queryFields;
-    self.can_edit = false;    
+    self.can_edit = $state.$current.data.can_edit;
     self.IDTypes = [];
     self.Salutations = [];
     self.IRDBranches = [];
@@ -182,7 +182,7 @@ materialAdmin
     });
 
     function clickHandler(item) {
-      $state.go('file-matters.edit', {'id': item.systemNo});
+      $state.go('matterforms.edit', {'fileNo': item.systemNo});
     }
     
     function initializeTable () {

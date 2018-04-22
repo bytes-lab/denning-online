@@ -4,16 +4,16 @@ materialAdmin
     self.dataReady = false;
     self.clickHandler = clickHandler;
     self.fileNo = $stateParams.fileNo;
+    self.fileName = $stateParams.fileName;
 
     noteService.getList($stateParams.fileNo, 1, 500).then(function(data) {
-      self.fileName = data.length > 0 && (data[0].strFileNo+' ( '+data[0].strFileName+' )') || 'Note List';
       self.data = data;
       self.dataReady = true;
       initializeTable();
     });    
 
     function clickHandler(item) {
-      $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': item.code});
+      $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': item.code, 'fileName': $stateParams.fileName});
     }
     
     function initializeTable () {
@@ -34,18 +34,19 @@ materialAdmin
     var self = this;
     self.save = save;
     self.cancel = cancel;
+    self.can_edit = $state.$current.data.can_edit;
     self.userInfo = Auth.getUserInfo();
-
+    self.fileNo = $stateParams.fileNo;
+    self.fileName = $stateParams.fileName;
+    
     if ($stateParams.id) {
       noteService.getItem($stateParams.id)
       .then(function(item){
-        self.fileName = item.strFileNo+' ( '+item.strFileName+' )';
         self.note = angular.copy(item);  // important
         self.note.dtDate = item.dtDate.split(' ')[0];
         self.title = 'Note Information';
       });
     } else {
-      self.fileName = $stateParams.fileNo;
       self.note = {
         strFileNo: $stateParams.fileNo,
         dtDate: new Date().toISOString().split('T')[0]
@@ -56,14 +57,14 @@ materialAdmin
     function save() {
       noteService.save(self.note).then(function(note) {
         self.note = note;
-        $state.go('notes.list', {'fileNo': $stateParams.fileNo});
+        $state.go('notes.list', {'fileNo': $stateParams.fileNo, 'fileName': $stateParams.fileName});
       })
       .catch(function(err){
       });
     }
 
     function cancel() {
-      $state.go('notes.list', {'fileNo': $stateParams.fileNo});
+      $state.go('notes.list', {'fileNo': $stateParams.fileNo, 'fileName': $stateParams.fileName});
     }
 
     $scope.open = function($event, opened) {

@@ -59,7 +59,7 @@ materialAdmin
     self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
     self.openDelete = openDelete;
-    self.can_edit = false;
+    self.can_edit = $state.$current.data.can_edit;
 
     if($stateParams.id) {
       propertyService.getItem($stateParams.id).then(function(item){

@@ -31,7 +31,8 @@ materialAdmin
   .controller('landPTGEditCtrl', function($stateParams, landPTGService, $state) {
     var self = this;
     self.cancel = cancel;
-
+    self.can_edit = $state.$current.data.can_edit;
+    
     landPTGService.getItem($stateParams.id)
     .then(function(item){
       self.landPTG = item;
