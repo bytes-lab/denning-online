@@ -7,7 +7,7 @@
         <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
         <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-        <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+        <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
       </div>
       <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
         <h2 style="display: inline;">Contact Detail</h2>
@@ -35,7 +35,7 @@
                   <md-item-template>
                     <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
                   </md-item-template>
-                </md-autocomplete>                                
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
@@ -43,7 +43,7 @@
             <dt class="p-t-10">ID No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.IDNo" placeholder="UA203453">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.IDNo" placeholder="000000-00-0000">
               </div>
             </dd>
           </dl>
@@ -56,7 +56,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-6 p-l-25">          
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Title</dt>
             <dd>
@@ -72,7 +72,7 @@
                   <md-item-template>
                     <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
                   </md-item-template>
-                </md-autocomplete>                                
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
@@ -82,14 +82,12 @@
               <div class="fg-line">
                 <input ng-model="vm.contact.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
               </div>
-
             </dd>
           </dl>
         </div>
       </div>
 
       <div class="clearfix"></div>
-
       <h4 class="m-t-25">Contact Information</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
@@ -123,7 +121,6 @@
               <div class="fg-line">
                 <input ng-model="vm.contact.address.postcode" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
-
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -174,7 +171,6 @@
               <div class="fg-line">
                 <input ng-model="vm.contact.phoneOffice" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
-
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -201,7 +197,6 @@
               </div>
             </dd>
           </dl>
-
         </div>        
       </div>      
       <div class="clearfix"></div>
@@ -231,7 +226,6 @@
               <div class="fg-line">
                 <input ng-model="vm.contact.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
-
             </dd>
           </dl>
         </div>
@@ -263,7 +257,7 @@
               </div>
             </dd>
           </dl>
-        </div>        
+        </div>
       </div>
       <h4 class="m-t-25" ng-click="vm.showCompany=!vm.showCompany">Company Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCompany"></i><i class="zmdi zmdi-minus" ng-if="vm.showCompany"></i></h4>
       <div class="row" ng-show="vm.showCompany">
@@ -275,8 +269,7 @@
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
-          </dl>          
-       
+          </dl>
         </div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
@@ -285,23 +278,23 @@
               <input id="ts4" ng-model="vm.contact.InviteToDenning" type="checkbox" hidden="hidden">
               <label for="ts4" class="ts-helper"></label>
             </div>
-          </dl>          
+          </dl>
         </div>
-      </div>      
-      <div class="row">   
+      </div>
+      <div class="row">
         <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
             <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-          </div>    
+            <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          </div>
         </div>
         <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">
           <div class="m-t-30">
             <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-          </div>    
+          </div>
         </div>
       </div>
     </div>

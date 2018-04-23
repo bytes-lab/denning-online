@@ -54,12 +54,14 @@ materialAdmin
   .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth) {
     var self = this;
     self.save = save;
+    self.copy = copy;
     self.cancel = cancel;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
     self.openDelete = openDelete;
     self.queryFields = queryFields;
+    self.create_new = $state.$current.data.can_edit;
     self.can_edit = $state.$current.data.can_edit;
     self.IDTypes = [];
     self.Salutations = [];
@@ -83,6 +85,20 @@ materialAdmin
       });
     }
 
+    function copy() {
+      self.create_new = true;
+      self.can_edit = true;
+      
+      delete self.contact.code;
+      delete self.contact.IDNo;
+      delete self.contact.old_ic;
+      delete self.contact.name;
+      delete self.contact.emailAddress;
+      delete self.contact.webSite;
+      delete self.contact.dateBirth;
+      delete self.contact.taxFileNo;
+    }
+
     if ($stateParams.id) {
       contactService.getItem($stateParams.id)
       .then(function(item){
@@ -95,7 +111,7 @@ materialAdmin
     function save() {
       contactService.save(self.contact).then(function(contact) {
         self.contact = contact;
-        $state.go('contacts.list');
+        $state.go('contacts.edit', {'id': contact.code});
       })
       .catch(function(err){
         //Handler

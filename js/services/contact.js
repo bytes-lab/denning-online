@@ -15,7 +15,6 @@ materialAdmin
     service.save = save;
     service.upload = upload;
     service.delete = delete_;
-    service.headers = Auth.isAuthenticated();
 
     function getList(page=1, pagesize=25, keyword='') {
       return $http({
@@ -42,7 +41,7 @@ materialAdmin
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/IDType',
-        headers: service.headers
+        headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
       });  
@@ -52,7 +51,7 @@ materialAdmin
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/Salutation',
-        headers: service.headers
+        headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
       });  
@@ -62,7 +61,7 @@ materialAdmin
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/IRDBranch',
-        headers: service.headers
+        headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
       });
@@ -89,13 +88,12 @@ materialAdmin
     function save(contact) {
       var method = contact.code ? 'PUT': 'POST';
       delete contact.relatedMatter;
-      contact.title = contact.title.description;
       // contact.irdBranch = contact.irdBranch.description;
 
       return $http({
         method: method,
         url: 'http://43.252.215.81/denningwcf/v1/app/contact',
-        headers: service.headers,
+        headers: Auth.isAuthenticated(),
         data: contact
       }).then(function(response) {
         return response.data;
