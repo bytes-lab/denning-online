@@ -12,7 +12,7 @@ materialAdmin
     }
 
     self.tableFilter = new NgTableParams({
-      page: 1,      // show first page
+      page: 1,        // show first page
       count: 25,
       sorting: {
         name: 'asc'   // initial sorting
@@ -47,12 +47,13 @@ materialAdmin
     $scope.cancel = function () {
       $modalInstance.close();
       if (on_list)
-        $state.go('propertys.list');      
+        $state.go('propertys.list');
     };
   })
 
   .controller('propertyEditCtrl', function($filter, $stateParams, propertyService, $state, Auth, $uibModal) {
     var self = this;
+    self.copy = copy;
     self.save = save;
     self.cancel = cancel;
     self.isDialog = false;
@@ -60,6 +61,7 @@ materialAdmin
     self.userInfo = Auth.getUserInfo();
     self.openDelete = openDelete;
     self.can_edit = $state.$current.data.can_edit;
+    self.create_new = $state.$current.data.can_edit;
 
     if($stateParams.id) {
       propertyService.getItem($stateParams.id).then(function(item){
@@ -69,15 +71,29 @@ materialAdmin
       self.property = {};
     }
 
+    function copy() {
+      self.create_new = true;
+      self.can_edit = true;
+      
+      delete self.property.code;
+      delete self.property.IDNo;
+      delete self.property.old_ic;
+      delete self.property.name;
+      delete self.property.emailAddress;
+      delete self.property.webSite;
+      delete self.property.dateBirth;
+      delete self.property.taxFileNo;
+    }
+
     function save() {
       propertyService.save(self.property).then(function(property) {
         self.property = property;
-        $state.go('properties.list');
+        $state.go('properties.edit', {'id': property.code});
       });
     }
 
     function cancel() {
-      $state.go('properties.list');      
+      $state.go('properties.list');
     }
 
     //Create Modal
@@ -96,7 +112,7 @@ materialAdmin
           on_list: function () {
             return false;
           }
-        }      
+        }
       });
     }
 
@@ -104,6 +120,5 @@ materialAdmin
     function openDelete(event, property) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, property)
-    };    
-
+    };
   })

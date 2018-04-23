@@ -1,18 +1,17 @@
 <div class="container">
   <div class="card">
     <div class="card-header" style="display: flex;">
-      <div class="col-md-10 no-padding" ng-if="!vm.viewMode">
-        <h2 style="display: inline;" ng-if="!vm.viewMode">Property Edit</h2>
-        <h2 style="display: inline;" ng-if="vm.viewMode">Property Detail</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.property)" ng-if="vm.userInfo.priority.property.delete">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.property.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.property.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+      <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
+        <h2 style="display: inline;">Property Edit</h2>
+        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.property)" ng-if="vm.userInfo.priority.property.delete">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.property.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.property.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+        <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.property.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
       </div>
-      <div class="col-md-10" ng-if="vm.viewMode">
-        <div class="m-t-30">
-          <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-        </div>
+      <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
+        <h2 style="display: inline;">Property Detail</h2>
+        <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
       </div>
     </div>
 
@@ -69,7 +68,7 @@
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.fullTitle" placeholder="UA203453">
               </div>
             </dd>
-          </dl>          
+          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Area</dt>
             <dd>
@@ -108,7 +107,6 @@
               <div class="fg-line">
                 <input ng-model="vm.property.mukim.value" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
               </div>
-
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -167,7 +165,6 @@
               <div class="fg-line">
                 <input ng-model="vm.property.proprietor" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
               </div>
-
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -216,7 +213,6 @@
               <div class="fg-line">
                 <input ng-model="vm.property.spaCondoName" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
               </div>
-
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -278,19 +274,20 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-10" ng-if="!vm.viewMode">
+        <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
           <div class="m-t-30">
-            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.property.delete">Delete</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.property.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.property.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.property)" ng-if="vm.userInfo.priority.property.delete">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.property.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.property.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.property.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
           </div>
         </div>
-        <div class="col-md-10" ng-if="vm.viewMode">
+        <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">
           <div class="m-t-30">
             <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
           </div>
-        </div>
+        </div>        
       </div>
     </div>
   </div>

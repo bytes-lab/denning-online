@@ -64,5 +64,5 @@ materialAdmin
 
       return deferred.promise;
     }
-    return service;    
+    return service;
   })
