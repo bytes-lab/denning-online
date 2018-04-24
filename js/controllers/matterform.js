@@ -1,5 +1,5 @@
 materialAdmin
-  .controller('matterformEditCtrl', function($scope, $stateParams, fileMatterService) {
+  .controller('matterformEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state) {
     var vm = this;
     vm.onSubmit = onSubmit;    
     vm.model = {};
@@ -8,6 +8,7 @@ materialAdmin
     if ($stateParams.fileNo) {
       fileMatterService.getItem($stateParams.fileNo)
       .then(function(item){
+        vm.item = item;
         vm.model = {
           "systemNo": item.systemNo,
           "party1": [
@@ -418,7 +419,7 @@ materialAdmin
             "label": "Text",
           },
           {
-            "label": "Generate Document",
+            "label": "Templates",
             "groups": [
               {
                 "key": "gen-docs-group",
@@ -454,6 +455,52 @@ materialAdmin
       }
     });
 
+    vm.notes = function() {
+      $state.go('notes.list', {fileNo: vm.item.systemNo, fileName: vm.item.primaryClient.name});
+    }
+    
+    vm.accounts = function() {
+      $state.go('accounts.list', {fileNo: vm.item.systemNo, fileName: vm.item.primaryClient.name});
+    }
+    
+    vm.openFolder = function() {
+      $state.go('folders.list', {id: vm.item.systemNo, type: 'matter'});
+    }
+
+    vm.payments = function() {
+      $state.go('payment-records.list', {fileNo: vm.item.systemNo});
+    };
+
+    vm.upload = function() {
+      vm.uploadType = 'matter';
+      vm.uploaded = 0;
+      angular.element('.matter-upload').click();
+    };
+
+    vm.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
+      var info = {
+        "fileNo1": vm.item.systemNo,
+        "documents":[
+          {
+            "FileName": fileObj.filename,
+            "MimeType": fileObj.filetype,
+            "dateCreate": file.lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "dateModify": file.lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "fileLength": fileObj.filesize,
+            "base64": fileObj.base64
+          }
+        ]
+      };
+
+      contactService.upload(info, vm.uploadType).then(function(res) {
+        vm.uploaded = vm.uploaded + 1;
+        if (fileList.length == vm.uploaded) {
+          alert('The file(s) uploaded successfully.');
+        }
+      })
+      .catch(function(err){
+      });
+    };
     // function definition
     function onSubmit() {
       alert(JSON.stringify(vm.model), null, 2);
