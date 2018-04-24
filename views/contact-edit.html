@@ -25,7 +25,8 @@
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+                <input ng-model="vm.contact.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway"  camel-case>
+                <!-- ng-blur="vm.contact.name = vm.contact.name.slice(0,1).toUpperCase() + vm.contact.name.slice(1)" -->
               </div>
             </dd>
           </dl>

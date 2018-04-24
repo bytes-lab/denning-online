@@ -162,6 +162,20 @@ materialAdmin
     })
 
     
+    //Make text camel case
+    .directive('camelCase', function(){
+        return {
+            restrict: 'A',
+            scope: {
+                ngModel: '='
+            },
+            link: function(scope, element, attrs) {
+                element.blur(function(){
+                    scope.ngModel = scope.ngModel.slice(0,1).toUpperCase() + scope.ngModel.slice(1)
+                });
+            }
+        }
+    })
 
     // =========================================================================
     // GROWL
