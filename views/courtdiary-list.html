@@ -76,20 +76,26 @@
                 <td data-title="'Status'" filter="{ 'name': 'text' }" sortable="'name'">
                   {{ w.name }}
                 </td>
-                <td data-title="'File Name'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
-                  {{ w.IDNo }}
-                </td>
-                <td data-title="'Previous Date'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
-                  {{ w.IDNo }}
+                <td data-title="'Weekday'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                  {{ w.phoneHome }}
                 </td>
                 <td data-title="'Hearing Date'" filter="{ 'phoneMobile': 'text' }" sortable="'phoneMobile'">
                   {{ w.phoneMobile }}
                 </td>
-                <td data-title="'Weekday'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
-                  {{ w.phoneHome }}
+                <td data-title="'Previous Date'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
+                  {{ w.IDNo }}
+                </td>
+                <td data-title="'File No'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
+                  {{ w.FileNo }}
+                </td>
+                <td data-title="'File No 2'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
+                  {{ w.IDNo }}
+                </td>
+                <td data-title="'File Name'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
+                  {{ w.IDNo }}
                 </td>
                 <td data-title="'Case No.'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
-                  {{ w.phoneHome }}
+                  {{ w.caseNo }}
                 </td>
                 <td data-title="'Case Name'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
                   {{ w.name }}
@@ -98,13 +104,13 @@
                   {{ w.name }}
                 </td>
                 <td data-title="'Place'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
-                  {{ w.name }}
+                  {{ w.location }}
                 </td>
-                <td data-title="'Hearing Type'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
-                  {{ w.name }}
+                <td data-title="'Hearing Type'" filter="{ '1court': 'text' }" sortable="'1court'">
+                  {{ w['1court'] }}
                 </td>
                 <td data-title="'Counsel Assigned'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
-                  {{ w.name }}
+                  {{ w.counsel }}
                 </td>
                 <td data-title="'Counsel Attended'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
                   {{ w.name }}
