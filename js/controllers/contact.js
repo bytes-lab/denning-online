@@ -85,6 +85,12 @@ materialAdmin
       });
     }
 
+    self.new_ = function new_() {
+      self.contact = {};
+      self.can_edit = true;
+      self.create_new = true;
+    }
+
     function copy() {
       self.create_new = true;
       self.can_edit = true;

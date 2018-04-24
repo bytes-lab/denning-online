@@ -1,16 +1,17 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
   <div class="card">
     <div class="card-header" style="display: flex;">
-      <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
-        <h2 style="display: inline;">Contact Edit</h2>
+      <div class="col-md-11 col-sm-12 no-padding" ng-if="!vm.viewMode">
+        <h2 class="c-purple f-500 f-20" style="display: inline;">Contact Edit</h2>
         <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
         <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
         <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-        <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
       </div>
       <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
-        <h2 style="display: inline;">Contact Detail</h2>
+        <h2 class="c-purple f-500 f-20" style="display: inline;">Contact Detail</h2>
         <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
       </div>
     </div>
@@ -20,6 +21,33 @@
       <h4>Personal Information</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.contact.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Title</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.contact.title"
+                  md-search-text="searchText"
+                  md-items="item in vm.queryFields('Salutations', searchText)"
+                  md-item-text="item.description"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>          
           <dl class="dl-horizontal">
             <dt class="p-t-10">ID Type</dt>
             <dd>
@@ -48,6 +76,15 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
+            <div class="toggle-switch disabled" data-ts-color="green">
+              <label for="ts4" class="ts-label">Invite To Denning</label>
+              <input id="ts4" ng-model="vm.contact.InviteToDenning" type="checkbox" hidden="hidden">
+              <label for="ts4" class="ts-helper"></label>
+            </div>
+          </dl>          
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
             <dt class="p-t-10">Old IC</dt>
             <dd>
               <div class="fg-line">
@@ -55,35 +92,30 @@
               </div>
             </dd>
           </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Title</dt>
+            <dt class="p-t-10">Date of Birth</dt>
             <dd>
               <div class="fg-line">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.title"
-                  md-search-text="searchText"
-                  md-items="item in vm.queryFields('Salutations', searchText)"
-                  md-item-text="item.description"
-                  md-min-length="0"
-                  class="default-input">
-                  <md-item-template>
-                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
-                  </md-item-template>
-                </md-autocomplete>
+                <input ng-model="vm.contact.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Name</dt>
+            <dt class="p-t-10">Citizenship</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.citizenship" placeholder="">
               </div>
             </dd>
           </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Occupation</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.contact.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>          
         </div>
       </div>
 
@@ -197,47 +229,6 @@
               </div>
             </dd>
           </dl>
-        </div>        
-      </div>      
-      <div class="clearfix"></div>
-
-      <h4>Other Information</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Citizenship</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.citizenship" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Date of Birth</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.contact.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Occupation</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.contact.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Tax File No.</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
-              </div>
-            </dd>
-          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">IRD Branch</dt>
             <dd>
@@ -256,6 +247,57 @@
                 </md-autocomplete>  
               </div>
             </dd>
+          </dl>          
+        </div>        
+      </div>      
+      <div class="clearfix"></div>
+
+      <h4>Tax Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.not_applicable">
+                <i class="input-helper"></i>
+                GST Status Verified
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Last GST Status Verified Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.not_applicable">
+                <i class="input-helper"></i>
+                GST Registered
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">GST Reg. No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">RMCD Approval No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
+              </div>
+            </dd>
           </dl>
         </div>
       </div>
@@ -263,7 +305,24 @@
       <div class="row" ng-show="vm.showCompany">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Registered Office</dt>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.same_as_above">
+                <i class="input-helper"></i>
+                Same as above
+              </label>
+            </div>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Office Address</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Secretary</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
@@ -273,22 +332,262 @@
         </div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <div class="toggle-switch disabled" data-ts-color="green">
-              <label for="ts4" class="ts-label">Invite To Denning</label>
-              <input id="ts4" ng-model="vm.contact.InviteToDenning" type="checkbox" hidden="hidden">
-              <label for="ts4" class="ts-helper"></label>
+            <dt class="p-t-10">Director 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Director 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Contact Person</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>          
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showOptional=!vm.showOptional">Optional Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showOptional"></i><i class="zmdi zmdi-minus" ng-if="vm.showOptional"></i></h4>
+      <div class="row" ng-show="vm.showOptional">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Spouse Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Spouse Occupation</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Race</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Religion</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Sex</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Monthly Income</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Place of Work</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Place of Birth</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Education Level</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Institution</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showMore=!vm.showMore">More Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showMore"></i><i class="zmdi zmdi-minus" ng-if="vm.showMore"></i></h4>
+      <div class="row" ng-show="vm.showMore">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 3</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 4</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 5</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showExtra=!vm.showExtra">Extra Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showExtra"></i><i class="zmdi zmdi-minus" ng-if="vm.showExtra"></i></h4>
+      <div class="row" ng-show="vm.showExtra">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Correspondence Address</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra Address 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra Address 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra Address 3</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Office Use&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
+      <div class="row" ng-show="vm.showRemark">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Entered by</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Updated by</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.add_favourite">
+                <i class="input-helper"></i>
+                Add to Favourites
+              </label>
+            </div>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remarks</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.deceased">
+                <i class="input-helper"></i>
+                Deceased
+              </label>
             </div>
           </dl>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
+        <div class="col-md-11 col-sm-12 no-padding" ng-if="!vm.viewMode">
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
             <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
         <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">
