@@ -24,7 +24,7 @@ materialAdmin
           return data.data;
         });
       }
-    })    
+    });
 
     function search() {
       self.tableFilter.reload();

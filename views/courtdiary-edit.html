@@ -1,254 +1,265 @@
 <div class="container">
-    <div class="card">
-        <div class="card-header" style="display: flex;">
-            <h2>Court Diary Edit</h2>
-            <a class="btn bgm-cyan btn-sm top_button_first" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn btn-primary btn-sm top_button_first" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
-            <a class="btn btn-danger btn-sm top_button" type="submit" ng-click="vm.openDelete($event, vm.courtdiary)" ng-if="vm.userInfo.priority.courtdiary.delete">delete</a>
-            <a class="btn btn-default btn-sm m-l-10" ng-click="vm.cancel()" >Cancel</a>
-        </div>
-                
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <h4>Court Diary Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">File No.1</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.courtdiary.idType.code" placeholder="New IC">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Previous Date</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.IDNo" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Hearing Date</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.old_ic" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Court Type</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.courtdiary.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Place</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.title" placeholder="Mr.
-                                ">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Hearing Type</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.citizenship" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Enclosure</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.courtdiary.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Case No</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.marital_status" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Case Name</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.num_children" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>                    
-                </div>                
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="row">
-                <div class="col-md-offset-2 col-md-10 m-b-15">
-                    <label class="radio radio-inline m-r-25">
-                        <input type="radio" name="inlineRadioOptions" value="option1">
-                        <i class="input-helper"></i>
-                        Attended 
-                    </label>
-
-                    <label class="radio radio-inline m-r-25">
-                        <input type="radio" name="inlineRadioOptions" value="option2">
-                        <i class="input-helper"></i>
-                        MOB
-                    </label>
-
-                    <label class="radio radio-inline m-r-25">
-                        <input type="radio" name="inlineRadioOptions" value="option3">
-                        <i class="input-helper"></i>
-                        Postponed
-                    </label>
-                    <label class="radio radio-inline m-r-25">
-                        <input type="radio" name="inlineRadioOptions" value="option3">
-                        <i class="input-helper"></i>
-                        Absent
-                    </label>
-                    <label class="radio radio-inline m-r-25">
-                        <input type="radio" name="inlineRadioOptions" value="option3">
-                        <i class="input-helper"></i>
-                        None
-                    </label>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Counsel Assigned</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.courtdiary.address.line1" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Counsel Attended</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.address.line2" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
- 
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Coram</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.courtdiary.address.postcode" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Opponent's Counsel</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.address.city" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Court Decision</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.address.state" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Action Required</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.courtdiary.address.country" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Action To be Completed By</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.phoneHome" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Remarks</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.phoneMobile" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Next Date</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.courtdiary.phoneOffice" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">No Next Event</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.phoneFax" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Next Date To Be Given</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.emailAddress" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>            
-            <div class="clearfix"></div>
-         
-            <div class="row">     
-                <div class="col-md-10">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-                        <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.courtdiary)" ng-if="vm.userInfo.priority.courtdiary.delete">Delete</a>
-                        <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
-                        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-                    </div>        
-                </div>
-            </div>
-        </div>
+  <div class="card">
+    <div class="card-header" style="display: flex;">
+      <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
+        <h2 class="f-20 f-500 c-purple" style="display: inline;">Court Diary Edit</h2>
+        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.courtdiary)" ng-if="vm.userInfo.priority.courtdiary.delete">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+        <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+      </div>
+      <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
+        <h2 style="display: inline;">Court Diary Detail</h2>
+        <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
+      </div>
     </div>
+
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+      <h4>Court Diary Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">File No.1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.courtdiary.idType.code" placeholder="New IC">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Previous Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.IDNo" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Hearing Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.old_ic" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Court Type</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.courtdiary.name" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Place</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.title" placeholder="Mr.
+                ">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Hearing Type</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.citizenship" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Enclosure</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.courtdiary.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Case No</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.marital_status" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Case Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.num_children" placeholder="">
+              </div>
+            </dd>
+          </dl>          
+        </div>        
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-offset-2 col-md-10 m-b-15">
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" name="inlineRadioOptions" value="option1">
+            <i class="input-helper"></i>
+            Attended 
+          </label>
+
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" name="inlineRadioOptions" value="option2">
+            <i class="input-helper"></i>
+            MOB
+          </label>
+
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" name="inlineRadioOptions" value="option3">
+            <i class="input-helper"></i>
+            Postponed
+          </label>
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" name="inlineRadioOptions" value="option3">
+            <i class="input-helper"></i>
+            Absent
+          </label>
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" name="inlineRadioOptions" value="option3">
+            <i class="input-helper"></i>
+            None
+          </label>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Counsel Assigned</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.courtdiary.address.line1" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Counsel Attended</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.address.line2" placeholder="">
+              </div>
+            </dd>
+          </dl>
+ 
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Coram</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.courtdiary.address.postcode" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+              </div>
+
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Opponent's Counsel</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.address.city" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Court Decision</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.address.state" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Action Required</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.courtdiary.address.country" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Action To be Completed By</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.phoneHome" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remarks</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.phoneMobile" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Next Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.courtdiary.phoneOffice" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+              </div>
+
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">No Next Event</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.phoneFax" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Next Date To Be Given</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.emailAddress" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>        
+      </div>      
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.courtdiary)" ng-if="vm.userInfo.priority.courtdiary.delete">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          </div>
+        </div>
+        <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
-        <h4 class="modal-title">Delete a court diary</h4>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure to delete the court diary?</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-link" ng-click="ok()">OK</button>
-        <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete a court diary</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete the court diary?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
 </script>

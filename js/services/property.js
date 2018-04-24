@@ -17,7 +17,7 @@ materialAdmin
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/property?page='+page+'&pagesize='+pagesize+'&search='+keyword,
-        headers: service.headers
+        headers: Auth.isAuthenticated()
       }).then(function(resp) {
         service.properties = resp.data;
         return resp;
