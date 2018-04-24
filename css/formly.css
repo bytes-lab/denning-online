@@ -63,6 +63,7 @@ input.form-control, label.form-control, select.form-control {
 
 .short-btn {
   padding: 6px 8px;
+  max-height: 30px;
 }
 
 .group-label {

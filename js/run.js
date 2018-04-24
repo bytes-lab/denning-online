@@ -116,7 +116,7 @@ materialAdmin
             $scope.model[$scope.options.key+'_solicitor'].party = {};
           }
         }
-        
+
         if (!$scope.model[$scope.options.key]) {
           $scope.model[$scope.options.key] = [
           {
@@ -224,7 +224,7 @@ materialAdmin
       templateUrl: 'file.html',
       controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
         $scope.getNumber = function(num) {
-          return new Array(num);   
+          return new Array(num);
         }
 
         $scope.represent_this = false;
@@ -245,7 +245,7 @@ materialAdmin
           "share": ""
         }];
 
-        $scope.solicitor = {};        
+        $scope.solicitor = {};
         $scope.changeSolicitor = function(item) {
           $scope.solicitor = item;
         }
@@ -276,7 +276,7 @@ materialAdmin
 
         legalFirmService.getList().then(function(resp) {
           $scope.legalFirms = resp.data;
-        });      
+        });
 
         $scope.contactDialog = function(party, viewMode) {
           var modalInstance = $uibModal.open({
@@ -290,11 +290,11 @@ materialAdmin
             resolve: {
               viewMode: viewMode,
               party: party
-            }      
+            }
           });
         }
       }
-    });    
+    });
 
     // case attribute
     formlyConfig.setType({
@@ -313,17 +313,17 @@ materialAdmin
         $scope.representChange = function() {
           $scope.model[$scope.options.key+'_solicitor'] = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};          
         }
-        
+
         $scope.model[$scope.options.key] = [
         {
           "party": "",
           "share": ""
         }];
 
-        $scope.solicitor = {};        
+        $scope.solicitor = {};
 
         $scope.changeSolicitor = function(item) {
-          $scope.solicitor = item;          
+          $scope.solicitor = item;
         }
 
         $scope.addParty = function() {
@@ -349,18 +349,18 @@ materialAdmin
         function initContacts() {
           contactService.getList().then(function(data) {
             $scope.contacts = data;
-          });                     
+          });
         }
 
         $scope.queryContacts = function(searchText) {
           return $scope.contacts.filter(function(c) {
             return c && (c.name.search(new RegExp(searchText, "i")) > -1 || c.IDNo.search(new RegExp(searchText, "i")) > -1);
-          });          
+          });
         }
 
         legalFirmService.getList().then(function(data) {
           $scope.legalFirms = data;
-        });      
+        });
 
         //Create Modal
         $scope.contactDialog = function(party, viewMode) {
@@ -378,7 +378,7 @@ materialAdmin
               initContacts: function(){
                 return initContacts;
               }
-            }      
+            }
           });
 
           modalInstance.result.then(function(contact){
@@ -386,8 +386,8 @@ materialAdmin
           })
         }
 
-      }]    
-    });   
+      }]
+    });
 
     // price attribute
     formlyConfig.setType({
@@ -406,17 +406,17 @@ materialAdmin
         $scope.representChange = function() {
           $scope.model[$scope.options.key+'_solicitor'] = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};          
         }
-        
+
         $scope.model[$scope.options.key] = [
         {
           "party": "",
           "share": ""
         }];
 
-        $scope.solicitor = {};        
+        $scope.solicitor = {};
 
         $scope.changeSolicitor = function(item) {
-          $scope.solicitor = item;          
+          $scope.solicitor = item;
         }
 
         $scope.addParty = function() {
@@ -442,18 +442,18 @@ materialAdmin
         function initContacts() {
           contactService.getList().then(function(data) {
             $scope.contacts = data;
-          });                     
+          });
         }
 
         $scope.queryContacts = function(searchText) {
           return $scope.contacts.filter(function(c) {
             return c && (c.name.search(new RegExp(searchText, "i")) > -1 || c.IDNo.search(new RegExp(searchText, "i")) > -1);
-          });          
+          });
         }
 
         legalFirmService.getList().then(function(data) {
           $scope.legalFirms = data;
-        });      
+        });
 
         //Create Modal
         $scope.contactDialog = function(party, viewMode) {
@@ -535,7 +535,7 @@ materialAdmin
         function initContacts() {
           contactService.getList().then(function(data) {
             $scope.contacts = data;
-          });                     
+          });
         }
 
         $scope.queryContacts = function(searchText) {

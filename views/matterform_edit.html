@@ -8,6 +8,20 @@
 
       <h2>Preview</h2>
       <div class="preview">
+        <section layout="row" layout-sm="column" layout-align="start center" layout-wrap style="margin-left: -8px;">
+          <div class="col-sm-12 col-md-10 m-b-25">
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="mactrl.openFolder(item.key, 'matter')">Folder</md-button>
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="mactrl.accounts(item)">Accounts</md-button>
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="mactrl.notes(item)">Notes</md-button>
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="mactrl.payments(item)">Payments</md-button>
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="mactrl.templates(item)">Templates</md-button>
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="mactrl.upload(item, 'matter')">Upload</md-button>
+            <input type="file" class="hidden" ng-class="'matter-upload-'+item.key" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" data-ui-sref="courtdiary">Calendar</md-button>
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;">Checklist</md-button>
+            <md-button class="btn-sm md-raised md-warn" style="min-height: 0;">Tasks</md-button>
+          </div>
+        </section>
         <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
           <formly-form model="vm.model" fields="vm.fields" options="vm.options" form="vm.form">          
           </formly-form>
@@ -16,7 +30,7 @@
         <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
           <uib-tabset>
             <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
-              <div ng-repeat="group in tab.groups" class="col-md-9 no-padding">    
+              <div ng-repeat="group in tab.groups" class="col-lg-9 no-padding">    
                 <div class="group">
                   <div class="form-group">
                     <input id="{{group.key}}-label" name="{{group.key}}-label" class="form-control group-label" ng-model="vm.model[group.key+'-label']" ng-value="group.label" />
