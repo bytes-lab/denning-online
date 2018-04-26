@@ -51,7 +51,7 @@ materialAdmin
     };
   })
 
-  .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth) {
+  .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope) {
     var self = this;
     self.save = save;
     self.copy = copy;
@@ -127,6 +127,20 @@ materialAdmin
     function cancel() {
       $state.go('contacts.list');      
     }
+
+    $scope.open = function($event, opened) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope[opened] = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yyyy',
+        startingDay: 1
+    };
+
+    $scope.format = 'dd-MM-yyyy';
 
     //Create Modal
     function modalInstances1(animation, size, backdrop, keyboard, contact) {

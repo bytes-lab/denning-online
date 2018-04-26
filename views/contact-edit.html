@@ -25,7 +25,7 @@
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.name" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+                <input ng-model="vm.contact.name" ng-readonly="!vm.can_edit" type="text" class="form-control f-500" camel-case>
               </div>
             </dd>
           </dl>
@@ -81,7 +81,16 @@
               <input id="ts4" ng-model="vm.contact.InviteToDenning" type="checkbox" hidden="hidden">
               <label for="ts4" class="ts-helper"></label>
             </div>
-          </dl>          
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.add_favourite">
+                <i class="input-helper"></i>
+                Add to Favourites
+              </label>
+            </div>
+          </dl>
         </div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
@@ -92,11 +101,11 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal dp-blue">
             <dt class="p-t-10">Date of Birth</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.dateBirth" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.contact.birthDate" is-open="opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -115,6 +124,23 @@
                 <input ng-model="vm.contact.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
             </dd>
+          </dl>
+          <dl class="dl-horizontal dp-blue">
+            <dt class="p-t-10">Date of Death</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'opened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.contact.deathDate" is-open="opened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.deceased">
+                <i class="input-helper"></i>
+                Deceased
+              </label>
+            </div>
           </dl>          
         </div>
       </div>
@@ -176,6 +202,14 @@
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.contact.address.country" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Contact Person</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
           </dl>
@@ -252,7 +286,7 @@
       </div>      
       <div class="clearfix"></div>
 
-      <h4>Tax Information</h4>
+      <h4>GST Information</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
@@ -332,6 +366,10 @@
         </div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
+            <dt>&nbsp;</dt>
+            <dd><div class="p-t-10">&nbsp;</div></dd>
+          </dl>
+          <dl class="dl-horizontal">
             <dt class="p-t-10">Director 1</dt>
             <dd>
               <div class="fg-line">
@@ -341,14 +379,6 @@
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Director 2</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
-              </div>
-            </dd>
-          </dl>          
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Contact Person</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
@@ -530,8 +560,21 @@
           </dl>
         </div>
       </div>
-      <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Office Use&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
+      <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Remarks&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
       <div class="row" ng-show="vm.showRemark">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remark</dt>
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.contact.strNote" placeholder="type here...."></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showOffice=!vm.showOffice">Office Use&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showOffice"></i><i class="zmdi zmdi-minus" ng-if="vm.showOffice"></i></h4>
+      <div class="row" ng-show="vm.showOffice">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Entered by</dt>
@@ -541,6 +584,8 @@
               </div>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Updated by</dt>
             <dd>
@@ -548,34 +593,6 @@
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="vm.contact.add_favourite">
-                <i class="input-helper"></i>
-                Add to Favourites
-              </label>
-            </div>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Remarks</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="vm.contact.deceased">
-                <i class="input-helper"></i>
-                Deceased
-              </label>
-            </div>
           </dl>
         </div>
       </div>

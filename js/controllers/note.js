@@ -7,7 +7,17 @@ materialAdmin
     self.fileName = $stateParams.fileName;
 
     noteService.getList($stateParams.fileNo, 1, 500).then(function(data) {
-      self.data = data;
+      self.data = [];
+      angular.forEach(data, function(value, key) {
+        if (value['strNote'].length > 60) 
+          value['strNote'] = value['strNote'].substring(0, 60) + '...';
+
+        if (value.clsMeetBy.strName.length > 20)
+          value.clsMeetBy.strName = value.clsMeetBy.strName.substring(0, 20) + '...';
+
+        self.data.push(value);
+      });
+
       self.dataReady = true;
       initializeTable();
     });    
