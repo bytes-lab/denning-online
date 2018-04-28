@@ -22,7 +22,9 @@ materialAdmin
           var data_ = [];
           params.total(data.headers('x-total-count'));
           angular.forEach(data.data, function(value, key) {
-            data_.push(JSON.parse(value.JsonDesc.replace(/[\u0000-\u0019]+/g,"")));
+            var item = JSON.parse(value.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+            item.dateOpen = item.dateOpen.split(' ')[0];
+            data_.push(item);
           });
           return data_;
         });
