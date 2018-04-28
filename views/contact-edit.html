@@ -76,31 +76,22 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <div class="toggle-switch disabled" data-ts-color="green">
-              <label for="ts4" class="ts-label">Invite To Denning</label>
-              <input id="ts4" ng-model="vm.contact.InviteToDenning" type="checkbox" hidden="hidden">
-              <label for="ts4" class="ts-helper"></label>
-            </div>
-          </dl>
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="vm.contact.add_favourite">
-                <i class="input-helper"></i>
-                Add to Favourites
-              </label>
-            </div>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
             <dt class="p-t-10">Old IC</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.old_ic" placeholder="">
               </div>
             </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <div class="toggle-switch disabled" data-ts-color="green">
+              <label for="ts4" class="ts-label">Invite To Denning</label>
+              <input id="ts4" ng-model="vm.contact.InviteToDenning" type="checkbox" hidden="hidden">
+              <label for="ts4" class="ts-helper"></label>
+            </div>
           </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal dp-blue">
             <dt class="p-t-10">Date of Birth</dt>
             <dd>
@@ -126,19 +117,27 @@
             </dd>
           </dl>
           <dl class="dl-horizontal dp-blue">
-            <dt class="p-t-10">Date of Death</dt>
+            <dt class="p-t-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="vm.contact.deceased">
+                  <i class="input-helper"></i>
+                  Deceased
+                </label>
+              </div>              
+            </dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.contact.deathDate" is-open="opened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'opened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.contact.deathDate" is-open="opened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date of death" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.contact.deceased">
+                <input type="checkbox" ng-model="vm.contact.add_favourite">
                 <i class="input-helper"></i>
-                Deceased
+                Add to Favourites
               </label>
             </div>
           </dl>          
