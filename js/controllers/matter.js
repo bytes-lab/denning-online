@@ -19,8 +19,12 @@ materialAdmin
     }, {
       getData: function(params) {
         return fileMatterService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+          var data_ = [];
           params.total(data.headers('x-total-count'));
-          return data.data;
+          angular.forEach(data.data, function(value, key) {
+            data_.push(JSON.parse(value.JsonDesc.replace(/[\u0000-\u0019]+/g,"")));
+          });
+          return data_;
         });
       }
     })    

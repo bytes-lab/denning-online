@@ -270,7 +270,7 @@ materialAdmin
     }
 
     self.notes = function(item) {
-      $state.go('notes.list', {fileNo: item.key, fileName: JSON.parse(item.JsonDesc).primaryClient.name});
+      $state.go('notes.list', {fileNo: item.key, fileName: JSON.parse(item.JsonDesc.replace(/[\u0000-\u0019]+/g,"")).primaryClient.name});
     }
 
     self.templates = function(item) {
@@ -278,7 +278,7 @@ materialAdmin
     }
     
     self.accounts = function(item) {
-      $state.go('accounts.list', {fileNo: item.key, fileName: JSON.parse(item.JsonDesc).primaryClient.name});
+      $state.go('accounts.list', {fileNo: item.key, fileName: JSON.parse(item.JsonDesc.replace(/[\u0000-\u0019]+/g,"")).primaryClient.name});
     }
     
     self.openFolder = function(code, type) {

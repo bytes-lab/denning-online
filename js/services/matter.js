@@ -19,10 +19,9 @@ materialAdmin
     function getList(page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/matter/simpleList?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'http://43.252.215.81/denningwcf/v1/generalSearch/file?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: service.headers
       }).then(function(resp) {
-        service.contacts = resp.data;
         return resp;
       });  
     }
@@ -117,7 +116,6 @@ materialAdmin
         url: 'http://43.252.215.81/denningwcf/v1/matter?type=all&page='+page+'&pagesize='+pagesize,
         headers: service.headers
       }).then(function(resp) {
-        service.contacts = resp.data;
         return resp.data;
       });  
     }
