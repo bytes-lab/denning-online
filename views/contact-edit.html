@@ -16,14 +16,14 @@
         <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
       </div>
       <div class="clearfix"></div>
-      <div class="col-sm-12 col-md-10 p-l-5" ng-if="!vm.create_new">
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.relatedMatter()">Matters</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.openFolder()">Folder</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.upload()">Upload</md-button>
+      <div class="col-sm-12 col-md-10 p-l-10" ng-if="!vm.create_new">
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()">Matters</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.openFolder()">Folder</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>
       </div>
       </div>
     </div>
-        
+
     <div class="card-body card-padding">
       <div class="clearfix"></div>
       <h4>Personal Information</h4>
@@ -90,7 +90,7 @@
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.old_ic" placeholder="">
               </div>
             </dd>
-          </dl>          
+          </dl>
           <dl class="dl-horizontal dp-blue">
             <dt class="p-t-10">Date of Birth</dt>
             <dd>
@@ -133,7 +133,7 @@
                   <i class="input-helper"></i>
                   Deceased
                 </label>
-              </div>              
+              </div>
             </dt>
             <dd>
               <div class="fg-line">
@@ -280,8 +280,8 @@
               </div>
             </dd>
           </dl>
-        </div>        
-      </div>      
+        </div>
+      </div>
       <div class="clearfix"></div>
 
       <h4>Tax Information</h4>
@@ -379,7 +379,7 @@
                 Same as above
               </label>
             </div>
-          </dl>          
+          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Office Address</dt>
             <dd>
@@ -417,7 +417,7 @@
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
-          </dl>          
+          </dl>
         </div>
       </div>
       <h4 class="m-t-25" ng-click="vm.showOptional=!vm.showOptional">Optional Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showOptional"></i><i class="zmdi zmdi-minus" ng-if="vm.showOptional"></i></h4>
@@ -480,7 +480,7 @@
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
-          </dl>          
+          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Place of Birth</dt>
             <dd>
@@ -488,7 +488,7 @@
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
-          </dl>          
+          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Education Level</dt>
             <dd>
@@ -631,11 +631,11 @@
       </div>
       <div class="row">
         <div class="col-md-11 col-sm-12 no-padding" ng-if="!vm.viewMode">
-          <div class="m-t-30">
-            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;" ng-click="vm.relatedMatter()">Matters</md-button>
-            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;" ng-click="vm.openFolder()">Folder</md-button>
-            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;" ng-click="vm.notes()">Upload</md-button>
-            <input ng-if="!vm.create_new" type="file" class="hidden" ng-class="'property-upload-'+item.key" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
+          <div class="m-t-30 p-l-15">
+            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()">Matters</md-button>
+            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.openFolder()">Folder</md-button>
+            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>
+            <input ng-if="!vm.create_new" type="file" class="hidden contact-upload" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
             <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
             <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>

@@ -11,7 +11,7 @@ materialAdmin
     }
 
     self.tableFilter = new NgTableParams({
-      page: 1,          // show first page
+      page: 1,            // show first page
       count: 25,
       sorting: {
         name: 'asc'       // initial sorting
@@ -161,6 +161,44 @@ materialAdmin
         }      
       });
     }
+
+    self.relatedMatter = function() {
+      $state.go('contacts.matters', {id: self.contact.code});
+    }
+
+    self.openFolder = function() {
+      $state.go('folders.list', {id: self.contact.code, type: 'contact'});
+    }
+
+    self.upload = function() {
+      self.uploaded = 0;
+      angular.element('.contact-upload').click();
+    };
+
+    self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
+      var info = {
+        "fileNo1": self.contact.code,
+        "documents":[
+          {
+            "FileName": fileObj.filename,
+            "MimeType": fileObj.filetype,
+            "dateCreate": file.lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "dateModify": file.lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "fileLength": fileObj.filesize,
+            "base64": fileObj.base64
+          }
+        ]
+      };
+
+      contactService.upload(info, 'contact').then(function(res) {
+        self.uploaded = self.uploaded + 1;
+        if (fileList.length == self.uploaded) {
+          alert('The file(s) uploaded successfully.');
+        }
+      })
+      .catch(function(err){
+      });
+    };
 
     //Prevent Outside Click
     function openDelete(event, contact) {
