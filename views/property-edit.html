@@ -29,55 +29,104 @@
 
     <div class="card-body card-padding">
       <div class="clearfix"></div>
-      <h4>Property Information</h4>
+      <h4>Property Type</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
+          <div class="row m-b-10">            
+            <div class="radio col-sm-6">
+              <label>
+                <input type="radio" name="sample" value="">
+                <i class="input-helper"></i>
+                Landed property
+              </label>
+            </div>
+            <div class="radio col-sm-6">
+              <label>
+                <input type="radio" name="sample" value="">
+                <i class="input-helper"></i>
+                Strata property
+              </label>
+            </div>
+          </div>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Account Building No</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo" placeholder="UA203453">
-              </div>
-            </dd>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.add_favourite">
+                <i class="input-helper"></i>
+                Individual Title Issued
+              </label>
+            </div>
           </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Account Parcel No</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accParcelNo" placeholder="UA203453">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Account Storey No</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accStoreyNo" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Approving Authority</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.property.approvingAuthority" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-              </div>
-
-            </dd>
-          </dl>
+        </div>
+      </div>
+      <h4>Title Details</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Title</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.title.value" placeholder="UA203453">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.title.value">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Full Title</dt>
+            <dt class="p-t-10">Title Type</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.fullTitle" placeholder="UA203453">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Title No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Lot Type</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Lot No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="">
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Daerah</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Negeri</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
               </div>
             </dd>
           </dl>
@@ -90,7 +139,194 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Building No</dt>
+            <dt class="p-t-10">Tenure</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Lease Expirey Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Title Registration Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                Restriction in Interest
+                <input type="checkbox" ng-model="vm.contact.add_favourite">
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </dl>
+          <div class="row m-b-10">            
+            <div class="checkbox col-sm-6">
+              <label>
+                <input type="checkbox" name="sample" value="">
+                <i class="input-helper"></i>
+                Bumi Lot
+              </label>
+            </div>
+            <div class="checkbox col-sm-6">
+              <label>
+                <input type="checkbox" name="sample" value="">
+                <i class="input-helper"></i>
+                Malay Reserve Land
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Restriction Against</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Approving Authority</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Other Restriction</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Category of Land Use</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Express Condition</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Building Type</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Age of Building</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postal Address</dt>
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.property.strNote" placeholder="type here...."></textarea>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Assessment Rate (Half Year)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Annual Quit Rent (1 Year)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Previous Title</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4>Strata Title Details</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Parcel No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Storey No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accParcelNo" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Building No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accStoreyNo" placeholder="Lawyer">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Accessory Parcel No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.property.approvingAuthority" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Accessory Storey No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.fullTitle" placeholder="UA203453">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Accessory Building No.</dt>
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.property.buildingNo" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
@@ -98,7 +334,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Lot PT</dt>
+            <dt class="p-t-10">Units of Shares</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.lotPT.value" placeholder="UA203453">
@@ -106,7 +342,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Master Title</dt>
+            <dt class="p-t-10">Total Shares</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.masterTitle" placeholder="Lawyer">
@@ -114,15 +350,32 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Mukim</dt>
+            <dt class="p-t-10">Floor Area</dt>
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.property.mukim.value" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
               </div>
             </dd>
           </dl>
+        </div>
+      </div>
+      <h4>Details of Unit / Parcel (as per Principal SPA)</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Negeri</dt>
+            <dt class="">
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Storey No.</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.negeri" placeholder="UA203453">
@@ -130,7 +383,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Parcel No</dt>
+            <dt class="p-t-10">Building / Block No.</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.parcelNo" placeholder="Lawyer">
@@ -138,15 +391,17 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Project</dt>
+            <dt class="p-t-10">Apt / Condo Name</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.project" placeholder="Lawyer">
               </div>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Property ID</dt>
+            <dt class="p-t-10">Accessory Parcel No.</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.propertyID" placeholder="Lawyer">
@@ -154,20 +409,47 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Address</dt>
+            <dt class="p-t-10">Building Description</dt>
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.property.address" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
               </div>
             </dd>
           </dl>
-        </div>
-        <div class="col-md-6 p-l-25">          
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Property Type</dt>
+            <dt class="p-t-10">Unit Area</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.propertyType.description" placeholder="Lawyer">
+                <input ng-model="vm.property.proprietor" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25">Project</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Project Code (optional)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.property.proprietor" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Project Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.property.proprietor" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Developer</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.property.proprietor" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
               </div>
             </dd>
           </dl>
@@ -180,111 +462,135 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Restriction Against</dt>
+            <dt class="p-t-10">Block / Master Title</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.restrictionAgainst" placeholder="UA203453">
+                <input ng-model="vm.property.proprietor" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">        
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Description</dt>
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.property.strNote" placeholder="type here...."></textarea>
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Restriction In Interest</dt>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.contact.add_favourite">
+                <i class="input-helper"></i>
+                Restriction in Interest
+              </label>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.ownership=!vm.ownership">Ownership / Encumbrace&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.ownership"></i><i class="zmdi zmdi-minus" ng-if="vm.ownership"></i></h4>
+      <div class="row" ng-show="vm.ownership">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Registered Owner</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.state" placeholder="Lawyer">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">SPA Acc Parcel No</dt>
+            <dt class="p-t-10">Master Chargee</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.property.spaAccParcelNo" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Branch</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>      
+      <h4 class="m-t-25" ng-click="vm.otherinfo=!vm.otherinfo">Other Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.otherinfo"></i><i class="zmdi zmdi-minus" ng-if="vm.otherinfo"></i></h4>
+      <div class="row" ng-show="vm.otherinfo">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Note 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">SPA Area</dt>
+            <dt class="p-t-10">Note 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.spaArea.value" placeholder="UA203453">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">SPA Building No</dt>
+            <dt class="p-t-10">Remark</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.spaBuildingNo" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">SPA Condo Name</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.property.spaCondoName" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">SPA Parcel</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.spaParcel.value" placeholder="UA203453">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">SPA StoreyNo</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.spaStoreyNo" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Storey No</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.storeyNo" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Tenure</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Title Issued</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.titleIssued.description" placeholder="Lawyer">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Total Share</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.property.totalShare" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Unit Share</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.unitShare" placeholder="UA203453">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
               </div>
             </dd>
           </dl>
         </div>
       </div>
+      <h4 class="m-t-25" ng-click="vm.showMore=!vm.showMore">More Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showMore"></i><i class="zmdi zmdi-minus" ng-if="vm.showMore"></i></h4>
+      <div class="row" ng-show="vm.showMore">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 3</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 4</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>      
       <h4 class="m-t-25">Remarks</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">

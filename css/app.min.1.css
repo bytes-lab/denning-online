@@ -3430,11 +3430,11 @@ input[type="search"] {
   margin-top: 4px \9;
 }
 
-.radio + .radio,
+/*.radio + .radio,
 .checkbox + .checkbox {
   margin-top: -5px;
 }
-
+*/
 .radio-inline,
 .checkbox-inline {
   position: relative;
