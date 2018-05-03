@@ -67,6 +67,24 @@ materialAdmin
     self.Salutations = [];
     self.IRDBranches = [];
 
+    $("#back-top").hide();
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        $('#back-top').fadeIn();
+        $('.btn-balances').fadeIn();
+      } else {
+        $('#back-top').fadeOut();
+        $('.btn-balances').fadeOut();
+      }
+    });
+
+    $('#back-top a').click(function() {
+      $('body,html').animate({
+          scrollTop : 0
+      }, 500);
+      return false;
+    });
+
     contactService.getIDTypeList().then(function(data) {
       self.IDTypes = data;
     });

@@ -56,3 +56,47 @@
 .no-pager .ng-table-pager {
     display: none;
 }
+
+#back-top a {
+    width: 45px;
+    display: block;
+    text-align: center;
+    background: rgba(245,245,245,0.5);
+    padding: 5px;
+    font: 12px/100% Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #666;
+    border: 1px solid #666;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
+    bottom: 10px;
+    position: fixed;
+    right: 2px;
+    border-radius: 7px;
+}
+
+#back-top span {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 18px;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
+}
+
+#back-top {
+    position: fixed;
+    bottom: 30px;
+    margin-left: -150px;
+    z-index: 99;
+    display: block;
+}
+
+#back-top a:hover, #back-top a:focus {
+    background: #39A8E0;
+    color: #fff;
+    border-color: #39A8E0;
+}

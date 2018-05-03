@@ -71,7 +71,7 @@
               {{  }}
             </td>
             <td data-title="'Title'" sortable="'dateOpen'" filter="vm.filter ? { 'dateOpen': 'text' }: {}">
-              {{  }}
+              {{ w.propertyGroup[0].fullTitle }}
             </td>
             <td data-title="'Chargee Bank'" sortable="bankGroup[0].bank.name" filter="vm.filter ? { 'bankGroup[0].bank.name': 'text' }: {}">
               {{ w.bankGroup[0].bank.name }}
@@ -81,6 +81,8 @@
               {{ w.bankGroup[1].bank.name }}
             </td>
             <td data-title="'Case No'" sortable="'dateOpen'" filter="vm.filter ? { 'dateOpen': 'text' }: {}">
+            </td>
+            <td data-title="'Project'" sortable="'dateOpen'" filter="vm.filter ? { 'dateOpen': 'text' }: {}">
             </td>
           </tr>
         </table>
