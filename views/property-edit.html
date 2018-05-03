@@ -285,6 +285,58 @@
           </dl>
         </div>
       </div>
+      <h4 class="m-t-25">Remarks</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remark</dt>
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.property.strNote" placeholder="type here...."></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25">Office Use</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Entered by</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.taxFileNo" placeholder="">
+              </div>
+            </dd>
+          </dl>          
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Updated by</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.registeredOffice" placeholder="">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.taxFileNo" placeholder="">
+              </div>
+            </dd>
+          </dl>          
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-md-11 col-sm-12 no-padding" ng-if="!vm.viewMode">
