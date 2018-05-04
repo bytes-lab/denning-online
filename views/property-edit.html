@@ -37,14 +37,14 @@
               <label>
                 <input type="radio" name="sample" value="">
                 <i class="input-helper"></i>
-                Landed property
+                Landed
               </label>
             </div>
             <div class="radio col-sm-6">
               <label>
                 <input type="radio" name="sample" value="">
                 <i class="input-helper"></i>
-                Strata property
+                Strata
               </label>
             </div>
           </div>
@@ -53,7 +53,7 @@
               <label>
                 <input type="checkbox" ng-model="vm.contact.add_favourite">
                 <i class="input-helper"></i>
-                Individual Title Issued
+                Individual Title / Strata Title
               </label>
             </div>
           </dl>
@@ -63,10 +63,10 @@
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Title</dt>
+            <dt class="p-t-10">ID</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.title.value">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.propertyID">
               </div>
             </dd>
           </dl>
@@ -115,7 +115,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Daerah</dt>
+            <dt class="p-t-10">District</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
@@ -123,7 +123,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Negeri</dt>
+            <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
@@ -162,15 +162,6 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label>
-                Restriction in Interest
-                <input type="checkbox" ng-model="vm.contact.add_favourite">
-                <i class="input-helper"></i>
-              </label>
-            </div>
-          </dl>
           <div class="row m-b-10">            
             <div class="checkbox col-sm-6">
               <label>
@@ -187,6 +178,15 @@
               </label>
             </div>
           </div>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                Restriction in Interest
+                <input type="checkbox" ng-model="vm.contact.add_favourite">
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </dl>
         </div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
@@ -230,7 +230,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Building Type</dt>
+            <dt class="p-t-10">Building / Cultivation Type</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
@@ -238,7 +238,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Age of Building</dt>
+            <dt class="p-t-10">Age of Building / Trees</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.tenure" placeholder="UA203453">
@@ -279,7 +279,7 @@
           </dl>
         </div>
       </div>
-      <h4>Strata Title Details</h4>
+      <h4 class="m-t-25">Strata Title Details</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
@@ -359,7 +359,7 @@
           </dl>
         </div>
       </div>
-      <h4>Details of Unit / Parcel (as per Principal SPA)</h4>
+      <h4 class="m-t-25">Details of Unit / Parcel (as per Principal SPA)</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
@@ -409,7 +409,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Building Description</dt>
+            <dt class="p-t-10">Building Type</dt>
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.property.address" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
@@ -472,7 +472,7 @@
         </div>
         <div class="col-md-6 p-l-25">        
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Description</dt>
+            <dt class="p-t-10">Multiple Master Titles</dt>
             <dd>
               <div class="fg-line">
                 <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.property.strNote" placeholder="type here...."></textarea>
