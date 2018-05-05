@@ -20,7 +20,7 @@ materialAdmin
     });
   })
 
-  .run(function(formlyConfig, contactService, legalFirmService) {
+  .run(function(formlyConfig, contactService, propertyService, legalFirmService) {
     var attributes = [
       'date-disabled',
       'custom-class',
@@ -74,6 +74,12 @@ materialAdmin
     
     function getContacts(page, pagesize, keyword) {
       return contactService.getList(page, pagesize, keyword).then(function(resp) {
+        return resp.data;
+      });
+    }
+
+    function getProperties(page, pagesize, keyword) {
+      return propertyService.getList(page, pagesize, keyword).then(function(resp) {
         return resp.data;
       });
     }
@@ -238,35 +244,35 @@ materialAdmin
         if (!$scope.model[$scope.options.key]) {
           $scope.model[$scope.options.key] = [
           {
-            "party": "",
+            "property": "",
             "share": ""
           }];          
         }
 
         $scope.model[$scope.options.key+'_solicitor'] = {
-          party: {}
+          property: {}
         };
 
         $scope.solicitor = {};
 
-        $scope.addParty = function() {
+        $scope.addProperty = function() {
           $scope.model[$scope.options.key].push({
-            "party": "",
+            "property": "",
             "share": ""
           })
         }
 
-        $scope.viewContact = function(party) {
-          if (party.party) {
-            $scope.contactDialog(party, true);
+        $scope.viewProperty = function(property) {
+          if (property.property) {
+            $scope.propertyDialog(property, true);
           } else {
-            alert('Please select a party.')
+            alert('Please select a property.')
           }
         }
 
-        $scope.viewLegalFirm = function(party) {
-          if (party) {
-            $scope.legalfirmDialog(party, true);
+        $scope.viewLegalFirm = function(property) {
+          if (property) {
+            $scope.legalfirmDialog(property, true);
           } else {
             alert('Please select a solicitor.')
           }
@@ -278,8 +284,8 @@ materialAdmin
           }
         }
 
-        $scope.queryContacts = function(searchText) {
-          return getContacts(1, 10, searchText);
+        $scope.queryProperties = function(searchText) {
+          return getProperties(1, 10, searchText);
         }
 
         $scope.queryLFs = function(searchText) {
@@ -287,7 +293,7 @@ materialAdmin
         }
 
         //Create Contact Modal
-        $scope.contactDialog = function(party, viewMode) {
+        $scope.contactDialog = function(property, viewMode) {
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'views/contact-edit.html',
@@ -298,14 +304,14 @@ materialAdmin
             keyboard: true,
             resolve: {
               viewMode: viewMode,
-              party: party
+              property: property
             }      
           });
 
-          modalInstance.result.then(function(contact){
-            if (contact) {  // should be integrated with service
-              party.party = contact;
-              $scope.contacts.push(contact);
+          modalInstance.result.then(function(property){
+            if (property) {  // should be integrated with service
+              property.property = property;
+              $scope.contacts.push(property);
             }
           })
         }

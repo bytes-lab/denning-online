@@ -416,7 +416,7 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": true,
-                      "party": true
+                      "property": true
                     }
                   }
                 ]
