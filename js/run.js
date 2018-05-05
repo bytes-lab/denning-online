@@ -218,6 +218,124 @@ materialAdmin
       }
     });
     
+    // property attribute
+    formlyConfig.setType({
+      name: 'property',
+      templateUrl: 'property.html',
+      controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
+        $scope.represent_this = false;
+        $scope.userInfo = Auth.getUserInfo();
+
+        $scope.representChange = function() {
+          $scope.represent_this = !$scope.represent_this;
+          if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
+            $scope.model[$scope.options.key+'_solicitor'].party = $scope.userInfo.catPersonal[0].LawFirm;
+          } else {
+            $scope.model[$scope.options.key+'_solicitor'].party = {};
+          }
+        }
+
+        if (!$scope.model[$scope.options.key]) {
+          $scope.model[$scope.options.key] = [
+          {
+            "party": "",
+            "share": ""
+          }];          
+        }
+
+        $scope.model[$scope.options.key+'_solicitor'] = {
+          party: {}
+        };
+
+        $scope.solicitor = {};
+
+        $scope.addParty = function() {
+          $scope.model[$scope.options.key].push({
+            "party": "",
+            "share": ""
+          })
+        }
+
+        $scope.viewContact = function(party) {
+          if (party.party) {
+            $scope.contactDialog(party, true);
+          } else {
+            alert('Please select a party.')
+          }
+        }
+
+        $scope.viewLegalFirm = function(party) {
+          if (party) {
+            $scope.legalfirmDialog(party, true);
+          } else {
+            alert('Please select a solicitor.')
+          }
+        }
+
+        $scope.removeParty = function(idx) {
+          if ($scope.model[$scope.options.key].length > 1) {
+            $scope.model[$scope.options.key].splice(idx, 1);
+          }
+        }
+
+        $scope.queryContacts = function(searchText) {
+          return getContacts(1, 10, searchText);
+        }
+
+        $scope.queryLFs = function(searchText) {
+          return getSolicitors(1, 10, searchText);
+        }
+
+        //Create Contact Modal
+        $scope.contactDialog = function(party, viewMode) {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/contact-edit.html',
+            controller: 'contactCreateModalCtrl',
+            controllerAs: 'vm',
+            size: 'lg',
+            backdrop: 'static',
+            keyboard: true,
+            resolve: {
+              viewMode: viewMode,
+              party: party
+            }      
+          });
+
+          modalInstance.result.then(function(contact){
+            if (contact) {  // should be integrated with service
+              party.party = contact;
+              $scope.contacts.push(contact);
+            }
+          })
+        }
+
+        //Create legal firm Modal
+        $scope.legalfirmDialog = function(lf, viewMode) {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/legal-firm-edit.html',
+            controller: 'lfCreateModalCtrl',
+            controllerAs: 'vm',
+            size: 'lg',
+            backdrop: 'static',
+            keyboard: true,
+            resolve: {
+              viewMode: viewMode,
+              lf: lf
+            }      
+          });
+
+          modalInstance.result.then(function(lf_){
+            if (lf_) {  // should be integrated with service
+              lf.party = lf_;
+              $scope.legalFirms.push(lf_);
+            }
+          })
+        }
+      }
+    });
+
     // file attribute
     formlyConfig.setType({
       name: 'file',

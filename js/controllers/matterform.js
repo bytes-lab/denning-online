@@ -405,6 +405,23 @@ materialAdmin
           }, 
           {
             "label": "Property",
+            "groups": [
+              {
+                "key": "property-group1",
+                "label": "Property Information",
+                "attrs": [
+                  {
+                    "key": "property1",
+                    "type": "property",
+                    "templateOptions": {
+                      "share": true,
+                      "solicitor": true,
+                      "party": true
+                    }
+                  }
+                ]
+              }
+            ]
           },
           {
             "label": "Bank",

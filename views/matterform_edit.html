@@ -156,6 +156,93 @@
   </div>
 </script>
 
+<!-- CONTACT GROUP -->
+<script type="text/ng-template" id="property.html">  
+  <div class="form-group col-md-12" ng-repeat="party in model[options.key]" ng-if="to.party">
+    <div style="display: flex;">
+      <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
+
+      <md-autocomplete
+          md-selected-item="party.party"
+          md-search-text="searchText"
+          md-items="item in queryContacts(searchText)"
+          md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
+          md-min-length="1"
+          md-autoselect="false"
+          class="default-input"
+          style="width:72%">
+        <md-item-template>
+          <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+          <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+        </md-item-template>
+      </md-autocomplete>
+
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(party, false)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span></a>
+      <a class="btn btn-primary short-btn" ng-click="viewContact(party)"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span></a>
+      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
+      <a class="btn btn-danger short-btn" ng-click="removeParty($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span></a>
+    </div>
+  </div>
+  <div style="margin-bottom: 30px;" ng-if="to.party">
+    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()" title="Add a new party to group"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party</a>    
+  </div>
+  <div ng-if="to.solicitor">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Solicitor</label>
+        <md-autocomplete
+            md-selected-item="model[options.key+'_solicitor'].party"
+            md-search-text="q_lf"
+            md-items="item in queryLFs(q_lf)"
+            md-item-text="item.name ? item.name+' ( '+item.code+' )': ' '"
+            md-min-length="1"
+            md-autoselect="false"
+            class="default-input"
+            style="width:45%">
+          <md-item-template>
+            <span md-highlight-text="q_lf" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+            <span md-highlight-text="q_lf" md-highlight-flags="i">{{item.code}}</span>
+          </md-item-template>
+        </md-autocomplete>
+        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="legalfirmDialog(model[options.key+'_solicitor'], false)"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new legal firm and choose it"></span></a>
+        <a class="btn btn-primary short-btn" ng-click="viewLegalFirm(model[options.key+'_solicitor'])" title="See detail of solicitor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+        <div class="checkbox" style="margin: 6px 0 6px 18px;">
+            <label>
+                <input type="checkbox" ng-model="represent_this" ng-click="representChange()">
+                <i class="input-helper"></i>
+                Representing this party
+            </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Firm Tel / Fax / Email</label>
+        <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].party.phoneHome" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Firm Location</label>
+        <input type="text" class="form-control" readonly="true" ng-model="model[options.key+'_solicitor'].party.address.fullAddress" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Staff in Charge</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_staff']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Solicitor Ref.</label>
+        <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+  </div>
+</script>
+
 <!-- FILE INFORMATION -->
 <script type="text/ng-template" id="file.html">  
   <div class="form-group col-md-12" ng-repeat="party in model[options.key]" ng-if="to.party">
