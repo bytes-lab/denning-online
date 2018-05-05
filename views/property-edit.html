@@ -33,14 +33,19 @@
       <div class="row">
         <div class="col-md-6 p-l-25">
           <div class="row m-b-10">            
-            <div class="radio col-sm-6">
+            <div class="radio col-sm-3">
               <label>
                 <input type="radio" name="sample" value="">
                 <i class="input-helper"></i>
                 Landed
               </label>
             </div>
-            <div class="radio col-sm-6">
+            <div class="radio col-sm-3">
+              <label>
+                Or
+              </label>
+            </div>
+            <div class="radio col-sm-5">
               <label>
                 <input type="radio" name="sample" value="">
                 <i class="input-helper"></i>
@@ -73,9 +78,11 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Title Type</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
-              </div>
+              <select class="form-control" ng-model="vm.property.title.type">
+                <option ng-repeat="item in vm.titleTypes" ng-value="item" ng-selected="vm.property.title.type == item">
+                  {{ item }}
+                </option>
+              </select>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -105,12 +112,12 @@
           <dl class="dl-horizontal">
             <dt class="">
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo" placeholder="Mukim Type">
               </div>
             </dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.accBuildingNo" placeholder="Select mukim">
               </div>
             </dd>
           </dl>
@@ -134,7 +141,8 @@
             <dt class="p-t-10">Area</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.property.area.value" placeholder="Lawyer">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control half-width" ng-model="vm.property.area.value">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control half-width" ng-model="vm.property.unit">
               </div>
             </dd>
           </dl>

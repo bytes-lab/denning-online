@@ -100,3 +100,8 @@
     color: #fff;
     border-color: #39A8E0;
 }
+
+.half-width {
+    width: 49.5% !important;
+    display: inline !important;
+}

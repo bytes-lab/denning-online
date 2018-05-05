@@ -114,6 +114,10 @@ materialAdmin
       $state.go('properties.list');
     }
 
+    propertyService.getTitleTypeList().then(function(data) {
+      self.titleTypes = data;
+    });
+
     //Create Modal
     function modalInstances1(animation, size, backdrop, keyboard, property) {
       var modalInstance = $uibModal.open({
