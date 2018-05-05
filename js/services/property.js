@@ -65,10 +65,10 @@ materialAdmin
       return deferred.promise;
     }
 
-    service.getTitleTypeList = function () {
+    service.getTypeList = function (type) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Property/TitleType',
+        url: 'http://43.252.215.81/denningwcf/v1/Property/'+type,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;

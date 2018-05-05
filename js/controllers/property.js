@@ -63,6 +63,10 @@ materialAdmin
     self.can_edit = $state.$current.data.can_edit;
     self.create_new = $state.$current.data.can_edit;
 
+    self.refList = ['MukimType', 'LotType', 'TitleType', 'ParcelType', 'LandUse', 
+                    'RestrictionAgainst', 'TenureType', 'AreaType'];
+    self.types = {};
+
     if($stateParams.id) {
       propertyService.getItem($stateParams.id).then(function(item){
         self.property = item;
@@ -114,8 +118,10 @@ materialAdmin
       $state.go('properties.list');
     }
 
-    propertyService.getTitleTypeList().then(function(data) {
-      self.titleTypes = data;
+    angular.forEach(self.refList, function (value, key) {
+      propertyService.getTypeList(value).then(function(data) {
+        self.types[value] = data;
+      });      
     });
 
     //Create Modal
