@@ -15,6 +15,11 @@ materialAdmin
             {
               "party": item.primaryClient
             }
+          ],
+          "property1": [
+            {
+              "property": item.propertyGroup[0]
+            }
           ]
         };
         

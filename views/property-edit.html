@@ -1,5 +1,5 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
-  <p id="back-top">
+  <p id="back-top" ng-if="!vm.isDialog">
     <a href="#top"><span class="glyphicon glyphicon-chevron-up"></span> TOP</a>  
   </p>
   <div class="card">
@@ -19,7 +19,7 @@
         <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
       </div>
       <div class="clearfix"></div>
-      <div class="col-sm-12 col-md-10 p-l-10" ng-if="!vm.create_new">
+      <div class="col-sm-12 col-md-10 p-l-10" ng-if="!vm.create_new && !vm.viewMode">
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()">Matters</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.openFolder()">Folder</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>

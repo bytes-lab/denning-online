@@ -228,18 +228,8 @@ materialAdmin
     formlyConfig.setType({
       name: 'property',
       templateUrl: 'property.html',
-      controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        $scope.represent_this = false;
+      controller: function ($scope, propertyService, Auth, $uibModal) {
         $scope.userInfo = Auth.getUserInfo();
-
-        $scope.representChange = function() {
-          $scope.represent_this = !$scope.represent_this;
-          if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
-            $scope.model[$scope.options.key+'_solicitor'].party = $scope.userInfo.catPersonal[0].LawFirm;
-          } else {
-            $scope.model[$scope.options.key+'_solicitor'].party = {};
-          }
-        }
 
         if (!$scope.model[$scope.options.key]) {
           $scope.model[$scope.options.key] = [
@@ -248,12 +238,6 @@ materialAdmin
             "share": ""
           }];          
         }
-
-        $scope.model[$scope.options.key+'_solicitor'] = {
-          property: {}
-        };
-
-        $scope.solicitor = {};
 
         $scope.addProperty = function() {
           $scope.model[$scope.options.key].push({
@@ -288,16 +272,12 @@ materialAdmin
           return getProperties(1, 10, searchText);
         }
 
-        $scope.queryLFs = function(searchText) {
-          return getSolicitors(1, 10, searchText);
-        }
-
-        //Create Contact Modal
-        $scope.contactDialog = function(property, viewMode) {
+        //Create Property Modal
+        $scope.propertyDialog = function(property, viewMode) {
           var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'views/contact-edit.html',
-            controller: 'contactCreateModalCtrl',
+            templateUrl: 'views/property-edit.html',
+            controller: 'propertyCreateModalCtrl',
             controllerAs: 'vm',
             size: 'lg',
             backdrop: 'static',
@@ -311,31 +291,7 @@ materialAdmin
           modalInstance.result.then(function(property){
             if (property) {  // should be integrated with service
               property.property = property;
-              $scope.contacts.push(property);
-            }
-          })
-        }
-
-        //Create legal firm Modal
-        $scope.legalfirmDialog = function(lf, viewMode) {
-          var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'views/legal-firm-edit.html',
-            controller: 'lfCreateModalCtrl',
-            controllerAs: 'vm',
-            size: 'lg',
-            backdrop: 'static',
-            keyboard: true,
-            resolve: {
-              viewMode: viewMode,
-              lf: lf
-            }      
-          });
-
-          modalInstance.result.then(function(lf_){
-            if (lf_) {  // should be integrated with service
-              lf.party = lf_;
-              $scope.legalFirms.push(lf_);
+              $scope.properties.push(property);
             }
           })
         }

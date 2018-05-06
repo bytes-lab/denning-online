@@ -11,7 +11,6 @@ materialAdmin
     service.getItem = getItem;
     service.save = save;
     service.delete = delete_;
-    service.headers = Auth.isAuthenticated();
 
     function getList(page, pagesize, keyword) {
       return $http({
@@ -28,7 +27,7 @@ materialAdmin
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/app/property/'+code,
-        headers: service.headers
+        headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
       });  
@@ -41,7 +40,7 @@ materialAdmin
       return $http({
         method: method,
         url: 'http://43.252.215.81/denningwcf/v1/property',
-        headers: service.headers,
+        headers: Auth.isAuthenticated(),
         data: property
       }).then(function(response) {
         return response.data;

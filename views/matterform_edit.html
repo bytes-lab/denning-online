@@ -178,15 +178,20 @@
       style="width:72%">
     <md-item-template>
       <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-      <span md-highlight-text="searchText" md-highlight-flags="i">{{item.title}}</span>
+      <span md-highlight-text="searchText" md-highlight-flags="i">{{item.fullTitle}}</span>
     </md-item-template>
     </md-autocomplete>
 
     <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="propertyDialog(property, false)">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new property and choose it"></span></a>
-    <a class="btn btn-primary short-btn" ng-click="viewProperty(property)"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of property"></span></a>
+      <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new property and choose it"></span>
+    </a>
+    <a class="btn btn-primary short-btn" ng-click="viewProperty(property)">
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of property"></span>
+    </a>
     <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="property.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
-    <a class="btn btn-danger short-btn" ng-click="removeParty($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this property from group"></span></a>
+    <a class="btn btn-danger short-btn" ng-click="removeParty($index)">
+      <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this property from group"></span>
+    </a>
   </div>
   </div>
   <div style="margin-bottom: 30px;" ng-if="to.property">

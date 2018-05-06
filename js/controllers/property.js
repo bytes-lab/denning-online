@@ -121,7 +121,7 @@ materialAdmin
     angular.forEach(self.refList, function (value, key) {
       propertyService.getTypeList(value).then(function(data) {
         self.types[value] = data;
-      });      
+      });
     });
 
     //Create Modal
@@ -148,5 +148,46 @@ materialAdmin
     function openDelete(event, property) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, property)
+    };
+  })
+
+  .controller('propertyCreateModalCtrl', function ($modalInstance, property, viewMode, propertyService, Auth) {
+    var self = this;
+    self.save = save;
+    self.cancel = cancel;
+    self.isDialog = true;
+    self.viewMode = viewMode;
+    self.userInfo = Auth.getUserInfo();
+    self.create_new = !viewMode;
+    self.can_edit = !viewMode;
+    self.refList = ['MukimType', 'LotType', 'TitleType', 'ParcelType', 'LandUse', 
+                    'RestrictionAgainst', 'TenureType', 'AreaType'];
+    self.types = {};
+
+    if (viewMode) {
+      propertyService.getItem(property.property.code)
+      .then(function(item){
+        self.property = item;
+      });
+    } else {
+      self.property = {};
+    }
+
+    angular.forEach(self.refList, function (value, key) {
+      propertyService.getTypeList(value).then(function(data) {
+        self.types[value] = data;
+      });
+    });
+
+    function save() {
+      propertyService.save(self.property).then(function(property) {
+        $modalInstance.close(property);
+      })
+      .catch(function(err){
+      });
+    };
+
+    function cancel() {
+      $modalInstance.close();
     };
   })
