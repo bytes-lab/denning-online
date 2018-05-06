@@ -232,6 +232,8 @@ materialAdmin
     self.isDialog = true;
     self.viewMode = viewMode;
     self.userInfo = Auth.getUserInfo();
+    self.create_new = !viewMode;
+    self.can_edit = !viewMode;
 
     if (viewMode) {
       contactService.getItem(party.party.code)
@@ -240,6 +242,24 @@ materialAdmin
       });
     } else {
       self.contact = {};
+    }
+
+    contactService.getIDTypeList().then(function(data) {
+      self.IDTypes = data;
+    });
+
+    contactService.getSalutationList().then(function(data) {
+      self.Salutations = data;
+    });
+
+    contactService.getIRDBranchList().then(function(data) {
+      self.IRDBranches = data;
+    });
+
+    self.queryFields = function (field, searchText) {
+      return self[field].filter(function(c) {
+        return c.description.search(new RegExp(searchText, "i")) > -1;
+      });
     }
 
     function save() {
