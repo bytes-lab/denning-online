@@ -204,16 +204,97 @@ materialAdmin
     }  
   })
 
-  .controller('matterCodeEditCtrl', function($filter, $stateParams, matterCodeService, $state) {
+  .controller('matterCodeEditCtrl', function($filter, $stateParams, matterCodeService, $state, Auth) {
     var self = this;
+    self.save = save;
+    self.copy = copy;
     self.cancel = cancel;
+    self.isDialog = false;
+    self.viewMode = false;  // for edit / create
+    self.userInfo = Auth.getUserInfo();
+    self.openDelete = openDelete;
+    self.create_new = $state.$current.data.can_edit;
+    self.can_edit = $state.$current.data.can_edit;
+    self.partyLabels = ['Primary Client', 'Vendor', 'Purchaser', 'Borrower', 'Guarantor', 'Original Developer', 'Proprietor', 'Customer Group5'];
+    self.lawyerLabels = ['Purchaser Solicitors', 'Bank Solicitors', 'Vendor Solicitors', 'Borrower', 'Guarantor', 'Original Developer', 'Proprietor'];
 
-    matterCodeService.getItem($stateParams.id)
-    .then(function(item){
-      self.landPTG = item;
+    $("#back-top").hide();
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        $('#back-top').fadeIn();
+        $('.btn-balances').fadeIn();
+      } else {
+        $('#back-top').fadeOut();
+        $('.btn-balances').fadeOut();
+      }
     });
+
+    $('#back-top a').click(function() {
+      $('body,html').animate({
+          scrollTop : 0
+      }, 500);
+      return false;
+    });
+
+    if ($stateParams.id) {
+      matterCodeService.getItem($stateParams.id)
+      .then(function(item){
+        self.matterCode = item;
+      });
+    } else {
+      self.matterCode = {};
+    }
+
+
+    self.new_ = function new_() {
+      self.matterCode = {};
+      self.can_edit = true;
+      self.create_new = true;
+    }
+
+    function copy() {
+      self.create_new = true;
+      self.can_edit = true;
+      
+      delete self.matterCode.code;
+    }
+
+    function save() {
+      contactService.save(self.matterCode).then(function(matterCode) {
+        self.matterCode = matterCode;
+        $state.go('matter-codes.edit', {'id': matterCode.code});
+      })
+      .catch(function(err){
+        //Handler
+      });
+    }
 
     function cancel() {
       $state.go('matter-codes.list');      
+    }
+    //Prevent Outside Click
+    function openDelete(event, matterCode) {
+      event.stopPropagation();
+      modalInstances1(true, '', 'static', true, matterCode)
+    };
+
+    //Create Modal
+    function modalInstances1(animation, size, backdrop, keyboard, matterCode) {
+      var modalInstance = $uibModal.open({
+        animation: animation,
+        templateUrl: 'myModalContent.html',
+        controller: 'ModalInstanceCtrl',
+        size: size,
+        backdrop: backdrop,
+        keyboard: keyboard,
+        resolve: {
+          matterCode: function () {
+            return matterCode;
+          }, 
+          on_list: function () {
+            return false;
+          }
+        }
+      });
     }
   })

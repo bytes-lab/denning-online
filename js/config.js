@@ -119,9 +119,10 @@ materialAdmin
       })
       .state ('matter-codes.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/',
+        url: '/new',
         controller: 'matterCodeEditCtrl as vm',
         templateUrl: 'views/matter-code-edit.html'
       })

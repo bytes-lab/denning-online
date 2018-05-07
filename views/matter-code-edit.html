@@ -1,130 +1,262 @@
 <div class="container">
+  <p id="back-top" ng-if="!vm.isDialog">
+    <a href="#top"><span class="glyphicon glyphicon-chevron-up"></span> TOP</a>  
+  </p>
   <div class="card">
+    <div class="card-header">
+      <div class="row">
+      <div class="col-md-11 col-sm-12" ng-if="!vm.viewMode">
+        <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Matter Code</h2>
+        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.mattercode)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.mattercode.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.mattercode.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+      </div>
+      <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
+        <h2 class="c-purple f-500 f-20" style="display: inline;">Matter Code Detail</h2>
+        <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
+      </div>
+      </div>
+    </div>
+
     <div class="card-body card-padding">
       <div class="clearfix"></div>
-      <h4 class="m-t-25">Legal Firm Information</h4>
+      <h4 class="m-t-10">Matter Information</h4>
       <div class="row">
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-12 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Code</dt>
+            <dt class="p-t-10">Matter</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.code" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Name</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.name" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Email</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.emailAddress">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Home</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneHome">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Mobile</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneMobile">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneOffice">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneFax">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Website</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.webSite">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.address.line2" camel-case>
               </div>
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
+            <dt class="p-t-10">Matter Code</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.country" type="text" class="form-control">
+                <input ng-model="vm.matterCode.code" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
+            <dt class="p-t-10">Category</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.state">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.strCategory" camel-case>
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
+            <dt class="p-t-10">Department</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.postcode" type="text" class="form-control">
+                <input ng-model="vm.matterCode.strDept" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">City</dt>
+            <dt class="p-t-10">Preset Checklist</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.city">
-              </div>
-            </dd>
-          </dl>              
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 1)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.line1" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 2)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line2">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.matterCode.clsPresetChecklist"
+                  md-search-text="searchText"
+                  md-items="item in queryContacts(searchText)"
+                  md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
+                  md-min-length="1"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+                </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 3)</dt>
+            <dt class="p-t-10">Billing Code</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line3">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.matterCode.clsPresetBill"
+                  md-search-text="searchText"
+                  md-items="item in queryContacts(searchText)"
+                  md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
+                  md-min-length="1"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+                </md-item-template>
+                </md-autocomplete>
               </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Form</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.strFormName">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Turnaround Time(Days)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.intTurnaroundTime">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25">Party Labels</h4>
+      <div class="row">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">0. Pary Group C0</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupC1" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC1 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">1. Party Group C1-C5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupC2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">2. Party Group C6-C10</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupC3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">3. Party Group C11-C15</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupC4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">4. Party Group C16-C20</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupC5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">5. Party Group C21</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupC6" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC6 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">6. Party Group C22-C27</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupC7" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC7 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showlawyer=!vm.showlawyer">Lawyer Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showlawyer"></i><i class="zmdi zmdi-minus" ng-if="vm.showlawyer"></i></h4>
+      <div class="row" ng-show="vm.showlawyer">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">0. Lawyer Group C0</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL1" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL1 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">1. Lawyer Group C1-C5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">2. Lawyer Group C6-C10</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">4. Lawyer Group C16-C20</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">5. Lawyer Group C21</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
             </dd>
           </dl>
         </div>
@@ -132,7 +264,17 @@
       <div class="clearfix"></div>
       
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-11 col-sm-12 no-padding" ng-if="!vm.viewMode">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.mattercode)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.mattercode.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.mattercode.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          </div>
+        </div>
+        <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">
           <div class="m-t-30">
             <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
           </div>
