@@ -25,17 +25,6 @@
       <div class="clearfix"></div>
       <h4 class="m-t-10">Matter Information</h4>
       <div class="row">
-        <div class="col-md-12 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Matter</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.address.line2" camel-case>
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="clearfix"></div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Matter Code</dt>
@@ -45,6 +34,19 @@
               </div>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-12 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Description</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.address.line2" camel-case>
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Category</dt>
             <dd>
@@ -83,7 +85,28 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Billing Code</dt>
+            <dt class="p-t-10">Billing Code 1</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.matterCode.clsPresetBill"
+                  md-search-text="searchText"
+                  md-items="item in queryContacts(searchText)"
+                  md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
+                  md-min-length="1"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+                </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Billing Code 2</dt>
             <dd>
               <div class="fg-line">
                 <md-autocomplete
@@ -115,6 +138,14 @@
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Turnaround Time(Days)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.intTurnaroundTime">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Track Subsale CD</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.intTurnaroundTime">
@@ -181,7 +212,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">5. Party Group C21</dt>
+            <dt class="p-t-10">5. Party Group C21-C25</dt>
             <dd>
               <select class="form-control" ng-model="vm.matterCode.strGroupC6" ng-disabled="!vm.can_edit">
                 <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC6 == item">
@@ -191,7 +222,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">6. Party Group C22-C27</dt>
+            <dt class="p-t-10">6. Party Group C26-C30</dt>
             <dd>
               <select class="form-control" ng-model="vm.matterCode.strGroupC7" ng-disabled="!vm.can_edit">
                 <option ng-repeat="item in vm.partyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupC7 == item">
@@ -207,16 +238,6 @@
       <div class="row" ng-show="vm.showlawyer">
         <div class="clearfix"></div>
         <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">0. Lawyer Group C0</dt>
-            <dd>
-              <select class="form-control" ng-model="vm.matterCode.strGroupL1" ng-disabled="!vm.can_edit">
-                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL1 == item">
-                  {{ item }}
-                </option>
-              </select>
-            </dd>
-          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">1. Lawyer Group C1-C5</dt>
             <dd>
@@ -240,7 +261,7 @@
         </div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">4. Lawyer Group C16-C20</dt>
+            <dt class="p-t-10">3. Lawyer Group C11-C15</dt>
             <dd>
               <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
                 <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
@@ -250,7 +271,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">5. Lawyer Group C21</dt>
+            <dt class="p-t-10">4. Lawyer Group C16-C20</dt>
             <dd>
               <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
                 <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
