@@ -283,6 +283,1938 @@
         </div>
       </div>
       <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showBank=!vm.showBank">Bank Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showBank"></i><i class="zmdi zmdi-minus" ng-if="vm.showBank"></i></h4>
+      <div class="row" ng-show="vm.showBank">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.bankLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.bankLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.bankLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.bankLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showProperty=!vm.showProperty">Property Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showProperty"></i><i class="zmdi zmdi-minus" ng-if="vm.showProperty"></i></h4>
+      <div class="row" ng-show="vm.showProperty">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Property 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Property 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Property 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Property 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Property 5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showPeriod=!vm.showPeriod">Period Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showPeriod"></i><i class="zmdi zmdi-minus" ng-if="vm.showPeriod"></i></h4>
+      <div class="row" ng-show="vm.showPeriod">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Period 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Period 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Period 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Period 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Period 5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Period 6</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showDate=!vm.showDate">Date Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showDate"></i><i class="zmdi zmdi-minus" ng-if="vm.showDate"></i></h4>
+      <div class="row" ng-show="vm.showDate">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 6</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 7</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 8</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 9</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 10</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 11</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 12</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 13</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 14</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 15</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 16</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 17</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 18</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 19</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 20</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 21</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 22</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 23</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 24</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 25</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 26</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 27</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 28</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 29</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 30</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 31</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 32</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 33</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 34</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 35</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 36</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 37</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 38</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 39</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 40</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 41</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 42</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 43</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 44</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date 45</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showCurrency=!vm.showCurrency">Currency Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCurrency"></i><i class="zmdi zmdi-minus" ng-if="vm.showCurrency"></i></h4>
+      <div class="row" ng-show="vm.showCurrency">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 6</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 7</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 8</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 9</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 10</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 11</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 12</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 13</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 14</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 15</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 16</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 17</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 18</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 19</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 20</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 21</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 22</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 23</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 24</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 25</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 26</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 27</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 28</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 29</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 30</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 31</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 32</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 33</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 34</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 35</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 36</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 37</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 38</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 39</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 40</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 41</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 42</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Currency 43</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showText=!vm.showText">Text Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showText"></i><i class="zmdi zmdi-minus" ng-if="vm.showText"></i></h4>
+      <div class="row" ng-show="vm.showText">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 6</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 7</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 8</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 9</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 10</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 11</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 12</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 13</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 14</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 15</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 16</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 17</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 18</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 19</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 20</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 21</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 22</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 23</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 24</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 25</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 26</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 27</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 28</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 29</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 30</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 31</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 32</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 33</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 34</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 35</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 36</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 37</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 38</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 39</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 40</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 41</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Text 42</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showCheckbox=!vm.showCheckbox">Checkbox Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCheckbox"></i><i class="zmdi zmdi-minus" ng-if="vm.showCheckbox"></i></h4>
+      <div class="row" ng-show="vm.showCheckbox">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 6</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 7</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 8</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 9</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Checkbox 10</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showRadio=!vm.showRadio">Radio Button Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRadio"></i><i class="zmdi zmdi-minus" ng-if="vm.showRadio"></i></h4>
+      <div class="row" ng-show="vm.showRadio">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 6</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 7</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 8</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 9</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Radio Button 10</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showPn=!vm.showPn">PN Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showPn"></i><i class="zmdi zmdi-minus" ng-if="vm.showPn"></i></h4>
+      <div class="row" ng-show="vm.showPn">
+        <div class="clearfix"></div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 1</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 2</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 3</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 4</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 5</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 6</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 7</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 8</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 9</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 10</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 11</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL2" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 12</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL3" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 13</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL4" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 14</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 15</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 16</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 17</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 18</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 19</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pn 20</dt>
+            <dd>
+              <select class="form-control" ng-model="vm.matterCode.strGroupL5" ng-disabled="!vm.can_edit">
+                <option ng-repeat="item in vm.lawyerLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
+                  {{ item }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+        </div>        
+      </div>
+      <div class="clearfix"></div>
       
       <div class="row">
         <div class="col-md-11 col-sm-12 no-padding" ng-if="!vm.viewMode">
