@@ -1,6 +1,6 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
-  <p id="back-top" ng-if="!vm.isDialog">
-    <a href="#top"><span class="glyphicon glyphicon-chevron-up"></span> TOP</a>  
+  <p id="back-top" style="display: none;">
+    <a ng-click="vm.scrollUp()"><span class="glyphicon glyphicon-chevron-up"></span> TOP</a>
   </p>
   <div class="card">
     <div class="card-header">

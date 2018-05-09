@@ -78,12 +78,12 @@ materialAdmin
       }
     });
 
-    $('#back-top a').click(function() {
+    self.scrollUp = function () {
       $('body,html').animate({
           scrollTop : 0
       }, 500);
       return false;
-    });
+    };
 
     contactService.getIDTypeList().then(function(data) {
       self.IDTypes = data;

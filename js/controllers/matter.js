@@ -215,10 +215,10 @@ materialAdmin
     self.openDelete = openDelete;
     self.create_new = $state.$current.data.can_edit;
     self.can_edit = $state.$current.data.can_edit;
-    self.partyLabels = ['Client', 'Vendor', 'Purchaser', 'Borrower', 'Guarantor', 'Plaintiff', 'Defendant', 'Third Party', 'Assignor', 'Assignee, Financing Bank', 'Chargee / Assignee Bank', 'Landlord', 'Tenant', 'Lessor', 'Lessee', 'First Party', 'Second Party', 'Third Party', 'Fourth Party Fifth Party', 'Sixth Party'];
+    self.partyLabels = ['Client', 'Vendor', 'Purchaser', 'Borrower', 'Guarantor', 'Plaintiff', 'Defendant', 'Assignor', 'Assignee, Financing Bank', 'Chargee / Assignee Bank', 'Landlord', 'Tenant', 'Lessor', 'Lessee', 'First Party', 'Second Party', 'Third Party', 'Fourth Party Fifth Party', 'Sixth Party'];
     self.lawyerLabels = ['Vendor Solicitors', 'Purchaser Solicitors', 'Bank Solicitors', 'Chargor Solicitors', 'Plaintiff Solicitors', 'Defendant Solicitors', 'Third Party Solicitors', 'Appellant Solicitors', 'Respondent Solicitors'];
     self.bankLabels = ['Chargee Bank', 'Financing Bank', 'Stakeholder Bank', 'Developer HDA Bank'];
-    
+
     $("#back-top").hide();
     $(window).scroll(function() {
       if ($(this).scrollTop() > 100) {
@@ -230,12 +230,12 @@ materialAdmin
       }
     });
 
-    $('#back-top a').click(function() {
+    self.scrollUp = function () {
       $('body,html').animate({
           scrollTop : 0
       }, 500);
       return false;
-    });
+    };
 
     if ($stateParams.id) {
       matterCodeService.getItem($stateParams.id)

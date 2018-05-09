@@ -86,13 +86,13 @@ materialAdmin
       }
     });
 
-    $('#back-top a').click(function() {
+    self.scrollUp = function () {
       $('body,html').animate({
           scrollTop : 0
       }, 500);
       return false;
-    });
-
+    };
+    
     function copy() {
       self.create_new = true;
       self.can_edit = true;
