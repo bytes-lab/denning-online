@@ -8,7 +8,7 @@ materialAdmin
       self.data = data;
       self.dataReady = true;
       initializeTable();
-    });    
+    });
 
     function clickHandler(item) {
       $state.go('land-PTGs.edit', {'id': item.code});

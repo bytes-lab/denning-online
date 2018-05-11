@@ -16,7 +16,6 @@ materialAdmin
         url: 'http://43.252.215.81/denningwcf/v1/app/GovOffice/PTG?page='+page+'&pagesize='+pagesize,
         headers: service.headers
       }).then(function(resp) {
-        service.contacts = resp.data;
         return resp.data;
       });  
     }
