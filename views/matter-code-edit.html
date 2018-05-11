@@ -67,11 +67,11 @@
             <dt class="p-t-10">Preset Checklist</dt>
             <dd>
               <div class="fg-line">
-                <md-autocomplete
+<!--                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
                   md-selected-item="vm.matterCode.strPresetCodeG1"
                   md-search-text="searchText"
-                  md-items="item in queryContacts(searchText)"
+                  md-items="item in queryFields(searchText)"
                   md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
                   md-min-length="1"
                   md-autoselect="false"
@@ -81,7 +81,7 @@
                   <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
                 </md-item-template>
                 </md-autocomplete>
-              </div>
+ -->              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -90,16 +90,16 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.clsPresetBill"
-                  md-search-text="searchText"
-                  md-items="item in queryContacts(searchText)"
-                  md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
+                  md-selected-item="vm.matterCode.clsPresetBill.code"
+                  md-search-text="qpsb1"
+                  md-items="item in vm.queryBills(qpsb1)"
+                  md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
                   md-min-length="1"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
-                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
-                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+                  <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+                  <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.description}}</span>
                 </md-item-template>
                 </md-autocomplete>
               </div>
@@ -111,16 +111,16 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.clsPresetBill"
-                  md-search-text="searchText"
-                  md-items="item in queryContacts(searchText)"
-                  md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
+                  md-selected-item="vm.matterCode.clsPresetBill1.code"
+                  md-search-text="qpsb2"
+                  md-items="item in vm.queryBills(qpsb2)"
+                  md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
                   md-min-length="1"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
-                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
-                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+                  <span md-highlight-text="qpsb2" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+                  <span md-highlight-text="qpsb2" md-highlight-flags="i">{{item.description}}</span>
                 </md-item-template>
                 </md-autocomplete>
               </div>

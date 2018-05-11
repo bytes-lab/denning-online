@@ -204,7 +204,7 @@ materialAdmin
     }  
   })
 
-  .controller('matterCodeEditCtrl', function($filter, $stateParams, matterCodeService, $state, Auth) {
+  .controller('matterCodeEditCtrl', function($filter, $stateParams, matterCodeService, $state, Auth, presetbillService) {
     var self = this;
     self.save = save;
     self.copy = copy;
@@ -228,6 +228,10 @@ materialAdmin
         $('#back-top').fadeOut();
         $('.btn-balances').fadeOut();
       }
+    });
+
+    presetbillService.getList(1, 500).then(function(data) {
+      self.presetBills = data;
     });
 
     self.scrollUp = function () {
@@ -284,6 +288,12 @@ materialAdmin
         return item.search(new RegExp(q, "i")) > -1;
       });
     };
+
+    self.queryBills = function (searchText) {
+      return self.presetBills.filter(function(c) {
+        return c.code.search(new RegExp(searchText, "i")) > -1 || c.description.search(new RegExp(searchText, "i")) > -1;
+      });
+    }
 
     //Create Modal
     function modalInstances1(animation, size, backdrop, keyboard, matterCode) {
