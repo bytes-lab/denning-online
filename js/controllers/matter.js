@@ -273,10 +273,16 @@ materialAdmin
     function cancel() {
       $state.go('matter-codes.list');      
     }
-    //Prevent Outside Click
+    
     function openDelete(event, matterCode) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, matterCode)
+    };
+
+    self.queryList = function (labels, q) {
+      return labels.filter(function(item) {
+        return item.search(new RegExp(q, "i")) > -1;
+      });
     };
 
     //Create Modal

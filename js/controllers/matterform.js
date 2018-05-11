@@ -459,6 +459,8 @@ materialAdmin
             ]
           }
         ];
+        
+        vm.textAreaModel = JSON.stringify(vm.tabs, null, 4);
       });
     }
 
@@ -468,7 +470,6 @@ materialAdmin
       }
     };
     
-    vm.textAreaModel = JSON.stringify(vm.tabs, null, 4);
 
     $scope.$watch('vm.textAreaModel', function() {
       try {
