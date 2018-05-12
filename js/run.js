@@ -302,7 +302,7 @@ materialAdmin
     formlyConfig.setType({
       name: 'file',
       templateUrl: 'file.html',
-      controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
+      controller: function ($scope, legalFirmService, contactService, matterCodeService, Auth, $uibModal, $filter) {
         $scope.getNumber = function(num) {
           return new Array(num);
         }
@@ -352,6 +352,14 @@ materialAdmin
 
         $scope.queryContacts = function(searchText) {
           return getContacts(1, 10, searchText);
+        }
+
+        $scope.queryCodes = function(searchText) {
+          return matterCodeService.getList().then(function(data) {
+            return data.filter(function(c) {
+              return c.strDescription.search(new RegExp(searchText, "i")) > -1 || c.code.search(new RegExp(searchText, "i")) > -1;
+            });
+          });
         }
 
         legalFirmService.getList().then(function(resp) {
