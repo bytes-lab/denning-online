@@ -9,19 +9,7 @@ materialAdmin
       fileMatterService.getItem($stateParams.fileNo)
       .then(function(item){
         vm.item = item;
-        vm.model = {
-          "systemNo": item.systemNo,
-          "party1": [
-            {
-              "party": item.primaryClient
-            }
-          ],
-          "property1": [
-            {
-              "property": item.propertyGroup[0]
-            }
-          ]
-        };
+        vm.model = item;
         
         vm.tabs = [
           {
@@ -52,7 +40,7 @@ materialAdmin
             "groups": [
               {
                 "key": "vendor-group",
-                "label": "Party w/ Solicitors Group 1 Information",
+                "label": vm.model.clsMatterCode.strGroupC1,
                 "attrs": [
                   {
                     "key": "party1",
@@ -67,7 +55,7 @@ materialAdmin
               },
               {
                 "key": "purchaser-group",
-                "label": "Party w/ Solicitors Group 2 Information",
+                "label": vm.model.clsMatterCode.strGroupC2,
                 "attrs": [
                   {
                     "key": "purchaser1",
@@ -82,7 +70,7 @@ materialAdmin
               },
               {
                 "key": "vendor-group3",
-                "label": "Party w/ Solicitors Group 3 Information",
+                "label": vm.model.clsMatterCode.strGroupC3,
                 "attrs": [
                   {
                     "key": "party3",
@@ -97,7 +85,7 @@ materialAdmin
               },
               {
                 "key": "vendor-group4",
-                "label": "Party w/ Solicitors Group 4 Information",
+                "label": vm.model.clsMatterCode.strGroupC4,
                 "attrs": [
                   {
                     "key": "party4",
@@ -112,7 +100,7 @@ materialAdmin
               },
               {
                 "key": "vendor-group5",
-                "label": "Party w/ Solicitors Group 5 Information",
+                "label": vm.model.clsMatterCode.strGroupC5,
                 "attrs": [
                   {
                     "key": "party5",
@@ -127,7 +115,7 @@ materialAdmin
               },
               {
                 "key": "vendor-group6",
-                "label": "Party w/ Solicitors Group 6 Information",
+                "label": vm.model.clsMatterCode.strGroupL1,
                 "attrs": [
                   {
                     "key": "party6",
@@ -142,7 +130,7 @@ materialAdmin
               },
               {
                 "key": "vendor-group7",
-                "label": "Party w/ Solicitors Group 7 Information",
+                "label": vm.model.clsMatterCode.strGroupL2,
                 "attrs": [
                   {
                     "key": "party7",
@@ -162,7 +150,7 @@ materialAdmin
             "groups": [
               {
                 "key": "vendor-group11",
-                "label": "Party Group 1 Information",
+                "label": vm.model.clsMatterCode.strGroupL1,
                 "attrs": [
                   {
                     "key": "party11",
@@ -177,7 +165,7 @@ materialAdmin
               },
               {
                 "key": "purchaser-group11",
-                "label": "Party Group 2 Information",
+                "label": vm.model.clsMatterCode.strGroupL2,
                 "attrs": [
                   {
                     "key": "purchaser11",
@@ -192,7 +180,7 @@ materialAdmin
               },
               {
                 "key": "vendor-group31",
-                "label": "Party Group 3 Information",
+                "label": vm.model.clsMatterCode.strGroupL3,
                 "attrs": [
                   {
                     "key": "party31",
@@ -451,7 +439,7 @@ materialAdmin
                     "key": "template",
                     "type": "gen-doc",
                     "templateOptions": {
-                      "fileNo": vm.model.systemNo
+                      "fileNo": vm.model.strFileNo1
                     }                
                   }
                 ]
