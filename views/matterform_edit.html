@@ -451,7 +451,7 @@
     <div style="display: flex;">
     <label class="form-control attr-label">Matter Code</label>
     <md-autocomplete
-      md-selected-item="model[options.key+'_solicitor'].matterCode"
+      md-selected-item="model.matter"
       md-search-text="qmc"
       md-items="item in queryCodes(qmc)"
       md-item-text="item.strDescription+' ( '+item.code+' )'"
@@ -460,7 +460,7 @@
       class="default-input"
       style="width:45%">
     <md-item-template>
-      <span md-highlight-text="qmc" class="col-1" md-highlight-flags="i">{{item.strDescription}}</span>
+      <span md-highlight-text="qmc" class="col-360" md-highlight-flags="i">{{item.strDescription}}</span>
       <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
     </md-item-template>
     </md-autocomplete>
