@@ -23,6 +23,13 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
       "update": true,
       "delete": true
     },
+    "matterform": {
+      "list": true,
+      "create": true,
+      "read": true,
+      "update": true,
+      "delete": true
+    },
     "note": {
       "list": true,
       "create": true,

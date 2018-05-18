@@ -529,9 +529,13 @@ materialAdmin
     self.openDelete = openDelete;
     self.can_edit = $state.$current.data.can_edit;
     self.create_new = $state.$current.data.can_edit;
+    self.matterform = {
+      selected: []
+    };
 
-    self.refList = ['MukimType', 'LotType', 'TitleType', 'ParcelType', 'LandUse', 
-                    'RestrictionAgainst', 'TenureType', 'AreaType'];
+    self.tabList = ['Summary', 'Matter', 'Parties-S', 'Parties', 'Solicitors', 
+                    'Case', 'Price', 'Loan', 'Property', 'Bank', '$', 'Date', 'Text',
+                    'Templates'];
     self.types = {};
 
     if($stateParams.id) {
@@ -541,36 +545,28 @@ materialAdmin
     } else {
       self.property = {};
     }
-
-    $("#back-top").hide();
-    $(window).scroll(function() {
-      if ($(this).scrollTop() > 100) {
-        $('#back-top').fadeIn();
-        $('.btn-balances').fadeIn();
-      } else {
-        $('#back-top').fadeOut();
-        $('.btn-balances').fadeOut();
-      }
-    });
-
-    self.scrollUp = function () {
-      $('body,html').animate({
-          scrollTop : 0
-      }, 500);
-      return false;
-    };
     
+    self.addTab = function (tab) {
+      if (self.matterform[tab]) {
+        self.matterform.selected.push(tab);
+      } else {
+        var index = self.matterform.selected.indexOf(tab);
+        self.matterform.selected.splice(index, 1);
+      }
+    };
+
+    self.changeOrder = function (x, y) {
+      if (x < 0)
+        return;
+      if (y == self.matterform.selected.length)
+        return;
+      self.matterform.selected.splice(y, 1, self.matterform.selected.splice(x, 1, self.matterform.selected[y])[0]);
+    };
+
     function copy() {
       self.create_new = true;
       self.can_edit = true;
       
-      delete self.property.code;
-      delete self.property.IDNo;
-      delete self.property.old_ic;
-      delete self.property.name;
-      delete self.property.emailAddress;
-      delete self.property.webSite;
-      delete self.property.dateBirth;
       delete self.property.taxFileNo;
     }
 
