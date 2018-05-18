@@ -294,7 +294,7 @@ materialAdmin
     });
 
     function clickHandler(item) {
-      $state.go('matterforms.edit', {'fileNo': item.systemNo});
+      $state.go('file-matters.edit', {'fileNo': item.systemNo});
     }
     
     function initializeTable () {

@@ -68,25 +68,73 @@ materialAdmin
 
 
       //------------------------------
-      // MATTER FORM
+      // FILE MATTER
       //------------------------------
-      .state ('matterforms', {
+    
+      .state ('file-matters', {
         data: {
           access: '@'
         },        
-        url: '/matterforms',
+        url: '/file-matters',
+        templateUrl: 'views/common.html'
+      })
+            
+      .state ('file-matters.list', {
+        data: {
+          access: '@'
+        },        
+        url: '/',
+        controller: 'fileMatterListCtrl as vm',
+        templateUrl: 'views/file-matter-list.html'
+      })
+
+      .state ('file-matters.edit', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/:fileNo',
+        controller: 'fileMatterEditCtrl as vm',
+        templateUrl: 'views/file-matter-edit.html'
+      })
+
+      //------------------------------
+      // MATTER FORM
+      //------------------------------
+      .state ('matter-forms', {
+        data: {
+          access: '@'
+        },        
+        url: '/matter-forms',
         templateUrl: 'views/common.html'
       })
 
-      .state ('matterforms.edit', {
+      .state ('matter-forms.list', {
+        data: {
+          access: '@'
+        },        
+        url: '/',
+        controller: 'matterformListCtrl as vm',
+        templateUrl: 'views/matter-form-list.html'
+      })
+
+      .state ('matter-forms.edit', {
         data: {
           access: '@'
         },        
         url: '/edit/:fileNo',
         controller: 'matterformEditCtrl as vm',
-        templateUrl: 'views/matterform_edit.html'
+        templateUrl: 'views/matter-form-edit.html'
       })
 
+      .state ('matter-forms.new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },        
+        url: '/edit/:fileNo',
+        controller: 'matterformEditCtrl as vm',
+        templateUrl: 'views/matter-form-edit.html'
+      })
 
       //------------------------------
       // MATTER CODE
@@ -125,28 +173,6 @@ materialAdmin
         url: '/new',
         controller: 'matterCodeEditCtrl as vm',
         templateUrl: 'views/matter-code-edit.html'
-      })
-
-
-      //------------------------------
-      // FILE MATTER
-      //------------------------------
-    
-      .state ('file-matters', {
-        data: {
-          access: '@'
-        },        
-        url: '/file-matters',
-        templateUrl: 'views/common.html'
-      })
-            
-      .state ('file-matters.list', {
-        data: {
-          access: '@'
-        },        
-        url: '/',
-        controller: 'fileMatterListCtrl as vm',
-        templateUrl: 'views/file-matter-list.html'
       })
 
       //------------------------------

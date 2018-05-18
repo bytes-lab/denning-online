@@ -255,7 +255,7 @@ materialAdmin
       if (item.Title.indexOf('Contact') == 0) {
         $state.go('contacts.edit', {id: item.key});
       } else if (item.Title.indexOf('File No') == 0) {
-        $state.go('matterforms.edit', {'fileNo': item.key});
+        $state.go('file-matters.edit', {'fileNo': item.key});
       } else if (item.Title.indexOf('Property') == 0) {
         $state.go('properties.edit', {id: item.key});
       }
@@ -274,7 +274,7 @@ materialAdmin
     }
 
     self.templates = function(item) {
-      $state.go('matterforms.edit', {'fileNo': item.key});
+      $state.go('file-matters.edit', {'fileNo': item.key});
     }
     
     self.accounts = function(item) {
