@@ -3,7 +3,7 @@ materialAdmin
   // Base controller for common functions
   // =========================================================================
 
-  .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchFilterService, $rootScope, Auth, contactService){
+  .controller('denningOnlineCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchService, $rootScope, Auth, contactService){
     var self = this;
 
     $scope.app = { 
@@ -104,7 +104,7 @@ materialAdmin
       this.currentSkin = color;
     }
 
-    searchFilterService.getFilter().then(function(data){
+    searchService.getFilter().then(function (data) {
       self.searchFilterCategories = [];
       data.forEach(function(item){
         self.searchFilterCategories.push(item);
@@ -139,37 +139,14 @@ materialAdmin
     }
 
     function querySearch (query) {
-
       self.showFilterCategory = false;
 
-      deferred = $q.defer();
-      if (query.trim() == ''){
-        $timeout( function () {deferred.resolve( [] )});
-        return deferred.promise;
-      }
-
-      $http({
-        method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/generalSearch/keyword',
-        headers: Auth.isAuthenticated(), 
-        params: {
-          search: query
-        }
-      }).then(function(resp) {
-        var results = [];
-        resp.data.forEach(function(item){
-          results.push({
-            value: item.keyword,
-            display: item.keyword
-          })
-        });
-        deferred.resolve( results ); 
+      return searchService.keyword(query).then(function (data) {
+        return data;
       });
-      return deferred.promise;
     }
 
     function searchTextChange(text) {
-      // console.log('Text changed to ' + text);
       self.selectedSearchCategory = 0;
       self.currentText = {value: text, display: text};
       if (text.trim() == '')
@@ -182,30 +159,11 @@ materialAdmin
       if(angular.isUndefined(item))
         return;
 
-      $http({
-        method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/generalSearch',
-        headers: Auth.isAuthenticated(), 
-        params: {
-          search: item.value,
-          category: self.selectedSearchCategory,
-          isAutoComplete: 1
-        }
-      }).then(function(resp) {
-        self.searchRes = resp.data.map(function(item){
-          var newItem = angular.copy(item);
-          try {
-            newItem.parseJSON = JSON.parse(item.JSON);
-          } catch(err) {
-            newItem.parseJSON = '';
-          }
-          
-          return newItem;
-        });
-
+      searchService.search(item.value, self.selectedSearchCategory).then(function (data) {
+        self.searchRes = data;
         if ($state.current.name != 'search')
           $state.go('search');
-      });     
+      });    
     }
 
     /**
