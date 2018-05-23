@@ -19,7 +19,7 @@ materialAdmin
     function getList(page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'http://43.252.215.81/denningwcf/v1/table/Customer?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         service.contacts = resp.data;

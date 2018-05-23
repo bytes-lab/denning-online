@@ -51,7 +51,7 @@ materialAdmin
     };
   })
 
-  .controller('propertyEditCtrl', function($filter, $stateParams, propertyService, $state, Auth, $uibModal) {
+  .controller('propertyEditCtrl', function($filter, $stateParams, propertyService, $state, Auth, $uibModal, contactService) {
     var self = this;
     self.copy = copy;
     self.save = save;
@@ -73,6 +73,16 @@ materialAdmin
       });
     } else {
       self.property = {};
+    }
+
+    function getContacts (page, pagesize, keyword) {
+      return contactService.getList(page, pagesize, keyword).then(function(resp) {
+        return resp.data;
+      });
+    }
+
+    self.queryContacts = function (searchText) {
+      return getContacts(1, 10, searchText);
     }
 
     $("#back-top").hide();
