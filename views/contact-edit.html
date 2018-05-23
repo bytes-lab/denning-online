@@ -61,14 +61,14 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.idType"
+                  md-selected-item="vm.contact.clsIDType"
                   md-search-text="q"
                   md-items="item in vm.queryFields('IDTypes', q)"
-                  md-item-text="item.description"
+                  md-item-text="item.strDescription"
                   md-min-length="0"
                   class="default-input">
                   <md-item-template>
-                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.strDescription}}</span>
                   </md-item-template>
                 </md-autocomplete>
               </div>
@@ -128,7 +128,7 @@
             <dt class="">
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" ng-model="vm.contact.deceased">
+                  <input type="checkbox" ng-model="vm.contact.boolDeceased">
                   <i class="input-helper"></i>
                   Deceased
                 </label>
@@ -302,14 +302,14 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.irdBranch"
+                  md-selected-item="vm.contact.clsIrdBranch"
                   md-search-text="iq"
                   md-items="item in vm.queryFields('IRDBranches', iq)"
-                  md-item-text="item.description"
+                  md-item-text="item.strName"
                   md-min-length="0"
                   class="default-input">
                   <md-item-template>
-                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.strName}}</span>
                   </md-item-template>
                 </md-autocomplete>  
               </div>
@@ -324,7 +324,7 @@
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.contact.not_applicable">
+                <input type="checkbox" ng-model="vm.contact.boolIsGSTRegistered">
                 <i class="input-helper"></i>
                 GST Registered
               </label>
@@ -351,7 +351,7 @@
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.contact.not_applicable">
+                <input type="checkbox" ng-model="vm.contact.boolGSTStatusVerified">
                 <i class="input-helper"></i>
                 GST Status Verified
               </label>
@@ -420,17 +420,39 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Director 1</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
-              </div>
+              <md-autocomplete
+                md-selected-item="vm.contact.clsDirector1"
+                md-search-text="qsdl"
+                md-items="item in vm.queryContacts(qsdl)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
+                md-min-length="1"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsdl" class="col-1" md-highlight-flags="i">
+                  ({{item.strIDNo}}) {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Director 2</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
-              </div>
+              <md-autocomplete
+                md-selected-item="vm.contact.clsDirector2"
+                md-search-text="qsdl2"
+                md-items="item in vm.queryContacts(qsdl2)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
+                md-min-length="1"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsdl2" class="col-1" md-highlight-flags="i">
+                  ({{item.strIDNo}}) {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>
@@ -627,16 +649,27 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Entered by</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
-              </div>
+              <md-autocomplete
+                md-selected-item="vm.contact.clsEnteredBy"
+                md-search-text="qseb"
+                md-items="item in vm.queryStaffs(qseb)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIdNo+' )': ' '"
+                md-min-length="1"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qseb" class="col-1" md-highlight-flags="i">
+                  ({{item.strIdNo}}) {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.dtDateEntered">
               </div>
             </dd>
           </dl>          
@@ -645,16 +678,27 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Updated by</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice" placeholder="">
-              </div>
+              <md-autocomplete
+                md-selected-item="vm.contact.clsUpdatedBy"
+                md-search-text="qsub"
+                md-items="item in vm.queryStaffs(qsub)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIdNo+' )': ' '"
+                md-min-length="1"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsub" class="col-1" md-highlight-flags="i">
+                  ({{item.strIdNo}}) {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo" placeholder="">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.dtDateUpdated">
               </div>
             </dd>
           </dl>          

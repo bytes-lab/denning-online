@@ -48,7 +48,7 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/app/contact/'+code,
+        url: 'http://43.252.215.81/denningwcf/v1/table/Customer/'+code,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -58,7 +58,7 @@ materialAdmin
     function getIDTypeList() {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/IDType',
+        url: 'http://43.252.215.81/denningwcf/v1/table/IDType',
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -78,7 +78,7 @@ materialAdmin
     function getIRDBranchList() {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/IRDBranch',
+        url: 'http://43.252.215.81/denningwcf/v1/table/IRDBranch',
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;

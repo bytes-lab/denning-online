@@ -97,6 +97,18 @@ materialAdmin
       self.IRDBranches = data;
     });
 
+    self.queryContacts = function (searchText) {
+      return contactService.getCustomerList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryStaffs = function (searchText) {
+      return contactService.getStaffList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    }
+
     function queryFields(field, searchText) {
       return self[field].filter(function(c) {
         return c.description.search(new RegExp(searchText, "i")) > -1;
