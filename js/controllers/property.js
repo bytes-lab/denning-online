@@ -75,14 +75,16 @@ materialAdmin
       self.property = {};
     }
 
-    function getContacts (page, pagesize, keyword) {
-      return contactService.getList(page, pagesize, keyword).then(function(resp) {
+    self.queryContacts = function (searchText) {
+      return contactService.getCustomerList(1, 10, searchText).then(function(resp) {
         return resp.data;
       });
-    }
+    };
 
-    self.queryContacts = function (searchText) {
-      return getContacts(1, 10, searchText);
+    self.queryStaffs = function (searchText) {
+      return contactService.getStaffList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
     }
 
     $("#back-top").hide();

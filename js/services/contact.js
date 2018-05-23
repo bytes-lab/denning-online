@@ -6,7 +6,6 @@ materialAdmin
   .service('contactService', function($q, $timeout, $http, Auth) {
     var service = {};
 
-    service.contacts = null;
     service.getList = getList;
     service.getItem = getItem;
     service.getIDTypeList = getIDTypeList;
@@ -19,13 +18,32 @@ materialAdmin
     function getList(page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/Customer?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
-        service.contacts = resp.data;
         return resp;
       });  
     }
+
+    service.getStaffList = function (page=1, pagesize=25, keyword='') {
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/table/Staff?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        headers: Auth.isAuthenticated()
+      }).then(function(resp) {
+        return resp;
+      });  
+    };
+
+    service.getCustomerList = function (page=1, pagesize=25, keyword='') {
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/table/Customer?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        headers: Auth.isAuthenticated()
+      }).then(function(resp) {
+        return resp;
+      });  
+    };
 
     function getItem(code) {
       return $http({
