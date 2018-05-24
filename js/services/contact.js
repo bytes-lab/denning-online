@@ -10,7 +10,6 @@ materialAdmin
     service.getItem = getItem;
     service.getIDTypeList = getIDTypeList;
     service.getSalutationList = getSalutationList;
-    service.getIRDBranchList = getIRDBranchList;
     service.save = save;
     service.upload = upload;
     service.delete = delete_;
@@ -73,16 +72,6 @@ materialAdmin
       }).then(function(resp) {
         return resp.data;
       });  
-    }
-
-    function getIRDBranchList() {
-      return $http({
-        method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/IRDBranch',
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
-        return resp.data;
-      });
     }
 
     function upload(info, type) {

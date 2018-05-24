@@ -51,7 +51,7 @@ materialAdmin
     };
   })
 
-  .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService, raceService, religionService) {
+  .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService, raceService, religionService, IRDBranchService) {
     var self = this;
     self.save = save;
     self.copy = copy;
@@ -85,16 +85,8 @@ materialAdmin
       return false;
     };
 
-    contactService.getIDTypeList().then(function(data) {
-      self.IDTypes = data;
-    });
-
     contactService.getSalutationList().then(function(data) {
       self.Salutations = data;
-    });
-
-    contactService.getIRDBranchList().then(function(data) {
-      self.IRDBranches = data;
     });
 
     self.queryContacts = function (searchText) {
@@ -117,6 +109,12 @@ materialAdmin
 
     self.queryRace = function (searchText) {
       return raceService.getList(1, 10, searchText).then(function(resp) {
+        return resp;
+      });
+    }
+
+    self.queryIRDBranch = function (searchText) {
+      return IRDBranchService.getList(1, 10, searchText).then(function(resp) {
         return resp;
       });
     }
@@ -273,10 +271,6 @@ materialAdmin
     } else {
       self.contact = {};
     }
-
-    contactService.getIDTypeList().then(function(data) {
-      self.IDTypes = data;
-    });
 
     contactService.getSalutationList().then(function(data) {
       self.Salutations = data;
