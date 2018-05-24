@@ -34,7 +34,7 @@
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('matter-forms') || mactrl.$state.includes('file-matters') || mactrl.$state.includes('matter-codes') }" ng-if="app.userInfo.priority.matter.list">
             <a href="" toggle-submenu><i class="zmdi zmdi-money"></i> Matter</a>
             <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="matter-forms.new" data-ng-click="mactrl.sidebarStat($event)">Matter Form</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="matter-forms.list" data-ng-click="mactrl.sidebarStat($event)">Matter Form</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="matter-codes.list" data-ng-click="mactrl.sidebarStat($event)">Matter Code</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="file-matters.list" data-ng-click="mactrl.sidebarStat($event)">File Matter</a></li>
             </ul>

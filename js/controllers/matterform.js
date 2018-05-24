@@ -613,3 +613,30 @@ materialAdmin
       modalInstances1(true, '', 'static', true, property)
     };
   })
+
+  .controller('matterformListCtrl', function($uibModal, NgTableParams, matterFormService, Auth, $state) {
+    var self = this;
+
+    self.clickHandler = function (item) {
+      $state.go('matter-forms.edit', {'code': item.code});
+    }
+
+    matterFormService.getList(1, 500).then(function(data) {
+      self.data = data;
+      self.dataReady = true;
+      initializeTable();
+    });
+
+    function initializeTable () {
+      //Filtering
+      self.tableFilter = new NgTableParams({
+        page: 1,      
+        count: 25,
+        sorting: {
+          name: 'asc' 
+        }
+      }, {
+        dataset: self.data
+      })
+    }
+  })

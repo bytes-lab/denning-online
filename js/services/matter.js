@@ -1,6 +1,6 @@
 materialAdmin
   // =========================================================================
-  // File Matter, Matter Code
+  // File Matter, Matter Code, Matter Form
   // =========================================================================
   
   .service('fileMatterService', function($q, $timeout, $http, Auth) {
@@ -106,7 +106,6 @@ materialAdmin
 
   .service('matterCodeService', function($http, Auth){
     var service = {};
-    service.landPTGs = null;
     service.getList = getList;
     service.getItem = getItem;
     service.headers = Auth.isAuthenticated();
@@ -126,6 +125,34 @@ materialAdmin
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/table/MatterCode/'+code,
         headers: service.headers
+      }).then(function(resp) {
+        return resp.data;
+      });    
+    }
+
+    return service;
+  })
+
+  .service('matterFormService', function($http, Auth){
+    var service = {};
+    service.getList = getList;
+    service.getItem = getItem;
+
+    function getList(page=1, pagesize=500) {
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize,
+        headers: Auth.isAuthenticated()
+      }).then(function(resp) {
+        return resp.data;
+      });  
+    }
+
+    function getItem(code) {
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm/'+code,
+        headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
       });    
