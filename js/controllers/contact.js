@@ -51,7 +51,7 @@ materialAdmin
     };
   })
 
-  .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService) {
+  .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService, raceService, religionService) {
     var self = this;
     self.save = save;
     self.copy = copy;
@@ -111,6 +111,18 @@ materialAdmin
 
     self.queryOccupation = function (searchText) {
       return occupationService.getList(1, 10, searchText).then(function(resp) {
+        return resp;
+      });
+    }
+
+    self.queryRace = function (searchText) {
+      return raceService.getList(1, 10, searchText).then(function(resp) {
+        return resp;
+      });
+    }
+
+    self.queryReligion = function (searchText) {
+      return religionService.getList(1, 10, searchText).then(function(resp) {
         return resp;
       });
     }
