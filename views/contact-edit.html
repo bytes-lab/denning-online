@@ -111,9 +111,20 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Occupation</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.contact.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control" placeholder="">
-              </div>
+              <md-autocomplete
+                md-selected-item="vm.contact.clsOccupation"
+                md-search-text="qsop"
+                md-items="item in vm.queryOccupation(qsop)"
+                md-item-text="item.strEnglish ? item.strEnglish: ' '"
+                md-min-length="1"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsop" class="col-1" md-highlight-flags="i">
+                  {{ item.strEnglish }}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">

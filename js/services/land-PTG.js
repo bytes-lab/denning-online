@@ -3,7 +3,7 @@ materialAdmin
   // Land PTGs
   // =========================================================================
   
-  .service('landPTGService', function($http, Auth){
+  .service('landPTGService', function ($http, Auth) {
     var service = {};
     service.landPTGs = null;
     service.getList = getList;
