@@ -57,37 +57,6 @@ materialAdmin
     };
   })
 
-  .controller('fileMatterCreateModalCtrl', function ($modalInstance, party, viewMode, fileMatterService, $scope, Auth) {
-    var self = this;
-    self.save = save;
-    self.cancel = cancel;
-    self.isDialog = true;
-    self.viewMode = viewMode;
-    self.userInfo = Auth.getUserInfo();
-
-    if (viewMode) {
-      fileMatterService.getItem(party.party.code)
-      .then(function(item){
-        self.filematter = item;
-      });                  
-    } else {
-      self.filematter = {};
-    }
-
-    function save() {
-      fileMatterService.save(self.filematter).then(function(contact) {
-        $modalInstance.close(contact);
-      })
-      .catch(function(err){
-        //Handler
-      });
-    };
-
-    function cancel() {
-      $modalInstance.close();
-    };
-  })
-
   .controller('matterCodeListCtrl', function($filter, $sce, $uibModal, NgTableParams, matterCodeService, $state) {
     var self = this;
     self.dataReady = false;

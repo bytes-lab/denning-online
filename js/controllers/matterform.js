@@ -5,8 +5,7 @@ materialAdmin
     vm.model = {};
 
     if ($stateParams.fileNo) {
-      fileMatterService.getItem($stateParams.fileNo)
-      .then(function(item){
+      fileMatterService.getItem($stateParams.fileNo).then(function (item) {
         vm.item = item;
         vm.model = item;
         
@@ -447,7 +446,6 @@ materialAdmin
           }
         ];
         
-        // vm.textAreaModel = JSON.stringify(vm.tabs, null, 4);
       });
     }
 
@@ -456,14 +454,7 @@ materialAdmin
         awesomeIsForced: false
       }
     };
-    
-    // $scope.$watch('vm.textAreaModel', function() {
-    //   try {
-    //     vm.tabs = JSON.parse(vm.textAreaModel);
-    //   } catch(exp) {
-    //   }
-    // });
-
+  
     vm.notes = function() {
       $state.go('notes.list', {fileNo: vm.item.systemNo, fileName: vm.item.primaryClient.name});
     }
