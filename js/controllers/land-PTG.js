@@ -17,15 +17,15 @@ materialAdmin
     function initializeTable () {
       //Filtering
       self.tableFilter = new NgTableParams({
-        page: 1,      
+        page: 1,
         count: 25,
         sorting: {
           name: 'asc' 
         }
       }, {
         dataset: self.data
-      })    
-    }  
+      })
+    }
   })
 
   .controller('landPTGEditCtrl', function($stateParams, landPTGService, $state) {

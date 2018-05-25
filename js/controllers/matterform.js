@@ -518,7 +518,7 @@ materialAdmin
     }
   })
 
-  .controller('matterformEditCtrl', function($filter, $stateParams, propertyService, $state, Auth, $uibModal) {
+  .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, Auth, $uibModal) {
     var self = this;
     self.copy = copy;
     self.save = save;
@@ -526,24 +526,28 @@ materialAdmin
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
-    self.openDelete = openDelete;
     self.can_edit = $state.$current.data.can_edit;
     self.create_new = $state.$current.data.can_edit;
     self.matterform = {
       selected: []
-    };
+    }
 
     self.tabList = ['Summary', 'Matter', 'Parties-S', 'Parties', 'Solicitors', 
                     'Case', 'Price', 'Loan', 'Property', 'Bank', '$', 'Date', 'Text',
                     'Templates'];
-    self.types = {};
 
-    if($stateParams.id) {
-      propertyService.getItem($stateParams.id).then(function(item){
-        self.property = item;
+    if($stateParams.code) {
+      matterFormService.getItem($stateParams.code).then(function(item){
+        self.matterForm = item;
+
+        angular.forEach(JSON.parse(item.jsonTabs), function(value, key) {
+          self.matterform[value.TabName] = true;
+          self.matterform.selected.push(value.TabName);
+        })
+        console.log(self.matterForm);
       });
     } else {
-      self.property = {};
+      self.matterForm = {};
     }
     
     self.addTab = function (tab) {
@@ -567,51 +571,32 @@ materialAdmin
       self.create_new = true;
       self.can_edit = true;
       
-      delete self.property.taxFileNo;
+      delete self.matterForm.code;
+      delete self.matterForm.strDisplayName;
     }
 
     function save() {
-      propertyService.save(self.property).then(function(property) {
-        self.property = property;
-        $state.go('properties.edit', {'id': property.code});
-      });
+      var selected = [];
+      var i = 0;
+      angular.forEach(self.matterform.selected, function(value, key) {
+        selected.push({
+          TabName: value,
+          Title: value,
+          Ordering: ++i
+        })
+      })
+
+      self.matterForm.jsonTabs = JSON.stringify(selected);
+      console.log(self.matterForm);
+      // matterFormService.save(self.matterForm).then(function(matterform) {
+      //   self.matterForm = matterform;
+      //   $state.go('matter-forms.edit', {'code': matterform.code});
+      // });
     }
 
     function cancel() {
-      $state.go('properties.list');
+      $state.go('matter-forms.list');
     }
-
-    angular.forEach(self.refList, function (value, key) {
-      propertyService.getTypeList(value).then(function(data) {
-        self.types[value] = data;
-      });
-    });
-
-    //Create Modal
-    function modalInstances1(animation, size, backdrop, keyboard, property) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'propertyDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          property: function () {
-            return property;
-          }, 
-          on_list: function () {
-            return false;
-          }
-        }
-      });
-    }
-
-    //Prevent Outside Click
-    function openDelete(event, property) {
-      event.stopPropagation();
-      modalInstances1(true, '', 'static', true, property)
-    };
   })
 
   .controller('matterformListCtrl', function($uibModal, NgTableParams, matterFormService, Auth, $state) {
