@@ -518,7 +518,7 @@ materialAdmin
 
     self.tabList = ['Summary', 'Matter', 'Parties-S', 'Parties', 'Solicitors', 
                     'Case', 'Price', 'Loan', 'Property', 'Bank', '$', 'Date', 'Text',
-                    'Templates'];
+                    'Template'];
 
     if($stateParams.code) {
       matterFormService.getItem($stateParams.code).then(function(item){
@@ -528,7 +528,6 @@ materialAdmin
           self.matterform[value.TabName] = true;
           self.matterform.selected.push(value.TabName);
         })
-        console.log(self.matterForm);
       });
     } else {
       self.matterForm = {};
@@ -571,11 +570,10 @@ materialAdmin
       })
 
       self.matterForm.jsonTabs = JSON.stringify(selected);
-      console.log(self.matterForm);
-      // matterFormService.save(self.matterForm).then(function(matterform) {
-      //   self.matterForm = matterform;
-      //   $state.go('matter-forms.edit', {'code': matterform.code});
-      // });
+      matterFormService.save(self.matterForm).then(function(matterform) {
+        self.matterForm = matterform;
+        $state.go('matter-forms.edit', {'code': matterform.code});
+      });
     }
 
     function cancel() {

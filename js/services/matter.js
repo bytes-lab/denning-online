@@ -158,5 +158,22 @@ materialAdmin
       });    
     }
 
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
+      delete entity.dtDateEntered;
+      delete entity.dtDateUpdated;
+
+      console.log(entity);
+
+      return $http({
+        method: method,
+        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm',
+        headers: Auth.isAuthenticated(),
+        data: entity
+      }).then(function(response) {
+        return response.data;
+      });
+    }
+
     return service;
   })
