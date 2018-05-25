@@ -1,20 +1,17 @@
 materialAdmin
-  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state) {
+  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService) {
     var vm = this;
-    vm.onSubmit = onSubmit;    
+    vm.onSubmit = onSubmit;
     vm.model = {};
 
     if ($stateParams.fileNo) {
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
         vm.item = item;
         vm.model = item;
-        
-        vm.tabs = [
-          {
-            "label": "Summary",
+        vm.tabDict = {
+          "Summary": {
           },
-          {
-            "label": "Matter",
+          "Matter": {
             "groups": [
               {
                 "key": "file-info",
@@ -33,8 +30,7 @@ materialAdmin
               }
             ]
           },
-          {
-            "label": "Parties-S",
+          "Parties-S": {
             "groups": [
               {
                 "key": "vendor-group",
@@ -143,8 +139,7 @@ materialAdmin
               }
             ]
           },
-          {
-            "label": "Parties",
+          "Parties": {
             "groups": [
               {
                 "key": "vendor-group11",
@@ -253,8 +248,7 @@ materialAdmin
               }
             ]
           },
-          {
-            "label": "Solicitors",
+          "Solicitors": {
             "groups": [
               {
                 "key": "vendor-group111",
@@ -318,8 +312,7 @@ materialAdmin
               }
             ]
           },
-          {
-            "label": "Case",
+          "Case": {
             "groups": [
               {
                 "key": "case-info",
@@ -333,8 +326,7 @@ materialAdmin
               }
             ]
           },
-          {
-            "label": "Price",
+          "Price": {
             "groups": [
               {
                 "key": "price-info",
@@ -348,8 +340,7 @@ materialAdmin
               }
             ]
           },        
-          {
-            "label": "Loan",
+          "Loan": {
             "groups": [
               {
                 "key": "loan-info",
@@ -394,8 +385,7 @@ materialAdmin
 
             ]
           }, 
-          {
-            "label": "Property",
+          "Property": {
             "groups": [
               {
                 "key": "property-group1",
@@ -414,20 +404,15 @@ materialAdmin
               }
             ]
           },
-          {
-            "label": "Bank",
+          "Bank": {
           },
-          {
-            "label": "$",
+          "$": {
           },
-          {
-            "label": "Date",
+          "Date": {
           },
-          {
-            "label": "Text",
+          "Text": {
           },
-          {
-            "label": "Templates",
+          "Template": {
             "groups": [
               {
                 "key": "gen-docs-group",
@@ -444,8 +429,18 @@ materialAdmin
               }
             ]
           }
-        ];
-        
+        };
+
+        matterFormService.getItem(item.clsMatterCode.strFormName).then(function(item){
+          vm.matterForm = item;
+          vm.tabs = [];
+          console.log(JSON.parse(item.jsonTabs));
+          angular.forEach(JSON.parse(item.jsonTabs), function(value, key) {
+            var item = vm.tabDict[value.TabName];
+            item['label'] = value.Title
+            vm.tabs.push(item);
+          })
+        });
       });
     }
 
@@ -454,15 +449,15 @@ materialAdmin
         awesomeIsForced: false
       }
     };
-  
+
     vm.notes = function() {
       $state.go('notes.list', {fileNo: vm.item.systemNo, fileName: vm.item.primaryClient.name});
     }
-    
+
     vm.accounts = function() {
       $state.go('accounts.list', {fileNo: vm.item.systemNo, fileName: vm.item.primaryClient.name});
     }
-    
+
     vm.openFolder = function() {
       $state.go('folders.list', {id: vm.item.systemNo, type: 'matter'});
     }
