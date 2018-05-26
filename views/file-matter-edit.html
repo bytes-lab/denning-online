@@ -388,16 +388,16 @@
 
       <md-autocomplete
         md-selected-item="model.clsPrimaryClient"
-        md-search-text="searchText"
-        md-items="item in queryContacts(searchText)"
-        md-item-text="item.name+' ( '+item.IDNo+' )'"
+        md-search-text="qspc"
+        md-items="item in queryContacts(qspc)"
+        md-item-text="item.strName+' ( '+item.code+' )'"
         md-min-length="1"
         md-autoselect="false"
         class="default-input"
         style="width:72%">
       <md-item-template>
-        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
-        <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+        <span md-highlight-text="qspc" class="col-1" md-highlight-flags="i">{{item.strName}}</span>
+        <span md-highlight-text="qspc" md-highlight-flags="i">{{item.code}}</span>
       </md-item-template>
       </md-autocomplete>
 

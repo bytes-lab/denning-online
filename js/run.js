@@ -73,7 +73,7 @@ materialAdmin
     }    
     
     function getContacts(page, pagesize, keyword) {
-      return contactService.getList(page, pagesize, keyword).then(function(resp) {
+      return contactService.getCustomerList(page, pagesize, keyword).then(function(resp) {
         return resp.data;
       });
     }
@@ -338,7 +338,7 @@ materialAdmin
         }
 
         $scope.viewContact = function(party) {
-          if (party.party) {
+          if (party) {
             $scope.contactDialog(party, true);
           } else {
             alert('Please select a party.')

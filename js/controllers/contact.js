@@ -253,7 +253,7 @@ materialAdmin
     };
   })
 
-  .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, contactService, Auth) {
+  .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, contactService, IRDBranchService, Auth) {
     var self = this;
     self.save = save;
     self.cancel = cancel;
@@ -264,8 +264,7 @@ materialAdmin
     self.can_edit = !viewMode;
 
     if (viewMode) {
-      contactService.getItem(party.party.code)
-      .then(function(item){
+      contactService.getItem(party.code).then(function(item){
         self.contact = item;
       });
     } else {
@@ -276,9 +275,11 @@ materialAdmin
       self.Salutations = data;
     });
 
-    contactService.getIRDBranchList().then(function(data) {
-      self.IRDBranches = data;
-    });
+    self.queryIRDBranch = function (searchText) {
+      return IRDBranchService.getList(1, 10, searchText).then(function(resp) {
+        return resp;
+      });
+    }
 
     self.queryFields = function (field, searchText) {
       return self[field].filter(function(c) {
