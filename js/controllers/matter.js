@@ -105,6 +105,7 @@ materialAdmin
     self.partyLabels = ['Client', 'Vendor', 'Purchaser', 'Borrower', 'Guarantor', 'Plaintiff', 'Defendant', 'Assignor', 'Assignee, Financing Bank', 'Chargee / Assignee Bank', 'Landlord', 'Tenant', 'Lessor', 'Lessee', 'First Party', 'Second Party', 'Third Party', 'Fourth Party Fifth Party', 'Sixth Party'];
     self.lawyerLabels = ['Vendor Solicitors', 'Purchaser Solicitors', 'Bank Solicitors', 'Chargor Solicitors', 'Plaintiff Solicitors', 'Defendant Solicitors', 'Third Party Solicitors', 'Appellant Solicitors', 'Respondent Solicitors'];
     self.bankLabels = ['Chargee Bank', 'Financing Bank', 'Stakeholder Bank', 'Developer HDA Bank'];
+    self.mattercode = {};
 
     $("#back-top").hide();
     $(window).scroll(function() {
@@ -129,14 +130,25 @@ materialAdmin
     };
 
     if ($stateParams.id) {
-      matterCodeService.getItem($stateParams.id)
-      .then(function(item){
+      matterCodeService.getItem($stateParams.id).then(function(item){
         self.matterCode = item;
+        
+        angular.forEach(JSON.parse(item.jsonFieldLabels), function(value, key) {
+          self.mattercode[value.Field] = value;
+        })        
       });
     } else {
       self.matterCode = {};
     }
 
+    self.range = function(min, max, step) {
+        step = step || 1;
+        var input = [];
+        for (var i = min; i <= max; i += step) {
+            input.push(i);
+        }
+        return input;
+    };
 
     self.new_ = function new_() {
       self.matterCode = {};
@@ -152,12 +164,15 @@ materialAdmin
     }
 
     function save() {
-      contactService.save(self.matterCode).then(function(matterCode) {
-        self.matterCode = matterCode;
-        $state.go('matter-codes.edit', {'id': matterCode.code});
+      var selected = [];
+      angular.forEach(self.mattercode, function(value, key) {
+        selected.push(value);
       })
-      .catch(function(err){
-        //Handler
+
+      self.matterCode.jsonFieldLabels = JSON.stringify(selected);
+      matterCodeService.save(self.matterCode).then(function(mattercode) {
+        self.matterCode = mattercode;
+        $state.go('matter-codes.edit', {'code': mattercode.code});
       });
     }
 
