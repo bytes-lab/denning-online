@@ -78,6 +78,12 @@ materialAdmin
       });
     }
 
+    function getStaffs(page, pagesize, keyword) {
+      return contactService.getStaffList(1, 10, keyword).then(function(resp) {
+        return resp.data;
+      });
+    }
+
     function getPresetBills(page, pagesize, keyword) {
       return presetbillService.getTableList(page, pagesize, keyword).then(function(resp) {
         return resp;
@@ -364,6 +370,10 @@ materialAdmin
 
         $scope.queryContacts = function(searchText) {
           return getContacts(1, 10, searchText);
+        }
+
+        $scope.queryStaffs = function (searchText) {
+          return getStaffs(1, 10, searchText);
         }
 
         $scope.queryCodes = function(searchText) {
