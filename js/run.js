@@ -20,7 +20,7 @@ materialAdmin
     });
   })
 
-  .run(function(formlyConfig, contactService, propertyService, legalFirmService) {
+  .run(function(formlyConfig, contactService, propertyService, legalFirmService, presetbillService) {
     var attributes = [
       'date-disabled',
       'custom-class',
@@ -75,6 +75,12 @@ materialAdmin
     function getContacts(page, pagesize, keyword) {
       return contactService.getCustomerList(page, pagesize, keyword).then(function(resp) {
         return resp.data;
+      });
+    }
+
+    function getPresetBills(page, pagesize, keyword) {
+      return presetbillService.getTableList(page, pagesize, keyword).then(function(resp) {
+        return resp;
       });
     }
 
@@ -355,11 +361,13 @@ materialAdmin
         }
 
         $scope.queryCodes = function(searchText) {
-          return matterCodeService.getList().then(function(data) {
-            return data.filter(function(c) {
-              return c.strDescription.search(new RegExp(searchText, "i")) > -1 || c.code.search(new RegExp(searchText, "i")) > -1;
-            });
+          return matterCodeService.getList(1, 10, searchText).then(function(data) {
+            return data;            
           });
+        }
+
+        $scope.queryBills = function (searchText) {
+          return getPresetBills(1, 10, searchText);
         }
 
         legalFirmService.getList().then(function(resp) {

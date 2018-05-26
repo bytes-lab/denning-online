@@ -87,43 +87,39 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Billing Code 1</dt>
             <dd>
-              <div class="fg-line">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.clsPresetBill.code"
-                  md-search-text="qpsb1"
-                  md-items="item in vm.queryBills(qpsb1)"
-                  md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
-                  md-min-length="1"
-                  md-autoselect="false"
-                  class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-                  <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.description}}</span>
-                </md-item-template>
-                </md-autocomplete>
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.matterCode.clsPresetBill.code"
+                md-search-text="qpsb1"
+                md-items="item in vm.queryBills(qpsb1)"
+                md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
+                md-min-length="1"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.description}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Billing Code 2</dt>
             <dd>
-              <div class="fg-line">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.clsPresetBill1.code"
-                  md-search-text="qpsb2"
-                  md-items="item in vm.queryBills(qpsb2)"
-                  md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
-                  md-min-length="1"
-                  md-autoselect="false"
-                  class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="qpsb2" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-                  <span md-highlight-text="qpsb2" md-highlight-flags="i">{{item.description}}</span>
-                </md-item-template>
-                </md-autocomplete>
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.matterCode.clsPresetBill1.code"
+                md-search-text="qpsb2"
+                md-items="item in vm.queryBills(qpsb2)"
+                md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
+                md-min-length="1"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qpsb2" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+                <span md-highlight-text="qpsb2" md-highlight-flags="i">{{item.description}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>
