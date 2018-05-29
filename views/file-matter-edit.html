@@ -1,7 +1,7 @@
 <div class="container">
   <div class="card">
   <div class="card-body card-padding">
-    <h2>Preview</h2>
+    <h2 class="c-purple p-b-15">{{ vm.model.strFileNo1 }} ( {{ vm.model.clsPrimaryClient.strName }} )</h2>
     <div class="preview">
     <section layout="row" layout-sm="column" layout-align="start center" layout-wrap style="margin-left: -8px;">
       <div class="col-sm-12 col-md-10 m-b-25">
@@ -419,22 +419,8 @@
   <h4 class="p-l-20 p-b-10 text-muted">References</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Ref 2 (Manual)</label>
-    <select class="form-control" ng-model="model[options.key+'_solicitor']" style="width:45%;">
-      <option ng-repeat="item in legalFirms" ng-value="item" ng-selected="model[options.key+'_solicitor'].code == item.code">
-      {{item.name}}
-      </option>
-    </select>
-    <a class="btn btn-primary short-btn" target="_new" ui-sref="legal-firms.edit({id: model[options.key+'_solicitor'].code})" title="See detail of solicitor">
-      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-    </a>
-    <div class="checkbox" style="margin: 6px 0 6px 18px;">
-      <label>
-      <input type="checkbox" ng-model="represent_this" ng-click="representChange()">
-      <i class="input-helper"></i>
-      Representing this party
-      </label>
-    </div>
+      <label class="form-control attr-label">Ref 2 (Manual)</label>
+      <input type="text" class="form-control" ng-model="model.strFileNo2" style="width:45%;">
     </div>
   </div>
   <div class="clearfix"></div>
@@ -457,12 +443,6 @@
       <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
     </md-item-template>
     </md-autocomplete>
-    </div>
-  </div>
-  <div class="form-group col-md-12">
-    <div style="display: flex;">
-    <label class="form-control attr-label">Matter Type</label>
-    <input type="text" class="form-control" ng-model="model.clsMatterCode.type" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
