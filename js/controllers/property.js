@@ -177,7 +177,7 @@ materialAdmin
     self.types = {};
 
     if (viewMode) {
-      propertyService.getItem(property.property.code)
+      propertyService.getItem(property.code)
       .then(function(item){
         self.property = item;
       });

@@ -274,18 +274,10 @@ materialAdmin
         }
 
         $scope.viewProperty = function(property) {
-          if (property.property) {
+          if (property && property.code) {
             $scope.propertyDialog(property, true);
           } else {
             alert('Please select a property.')
-          }
-        }
-
-        $scope.viewLegalFirm = function(property) {
-          if (property) {
-            $scope.legalfirmDialog(property, true);
-          } else {
-            alert('Please select a solicitor.')
           }
         }
 
