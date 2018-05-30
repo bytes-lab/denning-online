@@ -246,16 +246,26 @@ materialAdmin
     formlyConfig.setType({
       name: 'property',
       templateUrl: 'property.html',
-      controller: function ($scope, propertyService, Auth, $uibModal) {
-        $scope.userInfo = Auth.getUserInfo();
-
-        if (!$scope.model[$scope.options.key]) {
-          $scope.model[$scope.options.key] = [
-          {
-            "property": "",
-            "share": ""
-          }];
+      controller: function ($scope, propertyService, Auth, $uibModal) {        
+        function initProperty(item) {
+          if (item && item.code) {
+            propertyService.getItem(item.code)
+            .then(function(item) {
+              $scope.property = item;
+            });
+          } else {
+            $scope.property = {};
+          }          
         }
+
+        initProperty($scope.model.clsP1);
+
+        $scope.propertyChange = function (item, n) {
+          console.log(item, n);
+          if (n == 1) {
+            initProperty(item);
+          }
+        };
 
         $scope.range = function(min, max, step) {
             step = step || 1;
@@ -267,10 +277,6 @@ materialAdmin
         };
 
         $scope.addProperty = function() {
-          $scope.model[$scope.options.key].push({
-            "property": "",
-            "share": ""
-          })
         }
 
         $scope.viewProperty = function(property) {
@@ -282,9 +288,6 @@ materialAdmin
         }
 
         $scope.removeParty = function(idx) {
-          if ($scope.model[$scope.options.key].length > 1) {
-            $scope.model[$scope.options.key].splice(idx, 1);
-          }
         }
 
         $scope.queryProperties = function(searchText) {
