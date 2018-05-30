@@ -97,7 +97,7 @@ materialAdmin
     }
 
     function getProperties(page, pagesize, keyword) {
-      return propertyService.getList(page, pagesize, keyword).then(function(resp) {
+      return propertyService.getTableList(page, pagesize, keyword).then(function(resp) {
         return resp.data;
       });
     }
@@ -254,8 +254,17 @@ materialAdmin
           {
             "property": "",
             "share": ""
-          }];          
+          }];
         }
+
+        $scope.range = function(min, max, step) {
+            step = step || 1;
+            var input = [];
+            for (var i = min; i <= max; i += step) {
+                input.push(i);
+            }
+            return input;
+        };
 
         $scope.addProperty = function() {
           $scope.model[$scope.options.key].push({

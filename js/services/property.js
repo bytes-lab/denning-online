@@ -23,6 +23,16 @@ materialAdmin
       });  
     }
 
+    service.getTableList = function (page, pagesize, keyword) {
+      return $http({
+        method: 'GET',
+        url: 'http://43.252.215.81/denningwcf/v1/table/property?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        headers: Auth.isAuthenticated()
+      }).then(function(resp) {
+        return resp;
+      });  
+    };
+
     function getItem(code) {
       return $http({
         method: 'GET',
