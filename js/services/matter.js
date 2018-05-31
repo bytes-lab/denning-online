@@ -180,7 +180,9 @@ materialAdmin
       delete entity.dtDateEntered;
       delete entity.dtDateUpdated;
 
-      console.log(entity);
+      if (!entity.code || entity.code.length == 0) {
+        entity.code = 'frmFile' + entity.strDisplayName.replace(' ', '');
+      }
 
       return $http({
         method: method,
