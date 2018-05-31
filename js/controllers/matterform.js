@@ -4,10 +4,19 @@ materialAdmin
     vm.onSubmit = onSubmit;
     vm.model = {};
 
+    function getLabel(arr, key) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].JsonField == key) {
+          return arr[i].Label;
+        }
+      }
+    }
+
     if ($stateParams.fileNo) {
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
         vm.item = item;
         vm.model = item;
+        vm.matter_code = JSON.parse(item.clsMatterCode.jsonFieldLabels);
         vm.tabDict = {
           "Summary": {
           },
@@ -252,7 +261,7 @@ materialAdmin
             "groups": [
               {
                 "key": "vendor-group111",
-                "label": "Solicitors Group 1 Information",
+                "label": getLabel(vm.matter_code, 'clsLawyer1'),
                 "attrs": [
                   {
                     "key": "party12",
@@ -260,14 +269,15 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": true,
-                      "party": false
+                      "party": false,
+                      "field": "clsLawyer1"
                     }
                   }
                 ]
               },
               {
                 "key": "purchaser-group111",
-                "label": "Solicitors Group 2 Information",
+                "label": getLabel(vm.matter_code, 'clsLawyer2'),
                 "attrs": [
                   {
                     "key": "purchaser12",
@@ -275,14 +285,15 @@ materialAdmin
                     "templateOptions": {
                       "share": false,
                       "solicitor": true,
-                      "party": false
+                      "party": false,
+                      "field": "clsLawyer2"
                     }
                   }
                 ]
               },
               {
                 "key": "vendor-group13",
-                "label": "Solicitors Group 3 Information",
+                "label": getLabel(vm.matter_code, 'clsLawyer3'),
                 "attrs": [
                   {
                     "key": "party13",
@@ -290,14 +301,15 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": true,
-                      "party": false
+                      "party": false,
+                      "field": "clsLawyer3"
                     }
                   }
                 ]
               },
               {
                 "key": "vendor-group14",
-                "label": "Solicitors Group 4 Information",
+                "label": getLabel(vm.matter_code, 'clsLawyer4'),
                 "attrs": [
                   {
                     "key": "party14",
@@ -305,7 +317,8 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": true,
-                      "party": false
+                      "party": false,
+                      "field": "clsLawyer4"
                     }
                   }
                 ]

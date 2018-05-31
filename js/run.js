@@ -103,7 +103,7 @@ materialAdmin
     }
 
     function getSolicitors(page, pagesize, keyword) {
-      return legalFirmService.getList(page, pagesize, keyword).then(function(resp) {
+      return legalFirmService.getTableList(page, pagesize, keyword).then(function(resp) {
         return resp.data;
       });
     }
