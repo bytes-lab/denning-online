@@ -381,11 +381,11 @@ materialAdmin
                 ]
               },
               {
-                "key": "guaranter-group",
-                "label": "Guaranter Information",
+                "key": "guarantor-group",
+                "label": "Guarantor Information",
                 "attrs": [
                   {
-                    "key": "guaranter",
+                    "key": "guarantor",
                     "type": "contact",
                     "templateOptions": {
                       "share": true,

@@ -156,7 +156,7 @@
         <div class="clearfix"></div>
         <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">0. Pary Group C0</dt>
+            <dt class="p-t-10">1. Party Group C1-C5</dt>
             <dd>
               <div class="fg-line">
                 <md-autocomplete
@@ -176,7 +176,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">1. Party Group C1-C5</dt>
+            <dt class="p-t-10">2. Party Group C6-C10</dt>
             <dd>
               <div class="fg-line">
                 <md-autocomplete
@@ -196,7 +196,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">2. Party Group C6-C10</dt>
+            <dt class="p-t-10">3. Party Group C11-C15</dt>
             <dd>
               <div class="fg-line">
                 <md-autocomplete
@@ -215,8 +215,10 @@
               </div>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">3. Party Group C11-C15</dt>
+            <dt class="p-t-10">4. Party Group C16-C20</dt>
             <dd>
               <div class="fg-line">
                 <md-autocomplete
@@ -235,10 +237,8 @@
               </div>
             </dd>
           </dl>
-        </div>
-        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">4. Party Group C16-C20</dt>
+            <dt class="p-t-10">5. Party Group C21</dt>
             <dd>
               <div class="fg-line">
                 <md-autocomplete
@@ -258,7 +258,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">5. Party Group C21-C25</dt>
+            <dt class="p-t-10">6. Party Group C22-C25</dt>
             <dd>
               <div class="fg-line">
                 <md-autocomplete
@@ -272,26 +272,6 @@
                   class="default-input">
                 <md-item-template>
                   <span md-highlight-text="qp6" class="col-1" md-highlight-flags="i">{{ item }}</span>
-                </md-item-template>
-                </md-autocomplete>
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">6. Party Group C26-C30</dt>
-            <dd>
-              <div class="fg-line">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupC7"
-                  md-search-text="qp7"
-                  md-items="item in vm.queryList(vm.partyLabels, qp7)"
-                  md-item-text="item"
-                  md-min-length="1"
-                  md-autoselect="false"
-                  class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="qp7" class="col-1" md-highlight-flags="i">{{ item }}</span>
                 </md-item-template>
                 </md-autocomplete>
               </div>
