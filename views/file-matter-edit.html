@@ -66,29 +66,29 @@
 
 <!-- CONTACT GROUP -->
 <script type="text/ng-template" id="contact.html">  
-  <div class="form-group col-md-12" ng-repeat="party in model[options.key]" ng-if="to.party">
+  <div class="form-group col-md-12" ng-repeat="n in range(to.c_start, to.c_end)" ng-if="to.party">
     <div style="display: flex;">
       <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
 
       <md-autocomplete
-        md-selected-item="party.party"
+        md-selected-item="model['clsC'+n]"
         md-search-text="searchText"
         md-items="item in queryContacts(searchText)"
-        md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
+        md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
         md-min-length="1"
         md-autoselect="false"
         class="default-input"
         style="width:72%">
       <md-item-template>
-        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
-        <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.strName}}</span>
+        <span md-highlight-text="searchText" md-highlight-flags="i">{{item.strIDNo}}</span>
       </md-item-template>
       </md-autocomplete>
 
-      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(party, false)">
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(model['clsC'+n], false)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
       </a>
-      <a class="btn btn-primary short-btn" ng-click="viewContact(party)">
+      <a class="btn btn-primary short-btn" ng-click="viewContact(model['clsC'+n])">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
       </a>
       <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />

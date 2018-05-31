@@ -152,7 +152,7 @@ materialAdmin
             "groups": [
               {
                 "key": "vendor-group11",
-                "label": vm.model.clsMatterCode.strGroupL1,
+                "label": vm.model.clsMatterCode.strGroupC1,
                 "attrs": [
                   {
                     "key": "party11",
@@ -160,14 +160,16 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": false,
-                      "party": true
+                      "party": true,
+                      "c_start": 1,
+                      "c_end": 5
                     }
                   }
                 ]
               },
               {
                 "key": "purchaser-group11",
-                "label": vm.model.clsMatterCode.strGroupL2,
+                "label": vm.model.clsMatterCode.strGroupC2,
                 "attrs": [
                   {
                     "key": "purchaser11",
@@ -175,14 +177,16 @@ materialAdmin
                     "templateOptions": {
                       "share": false,
                       "solicitor": false,
-                      "party": true
+                      "party": true,
+                      "c_start": 6,
+                      "c_end": 10
                     }
                   }
                 ]
               },
               {
                 "key": "vendor-group31",
-                "label": vm.model.clsMatterCode.strGroupL3,
+                "label": vm.model.clsMatterCode.strGroupC3,
                 "attrs": [
                   {
                     "key": "party31",
@@ -190,14 +194,16 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": false,
-                      "party": true
+                      "party": true,
+                      "c_start": 11,
+                      "c_end": 15
                     }
                   }
                 ]
               },
               {
                 "key": "vendor-group41",
-                "label": "Party Group 4 Information",
+                "label": vm.model.clsMatterCode.strGroupC4,
                 "attrs": [
                   {
                     "key": "party41",
@@ -205,14 +211,16 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": false,
-                      "party": true
+                      "party": true,
+                      "c_start": 16,
+                      "c_end": 20
                     }
                   }
                 ]
               },
               {
                 "key": "vendor-group51",
-                "label": "Party Group 5 Information",
+                "label": vm.model.clsMatterCode.strGroupC5,
                 "attrs": [
                   {
                     "key": "party51",
@@ -220,14 +228,16 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": false,
-                      "party": true
+                      "party": true,
+                      "c_start": 21,
+                      "c_end": 21
                     }
                   }
                 ]
               },
               {
                 "key": "vendor-group61",
-                "label": "Party Group 6 Information",
+                "label": vm.model.clsMatterCode.strGroupC6,
                 "attrs": [
                   {
                     "key": "party61",
@@ -235,22 +245,9 @@ materialAdmin
                     "templateOptions": {
                       "share": true,
                       "solicitor": false,
-                      "party": true
-                    }
-                  }
-                ]
-              },
-              {
-                "key": "vendor-group71",
-                "label": "Party Group 7 Information",
-                "attrs": [
-                  {
-                    "key": "party71",
-                    "type": "contact",
-                    "templateOptions": {
-                      "share": true,
-                      "solicitor": false,
-                      "party": true
+                      "party": true,
+                      "c_start": 22,
+                      "c_end": 25
                     }
                   }
                 ]

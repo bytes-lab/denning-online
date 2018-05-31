@@ -141,6 +141,15 @@ materialAdmin
           }
         }
 
+        $scope.range = function(min, max, step) {
+            step = step || 1;
+            var input = [];
+            for (var i = min; i <= max; i += step) {
+                input.push(i);
+            }
+            return input;
+        };
+
         if (!$scope.model[$scope.options.key]) {
           $scope.model[$scope.options.key] = [
           {
@@ -163,7 +172,7 @@ materialAdmin
         }
 
         $scope.viewContact = function(party) {
-          if (party.party) {
+          if (party) {
             $scope.contactDialog(party, true);
           } else {
             alert('Please select a party.')
