@@ -39,7 +39,7 @@
       <div class="col-md-9">
         <div class="pull-right">
           <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Save</button>
-          <button type="button" class="btn btn-default m-l-15 m-r-20" ng-click="vm.resetAllForms()">Cancel</button>          
+          <button type="button" class="btn btn-default m-l-15 m-r-20" ng-click="vm.cancel()">Cancel</button>
         </div>
       </div>
     </form>
@@ -77,17 +77,16 @@
         <label for="{{::id}}_party_{{$index}}" class="form-control attr-label"> Bank Branch</label>
 
         <md-autocomplete
-          md-selected-item="model['clsBank'+(n+to.base)].clsBankCode"
+          md-selected-item="model['clsBank'+(n+to.base)]"
           md-search-text="searchText"
           md-items="item in queryBanks(searchText)"
-          md-item-text="item.code ? item.code+' - '+item.strCompanyNo: ' '"
+          md-item-text="item.strName ? item.strName: ' '"
           md-min-length="1"
           md-autoselect="false"
           class="default-input"
           style="width:72%">
         <md-item-template>
-          <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-          <span md-highlight-text="searchText" md-highlight-flags="i">{{item.strCompanyNo}}</span>
+          <span md-highlight-text="searchText" md-highlight-flags="i">{{item.strName}}</span>
         </md-item-template>
         </md-autocomplete>
 
@@ -114,31 +113,31 @@
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">CAC Name</label>
-      <input type="text" class="form-control" ng-model="model['clsBank'+n].clsBankCode.strRegAdd1" style="width:45%;">
+      <input type="text" class="form-control" readonly="" ng-model="model['clsBank'+n].clsCACCode.strName" style="width:45%;">
       </div>
     </div>    
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">PA Name</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank'+n].clsBankCode.strRegAdd2" style="width:45%;">
+      <input type="text" class="form-control" ng-model="model['clsBank'+n].clsBankCode.strRegAdd2" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Bank Ref</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank'+n].clsBankCode.strRegAdd3" style="width:45%;">
+      <input type="text" class="form-control" ng-model="model['clsBank'+n].clsBankCode.strRegAdd3" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Bank Instruction Date</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank'+n].clsBankCode.strRegAdd4" style="width:45%;">
+      <input type="text" class="form-control" ng-model="model['clsBank'+n].clsBankCode.strRegAdd4" style="width:45%;">
       </div>
     </div>    
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Letter of Offer Date</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank'+n].clsBankCode.strRegAdd5" style="width:45%;">
+      <input type="text" class="form-control" ng-model="model['clsBank'+n].clsBankCode.strRegAdd5" style="width:45%;">
       </div>
     </div>    
   </div>  

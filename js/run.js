@@ -20,7 +20,7 @@ materialAdmin
     });
   })
 
-  .run(function(formlyConfig, contactService, propertyService, legalFirmService, presetbillService, spaChecklistService) {
+  .run(function(formlyConfig, contactService, propertyService, legalFirmService, presetbillService, spaChecklistService, bankBranchService) {
     var attributes = [
       'date-disabled',
       'custom-class',
@@ -74,6 +74,12 @@ materialAdmin
     
     function getContacts(page, pagesize, keyword) {
       return contactService.getCustomerList(page, pagesize, keyword).then(function(resp) {
+        return resp.data;
+      });
+    }
+
+    function getBankBranches(page, pagesize, keyword) {
+      return bankBranchService.getTableList(page, pagesize, keyword).then(function(resp) {
         return resp.data;
       });
     }
@@ -722,7 +728,7 @@ materialAdmin
       templateUrl: 'bank.html',
       controller: function ($scope) {
         $scope.queryBanks = function(searchText) {
-          return {};
+          return getBankBranches(1, 10, searchText)
         };
 
         $scope.range = function(min, max, step) {

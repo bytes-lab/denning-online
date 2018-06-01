@@ -1,7 +1,7 @@
 materialAdmin
   .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService) {
     var vm = this;
-    vm.onSubmit = onSubmit;
+    vm.onSubmit = save;
     vm.model = {};
 
     function getLabel(arr, key) {
@@ -537,8 +537,12 @@ materialAdmin
       });
     };
     // function definition
-    function onSubmit() {
+    function save() {
       alert(JSON.stringify(vm.model), null, 2);
+    }
+
+    vm.cancel = function () {
+      $state.go('file-matters.list');
     }
   })
 
