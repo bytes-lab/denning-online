@@ -382,11 +382,6 @@ materialAdmin
           }
         }
 
-        $scope.removeParty = function(idx) {
-          if ($scope.model[$scope.options.key].length > 1)
-            $scope.model[$scope.options.key].splice(idx, 1);
-        }
-
         $scope.queryContacts = function(searchText) {
           return getContacts(1, 10, searchText);
         }

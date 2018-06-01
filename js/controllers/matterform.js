@@ -16,6 +16,7 @@ materialAdmin
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
         vm.item = item;
         vm.model = item;
+        vm.title = 'Matter: ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
         vm.matter_code = JSON.parse(item.clsMatterCode.jsonFieldLabels);
         vm.tabDict = {
           "Summary": {
@@ -24,13 +25,13 @@ materialAdmin
             "groups": [
               {
                 "key": "file-info",
-                "label": "File Information",
+                "label": "Primary Client",
                 "attrs": [
                   {
                     "key": "matter1",
                     "type": "file",
                     "templateOptions": {
-                      "share": true,
+                      "share": false,
                       "solicitor": true,
                       "party": true
                     }
@@ -64,7 +65,7 @@ materialAdmin
                     "key": "purchaser1",
                     "type": "contact",
                     "templateOptions": {
-                      "share": false,
+                      "share": true,
                       "solicitor": true,
                       "party": true
                     }
@@ -175,7 +176,7 @@ materialAdmin
                     "key": "purchaser11",
                     "type": "contact",
                     "templateOptions": {
-                      "share": false,
+                      "share": true,
                       "solicitor": false,
                       "party": true,
                       "c_start": 6,
@@ -192,7 +193,7 @@ materialAdmin
                     "key": "party31",
                     "type": "contact",
                     "templateOptions": {
-                      "share": true,
+                      "share": false,
                       "solicitor": false,
                       "party": true,
                       "c_start": 11,
@@ -209,7 +210,7 @@ materialAdmin
                     "key": "party41",
                     "type": "contact",
                     "templateOptions": {
-                      "share": true,
+                      "share": false,
                       "solicitor": false,
                       "party": true,
                       "c_start": 16,
@@ -226,7 +227,7 @@ materialAdmin
                     "key": "party51",
                     "type": "contact",
                     "templateOptions": {
-                      "share": true,
+                      "share": false,
                       "solicitor": false,
                       "party": true,
                       "c_start": 21,
@@ -243,7 +244,7 @@ materialAdmin
                     "key": "party61",
                     "type": "contact",
                     "templateOptions": {
-                      "share": true,
+                      "share": false,
                       "solicitor": false,
                       "party": true,
                       "c_start": 22,
@@ -267,7 +268,8 @@ materialAdmin
                       "share": true,
                       "solicitor": true,
                       "party": false,
-                      "field": "clsLawyer1"
+                      "field": "clsLawyer1",
+                      "idx": 1
                     }
                   }
                 ]
@@ -283,7 +285,8 @@ materialAdmin
                       "share": false,
                       "solicitor": true,
                       "party": false,
-                      "field": "clsLawyer2"
+                      "field": "clsLawyer2",
+                      "idx": 2
                     }
                   }
                 ]
@@ -299,7 +302,8 @@ materialAdmin
                       "share": true,
                       "solicitor": true,
                       "party": false,
-                      "field": "clsLawyer3"
+                      "field": "clsLawyer3",
+                      "idx": 3
                     }
                   }
                 ]
@@ -315,7 +319,8 @@ materialAdmin
                       "share": true,
                       "solicitor": true,
                       "party": false,
-                      "field": "clsLawyer4"
+                      "field": "clsLawyer4",
+                      "idx": 4
                     }
                   }
                 ]
@@ -361,38 +366,7 @@ materialAdmin
                     "type": "loan"
                   }
                 ]
-              },
-              {
-                "key": "borrower-group",
-                "label": "Borrower Information",
-                "attrs": [
-                  {
-                    "key": "borrower",
-                    "type": "contact",
-                    "templateOptions": {
-                      "share": true,
-                      "solicitor": false,
-                      "party": true
-                    }
-                  }
-                ]
-              },
-              {
-                "key": "guarantor-group",
-                "label": "Guarantor Information",
-                "attrs": [
-                  {
-                    "key": "guarantor",
-                    "type": "contact",
-                    "templateOptions": {
-                      "share": true,
-                      "solicitor": false,
-                      "party": true
-                    }
-                  }
-                ]
               }
-
             ]
           }, 
           "Property": {
