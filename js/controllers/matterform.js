@@ -415,6 +415,36 @@ materialAdmin
             ]
           },
           "Bank": {
+            "groups": [
+              {
+                "key": "bank-info",
+                "label": "Bank 1 Information",
+                "attrs": [
+                  {
+                    "key": "bank1",
+                    "type": "bank",
+                    "templateOptions": {
+                      "numBank": 1,
+                      "base": 0
+                    }
+                  }
+                ]
+              },
+              {
+                "key": "bank-info",
+                "label": "Bank 2 Information",
+                "attrs": [
+                  {
+                    "key": "bank1",
+                    "type": "bank",
+                    "templateOptions": {
+                      "numBank": 1,
+                      "base": 1
+                    }
+                  }
+                ]
+              }
+            ]            
           },
           "$": {
           },
@@ -444,7 +474,7 @@ materialAdmin
         matterFormService.getItem(item.clsMatterCode.strFormName).then(function(item){
           vm.matterForm = item;
           vm.tabs = [];
-          console.log(JSON.parse(item.jsonTabs));
+          
           angular.forEach(JSON.parse(item.jsonTabs), function(value, key) {
             var item = vm.tabDict[value.TabName];
             item['label'] = value.Title

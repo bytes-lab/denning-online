@@ -123,7 +123,7 @@ materialAdmin
       name: 'text',
       templateUrl: 'text.html'
     });
-    
+
     // contact attribute
     formlyConfig.setType({
       name: 'contact',
@@ -712,8 +712,28 @@ materialAdmin
         legalFirmService.getList().then(function(data) {
           $scope.legalFirms = data;
           $scope.dataReady = true;
-        });           
-      }]    
+        });
+      }]
+    });
+
+    // bank group
+    formlyConfig.setType({
+      name: 'bank',
+      templateUrl: 'bank.html',
+      controller: function ($scope) {
+        $scope.queryBanks = function(searchText) {
+          return {};
+        };
+
+        $scope.range = function(min, max, step) {
+          step = step || 1;
+          var input = [];
+          for (var i = min; i <= max; i += step) {
+              input.push(i);
+          }
+          return input;
+        };        
+      }
     });
 
     // gen-doc attribute
