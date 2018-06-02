@@ -151,6 +151,31 @@
         </div>
       </div>
       <div class="clearfix"></div>
+      <h4 class="m-t-25">Staff Labels</h4>
+      <div class="row">
+        <div class="clearfix"></div>
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 2)">
+            <dt class="p-t-10">Staff label {{ n }}</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.mattercode['staff'+n].Label" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal" ng-repeat="n in vm.range(3, 4)">
+            <dt class="p-t-10">Staff label {{ n }}</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.mattercode['staff'+n].Label" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>      
+      <div class="clearfix"></div>
       <h4 class="m-t-25">Party Labels</h4>
       <div class="row">
         <div class="clearfix"></div>

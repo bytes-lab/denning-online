@@ -114,6 +114,15 @@ materialAdmin
       });
     }
 
+    function range (min, max, step) {
+      step = step || 1;
+      var input = [];
+      for (var i = min; i <= max; i += step) {
+          input.push(i);
+      }
+      return input;
+    }
+
     // set templates here
     formlyConfig.setType({
       name: 'price_w_currency',
@@ -147,34 +156,21 @@ materialAdmin
           }
         }
 
-        $scope.range = function(min, max, step) {
-            step = step || 1;
-            var input = [];
-            for (var i = min; i <= max; i += step) {
-                input.push(i);
-            }
-            return input;
+        $scope.range = function (min, max, step) {
+          return range(min, max, step);
         };
-
-        if (!$scope.model[$scope.options.key]) {
-          $scope.model[$scope.options.key] = [
-          {
-            "party": "",
-            "share": ""
-          }];          
-        }
-
-        $scope.model[$scope.options.key+'_solicitor'] = {
-          party: {}
-        };
-
-        $scope.solicitor = {};
 
         $scope.addParty = function() {
           $scope.model[$scope.options.key].push({
             "party": "",
             "share": ""
           })
+        }
+
+        $scope.removeParty = function(idx) {
+          if ($scope.model[$scope.options.key].length > 1) {
+            $scope.model[$scope.options.key].splice(idx, 1);
+          }
         }
 
         $scope.viewContact = function(party) {
@@ -190,12 +186,6 @@ materialAdmin
             $scope.legalfirmDialog(party, true);
           } else {
             alert('Please select a solicitor.')
-          }
-        }
-
-        $scope.removeParty = function(idx) {
-          if ($scope.model[$scope.options.key].length > 1) {
-            $scope.model[$scope.options.key].splice(idx, 1);
           }
         }
 

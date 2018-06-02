@@ -14,8 +14,8 @@ materialAdmin
 
     if ($stateParams.fileNo) {
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
-        vm.item = item;
         vm.model = item;
+        vm.model.tmp = {}; // temp variable
         vm.title = 'Matter: ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
         vm.matter_code = JSON.parse(item.clsMatterCode.jsonFieldLabels);
         vm.tabDict = {
@@ -231,7 +231,7 @@ materialAdmin
                       "solicitor": false,
                       "party": true,
                       "c_start": 21,
-                      "c_end": 21
+                      "c_end": 25
                     }
                   }
                 ]
@@ -247,8 +247,8 @@ materialAdmin
                       "share": false,
                       "solicitor": false,
                       "party": true,
-                      "c_start": 22,
-                      "c_end": 25
+                      "c_start": 26,
+                      "c_end": 26
                     }
                   }
                 ]
@@ -465,19 +465,19 @@ materialAdmin
     };
 
     vm.notes = function() {
-      $state.go('notes.list', {fileNo: vm.item.systemNo, fileName: vm.item.primaryClient.name});
+      $state.go('notes.list', {fileNo: vm.model.systemNo, fileName: vm.model.primaryClient.name});
     }
 
     vm.accounts = function() {
-      $state.go('accounts.list', {fileNo: vm.item.systemNo, fileName: vm.item.primaryClient.name});
+      $state.go('accounts.list', {fileNo: vm.model.systemNo, fileName: vm.model.primaryClient.name});
     }
 
     vm.openFolder = function() {
-      $state.go('folders.list', {id: vm.item.systemNo, type: 'matter'});
+      $state.go('folders.list', {id: vm.model.systemNo, type: 'matter'});
     }
 
     vm.payments = function() {
-      $state.go('payment-records.list', {fileNo: vm.item.systemNo});
+      $state.go('payment-records.list', {fileNo: vm.model.systemNo});
     };
 
     vm.upload = function() {
@@ -488,7 +488,7 @@ materialAdmin
 
     vm.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
       var info = {
-        "fileNo1": vm.item.systemNo,
+        "fileNo1": vm.model.systemNo,
         "documents":[
           {
             "FileName": fileObj.filename,

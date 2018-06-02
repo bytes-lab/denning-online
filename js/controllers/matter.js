@@ -135,7 +135,12 @@ materialAdmin
         
         angular.forEach(JSON.parse(item.jsonFieldLabels), function(value, key) {
           self.mattercode[value.Field] = value;
-        })        
+        })
+
+        self.mattercode.staff1 = {'Label': 'Partner'};
+        self.mattercode.staff2 = {'Label': 'L.A.'};
+        self.mattercode.staff3 = {'Label': 'Clerk in charge'};
+        self.mattercode.staff4 = {'Label': 'Team'};
       });
     } else {
       self.matterCode = {};

@@ -38,8 +38,11 @@
       <div class="clearfix"></div>
       <div class="col-md-9">
         <div class="pull-right">
-          <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Save</button>
-          <button type="button" class="btn btn-default m-l-15 m-r-20" ng-click="vm.cancel()">Cancel</button>
+          <button class="btn btn-default btn-icon-text m-l-5 waves-effect"><i class="zmdi zmdi-arrow-back"></i> Back</button>
+          <button class="btn btn-default btn-icon-text m-l-5 waves-effect"><i class="zmdi zmdi-long-arrow-up"></i> Up</button>
+          <button class="btn btn-default btn-icon-text m-l-5 waves-effect"><i class="zmdi zmdi-arrow-forward"></i> Forward</button>
+          <button type="submit" class="btn btn-primary m-l-5 submit-button" ng-disabled="vm.form.$invalid" style="margin-top: 2px;">Save</button>
+          <button type="button" class="btn btn-default m-l-5 m-r-20" ng-click="vm.cancel()">Cancel</button>
         </div>
       </div>
     </form>
@@ -144,8 +147,8 @@
 </script>
 
 <!-- CONTACT GROUP -->
-<script type="text/ng-template" id="contact.html">  
-  <div class="form-group col-md-12" ng-repeat="n in range(to.c_start, to.c_end)" ng-if="to.party">
+<script type="text/ng-template" id="contact.html">
+  <div class="form-group col-md-12" ng-repeat="n in range(to.c_start, to.c_end)" ng-if="to.party && (model['clsC'+n].code || model.tmp['clsC'+n])">
     <div style="display: flex;">
       <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
 
@@ -170,16 +173,16 @@
       <a class="btn btn-primary short-btn" ng-click="viewContact(model['clsC'+n])">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
       </a>
-      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="party.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
+      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="model['strShareC'+n]" ng-if="to.share" style="width: 15%;" placeholder="Share" />
       <a class="btn btn-danger short-btn" ng-click="removeParty($index)">
         <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span>
       </a>
     </div>
   </div>
   <div style="margin-bottom: 30px;" ng-if="to.party">
-    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty()" title="Add a new party to group">
+    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty(to.c_start, to.c_end)" title="Add a new party to group">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party
-    </a>  
+    </a>
   </div>
   <div ng-if="to.solicitor">
     <div class="form-group col-md-12">
@@ -270,7 +273,7 @@
       <a class="btn btn-primary short-btn" ng-click="viewProperty(model['clsP'+n])">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of property"></span>
       </a>
-      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="property.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
+      <input class="form-control" ng-model="model['strShare'+n]" ng-if="to.share" style="width: 15%;" placeholder="Share" />
       <a class="btn btn-danger short-btn" ng-click="removeParty($index)">
         <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this property from group"></span>
       </a>
