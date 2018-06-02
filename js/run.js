@@ -188,6 +188,34 @@ materialAdmin
           $scope.model['clsC'+last] = {};
         }
 
+        $scope.addParty = function(start, end) {
+          var flag = false;
+          for(var i = start; i <= end; i++) {
+            if (!$scope.model.tmp['clsC'+i] && !$scope.model['clsC'+i].code) {
+              $scope.model.tmp['clsC'+i] = true;
+              flag = true;
+              break;
+            }
+          }
+          if (!flag) {
+            alert('Sorry, you cannot add more party!');
+          }
+        }
+
+        $scope.removeParty = function(idx, start, end) {
+          var last = end;
+          for(var i = idx; i < end; i++) {           // shift 
+            if (!$scope.model['clsC'+(i+1)].code && !$scope.model.tmp['clsC'+(i+1)]) {
+              last = i;
+              break;
+            }
+            $scope.model['clsC'+i] = $scope.model['clsC'+(i+1)];
+            $scope.model.tmp['clsC'+i] = $scope.model.tmp['clsC'+(i+1)];
+          }
+          $scope.model.tmp['clsC'+last] = false;
+          $scope.model['clsC'+last] = {};
+        }
+
         $scope.viewContact = function(party) {
           if (party) {
             $scope.contactDialog(party, true);
@@ -281,22 +309,41 @@ materialAdmin
         initProperty($scope.model.clsP1);
 
         $scope.propertyChange = function (item, n) {
-          console.log(item, n);
           if (n == 1) {
             initProperty(item);
           }
         };
 
-        $scope.range = function(min, max, step) {
-            step = step || 1;
-            var input = [];
-            for (var i = min; i <= max; i += step) {
-                input.push(i);
-            }
-            return input;
+        $scope.range = function (min, max, step) {
+            return range(min, max, step);
         };
 
-        $scope.addProperty = function() {
+        $scope.addProperty = function(start, end) {
+          var flag = false;
+          for(var i = start; i <= end; i++) {
+            if (!$scope.model.tmp['clsP'+i] && !$scope.model['clsP'+i].code) {
+              $scope.model.tmp['clsP'+i] = true;
+              flag = true;
+              break;
+            }
+          }
+          if (!flag) {
+            alert('Sorry, you cannot add more property!');
+          }
+        }
+
+        $scope.removeProperty = function(idx, start, end) {
+          var last = end;
+          for(var i = idx; i < end; i++) {           // shift 
+            if (!$scope.model['clsP'+(i+1)].code && !$scope.model.tmp['clsP'+(i+1)]) {
+              last = i;
+              break;
+            }
+            $scope.model['clsP'+i] = $scope.model['clsP'+(i+1)];
+            $scope.model.tmp['clsP'+i] = $scope.model.tmp['clsP'+(i+1)];
+          }
+          $scope.model.tmp['clsP'+last] = false;
+          $scope.model['clsP'+last] = {};
         }
 
         $scope.viewProperty = function(property) {
@@ -305,9 +352,6 @@ materialAdmin
           } else {
             alert('Please select a property.')
           }
-        }
-
-        $scope.removeParty = function(idx) {
         }
 
         $scope.queryProperties = function(searchText) {
