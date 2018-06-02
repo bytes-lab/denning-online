@@ -285,6 +285,8 @@
     </a>  
   </div>
   <div class="form-group">
+  <div class="clearfix"></div>
+  <h4 class="p-5 m-b-15 group-label">Property 1 Information</h4>    
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Address</label>
@@ -834,31 +836,31 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Purchase Price</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.decRM1" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Earnest Deposit</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.decRM17" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Balance Deposit</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.decRM18" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Total Deposit</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.decRM2" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Balance Purchase Price</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.decRM19" style="width:45%;">
     </div>
   </div>
   <div class="clearfix"></div>
@@ -871,7 +873,7 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">GST Price Value</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.decRM36" style="width:45%;">
     </div>
   </div>  
   <div class="form-group col-md-12">
@@ -907,20 +909,20 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Type of Loan</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_loan_type']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.strF3" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Type of Finacing</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_fiancing_type']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.strF4" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Term Loan Amount</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_term_loan_amount']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM4" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -928,7 +930,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Repayment Period (TL)</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_repayment_period']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.strF1" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -936,7 +938,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">DO Loan Amount</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_do_loan_amount']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM5" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -944,7 +946,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Interest Rate (TL)</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_interest_rate_tl']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.strF2" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -952,7 +954,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;MRTA</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model[options.key+'_MRTA']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM6" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -960,7 +962,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Monthly Installment (TL)</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_monthly_installment']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM7" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -969,7 +971,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Legal Fee</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_legal_fee']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM23" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -977,7 +979,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Interest Rate (DO)</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_interest_rate_do']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.strF8" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>     
@@ -985,7 +987,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Other</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model[options.key+'_other']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM24" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -993,7 +995,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Islamic Loan</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_islamic_loan']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model[options.key+'_islamic_loan']" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>     
@@ -1001,7 +1003,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Total Loan</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-model="model[options.key+'_total_loan']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM25" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>      
