@@ -176,13 +176,13 @@ materialAdmin
 
         $scope.removeParty = function(idx, start, end) {
           var last = end;
-          // shift 
-          for(var i = idx; i < end; i++) {
+          for(var i = idx; i < end; i++) {           // shift 
             if (!$scope.model['clsC'+(i+1)].code && !$scope.model.tmp['clsC'+(i+1)]) {
               last = i;
               break;
             }
             $scope.model['clsC'+i] = $scope.model['clsC'+(i+1)];
+            $scope.model.tmp['clsC'+i] = $scope.model.tmp['clsC'+(i+1)];
           }
           $scope.model.tmp['clsC'+last] = false;
           $scope.model['clsC'+last] = {};
