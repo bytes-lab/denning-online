@@ -150,7 +150,7 @@
 <script type="text/ng-template" id="contact.html">
   <div class="form-group col-md-12" ng-repeat="n in range(to.c_start, to.c_end)" ng-if="to.party && (model['clsC'+n].code || model.tmp['clsC'+n])">
     <div style="display: flex;">
-      <label for="{{::id}}_party_{{$index}}" class="form-control attr-label short-label">{{ $index+1 }}</label>
+      <label class="form-control attr-label short-label">{{ $index+1 }}</label>
 
       <md-autocomplete
         md-selected-item="model['clsC'+n]"
@@ -173,8 +173,8 @@
       <a class="btn btn-primary short-btn" ng-click="viewContact(model['clsC'+n])">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
       </a>
-      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="model['strShareC'+n]" ng-if="to.share" style="width: 15%;" placeholder="Share" />
-      <a class="btn btn-danger short-btn" ng-click="removeParty($index)">
+      <input class="form-control" ng-model="model['strShareC'+n]" ng-if="to.share" style="width: 15%;" placeholder="Share" />
+      <a class="btn btn-danger short-btn" ng-click="removeParty(n, to.c_start, to.c_end)">
         <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span>
       </a>
     </div>

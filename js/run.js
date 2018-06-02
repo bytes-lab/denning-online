@@ -160,17 +160,32 @@ materialAdmin
           return range(min, max, step);
         };
 
-        $scope.addParty = function() {
-          $scope.model[$scope.options.key].push({
-            "party": "",
-            "share": ""
-          })
+        $scope.addParty = function(start, end) {
+          var flag = false;
+          for(var i = start; i <= end; i++) {
+            if (!$scope.model.tmp['clsC'+i] && !$scope.model['clsC'+i].code) {
+              $scope.model.tmp['clsC'+i] = true;
+              flag = true;
+              break;
+            }
+          }
+          if (!flag) {
+            alert('Sorry, you cannot add more party!');
+          }
         }
 
-        $scope.removeParty = function(idx) {
-          if ($scope.model[$scope.options.key].length > 1) {
-            $scope.model[$scope.options.key].splice(idx, 1);
+        $scope.removeParty = function(idx, start, end) {
+          var last = end;
+          // shift 
+          for(var i = idx; i < end; i++) {
+            if (!$scope.model['clsC'+(i+1)].code && !$scope.model.tmp['clsC'+(i+1)]) {
+              last = i;
+              break;
+            }
+            $scope.model['clsC'+i] = $scope.model['clsC'+(i+1)];
           }
+          $scope.model.tmp['clsC'+last] = false;
+          $scope.model['clsC'+last] = {};
         }
 
         $scope.viewContact = function(party) {
