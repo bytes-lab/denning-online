@@ -396,7 +396,7 @@ materialAdmin
                 "attrs": [
                   {
                     "key": "bank1",
-                    "type": "bank",
+                    "type": "bank1",
                     "templateOptions": {
                       "numBank": 1,
                       "base": 0
@@ -409,8 +409,8 @@ materialAdmin
                 "label": "Bank 2 Information",
                 "attrs": [
                   {
-                    "key": "bank1",
-                    "type": "bank",
+                    "key": "bank2",
+                    "type": "bank2",
                     "templateOptions": {
                       "numBank": 1,
                       "base": 1

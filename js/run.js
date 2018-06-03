@@ -594,8 +594,28 @@ materialAdmin
 
     // bank group
     formlyConfig.setType({
-      name: 'bank',
-      templateUrl: 'bank.html',
+      name: 'bank1',
+      templateUrl: 'bank1.html',
+      controller: function ($scope) {
+        $scope.queryBanks = function(searchText) {
+          return getBankBranches(1, 10, searchText)
+        };
+
+        $scope.range = function(min, max, step) {
+          step = step || 1;
+          var input = [];
+          for (var i = min; i <= max; i += step) {
+              input.push(i);
+          }
+          return input;
+        };        
+      }
+    });
+
+    // bank group
+    formlyConfig.setType({
+      name: 'bank2',
+      templateUrl: 'bank2.html',
       controller: function ($scope) {
         $scope.queryBanks = function(searchText) {
           return getBankBranches(1, 10, searchText)
