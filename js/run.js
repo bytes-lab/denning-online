@@ -139,6 +139,11 @@ materialAdmin
       templateUrl: 'text.html'
     });
 
+    formlyConfig.setType({
+      name: 'offer',
+      templateUrl: 'offer.html'
+    });
+
     // contact attribute
     formlyConfig.setType({
       name: 'contact',

@@ -127,6 +127,20 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Form</dt>
             <dd>
+<!--               <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.matterCode.strFormName"
+                md-search-text="searchText"
+                md-items="item in vm.queryForms(searchText)"
+                md-item-text="item.strDisplayName ? item.strDisplayName+' ( '+item.code+' )': ' '"
+                md-min-length="1"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.strDisplayName}}</span>
+                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
+              </md-item-template>
+              </md-autocomplete> -->
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.strFormName">
               </div>

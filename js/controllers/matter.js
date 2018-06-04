@@ -91,7 +91,7 @@ materialAdmin
     }  
   })
 
-  .controller('matterCodeEditCtrl', function($filter, $stateParams, matterCodeService, $state, Auth, presetbillService) {
+  .controller('matterCodeEditCtrl', function($filter, $stateParams, matterCodeService, $state, Auth, presetbillService, matterFormService) {
     var self = this;
     self.save = save;
     self.copy = copy;
@@ -194,6 +194,10 @@ materialAdmin
       return labels.filter(function(item) {
         return item.search(new RegExp(q, "i")) > -1;
       });
+    };
+
+    self.queryForms = function (searchText) {
+      return matterFormService.getList(1, 10, searchText).then(function(data) { return data; });
     };
 
     self.queryBills = function (searchText) {

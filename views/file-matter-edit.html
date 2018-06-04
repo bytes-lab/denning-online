@@ -147,7 +147,7 @@
         <label for="{{::id}}_party_{{$index}}" class="form-control attr-label"> Bank Branch</label>
 
         <md-autocomplete
-          md-selected-item="model['clsBank'+(n+to.base)]"
+          md-selected-item="model['clsBank2']"
           md-search-text="searchText"
           md-items="item in queryBanks(searchText)"
           md-item-text="item.strName ? item.strName: ' '"
@@ -171,25 +171,25 @@
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Bank</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank'+(n+to.base)].clsBankCode.strName" style="width:45%;">
+      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank2'].clsBankCode.strName" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Address</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank'+(n+to.base)].clsBankCode.strRegAdd" style="width:45%;">
+      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank2'].clsBankCode.strRegAdd" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">CAC / LDC</label>
-      <input type="text" class="form-control" readonly="" ng-model="model['clsBank'+n].clsCACCode.strName" style="width:45%;">
+      <input type="text" class="form-control" readonly="" ng-model="model['clsBank2'].clsCACCode.strName" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">PA Name</label>
-      <input type="text" class="form-control" ng-model="model.strRegAdd2" style="width:45%;">
+      <input type="text" class="form-control" ng-model="model.strBank2PANo" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12 m-l-15">
@@ -356,7 +356,7 @@
   <h4 class="p-5 m-b-15 group-label">Property 1 Information</h4>    
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Address</label>
+    <label class="form-control attr-label">Title</label>
     <input type="text" readonly class="form-control" ng-model="property.strAddress">
     </div>
   </div>
@@ -424,14 +424,6 @@
       </label>
     </div>    
   </div>
-  <div class="form-group col-md-6">
-    <label for="inputEmail3" class="col-sm-4 attr-label-1">Annual Quit Rent</label>
-    <div class="col-sm-8">
-      <div class="fg-line">
-        <input type="text" readonly ng-model="property.decAnnualQuit" class="form-control input-sm" id="inputEmail3">
-      </div>
-    </div>
-  </div>     
   <div class="form-group1 col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Restriction Against</label>
     <div class="col-sm-8">
@@ -441,6 +433,22 @@
     </div>
   </div>
   <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Approving Authority</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" readonly ng-model="property.strApprovingAuthority" class="form-control input-sm" id="inputEmail3">
+      </div>
+    </div>
+  </div>        
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Annual Quit Rent</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" readonly ng-model="property.decAnnualQuit" class="form-control input-sm" id="inputEmail3">
+      </div>
+    </div>
+  </div>     
+  <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Assessment Rate</label>
     <div class="col-sm-8">
       <div class="fg-line">
@@ -448,14 +456,6 @@
       </div>
     </div>
   </div>     
-  <div class="form-group col-md-6">
-    <label for="inputEmail3" class="col-sm-4 attr-label-1">Approving Authority</label>
-    <div class="col-sm-8">
-      <div class="fg-line">
-        <input type="text" readonly ng-model="property.strApprovingAuthority" class="form-control input-sm" id="inputEmail3">
-      </div>
-    </div>
-  </div>      
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Previous Title</label>
     <div class="col-sm-8">
@@ -486,7 +486,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Details as per Principla SPA</h4>
+  <h4 class="p-5 m-b-15 group-label">Details Principla SPA</h4>
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Unit No.</label>
     <div class="col-sm-8">
@@ -512,18 +512,18 @@
     </div>
   </div>
   <div class="form-group col-md-6">
-    <label for="inputEmail3" class="col-sm-4 attr-label-1">Developer</label>
-    <div class="col-sm-8">
-      <div class="fg-line">
-        <input type="text" readonly ng-model="property.clsDeveloper.strName" class="form-control input-sm" id="inputEmail3">
-      </div>
-    </div>
-  </div>
-  <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Building Description</label>
     <div class="col-sm-8">
       <div class="fg-line">
         <input type="text" readonly ng-model="model[options.key+'_selling_price']" class="form-control input-sm" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Developer</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" readonly ng-model="property.clsDeveloper.strName" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -971,6 +971,56 @@
   </div>
 </script>
 
+<script type="text/ng-template" id="offer.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Special Damages</label>
+      <input type="text" class="form-control" ng-model="model.decRM1" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">General Damages</label>
+      <input type="text" class="form-control" ng-model="model.decRM17" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-model="model.decRM18" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="p-5 m-b-15 group-label">Insurance Settlement Offer</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">First Offer</label>
+      <input type="text" class="form-control" ng-model="model.decRM2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Second Offer</label>
+      <input type="text" class="form-control" ng-model="model.decRM19" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Third Offer</label>
+      <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-model="model.decRM36" style="width:45%;">
+      </div>
+    </div>   
+  </div>
+</script>
+
 <script type="text/ng-template" id="loan.html">
   <div class="form-group">
   <div class="form-group col-md-12">
@@ -985,6 +1035,8 @@
     <input type="text" class="form-control" ng-model="model.strF4" style="width:45%;">
     </div>
   </div>
+  <div class="clearfix"></div>
+  <h4 class="p-5 m-b-15 group-label">Loan Amount</h4>  
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Term Loan Amount</label>
     <div class="col-sm-8">
@@ -1073,7 +1125,9 @@
         <input type="text" ng-model="model.decRM25" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
-  </div>      
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="p-5 m-b-15 group-label">Klamnic Loan</h4>  
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Selling Price</label>
     <div class="col-sm-8">
@@ -1082,7 +1136,7 @@
       </div>
     </div>
   </div>      
-  <div class="form-group col-md-6 col-md-offset-6">
+  <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Purchase Price</label>
     <div class="col-sm-8">
       <div class="fg-line">

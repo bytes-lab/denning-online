@@ -16,11 +16,9 @@ materialAdmin
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
         vm.model = item;
         vm.model.tmp = {}; // temp variable
-        vm.title = 'Matter: ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
+        vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
         vm.matter_code = JSON.parse(item.clsMatterCode.jsonFieldLabels);
         vm.tabDict = {
-          "Summary": {
-          },
           "Matter": {
             "groups": [
               {
@@ -39,6 +37,8 @@ materialAdmin
                 ]
               }
             ]
+          },
+          "Summary": {
           },
           "Parties-S": {
             "groups": [
@@ -359,7 +359,7 @@ materialAdmin
             "groups": [
               {
                 "key": "loan-info",
-                "label": "Loan Information",
+                "label": "Loan Type",
                 "attrs": [
                   {
                     "key": "loan1",
@@ -398,8 +398,6 @@ materialAdmin
                     "key": "bank1",
                     "type": "bank1",
                     "templateOptions": {
-                      "numBank": 1,
-                      "base": 0
                     }
                   }
                 ]
@@ -412,8 +410,6 @@ materialAdmin
                     "key": "bank2",
                     "type": "bank2",
                     "templateOptions": {
-                      "numBank": 1,
-                      "base": 1
                     }
                   }
                 ]
@@ -442,6 +438,54 @@ materialAdmin
                 ]
               }
             ]
+          },
+          "Premises & Rent": {
+            label: "Premises & Rent"
+          },
+          "Term": {
+            label: "Term"
+          },
+          "Tenancy": {
+            label: "Tenancy"
+          },
+          "Vehicles": {
+            label: "Vehicles"
+          },
+          "Others": {
+            label: "Others"
+          },
+          "Estate Agent": {
+            label: "Estate Agent"
+          },
+          "Reports": {
+            label: "Reports"
+          },
+          "Arrears": {
+            label: "Arrears"
+          },
+          "Beneficiary": {
+            label: "Beneficiary"
+          },
+          "Chain": {
+            label: "Chain"
+          },
+          "RPGT": {
+            label: "RPGT"
+          },
+          "Offers": {
+            "label": "Offers",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           }
         };
 
@@ -454,6 +498,18 @@ materialAdmin
             item['label'] = value.Title
             vm.tabs.push(item);
           })
+
+          vm.tabs.push(vm.tabDict['Offers']);
+          vm.tabs.push(vm.tabDict['RPGT']);
+          vm.tabs.push(vm.tabDict['Chain']);
+          vm.tabs.push(vm.tabDict['Beneficiary']);
+          vm.tabs.push(vm.tabDict['Arrears']);
+          vm.tabs.push(vm.tabDict['Reports']);
+          vm.tabs.push(vm.tabDict['Estate Agent']);
+          vm.tabs.push(vm.tabDict['Vehicles']);
+          vm.tabs.push(vm.tabDict['Tenancy']);
+          vm.tabs.push(vm.tabDict['Term']);
+          vm.tabs.push(vm.tabDict['Premises & Rent']);
         });
       });
     }
@@ -536,7 +592,9 @@ materialAdmin
 
     self.tabList = ['Summary', 'Matter', 'Parties-S', 'Parties', 'Solicitors', 
                     'Case', 'Price', 'Loan', 'Property', 'Bank', '$', 'Date', 'Text',
-                    'Template'];
+                    'Template', 'Premises & Rent', 'Term', 'Tenancy', 'Vehicles', 
+                    'Others', 'Estate Agent', 'Reports', 'Arrears', 'Beneficiary',
+                    'Chain', 'RPGT', 'Offers'];
 
     if($stateParams.code) {
       matterFormService.getItem($stateParams.code).then(function(item){

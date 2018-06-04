@@ -155,10 +155,10 @@ materialAdmin
     service.getList = getList;
     service.getItem = getItem;
 
-    function getList(page=1, pagesize=500) {
+    function getList(page=1, pagesize=500, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize,
+        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
