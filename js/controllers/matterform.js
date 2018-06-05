@@ -362,7 +362,7 @@ materialAdmin
             "groups": [
               {
                 "key": "price-info",
-                "label": "Price Information",
+                "label": "Price",
                 "attrs": [
                   {
                     "key": "price1",

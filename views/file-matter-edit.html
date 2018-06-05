@@ -902,39 +902,66 @@
   <div class="form-group">
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Purchase Price</label>
+    <label class="form-control attr-label-210">Purchase Price [A]</label>
     <input type="text" class="form-control" ng-model="model.decRM1" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Earnest Deposit</label>
+    <label class="form-control attr-label-210">Earnest Deposit [B]</label>
     <input type="text" class="form-control" ng-model="model.decRM17" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Balance Deposit</label>
+    <label class="form-control attr-label-210">Balance Deposit [C]</label>
     <input type="text" class="form-control" ng-model="model.decRM18" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Total Deposit</label>
+    <label class="form-control attr-label-210">Total Deposit [D] = B + C</label>
     <input type="text" class="form-control" ng-model="model.decRM2" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Balance Purchase Price</label>
+    <label class="form-control attr-label-210">Balance Purchase Price [ A - D ]</label>
     <input type="text" class="form-control" ng-model="model.decRM19" style="width:45%;">
     </div>
   </div>
   <div class="clearfix"></div>
+  <h4 class="p-5 m-b-15 group-label">Extra Price</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Extra 1 [X]</label>
+    <input type="text" class="form-control" ng-model="model.decRM3" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Extra 2 [Y]</label>
+    <input type="text" class="form-control" ng-model="model.decRM20" style="width:45%;">
+    </div>
+  </div>  
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Extra 3 [Z]</label>
+    <input type="text" class="form-control" ng-model="model.decRM21" style="width:45%;">
+    </div>
+  </div>  
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Total [ A + X + Y + Z ]</label>
+    <input type="text" class="form-control" ng-model="model.decRM22" style="width:45%;">
+    </div>
+  </div>  
+  <div class="clearfix"></div>
+  <h4 class="p-5 m-b-15 group-label">SST / GST</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">GST</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.decPriceGst" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
@@ -946,25 +973,6 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Purchase Price</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
-    </div>
-  </div>  
-  <div class="clearfix"></div>
-  <div class="form-group col-md-12">
-    <div style="display: flex;">
-    <label class="form-control attr-label">Court A</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
-    </div>
-  </div>
-  <div class="form-group col-md-12">
-    <div style="display: flex;">
-    <label class="form-control attr-label">Court B</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
-    </div>
-  </div>  
-  <div class="form-group col-md-12">
-    <div style="display: flex;">
-    <label class="form-control attr-label">Court C</label>
     <input type="text" class="form-control" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
     </div>
   </div>  
