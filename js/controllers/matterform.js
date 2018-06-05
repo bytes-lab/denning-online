@@ -518,12 +518,12 @@ materialAdmin
             "label": "Estate Agent",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "estate-agent-group",
+                "label": "Estate Agent",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "estate-agent",
+                    "type": "estate-agent"
                   }
                 ]
               }

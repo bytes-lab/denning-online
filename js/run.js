@@ -625,6 +625,11 @@ materialAdmin
       templateUrl: 'report.html'
     });  
 
+    formlyConfig.setType({
+      name: 'estate-agent',
+      templateUrl: 'estate-agent.html'
+    });  
+
     // legal firm attribute
     formlyConfig.setType({
       name: 'legalFirm',
