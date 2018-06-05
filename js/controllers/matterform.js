@@ -533,12 +533,12 @@ materialAdmin
             "label": "Reports",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "report-group",
+                "label": "Reports",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "report",
+                    "type": "report"
                   }
                 ]
               }

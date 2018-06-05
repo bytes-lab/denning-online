@@ -620,6 +620,11 @@ materialAdmin
       templateUrl: 'other.html'
     });  
 
+    formlyConfig.setType({
+      name: 'report',
+      templateUrl: 'report.html'
+    });  
+
     // legal firm attribute
     formlyConfig.setType({
       name: 'legalFirm',
