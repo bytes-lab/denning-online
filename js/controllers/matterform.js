@@ -503,12 +503,12 @@ materialAdmin
             "label": "Others",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "other-group",
+                "label": "Loan Tier",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "other",
+                    "type": "other"
                   }
                 ]
               }
@@ -641,6 +641,7 @@ materialAdmin
           vm.tabs.push(vm.tabDict['Vehicles']);
           vm.tabs.push(vm.tabDict['Tenancy']);
           vm.tabs.push(vm.tabDict['Term']);
+          vm.tabs.push(vm.tabDict['Others']);
           vm.tabs.push(vm.tabDict['Premises & Rent']);
         });
       });

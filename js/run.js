@@ -615,6 +615,11 @@ materialAdmin
       templateUrl: 'beneficiary.html'
     });  
 
+    formlyConfig.setType({
+      name: 'other',
+      templateUrl: 'other.html'
+    });  
+
     // legal firm attribute
     formlyConfig.setType({
       name: 'legalFirm',
