@@ -37,11 +37,14 @@
       </uib-tabset>
       <div class="clearfix"></div>
       <div class="col-md-9">
-        <div class="pull-right">
+        <div class="pull-left">
           <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.prevTab()"><i class="zmdi zmdi-arrow-back"></i> Back</button>
           <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.scrollUp()"><i class="zmdi zmdi-long-arrow-up"></i> Up</button>
-          <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.nextTab()"><i class="zmdi zmdi-arrow-forward"></i> Forward</button>
-          <button type="submit" class="btn btn-primary m-l-5 submit-button" ng-disabled="vm.form.$invalid" style="margin-top: 2px;" ng-click="vm.save()">Save</button>
+          <button class="btn btn-default btn-icon-text m-l-5 m-r-15 waves-effect" ng-click="vm.nextTab()"><i class="zmdi zmdi-arrow-forward"></i> Forward</button>          
+        </div>
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid" style="margin-top: 2px;" ng-click="vm.save()">Save</button>
+          <button type="button" class="btn btn-default m-l-5" ng-click="vm.reset()">Reset</button>
           <button type="button" class="btn btn-default m-l-5 m-r-20" ng-click="vm.cancel()">Cancel</button>
         </div>
       </div>

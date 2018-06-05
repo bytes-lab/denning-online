@@ -721,6 +721,10 @@ materialAdmin
       alert(JSON.stringify(vm.model), null, 2);
     }
 
+    vm.reset = function () {
+      vm.form = {};
+    }
+
     vm.cancel = function () {
       $state.go('file-matters.list');
     }
