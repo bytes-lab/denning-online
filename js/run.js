@@ -596,6 +596,11 @@ materialAdmin
     });  
 
     formlyConfig.setType({
+      name: 'rpgt',
+      templateUrl: 'rpgt.html'
+    });  
+
+    formlyConfig.setType({
       name: 'arrear',
       templateUrl: 'arrear.html'
     });  

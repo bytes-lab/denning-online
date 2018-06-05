@@ -593,12 +593,12 @@ materialAdmin
             "label": "RPGT",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "rpgt-group",
+                "label": "CKHT Information",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "rpgt",
+                    "type": "rpgt"
                   }
                 ]
               }
