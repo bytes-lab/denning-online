@@ -578,12 +578,12 @@ materialAdmin
             "label": "Chain",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "chain-group",
+                "label": "Principle SPA Details",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "chain",
+                    "type": "chain"
                   }
                 ]
               }
