@@ -488,12 +488,12 @@ materialAdmin
             "label": "Vehicles",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "vehicle-group",
+                "label": "Claimant's Vehicle Detail",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "vehicle",
+                    "type": "vehicle"
                   }
                 ]
               }
