@@ -563,12 +563,12 @@ materialAdmin
             "label": "Beneficiary",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "beneficiary-group",
+                "label": "Parent(s)",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "beneficiary",
+                    "type": "beneficiary"
                   }
                 ]
               }
