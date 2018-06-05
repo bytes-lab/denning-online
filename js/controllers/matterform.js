@@ -500,7 +500,7 @@ materialAdmin
             ]
           },
           "Others": {
-            label: "Others",
+            "label": "Others",
             "groups": [
               {
                 "key": "offer-group",
@@ -548,12 +548,12 @@ materialAdmin
             "label": "Arrears",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "arrear-group",
+                "label": "Rent in Arrears / Distress",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "arrear",
+                    "type": "arrear"
                   }
                 ]
               }
