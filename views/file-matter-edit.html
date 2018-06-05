@@ -21,7 +21,7 @@
       </formly-form>
     </form>    
 
-    <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
+    <form name="vm.form" novalidate>
       <uib-tabset active="vm.idxTab">
         <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
           <div ng-repeat="group in tab.groups" class="col-lg-9 no-padding">  
@@ -38,10 +38,10 @@
       <div class="clearfix"></div>
       <div class="col-md-9">
         <div class="pull-right">
-          <button class="btn btn-default btn-icon-text m-l-5 waves-effect"><i class="zmdi zmdi-arrow-back"></i> Back</button>
-          <button class="btn btn-default btn-icon-text m-l-5 waves-effect"><i class="zmdi zmdi-long-arrow-up"></i> Up</button>
-          <button class="btn btn-default btn-icon-text m-l-5 waves-effect"><i class="zmdi zmdi-arrow-forward"></i> Forward</button>
-          <button type="submit" class="btn btn-primary m-l-5 submit-button" ng-disabled="vm.form.$invalid" style="margin-top: 2px;">Save</button>
+          <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.prevTab()"><i class="zmdi zmdi-arrow-back"></i> Back</button>
+          <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.scrollUp()"><i class="zmdi zmdi-long-arrow-up"></i> Up</button>
+          <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.nextTab()"><i class="zmdi zmdi-arrow-forward"></i> Forward</button>
+          <button type="submit" class="btn btn-primary m-l-5 submit-button" ng-disabled="vm.form.$invalid" style="margin-top: 2px;" ng-click="vm.save()">Save</button>
           <button type="button" class="btn btn-default m-l-5 m-r-20" ng-click="vm.cancel()">Cancel</button>
         </div>
       </div>

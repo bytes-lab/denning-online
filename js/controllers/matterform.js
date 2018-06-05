@@ -1,9 +1,25 @@
 materialAdmin
   .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService) {
     var vm = this;
-    vm.onSubmit = save;
     vm.model = {};
-    vm.idxTab = 5;
+    vm.idxTab = 0;
+
+    vm.prevTab = function () {
+      if (vm.idxTab > 0)
+        vm.idxTab--;
+    };
+
+    vm.nextTab = function () {
+      if (vm.idxTab < 20)
+        vm.idxTab++;
+    };
+
+    vm.scrollUp = function () {
+      $('body,html').animate({
+          scrollTop : 0
+      }, 500);
+      return false;
+    };
 
     function getLabel(arr, key) {
       for (var i = 0; i < arr.length; i++) {
@@ -701,7 +717,7 @@ materialAdmin
       });
     };
     // function definition
-    function save() {
+    vm.save = function () {
       alert(JSON.stringify(vm.model), null, 2);
     }
 
