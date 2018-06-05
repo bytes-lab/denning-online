@@ -626,6 +626,11 @@ materialAdmin
     });  
 
     formlyConfig.setType({
+      name: 'tenancy',
+      templateUrl: 'tenancy.html'
+    });  
+
+    formlyConfig.setType({
       name: 'estate-agent',
       templateUrl: 'estate-agent.html'
     });  

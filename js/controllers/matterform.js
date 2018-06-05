@@ -473,12 +473,12 @@ materialAdmin
             "label": "Tenancy",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "tenancy-group",
+                "label": "Party Paying Council Rates & Outgoings",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "tenancy",
+                    "type": "tenancy"
                   }
                 ]
               }
