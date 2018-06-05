@@ -590,6 +590,11 @@ materialAdmin
       templateUrl: 'premises-rent.html'
     });  
 
+    formlyConfig.setType({
+      name: 'term',
+      templateUrl: 'term.html'
+    });  
+
     // legal firm attribute
     formlyConfig.setType({
       name: 'legalFirm',

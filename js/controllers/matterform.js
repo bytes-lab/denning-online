@@ -458,12 +458,12 @@ materialAdmin
             "label": "Term",
             "groups": [
               {
-                "key": "offer-group",
-                "label": "Claim Details",
+                "key": "term-group",
+                "label": "Term",
                 "attrs": [
                   {
-                    "key": "offer",
-                    "type": "offer"
+                    "key": "term",
+                    "type": "term"
                   }
                 ]
               }
