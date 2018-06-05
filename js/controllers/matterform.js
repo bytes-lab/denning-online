@@ -440,37 +440,169 @@ materialAdmin
             ]
           },
           "Premises & Rent": {
-            label: "Premises & Rent"
+            "label": "Premises & Rent",
+            "groups": [
+              {
+                "key": "premises-rent-group",
+                "label": "Premises Details",
+                "attrs": [
+                  {
+                    "key": "premises-rent",
+                    "type": "premises-rent"
+                  }
+                ]
+              }
+            ]
           },
           "Term": {
-            label: "Term"
+            "label": "Term",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Tenancy": {
-            label: "Tenancy"
+            "label": "Tenancy",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Vehicles": {
-            label: "Vehicles"
+            "label": "Vehicles",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Others": {
-            label: "Others"
+            label: "Others",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Estate Agent": {
-            label: "Estate Agent"
+            "label": "Estate Agent",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Reports": {
-            label: "Reports"
+            "label": "Reports",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Arrears": {
-            label: "Arrears"
+            "label": "Arrears",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Beneficiary": {
-            label: "Beneficiary"
+            "label": "Beneficiary",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Chain": {
-            label: "Chain"
+            "label": "Chain",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "RPGT": {
-            label: "RPGT"
+            "label": "RPGT",
+            "groups": [
+              {
+                "key": "offer-group",
+                "label": "Claim Details",
+                "attrs": [
+                  {
+                    "key": "offer",
+                    "type": "offer"
+                  }
+                ]
+              }
+            ]
           },
           "Offers": {
             "label": "Offers",
