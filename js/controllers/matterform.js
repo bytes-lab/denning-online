@@ -3,6 +3,7 @@ materialAdmin
     var vm = this;
     vm.onSubmit = save;
     vm.model = {};
+    vm.idxTab = 5;
 
     function getLabel(arr, key) {
       for (var i = 0; i < arr.length; i++) {

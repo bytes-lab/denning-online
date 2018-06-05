@@ -22,19 +22,19 @@
     </form>    
 
     <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
-      <uib-tabset>
-      <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
-        <div ng-repeat="group in tab.groups" class="col-lg-9 no-padding">  
-          <div class="group">
-            <div class="form-group">
-              <input id="{{group.key}}-label" name="{{group.key}}-label" class="form-control group-label" ng-model="vm.model[group.key+'-label']" ng-value="group.label" />
+      <uib-tabset active="vm.idxTab">
+        <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
+          <div ng-repeat="group in tab.groups" class="col-lg-9 no-padding">  
+            <div class="group">
+              <div class="form-group">
+                <input id="{{group.key}}-label" name="{{group.key}}-label" class="form-control group-label" ng-model="vm.model[group.key+'-label']" ng-value="group.label" />
+              </div>
+              <formly-form model="vm.model" fields="group.attrs" form="vm.form" options="group.options">
+              </formly-form>
             </div>
-            <formly-form model="vm.model" fields="group.attrs" form="vm.form" options="group.options">
-            </formly-form>
           </div>
-        </div>
-      </tab>
-      </tabset>
+        </uib-tab>
+      </uib-tabset>
       <div class="clearfix"></div>
       <div class="col-md-9">
         <div class="pull-right">
@@ -2036,4 +2036,3 @@
   <input id="{{::id}}" name="{{::id}}" class="form-control" ng-model="model[options.key]" />
   </div>
 </script>
-
