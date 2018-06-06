@@ -653,7 +653,7 @@ materialAdmin
     });
 
     // bank group
-    function bankCtrl ($scope) {
+    function bankCtrl ($scope, $uibModal) {
       $scope.queryBanks = function(searchText) {
         return getBankBranches(1, 10, searchText)
       };
@@ -669,8 +669,8 @@ materialAdmin
       $scope.bankDialog = function(party, viewMode) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'views/contact-edit.html',
-          controller: 'contactCreateModalCtrl',
+          templateUrl: 'views/bank-branch-edit.html',
+          controller: 'bankBranchCreateModalCtrl',
           controllerAs: 'vm',
           size: 'lg',
           backdrop: 'static',

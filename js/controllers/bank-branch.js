@@ -58,3 +58,46 @@ materialAdmin
       $state.go('bank-branches.list');
     }
   })
+
+  .controller('bankBranchCreateModalCtrl', function ($uibModalInstance, party, viewMode, bankBranchService, Auth, bankService, bankCACService) {
+    var self = this;
+    self.save = save;
+    self.cancel = cancel;
+    self.isDialog = true;
+    self.viewMode = viewMode;
+    self.userInfo = Auth.getUserInfo();
+    self.create_new = !viewMode;
+    self.can_edit = !viewMode;
+
+    self.queryBanks = function(searchText) {
+      return bankService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryBankCACs = function(searchText) {
+      return bankCACService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    if (viewMode) {
+      bankBranchService.getItem(party.code).then(function(item) {
+        self.bankBranch = item;
+      });
+    } else {
+      self.bankBranch = {};
+    }
+
+    function save() {
+      bankBranchService.save(self.contact).then(function(contact) {
+        $uibModalInstance.close(contact);
+      })
+      .catch(function(err){
+      });
+    };
+
+    function cancel() {
+      $uibModalInstance.close();
+    };
+  })

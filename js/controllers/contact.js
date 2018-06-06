@@ -30,7 +30,7 @@ materialAdmin
     }
   })
 
-  .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, on_list, contactService, $state) {
+  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, contact, on_list, contactService, $state) {
     $scope.ok = function () {
       contactService.delete(contact).then(function(contact) {
         if (on_list)
@@ -41,11 +41,11 @@ materialAdmin
       .catch(function(err){
         //$scope.formname.contactInfo.$error.push({meessage:''});
       });
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-      $modalInstance.close();
+      $uibModalInstance.close();
       if (on_list)
         $state.go('contacts.list');
     };
@@ -253,7 +253,7 @@ materialAdmin
     };
   })
 
-  .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, contactService, IRDBranchService, Auth) {
+  .controller('contactCreateModalCtrl', function ($uibModalInstance, party, viewMode, contactService, IRDBranchService, Auth) {
     var self = this;
     self.save = save;
     self.cancel = cancel;
@@ -289,14 +289,14 @@ materialAdmin
 
     function save() {
       contactService.save(self.contact).then(function(contact) {
-        $modalInstance.close(contact);
+        $uibModalInstance.close(contact);
       })
       .catch(function(err){
       });
     };
 
     function cancel() {
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
   })
 
