@@ -85,7 +85,7 @@ materialAdmin
     }
   })
 
-  .controller('bankCACCreateModalCtrl', function ($uibModalInstance, party, viewMode, bankBranchService, Auth, bankService, bankCACService) {
+  .controller('bankCACCreateModalCtrl', function ($uibModalInstance, party, viewMode, Auth, bankService, bankCACService) {
     var self = this;
     self.save = save;
     self.cancel = cancel;
@@ -101,22 +101,16 @@ materialAdmin
       });
     };
 
-    self.queryBankCACs = function(searchText) {
-      return bankCACService.getTableList(1, 10, searchText).then(function(resp) {
-        return resp.data;
-      });
-    };
-
     if (viewMode) {
-      bankBranchService.getItem(party.code).then(function(item) {
-        self.bankBranch = item;
+      bankCACService.getItem(party.code).then(function(item) {
+        self.bank_CAC = item;
       });
     } else {
-      self.bankBranch = {};
+      self.bank_CAC = {};
     }
 
     function save() {
-      bankBranchService.save(self.contact).then(function(contact) {
+      bankCACService.save(self.contact).then(function(contact) {
         $uibModalInstance.close(contact);
       })
       .catch(function(err){

@@ -685,8 +685,8 @@ materialAdmin
       $scope.bankCACDialog = function(party, viewMode) {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'views/contact-edit.html',
-          controller: 'contactCreateModalCtrl',
+          templateUrl: 'views/bank-CAC-edit.html',
+          controller: 'bankCACCreateModalCtrl',
           controllerAs: 'vm',
           size: 'lg',
           backdrop: 'static',
@@ -697,7 +697,6 @@ materialAdmin
           }      
         });
       };
-
     }
 
     formlyConfig.setType({
