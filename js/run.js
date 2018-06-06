@@ -653,43 +653,64 @@ materialAdmin
     });
 
     // bank group
+    function bankCtrl ($scope) {
+      $scope.queryBanks = function(searchText) {
+        return getBankBranches(1, 10, searchText)
+      };
+
+      $scope.viewBankBranch = function(branch) {
+        if (branch) {
+          $scope.bankDialog(branch, true);
+        } else {
+          alert('Please select a branch.')
+        }
+      };
+
+      $scope.bankDialog = function(party, viewMode) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'views/contact-edit.html',
+          controller: 'contactCreateModalCtrl',
+          controllerAs: 'vm',
+          size: 'lg',
+          backdrop: 'static',
+          keyboard: true,
+          resolve: {
+            viewMode: viewMode,
+            party: party
+          }      
+        });
+      };
+
+      $scope.bankCACDialog = function(party, viewMode) {
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'views/contact-edit.html',
+          controller: 'contactCreateModalCtrl',
+          controllerAs: 'vm',
+          size: 'lg',
+          backdrop: 'static',
+          keyboard: true,
+          resolve: {
+            viewMode: viewMode,
+            party: party
+          }      
+        });
+      };
+
+    }
+
     formlyConfig.setType({
       name: 'bank1',
       templateUrl: 'bank1.html',
-      controller: function ($scope) {
-        $scope.queryBanks = function(searchText) {
-          return getBankBranches(1, 10, searchText)
-        };
-
-        $scope.range = function(min, max, step) {
-          step = step || 1;
-          var input = [];
-          for (var i = min; i <= max; i += step) {
-              input.push(i);
-          }
-          return input;
-        };        
-      }
+      controller: bankCtrl
     });
 
     // bank group
     formlyConfig.setType({
       name: 'bank2',
       templateUrl: 'bank2.html',
-      controller: function ($scope) {
-        $scope.queryBanks = function(searchText) {
-          return getBankBranches(1, 10, searchText)
-        };
-
-        $scope.range = function(min, max, step) {
-          step = step || 1;
-          var input = [];
-          for (var i = min; i <= max; i += step) {
-              input.push(i);
-          }
-          return input;
-        };        
-      }
+      controller: bankCtrl
     });
 
     // gen-doc attribute

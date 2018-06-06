@@ -826,9 +826,10 @@ materialAdmin
       })
       .state ('bank-branches.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'bankBranchEditCtrl as vm',
         templateUrl: 'views/bank-branch-edit.html'
       })  

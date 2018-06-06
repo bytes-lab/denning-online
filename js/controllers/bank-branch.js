@@ -29,13 +29,29 @@ materialAdmin
     }
   })
 
-  .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state) {
+  .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state, Auth, bankService, bankCACService) {
     var self = this;
+    self.isDialog = false;
+    self.viewMode = false;  // for edit / create
     self.cancel = cancel;
+    self.userInfo = Auth.getUserInfo();
+    self.create_new = $state.$current.data.can_edit;
+    self.can_edit = $state.$current.data.can_edit;
 
-    bankBranchService.getItem($stateParams.id)
-    .then(function(item){
-      self.bankBranch = angular.copy(item);
+    self.queryBanks = function(searchText) {
+      return bankService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryBankCACs = function(searchText) {
+      return bankCACService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    bankBranchService.getItem($stateParams.id).then(function(item) {
+      self.bankBranch = item;
     });
 
     function cancel() {

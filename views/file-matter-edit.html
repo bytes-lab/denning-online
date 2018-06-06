@@ -96,11 +96,11 @@
         </md-item-template>
         </md-autocomplete>
 
-        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(model['clsC'+(n+to.base)], false)">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
+        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="bankDialog(model.clsBank1, false)">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
         </a>
-        <a class="btn btn-primary short-btn" ng-click="viewContact(model['clsC'+(n+to.base)])">
-          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+        <a class="btn btn-primary short-btn" ng-click="viewBankBranch(model.clsBank1)">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of bank"></span>
         </a>
       </div>
     </div>
@@ -147,7 +147,7 @@
   <div class="form-group col-md-12">
     <div class="form-group col-md-12">
       <div style="display: flex;">
-        <label for="{{::id}}_party_{{$index}}" class="form-control attr-label"> Bank Branch</label>
+        <label class="form-control attr-label"> Bank Branch</label>
 
         <md-autocomplete
           md-selected-item="model['clsBank2']"
@@ -163,11 +163,11 @@
         </md-item-template>
         </md-autocomplete>
 
-        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(model['clsC'+(n+to.base)], false)">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
+        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="bankDialog(model.clsBank2, false)">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank branch and choose it"></span>
         </a>
-        <a class="btn btn-primary short-btn" ng-click="viewContact(model['clsC'+(n+to.base)])">
-          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+        <a class="btn btn-primary short-btn" ng-click="viewBankBranch(model.clsBank2)">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of bank branch"></span>
         </a>
       </div>
     </div>
@@ -185,10 +185,14 @@
     </div>
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
-      <label class="form-control attr-label">CAC / LDC</label>
-      <input type="text" class="form-control" readonly="" ng-model="model['clsBank2'].clsCACCode.strName" style="width:45%;">
+        <label class="form-control attr-label">CAC / LDC</label>
+        <input type="text" class="form-control" readonly="" ng-model="model['clsBank2'].clsCACCode.strName" style="width:45%;">
+        <a class="btn btn-primary short-btn" ng-click="bankCACDialog(model['clsBank2'].clsCACCode, true)">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the bank CAC"></span>
+        </a>
       </div>
     </div>
+
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">PA Name</label>
