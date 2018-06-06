@@ -1,64 +1,50 @@
 <div class="container">
-
-    <div class="block-header">
-        <ul class="actions m-t-20 hidden-xs">
-            <li class="dropdown" uib-dropdown>
-                <a href="" uib-dropdown-toggle>
-                    <i class="zmdi zmdi-more-vert"></i>
-                </a>
-
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a ui-sref="bank-CACs.new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Add a new Bank CAC</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="card">
-        <div class="card-header">
-            <h2>Bank CAC List <small>Type something in filter and press Enter or Filter button</small></h2>
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-8">
+          <h2 class="f-20 f-500 c-purple">Bank CAC List</h2>
         </div>
-                
-        <div class="card-body">
-            <div class="table-responsive" ng-if="vm.dataReady" > 
-                <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
-                    <tr ng-repeat="w in $data">
-                        <td data-title="'Master Bank Code'" filter="{ 'master_bank_code': 'text' }" sortable="'master_bank_code'">
-                            {{ w.master_bank_code }}
-                        </td>
-                        <td data-title="'CAC Name'" filter="{ 'CAC_name': 'text' }" sortable="'CAC_name'">
-                            {{ w.CAC_name }}
-                        </td>
-                        <td data-title="'Email'" filter="{ 'email': 'text' }" sortable="'email'">
-                            {{ w.email }}
-                        </td>
-                        <td data-title="'Phone'" filter="{ 'phone3': 'text' }" sortable="'phone3'">
-                            {{ w.phone3 }}
-                        </td>
-                        <td data-title="'Actions'">
-                            <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="bank-CACs.edit({id:w.id})"><i class="zmdi zmdi-edit"></i></a>
-                            <a class="btn btn-warning" ng-click="vm.openDelete(w)"><i class="zmdi zmdi-delete"></i></a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="col-sm-4">
+          <a ui-sref="bank-branches.new" class="btn bgm-cyan pull-right"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New Branch CAC</a>
         </div>
+      </div>
     </div>
+        
+    <div class="card-body">
+      <div class="table-responsive" ng-if="vm.dataReady" > 
+        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+          <tr ng-repeat="w in $data" ng-click="vm.clickHandler(w)">
+            <td data-title="'Master Bank Code'" filter="{ 'clsBankCode.code': 'text' }" sortable="'clsBankCode.code'">
+              {{ w.clsBankCode.code }}
+            </td>
+            <td data-title="'CAC Name'" filter="{ 'strName': 'text' }" sortable="'strName'">
+              {{ w.strName }}
+            </td>
+            <td data-title="'Email'" filter="{ 'strEmailAddress': 'text' }" sortable="'strEmailAddress'">
+              {{ w.strEmailAddress }}
+            </td>
+            <td data-title="'Phone'" filter="{ 'strPhone1': 'text' }" sortable="'strPhone1'">
+              {{ w.strPhone1 }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
-        <h4 class="modal-title">Delete a bank CAC</h4>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure to delete the bank CAC?</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-link" ng-click="ok()">OK</button>
-        <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete a bank CAC</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete the bank CAC?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
 </script>
 
 
