@@ -136,3 +136,13 @@ materialAdmin
     
     return gs;
   })
+
+  .filter('ddate', function() {
+    return function(strDate) {
+      if (strDate) {
+        return moment(strDate).format('DD/MM/YYYY');
+      } else {
+        return '';
+      }
+    }
+  })

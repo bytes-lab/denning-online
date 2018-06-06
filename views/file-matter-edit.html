@@ -210,7 +210,7 @@
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Letter of Offer Date</label>
-      <input type="text" class="form-control" ng-model="model.dtDate8" style="width:45%;">
+      <input type="text" class="form-control" readonly="" ng-value="model.dtDate8 | ddate" style="width:45%;">
       </div>
     </div>    
   </div>  
@@ -675,7 +675,7 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Open Date</label>
-    <input type="text" class="form-control" ng-value="model.dtDateOpenFile.split(' ')[0]" style="width:45%;">
+    <input type="text" class="form-control" readonly="" ng-value="model.dtDateOpenFile | ddate" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
@@ -693,7 +693,7 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Close Date</label>
-    <input type="text" class="form-control" readonly="" ng-value="model.dtDateCloseFile.split(' ')[0]" style="width:45%;">
+    <input type="text" class="form-control" readonly="" ng-value="model.dtDateCloseFile | ddate" style="width:45%;">
     </div>
   </div>
 
@@ -833,7 +833,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Date</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" readonly="" ng-value="model.dtDateEntered.split(' ')[0]" class="form-control input-sm" id="inputEmail3">
+        <input type="text" readonly="" ng-value="model.dtDateEntered | ddate" class="form-control input-sm" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -841,7 +841,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Date</label>
     <div class="col-sm-8">
       <div class="fg-line">        
-        <label class="form-control input-sm" id="inputEmail3">{{ model.dtDateUpdated | date : "dd/MM/yyyy" }}</label>
+        <label class="form-control input-sm" id="inputEmail3">{{ model.dtDateUpdated | ddate }}</label>
       </div>
     </div>
   </div>

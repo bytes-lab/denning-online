@@ -179,6 +179,8 @@ materialAdmin
       var method = entity.code ? 'PUT': 'POST';
       delete entity.dtDateEntered;
       delete entity.dtDateUpdated;
+      delete entity.intCategory;
+      delete entity.intOrdering;
 
       if (!entity.code || entity.code.length == 0) {
         entity.code = 'frmFile' + entity.strDisplayName.replace(' ', '');
