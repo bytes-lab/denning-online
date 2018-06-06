@@ -46,9 +46,15 @@ materialAdmin
     };
   })
 
-  .controller('bankCACEditCtrl', function($filter, $stateParams, bankCACService, $state) {
+  .controller('bankCACEditCtrl', function($stateParams, bankCACService, $state, bankService, Auth) {
     var self = this;
     self.save = save;
+    self.isDialog = false;
+    self.viewMode = false;  // for edit / create
+    self.cancel = cancel;
+    self.userInfo = Auth.getUserInfo();
+    self.create_new = $state.$current.data.can_edit;
+    self.can_edit = $state.$current.data.can_edit;
 
     if($stateParams.id) {
       bankCACService.getItem($stateParams.id)
@@ -59,15 +65,65 @@ materialAdmin
       self.bank_CAC = {};
     }
 
+    self.queryBanks = function(searchText) {
+      return bankService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    function cancel() {
+      $state.go('bank-CACs.list');
+    }
+
     function save() {
       bankCACService.save(self.bank_CAC).then(function(bank_CAC) {
         self.bank_CAC = bank_CAC;
         $state.go('bank-CACs.list');
       })
       .catch(function(err){
-        //Handler
-
-        //$scope.formname.bank_CACInfo.$error.push({meessage:''});
       });
     }
+  })
+
+  .controller('bankCACCreateModalCtrl', function ($uibModalInstance, party, viewMode, bankBranchService, Auth, bankService, bankCACService) {
+    var self = this;
+    self.save = save;
+    self.cancel = cancel;
+    self.isDialog = true;
+    self.viewMode = viewMode;
+    self.userInfo = Auth.getUserInfo();
+    self.create_new = !viewMode;
+    self.can_edit = !viewMode;
+
+    self.queryBanks = function(searchText) {
+      return bankService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryBankCACs = function(searchText) {
+      return bankCACService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    if (viewMode) {
+      bankBranchService.getItem(party.code).then(function(item) {
+        self.bankBranch = item;
+      });
+    } else {
+      self.bankBranch = {};
+    }
+
+    function save() {
+      bankBranchService.save(self.contact).then(function(contact) {
+        $uibModalInstance.close(contact);
+      })
+      .catch(function(err){
+      });
+    };
+
+    function cancel() {
+      $uibModalInstance.close();
+    };
   })

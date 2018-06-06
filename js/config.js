@@ -866,9 +866,10 @@ materialAdmin
       })
       .state ('bank-CACs.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'bankCACEditCtrl as vm',
         templateUrl: 'views/bank-CAC-edit.html'
       })  
