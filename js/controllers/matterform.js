@@ -34,7 +34,12 @@ materialAdmin
         vm.model = item;
         vm.model.tmp = {}; // temp variable
         vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
-        vm.matter_code = JSON.parse(item.clsMatterCode.jsonFieldLabels);
+        if (item.clsMatterCode.jsonFieldLabels) {
+          vm.matter_code = JSON.parse(item.clsMatterCode.jsonFieldLabels);
+        } else {
+          vm.matter_code = [];
+        }
+
         vm.tabDict = {
           "Matter": {
             "groups": [
