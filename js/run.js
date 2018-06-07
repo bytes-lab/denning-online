@@ -587,7 +587,15 @@ materialAdmin
 
     formlyConfig.setType({
       name: 'premises-rent',
-      templateUrl: 'premises-rent.html'
+      templateUrl: 'premises-rent.html',
+      controller: function ($scope) {
+        $scope.types = ['Dwelling House', 'Apartment', 'Condominium', 'Shop', 'Office', 'Factory', 'Workshop', 'Land'];
+        $scope.queryList = function (q) {
+          return $scope.types.filter(function(item) {
+            return item.search(new RegExp(q, "i")) > -1;
+          });
+        };
+      }
     });  
 
     formlyConfig.setType({
