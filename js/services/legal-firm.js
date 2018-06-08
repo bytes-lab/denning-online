@@ -31,7 +31,7 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/app/Solicitor/'+code,
+        url: 'http://43.252.215.81/denningwcf/v1/table/Lawyer/'+code,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;

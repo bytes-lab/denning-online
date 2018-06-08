@@ -946,7 +946,8 @@ materialAdmin
       })
       .state ('legal-firms.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
         url: '/new',
         controller: 'legalFirmEditCtrl as vm',

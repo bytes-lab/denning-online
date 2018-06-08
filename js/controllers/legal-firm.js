@@ -29,14 +29,21 @@ materialAdmin
     }
   })
 
-  .controller('legalFirmEditCtrl', function($stateParams, legalFirmService, $state) {
+  .controller('legalFirmEditCtrl', function($stateParams, legalFirmService, $state, Auth) {
     var self = this;
+    self.userInfo = Auth.getUserInfo();
     self.cancel = cancel;
+    self.create_new = $state.$current.data.can_edit;
+    self.can_edit = $state.$current.data.can_edit;
+    self.viewMode = false;
 
-    legalFirmService.getItem($stateParams.id)
-    .then(function(item){
-      self.legalFirm = item;
-    });
+    if ($stateParams.id) {
+      legalFirmService.getItem($stateParams.id).then(function(item){
+        self.legalFirm = item;
+      });      
+    } else {
+      self.legalFirm = {};
+    }
 
     function cancel() {
       $state.go('legal-firms.list');      

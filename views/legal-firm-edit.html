@@ -1,15 +1,25 @@
-<div ng-class="vm.isDialog ? '' : 'container'">
+<div class="container">
   <div class="card">
+    <div class="card-header">
+      <div class="row">
+      <div class="col-md-10 col-sm-11">
+        <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Legal Firm</h2>
+        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.legalfirm)" ng-if="vm.userInfo.priority.legalfirm.delete && !vm.create_new && !vm.viewMode">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.legalfirm.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.legalfirm.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+      </div>  
+      </div>
+    </div>
     <div class="card-body card-padding">
       <div class="clearfix"></div>
-      <h4 class="m-t-25">Legal Firm Information</h4>
       <div class="row">
         <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Code</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.code" type="text" class="form-control">
+                <input ng-model="vm.legalFirm.code" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -17,7 +27,31 @@
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.name" type="text" class="form-control">
+                <input ng-model="vm.legalFirm.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Initials</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.legalFirm.strInitials" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Title</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strTitle">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Lawyer Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.legalFirm.strLawyerName" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -25,31 +59,23 @@
             <dt class="p-t-10">Email</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.emailAddress">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strEmailAddress">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Home</dt>
+            <dt class="p-t-10">Phone Office 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneHome">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strPhone1">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Mobile</dt>
+            <dt class="p-t-10">Phone Office 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneMobile">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneOffice">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strPhone2">
               </div>
             </dd>
           </dl>
@@ -57,33 +83,33 @@
             <dt class="p-t-10">Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.phoneFax">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strPhoneFax">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Website</dt>
+            <dt class="p-t-10">Mobile</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.webSite">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strPhoneMobile">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remarks</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strRemarks">
               </div>
             </dd>
           </dl>
         </div>
         <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.country" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
             <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.state">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strState">
               </div>
             </dd>
           </dl>
@@ -91,7 +117,7 @@
             <dt class="p-t-10">Postcode</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.postcode" type="text" class="form-control">
+                <input ng-model="vm.legalFirm.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -99,7 +125,7 @@
             <dt class="p-t-10">City</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.city">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strCity">
               </div>
             </dd>
           </dl>              
@@ -107,7 +133,7 @@
             <dt class="p-t-10">Address (Line 1)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.address.line1" type="text" class="form-control">
+                <input ng-model="vm.legalFirm.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -115,7 +141,7 @@
             <dt class="p-t-10">Address (Line 2)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strAddressLine2">
               </div>
             </dd>
           </dl>
@@ -123,7 +149,39 @@
             <dt class="p-t-10">Address (Line 3)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.legalFirm.address.line3">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strAddressLine3">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Status</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strStatus">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Website</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strWebsite">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Note 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strNote1">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Note 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strNote2">
               </div>
             </dd>
           </dl>
@@ -132,12 +190,20 @@
       <div class="clearfix"></div>
       
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10 col-sm-11 no-padding">
+          <div class="m-t-30">
+            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.legalfirm.delete && !vm.create_new && !vm.viewMode">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.legalfirm.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.legalfirm.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          </div>
+        </div>
+        <div class="col-md-10" ng-if="vm.viewMode">
           <div class="m-t-30">
             <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div>     
 </div>
