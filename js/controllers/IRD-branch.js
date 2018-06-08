@@ -18,10 +18,10 @@ materialAdmin
     function initializeTable () {
       //Filtering
       self.tableFilter = new NgTableParams({
-        page: 1,      // show first page
+        page: 1,
         count: 25,
         sorting: {
-          name: 'asc'   // initial sorting
+          name: 'asc'
         }
       }, {
         dataset: self.data
@@ -46,6 +46,6 @@ materialAdmin
     }
 
     function cancel() {
-      $state.go('IRD-branches.list');      
-    }     
+      $state.go('IRD-branches.list');
+    }
   })

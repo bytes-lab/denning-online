@@ -53,13 +53,9 @@ materialAdmin
 
   .controller('propertyEditCtrl', function($filter, $stateParams, propertyService, $state, Auth, $uibModal, contactService) {
     var self = this;
-    self.copy = copy;
-    self.save = save;
-    self.cancel = cancel;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
-    self.openDelete = openDelete;
     self.can_edit = $state.$current.data.can_edit;
     self.create_new = $state.$current.data.can_edit;
 
@@ -105,7 +101,7 @@ materialAdmin
       return false;
     };
     
-    function copy() {
+    self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
       
@@ -119,14 +115,13 @@ materialAdmin
       delete self.property.taxFileNo;
     }
 
-    function save() {
+    self.save = function () {
       propertyService.save(self.property).then(function(property) {
         self.property = property;
-        $state.go('properties.edit', {'id': property.code});
       });
     }
 
-    function cancel() {
+    self.cancel = function () {
       $state.go('properties.list');
     }
 
@@ -157,7 +152,7 @@ materialAdmin
     }
 
     //Prevent Outside Click
-    function openDelete(event, property) {
+    self.openDelete = function (event, property) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, property)
     };

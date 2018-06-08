@@ -40,13 +40,13 @@ materialAdmin
     if ($stateParams.id) {
       legalFirmService.getItem($stateParams.id).then(function(item){
         self.legalFirm = item;
-      });      
+      });
     } else {
       self.legalFirm = {};
     }
 
     function cancel() {
-      $state.go('legal-firms.list');      
+      $state.go('legal-firms.list');
     }  
   })
 
@@ -62,7 +62,7 @@ materialAdmin
       legalFirmService.getItem(lf.party.code)
       .then(function(item){
         self.legalFirm = item;
-      });                  
+      });
     } else {
       self.legalFirm = {};
     }

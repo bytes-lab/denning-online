@@ -43,15 +43,16 @@ materialAdmin
       });  
     }
 
-    function save(property) {
-      var method = property.code ? 'PUT': 'POST';
-      delete property.relatedMatter;
+    function save(entity) {
+      var method = entity.code ? 'PUT': 'POST';
+      delete entity.dtDateEntered;
+      delete entity.dtDateUpdated;
 
       return $http({
         method: method,
-        url: 'http://43.252.215.81/denningwcf/v1/property',
+        url: 'http://43.252.215.81/denningwcf/v1/table/Property',
         headers: Auth.isAuthenticated(),
-        data: property
+        data: entity
       }).then(function(response) {
         return response.data;
       });

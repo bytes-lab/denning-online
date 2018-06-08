@@ -6,15 +6,7 @@ materialAdmin
   .service('contactService', function($q, $timeout, $http, Auth) {
     var service = {};
 
-    service.getList = getList;
-    service.getItem = getItem;
-    service.getIDTypeList = getIDTypeList;
-    service.getSalutationList = getSalutationList;
-    service.save = save;
-    service.upload = upload;
-    service.delete = delete_;
-
-    function getList(page=1, pagesize=25, keyword='') {
+    service.getList = function (page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
@@ -44,7 +36,7 @@ materialAdmin
       });  
     };
 
-    function getItem(code) {
+    service.getItem = function (code) {
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/table/Customer/'+code,
@@ -54,7 +46,7 @@ materialAdmin
       });  
     }
 
-    function getIDTypeList() {
+    service.getIDTypeList = function () {
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/table/IDType',
@@ -64,7 +56,7 @@ materialAdmin
       });  
     }
 
-    function getSalutationList() {
+    service.getSalutationList = function () {
       return $http({
         method: 'GET',
         url: 'http://43.252.215.81/denningwcf/v1/Salutation',
@@ -74,7 +66,7 @@ materialAdmin
       });  
     }
 
-    function upload(info, type) {
+    service.upload = function (info, type) {
       var url = 'http://43.252.215.81/denningwcf/v1/app/';
       if (type == 'contact') {
         url = url + 'contactFolder';
@@ -92,22 +84,22 @@ materialAdmin
       });
     }
 
-    function save(contact) {
-      var method = contact.code ? 'PUT': 'POST';
-      delete contact.relatedMatter;
-      // contact.irdBranch = contact.irdBranch.description;
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
+      delete entity.dtDateEntered;
+      delete entity.dtDateUpdated;
 
       return $http({
         method: method,
-        url: 'http://43.252.215.81/denningwcf/v1/app/contact',
+        url: 'http://43.252.215.81/denningwcf/v1/table/Customer',
         headers: Auth.isAuthenticated(),
-        data: contact
+        data: entity
       }).then(function(response) {
         return response.data;
       });
     }
 
-    function delete_(contact) {
+    service.delete = function (contact) {
       var deferred = $q.defer();
 
       $timeout(function(){

@@ -704,27 +704,14 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Entered by</dt>
             <dd>
-              <md-autocomplete
-                md-selected-item="vm.contact.clsEnteredBy"
-                md-search-text="qseb"
-                md-items="item in vm.queryStaffs(qseb)"
-                md-item-text="item.strName ? item.strName+' ( '+item.strIdNo+' )': ' '"
-                md-min-length="1"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="qseb" class="col-1" md-highlight-flags="i">
-                  ({{item.strIdNo}}) {{item.strName}}
-                </span>
-              </md-item-template>
-              </md-autocomplete>
+              <input type="text" class="form-control" readonly="" ng-model="vm.contact.clsEnteredBy.strInitials">
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.dtDateEntered">
+                <input type='text' ng-readonly="true" class="form-control" ng-value="vm.contact.dtDateEntered|ddate">
               </div>
             </dd>
           </dl>          
@@ -733,27 +720,14 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Updated by</dt>
             <dd>
-              <md-autocomplete
-                md-selected-item="vm.contact.clsUpdatedBy"
-                md-search-text="qsub"
-                md-items="item in vm.queryStaffs(qsub)"
-                md-item-text="item.strName ? item.strName+' ( '+item.strIdNo+' )': ' '"
-                md-min-length="1"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="qsub" class="col-1" md-highlight-flags="i">
-                  ({{item.strIdNo}}) {{item.strName}}
-                </span>
-              </md-item-template>
-              </md-autocomplete>
+              <input type="text" class="form-control" readonly="" ng-model="vm.contact.clsUpdatedBy.strInitials">
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.dtDateUpdated">
+                <input type='text' ng-readonly="true" class="form-control" ng-value="vm.contact.dtDateUpdated|ddate">
               </div>
             </dd>
           </dl>          

@@ -35,7 +35,7 @@
           <dl class="dl-horizontal" ng-repeat="item in vm.tabList">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.matterform[item]" ng-click="vm.addTab(item)">
+                <input type="checkbox" ng-disabled="!vm.can_edit" ng-model="vm.matterform[item]" ng-click="vm.addTab(item)">
                 <i class="input-helper"></i>
                 {{ item }}
               </label>
@@ -51,8 +51,8 @@
                 <span>{{ item }}</span>
               </label>
               <div class="pull-right">
-                <button class="btn btn-default btn-sm waves-effect"><i class="zmdi zmdi-chevron-up" ng-click="vm.changeOrder($index-1, $index);"></i></button>
-                <button class="btn btn-default btn-sm waves-effect" ng-click="vm.changeOrder($index, $index+1);"><i class="zmdi zmdi-chevron-down"></i></button>
+                <button class="btn btn-default btn-sm waves-effect" ng-disabled="!vm.can_edit"><i class="zmdi zmdi-chevron-up" ng-click="vm.changeOrder($index-1, $index);"></i></button>
+                <button class="btn btn-default btn-sm waves-effect" ng-click="vm.changeOrder($index, $index+1);" ng-disabled="!vm.can_edit"><i class="zmdi zmdi-chevron-down"></i></button>
               </div>
             </div>
           </dl>
@@ -68,7 +68,7 @@
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.matterform.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.matterform.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
             <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.matterform.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.matterform.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.matterform.create && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>

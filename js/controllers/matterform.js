@@ -1,6 +1,7 @@
 materialAdmin
-  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService) {
+  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService, Auth) {
     var vm = this;
+    vm.userInfo = Auth.getUserInfo();
     vm.model = {};
     vm.idxTab = 0;
 
@@ -737,9 +738,6 @@ materialAdmin
 
   .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, Auth, $uibModal) {
     var self = this;
-    self.copy = copy;
-    self.save = save;
-    self.cancel = cancel;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
@@ -747,7 +745,7 @@ materialAdmin
     self.create_new = $state.$current.data.can_edit;
     self.matterform = {
       selected: []
-    }
+    };
 
     self.tabList = ['Summary', 'Matter', 'Parties-S', 'Parties', 'Solicitors', 
                     'Case', 'Price', 'Loan', 'Property', 'Bank', '$', 'Date', 'Text',
@@ -785,7 +783,16 @@ materialAdmin
       self.matterform.selected.splice(y, 1, self.matterform.selected.splice(x, 1, self.matterform.selected[y])[0]);
     };
 
-    function copy() {
+    self.new_ = function new_() {
+      self.matterForm = {};
+      self.matterform = {
+        selected: []
+      };      
+      self.can_edit = true;
+      self.create_new = true;
+    }
+
+    self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
       
@@ -793,7 +800,7 @@ materialAdmin
       delete self.matterForm.strDisplayName;
     }
 
-    function save() {
+    self.save = function () {
       var selected = [];
       var i = 0;
       angular.forEach(self.matterform.selected, function(value, key) {
@@ -807,11 +814,11 @@ materialAdmin
       self.matterForm.jsonTabs = JSON.stringify(selected);
       matterFormService.save(self.matterForm).then(function(matterform) {
         self.matterForm = matterform;
-        $state.go('matter-forms.edit', {'code': matterform.code});
+        alert('Saved successfully.');
       });
     }
 
-    function cancel() {
+    self.cancel = function () {
       $state.go('matter-forms.list');
     }
   })

@@ -53,14 +53,9 @@ materialAdmin
 
   .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService, raceService, religionService, IRDBranchService) {
     var self = this;
-    self.save = save;
-    self.copy = copy;
-    self.cancel = cancel;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
-    self.openDelete = openDelete;
-    self.queryFields = queryFields;
     self.create_new = $state.$current.data.can_edit;
     self.can_edit = $state.$current.data.can_edit;
     self.IDTypes = [];
@@ -125,7 +120,7 @@ materialAdmin
       });
     }
 
-    function queryFields(field, searchText) {
+    self.queryFields = function (field, searchText) {
       return self[field].filter(function(c) {
         return c.description.search(new RegExp(searchText, "i")) > -1;
       });
@@ -137,7 +132,7 @@ materialAdmin
       self.create_new = true;
     }
 
-    function copy() {
+    self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
       
@@ -152,41 +147,36 @@ materialAdmin
     }
 
     if ($stateParams.id) {
-      contactService.getItem($stateParams.id)
-      .then(function(item){
+      contactService.getItem($stateParams.id).then(function(item){
         self.contact = angular.copy(item);  // important
       });
     } else {
       self.contact = {};
     }
 
-    function save() {
+    self.save = function () {
       contactService.save(self.contact).then(function(contact) {
         self.contact = contact;
-        $state.go('contacts.edit', {'id': contact.code});
-      })
-      .catch(function(err){
-        //Handler
       });
     }
 
-    function cancel() {
+    self.cancel = function () {
       $state.go('contacts.list');      
     }
 
     $scope.open = function($event, opened) {
-        $event.preventDefault();
-        $event.stopPropagation();
+      $event.preventDefault();
+      $event.stopPropagation();
 
-        $scope[opened] = true;
+      $scope[opened] = true;
     };
 
     $scope.dateOptions = {
-        formatYear: 'yyyy',
-        startingDay: 1
+      formatYear: 'yyyy',
+      startingDay: 1
     };
 
-    $scope.format = 'dd-MM-yyyy';
+    $scope.format = 'dd/MM/yyyy';
 
     //Create Modal
     function modalInstances1(animation, size, backdrop, keyboard, contact) {
@@ -247,7 +237,7 @@ materialAdmin
     };
 
     //Prevent Outside Click
-    function openDelete(event, contact) {
+    self.openDelete = function (event, contact) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, contact)
     };
