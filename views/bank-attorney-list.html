@@ -1,66 +1,58 @@
 <div class="container">
-
-    <div class="block-header">
-        <h2>home/bank attorney</h2>
-
-        <ul class="actions m-t-20 hidden-xs">
-            <li class="dropdown" uib-dropdown>
-                <a href="" uib-dropdown-toggle>
-                    <i class="zmdi zmdi-more-vert"></i>
-                </a>
-
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a ui-sref="bank-attorneys.new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Add a new Bank Attorney</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="card">
-        <div class="card-header">
-            <h2>Bank Attorney List</h2>
+  <div class="block-header">
+    <h2>home / bank attorney</h2>
+  </div>
+  
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2 class="f-20 f-500 c-purple">Bank Attorney List</h2>
         </div>
-                
-        <div class="card-body">
-            <div class="table-responsive" ng-if="vm.dataReady" > 
-                <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
-                    <tr ng-repeat="w in $data">
-                        <td data-title="'Attorney Name'" filter="{ 'name': 'text' }" sortable="'name'">
-                            {{ w.name }}
-                        </td>
-                        <td data-title="'IC'" filter="{ 'ic': 'text' }" sortable="'ic'">
-                            {{ w.ic }}
-                        </td>
-                        <td data-title="'Master Bank'" filter="{ 'bank': 'text' }" sortable="'bank'">
-                            {{ w.bank }}
-                        </td>
-                        <td data-title="'District/State'" filter="{ 'state': 'text' }" sortable="'state'">
-                            {{ w.state }}
-                        </td>
-                        <td data-title="'Actions'">
-                            <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="bank-attorneys.edit({id:w.id})"><i class="zmdi zmdi-edit"></i></a>
-                            <a class="btn btn-warning" ng-click="vm.openDelete(w)"><i class="zmdi zmdi-delete"></i></a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="col-sm-4">
+          <a ui-sref="bank-attorneys.new" class="btn bgm-cyan pull-right"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New Bank Attorney</a>
         </div>
+      </div>
     </div>
+        
+    <div class="card-body">
+      <div class="table-responsive" ng-if="vm.dataReady" > 
+        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+          <tr ng-repeat="w in $data">
+            <td data-title="'Attorney Name'" filter="{ 'name': 'text' }" sortable="'name'">
+              {{ w.name }}
+            </td>
+            <td data-title="'IC'" filter="{ 'ic': 'text' }" sortable="'ic'">
+              {{ w.ic }}
+            </td>
+            <td data-title="'Master Bank'" filter="{ 'bank': 'text' }" sortable="'bank'">
+              {{ w.bank }}
+            </td>
+            <td data-title="'District/State'" filter="{ 'state': 'text' }" sortable="'state'">
+              {{ w.state }}
+            </td>
+            <td data-title="'Actions'">
+              <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="bank-attorneys.edit({id:w.id})"><i class="zmdi zmdi-edit"></i></a>
+              <a class="btn btn-warning" ng-click="vm.openDelete(w)"><i class="zmdi zmdi-delete"></i></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
-        <h4 class="modal-title">Delete a bank attorney</h4>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure to delete the bank attorney?</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-link" ng-click="ok()">OK</button>
-        <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete a bank attorney</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete the bank attorney?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
 </script>
 
 

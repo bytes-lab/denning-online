@@ -1,26 +1,19 @@
 <div class="container">
 
   <div class="block-header">
-    <h2>Breadcrumb</h2>
-
-    <ul class="actions m-t-20 hidden-xs">
-      <li class="dropdown" uib-dropdown>
-        <a href="" uib-dropdown-toggle>
-          <i class="zmdi zmdi-more-vert"></i>
-        </a>
-
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li>
-            <a ui-sref="occupations.new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Add a new Occupation</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <h2>home / occupations</h2>
   </div>
   
   <div class="card">
     <div class="card-header">
-      <h2>Occupation List <small>Type something in filter and press Enter or Filter button</small></h2>
+      <div class="row">
+        <div class="col-sm-8">
+          <h2 class="f-20 f-500 c-purple">Occupation List</h2>
+        </div>
+        <div class="col-sm-4">
+          <a ui-sref="occupations.new" class="btn bgm-cyan pull-right"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New Occupation</a>
+        </div>
+      </div>
     </div>
         
     <div class="card-body">
