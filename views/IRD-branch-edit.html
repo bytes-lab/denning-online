@@ -1,31 +1,41 @@
 <div class="container">
   <div class="card">
+    <div class="card-header">
+      <div class="row">
+      <div class="col-md-10 col-sm-11">
+        <h2 class="c-purple f-500 f-20" style="display: inline;">Edit IRB Branch</h2>
+        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.irbbranch)" ng-if="vm.userInfo.priority.irbbranch.delete && !vm.create_new && !vm.viewMode">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.irbbranch.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.irbbranch.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+      </div>  
+      </div>
+    </div>
     <div class="card-body card-padding">
       <div class="clearfix"></div>
-      <h4 class="m-t-25">IRB Branch Information</h4>
       <div class="row">
         <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Code</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.code" type="text" class="form-control">
+                <input ng-model="vm.IRDBranch.code" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Description</dt>
+            <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.description" type="text" class="form-control">
+                <input ng-model="vm.IRDBranch.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Email</dt>
+            <dt class="p-t-10">Contact Person</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.emailAddress">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strContactPerson">
               </div>
             </dd>
           </dl>
@@ -33,7 +43,7 @@
             <dt class="p-t-10">Phone Office 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone1">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strPhone1">
               </div>
             </dd>
           </dl>
@@ -41,7 +51,7 @@
             <dt class="p-t-10">Phone Office 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.phone2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strPhone2">
               </div>
             </dd>
           </dl>
@@ -49,33 +59,25 @@
             <dt class="p-t-10">Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.phoneFax">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strPhoneFax">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Website</dt>
+            <dt class="p-t-10">Remarks</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.webSite">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strRemarks">
               </div>
             </dd>
-          </dl>                
+          </dl>
         </div>
         <div class="col-md-5 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.IRDBranch.address.country" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.address.state">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strState">
               </div>
             </dd>
           </dl>
@@ -83,7 +85,7 @@
             <dt class="p-t-10">Postcode</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.address.postcode" type="text" class="form-control">
+                <input ng-model="vm.IRDBranch.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -91,7 +93,7 @@
             <dt class="p-t-10">City</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.address.city">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strCity">
               </div>
             </dd>
           </dl>              
@@ -99,7 +101,7 @@
             <dt class="p-t-10">Address (Line 1)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.address.line1" type="text" class="form-control">
+                <input ng-model="vm.IRDBranch.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -107,7 +109,7 @@
             <dt class="p-t-10">Address (Line 2)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.address.line2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strAddressLine2">
               </div>
             </dd>
           </dl>
@@ -115,7 +117,7 @@
             <dt class="p-t-10">Address (Line 3)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.IRDBranch.address.line3">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strAddressLine3">
               </div>
             </dd>
           </dl>
@@ -124,10 +126,10 @@
       <div class="clearfix"></div>
       
       <div class="row">
-        <div class="col-md-10" ng-if="!vm.viewMode">
+        <div class="col-md-10 col-sm-11 no-padding">
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.irbbranch.delete">Delete</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.irbbranch.delete && !vm.create_new && !vm.viewMode">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.irbbranch.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.irbbranch.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
           </div>

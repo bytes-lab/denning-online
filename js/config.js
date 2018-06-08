@@ -633,7 +633,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'occupationEditCtrl as vm',
         templateUrl: 'views/occupation-edit.html'
       })     
@@ -670,9 +670,10 @@ materialAdmin
       })
       .state ('IRD-branches.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'IRDBranchEditCtrl as vm',
         templateUrl: 'views/IRD-branch-edit.html'
       })  
@@ -711,7 +712,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'cityEditCtrl as vm',
         templateUrl: 'views/city-edit.html'
       })  
@@ -750,7 +751,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'staffEditCtrl as vm',
         templateUrl: 'views/staff-edit.html'
       })  
@@ -789,7 +790,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'bankEditCtrl as vm',
         templateUrl: 'views/bank-edit.html'
       })  
@@ -908,7 +909,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'bankAttorneyEditCtrl as vm',
         templateUrl: 'views/bank-attorney-edit.html'
       })  
@@ -947,7 +948,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'legalFirmEditCtrl as vm',
         templateUrl: 'views/legal-firm-edit.html'
       })        
@@ -986,7 +987,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'judgeEditCtrl as vm',
         templateUrl: 'views/judge-edit.html'
       })  
@@ -1025,7 +1026,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'courtEditCtrl as vm',
         templateUrl: 'views/court-edit.html'
       })  
@@ -1142,7 +1143,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'buildingEditCtrl as vm',
         templateUrl: 'views/building-edit.html'
       })  
@@ -1181,7 +1182,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'projectEditCtrl as vm',
         templateUrl: 'views/project-edit.html'
       })  
@@ -1220,7 +1221,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'mukimEditCtrl as vm',
         templateUrl: 'views/mukim-edit.html'
       })  
@@ -1259,7 +1260,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'loanTypeEditCtrl as vm',
         templateUrl: 'views/loan-type-edit.html'
       })  
@@ -1298,7 +1299,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'CKHTEditCtrl as vm',
         templateUrl: 'views/CKHT-edit.html'
       })                          
@@ -1354,7 +1355,7 @@ materialAdmin
         data: {
           access: '@'
         },        
-        url: '/edit/new',
+        url: '/new',
         controller: 'courtdiaryEditCtrl as vm',
         templateUrl: 'views/courtdiary-edit.html'
       })  

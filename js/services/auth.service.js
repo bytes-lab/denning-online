@@ -81,10 +81,10 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
     },
     "irbbranch": {
       "list": true,
-      "create": false,
+      "create": true,
       "read": true,
-      "update": false,
-      "delete": false
+      "update": true,
+      "delete": true
     },
     "courtdiary": {
       "list": true,
