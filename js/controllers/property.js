@@ -158,7 +158,7 @@ materialAdmin
     };
   })
 
-  .controller('propertyCreateModalCtrl', function ($modalInstance, property, viewMode, propertyService, Auth) {
+  .controller('propertyCreateModalCtrl', function ($uibModalInstance, property, viewMode, propertyService, Auth) {
     var self = this;
     self.save = save;
     self.cancel = cancel;
@@ -188,13 +188,13 @@ materialAdmin
 
     function save() {
       propertyService.save(self.property).then(function(property) {
-        $modalInstance.close(property);
+        $uibModalInstance.close(property);
       })
       .catch(function(err){
       });
     };
 
     function cancel() {
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
   })

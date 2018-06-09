@@ -36,7 +36,7 @@ materialAdmin
     }
   })
 
-  .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, on_list, fileMatterService, $state) {
+  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, contact, on_list, fileMatterService, $state) {
     $scope.ok = function () {
       fileMatterService.delete(contact).then(function(contact) {
         if (on_list)
@@ -47,11 +47,11 @@ materialAdmin
       .catch(function(err){
         //$scope.formname.contactInfo.$error.push({meessage:''});
       });
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-      $modalInstance.close();
+      $uibModalInstance.close();
       if (on_list)
         $state.go('file-matters.list');
     };

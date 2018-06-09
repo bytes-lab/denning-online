@@ -51,7 +51,7 @@ materialAdmin
     };    
   })
 
-  .controller('PresetbillDeleteModalCtrl', function ($scope, $modalInstance, presetbill, presetbillService, $state) {
+  .controller('PresetbillDeleteModalCtrl', function ($scope, $uibModalInstance, presetbill, presetbillService, $state) {
     $scope.ok = function () {
       presetbillService.delete(presetbill).then(function(presetbill) {
         $state.reload();
@@ -61,11 +61,11 @@ materialAdmin
 
         //$scope.formname.presetbillInfo.$error.push({meessage:''});
       });
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-      $modalInstance.close();
+      $uibModalInstance.close();
       $state.go('presetbills.list');
     };
   })

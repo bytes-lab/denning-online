@@ -130,19 +130,19 @@ materialAdmin
 
     })
 
-    // Please note that $modalInstance represents a modal window (instance) dependency.
+    // Please note that $uibModalInstance represents a modal window (instance) dependency.
     // It is not the same as the $modal service used above.
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, content) {
+    .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, content) {
 
           $scope.modalContent = content;
 
           $scope.ok = function () {
-            $modalInstance.close();
+            $uibModalInstance.close();
           };
 
           $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
           };
     })
     

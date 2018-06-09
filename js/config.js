@@ -97,6 +97,16 @@ materialAdmin
         templateUrl: 'views/file-matter-edit.html'
       })
 
+      .state ('file-matters.new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },        
+        url: '/new',
+        controller: 'fileMatterEditCtrl as vm',
+        templateUrl: 'views/file-matter-edit.html'
+      })
+
       //------------------------------
       // MATTER FORM
       //------------------------------

@@ -61,7 +61,7 @@ materialAdmin
         };        
     })
 
-    .controller('cityDeleteModalCtrl', function ($scope, $modalInstance, city, cityService, $state) {
+    .controller('cityDeleteModalCtrl', function ($scope, $uibModalInstance, city, cityService, $state) {
         $scope.ok = function () {
             cityService.delete(city).then(function(city) {
                 $state.reload();
@@ -71,11 +71,11 @@ materialAdmin
 
                 //$scope.formname.cityInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     })
 

@@ -57,7 +57,7 @@ materialAdmin
     };    
   })
 
-  .controller('CourtDiaryDeleteModalCtrl', function ($scope, $modalInstance, courtdiary, courtdiaryService, $state) {
+  .controller('CourtDiaryDeleteModalCtrl', function ($scope, $uibModalInstance, courtdiary, courtdiaryService, $state) {
     $scope.ok = function () {
       courtdiaryService.delete(courtdiary).then(function(courtdiary) {
         $state.reload();
@@ -67,11 +67,11 @@ materialAdmin
 
         //$scope.formname.courtdiaryInfo.$error.push({meessage:''});
       });
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-      $modalInstance.close();
+      $uibModalInstance.close();
       $state.go('courtdiary');
     };
   })

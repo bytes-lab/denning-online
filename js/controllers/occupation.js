@@ -59,7 +59,7 @@ materialAdmin
         };        
     })
 
-    .controller('occupationDeleteModalCtrl', function ($scope, $modalInstance, occupation, occupationService, $state) {
+    .controller('occupationDeleteModalCtrl', function ($scope, $uibModalInstance, occupation, occupationService, $state) {
         $scope.ok = function () {
             occupationService.delete(occupation).then(function(occupation) {
                 $state.reload();
@@ -69,11 +69,11 @@ materialAdmin
 
                 //$scope.formname.occupationInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     })
 

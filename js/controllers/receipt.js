@@ -53,7 +53,7 @@ materialAdmin
         };        
     })
 
-    .controller('ReceiptDeleteModalCtrl', function ($scope, $modalInstance, receipt, receiptService, $state) {
+    .controller('ReceiptDeleteModalCtrl', function ($scope, $uibModalInstance, receipt, receiptService, $state) {
         $scope.ok = function () {
             receiptService.delete(receipt).then(function(receipt) {
                 $state.reload();
@@ -63,11 +63,11 @@ materialAdmin
 
                 //$scope.formname.receiptInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.close();
+            $uibModalInstance.close();
             $state.go('receipts.list');
         };
     })

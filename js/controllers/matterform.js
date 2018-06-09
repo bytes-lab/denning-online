@@ -43,6 +43,7 @@ materialAdmin
 
         vm.tabDict = {
           "Matter": {
+            "label": "Info",
             "groups": [
               {
                 "key": "file-info",
@@ -648,10 +649,14 @@ materialAdmin
           vm.matterForm = item;
           vm.tabs = [];
           
+          vm.tabs.push(vm.tabDict['Matter']); // first tab
+
           angular.forEach(JSON.parse(item.jsonTabs), function(value, key) {
-            var item = vm.tabDict[value.TabName];
-            item['label'] = value.Title
-            vm.tabs.push(item);
+            if (value.TabName != 'Matter') {
+              var item = vm.tabDict[value.TabName];
+              item['label'] = value.Title
+              vm.tabs.push(item);              
+            }
           })
 
           vm.tabs.push(vm.tabDict['Offers']);
@@ -668,6 +673,8 @@ materialAdmin
           vm.tabs.push(vm.tabDict['Premises & Rent']);
         });
       });
+    } else {
+      vm.tabs.push(vm.tabDict['Matter']); // first tab
     }
 
     vm.options = {
@@ -719,7 +726,7 @@ materialAdmin
           alert('The file(s) uploaded successfully.');
         }
       })
-      .catch(function(err){
+      .catch(function(err) {
       });
     };
     // function definition

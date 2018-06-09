@@ -62,7 +62,7 @@ materialAdmin
         };        
     })
 
-    .controller('loanTypeDeleteModalCtrl', function ($scope, $modalInstance, contact, loanTypeService, $state) {
+    .controller('loanTypeDeleteModalCtrl', function ($scope, $uibModalInstance, contact, loanTypeService, $state) {
         $scope.ok = function () {
             loanTypeService.delete(contact).then(function(contact) {
                 $state.reload();
@@ -72,11 +72,11 @@ materialAdmin
 
                 //$scope.formname.contactInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     })
 

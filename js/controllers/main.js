@@ -567,7 +567,7 @@ materialAdmin
   })
 
   //Add event Controller (Modal Instance)
-  .controller('addeventCtrl', function($scope, $modalInstance, calendarData){
+  .controller('addeventCtrl', function($scope, $uibModalInstance, calendarData){
     
     //Calendar Event Data
     $scope.calendarData = {
@@ -614,13 +614,13 @@ materialAdmin
 
         $scope.activeState = -1;
         $scope.calendarData.eventName = '';   
-        $modalInstance.close();
+        $uibModalInstance.close();
       }
     }
     
     //Dismiss 
     $scope.eventDismiss = function() {
-      $modalInstance.dismiss();
+      $uibModalInstance.dismiss();
     }
   })
 

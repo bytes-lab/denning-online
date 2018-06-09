@@ -58,7 +58,7 @@ materialAdmin
         };        
     })
 
-    .controller('mukimDeleteModalCtrl', function ($scope, $modalInstance, mukim, mukimService, $state) {
+    .controller('mukimDeleteModalCtrl', function ($scope, $uibModalInstance, mukim, mukimService, $state) {
         $scope.ok = function () {
             mukimService.delete(mukim).then(function(mukim) {
                 $state.reload();
@@ -68,11 +68,11 @@ materialAdmin
 
                 //$scope.formname.mukimInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     })
 

@@ -63,7 +63,7 @@ materialAdmin
         };        
     })
 
-    .controller('SPApresetclDeleteModalCtrl', function ($scope, $modalInstance, spapresetcl, spapresetclService, $state, on_list) {
+    .controller('SPApresetclDeleteModalCtrl', function ($scope, $uibModalInstance, spapresetcl, spapresetclService, $state, on_list) {
         $scope.ok = function () {
             spapresetclService.delete(spapresetcl).then(function(spapresetcl) {
                 $state.reload();
@@ -73,11 +73,11 @@ materialAdmin
 
                 //$scope.formname.spapresetclInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.close();
+            $uibModalInstance.close();
             if (on_list)
                 $state.go('spapresetcls.list');
         };

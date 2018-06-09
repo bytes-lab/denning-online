@@ -62,7 +62,7 @@ materialAdmin
         };        
     })
 
-    .controller('CKHTDeleteModalCtrl', function ($scope, $modalInstance, contact, CKHTService, $state) {
+    .controller('CKHTDeleteModalCtrl', function ($scope, $uibModalInstance, contact, CKHTService, $state) {
         $scope.ok = function () {
             CKHTService.delete(contact).then(function(contact) {
                 $state.reload();
@@ -72,11 +72,11 @@ materialAdmin
 
                 //$scope.formname.contactInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     })
 

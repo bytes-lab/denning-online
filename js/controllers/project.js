@@ -61,7 +61,7 @@ materialAdmin
     };    
   })
 
-  .controller('projectDeleteModalCtrl', function ($scope, $modalInstance, contact, projectService, $state) {
+  .controller('projectDeleteModalCtrl', function ($scope, $uibModalInstance, contact, projectService, $state) {
     $scope.ok = function () {
       projectService.delete(contact).then(function(contact) {
         $state.reload();
@@ -71,11 +71,11 @@ materialAdmin
 
         //$scope.formname.contactInfo.$error.push({meessage:''});
       });
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
   })
 

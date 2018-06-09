@@ -50,7 +50,7 @@ materialAdmin
     }  
   })
 
-  .controller('lfCreateModalCtrl', function ($modalInstance, lf, viewMode, legalFirmService, $scope, Auth) {
+  .controller('lfCreateModalCtrl', function ($uibModalInstance, lf, viewMode, legalFirmService, $scope, Auth) {
     var self = this;
     self.save = save;
     self.cancel = cancel;
@@ -69,7 +69,7 @@ materialAdmin
 
     function save() {
       legalFirmService.save(self.legalFirm).then(function(legalFirm) {
-        $modalInstance.close(legalFirm);
+        $uibModalInstance.close(legalFirm);
       })
       .catch(function(err){
         //Handler
@@ -77,6 +77,6 @@ materialAdmin
     };
 
     function cancel() {
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
   })

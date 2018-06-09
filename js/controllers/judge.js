@@ -59,7 +59,7 @@ materialAdmin
         };        
     })
 
-    .controller('judgeDeleteModalCtrl', function ($scope, $modalInstance, judge, judgeService, $state) {
+    .controller('judgeDeleteModalCtrl', function ($scope, $uibModalInstance, judge, judgeService, $state) {
         $scope.ok = function () {
             judgeService.delete(judge).then(function(judge) {
                 $state.reload();
@@ -69,11 +69,11 @@ materialAdmin
 
                 //$scope.formname.judgeInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     })
 

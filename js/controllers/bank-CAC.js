@@ -28,7 +28,7 @@ materialAdmin
     }   
   })
 
-  .controller('bankCACDeleteModalCtrl', function ($scope, $modalInstance, bank_CAC, bankCACService, $state) {
+  .controller('bankCACDeleteModalCtrl', function ($scope, $uibModalInstance, bank_CAC, bankCACService, $state) {
     $scope.ok = function () {
       bankCACService.delete(bank_CAC).then(function(bank_CAC) {
         $state.reload();
@@ -38,11 +38,11 @@ materialAdmin
 
         //$scope.formname.bank_CACInfo.$error.push({meessage:''});
       });
-      $modalInstance.close();
+      $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
   })
 
