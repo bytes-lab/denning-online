@@ -745,7 +745,7 @@ materialAdmin
               }
             }, {
               getData: function(params) {
-                return templateService.getTemplates($scope.model[$scope.options.key+'_category'], $scope.model[$scope.options.key+'_type'], $scope.model[$scope.options.key+'_source'], $scope.to.fileNo).then(function(data) {
+                return templateService.getTemplates($scope.model[$scope.options.key+'_category'], $scope.model[$scope.options.key+'_type'], $scope.model[$scope.options.key+'_source'], $scope.model.strFileNo1).then(function(data) {
                   params.total(data.headers('x-total-count'));
                   return data.data;
                 });
@@ -754,11 +754,7 @@ materialAdmin
           }
         };
 
-        $scope.sources = [
-          'All',
-          'Online',
-          'User'
-        ];        
+        $scope.sources = ['All', 'Online', 'User'];
       }
     });
     
