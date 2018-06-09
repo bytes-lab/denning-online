@@ -616,6 +616,7 @@
       md-selected-item="model.clsMatterCode"
       md-search-text="qmc"
       md-items="item in queryCodes(qmc)"
+      md-selected-item-change="matterCodeChange(item)"
       md-item-text="item.strDescription+' ( '+item.code+' )'"
       md-min-length="1"
       md-autoselect="false"

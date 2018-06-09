@@ -640,23 +640,14 @@ materialAdmin
       };
     }
 
-    if ($stateParams.fileNo) {
-      fileMatterService.getItem($stateParams.fileNo).then(function (item) {
-        vm.model = item;
-        vm.model.tmp = {
-          create_new: $state.$current.data.can_edit,
-          can_edit: $state.$current.data.can_edit
-        }; // temp variable
-        
-        vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
+    function buildTabs(clsMatterCode) {
+      buildTabDict(clsMatterCode);
 
-        buildTabDict(vm.model.clsMatterCode);
+      vm.tabs = [];
+      vm.tabs.push(vm.tabDict['Matter']); // first tab
 
-        matterFormService.getItem(item.clsMatterCode.strFormName).then(function(item){
-          vm.tabs = [];
-          
-          vm.tabs.push(vm.tabDict['Matter']); // first tab
-
+      if (clsMatterCode) {
+        matterFormService.getItem(clsMatterCode.strFormName).then(function(item){
           angular.forEach(JSON.parse(item.jsonTabs), function(value, key) {
             if (value.TabName != 'Matter') {
               var item = vm.tabDict[value.TabName];
@@ -677,20 +668,30 @@ materialAdmin
           vm.tabs.push(vm.tabDict['Term']);
           vm.tabs.push(vm.tabDict['Others']);
           vm.tabs.push(vm.tabDict['Premises & Rent']);
-        });
+        });        
+      }
+    }
+
+    var editControl = {   // very important
+      create_new: $state.$current.data.can_edit,
+      can_edit: $state.$current.data.can_edit,
+      matterCodeChange: buildTabs      
+    };
+
+    if ($stateParams.fileNo) {
+      fileMatterService.getItem($stateParams.fileNo).then(function (item) {
+        vm.model = item;
+        vm.model.tmp = editControl;
+
+        vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
+        buildTabs(vm.model.clsMatterCode);
       });
     } else {
       vm.model = { 
-        tmp: {
-          create_new: $state.$current.data.can_edit,
-          can_edit: $state.$current.data.can_edit
-        } 
+        tmp: editControl
       };
 
-      buildTabDict(vm.model.clsMatterCode);
-
-      vm.tabs = [];
-      vm.tabs.push(vm.tabDict['Matter']); // first tab
+      buildTabs(vm.model.clsMatterCode);
     }
 
     vm.options = {

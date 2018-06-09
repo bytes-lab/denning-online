@@ -394,10 +394,6 @@ materialAdmin
       name: 'file',
       templateUrl: 'file.html',
       controller: function ($scope, legalFirmService, contactService, matterCodeService, Auth, $uibModal, $filter) {
-        $scope.getNumber = function(num) {
-          return new Array(num);
-        }
-
         $scope.represent_this = false;
         $scope.userInfo = Auth.getUserInfo();
 
@@ -410,22 +406,9 @@ materialAdmin
           }
         }
         
-        $scope.model[$scope.options.key] = [
-        {
-          "party": "",
-          "share": ""
-        }];
-
         $scope.solicitor = {};
         $scope.changeSolicitor = function(item) {
           $scope.solicitor = item;
-        }
-
-        $scope.addParty = function() {
-          $scope.model[$scope.options.key].push({
-            "party": "",
-            "share": ""
-          })
         }
 
         $scope.viewContact = function(party) {
@@ -448,6 +431,12 @@ materialAdmin
           return matterCodeService.getList(1, 10, searchText).then(function(data) {
             return data;            
           });
+        }
+
+        $scope.matterCodeChange = function (item) {
+          if (item) {
+            $scope.model.tmp.matterCodeChange(item);
+          }
         }
 
         $scope.queryBills = function (searchText) {
@@ -508,13 +497,6 @@ materialAdmin
 
         $scope.changeSolicitor = function(item) {
           $scope.solicitor = item;
-        }
-
-        $scope.addParty = function() {
-          $scope.model[$scope.options.key].push({
-            "party": "",
-            "share": ""
-          })
         }
 
         $scope.viewContact = function(party) {
