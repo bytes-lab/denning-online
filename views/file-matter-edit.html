@@ -258,9 +258,9 @@
     </div>
   </div>
   <div style="margin-bottom: 30px;" ng-if="to.party">
-    <a class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty(to.c_start, to.c_end)" title="Add a new party to group">
+    <button ng-disabled="!model.tmp.can_edit" class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty(to.c_start, to.c_end)" title="Add a new party to group">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party
-    </a>
+    </button>
   </div>
   <div ng-if="to.solicitor">
     <div class="form-group col-md-12">
@@ -299,7 +299,7 @@
       <div style="display: flex;">
         <label class="form-control attr-label">Tel / Fax / Email</label>
         <label class="form-control p-t-5" style="width:45%;">
-          {{ model[to.field].strPhone1 }} / {{ model[to.field].strEmailAddress }}
+          {{ model[to.field].strName ? model[to.field].strPhone1+' / '+model[to.field].strEmailAddress : '' }}
         </label>
       </div>
     </div>

@@ -110,10 +110,10 @@ materialAdmin
     service.getItem = getItem;
     service.headers = Auth.isAuthenticated();
 
-    function getList(page=1, pagesize=500) {
+    function getList(page=1, pagesize=500, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCode?page='+page+'&pagesize='+pagesize,
+        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCode?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: service.headers
       }).then(function(resp) {
         return resp.data;

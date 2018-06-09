@@ -149,49 +149,24 @@ materialAdmin
       name: 'contact',
       templateUrl: 'contact.html',
       controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        $scope.represent_this = false;
+        $scope.represent_this = $scope.model['strLawyer'+$scope.to.idx+'Ref'] && $scope.model['strLawyer'+$scope.to.idx+'Ref'].indexOf('tmho') > -1;
         $scope.userInfo = Auth.getUserInfo();
-
+        
         $scope.representChange = function() {
           $scope.represent_this = !$scope.represent_this;
-          if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
-            $scope.model[$scope.options.key+'_solicitor'].party = $scope.userInfo.catPersonal[0].LawFirm;
+          // if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
+            // $scope.model['strLawyer'+$scope.to.idx+'Ref'] = $scope.userInfo.catPersonal[0].LawFirm.name;
+          if ($scope.represent_this) {
+            // 6000-2862/0/tmho/Siti/501
+            $scope.model['strLawyer'+$scope.to.idx+'Ref'] = $scope.model.strFileNo1 + "/0/tmho";
           } else {
-            $scope.model[$scope.options.key+'_solicitor'].party = {};
+            $scope.model['strLawyer'+$scope.to.idx+'Ref'] = '';
           }
         }
 
         $scope.range = function (min, max, step) {
           return range(min, max, step);
         };
-
-        $scope.addParty = function(start, end) {
-          var flag = false;
-          for(var i = start; i <= end; i++) {
-            if (!$scope.model.tmp['clsC'+i] && !$scope.model['clsC'+i].code) {
-              $scope.model.tmp['clsC'+i] = true;
-              flag = true;
-              break;
-            }
-          }
-          if (!flag) {
-            alert('Sorry, you cannot add more party!');
-          }
-        }
-
-        $scope.removeParty = function(idx, start, end) {
-          var last = end;
-          for(var i = idx; i < end; i++) {           // shift 
-            if (!$scope.model['clsC'+(i+1)].code && !$scope.model.tmp['clsC'+(i+1)]) {
-              last = i;
-              break;
-            }
-            $scope.model['clsC'+i] = $scope.model['clsC'+(i+1)];
-            $scope.model.tmp['clsC'+i] = $scope.model.tmp['clsC'+(i+1)];
-          }
-          $scope.model.tmp['clsC'+last] = false;
-          $scope.model['clsC'+last] = {};
-        }
 
         $scope.addParty = function(start, end) {
           var flag = false;
@@ -394,22 +369,7 @@ materialAdmin
       name: 'file',
       templateUrl: 'file.html',
       controller: function ($scope, legalFirmService, contactService, matterCodeService, Auth, $uibModal, $filter) {
-        $scope.represent_this = false;
         $scope.userInfo = Auth.getUserInfo();
-
-        $scope.representChange = function() {
-          $scope.represent_this = !$scope.represent_this;
-          if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
-            $scope.model[$scope.options.key+'_solicitor'].party = $scope.userInfo.catPersonal[0].LawFirm;
-          } else {
-            $scope.model[$scope.options.key+'_solicitor'].party = {};
-          }
-        }
-        
-        $scope.solicitor = {};
-        $scope.changeSolicitor = function(item) {
-          $scope.solicitor = item;
-        }
 
         $scope.viewContact = function(party) {
           if (party) {
@@ -482,16 +442,6 @@ materialAdmin
 
         $scope.represent_this = false;
         $scope.userInfo = Auth.getUserInfo();
-
-        $scope.representChange = function() {
-          $scope.model[$scope.options.key+'_solicitor'] = $scope.represent_this ? $scope.userInfo.catPersonal[0].LawFirm : {};          
-        }
-
-        $scope.model[$scope.options.key] = [
-        {
-          "party": "",
-          "share": ""
-        }];
 
         $scope.solicitor = {};
 
