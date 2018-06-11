@@ -1,35 +1,30 @@
 materialAdmin
   .controller('courtdiaryListCtrl', function($filter, $uibModal, NgTableParams, courtdiaryService, $state, Auth) {
     var self = this;
-    self.openDelete = openDelete;
-    self.clickHandler = clickHandler;
+
     self.userInfo = Auth.getUserInfo();
-    self.search = search;
     self.keyword = '';
 
-    function clickHandler(item) {
-      // $state.go('courtdiaries.edit', {'id': item.code});
+    self.clickHandler = function (item) {
+      $state.go('courtdiaries.edit', {'id': item.code});
     }
 
     self.tableFilter = new NgTableParams({
       page: 1,        // show first page
-      count: 25,
+      count: 5,
       sorting: {
         name: 'asc'   // initial sorting
       }
     }, {
       getData: function(params) {
-        var start = '2014-04-01',
-            end = '2014-04-30';
-
-        return courtdiaryService.getList(start, end, params.page(), params.count(), self.keyword).then(function(data) {
+        return courtdiaryService.getList(params.page(), params.count(), self.keyword).then(function(data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
       }
     });
 
-    function search() {
+    self.search = function () {
       self.tableFilter.reload();
     }
 
@@ -51,7 +46,7 @@ materialAdmin
     }
 
     //Prevent Outside Click
-    function openDelete(event, courtdiary) {
+    self.openDelete = function (event, courtdiary) {
       event.stopPropagation();
       modalInstances(true, '', 'static', true, courtdiary)
     };    
@@ -82,7 +77,8 @@ materialAdmin
     self.cancel = cancel;
     self.userInfo = Auth.getUserInfo();
     self.openDelete = openDelete;
-    self.can_edit = false;
+    self.create_new = $state.$current.data.can_edit;
+    self.can_edit = $state.$current.data.can_edit;
 
     if ($stateParams.id) {
       courtdiaryService.getItem($stateParams.id)

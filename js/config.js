@@ -1364,7 +1364,8 @@ materialAdmin
       })
       .state ('courtdiaries.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
         url: '/new',
         controller: 'courtdiaryEditCtrl as vm',
