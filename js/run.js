@@ -394,8 +394,13 @@ materialAdmin
         }
 
         $scope.matterCodeChange = function (item) {
-          if (item) {
-            $scope.model.tmp.matterCodeChange(item);
+          if (item && $scope.model.clsMatterCode != $scope.model.tmp.oldMatterCode) {
+            if (confirm('Are you sure to change the matter code? \n Changing matter code could lead to change of tabs.')) {
+              $scope.model.tmp.matterCodeChange(item);
+              $scope.model.tmp.oldMatterCode = item;
+            } else {
+              $scope.model.clsMatterCode = $scope.model.tmp.oldMatterCode;
+            }
           }
         }
 

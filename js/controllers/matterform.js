@@ -675,14 +675,15 @@ materialAdmin
     var editControl = {   // very important
       create_new: $state.$current.data.can_edit,
       can_edit: $state.$current.data.can_edit,
-      matterCodeChange: buildTabs      
+      matterCodeChange: buildTabs
     };
 
     if ($stateParams.fileNo) {
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
         vm.model = item;
         vm.model.tmp = editControl;
-
+        vm.model.tmp.oldMatterCode = item.clsMatterCode;
+        
         vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
         buildTabs(vm.model.clsMatterCode);
       });
