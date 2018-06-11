@@ -134,6 +134,8 @@ materialAdmin
       var method = entity.code ? 'PUT': 'POST';
       delete entity.dtDateEntered;
       delete entity.dtDateUpdated;
+      delete entity.clsEnteredBy;
+      delete entity.clsUpdatedBy;
 
       console.log(entity);
 
