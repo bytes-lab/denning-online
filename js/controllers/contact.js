@@ -194,7 +194,7 @@ materialAdmin
           on_list: function () {
             return false;
           }
-        }      
+        }
       });
     }
 

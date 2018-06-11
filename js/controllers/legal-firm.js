@@ -59,8 +59,7 @@ materialAdmin
     self.userInfo = Auth.getUserInfo();
 
     if (viewMode) {
-      legalFirmService.getItem(lf.party.code)
-      .then(function(item){
+      legalFirmService.getItem(lf.code).then(function(item){
         self.legalFirm = item;
       });
     } else {

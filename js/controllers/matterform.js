@@ -752,7 +752,7 @@ materialAdmin
     }
 
     vm.reset = function () {
-      vm.form = {};
+      $state.reload();
     }
 
     vm.cancel = function () {

@@ -520,7 +520,7 @@ materialAdmin
   // CALENDAR
   //=================================================
   
-  .controller('calendarCtrl', function($modal){
+  .controller('calendarCtrl', function($uibModal){
   
     //Create and add Action button with dropdown in Calendar header. 
     this.month = 'month';
@@ -551,7 +551,7 @@ materialAdmin
       
     //Open new event modal on selecting a day
     this.onSelect = function(argStart, argEnd) {      
-      var modalInstance  = $modal.open({
+      var modalInstance  = $uibModal.open({
         templateUrl: 'addEvent.html',
         controller: 'addeventCtrl',
         backdrop: 'static',
