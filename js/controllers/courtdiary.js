@@ -71,37 +71,51 @@ materialAdmin
     };
   })
 
-  .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, courtdiaryService, $state, Auth) {
+  .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, courtdiaryService, $state, Auth, $scope, uibDateParser) {
     var self = this;
-    self.save = save;
-    self.cancel = cancel;
     self.userInfo = Auth.getUserInfo();
-    self.openDelete = openDelete;
     self.create_new = $state.$current.data.can_edit;
     self.can_edit = $state.$current.data.can_edit;
 
     if ($stateParams.id) {
-      courtdiaryService.getItem($stateParams.id)
-      .then(function(item){
-        self.courtdiary = angular.copy(item);  // important
+      courtdiaryService.getItem($stateParams.id).then(function(item){
+        self.courtdiary = item;
+        angular.forEach(self.courtdiary, function(value, key) {
+          if (key.indexOf('dt') == 0) {
+            self.courtdiary[key] = uibDateParser.parse(self.courtdiary[key], 'yyyy-MM-dd HH:mm:ss');
+          }
+        })
       });
     } else {
       self.courtdiary = {};
     }
 
-    function save() {
+    self.save = function () {
       courtdiaryService.save(self.courtdiary).then(function(courtdiary) {
         self.courtdiary = courtdiary;
-        $state.go('courtdiary');
       })
       .catch(function(err){
         //Handler
       });
     }
 
-    function cancel() {
+    self.cancel = function () {
       $state.go('courtdiary');      
     }
+
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
+
+    $scope.dateOptions = {
+      formatYear: 'yyyy',
+      startingDay: 1
+    };
+
+    $scope.format = 'dd/MM/yyyy';
 
     //Create Modal
     function modalInstances1(animation, size, backdrop, keyboard, contact) {
@@ -124,7 +138,7 @@ materialAdmin
     }
 
     //Prevent Outside Click
-    function openDelete(event, contact) {
+    self.openDelete = function (event, contact) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, contact)
     };    

@@ -647,7 +647,7 @@ materialAdmin
       vm.tabs.push(vm.tabDict['Matter']); // first tab
 
       if (clsMatterCode) {
-        matterFormService.getItem(clsMatterCode.strFormName).then(function(item){
+        matterFormService.getItem(clsMatterCode.clsFormName.code).then(function(item){
           angular.forEach(JSON.parse(item.jsonTabs), function(value, key) {
             if (value.TabName != 'Matter') {
               var item = vm.tabDict[value.TabName];
