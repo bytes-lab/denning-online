@@ -84,22 +84,39 @@ materialAdmin
       },
       link: function(scope, element, attrs) {
         courtdiaryService.getList().then(function(res) {
-          var events = [];
+          var eventObj = {};
           angular.forEach(res.data, function(value, key) {
-            var color;
-            if (value.clsCourtPlace.strTypeE == 'High Court') {
-              color = 'bgm-blue';
-            } else if (value.clsCourtPlace.strTypeE == 'Sessions Court') {
-              color = 'bgm-green';
+            if (value.dtEventDate in eventObj) {
+              event = eventObj[value.dtEventDate];
+              if (value.clsCourtPlace.strTypeE in event) {
+                event[value.clsCourtPlace.strTypeE]++;
+              } else {
+                event[value.clsCourtPlace.strTypeE] = 1;
+              }
             } else {
-              color = 'bgm-orange'
+              eventObj[value.dtEventDate] = {};
+              eventObj[value.dtEventDate][value.clsCourtPlace.strTypeE] = 1;
             }
-            
-            events.push({
-                title: value.clsCourtPlace.strTypeE,
-                start: uibDateParser.parse(value.dtEventDate, 'yyyy-MM-dd HH:mm:ss'),
-                allDay: true,
-                className: color
+          })
+
+          var events = [];
+          angular.forEach(eventObj, function(value, date) {
+            angular.forEach(value, function(count, event) {
+              var color;
+              if (event == 'High Court') {
+                color = 'bgm-blue';
+              } else if (event == 'Sessions Court') {
+                color = 'bgm-green';
+              } else {
+                color = 'bgm-orange'
+              }
+
+              events.push({
+                  title: event+'( '+count+' )',
+                  start: uibDateParser.parse(date, 'yyyy-MM-dd HH:mm:ss'),
+                  allDay: true,
+                  className: color
+              })
             })
           })
           //Generate the Calendar
