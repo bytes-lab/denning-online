@@ -2,61 +2,14 @@
 
 <section id="main">
   <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
-  <section id="content" data-ng-controller="calendarCtrl as clctrl">
-    <div class="container c-alt" data-ng-controller="ModalDemoCtrl">
-      <div id="calendar" data-calendar data-action-links="clctrl.actionMenu" data-select="clctrl.onSelect(start, end)"></div>
-      
-      <!-- Add event -->
-      <script type="text/ng-template" id="addEvent.html">
-        <div class="modal-header">
-          <h4 class="modal-title">Add an Event</h4>
-        </div>
-        <div class="modal-body">
-          <form class="addEvent" role="form">
-            <div class="form-group" data-ng-class="{ 'has-error': calendarData.eventName === '' }">
-              <label for="eventName">Event Name</label>
-              <div class="fg-line">
-                <input type="text" class="input-sm form-control" data-ng-model="calendarData.eventName" placeholder="eg: Sports day">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="eventName">Tag Color</label>
-              <div class="event-tag" data-ng-class="{ 'active': activeState }">
-                <span data-ng-repeat="w in tags" data-tag="{{ w }}" class="{{ w }}" data-ng-class="{ 'selected': activeState === $index }" data-ng-click="onTagClick(w, $index)"></span>
-              </div>
-            </div>
-            <input type="hidden" data-ng-model="getStart" />
-            <input type="hidden" data-ng-model="getEnd" />
-          </form>
-        </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-link" data-ng-click="addEvent()">Add Event</button>
-          <button type="button" class="btn btn-link" data-ng-click="eventDismiss()">Close</button>
-        </div>
-      </script>
-
-      <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-          <h4 class="modal-title">Delete a court diary</h4>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure to delete the court diary?</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-link" ng-click="ok()">OK</button>
-          <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-        </div>
-      </script>
-
-    </div>
-
-    <div class="container" data-ng-controller="courtdiaryListCtrl as vm">
-
-      <div class="block-header">
-        <h2></h2>
+  <section id="content" data-ng-controller="courtdiaryListCtrl as vm">
+    <div class="container c-alt m-b-20">
+      <div id="calendar" data-calendar data-select="vm.onSelect(start, end)">
       </div>
-      
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
       <div class="card">
         <div class="card-header">
           <div class="row">
@@ -102,8 +55,8 @@
                 <td data-title="'Status'" sortable="'clsAttendedStatus.description'">
                   {{ w.clsAttendedStatus.description }}
                 </td>
-                <td data-title="'Day'" sortable="'phoneHome'">
-                  {{ w.phoneHome }}
+                <td data-title="'Day'">
+                  {{ w.dtEventDate|dow }}
                 </td>
                 <td data-title="'Hearing Date'" sortable="'dtEventDate'">
                   {{ w.dtEventDate|ddate }}
@@ -146,5 +99,48 @@
     </div>    
   </section>
 </section>
+
+<!-- Add event -->
+<script type="text/ng-template" id="addEvent.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Add an Event</h4>
+  </div>
+  <div class="modal-body">
+    <form class="addEvent" role="form">
+      <div class="form-group" data-ng-class="{ 'has-error': calendarData.eventName === '' }">
+        <label for="eventName">Event Name</label>
+        <div class="fg-line">
+          <input type="text" class="input-sm form-control" data-ng-model="calendarData.eventName" placeholder="eg: Sports day">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="eventName">Tag Color</label>
+        <div class="event-tag" data-ng-class="{ 'active': activeState }">
+          <span data-ng-repeat="w in tags" data-tag="{{ w }}" class="{{ w }}" data-ng-class="{ 'selected': activeState === $index }" data-ng-click="onTagClick(w, $index)"></span>
+        </div>
+      </div>
+      <input type="hidden" data-ng-model="getStart" />
+      <input type="hidden" data-ng-model="getEnd" />
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-link" data-ng-click="addEvent()">Add Event</button>
+    <button type="button" class="btn btn-link" data-ng-click="eventDismiss()">Close</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Delete a court diary</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete the court diary?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
 
 <footer id="footer" data-ng-include="'template/footer.html'"></footer>

@@ -515,57 +515,6 @@ materialAdmin
   })
 
 
-
-  //=================================================
-  // CALENDAR
-  //=================================================
-  
-  .controller('calendarCtrl', function($uibModal){
-  
-    //Create and add Action button with dropdown in Calendar header. 
-    this.month = 'month';
-  
-    this.actionMenu = '<ul class="actions actions-alt" id="fc-actions">' +
-              '<li class="dropdown" dropdown>' +
-                '<a href="" dropdown-toggle><i class="zmdi zmdi-more-vert"></i></a>' +
-                '<ul class="dropdown-menu dropdown-menu-right">' +
-                  '<li class="active">' +
-                    '<a data-calendar-view="month" href="">Month View</a>' +
-                  '</li>' +
-                  '<li>' +
-                    '<a data-calendar-view="basicWeek" href="">Week View</a>' +
-                  '</li>' +
-                  '<li>' +
-                    '<a data-calendar-view="agendaWeek" href="">Agenda Week View</a>' +
-                  '</li>' +
-                  '<li>' +
-                    '<a data-calendar-view="basicDay" href="">Day View</a>' +
-                  '</li>' +
-                  '<li>' +
-                    '<a data-calendar-view="agendaDay" href="">Agenda Day View</a>' +
-                  '</li>' +
-                '</ul>' +
-              '</div>' +
-            '</li>';
-
-      
-    //Open new event modal on selecting a day
-    this.onSelect = function(argStart, argEnd) {      
-      var modalInstance  = $uibModal.open({
-        templateUrl: 'addEvent.html',
-        controller: 'addeventCtrl',
-        backdrop: 'static',
-        keyboard: false,
-        resolve: {
-          calendarData: function() {
-            var x = [argStart, argEnd];
-            return x;
-          }
-        }
-      });
-    }
-  })
-
   //Add event Controller (Modal Instance)
   .controller('addeventCtrl', function($scope, $uibModalInstance, calendarData){
     
@@ -592,12 +541,13 @@ materialAdmin
     
     //Select Tag
     $scope.currentTag = '';
-    
+
     $scope.onTagClick = function(tag, $index) {
+      console.log(tag, $index);
       $scope.activeState = $index;
       $scope.activeTagColor = tag;
     } 
-    
+
     //Add new event
     $scope.addEvent = function() {
       if ($scope.calendarData.eventName) {

@@ -28,6 +28,22 @@ materialAdmin
       self.tableFilter.reload();
     }
 
+    self.onSelect = function(argStart, argEnd) {
+      console.log(argStart);
+      var modalInstance  = $uibModal.open({
+        templateUrl: 'addEvent.html',
+        controller: 'addeventCtrl',
+        backdrop: 'static',
+        keyboard: false,
+        resolve: {
+          calendarData: function() {
+            var x = [argStart, argEnd];
+            return x;
+          }
+        }
+      });
+    }
+
     //Create Modal
     function modalInstances(animation, size, backdrop, keyboard, courtdiary) {
       var modalInstance = $uibModal.open({

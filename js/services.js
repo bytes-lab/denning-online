@@ -146,3 +146,14 @@ materialAdmin
       }
     }
   })
+
+  .filter('dow', function() {
+    return function(strDate) {
+      var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      if (strDate) {
+        return dayNames[moment(strDate).day()];
+      } else {
+        return '';
+      }
+    }
+  })

@@ -75,7 +75,7 @@ materialAdmin
   // MAIN CALENDAR
   // =========================================================================
 
-  .directive('calendar', function($compile){
+  .directive('calendar', function($compile, courtdiaryService, uibDateParser){
     return {
       restrict: 'A',
       scope: {
@@ -83,119 +83,53 @@ materialAdmin
         actionLinks: '=',
       },
       link: function(scope, element, attrs) {
-        
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
+        courtdiaryService.getList().then(function(res) {
+          var events = [];
+          angular.forEach(res.data, function(value, key) {
+            var color;
+            if (value.clsCourtPlace.strTypeE == 'High Court') {
+              color = 'bgm-blue';
+            } else if (value.clsCourtPlace.strTypeE == 'Sessions Court') {
+              color = 'bgm-green';
+            } else {
+              color = 'bgm-orange'
+            }
+            
+            events.push({
+                title: value.clsCourtPlace.strTypeE,
+                start: uibDateParser.parse(value.dtEventDate, 'yyyy-MM-dd HH:mm:ss'),
+                allDay: true,
+                className: color
+            })
+          })
+          //Generate the Calendar
+          element.fullCalendar({
+            header: {
+              right: '',
+              center: 'prev, title, next',
+              left: ''
+            },
 
-        //Generate the Calendar
-        element.fullCalendar({
-          header: {
-            right: '',
-            center: 'prev, title, next',
-            left: ''
-          },
+            theme: true, //Do not remove this as it ruin the design
+            selectable: true,
+            selectHelper: true,
+            editable: true,
 
-          theme: true, //Do not remove this as it ruin the design
-          selectable: true,
-          selectHelper: true,
-          editable: true,
+            //Add Events
+            events: events,
+            
+            //On Day Select
+            select: function(start, end, allDay) {
+              scope.select({
+                start: start, 
+                end: end
+              });
+            }
+          });
 
-          //Add Events
-          events: [
-            {
-              title: 'Court (2)',
-              start: new Date(y, m, 1),
-              allDay: true,
-              className: 'bgm-green'
-            },
-            {
-              title: 'Office (1)',
-              start: new Date(y, m, 10),
-              allDay: true,
-              className: 'bgm-orange'
-            },
-            {
-              title: 'Personal (5)',
-              start: new Date(y, m, 18),
-              allDay: true,
-              className: 'bgm-blue'
-            },
-            {
-              title: 'Court (3)',
-              start: new Date(y, m, 20),
-              allDay: true,
-              className: 'bgm-green'
-            },
-            {
-              title: 'Office (2)',
-              start: new Date(y, m, 5),
-              allDay: true,
-              className: 'bgm-orange'
-            },
-            {
-              title: 'Office (4)',
-              start: new Date(y, m, 21),
-              allDay: true,
-              className: 'bgm-orange'
-            },
-            {
-              title: 'Personal (3)',
-              start: new Date(y, m, 5),
-              allDay: true,
-              className: 'bgm-blue'
-            },
-            {
-              title: 'Court (2)',
-              start: new Date(y, m, 5),
-              allDay: true,
-              className: 'bgm-green'
-            },
-            {
-              title: 'Personal (7)',
-              start: new Date(y, m, 1),
-              allDay: true,
-              className: 'bgm-blue'
-            },
-            {
-              title: 'Office (1)',
-              start: new Date(y, m, 15),
-              allDay: true,
-              className: 'bgm-orange'
-            },
-            {
-              title: 'Personal (2)',
-              start: new Date(y, m, 25),
-              allDay: true,
-              className: 'bgm-blue'
-            },
-            {
-              title: 'Office (6)',
-              start: new Date(y, m, 30),
-              allDay: true,
-              className: 'bgm-orange'
-            },
-            {
-              title: 'Court (2)',
-              start: new Date(y, m, 30),
-              allDay: true,
-              className: 'bgm-green'
-            },
-          ],
-
-          //On Day Select
-          select: function(start, end, allDay) {
-            scope.select({
-              start: start, 
-              end: end
-            });
-          }
+          //Add action links in calendar header
+          element.find('.fc-toolbar').append($compile(scope.actionLinks)(scope));
         });
-        
-          
-        //Add action links in calendar header
-        element.find('.fc-toolbar').append($compile(scope.actionLinks)(scope));
       }
     }
   })
