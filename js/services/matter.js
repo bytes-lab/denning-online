@@ -136,8 +136,9 @@ materialAdmin
       delete entity.dtDateUpdated;
       delete entity.clsEnteredBy;
       delete entity.clsUpdatedBy;
-
-      console.log(entity);
+      delete entity.intTurnaroundTime;
+      delete entity.boolIsDeleted;
+      delete entity.boolChkSubsaleCD;
 
       return $http({
         method: method,

@@ -83,9 +83,10 @@ materialAdmin
         actionLinks: '=',
       },
       link: function(scope, element, attrs) {
-        courtdiaryService.getList().then(function(res) {
+        courtdiaryService.getList(1, 100).then(function(res) {
           var eventObj = {};
           angular.forEach(res.data, function(value, key) {
+            console.log(value.clsCourtPlace.strTypeE);
             if (value.dtEventDate in eventObj) {
               event = eventObj[value.dtEventDate];
               if (value.clsCourtPlace.strTypeE in event) {
