@@ -702,11 +702,11 @@ materialAdmin
     };
 
     vm.notes = function() {
-      $state.go('notes.list', {fileNo: vm.model.strFileNo1, fileName: vm.model.primaryClient.name});
+      $state.go('notes.list', {fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName});
     }
 
     vm.accounts = function() {
-      $state.go('accounts.list', {fileNo: vm.model.strFileNo1, fileName: vm.model.primaryClient.name});
+      $state.go('accounts.list', {fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName});
     }
 
     vm.openFolder = function() {
