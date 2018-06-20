@@ -13,7 +13,7 @@ materialAdmin
     function getList(fileNo, category) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/'+fileNo+'/fileLedger/'+category,
+        url: 'https://43.252.215.81/denningwcf/v1/'+fileNo+'/fileLedger/'+category,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -23,7 +23,7 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/app/GovOffice/PTG/'+code,
+        url: 'https://43.252.215.81/denningwcf/v1/app/GovOffice/PTG/'+code,
         headers: service.headers
       }).then(function(resp) {
         return resp.data;

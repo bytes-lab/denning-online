@@ -9,7 +9,7 @@ materialAdmin
     service.getList = function (page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp;
@@ -19,7 +19,7 @@ materialAdmin
     service.getStaffList = function (page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/Staff?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/table/Staff?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp;
@@ -29,7 +29,7 @@ materialAdmin
     service.getCustomerList = function (page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/Customer?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/table/Customer?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp;
@@ -39,7 +39,7 @@ materialAdmin
     service.getItem = function (code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/Customer/'+code,
+        url: 'https://43.252.215.81/denningwcf/v1/table/Customer/'+code,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -49,7 +49,7 @@ materialAdmin
     service.getIDTypeList = function () {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/IDType',
+        url: 'https://43.252.215.81/denningwcf/v1/table/IDType',
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -59,7 +59,7 @@ materialAdmin
     service.getSalutationList = function () {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Salutation',
+        url: 'https://43.252.215.81/denningwcf/v1/Salutation',
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -67,7 +67,7 @@ materialAdmin
     }
 
     service.upload = function (info, type) {
-      var url = 'http://43.252.215.81/denningwcf/v1/app/';
+      var url = 'https://43.252.215.81/denningwcf/v1/app/';
       if (type == 'contact') {
         url = url + 'contactFolder';
       } else {
@@ -91,7 +91,7 @@ materialAdmin
 
       return $http({
         method: method,
-        url: 'http://43.252.215.81/denningwcf/v1/table/Customer',
+        url: 'https://43.252.215.81/denningwcf/v1/table/Customer',
         headers: Auth.isAuthenticated(),
         data: entity
       }).then(function(response) {

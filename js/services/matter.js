@@ -19,7 +19,7 @@ materialAdmin
     function getList(page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/generalSearch/file?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/generalSearch/file?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: service.headers
       }).then(function(resp) {
         return resp;
@@ -29,8 +29,8 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/File/'+code,
-        // url: 'http://43.252.215.81/denningwcf/v1/app/matter/'+code,
+        url: 'https://43.252.215.81/denningwcf/v1/table/File/'+code,
+        // url: 'https://43.252.215.81/denningwcf/v1/app/matter/'+code,
         headers: service.headers
       }).then(function(resp) {
         return resp.data;
@@ -40,7 +40,7 @@ materialAdmin
     function getIDTypeList() {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/IDType',
+        url: 'https://43.252.215.81/denningwcf/v1/IDType',
         headers: service.headers
       }).then(function(resp) {
         return resp.data;
@@ -50,7 +50,7 @@ materialAdmin
     function getSalutationList() {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Salutation',
+        url: 'https://43.252.215.81/denningwcf/v1/Salutation',
         headers: service.headers
       }).then(function(resp) {
         return resp.data;
@@ -60,7 +60,7 @@ materialAdmin
     function getIRDBranchList() {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/IRDBranch',
+        url: 'https://43.252.215.81/denningwcf/v1/IRDBranch',
         headers: service.headers
       }).then(function(resp) {
         return resp.data;
@@ -77,7 +77,7 @@ materialAdmin
 
       return $http({
         method: method,
-        url: 'http://43.252.215.81/denningwcf/v1/app/contact',
+        url: 'https://43.252.215.81/denningwcf/v1/app/contact',
         headers: service.headers,
         data: contact
       }).then(function(response) {
@@ -113,7 +113,7 @@ materialAdmin
     function getList(page=1, pagesize=500, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCode?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/table/MatterCode?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: service.headers
       }).then(function(resp) {
         return resp.data;
@@ -123,7 +123,7 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCode/'+code,
+        url: 'https://43.252.215.81/denningwcf/v1/table/MatterCode/'+code,
         headers: service.headers
       }).then(function(resp) {
         return resp.data;
@@ -142,7 +142,7 @@ materialAdmin
 
       return $http({
         method: method,
-        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCode',
+        url: 'https://43.252.215.81/denningwcf/v1/table/MatterCode',
         headers: Auth.isAuthenticated(),
         data: entity
       }).then(function(response) {
@@ -161,7 +161,7 @@ materialAdmin
     function getList(page=1, pagesize=500, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -171,7 +171,7 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm/'+code,
+        url: 'https://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm/'+code,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -191,7 +191,7 @@ materialAdmin
 
       return $http({
         method: method,
-        url: 'http://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm',
+        url: 'https://43.252.215.81/denningwcf/v1/table/MatterCodeEditForm',
         headers: Auth.isAuthenticated(),
         data: entity
       }).then(function(response) {

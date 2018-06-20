@@ -9,7 +9,7 @@ materialAdmin
     service.getList = function (page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/courtdiary?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/table/courtdiary?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp;
@@ -19,7 +19,7 @@ materialAdmin
     service.getItem = function (code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/courtdiary/'+code,
+        url: 'https://43.252.215.81/denningwcf/v1/table/courtdiary/'+code,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -33,7 +33,7 @@ materialAdmin
 
       return $http({
         method: method,
-        url: 'http://43.252.215.81/denningwcf/v1/table/courtdiary',
+        url: 'https://43.252.215.81/denningwcf/v1/table/courtdiary',
         headers: Auth.isAuthenticated(),
         data: entity
       }).then(function(response) {

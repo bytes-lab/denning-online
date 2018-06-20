@@ -11,7 +11,7 @@ materialAdmin
     function getList(page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Solicitor?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/Solicitor?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp;
@@ -21,7 +21,7 @@ materialAdmin
     service.getTableList = function (page=1, pagesize=25, keyword='') {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/Lawyer?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/table/Lawyer?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp;
@@ -31,7 +31,7 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/Lawyer/'+code,
+        url: 'https://43.252.215.81/denningwcf/v1/table/Lawyer/'+code,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;

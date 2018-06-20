@@ -15,7 +15,7 @@ materialAdmin
     function getList(page, pagesize, keyword) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/property?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/property?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         service.properties = resp.data;
@@ -26,7 +26,7 @@ materialAdmin
     service.getTableList = function (page, pagesize, keyword) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/property?page='+page+'&pagesize='+pagesize+'&search='+keyword,
+        url: 'https://43.252.215.81/denningwcf/v1/table/property?page='+page+'&pagesize='+pagesize+'&search='+keyword,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp;
@@ -36,7 +36,7 @@ materialAdmin
     function getItem(code) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/table/property/'+code,
+        url: 'https://43.252.215.81/denningwcf/v1/table/property/'+code,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -50,7 +50,7 @@ materialAdmin
 
       return $http({
         method: method,
-        url: 'http://43.252.215.81/denningwcf/v1/table/Property',
+        url: 'https://43.252.215.81/denningwcf/v1/table/Property',
         headers: Auth.isAuthenticated(),
         data: entity
       }).then(function(response) {
@@ -78,7 +78,7 @@ materialAdmin
     service.getTypeList = function (type) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Property/'+type,
+        url: 'https://43.252.215.81/denningwcf/v1/Property/'+type,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;

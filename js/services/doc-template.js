@@ -12,7 +12,7 @@ materialAdmin
     function getCategories() {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Table/cbotemplatecategory/only',
+        url: 'https://43.252.215.81/denningwcf/v1/Table/cbotemplatecategory/only',
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -22,7 +22,7 @@ materialAdmin
     function getTypes(category) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Table/cbotemplatecategory?filter='+category,
+        url: 'https://43.252.215.81/denningwcf/v1/Table/cbotemplatecategory?filter='+category,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp.data;
@@ -36,7 +36,7 @@ materialAdmin
       
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/Table/cboTemplate?fileno='+fileNo+'&Online='+source.toLowerCase()+'&category='+category+'&Type='+type,
+        url: 'https://43.252.215.81/denningwcf/v1/Table/cboTemplate?fileno='+fileNo+'&Online='+source.toLowerCase()+'&category='+category+'&Type='+type,
         headers: Auth.isAuthenticated()
       }).then(function(resp) {
         return resp;
