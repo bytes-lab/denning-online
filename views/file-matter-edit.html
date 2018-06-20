@@ -645,44 +645,50 @@
   <h4 class="p-5 m-b-15 group-label">Checklist</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Checklist</label>
-    <md-autocomplete
-      ng-disabled="!model.tmp.can_edit"
-      md-selected-item="model.clsPresetChecklist"
-      md-search-text="qpscl"
-      md-items="item in queryChecklist(qpscl)"
-      md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
-      md-min-length="1"
-      md-autoselect="false"
-      class="default-input"
-      style="width:45%;">
-    <md-item-template>
-      <span md-highlight-text="qpscl" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-      <span md-highlight-text="qpscl" md-highlight-flags="i">{{item.strDescription}}</span>
-    </md-item-template>
-    </md-autocomplete>
+      <label class="form-control attr-label">Checklist</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.clsPresetChecklist"
+        md-search-text="qpscl"
+        md-items="item in queryChecklist(qpscl)"
+        md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
+        md-min-length="1"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%;">
+      <md-item-template>
+        <span md-highlight-text="qpscl" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+        <span md-highlight-text="qpscl" md-highlight-flags="i">{{item.strDescription}}</span>
+      </md-item-template>
+      </md-autocomplete>
+      <a class="btn btn-primary short-btn" target="_new" ng-click="viewChecklist(model.clsPrimaryClient)">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+      </a>      
     </div>
   </div>
   <div class="clearfix"></div>
   <h4 class="p-5 m-b-15 group-label">Billing Code</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Billing Code</label>
-    <md-autocomplete
-      ng-disabled="!model.tmp.can_edit"
-      md-selected-item="model.clsPresetBill"
-      md-search-text="qpsb1"
-      md-items="item in queryBills(qpsb1)"
-      md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
-      md-min-length="1"
-      md-autoselect="false"
-      class="default-input"
-      style="width:45%;">
-    <md-item-template>
-      <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-      <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
-    </md-item-template>
-    </md-autocomplete>
+      <label class="form-control attr-label">Billing Code</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.clsPresetBill"
+        md-search-text="qpsb1"
+        md-items="item in queryBills(qpsb1)"
+        md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
+        md-min-length="1"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%;">
+      <md-item-template>
+        <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+        <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
+      </md-item-template>
+      </md-autocomplete>
+      <a class="btn btn-primary short-btn" target="_new" ng-click="viewBillingCode(model.clsPrimaryClient)">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+      </a>      
     </div>
   </div>
   <div class="clearfix"></div>
@@ -722,7 +728,7 @@
         md-selected-item="model.clsPartnerInCharge"
         md-search-text="qspic"
         md-items="item in queryStaffs(qspic)"
-        md-item-text="item.strName ? item.strName+' ( '+item.strIdNo+' )': ' '"
+        md-item-text="item.strInitials ? item.strInitials: ' '"
         md-min-length="1"
         md-autoselect="false"
         class="default-input"
@@ -743,7 +749,7 @@
         md-selected-item="model.clsLAInCharge"
         md-search-text="qslic"
         md-items="item in queryStaffs(qslic)"
-        md-item-text="item.strName ? item.strName+' ( '+item.strIdNo+' )': ' '"
+        md-item-text="item.strInitials ? item.strInitials: ' '"
         md-min-length="1"
         md-autoselect="false"
         class="default-input"
@@ -764,7 +770,7 @@
         md-selected-item="model.clsClerkInCharge"
         md-search-text="qscic"
         md-items="item in queryStaffs(qscic)"
-        md-item-text="item.strName ? item.strName+' ( '+item.strIdNo+' )': ' '"
+        md-item-text="item.strInitials ? item.strInitials: ' '"
         md-min-length="1"
         md-autoselect="false"
         class="default-input"
@@ -785,7 +791,7 @@
         md-selected-item="model.team"
         md-search-text="qsctc"
         md-items="item in queryStaffs(qsctc)"
-        md-item-text="item.strName ? item.strName+' ( '+item.strIdNo+' )': ' '"
+        md-item-text="item.strInitials ? item.strInitials: ' '"
         md-min-length="1"
         md-autoselect="false"
         class="default-input"
