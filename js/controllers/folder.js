@@ -117,6 +117,10 @@ materialAdmin
       angular.element('.file-upload').click();
     };
 
+    self.refresh = function () {
+      $state.reload();
+    }
+    
     self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
 
       var info = {
