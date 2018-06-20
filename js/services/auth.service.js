@@ -146,7 +146,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
 
     return $http({
       method: 'POST',
-      url: 'https://43.252.215.163:8313/denningapi/v1/signIn',
+      url: 'https://43.252.215.163:443/denningapi/v1/signIn',
       headers: service.headers,
       data: data
     }).then(function(response) {
@@ -162,7 +162,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
 
     return $http({
       method: 'POST',
-      url: 'https://43.252.215.163:8313/denningapi/v1/SMS/newDevice',
+      url: 'https://43.252.215.163/denningapi/v1/SMS/newDevice',
       headers: service.headers,
       data: data
     }).then(function(response) {
@@ -184,7 +184,7 @@ angular.module('materialAdmin').factory('Auth', ['$http', '$window', '$timeout',
 
     return $http({
       method: 'POST',
-      url: 'https://43.252.215.81:8081/denningwcf/v1/app/staffLogin',
+      url: 'https://43.252.215.81/denningwcf/v1/app/staffLogin',
       headers: service.headers,
       data: data
     }).then(function(response) {

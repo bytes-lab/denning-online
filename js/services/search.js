@@ -5,7 +5,7 @@ materialAdmin
 
   .service('searchService', function ($http, Auth) {
     this.getFilter = function () {
-      return $http.get('http://43.252.215.81/denningwcf/v1/generalSearch/category')
+      return $http.get('https://43.252.215.81/denningwcf/v1/generalSearch/category')
       .then(function (resp) {
         return resp.data;
       })
@@ -14,7 +14,7 @@ materialAdmin
     this.search = function (keyword, category) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/generalSearch',
+        url: 'https://43.252.215.81/denningwcf/v1/generalSearch',
         headers: Auth.isAuthenticated(), 
         params: {
           search: keyword,
@@ -39,7 +39,7 @@ materialAdmin
     this.keyword = function (query) {
       return $http({
         method: 'GET',
-        url: 'http://43.252.215.81/denningwcf/v1/generalSearch/keyword',
+        url: 'https://43.252.215.81/denningwcf/v1/generalSearch/keyword',
         headers: Auth.isAuthenticated(), 
         params: {
           search: query
