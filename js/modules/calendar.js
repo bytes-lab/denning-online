@@ -87,33 +87,43 @@ materialAdmin
           var eventObj = {};
           angular.forEach(res.data, function(value, key) {
             console.log(value.clsCourtPlace.strTypeE);
-            if (value.dtEventDate in eventObj) {
-              event = eventObj[value.dtEventDate];
-              if (value.clsCourtPlace.strTypeE in event) {
-                event[value.clsCourtPlace.strTypeE]++;
+            if (value.clsCourtPlace.strTypeE) {
+              if (value.dtEventDate in eventObj) {
+                event = eventObj[value.dtEventDate];
+                if (value.clsCourtPlace.strTypeE in event) {
+                  event[value.clsCourtPlace.strTypeE]++;
+                } else {
+                  event[value.clsCourtPlace.strTypeE] = 1;
+                }                
               } else {
-                event[value.clsCourtPlace.strTypeE] = 1;
+                eventObj[value.dtEventDate] = {};
+                eventObj[value.dtEventDate][value.clsCourtPlace.strTypeE] = 1;
               }
-            } else {
-              eventObj[value.dtEventDate] = {};
-              eventObj[value.dtEventDate][value.clsCourtPlace.strTypeE] = 1;
             }
           })
 
-          var events = [];
+          var events = [],
+              colors = {
+                'Land Office': 'bgm-blue',
+                'High Court': 'bgm-green',
+                'Magistrates Court': 'bgm-gray',
+                'Sessions Court': 'bgm-teal',
+                'Small Estate Department': 'bgm-pink',
+                'Federal Court': 'bgm-purple',
+                'Court of Appeal': 'bgm-cyan'
+              };
+
           angular.forEach(eventObj, function(value, date) {
             angular.forEach(value, function(count, event) {
               var color;
-              if (event == 'High Court') {
-                color = 'bgm-blue';
-              } else if (event == 'Sessions Court') {
-                color = 'bgm-green';
+              if (event in colors) {
+                color = colors[event];
               } else {
-                color = 'bgm-orange'
+                color = 'bgm-brown';
               }
 
               events.push({
-                  title: event+'( '+count+' )',
+                  title: '['+count+'] '+event,
                   start: uibDateParser.parse(date, 'yyyy-MM-dd HH:mm:ss'),
                   allDay: true,
                   className: color
