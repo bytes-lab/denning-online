@@ -718,4 +718,12 @@ materialAdmin
         };
       }]
     });  
-  });
+  })
+
+  .run(function(formlyConfig) {
+    formlyConfig.setType({
+      name: 'widget1',
+      templateUrl: 'widget1.html'
+    });
+
+  })

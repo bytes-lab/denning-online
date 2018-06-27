@@ -46,9 +46,10 @@ materialAdmin
 
       .state ('overview', {
         data: {
-          access: '@'
+          access: '?'
         },
         url: '/overview',
+        controller: 'overviewCtrl as vm',
         templateUrl: 'views/overview.html',
         resolve: {
           loadPlugin: function($ocLazyLoad) {

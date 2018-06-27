@@ -315,7 +315,9 @@ materialAdmin
   .controller('headerCtrl', function($timeout, $scope, messageService, Auth){
     $scope.app.loadChat = true;
     $scope.app.userInfo = Auth.getUserInfo();
-    $scope.app.chat_url = '/chat/index.html?uid=' + $scope.app.userInfo.email;
+    $scope.app.chat_url = '/chat/index.html?uid=';
+    if ($scope.app.userInfo != null) 
+      $scope.app.chat_url += $scope.app.userInfo.email;
 
     // Top Search
     this.openSearch = function(){

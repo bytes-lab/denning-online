@@ -86,7 +86,6 @@ materialAdmin
         courtdiaryService.getList(1, 100).then(function(res) {
           var eventObj = {};
           angular.forEach(res.data, function(value, key) {
-            console.log(value.clsCourtPlace.strTypeE);
             if (value.clsCourtPlace.strTypeE) {
               if (value.dtEventDate in eventObj) {
                 event = eventObj[value.dtEventDate];
@@ -94,7 +93,7 @@ materialAdmin
                   event[value.clsCourtPlace.strTypeE]++;
                 } else {
                   event[value.clsCourtPlace.strTypeE] = 1;
-                }                
+                }
               } else {
                 eventObj[value.dtEventDate] = {};
                 eventObj[value.dtEventDate][value.clsCourtPlace.strTypeE] = 1;
