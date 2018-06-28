@@ -205,11 +205,11 @@
 </script>
 
 <script type="text/ng-template" id="widget4.html">
-  <div class="col-sm-6">
+  <div class="col-sm-6" ng-show="!to.hide">
     <!-- Recent Items -->
     <div class="card" data-ng-controller="recentitemCtrl as rictrl">
       <div class="card-header">
-        <h2>Collection <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
+        <h2>File Collection <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
         <ul class="actions">
           <li class="dropdown" uib-dropdown>
             <a href="" uib-dropdown-toggle>
@@ -218,13 +218,7 @@
 
             <ul class="dropdown-menu dropdown-menu-right">
               <li>
-                <a href="">Refresh</a>
-              </li>
-              <li>
-                <a href="">Settings</a>
-              </li>
-              <li>
-                <a href="">Other Settings</a>
+                <a href="" ng-click="to.hide=true">Remove</a>
               </li>
             </ul>
           </li>
@@ -254,11 +248,11 @@
 </script>
 
 <script type="text/ng-template" id="widget5.html">
-  <div class="col-sm-6">
+  <div class="col-sm-6" ng-show="!to.hide">
     <!-- Calendar -->
     <div class="card" data-ng-controller="recentitemCtrl as rictrl">
       <div class="card-header">
-        <h2>Collection <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
+        <h2>Matter Collection <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
         <ul class="actions">
           <li class="dropdown" uib-dropdown>
             <a href="" uib-dropdown-toggle>
@@ -267,13 +261,7 @@
 
             <ul class="dropdown-menu dropdown-menu-right">
               <li>
-                <a href="">Refresh</a>
-              </li>
-              <li>
-                <a href="">Settings</a>
-              </li>
-              <li>
-                <a href="">Other Settings</a>
+                <a href="" ng-click="to.hide=true">Delete</a>
               </li>
             </ul>
           </li>
