@@ -115,4 +115,26 @@ materialAdmin
     vm.deleteTab = function (idx) {
       vm.tabs.splice(idx, 1);
     }
+
+    vm.newTab = function () {
+      vm.tabs.push({
+        'title': 'New Tab',
+        'sections': []        
+      })
+    }
+
+    vm.editTab = function (idx) {
+      angular.element('.tab-title-'+idx).attr('contenteditable', true);
+    }
+
+    vm.finishEdit = function (idx) {
+      angular.element('.tab-title-'+idx).attr('contenteditable', false); 
+    }
+
+    vm.editTitle = function (event, idx) {
+      if (event.which == 13) {
+        event.stopPropagation();
+        vm.finishEdit(idx);
+      }
+    }
   })
