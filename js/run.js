@@ -726,4 +726,43 @@ materialAdmin
       templateUrl: 'widget1.html'
     });
 
+    formlyConfig.setType({
+      name: 'widget2',
+      templateUrl: 'widget2.html'
+    });
+
+    formlyConfig.setType({
+      name: 'widget3',
+      templateUrl: 'widget3.html'
+    });
+
+    formlyConfig.setType({
+      name: 'widget4',
+      templateUrl: 'widget4.html'
+    });
+
+    formlyConfig.setType({
+      name: 'widget5',
+      templateUrl: 'widget5.html'
+    });
+
+    formlyConfig.setType({
+      name: 'widget6',
+      templateUrl: 'widget6.html'
+    });
+
+    formlyConfig.setType({
+      name: 'widget7',
+      templateUrl: 'widget7.html'
+    });
+
+    formlyConfig.setType({
+      name: 'widget8',
+      templateUrl: 'widget8.html'
+    });
+
+    formlyConfig.setType({
+      name: 'widget9',
+      templateUrl: 'widget9.html'
+    });
   })

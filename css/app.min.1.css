@@ -5456,6 +5456,24 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom-color: transparent;
   cursor: default;
 }
+ 
+.overview-tabs .nav-tabs > li.active > a,
+.overview-tabs .nav-tabs > li.active > a:hover,
+.overview-tabs .nav-tabs > li.active > a:focus {
+  color: #2aa7ff;
+  font-weight: 500;
+  background-color: transparent;
+  border: 1px solid transparent !important;
+  border-bottom-color: #2aa7ff !important;
+  cursor: default;
+}
+
+.overview-tabs .nav-tabs > li > a {
+  color: #aaa;
+  font-weight: 400;
+  font-size: 15px;
+  /*border: 2px solid transparent;*/
+}
 
 .nav-tabs.nav-justified {
   width: 100%;
