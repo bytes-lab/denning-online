@@ -8,29 +8,28 @@
 
     <div class="container">
       <uib-tabset active="vm.idxTab" class="overview-tabs">
-        <uib-tab ng-repeat="tab in vm.tabs">
+        <uib-tab ng-repeat="tab in vm.tabs" index="$index">
           <uib-tab-heading>
             <div>
-              <span contenteditable="true" spellcheck=false class="m-r-5">{{ tab.title }}</span>
-              <!-- <i class="zmdi zmdi-close c-gray" ng-click="removeTab($index)"></i> -->
-      <div class="pull-right">
-        <ul class="actions">
-          <li class="dropdown" uib-dropdown>
-            <a href="" uib-dropdown-toggle>
-              <i class="zmdi zmdi-chevron-down"></i>
-            </a>
+              <span contenteditable="false" spellcheck=false class="m-r-5">{{ tab.title }}</span>
+              <div class="pull-right">
+                <ul class="actions">
+                  <li class="dropdown" uib-dropdown>
+                    <a href="" uib-dropdown-toggle>
+                      <i class="zmdi zmdi-chevron-down"></i>
+                    </a>
 
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li>
-                <a href="">Edit</a>
-              </li>
-              <li>
-                <a href="">Delete</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>              
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li>
+                        <a href="">Edit</a>
+                      </li>
+                      <li>
+                        <a href="" ng-click="vm.deleteTab($index)">Delete</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>              
             </div>
           </uib-tab-heading>          
           <div class="row">

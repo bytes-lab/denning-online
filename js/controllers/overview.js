@@ -1,6 +1,7 @@
 materialAdmin
   .controller('overviewCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService, Auth) {
     var vm = this;
+    vm.idxTab = 0;
     vm.tabs = [
       {
         "title": "Matter Overview",
@@ -110,4 +111,8 @@ materialAdmin
         ]
       }
     ]
+
+    vm.deleteTab = function (idx) {
+      vm.tabs.splice(idx, 1);
+    }
   })

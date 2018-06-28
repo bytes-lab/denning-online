@@ -5465,7 +5465,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
   border: 1px solid transparent !important;
   border-bottom-color: #2aa7ff !important;
-  cursor: default;
+  /*cursor: default;*/
 }
 
 .overview-tabs .nav-tabs > li > a {
