@@ -11,23 +11,41 @@
         <uib-tab ng-repeat="tab in vm.tabs">
           <uib-tab-heading>
             <div>
-              <span contenteditable="true">{{ tab.title }}&nbsp;</span>
-              <i class="zmdi zmdi-close c-gray" ng-click="removeTab($index)"></i>
+              <span contenteditable="true" spellcheck=false class="m-r-5">{{ tab.title }}</span>
+              <!-- <i class="zmdi zmdi-close c-gray" ng-click="removeTab($index)"></i> -->
+      <div class="pull-right">
+        <ul class="actions">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-chevron-down"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="">Edit</a>
+              </li>
+              <li>
+                <a href="">Delete</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>              
             </div>
           </uib-tab-heading>          
           <div class="row">
-          <div ng-repeat="section in tab.sections" class="col-sm-12">
-            <div class="row m-b-20">
-<!--               <div class="group1">
-                <div class="form-group">
-                  <input class="form-control group-label" ng-model="vm.model[group.key+'-title']" ng-value="section.title" />
+            <div ng-repeat="section in tab.sections" class="col-sm-12">
+              <div class="row m-b-20">
+  <!--               <div class="group1">
+                  <div class="form-group">
+                    <input class="form-control group-label" ng-model="vm.model[group.key+'-title']" ng-value="section.title" />
+                  </div>
                 </div>
+   -->              
+                <formly-form model="vm.model" fields="section.widgets">
+                </formly-form>
               </div>
- -->              
-              <formly-form model="vm.model" fields="section.widgets">
-              </formly-form>
             </div>
-          </div>
           </div>
         </uib-tab>
         <uib-tab index="10">
