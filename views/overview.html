@@ -50,7 +50,7 @@
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li ng-repeat="item in vm.permittedWidgets[$index]">
                         <a href="" ng-click="vm.manageWidget($parent.$parent.$index, $parent.$index, item.type)">
-                          <i class="zmdi zmdi-check m-r-10" ng-if="vm.manageWidget($parent.$parent.$index, $parent.$index, item.type)"></i>
+                          <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$parent.$index, $parent.$index, item.type)"></i>
                           {{ item.title }}
                         </a>
                       </li>

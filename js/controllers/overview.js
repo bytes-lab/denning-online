@@ -186,13 +186,31 @@ materialAdmin
     }
 
     vm.manageWidget = function (tabIdx, secIdx, type) {
-      var flag = false;
-      angular.forEach(vm.tabs[tabIdx].sections[secIdx].widgets, function(value, key) {
-        if (value.type == type) {
-          flag = true;
+      var idx = vm.checkWidget(tabIdx, secIdx, type);
+      if (idx > 0) {
+        vm.tabs[tabIdx].sections[secIdx].widgets.splice(idx-1, 1)
+      } else {
+        vm.tabs[tabIdx].sections[secIdx].widgets.push({
+          "type": type,
+          "templateOptions": {
+            "position": [2, 3], 
+            "num_matters": 3,
+          }
+        })
+      }
+    }
+
+    vm.checkWidget = function (tabIdx, secIdx, type) {
+      var flag = -1,
+          widgets = vm.tabs[tabIdx].sections[secIdx].widgets;
+
+      for (var i = 0; i < widgets.length; i++) {
+        if (widgets[i].type == type) {
+          flag = i;
+          break;
         }
-      })
-      return flag;
+      }
+      return flag+1;
     }
 
     vm.saveOverview = function () {
