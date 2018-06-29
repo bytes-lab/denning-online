@@ -114,13 +114,17 @@ materialAdmin
 
     vm.deleteTab = function (idx) {
       vm.tabs.splice(idx, 1);
+      vm.idxTab = idx -1;
+      vm.saveOverview();
     }
 
     vm.newTab = function () {
       vm.tabs.push({
         'title': 'New Tab',
-        'sections': []        
+        'sections': []
       })
+
+      vm.saveOverview();
     }
 
     vm.editTab = function (idx) {
@@ -136,5 +140,9 @@ materialAdmin
         event.stopPropagation();
         vm.finishEdit(idx);
       }
+    }
+
+    vm.saveOverview = function () {
+      // save vm.tabs
     }
   })
