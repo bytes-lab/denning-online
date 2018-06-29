@@ -144,5 +144,6 @@ materialAdmin
 
     vm.saveOverview = function () {
       // save vm.tabs
+      // filter to.hide == true
     }
   })

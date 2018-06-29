@@ -207,7 +207,7 @@
           </ul>
         </li>
       </ul>
-      
+
       <div class="row" style="padding: 16px 0;">
         <div class="col-xs-4">
           <div class="box-title">Due Tasks</div>
@@ -333,7 +333,7 @@
 </script>
 
 <script type="text/ng-template" id="widget6.html">
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
     <div id="site-visits" class="dash-widget-item bgm-teal">
       <div class="dash-widget-header">
         <div class="p-20">
@@ -350,13 +350,7 @@
 
             <ul class="dropdown-menu dropdown-menu-right">
               <li>
-                <a href="">Refresh</a>
-              </li>
-              <li>
-                <a href="">Manage Widgets</a>
-              </li>
-              <li>
-                <a href="">Widgets Settings</a>
+                <a href="" ng-click="to.hide=true">Delete</a>
               </li>
             </ul>
           </li>
@@ -383,11 +377,24 @@
 </script>
 
 <script type="text/ng-template" id="widget7.html">
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
     <div id="pie-charts" class="dash-widget-item">
       <div class="bgm-pink">
         <div class="dash-widget-header">
           <div class="dash-widget-title">Email Statistics</div>
+          <ul class="actions actions-alt">
+            <li class="dropdown" uib-dropdown>
+              <a href="" uib-dropdown-toggle>
+                <i class="zmdi zmdi-more-vert"></i>
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a href="" ng-click="to.hide=true">Delete</a>
+                </li>
+              </ul>
+            </li>
+          </ul>          
         </div>
 
         <div class="clearfix"></div>
@@ -415,18 +422,46 @@
 </script>
 
 <script type="text/ng-template" id="widget8.html">
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
     <div class="dash-widget-item bgm-lime">
       <div id="weather-widget"></div>
+      <div class="dash-widget-header">
+        <ul class="actions actions-alt">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="" ng-click="to.hide=true">Delete</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </script>
 
 <script type="text/ng-template" id="widget9.html">
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
     <div id="best-selling" class="dash-widget-item" data-ng-controller="bestsellingCtrl as wctrl">
       <div class="dash-widget-header">
         <div class="dash-widget-title">Best Sellings</div>
+        <ul class="actions actions-alt">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="" ng-click="to.hide=true">Delete</a>
+              </li>
+            </ul>
+          </li>
+        </ul>        
         <img src="img/widgets/alpha.jpg" alt="">
         <div class="main-item">
           <small>Samsung Galaxy Alpha</small>
