@@ -112,6 +112,49 @@ materialAdmin
       }
     ]
 
+    vm.permittedWidgets = [
+      [
+        {
+          type: 'widget1',
+          title: 'New Matters'
+        },
+        {
+          type: 'widget2',
+          title: 'Court Today'
+        },
+        {
+          type: 'widget3',
+          title: 'Due Tasks'
+        }
+      ],
+      [
+        {
+          type: 'widget4',
+          title: 'Matter Collection'
+        },
+        {
+          type: 'widget5',
+          title: 'File Collection'
+        },
+        {
+          type: 'widget6',
+          title: 'File Views'
+        },
+        {
+          type: 'widget7',
+          title: 'Email Statistics'
+        },
+        {
+          type: 'widget8',
+          title: 'Wheather'
+        },
+        {
+          type: 'widget9',
+          title: 'Best Sellings'
+        }
+      ]
+    ]
+
     vm.deleteTab = function (idx) {
       vm.tabs.splice(idx, 1);
       vm.idxTab = idx -1;
@@ -140,6 +183,16 @@ materialAdmin
         event.stopPropagation();
         vm.finishEdit(idx);
       }
+    }
+
+    vm.manageWidget = function (tabIdx, secIdx, type) {
+      var flag = false;
+      angular.forEach(vm.tabs[tabIdx].sections[secIdx].widgets, function(value, key) {
+        if (value.type == type) {
+          flag = true;
+        }
+      })
+      return flag;
     }
 
     vm.saveOverview = function () {

@@ -11788,6 +11788,13 @@ a.lv-footer:hover {
   top: 7px;
 }
 
+.section > .row > .actions {
+  position: absolute;
+  right: -10px;
+  z-index: 2;
+  top: 2px;
+}
+
 .card-header .btn-float {
   right: 25px;
   bottom: -23px;

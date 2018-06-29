@@ -33,7 +33,7 @@
             </div>
           </uib-tab-heading>          
           <div class="row">
-            <div ng-repeat="section in tab.sections" class="col-sm-12">
+            <div ng-repeat="section in tab.sections" class="col-sm-12 section">
               <div class="row m-b-20">
   <!--               <div class="group1">
                   <div class="form-group">
@@ -41,6 +41,23 @@
                   </div>
                 </div>
    -->              
+                <ul class="actions">
+                  <li class="dropdown" uib-dropdown>
+                    <a href="" uib-dropdown-toggle>
+                      <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li ng-repeat="item in vm.permittedWidgets[$index]">
+                        <a href="" ng-click="vm.manageWidget($parent.$parent.$index, $parent.$index, item.type)">
+                          <i class="zmdi zmdi-check m-r-10" ng-if="vm.manageWidget($parent.$parent.$index, $parent.$index, item.type)"></i>
+                          {{ item.title }}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+
                 <formly-form model="vm.model" fields="section.widgets">
                 </formly-form>
               </div>
