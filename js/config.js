@@ -46,7 +46,7 @@ materialAdmin
 
       .state ('overview', {
         data: {
-          access: '?'
+          access: '@'
         },
         url: '/overview',
         controller: 'overviewCtrl as vm',

@@ -102,9 +102,49 @@ materialAdmin
     self.openDelete = openDelete;
     self.create_new = $state.$current.data.can_edit;
     self.can_edit = $state.$current.data.can_edit;
-    self.partyLabels = ['Client', 'Vendor', 'Purchaser', 'Borrower', 'Guarantor', 'Plaintiff', 'Defendant', 'Assignor', 'Assignee, Financing Bank', 'Chargee / Assignee Bank', 'Landlord', 'Tenant', 'Lessor', 'Lessee', 'First Party', 'Second Party', 'Third Party', 'Fourth Party Fifth Party', 'Sixth Party'];
-    self.lawyerLabels = ['Vendor Solicitors', 'Purchaser Solicitors', 'Bank Solicitors', 'Chargor Solicitors', 'Plaintiff Solicitors', 'Defendant Solicitors', 'Third Party Solicitors', 'Appellant Solicitors', 'Respondent Solicitors'];
-    self.bankLabels = ['Chargee Bank', 'Financing Bank', 'Stakeholder Bank', 'Developer HDA Bank'];
+    self.partyLabels = [
+      'Client', 
+      'Vendor', 
+      'Purchaser', 
+      'Borrower', 
+      'Guarantor', 
+      'Plaintiff', 
+      'Defendant', 
+      'Assignor', 
+      'Assignee',
+      'Financing Bank', 
+      'Chargee / Assignee Bank', 
+      'Landlord', 
+      'Tenant', 
+      'Lessor', 
+      'Lessee', 
+      'First Party', 
+      'Second Party', 
+      'Third Party', 
+      'Fourth Party',
+      'Fifth Party', 
+      'Sixth Party'
+    ];
+
+    self.lawyerLabels = [
+      'Vendor Solicitors', 
+      'Purchaser Solicitors', 
+      'Bank Solicitors', 
+      'Charger Solicitors', 
+      'Plaintiff Solicitors', 
+      'Defendant Solicitors', 
+      'Third Party Solicitors', 
+      'Appellant Solicitors', 
+      'Respondent Solicitors'
+    ];
+
+    self.bankLabels = [
+      'Chargee Bank', 
+      'Financing Bank', 
+      'Stakeholder Bank', 
+      'Developer HDA Bank'
+    ];
+
     self.mattercode = {};
 
     $("#back-top").hide();

@@ -146,7 +146,7 @@ materialAdmin
         },
         {
           type: 'widget8',
-          title: 'Wheather'
+          title: 'Weather'
         },
         {
           type: 'widget9',
@@ -164,7 +164,7 @@ materialAdmin
     vm.newTab = function () {
       vm.tabs.push({
         'title': 'New Tab',
-        'sections': []
+        'sections': [{}, {}]
       })
 
       vm.saveOverview();
