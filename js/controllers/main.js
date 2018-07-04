@@ -104,13 +104,21 @@ materialAdmin
       this.currentSkin = color;
     }
 
-    if (Auth.isAuthenticated()) {
-      searchService.getFilter().then(function (data) {
-        self.searchFilterCategories = [];
-        data.forEach(function(item){
-          self.searchFilterCategories.push(item);
-        })
-      })      
+    self.getSearchFilterCategories = function () {
+      if (self.searchFilterCategories.length > 0) {
+        return self.searchFilterCategories;
+      } else {
+        self.searchFilterCategories = ['loading'];
+        if (Auth.isAuthenticated()) {
+          searchService.getFilter().then(function (data) {
+            self.searchFilterCategories = [];
+            data.forEach(function(item){
+              self.searchFilterCategories.push(item);
+            })
+            return self.searchFilterCategories;
+          })
+        }        
+      }
     }
     
     self.states    = [];

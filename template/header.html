@@ -40,9 +40,10 @@
           No results matching "{{mactrl.searchText}}" were found.
         </md-not-found>
       </md-autocomplete>
+      
       <md-card ng-show="mactrl.showFilterCategory" style="margin: 0px" >
         <md-radio-group ng-model="mactrl.selectedSearchCategory" ng-init="mactrl.selectedSearchCategory=0" layout-wrap layout="row" layout-padding ng-change="mactrl.searchFilterChange()">
-          <md-radio-button flex="{{ mactrl.searchFilterFlex }}"  ng-repeat="item in mactrl.searchFilterCategories" ng-value="item.ID" style="margin-right: 0px">
+          <md-radio-button flex="{{ mactrl.searchFilterFlex }}"  ng-repeat="item in mactrl.getSearchFilterCategories()" ng-value="item.ID" style="margin-right: 0px">
           {{item.Category}}
           </md-radio-button>
         </md-radio-group>
