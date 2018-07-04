@@ -104,12 +104,14 @@ materialAdmin
       this.currentSkin = color;
     }
 
-    searchService.getFilter().then(function (data) {
-      self.searchFilterCategories = [];
-      data.forEach(function(item){
-        self.searchFilterCategories.push(item);
-      })
-    })
+    if (Auth.isAuthenticated()) {
+      searchService.getFilter().then(function (data) {
+        self.searchFilterCategories = [];
+        data.forEach(function(item){
+          self.searchFilterCategories.push(item);
+        })
+      })      
+    }
     
     self.states    = [];
     self.querySearch   = querySearch;
