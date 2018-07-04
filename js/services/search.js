@@ -3,24 +3,18 @@ materialAdmin
   // Search Data
   // =========================================================================
 
-  .service('searchService', function ($http, Auth) {
+  .service('searchService', function (http) {
     this.getFilter = function () {
-      return $http.get('https://43.252.215.81/denningwcf/v1/generalSearch/category')
-      .then(function (resp) {
+      return http.GET('/v1/generalSearch/category').then(function (resp) {
         return resp.data;
       })
     };
 
     this.search = function (keyword, category) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/generalSearch',
-        headers: Auth.isAuthenticated(), 
-        params: {
+      return http.GET('/v1/generalSearch', {
           search: keyword,
           category: category,
           isAutoComplete: 1
-        }
       }).then(function(resp) {
         var searchRes = resp.data.map(function(item) {
           var newItem = angular.copy(item);
@@ -37,13 +31,8 @@ materialAdmin
     };
 
     this.keyword = function (query) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/generalSearch/keyword',
-        headers: Auth.isAuthenticated(), 
-        params: {
-          search: query
-        }
+      return http.GET('/v1/generalSearch/keyword', {
+        search: query
       }).then(function(resp) {
         var results = [];
         resp.data.forEach(function(item){

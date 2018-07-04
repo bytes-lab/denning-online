@@ -3,7 +3,7 @@ materialAdmin
   // Properties
   // =========================================================================
   
-  .service('propertyService', function($q, $timeout, http, Auth) {
+  .service('propertyService', function($q, $timeout, http) {
     var service = {};
 
     service.properties = null;

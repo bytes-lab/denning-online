@@ -6,11 +6,12 @@ materialAdmin
   .service('http', function($http, Auth) {
     var service = {};
 
-    service.GET = function (url) {
+    service.GET = function (url, params) {
       return $http({
         method: 'GET',
         url: Auth.getBaseURL() + url,
-        headers: Auth.isAuthenticated()
+        headers: Auth.isAuthenticated(),
+        params: params
       }).then(function(response) {
         return response;
       })
