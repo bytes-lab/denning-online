@@ -188,7 +188,11 @@ materialAdmin
     vm.manageWidget = function (tabIdx, secIdx, type) {
       var idx = vm.checkWidget(tabIdx, secIdx, type);
       if (idx > 0) {
-        vm.tabs[tabIdx].sections[secIdx].widgets.splice(idx-1, 1)
+        if (vm.tabs[tabIdx].sections[secIdx].widgets[idx-1].templateOptions.hide) {
+          vm.tabs[tabIdx].sections[secIdx].widgets[idx-1].templateOptions.hide = false;
+        } else {
+          vm.tabs[tabIdx].sections[secIdx].widgets.splice(idx-1, 1)
+        }
       } else {
         vm.tabs[tabIdx].sections[secIdx].widgets.push({
           "type": type,
@@ -200,17 +204,21 @@ materialAdmin
       }
     }
 
-    vm.checkWidget = function (tabIdx, secIdx, type) {
+    vm.checkWidget = function (tabIdx, secIdx, type, checkHide) {
       var flag = -1,
+          hide = false,
           widgets = vm.tabs[tabIdx].sections[secIdx].widgets;
 
       for (var i = 0; i < widgets.length; i++) {
         if (widgets[i].type == type) {
           flag = i;
+          hide = widgets[i].templateOptions.hide;
           break;
         }
       }
-      return flag+1;
+
+      result = (!checkHide || !hide) ? flag+1 : 0;
+      return result;
     }
 
     vm.saveOverview = function () {

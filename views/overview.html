@@ -3,7 +3,6 @@
 <section id="main">
   <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
 
-  <aside id="chat" data-ng-include src="'template/task.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.task === true }"></aside>
   <section id="content">
 
     <div class="container">
@@ -50,7 +49,7 @@
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li ng-repeat="item in vm.permittedWidgets[$index]">
                         <a href="" ng-click="vm.manageWidget($parent.$parent.$index, $parent.$index, item.type)">
-                          <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$parent.$index, $parent.$index, item.type)"></i>
+                          <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$parent.$index, $parent.$index, item.type, true)"></i>
                           {{ item.title }}
                         </a>
                       </li>
