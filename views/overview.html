@@ -100,32 +100,14 @@
       <div class="row" style="padding: 16px 0;">
         <div class="col-xs-4">
           <div class="box-title">New Matters</div>
-          <div class="box-title-detail c-cyan">24</div>
+          <div class="box-title-detail c-cyan">{{ data.mainValue }}</div>
         </div>
         <div class="col-xs-8" style="text-align: left;">
           <ul style="list-style-type: none;">
-            <li>
-              2000-2001 Hoo Wei Mee
+            <li ng-repeat="item in data.details">
+              {{ item.value }}
               <div class="c-cyan f-10">
-                Added 15min ago
-              </div>
-            </li>
-            <li>
-              2000-2002 Hoo Wei Mee
-              <div class="c-cyan f-10">
-                Added 25min ago
-              </div>
-            </li>
-            <li>
-              2000-2003 Hoo Wei Mee
-              <div class="c-cyan f-10">
-                Added 45min ago
-              </div>
-            </li>
-            <li>
-              2000-2003 Hoo Wei Mee
-              <div class="c-cyan f-10">
-                Added 45min ago
+                Added {{ item.updatedDate }}
               </div>
             </li>
           </ul>
@@ -155,51 +137,15 @@
       <div class="row" style="padding: 16px 0;">
         <div class="col-xs-4">
           <div class="box-title">Court Today</div>
-          <div class="box-title-detail c-cyan">6</div>
+          <div class="box-title-detail c-cyan">{{ data.mainValue }}</div>
         </div>
         <div class="col-xs-8" style="text-align: left;">
           <ul style="list-style-type: none;">
-            <li>
+            <li ng-repeat="item in data.details">
               <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                9:00 a.m.
+                {{ item.value1 }}
               </div>
-              Court
-            </li>
-            <li>
-              <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                3:00 p.m.
-              </div>
-              High Court
-            </li>
-            <li>
-              <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                4:45 p.m.
-              </div>
-              Court
-            </li>
-            <li>
-              <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                9:00 a.m.
-              </div>
-              Court
-            </li>
-            <li>
-              <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                3:00 p.m.
-              </div>
-              High Court
-            </li>
-            <li>
-              <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                3:00 p.m.
-              </div>
-              High Court
-            </li>
-            <li>
-              <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                4:45 p.m.
-              </div>
-              Court
+              {{ item.value2 }}
             </li>
           </ul>
         </div>

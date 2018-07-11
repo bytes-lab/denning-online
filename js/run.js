@@ -723,12 +723,22 @@ materialAdmin
   .run(function(formlyConfig) {
     formlyConfig.setType({
       name: 'widget1',
-      templateUrl: 'widget1.html'
+      templateUrl: 'widget1.html',
+      controller: function ($scope, overviewService) {
+        overviewService.getWidget1().then(function(data) {
+          $scope.data = data;
+        });
+      }
     });
 
     formlyConfig.setType({
       name: 'widget2',
-      templateUrl: 'widget2.html'
+      templateUrl: 'widget2.html',
+      controller: function ($scope, overviewService) {
+        overviewService.getWidget2().then(function(data) {
+          $scope.data = data;
+        });
+      }
     });
 
     formlyConfig.setType({
