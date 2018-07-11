@@ -45,9 +45,9 @@ materialAdmin
     service.upload = function (info, type) {
       var url;
       if (type == 'contact') {
-        url = url + '/v1/app/contactFolder';
+        url = '/v1/app/contactFolder';
       } else {
-        url = url + '/v1/app/matter/fileFolder';
+        url = '/v1/app/matter/fileFolder';
       }
 
       return http.POST(url, info).then(function(resp) {

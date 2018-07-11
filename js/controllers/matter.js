@@ -65,10 +65,10 @@ materialAdmin
     }
 
     self.tableFilter = new NgTableParams({
-      page: 1,            // show first page
+      page: 1,
       count: 25,
       sorting: {
-        name: 'asc'       // initial sorting
+        name: 'asc'
       }
     }, {
       getData: function(params) {
@@ -167,10 +167,10 @@ materialAdmin
           self.mattercode[value.Field] = value;
         })
 
-        self.mattercode.staff1 = {'Label': 'Partner'};
-        self.mattercode.staff2 = {'Label': 'L.A.'};
-        self.mattercode.staff3 = {'Label': 'Clerk in charge'};
-        self.mattercode.staff4 = {'Label': 'Team'};
+        // self.mattercode.staff1 = {'Label': 'Partner'};
+        // self.mattercode.staff2 = {'Label': 'L.A.'};
+        // self.mattercode.staff3 = {'Label': 'Clerk in charge'};
+        // self.mattercode.staff4 = {'Label': 'Team'};
       });
     } else {
       self.matterCode = {};
@@ -205,9 +205,9 @@ materialAdmin
       })
 
       self.matterCode.jsonFieldLabels = JSON.stringify(selected);
-      matterCodeService.save(self.matterCode).then(function(mattercode) {
-        self.matterCode = mattercode;
-        // $state.go('matter-codes.edit', {'code': mattercode.code});
+      matterCodeService.save(self.matterCode).then(function(matterCode) {
+        // self.matterCode = matterCode;
+        $state.go('matter-codes.edit', {'code': matterCode.code});
       });
     }
 
