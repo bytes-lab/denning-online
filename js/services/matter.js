@@ -62,7 +62,7 @@ materialAdmin
 
     service.getList = function (page=1, pagesize=500, keyword='') {
       return http.GET('/v1/table/MatterCode?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
-        return resp.data;
+        return resp;
       });
     }
 

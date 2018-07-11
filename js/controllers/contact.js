@@ -2,11 +2,9 @@ materialAdmin
   .controller('contactListCtrl', function($uibModal, NgTableParams, contactService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-    self.clickHandler = clickHandler;
-    self.search = search;
     self.keyword = '';
 
-    function clickHandler(item) {
+    self.clickHandler = function (item) {
       $state.go('contacts.edit', {'id': item.code});
     }
 
@@ -25,7 +23,7 @@ materialAdmin
       }
     })
 
-    function search() {
+    self.search = function () {
       self.tableFilter.reload();
     }
   })

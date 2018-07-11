@@ -14,28 +14,38 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="table-responsive table-div p-15" ng-if="vm.dataReady" > 
-        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list" show-filter="true">
+      <div class="col-sm-4 p-l-25">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon search-icon"><i class="zmdi zmdi-search"></i></span>
+          <div class="fg-line">
+            <input type="text" class="form-control" placeholder="Search" ng-model="vm.keyword" ng-change="vm.search()">
+          </div>
+          <span class="input-group-addon search-clear" ng-show="vm.keyword" ng-click="vm.keyword='';vm.search();"><i class="zmdi zmdi-close"></i></span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="table-responsive table-div p-15"> 
+        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
           <tr ng-repeat="w in $data" ng-click="vm.clickHandler(w)">
-            <td data-title="'Code'" filter="{ 'code': 'text' }" sortable="'code'">
+            <td data-title="'Code'" sortable="'code'">
               {{ w.code }}
             </td>
-            <td data-title="'Description'" filter="{ 'strDescription': 'text' }" sortable="'strDescription'">
+            <td data-title="'Description'" sortable="'strDescription'">
               {{ w.strDescription }}
             </td>
-            <td data-title="'Category'" filter="{ 'strCategory': 'text' }" sortable="'strCategory'">
+            <td data-title="'Category'" sortable="'strCategory'">
               {{ w.strCategory }}
             </td>
-            <td data-title="'Party Group Label 1'" filter="{ 'strGroupC1': 'text' }" sortable="'strGroupC1'">
+            <td data-title="'Party Group Label 1'" sortable="'strGroupC1'">
               {{ w.strGroupC1 }}
             </td>
-            <td data-title="'Party Group Label 2'" filter="{ 'strGroupC2': 'text' }" sortable="'strGroupC2'">
+            <td data-title="'Party Group Label 2'" sortable="'strGroupC2'">
               {{ w.strGroupC2 }}
             </td>
-            <td data-title="'Lawyer Group Label 1'" filter="{ 'strGroupL1': 'text' }" sortable="'strGroupL1'">
+            <td data-title="'Lawyer Group Label 1'" sortable="'strGroupL1'">
               {{ w.strGroupL1 }}
             </td>
-            <td data-title="'Lawyer Group Label 2'" filter="{ 'strGroupL2': 'text' }" sortable="'strGroupL2'">
+            <td data-title="'Lawyer Group Label 2'" sortable="'strGroupL2'">
               {{ w.strGroupL2 }}
             </td>
           </tr>
