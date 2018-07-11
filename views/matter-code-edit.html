@@ -195,7 +195,19 @@
             <dt class="p-t-10">0. Party Group C0</dt>
             <dd>
               <div class="fg-line">
-                <input value="Primary Client" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.matterCode.C0.Label"
+                  md-search-text="qp0"
+                  md-items="item in vm.queryList(vm.partyLabels, qp0)"
+                  md-item-text="item"
+                  md-min-length="1"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qp1" class="col-1" md-highlight-flags="i">{{ item }}</span>
+                </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
@@ -338,7 +350,7 @@
                   md-search-text="ql1"
                   md-items="item in vm.queryList(vm.lawyerLabels, ql1)"
                   md-item-text="item"
-                  md-min-length="1"
+                  md-min-length="0"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
@@ -358,7 +370,7 @@
                   md-search-text="ql2"
                   md-items="item in vm.queryList(vm.lawyerLabels, ql2)"
                   md-item-text="item"
-                  md-min-length="1"
+                  md-min-length="0"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
@@ -380,7 +392,7 @@
                   md-search-text="ql3"
                   md-items="item in vm.queryList(vm.lawyerLabels, ql3)"
                   md-item-text="item"
-                  md-min-length="1"
+                  md-min-length="0"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
@@ -400,7 +412,7 @@
                   md-search-text="ql4"
                   md-items="item in vm.queryList(vm.lawyerLabels, ql4)"
                   md-item-text="item"
-                  md-min-length="1"
+                  md-min-length="0"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
@@ -423,11 +435,11 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strBank1"
+                  md-selected-item="vm.mattercode.Bank1.Label"
                   md-search-text="qb1"
                   md-items="item in vm.queryList(vm.bankLabels, qb1)"
                   md-item-text="item"
-                  md-min-length="1"
+                  md-min-length="0"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
@@ -445,11 +457,11 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strBank2"
+                  md-selected-item="vm.mattercode.Bank2.Label"
                   md-search-text="qb2"
                   md-items="item in vm.queryList(vm.bankLabels, qb2)"
                   md-item-text="item"
-                  md-min-length="1"
+                  md-min-length="0"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
@@ -466,56 +478,22 @@
       <div class="row" ng-show="vm.showProperty">
         <div class="clearfix"></div>
         <div class="col-md-5 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Property 1</dt>
+          <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 3)">
+            <dt class="p-t-10">Property {{ n }}</dt>
             <dd>
-              <select class="form-control" ng-model="vm.matterCode.strProperty1" ng-disabled="!vm.can_edit">
-                <option ng-repeat="item in vm.propertyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL2 == item">
-                  {{ item }}
-                </option>
-              </select>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Property 2</dt>
-            <dd>
-              <select class="form-control" ng-model="vm.matterCode.strProperty2" ng-disabled="!vm.can_edit">
-                <option ng-repeat="item in vm.propertyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL3 == item">
-                  {{ item }}
-                </option>
-              </select>
-            </dd>
-          </dl>          
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Property 3</dt>
-            <dd>
-              <select class="form-control" ng-model="vm.matterCode.strProperty3" ng-disabled="!vm.can_edit">
-                <option ng-repeat="item in vm.propertyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL4 == item">
-                  {{ item }}
-                </option>
-              </select>
+              <div class="fg-line">
+                <input ng-model="vm.mattercode['P'+n].Label" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+              </div>
             </dd>
           </dl>
         </div>
         <div class="col-md-5 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Property 4</dt>
+          <dl class="dl-horizontal" ng-repeat="n in vm.range(4, 5)">
+            <dt class="p-t-10">Property {{ n }}</dt>
             <dd>
-              <select class="form-control" ng-model="vm.matterCode.strProperty4" ng-disabled="!vm.can_edit">
-                <option ng-repeat="item in vm.propertyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
-                  {{ item }}
-                </option>
-              </select>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Property 5</dt>
-            <dd>
-              <select class="form-control" ng-model="vm.matterCode.strProperty5" ng-disabled="!vm.can_edit">
-                <option ng-repeat="item in vm.propertyLabels" ng-value="item" ng-selected="vm.matterCode.strGroupL5 == item">
-                  {{ item }}
-                </option>
-              </select>
+              <div class="fg-line">
+                <input ng-model="vm.mattercode['P'+n].Label" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+              </div>
             </dd>
           </dl>
         </div>

@@ -93,15 +93,12 @@ materialAdmin
 
   .controller('matterCodeEditCtrl', function($filter, $stateParams, matterCodeService, $state, Auth, presetbillService, matterFormService) {
     var self = this;
-    self.save = save;
-    self.copy = copy;
-    self.cancel = cancel;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
-    self.openDelete = openDelete;
-    self.create_new = $state.$current.data.can_edit;
     self.can_edit = $state.$current.data.can_edit;
+    self.create_new = $state.$current.data.can_edit;
+    
     self.partyLabels = [
       'Client', 
       'Vendor', 
@@ -145,7 +142,7 @@ materialAdmin
       'Developer HDA Bank'
     ];
 
-    self.mattercode = {};
+    self.mattercode = {};   //  temp variable for json fields
 
     $("#back-top").hide();
     $(window).scroll(function() {
@@ -173,7 +170,7 @@ materialAdmin
       matterCodeService.getItem($stateParams.id).then(function(item){
         self.matterCode = item;
         
-        angular.forEach(JSON.parse(item.jsonFieldLabels), function(value, key) {
+        angular.forEach(JSON.parse(item.jsonFieldLabels || "{}"), function(value, key) {
           self.mattercode[value.Field] = value;
         })
 
@@ -201,14 +198,14 @@ materialAdmin
       self.create_new = true;
     }
 
-    function copy() {
+    self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
       
       delete self.matterCode.code;
     }
 
-    function save() {
+    self.save = function () {
       var selected = [];
       angular.forEach(self.mattercode, function(value, key) {
         selected.push(value);
@@ -217,15 +214,15 @@ materialAdmin
       self.matterCode.jsonFieldLabels = JSON.stringify(selected);
       matterCodeService.save(self.matterCode).then(function(mattercode) {
         self.matterCode = mattercode;
-        $state.go('matter-codes.edit', {'code': mattercode.code});
+        // $state.go('matter-codes.edit', {'code': mattercode.code});
       });
     }
 
-    function cancel() {
+    self.cancel = function () {
       $state.go('matter-codes.list');      
     }
     
-    function openDelete(event, matterCode) {
+    self.openDelete = function (event, matterCode) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, matterCode)
     };

@@ -73,6 +73,7 @@ materialAdmin
     }
 
     service.save = function (entity) {
+      console.log(entity);
       delete entity.dtDateEntered;
       delete entity.dtDateUpdated;
       delete entity.clsEnteredBy;
