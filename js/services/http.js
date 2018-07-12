@@ -1,9 +1,9 @@
 denningOnline
   // =========================================================================
-  // $http wrapper
+  // $http wrapper with refactoring model
   // =========================================================================
   
-  .service('http', function($http, Auth) {
+  .service('http', function($http, Auth, refactorService) {
     var service = {};
 
     service.GET = function (url, params) {
@@ -22,7 +22,7 @@ denningOnline
         method: 'POST',
         url: Auth.getBaseURL() + url,
         headers: Auth.isAuthenticated(),
-        data: data
+        data: refactorService.removeEmpty(data)
       }).then(function(response) {
         return response;
       })
@@ -33,7 +33,7 @@ denningOnline
         method: 'PUT',
         url: Auth.getBaseURL() + url,
         headers: Auth.isAuthenticated(),
-        data: data
+        data: refactorService.removeEmpty(data)
       }).then(function(response) {
         return response;
       })

@@ -54,8 +54,9 @@ denningOnline
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
-    self.create_new = $state.$current.data.can_edit;
     self.can_edit = $state.$current.data.can_edit;
+    self.create_new = $state.$current.data.can_edit;
+
     self.IDTypes = [];
     self.Salutations = [];
     self.IRDBranches = [];
@@ -243,13 +244,11 @@ denningOnline
 
   .controller('contactCreateModalCtrl', function ($uibModalInstance, party, viewMode, contactService, IRDBranchService, Auth) {
     var self = this;
-    self.save = save;
-    self.cancel = cancel;
     self.isDialog = true;
     self.viewMode = viewMode;
-    self.userInfo = Auth.getUserInfo();
-    self.create_new = !viewMode;
     self.can_edit = !viewMode;
+    self.create_new = !viewMode;
+    self.userInfo = Auth.getUserInfo();
 
     if (viewMode) {
       contactService.getItem(party.code).then(function(item){
@@ -275,7 +274,7 @@ denningOnline
       });
     }
 
-    function save() {
+    self.save = function () {
       contactService.save(self.contact).then(function(contact) {
         $uibModalInstance.close(contact);
       })
@@ -283,7 +282,7 @@ denningOnline
       });
     };
 
-    function cancel() {
+    self.cancel = function () {
       $uibModalInstance.close();
     };
   })
@@ -291,7 +290,6 @@ denningOnline
   .controller('relatedMatterCtrl', function($filter, $stateParams, NgTableParams, contactService, propertyService, $state) {
     var type = $state.$current.data.type;
     var self = this;
-    self.clickHandler = clickHandler;
     self.filter = true;
 
     var service = contactService;
@@ -306,7 +304,7 @@ denningOnline
       initializeTable();
     });
 
-    function clickHandler(item) {
+    self.clickHandler = function (item) {
       $state.go('file-matters.edit', {'fileNo': item.systemNo});
     }
     

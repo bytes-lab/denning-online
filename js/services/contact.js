@@ -3,7 +3,7 @@ denningOnline
   // Contacts
   // =========================================================================
   
-  .service('contactService', function(http) {
+  .service('contactService', function (http) {
     var service = {};
 
     service.getList = function (page=1, pagesize=25, keyword='') {
@@ -55,10 +55,7 @@ denningOnline
       });
     }
 
-    service.save = function (entity) {
-      delete entity.dtDateEntered;
-      delete entity.dtDateUpdated;
-
+    service.save = function (entity) {      
       if (entity.code) {
         return http.PUT('/v1/table/Customer', entity).then(function(response) {
           return response.data;
