@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .service('raceService', function ($http, Auth) {
     var service = {};
 

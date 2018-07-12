@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .config(function ($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise("/home");
 

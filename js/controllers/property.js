@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('propertyListCtrl', function($sce, $uibModal, NgTableParams, propertyService, $state, Auth) {
     var self = this;
     self.dataReady = false;
@@ -51,7 +51,7 @@ materialAdmin
     };
   })
 
-  .controller('propertyEditCtrl', function($filter, $stateParams, propertyService, $state, Auth, $uibModal, contactService) {
+  .controller('propertyEditCtrl', function($stateParams, propertyService, $state, Auth, $uibModal, contactService) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create

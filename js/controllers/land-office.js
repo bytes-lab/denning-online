@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('landOfficeListCtrl', function(NgTableParams, landOfficeService, $state) {
     var self = this;
     self.dataReady = false;

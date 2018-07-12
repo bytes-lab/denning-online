@@ -25,7 +25,7 @@ module.exports = function(grunt) {
             },
         },
         ngtemplates: {
-          materialAdmin: {
+          denningOnline: {
             src: ['template/**.html', 'template/**/**.html'],
             dest: 'js/templates.js',
             options: {

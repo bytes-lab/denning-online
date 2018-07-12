@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('courtdiaryListCtrl', function($filter, $uibModal, NgTableParams, courtdiaryService, $state, Auth) {
     var self = this;
 

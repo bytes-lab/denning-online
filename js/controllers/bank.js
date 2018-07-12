@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('bankListCtrl', function($filter, $sce, $uibModal, NgTableParams, bankService) {
         var self = this;
         self.dataReady = false;

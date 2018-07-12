@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('CKHTListCtrl', function($filter, $sce, $uibModal, NgTableParams, CKHTService) {
         var self = this;
         self.dataReady = false;

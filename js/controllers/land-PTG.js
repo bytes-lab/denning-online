@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('landPTGListCtrl', function(NgTableParams, landPTGService, $state) {
     var self = this;
     self.dataReady = false;

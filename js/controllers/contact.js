@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('contactListCtrl', function($uibModal, NgTableParams, contactService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();

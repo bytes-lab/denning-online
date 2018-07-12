@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('IRDBranchListCtrl', function(NgTableParams, IRDBranchService, $state, Auth) {
     var self = this;
     self.dataReady = false;

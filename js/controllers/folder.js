@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element, growlService, ngClipboard) {
     var self = this;
     self.userInfo = Auth.getUserInfo();

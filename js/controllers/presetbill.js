@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('presetbillListCtrl', function($filter, $uibModal, NgTableParams, presetbillService, $state) {
     var self = this;
     self.dataReady = false;

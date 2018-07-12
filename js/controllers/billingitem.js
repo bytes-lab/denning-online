@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('billingitemListCtrl', function($filter, $uibModal, NgTableParams, billingitemService) {
         var self = this;
         self.dataReady = false;

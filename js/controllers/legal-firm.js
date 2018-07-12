@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('legalFirmListCtrl', function(NgTableParams, legalFirmService, $state) {
     var self = this;
     self.search = search;

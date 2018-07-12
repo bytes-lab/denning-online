@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('spapresetclListCtrl', function($filter, $uibModal, NgTableParams, spapresetclService, $state, Auth) {
         var self = this;
         self.dataReady = false;

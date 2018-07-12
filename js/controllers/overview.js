@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('overviewCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService, Auth) {
     var vm = this;
     vm.idxTab = 0;

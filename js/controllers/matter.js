@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('fileMatterListCtrl', function($uibModal, NgTableParams, fileMatterService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();

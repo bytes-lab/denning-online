@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('judgeListCtrl', function($filter, $sce, $uibModal, NgTableParams, judgeService) {
         var self = this;
         self.dataReady = false;

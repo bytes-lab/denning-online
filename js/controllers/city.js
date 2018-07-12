@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('cityListCtrl', function($filter, $sce, $uibModal, NgTableParams, cityService) {
         var self = this;
         self.dataReady = false;

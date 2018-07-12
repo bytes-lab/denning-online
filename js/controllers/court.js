@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('courtListCtrl', function(NgTableParams, courtService, $state) {
     var self = this;
     self.dataReady = false;

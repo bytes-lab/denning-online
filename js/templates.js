@@ -1,4 +1,4 @@
-angular.module('materialAdmin').run(['$templateCache', function($templateCache) {
+angular.module('denningOnline').run(['$templateCache', function($templateCache) {
   'use strict';
 
   // $templateCache.put('template/chat.html',

@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('bankAttorneyListCtrl', function($filter, $sce, $uibModal, NgTableParams, bankAttorneyService) {
         var self = this;
         self.dataReady = false;

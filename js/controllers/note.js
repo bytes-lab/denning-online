@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('noteListCtrl', function($stateParams, NgTableParams, noteService, $state) {
     var self = this;
     self.dataReady = false;

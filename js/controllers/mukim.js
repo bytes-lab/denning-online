@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('mukimListCtrl', function($filter, $sce, $uibModal, NgTableParams, mukimService) {
         var self = this;
         self.dataReady = false;

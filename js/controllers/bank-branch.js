@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('bankBranchListCtrl', function(NgTableParams, bankBranchService, $state) {
     var self = this;
     self.search = search;

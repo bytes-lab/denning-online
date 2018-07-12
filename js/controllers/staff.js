@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('staffListCtrl', function($filter, $sce, $uibModal, NgTableParams, staffService) {
         var self = this;
         self.dataReady = false;

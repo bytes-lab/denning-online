@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('receiptListCtrl', function($filter, $uibModal, NgTableParams, receiptService) {
         var self = this;
         self.dataReady = false;

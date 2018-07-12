@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('occupationListCtrl', function($filter, $sce, $uibModal, NgTableParams, occupationService) {
         var self = this;
         self.dataReady = false;

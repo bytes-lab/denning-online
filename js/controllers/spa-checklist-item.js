@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('spaclitemListCtrl', function($filter, $uibModal, NgTableParams, spaclitemService, $state, Auth) {
         var self = this;
         self.dataReady = false;

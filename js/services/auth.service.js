@@ -1,4 +1,4 @@
-angular.module('materialAdmin')
+denningOnline
   .factory('Auth', function ($http, $window, $timeout, $q) {
     var service = {
       baseUrl: 'https://43.252.215.163/denningapi'

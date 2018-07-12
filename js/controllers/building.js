@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('buildingListCtrl', function($filter, $sce, $uibModal, NgTableParams, buildingService) {
         var self = this;
         self.dataReady = false;

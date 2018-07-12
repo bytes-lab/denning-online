@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .run(function ($rootScope, Auth, $state){
   	$rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
       $rootScope.toState = toState;

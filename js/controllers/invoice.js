@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('invoiceListCtrl', function($filter, $uibModal, NgTableParams, invoiceService) {
         var self = this;
         self.dataReady = false;

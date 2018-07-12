@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('loanTypeListCtrl', function($filter, $sce, $uibModal, NgTableParams, loanTypeService) {
         var self = this;
         self.dataReady = false;

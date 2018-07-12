@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('quotationListCtrl', function($filter, $uibModal, NgTableParams, quotationService, $state) {
     var self = this;
     self.dataReady = false;

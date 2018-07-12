@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('bankCACListCtrl', function(NgTableParams, bankCACService, $state) {
     var self = this;
     self.dataReady = false;

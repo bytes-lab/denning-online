@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .service('religionService', function ($http, Auth) {
     var service = {};
 

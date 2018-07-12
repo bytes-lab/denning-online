@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService, Auth) {
     var vm = this;
     vm.userInfo = Auth.getUserInfo();

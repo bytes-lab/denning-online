@@ -41,7 +41,7 @@
         <target value="development" />
       </core-task>
       <core-task name="ngtemplates" info="Compile AngularJS templates for $templateCache" file-path="$PROJECT_DIR$/node_modules/grunt-angular-templates/tasks/angular-templates.js" multi="true">
-        <target value="materialAdmin" />
+        <target value="denningOnline" />
       </core-task>
       <core-task name="watch" info="Run predefined tasks whenever watched files change." file-path="$PROJECT_DIR$/node_modules/grunt-contrib-watch/tasks/watch.js" multi="false">
         <target value="a" />

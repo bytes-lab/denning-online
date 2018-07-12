@@ -1,4 +1,4 @@
-var materialAdmin = angular.module('materialAdmin', [
+var denningOnline = angular.module('denningOnline', [
     'ngAnimate',
     'ngResource',
     'ui.router',

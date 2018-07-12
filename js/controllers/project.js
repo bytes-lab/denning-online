@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('projectListCtrl', function($filter, $sce, $uibModal, NgTableParams, projectService) {
     var self = this;
     self.dataReady = false;

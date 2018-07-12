@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
   .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, quotationService, invoiceService, $state) {
     var self = this;
     self.fileNo = $stateParams.fileNo;
