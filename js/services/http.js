@@ -25,6 +25,8 @@ denningOnline
         data: refactorService.removeEmpty(data)
       }).then(function(response) {
         return response;
+      }).catch(function (err) {
+        alert('Error: '+err.statusText);
       })
     };
 
@@ -34,8 +36,10 @@ denningOnline
         url: Auth.getBaseURL() + url,
         headers: Auth.isAuthenticated(),
         data: refactorService.removeEmpty(data)
-      }).then(function(response) {
+      }).then(function (response) {
         return response;
+      }).catch(function (err) {
+        alert('Error: '+err.statusText);
       })
     };
 

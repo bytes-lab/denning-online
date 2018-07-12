@@ -155,7 +155,9 @@ denningOnline
 
     self.save = function () {
       contactService.save(self.contact).then(function(contact) {
-        self.contact = contact;
+        if (contact) {
+          self.contact = contact;
+        }
       });
     }
 
