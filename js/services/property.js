@@ -25,16 +25,13 @@ denningOnline
     }
 
     service.save = function (entity) {
-      delete entity.dtDateEntered;
-      delete entity.dtDateUpdated;
-
       if (entity.code) {
         return http.PUT('/v1/table/Property', entity).then(function(response) {
-          return response.data;
+          return response ? response.data : null;
         });        
       } else {
         return http.POST('/v1/table/Property', entity).then(function(response) {
-          return response.data;
+          return response ? response.data : null;
         });                
       }
     }

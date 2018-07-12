@@ -1,13 +1,12 @@
 denningOnline
-  .controller('propertyListCtrl', function($sce, $uibModal, NgTableParams, propertyService, $state, Auth) {
+  .controller('propertyListCtrl', function (NgTableParams, propertyService, $state, Auth) {
     var self = this;
     self.dataReady = false;
-    self.clickHandler = clickHandler;
     self.userInfo = Auth.getUserInfo();
     self.search = search;
     self.keyword = '';
 
-    function clickHandler(item) {
+    self.clickHandler = function (item) {
       $state.go('properties.edit', {'id': item.code});
     }
 
@@ -18,7 +17,7 @@ denningOnline
         name: 'asc'   // initial sorting
       }
     }, {
-      getData: function(params) {
+      getData: function (params) {
         return propertyService.getList(params.page(), params.count(), self.keyword).then(function(data) {
           params.total(data.headers('x-total-count'));
           return data.data;
@@ -117,7 +116,9 @@ denningOnline
 
     self.save = function () {
       propertyService.save(self.property).then(function(property) {
-        self.property = property;
+        if (property) {
+          self.property = property;
+        }
       });
     }
 
@@ -160,8 +161,6 @@ denningOnline
 
   .controller('propertyCreateModalCtrl', function ($uibModalInstance, property, viewMode, propertyService, Auth) {
     var self = this;
-    self.save = save;
-    self.cancel = cancel;
     self.isDialog = true;
     self.viewMode = viewMode;
     self.userInfo = Auth.getUserInfo();
@@ -186,7 +185,7 @@ denningOnline
       });
     });
 
-    function save() {
+    self.save = function () {
       propertyService.save(self.property).then(function(property) {
         $uibModalInstance.close(property);
       })
@@ -194,7 +193,7 @@ denningOnline
       });
     };
 
-    function cancel() {
+    self.cancel = function () {
       $uibModalInstance.close();
     };
   })
