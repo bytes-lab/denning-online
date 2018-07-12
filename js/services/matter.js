@@ -36,22 +36,16 @@ denningOnline
       });
     }
 
-    service.save = function (contact) {
-      delete contact.relatedMatter;
-      contact.title = contact.title.description;
-
-      if (contact.code) {
-        return http.PUT('/v1/app/contact', contact).then(function(response) {
+    service.save = function (matter) {
+      if (matter.code) {
+        return http.PUT('/v1/table/File', matter).then(function(response) {
           return response.data;
         });
       } else {
-        return http.POST('/v1/app/contact', contact).then(function(response) {
+        return http.POST('/v1/table/File', matter).then(function(response) {
           return response.data;
         });
       }
-    }
-
-    service.delete = function (contact) {
     }
 
     return service;
@@ -73,22 +67,13 @@ denningOnline
     }
 
     service.save = function (entity) {
-      console.log(entity);
-      delete entity.dtDateEntered;
-      delete entity.dtDateUpdated;
-      delete entity.clsEnteredBy;
-      delete entity.clsUpdatedBy;
-      delete entity.intTurnaroundTime;
-      delete entity.boolIsDeleted;
-      delete entity.boolChkSubsaleCD;
-
       if (entity.code) {
         return http.PUT('/v1/table/MatterCode',entity).then(function(response) {
-          return response.data;
+          return response ? response.data : null;
         });
       } else {
         return http.POST('/v1/table/MatterCode',entity).then(function(response) {
-          return response.data;
+          return response ? response.data : null;
         });
       }
     }
@@ -112,11 +97,6 @@ denningOnline
     }
 
     service.save = function (entity) {
-      delete entity.dtDateEntered;
-      delete entity.dtDateUpdated;
-      delete entity.intCategory;
-      delete entity.intOrdering;
-
       if (!entity.code || entity.code.length == 0) {
         entity.code = 'frmFile' + entity.strDisplayName.replace(' ', '');
       }

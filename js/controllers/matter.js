@@ -2,11 +2,9 @@ denningOnline
   .controller('fileMatterListCtrl', function($uibModal, NgTableParams, fileMatterService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-    self.clickHandler = clickHandler;
-    self.search = search;
     self.keyword = '';
 
-    function clickHandler(item) {
+    self.clickHandler = function (item) {
       $state.go('file-matters.edit', {'fileNo': item.systemNo});
     }
 
@@ -31,7 +29,7 @@ denningOnline
       }
     })    
 
-    function search() {
+    self.search = function () {
       self.tableFilter.reload();
     }
   })
