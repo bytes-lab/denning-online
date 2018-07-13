@@ -12,6 +12,12 @@ denningOnline
       });  
     }
 
+    service.getRelatedMatters = function (type, code) {
+      return http.GET('/v1/table/'+type+'/relatedmatter/'+code).then(function(resp) {
+        return resp.data;
+      });  
+    }
+
     service.getItem = function (code) {
       return http.GET('/v1/table/File/'+code).then(function(resp) {
         return resp.data;
@@ -37,13 +43,13 @@ denningOnline
     }
 
     service.save = function (matter) {
-      if (matter.code) {
+      if (matter.strFileNo1) {
         return http.PUT('/v1/table/File', matter).then(function(response) {
-          return response.data;
+          return response ? response.data : null;
         });
       } else {
         return http.POST('/v1/table/File', matter).then(function(response) {
-          return response.data;
+          return response ? response.data : null;
         });
       }
     }

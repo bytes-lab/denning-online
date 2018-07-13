@@ -245,7 +245,7 @@ denningOnline
       .state ('contacts.matters', {
         data: {
           access: '@',
-          type: 'contact'
+          type: 'customer'
         },
         url: '/:id/matters',
         controller: 'relatedMatterCtrl as vm',
@@ -604,7 +604,7 @@ denningOnline
       .state ('properties.matters', {
         data: {
           access: '@',
-          type: 'property'          
+          type: 'property'
         },
         url: '/:id/matters',
         controller: 'relatedMatterCtrl as vm',

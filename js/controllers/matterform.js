@@ -749,9 +749,11 @@ denningOnline
     };
     // function definition
     vm.save = function () {
+      delete vm.model.tmp;
       fileMatterService.save(vm.model).then(function (data) {
         if (data) {
           vm.model = data;
+          // $state.reload();
         }
       })
     }

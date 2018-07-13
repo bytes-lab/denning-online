@@ -288,37 +288,3 @@ denningOnline
       $uibModalInstance.close();
     };
   })
-
-  .controller('relatedMatterCtrl', function($filter, $stateParams, NgTableParams, contactService, propertyService, $state) {
-    var type = $state.$current.data.type;
-    var self = this;
-    self.filter = true;
-
-    var service = contactService;
-    if (type == 'property')
-      service = propertyService;
-
-    service.getItem($stateParams.id).then(function(item) {
-      self.data = [];
-      angular.forEach(item.relatedMatter, function(value, key) {
-        self.data.push(angular.fromJson(value.JsonDesc));
-      })
-      initializeTable();
-    });
-
-    self.clickHandler = function (item) {
-      $state.go('file-matters.edit', {'fileNo': item.systemNo});
-    }
-    
-    function initializeTable () {
-      self.tableFilter = new NgTableParams({
-        page: 1,      
-        count: 25,
-        sorting: {
-          name: 'asc' 
-        }
-      }, {
-        dataset: self.data
-      })
-    }
-  })

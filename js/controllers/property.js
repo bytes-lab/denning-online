@@ -122,6 +122,10 @@ denningOnline
       });
     }
 
+    self.relatedMatter = function() {
+      $state.go('properties.matters', {id: self.property.code});
+    }
+
     self.cancel = function () {
       $state.go('properties.list');
     }

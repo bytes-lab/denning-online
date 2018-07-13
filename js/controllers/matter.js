@@ -1,8 +1,8 @@
 denningOnline
   .controller('fileMatterListCtrl', function($uibModal, NgTableParams, fileMatterService, Auth, $state) {
     var self = this;
-    self.userInfo = Auth.getUserInfo();
     self.keyword = '';
+    self.userInfo = Auth.getUserInfo();
 
     self.clickHandler = function (item) {
       $state.go('file-matters.edit', {'fileNo': item.systemNo});
@@ -31,6 +31,38 @@ denningOnline
 
     self.search = function () {
       self.tableFilter.reload();
+    }
+  })
+
+  .controller('relatedMatterCtrl', function($filter, $stateParams, NgTableParams, fileMatterService, $state) {
+    var type = $state.$current.data.type;
+    var self = this;
+    self.filter = true;
+
+    fileMatterService.getRelatedMatters(type, $stateParams.id).then(function (data) {
+      self.data = [];
+      angular.forEach(data, function(value, key) {
+        var item = JSON.parse(value.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+        item.dateOpen = item.dateOpen.split(' ')[0];
+        self.data.push(item);
+      })
+      initializeTable();
+    });
+
+    self.clickHandler = function (item) {
+      $state.go('file-matters.edit', {'fileNo': item.systemNo});
+    }
+    
+    function initializeTable () {
+      self.tableFilter = new NgTableParams({
+        page: 1,
+        count: 25,
+        sorting: {
+          name: 'asc' 
+        }
+      }, {
+        dataset: self.data
+      })
     }
   })
 
