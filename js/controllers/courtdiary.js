@@ -118,7 +118,7 @@ denningOnline
     }
 
     self.cancel = function () {
-      $state.go('courtdiary');      
+      $state.go('courtdiary');
     }
 
     $scope.open = function($event, opened) {
@@ -151,7 +151,7 @@ denningOnline
           on_list: function () {
             return false;
           }
-        }      
+        }
       });
     }
 
@@ -159,5 +159,5 @@ denningOnline
     self.openDelete = function (event, contact) {
       event.stopPropagation();
       modalInstances1(true, '', 'static', true, contact)
-    };    
+    };
   })
