@@ -48,7 +48,7 @@
             <dt class="p-t-10">Court Type</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.courtdiary.strCourtType" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.courtdiary.clsCourtPlace.strTypeE" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
 
             </dd>
@@ -57,7 +57,7 @@
             <dt class="p-t-10">Place</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.strPlace">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.clsCourtPlace.strPlace">
               </div>
             </dd>
           </dl>
@@ -83,7 +83,7 @@
             <dt class="p-t-10">Case No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.marital_status">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.courtInfo.CaseNo">
               </div>
             </dd>
           </dl>
@@ -91,7 +91,7 @@
             <dt class="p-t-10">Case Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.num_children">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.courtInfo.CaseName">
               </div>
             </dd>
           </dl>          
@@ -101,35 +101,34 @@
       <div class="clearfix"></div>
 
       <div class="row">
-        <div class="col-md-offset-2 col-md-10 m-b-15">
+        <div class="col-md-10 m-b-20" style="margin-left: 190px;">
           <label class="radio radio-inline m-r-25">
-            <input type="radio" name="inlineRadioOptions" value="option1">
+            <input type="radio" value="Attended" ng-model="vm.clsAttendedStatus.description">
             <i class="input-helper"></i>
             Attended 
           </label>
 
           <label class="radio radio-inline m-r-25">
-            <input type="radio" name="inlineRadioOptions" value="option2">
+            <input type="radio" value="MOB" ng-model="vm.courtdiary.clsAttendedStatus.description">
             <i class="input-helper"></i>
             MOB
           </label>
 
           <label class="radio radio-inline m-r-25">
-            <input type="radio" name="inlineRadioOptions" value="option3">
+            <input type="radio" value="Postponed" ng-model="vm.courtdiary.clsAttendedStatus.description">
             <i class="input-helper"></i>
             Postponed
           </label>
           <label class="radio radio-inline m-r-25">
-            <input type="radio" name="inlineRadioOptions" value="option3">
+            <input type="radio" value="Absent" ng-model="vm.courtdiary.clsAttendedStatus.description">
             <i class="input-helper"></i>
             Absent
           </label>
           <label class="radio radio-inline m-r-25">
-            <input type="radio" name="inlineRadioOptions" value="option3">
+            <input type="radio" value="None" ng-model="vm.courtdiary.clsAttendedStatus.description">
             <i class="input-helper"></i>
             None
           </label>
-
         </div>
       </div>
       <div class="row">

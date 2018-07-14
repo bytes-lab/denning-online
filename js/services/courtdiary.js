@@ -31,7 +31,7 @@ denningOnline
 
     service.getItem = function (code) {
       return http.GET('/v1/table/courtdiary/'+code).then(function(resp) {
-        return resp;
+        return resp.data;
       });
     }
 

@@ -108,9 +108,9 @@ denningOnline
     self.can_edit = $state.$current.data.can_edit;
 
     if ($stateParams.id) {
-      courtdiaryService.getItem($stateParams.id).then(function(item){
+      courtdiaryService.getItem($stateParams.id).then(function (item){
         self.courtdiary = item;
-        angular.forEach(self.courtdiary, function(value, key) {
+        angular.forEach(self.courtdiary, function (value, key) {
           if (key.indexOf('dt') == 0) {
             self.courtdiary[key] = uibDateParser.parse(self.courtdiary[key], 'yyyy-MM-dd HH:mm:ss');
           }
