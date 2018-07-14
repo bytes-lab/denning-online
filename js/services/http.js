@@ -12,27 +12,14 @@ denningOnline
         url: Auth.getBaseURL() + url,
         headers: Auth.isAuthenticated(),
         params: params
-      }).then(function(response) {
+      }).then(function (response) {
         return response;
       })
     };
 
-    service.POST = function (url, data) {
+    function do_(method, url, data) {
       return $http({
-        method: 'POST',
-        url: Auth.getBaseURL() + url,
-        headers: Auth.isAuthenticated(),
-        data: refactorService.removeEmpty(data)
-      }).then(function(response) {
-        return response;
-      }).catch(function (err) {
-        alert('Error: '+err.statusText);
-      })
-    };
-
-    service.PUT = function (url, data) {
-      return $http({
-        method: 'PUT',
+        method: method,
         url: Auth.getBaseURL() + url,
         headers: Auth.isAuthenticated(),
         data: refactorService.removeEmpty(data)
@@ -41,6 +28,18 @@ denningOnline
       }).catch(function (err) {
         alert('Error: '+err.statusText);
       })
+    }
+    
+    service.POST = function (url, data) {
+      return do_('POST', url, data);
+    };
+
+    service.PUT = function (url, data) {
+      return do_('PUT', url, data);
+    };
+
+    service.DELETE = function (url, data) {
+      return do_('DELETE', url, data);
     };
 
     return service;

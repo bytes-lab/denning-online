@@ -56,18 +56,17 @@ denningOnline
     }
 
     service.save = function (entity) {
-      if (entity.code) {
-        return http.PUT('/v1/table/Customer', entity).then(function(response) {
-          return response ? response.data : null;
-        });
-      } else {
-        return http.POST('/v1/table/Customer', entity).then(function(response) {
-          return response ? response.data : null;
-        });
-      }
+      var method = entity.code ? 'PUT': 'POST';
+
+      return http[method]('/v1/table/Customer', entity).then(function(response) {
+        return response ? response.data : null;
+      });
     }
 
-    service.delete = function (contact) {
+    service.delete = function (entity) {
+      return http.DELETE('/v1/table/Customer', { code: entity.code }).then(function (response) {
+        return response;
+      });      
     }
     
     return service;

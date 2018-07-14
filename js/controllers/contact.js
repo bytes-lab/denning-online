@@ -28,15 +28,14 @@ denningOnline
     }
   })
 
-  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, contact, on_list, contactService, $state) {
+  .controller('deleteModalCtrl', function ($scope, $uibModalInstance, contact, on_list, contactService, $state) {
     $scope.ok = function () {
-      contactService.delete(contact).then(function(contact) {
+      contactService.delete(contact).then(function () {
         if (on_list)
           $state.reload();
         else
           $state.go('contacts.list');
-      })
-      .catch(function(err){
+      }).catch(function(err){
         //$scope.formname.contactInfo.$error.push({meessage:''});
       });
       $uibModalInstance.close();
@@ -44,8 +43,9 @@ denningOnline
 
     $scope.cancel = function () {
       $uibModalInstance.close();
-      if (on_list)
+      if (on_list) {
         $state.go('contacts.list');
+      }
     };
   })
 
@@ -179,26 +179,6 @@ denningOnline
 
     $scope.format = 'dd/MM/yyyy';
 
-    //Create Modal
-    function modalInstances1(animation, size, backdrop, keyboard, contact) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          contact: function () {
-            return contact;
-          }, 
-          on_list: function () {
-            return false;
-          }
-        }
-      });
-    }
-
     self.relatedMatter = function() {
       $state.go('contacts.matters', {id: self.contact.code});
     }
@@ -240,7 +220,23 @@ denningOnline
     //Prevent Outside Click
     self.openDelete = function (event, contact) {
       event.stopPropagation();
-      modalInstances1(true, '', 'static', true, contact)
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'deleteModal.html',
+        controller: 'deleteModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          contact: function () {
+            return contact;
+          }, 
+          on_list: function () {
+            return false;
+          }
+        }
+      });
     };
   })
 
