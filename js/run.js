@@ -724,10 +724,14 @@ denningOnline
     formlyConfig.setType({
       name: 'widget1',
       templateUrl: 'widget1.html',
-      controller: function ($scope, overviewService) {
+      controller: function ($scope, $state, overviewService) {
         overviewService.getWidget1().then(function(data) {
           $scope.data = data;
         });
+
+        $scope.showMatter = function (item) {          
+          $state.go('file-matters.edit', {'fileNo': item.values[0]});
+        }
       }
     });
 

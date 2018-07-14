@@ -680,11 +680,18 @@ denningOnline
 
     if ($stateParams.fileNo) {
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
-        vm.model = item;
-        vm.model.tmp = editControl;
-        vm.model.tmp.oldMatterCode = item.clsMatterCode;
-        
-        vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )'; 
+        if (item) {
+          vm.model = item;
+          vm.model.tmp = editControl;
+          vm.model.tmp.oldMatterCode = item.clsMatterCode;
+          
+          vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )';           
+        } else {
+          vm.model = { 
+            tmp: editControl
+          };
+          vm.title = 'New Matter';
+        }
         buildTabs(vm.model.clsMatterCode);
       });
     } else {

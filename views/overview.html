@@ -99,12 +99,12 @@
       <div class="row" style="padding: 16px 0;">
         <div class="col-xs-4">
           <div class="box-title">New Matters</div>
-          <div class="box-title-detail c-cyan">{{ data.mainValue }}</div>
+          <div class="box-title-detail c-cyan">{{ data.mainValue.value }}</div>
         </div>
         <div class="col-xs-8" style="text-align: left;">
           <ul style="list-style-type: none;">
-            <li ng-repeat="item in data.details">
-              {{ item.value }}
+            <li ng-repeat="item in data.table.rows" style="cursor: pointer;" ng-click="showMatter(item);">
+              <span>{{ item.values[0] }} {{ item.values[1] }}</span>
               <div class="c-cyan f-10">
                 Added {{ item.updatedDate }}
               </div>
@@ -136,15 +136,15 @@
       <div class="row" style="padding: 16px 0;">
         <div class="col-xs-4">
           <div class="box-title">Court Today</div>
-          <div class="box-title-detail c-cyan">{{ data.mainValue }}</div>
+          <div class="box-title-detail c-cyan">{{ data.mainValue.value }}</div>
         </div>
         <div class="col-xs-8" style="text-align: left;">
           <ul style="list-style-type: none;">
-            <li ng-repeat="item in data.details">
+            <li ng-repeat="item in data.table.rows">
               <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                {{ item.value1 }}
+                {{ item.values[0] }}
               </div>
-              {{ item.value2 }}
+              {{ item.values[1] }}
             </li>
           </ul>
         </div>
