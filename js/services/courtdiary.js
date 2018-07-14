@@ -6,14 +6,25 @@ denningOnline
   .service('courtdiaryService', function(http) {
     var service = {};
 
-    service.getList = function (page=1, pagesize=25, keyword='') {
-      return http.GET('/v1/table/courtdiary?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
+    service.getList = function (page, pagesize, keyword='') {
+      return http.GET('/v1/table/courtdiary', {
+        page: page,
+        pagesize: pagesize,
+        search:keyword
+      }).then(function(resp) {
         return resp;
       });
     }
 
-    service.getCalendar = function (page=1, pagesize=25, keyword='') {
-      return http.GET("/v1/DenningCalendar?dateStart='2014-04-01'&dateEnd='2014-04-30'&filterBy=0All").then(function(resp) {
+    service.getCalendar = function (start, end, filter, page, pagesize, keyword='') {
+      return http.GET("/v1/DenningCalendar", {
+        dateStart: start,
+        dateEnd: end,
+        filterBy: filter,
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
         return resp;
       });
     }

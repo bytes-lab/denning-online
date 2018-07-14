@@ -4,6 +4,7 @@ denningOnline
 
     self.userInfo = Auth.getUserInfo();
     self.keyword = '';
+    self.filter = '0All';
 
     self.clickHandler = function (item) {
       $state.go('courtdiaries.edit', {'id': item.code});
@@ -17,7 +18,7 @@ denningOnline
       }
     }, {
       getData: function(params) {
-        return courtdiaryService.getCalendar(params.page(), params.count(), self.keyword).then(function(data) {
+        return courtdiaryService.getCalendar('2014-04-01', '2014-04-30', self.filter, params.page(), params.count(), self.keyword).then(function(data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
