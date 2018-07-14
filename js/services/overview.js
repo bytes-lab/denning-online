@@ -23,11 +23,11 @@ denningOnline
       delete entity.dtDateUpdated;
 
       if (entity.code) {
-        return http.PUT('/v1/table/Customer', entity).then(function(response) {
+        return http.PUT('/v1/table/Overview', entity).then(function(response) {
           return response.data;
         });
       } else {
-        return http.POST('/v1/table/Customer', entity).then(function(response) {
+        return http.POST('/v1/table/Overview', entity).then(function(response) {
           return response.data;
         });
       }

@@ -40,9 +40,8 @@ denningOnline
 
     self.onSelect = function(argStart, argEnd) {
       self.firstDay = argStart.toISOString();
-      self.lastDay = argEnd.toISOString();
+      self.lastDay = moment(argEnd).add(-1, 'days').format('YYYY-MM-DD');
       self.tableFilter.reload();
-
       // ad event on calendar
       // var modalInstance  = $uibModal.open({
       //   templateUrl: 'addEvent.html',
