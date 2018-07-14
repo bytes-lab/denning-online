@@ -6,19 +6,28 @@ denningOnline
     self.keyword = '';
     self.filter = '0All';
 
+    var date = new Date(), 
+        y = date.getFullYear(), 
+        m = date.getMonth(),
+        firstDay = new Date(y, m, 1),
+        lastDay = new Date(y, m + 1, 0);
+
+    self.firstDay = moment(firstDay).format('YYYY-MM-DD');
+    self.lastDay = moment(lastDay).format('YYYY-MM-DD');
+
     self.clickHandler = function (item) {
       $state.go('courtdiaries.edit', {'id': item.code});
     }
 
     self.tableFilter = new NgTableParams({
-      page: 1,        // show first page
+      page: 1,
       count: 5,
       sorting: {
-        name: 'asc'   // initial sorting
+        name: 'asc'
       }
     }, {
       getData: function(params) {
-        return courtdiaryService.getCalendar('2014-04-01', '2014-04-30', self.filter, params.page(), params.count(), self.keyword).then(function(data) {
+        return courtdiaryService.getCalendar(self.firstDay, self.lastDay, self.filter, params.page(), params.count(), self.keyword).then(function(data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
@@ -30,9 +39,11 @@ denningOnline
     }
 
     self.onSelect = function(argStart, argEnd) {
-      console.log(argStart.toISOString(), argEnd.toISOString());
+      self.firstDay = argStart.toISOString();
+      self.lastDay = argEnd.toISOString();
       self.tableFilter.reload();
 
+      // ad event on calendar
       // var modalInstance  = $uibModal.open({
       //   templateUrl: 'addEvent.html',
       //   controller: 'addeventCtrl',

@@ -83,80 +83,93 @@ denningOnline
         actionLinks: '=',
       },
       link: function(scope, element, attrs) {
-        courtdiaryService.getList(1, 100).then(function(res) {
-          var eventObj = {};
-          angular.forEach(res.data, function(value, key) {
-            if (value.clsCourtPlace.strTypeE) {
-              if (value.dtEventDate in eventObj) {
-                event = eventObj[value.dtEventDate];
-                if (value.clsCourtPlace.strTypeE in event) {
-                  event[value.clsCourtPlace.strTypeE]++;
-                } else {
-                  event[value.clsCourtPlace.strTypeE] = 1;
+        var colors = {
+          'Land Office': 'bgm-blue',
+          'High Court': 'bgm-green',
+          'Magistrates Court': 'bgm-gray',
+          'Sessions Court': 'bgm-teal',
+          'Small Estate Department': 'bgm-pink',
+          'Federal Court': 'bgm-purple',
+          'Court of Appeal': 'bgm-cyan'
+        };
+
+        var getType = function (strType) {
+          for (key in colors) {
+            if (strType.indexOf(key) > -1) {
+              return key;
+            }            
+          }
+        }
+        // Generate the Calendar
+        element.fullCalendar({
+          header: {
+            right: '',
+            center: 'prev, title, next',
+            left: ''
+          },
+
+          theme: true, //Do not remove this as it ruin the design
+          selectable: true,
+          selectHelper: true,
+          editable: true,
+
+          //Add Events
+          // events: events,
+          
+          //On Day Select
+          select: function(start, end, allDay) {
+            scope.select({
+              start: start, 
+              end: end
+            });
+          },
+          viewRender: function (view, elem) {
+            courtdiaryService.getCalendar(view.start.format('YYYY-MM-DD'), view.end.format('YYYY-MM-DD'), '0All', 1, 100, '').then(function(res) {
+              var eventObj = {};
+              angular.forEach(res.data, function(value, key) {
+                if (value.location) {
+                  var type_ = getType(value.location);
+                  if (value.eventStart in eventObj) {
+                    event = eventObj[value.eventStart];
+                    if (type_ in event) {
+                      event[type_]++;
+                    } else {
+                      event[type_] = 1;
+                    }
+                  } else {
+                    eventObj[value.eventStart] = {};
+                    eventObj[value.eventStart][type_] = 1;
+                  }
                 }
-              } else {
-                eventObj[value.dtEventDate] = {};
-                eventObj[value.dtEventDate][value.clsCourtPlace.strTypeE] = 1;
-              }
-            }
-          })
-
-          var events = [],
-              colors = {
-                'Land Office': 'bgm-blue',
-                'High Court': 'bgm-green',
-                'Magistrates Court': 'bgm-gray',
-                'Sessions Court': 'bgm-teal',
-                'Small Estate Department': 'bgm-pink',
-                'Federal Court': 'bgm-purple',
-                'Court of Appeal': 'bgm-cyan'
-              };
-
-          angular.forEach(eventObj, function(value, date) {
-            angular.forEach(value, function(count, event) {
-              var color;
-              if (event in colors) {
-                color = colors[event];
-              } else {
-                color = 'bgm-brown';
-              }
-
-              events.push({
-                  title: '['+count+'] '+event,
-                  start: uibDateParser.parse(date, 'yyyy-MM-dd HH:mm:ss'),
-                  allDay: true,
-                  className: color
               })
-            })
-          })
-          //Generate the Calendar
-          element.fullCalendar({
-            header: {
-              right: '',
-              center: 'prev, title, next',
-              left: ''
-            },
 
-            theme: true, //Do not remove this as it ruin the design
-            selectable: true,
-            selectHelper: true,
-            editable: true,
+              var events = [];
+              angular.forEach(eventObj, function(value, date) {
+                angular.forEach(value, function(count, event) {
+                  var color;
+                  if (event in colors) {
+                    color = colors[event];
+                  } else {
+                    color = 'bgm-brown';
+                  }
 
-            //Add Events
-            events: events,
-            
-            //On Day Select
-            select: function(start, end, allDay) {
-              scope.select({
-                start: start, 
-                end: end
-              });
-            }
-          });
-
-          //Add action links in calendar header
-          element.find('.fc-toolbar').append($compile(scope.actionLinks)(scope));
+                  events.push({
+                      title: '['+count+'] '+event,
+                      start: uibDateParser.parse(date, 'yyyy-MM-dd HH:mm:ss'),
+                      allDay: true,
+                      className: color
+                  })
+                })
+              })              
+              element.fullCalendar( 'removeEvents' );
+              element.fullCalendar( 'addEventSource', events );
+              // updateEvents
+            });
+          }
         });
+
+        //Add action links in calendar header
+        element.find('.fc-toolbar').append($compile(scope.actionLinks)(scope));
       }
     }
   })
