@@ -17,7 +17,7 @@ denningOnline
       }
     }, {
       getData: function(params) {
-        return courtdiaryService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+        return courtdiaryService.getCalendar(params.page(), params.count(), self.keyword).then(function(data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });

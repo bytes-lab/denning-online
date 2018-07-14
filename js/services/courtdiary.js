@@ -3,41 +3,32 @@ denningOnline
   // Court Diaries
   // =========================================================================
   
-  .service('courtdiaryService', function($q, $timeout, $http, Auth) {
+  .service('courtdiaryService', function(http) {
     var service = {};
 
     service.getList = function (page=1, pagesize=25, keyword='') {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/table/courtdiary?page='+page+'&pagesize='+pagesize+'&search='+keyword,
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
+      return http.GET('/v1/table/courtdiary?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
         return resp;
-      });  
+      });
+    }
+
+    service.getCalendar = function (page=1, pagesize=25, keyword='') {
+      return http.GET("/v1/DenningCalendar?dateStart='2014-04-01'&dateEnd='2014-04-30'&filterBy=0All").then(function(resp) {
+        return resp;
+      });
     }
 
     service.getItem = function (code) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/table/courtdiary/'+code,
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
-        return resp.data;
-      });  
+      return http.GET('/v1/table/courtdiary/'+code).then(function(resp) {
+        return resp;
+      });
     }
 
     service.save = function (entity) {
       var method = entity.code ? 'PUT': 'POST';
-      delete entity.dtDateEntered;
-      delete entity.dtDateUpdated;
 
-      return $http({
-        method: method,
-        url: 'https://43.252.215.81/denningwcf/v1/table/courtdiary',
-        headers: Auth.isAuthenticated(),
-        data: entity
-      }).then(function(response) {
-        return response.data;
+      return http[method]('/v1/table/courtdiary', entity).then(function(response) {
+        return response ? response.data : null;
       });
     }
 
