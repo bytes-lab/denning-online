@@ -66,8 +66,8 @@ denningOnline
     service.delete = function (entity) {
       return http.DELETE('/v1/table/Customer', { code: entity.code }).then(function (response) {
         return response;
-      });      
+      });
     }
-    
+
     return service;
   })

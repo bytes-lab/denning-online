@@ -1,5 +1,5 @@
 denningOnline
-  .controller('fileMatterListCtrl', function($uibModal, NgTableParams, fileMatterService, Auth, $state) {
+  .controller('fileMatterListCtrl', function(NgTableParams, fileMatterService, Auth, $state) {
     var self = this;
     self.keyword = '';
     self.userInfo = Auth.getUserInfo();
@@ -66,27 +66,6 @@ denningOnline
     }
   })
 
-  .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, contact, on_list, fileMatterService, $state) {
-    $scope.ok = function () {
-      fileMatterService.delete(contact).then(function(contact) {
-        if (on_list)
-          $state.reload();
-        else
-          $state.go('file-matters.list');
-      })
-      .catch(function(err){
-        //$scope.formname.contactInfo.$error.push({meessage:''});
-      });
-      $uibModalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $uibModalInstance.close();
-      if (on_list)
-        $state.go('file-matters.list');
-    };
-  })
-
   .controller('matterCodeListCtrl', function(NgTableParams, matterCodeService, $state) {
     var self = this;
 
@@ -114,7 +93,7 @@ denningOnline
     }
   })
 
-  .controller('matterCodeEditCtrl', function($filter, $stateParams, matterCodeService, $state, Auth, presetbillService, matterFormService) {
+  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, matterCodeService, $state, Auth, presetbillService, matterFormService) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -245,9 +224,34 @@ denningOnline
       $state.go('matter-codes.list');      
     }
     
-    self.openDelete = function (event, matterCode) {
+    self.openDelete = function (event, entity) {
       event.stopPropagation();
-      modalInstances1(true, '', 'static', true, matterCode)
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'deleteEntityModal.html',
+        controller: 'deleteEntityModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          entity: function () {
+            return entity;
+          }, 
+          on_list: function () {
+            return false;
+          },
+          entity_type: function () {
+            return 'matter code';
+          },
+          service: function () {
+            return matterCodeService;
+          },
+          return_state: function () {
+            return 'matter-codes.list';
+          }
+        }
+      });      
     };
 
     self.queryList = function (labels, q) {
@@ -263,26 +267,6 @@ denningOnline
     self.queryBills = function (searchText) {
       return self.presetBills.filter(function(c) {
         return c.code.search(new RegExp(searchText, "i")) > -1 || c.description.search(new RegExp(searchText, "i")) > -1;
-      });
-    }
-
-    //Create Modal
-    function modalInstances1(animation, size, backdrop, keyboard, matterCode) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          matterCode: function () {
-            return matterCode;
-          }, 
-          on_list: function () {
-            return false;
-          }
-        }
       });
     }
   })

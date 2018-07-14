@@ -43,15 +43,16 @@ denningOnline
     }
 
     service.save = function (matter) {
-      if (matter.strFileNo1) {
-        return http.PUT('/v1/table/File', matter).then(function(response) {
-          return response ? response.data : null;
-        });
-      } else {
-        return http.POST('/v1/table/File', matter).then(function(response) {
-          return response ? response.data : null;
-        });
-      }
+      var method = matter.strFileNo1 ? 'PUT': 'POST';
+      return http[method]('/v1/table/File', matter).then(function(response) {
+        return response ? response.data : null;
+      });
+    }
+
+    service.delete = function (entity) {
+      return http.DELETE('/v1/table/File', { code: entity.strFileNo1 }).then(function (response) {
+        return response;
+      });
     }
 
     return service;
@@ -73,15 +74,17 @@ denningOnline
     }
 
     service.save = function (entity) {
-      if (entity.code) {
-        return http.PUT('/v1/table/MatterCode',entity).then(function(response) {
-          return response ? response.data : null;
-        });
-      } else {
-        return http.POST('/v1/table/MatterCode',entity).then(function(response) {
-          return response ? response.data : null;
-        });
-      }
+      var method = entity.code ? 'PUT': 'POST';
+
+      return http[method]('/v1/table/MatterCode',entity).then(function(response) {
+        return response ? response.data : null;
+      });
+    }
+
+    service.delete = function (entity) {
+      return http.DELETE('/v1/table/MatterCode', { code: entity.code }).then(function (response) {
+        return response;
+      });
     }
 
     return service;
@@ -107,15 +110,16 @@ denningOnline
         entity.code = 'frmFile' + entity.strDisplayName.replace(' ', '');
       }
 
-      if (entity.code) {
-        return http.PUT('/v1/table/MatterCodeEditForm', entity).then(function(response) {
-          return response.data;
-        });
-      } else {
-        return http.POST('/v1/table/MatterCodeEditForm', entity).then(function(response) {
-          return response.data;
-        });
-      }
+      var method = entity.code ? 'PUT': 'POST';
+      return http[method]('/v1/table/MatterCodeEditForm', entity).then(function(response) {
+        return response ? response.data : null;
+      });
+    }
+
+    service.delete = function (entity) {
+      return http.DELETE('/v1/table/matterform', { code: entity.code }).then(function (response) {
+        return response;
+      });
     }
 
     return service;

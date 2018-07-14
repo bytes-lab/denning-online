@@ -30,26 +30,6 @@ denningOnline
     }
   })
 
-  .controller('propertyDeleteModalCtrl', function ($scope, $modalInstance, property, propertyService, $state) {
-    $scope.ok = function () {
-      propertyService.delete(property).then(function(property) {
-        $state.reload();
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.propertyInfo.$error.push({meessage:''});
-      });
-      $modalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.close();
-      if (on_list)
-        $state.go('propertys.list');
-    };
-  })
-
   .controller('propertyEditCtrl', function($stateParams, propertyService, $state, Auth, $uibModal, contactService) {
     var self = this;
     self.isDialog = false;
@@ -136,34 +116,39 @@ denningOnline
       });
     });
 
-    //Create Modal
-    function modalInstances1(animation, size, backdrop, keyboard, property) {
+    //Prevent Outside Click
+    self.openDelete = function (event, entity) {
+      event.stopPropagation();
+
       var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'propertyDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
+        animation: true,
+        templateUrl: 'deleteEntityModal.html',
+        controller: 'deleteEntityModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
         resolve: {
-          property: function () {
-            return property;
+          entity: function () {
+            return entity;
           }, 
           on_list: function () {
             return false;
+          },
+          entity_type: function () {
+            return 'property';
+          },
+          service: function () {
+            return propertyService;
+          },
+          return_state: function () {
+            return 'properties.list';
           }
         }
       });
-    }
-
-    //Prevent Outside Click
-    self.openDelete = function (event, property) {
-      event.stopPropagation();
-      modalInstances1(true, '', 'static', true, property)
     };
   })
 
-  .controller('propertyCreateModalCtrl', function ($uibModalInstance, property, viewMode, propertyService, Auth) {
+  .controller('propertyCreateModalCtrl', function ($uibuibModalInstance, property, viewMode, propertyService, Auth) {
     var self = this;
     self.isDialog = true;
     self.viewMode = viewMode;
@@ -191,13 +176,13 @@ denningOnline
 
     self.save = function () {
       propertyService.save(self.property).then(function(property) {
-        $uibModalInstance.close(property);
+        $uibuibModalInstance.close(property);
       })
       .catch(function(err){
       });
     };
 
     self.cancel = function () {
-      $uibModalInstance.close();
+      $uibuibModalInstance.close();
     };
   })

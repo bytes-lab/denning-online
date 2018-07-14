@@ -28,27 +28,6 @@ denningOnline
     }
   })
 
-  .controller('deleteModalCtrl', function ($scope, $uibModalInstance, contact, on_list, contactService, $state) {
-    $scope.ok = function () {
-      contactService.delete(contact).then(function () {
-        if (on_list)
-          $state.reload();
-        else
-          $state.go('contacts.list');
-      }).catch(function(err){
-        //$scope.formname.contactInfo.$error.push({meessage:''});
-      });
-      $uibModalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $uibModalInstance.close();
-      if (on_list) {
-        $state.go('contacts.list');
-      }
-    };
-  })
-
   .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService, raceService, religionService, IRDBranchService) {
     var self = this;
     self.isDialog = false;
@@ -162,7 +141,7 @@ denningOnline
     }
 
     self.cancel = function () {
-      $state.go('contacts.list');      
+      $state.go('contacts.list');
     }
 
     $scope.open = function($event, opened) {
@@ -218,25 +197,58 @@ denningOnline
     };
 
     //Prevent Outside Click
-    self.openDelete = function (event, contact) {
+    self.openDelete = function (event, entity) {
       event.stopPropagation();
 
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'deleteModal.html',
-        controller: 'deleteModalCtrl',
+        templateUrl: 'deleteEntityModal.html',
+        controller: 'deleteEntityModalCtrl',
         size: '',
         backdrop: 'static',
         keyboard: true,
         resolve: {
-          contact: function () {
-            return contact;
+          entity: function () {
+            return entity;
           }, 
           on_list: function () {
             return false;
+          },
+          entity_type: function () {
+            return 'contact';
+          },
+          service: function () {
+            return contactService;
+          },
+          return_state: function () {
+            return 'contacts.list';
           }
         }
       });
+    };
+  })
+
+  .controller('deleteEntityModalCtrl', function ($scope, $uibModalInstance, $state, entity, on_list, entity_type, service, return_state) {
+    $scope.entity_type = entity_type;
+
+    $scope.ok = function () {
+      service.delete(entity).then(function () {
+        if (on_list) {
+          $state.reload();
+        } else {
+          $state.go(return_state);
+        }
+      }).catch(function(err){
+        //$scope.formname.contactInfo.$error.push({meessage:''});
+      });
+      $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.close();
+      if (on_list) {
+        $state.go(return_state);
+      }
     };
   })
 
