@@ -99,6 +99,7 @@ denningOnline
               return key;
             }            
           }
+          return 'Unspecified';
         }
         // Generate the Calendar
         element.fullCalendar({
@@ -127,19 +128,17 @@ denningOnline
             courtdiaryService.getCalendar(view.start.format('YYYY-MM-DD'), view.end.format('YYYY-MM-DD'), '0All', 1, 100, '').then(function(res) {
               var eventObj = {};
               angular.forEach(res.data, function(value, key) {
-                if (value.location) {
-                  var type_ = getType(value.location);
-                  if (value.eventStart in eventObj) {
-                    event = eventObj[value.eventStart];
-                    if (type_ in event) {
-                      event[type_]++;
-                    } else {
-                      event[type_] = 1;
-                    }
+                var type_ = getType(value.location);
+                if (value.eventStart in eventObj) {
+                  event = eventObj[value.eventStart];
+                  if (type_ in event) {
+                    event[type_]++;
                   } else {
-                    eventObj[value.eventStart] = {};
-                    eventObj[value.eventStart][type_] = 1;
+                    event[type_] = 1;
                   }
+                } else {
+                  eventObj[value.eventStart] = {};
+                  eventObj[value.eventStart][type_] = 1;
                 }
               })
 
