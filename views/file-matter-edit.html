@@ -11,7 +11,7 @@
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.payments()">Payments</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.upload()">Upload</md-button>
         <input type="file" class="hidden" ng-class="'matter-upload'" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" data-ui-sref="courtdiary">Calendar</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" data-ui-sref="courtdiary({ keyword: vm.model.strFileNo1 })">Calendar</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;">Checklist</md-button>
         <!-- <md-button class="btn-sm md-raised md-warn" style="min-height: 0;">Tasks</md-button> -->
       </div>

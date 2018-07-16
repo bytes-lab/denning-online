@@ -93,7 +93,7 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/edit/:fileNo',
+        url: '/edit/:fileNo/:tab',
         controller: 'fileMatterEditCtrl as vm',
         templateUrl: 'views/file-matter-edit.html'
       })
@@ -1324,7 +1324,7 @@ denningOnline
         data: {
           access: '@'
         },
-        url: '/courtdiary',
+        url: '/courtdiary/:keyword',
         templateUrl: 'views/courtdiary-list.html',
         resolve: {
           loadPlugin: function($ocLazyLoad) {

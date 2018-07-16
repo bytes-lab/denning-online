@@ -51,11 +51,15 @@ denningOnline
     self.ledger_level2 = ledger_level2;
     self.toggleSelection = toggleSelection;
     self.toggleAll = toggleAll;
-    self.all_categories = [{'key': 'client', 'val': 'Client'}, 
+    self.all_categories = [
+      {'key': 'client', 'val': 'Client'}, 
       {'key': 'fd', 'val': 'FD'}, 
       {'key': 'disb', 'val': 'Disbursement'}, 
       {'key': 'advance', 'val': 'Advanced'}, 
-      {'key': 'other', 'val': 'Other'}];
+      {'key': 'other', 'val': 'Other'},
+      {'key': 'receivables', 'val': 'Receivables'},
+    ];
+
     self.select_all = false;
     self.categories = [$stateParams.category];
 

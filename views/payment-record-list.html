@@ -10,7 +10,11 @@
 
     <div class="card-body">
       <div class="row">
-      <div class="col-md-6 col-sm-7">
+      <div class="col-md-4 m-l-25">
+        <a ui-sref="payment.new" class="btn bgm-cyan"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Add Payment</a>
+      </div>
+      <div class="clearfix"></div>        
+      <div class="col-lg-6 col-md-8">
         <div class="table-responsive table-div p-15 f-14"> 
           <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
             <tr class="ng-table-group" ng-repeat-start="group in $groups">
@@ -22,7 +26,7 @@
             </tr>
             <tr ng-hide="group.$hideRows" ng-repeat="file in group.data" ng-repeat-end>
               <td data-title="'Date Paid'" class="ng-table-fixed-column-40">
-                {{file.strDescription}}
+                {{ file.strDescription }}
               </td>
               <td data-title="'Paid to'" class="ng-table-fixed-column-50">
                 {{file.strPaidTo}}

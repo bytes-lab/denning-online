@@ -17,7 +17,7 @@
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Property')==0" style="margin-left: -8px;">
             <div class="col-sm-12 no-padding">
               <md-button class="md-raised md-warn" ng-click="mactrl.relatedMatter(item.key, 'property')">Matters</md-button>
-              <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item.key, 'property')">Folder</md-button>
+              <md-button class="md-raised md-warn" data-ui-sref="folders.list({ id: item.key, type: 'property' })">Folder</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'property')">Upload</md-button>
               <input type="file" class="hidden" ng-class="'property-upload-'+item.key" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
             </div>
@@ -25,21 +25,21 @@
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Contact')==0" style="margin-left: -8px;">
             <div class="col-sm-12 no-padding">
               <md-button class="md-raised md-warn" ng-click="mactrl.relatedMatter(item.key, 'contact')">Matters</md-button>
-              <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item.key, 'contact')">Folder</md-button>
+              <md-button class="md-raised md-warn" data-ui-sref="folders.list({ id: item.key, type: 'contact' })">Folder</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'contact')">Upload</md-button>
               <input type="file" class="hidden" ng-class="'contact-upload-'+item.key" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
             </div>
           </section>
           <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('File No')==0 || item.Title.indexOf('Matter')==0" style="margin-left: -8px;">
             <div class="col-sm-12 col-md-10 no-padding">
-              <md-button class="md-raised md-warn" ng-click="mactrl.openFolder(item.key, 'matter')">Folder</md-button>
+              <md-button class="md-raised md-warn" data-ui-sref="folders.list({ id: item.key, type: 'matter' })">Folder</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.accounts(item)">Accounts</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.notes(item)">Notes</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.payments(item)">Payments</md-button>
-              <md-button class="md-raised md-warn" ng-click="mactrl.templates(item)">Templates</md-button>
+              <md-button class="md-raised md-warn" data-ui-sref="file-matters.edit({ fileNo: item.key, tab: 'template' })">Templates</md-button>
               <md-button class="md-raised md-warn" ng-click="mactrl.upload(item, 'matter')">Upload</md-button>
               <input type="file" class="hidden" ng-class="'matter-upload-'+item.key" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
-              <md-button class="md-raised md-warn" data-ui-sref="courtdiary">Calendar</md-button>
+              <md-button class="md-raised md-warn" data-ui-sref="courtdiary({ keyword: item.key })">Calendar</md-button>
               <md-button class="md-raised md-warn">Checklist</md-button>
               <!-- <md-button class="md-raised md-warn">Tasks</md-button> -->
             </div>

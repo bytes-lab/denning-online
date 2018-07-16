@@ -1,9 +1,9 @@
 denningOnline
-  .controller('courtdiaryListCtrl', function($filter, $uibModal, NgTableParams, courtdiaryService, $state, Auth) {
+  .controller('courtdiaryListCtrl', function($filter, $uibModal, $stateParams, NgTableParams, courtdiaryService, $state, Auth) {
     var self = this;
 
     self.userInfo = Auth.getUserInfo();
-    self.keyword = '';
+    self.keyword = $stateParams.keyword;
     self.filter = '0All';
 
     var date = new Date(), 

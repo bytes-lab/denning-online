@@ -16,11 +16,16 @@
           All
         </label>
         <label class="checkbox checkbox-inline m-r-20" ng-repeat="category in vm.all_categories">
-          <input type="checkbox" name="categories[]" 
-            ng-checked="vm.categories.indexOf(category.key) > -1"
-            ng-click="vm.toggleSelection(category.key)">
-          <i class="input-helper"></i>
-          {{ category.val }}
+          <div>
+            <input type="checkbox" name="categories[]" 
+              ng-checked="vm.categories.indexOf(category.key) > -1"
+              ng-click="vm.toggleSelection(category.key)">
+            <i class="input-helper"></i>
+            {{ category.val }}            
+          </div>
+          <div class="f-500 c-purple">
+            321.25
+          </div>
         </label>
       </div>
 
@@ -28,7 +33,7 @@
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list" show-filter="true">
           <tr ng-repeat="w in $data">
             <td data-title="'Date'" filter="{ 'date': 'text' }" sortable="'date'">
-              {{ w.date }}
+              {{ w.date|ddate }}
             </td>
             <td data-title="'Transaction No'" filter="{ 'documentNo': 'text' }" sortable="'documentNo'">
               {{ w.documentNo }}
@@ -42,11 +47,14 @@
             <td data-title="'Description'" filter="{ 'description': 'text' }" sortable="'description'">
               {{ w.description }}
             </td>
-            <td data-title="'Dr Amount'" filter="{ 'amountDR': 'text' }" sortable="'amountDR'">
+            <td data-title="'Dr'" filter="{ 'amountCR': 'text' }" sortable="'amountCR'">
+              {{ w.amountCR }}
+            </td>
+            <td data-title="'Cr'" filter="{ 'amountDR': 'text' }" sortable="'amountDR'">
               {{ w.amountDR }}
             </td>
-            <td data-title="'Cr Amount'" filter="{ 'amountCR': 'text' }" sortable="'amountCR'">
-              {{ w.amountCR }}
+            <td data-title="'Balance'" filter="{ 'displayAmount': 'text' }" sortable="'displayAmount'">
+              {{ w.displayAmount }}
             </td>
             <td data-title="'Mode'" filter="{ 'paymentMode': 'text' }" sortable="'paymentMode'">
               {{ w.paymentMode }}

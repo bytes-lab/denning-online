@@ -240,17 +240,9 @@ denningOnline
     self.notes = function(item) {
       $state.go('notes.list', {fileNo: item.key, fileName: JSON.parse(item.JsonDesc.replace(/[\u0000-\u0019]+/g,"")).primaryClient.name});
     }
-
-    self.templates = function(item) {
-      $state.go('file-matters.edit', {'fileNo': item.key});
-    }
     
     self.accounts = function(item) {
       $state.go('accounts.list', {fileNo: item.key, fileName: JSON.parse(item.JsonDesc.replace(/[\u0000-\u0019]+/g,"")).primaryClient.name});
-    }
-    
-    self.openFolder = function(code, type) {
-      $state.go('folders.list', {id: code, type: type});
     }
     /**
      * Create filter function for a query string

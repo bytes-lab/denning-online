@@ -103,7 +103,7 @@ denningOnline
 
       angular.forEach(data.section1, function(value, key) {
         value['folder'] = ' ';
-        value['strDescription'] = value['dtDatePaid'].split(' ')[0];
+        value['strDescription'] = moment(value['dtDatePaid'].split(' ')[0]).format('DD/MM/YYYY');
         value['strValue'] = value['decAmount'];
         self.data.push(value);
       })

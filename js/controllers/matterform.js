@@ -3,16 +3,16 @@ denningOnline
     var vm = this;
     vm.userInfo = Auth.getUserInfo();
 
-    vm.idxTab = 0;
-
     vm.prevTab = function () {
-      if (vm.idxTab > 0)
+      if (vm.idxTab > 0) {
         vm.idxTab--;
+      }
     };
 
     vm.nextTab = function () {
-      if (vm.idxTab < 20)
+      if (vm.idxTab < 20) {
         vm.idxTab++;
+      }
     };
 
     vm.scrollUp = function () {
@@ -647,15 +647,22 @@ denningOnline
       vm.tabs.push(vm.tabDict['Matter']); // first tab
 
       if (clsMatterCode) {
-        matterFormService.getItem(clsMatterCode.clsFormName.code).then(function(item){
-          angular.forEach(JSON.parse(item.jsonTabs), function(value, key) {
+        matterFormService.getItem(clsMatterCode.clsFormName.code).then(function (item) {
+          jsonTabs = JSON.parse(item.jsonTabs);
+          idxTab = 0;
+          for (idx in jsonTabs) {
+            value = jsonTabs[idx];
             if (value.TabName != 'Matter') {
               var item = vm.tabDict[value.TabName];
               item['label'] = value.Title
-              vm.tabs.push(item);              
+              vm.tabs.push(item);
             }
-          })
 
+            if (value.TabName.toLowerCase() == $stateParams.tab) {
+              idxTab = parseInt(idx);
+            }
+          }
+          vm.idxTab = idxTab;
           vm.tabs.push(vm.tabDict['Offers']);
           vm.tabs.push(vm.tabDict['RPGT']);
           vm.tabs.push(vm.tabDict['Chain']);
@@ -668,7 +675,7 @@ denningOnline
           vm.tabs.push(vm.tabDict['Term']);
           vm.tabs.push(vm.tabDict['Others']);
           vm.tabs.push(vm.tabDict['Premises & Rent']);
-        });        
+        });
       }
     }
 
@@ -681,12 +688,14 @@ denningOnline
     if ($stateParams.fileNo) {
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
         if (item) {
+          vm.idxTab = 5;  // any none zero value
           vm.model = item;
           vm.model.tmp = editControl;
           vm.model.tmp.oldMatterCode = item.clsMatterCode;
           
           vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )';           
         } else {
+          vm.idxTab = 0;
           vm.model = { 
             tmp: editControl
           };
@@ -695,6 +704,7 @@ denningOnline
         buildTabs(vm.model.clsMatterCode);
       });
     } else {
+      vm.idxTab = 0;
       vm.model = { 
         tmp: editControl
       };
