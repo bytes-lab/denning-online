@@ -58,11 +58,15 @@ denningOnline
     return service;
   })
 
-  .service('matterCodeService', function(http, Auth){
+  .service('matterCodeService', function(http){
     var service = {};
 
     service.getList = function (page=1, pagesize=500, keyword='') {
-      return http.GET('/v1/table/MatterCode?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
+      return http.GET('/v1/table/MatterCode', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
         return resp;
       });
     }
@@ -76,7 +80,7 @@ denningOnline
     service.save = function (entity) {
       var method = entity.code ? 'PUT': 'POST';
 
-      return http[method]('/v1/table/MatterCode',entity).then(function(response) {
+      return http[method]('/v1/table/MatterCode', entity).then(function(response) {
         return response ? response.data : null;
       });
     }

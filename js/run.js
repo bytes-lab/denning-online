@@ -388,8 +388,8 @@ denningOnline
         }
 
         $scope.queryCodes = function(searchText) {
-          return matterCodeService.getList(1, 10, searchText).then(function(data) {
-            return data;            
+          return matterCodeService.getList(1, 10, searchText).then(function (data) {
+            return data.data;
           });
         }
 
