@@ -25,5 +25,41 @@ denningOnline
       });
     }
 
+    service.renameDocument = function (url) {
+      return http.GET('/v1/document/rename').then(function(resp) {
+        return resp;
+      });
+    }
+
+    service.renameFolder = function (url) {
+      return http.GET('/v1/document/subFolder/rename').then(function(resp) {
+        return resp;
+      });
+    }
+
+    service.createSubFolder = function (url) {
+      return http.GET('/v1/document/subFolder').then(function(resp) {
+        return resp;
+      });
+    }
+
+    service.deleteSubFolder = function (url) {
+      return http.GET('/v1/document/matter/{strFileNo}/{strSubFolder}').then(function(resp) {
+        return resp;
+      });
+    }
+
+    service.moveDocument = function (url) {
+      return http.GET('/v1/document/move').then(function(resp) {
+        return resp;
+      });
+    }
+
+    service.deleteDocument = function (url) {
+      return http.GET('/v1/document/matter/{strFileNo}/{strSubFolder}/{strFilename}.{strExtension}').then(function(resp) {
+        return resp;
+      });
+    }
+
     return service;
   })

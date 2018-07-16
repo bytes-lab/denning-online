@@ -3,8 +3,6 @@ denningOnline
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
-    self.download = download;
-
     self.data = [];
     self.checkboxes = {
       checked: false,
@@ -37,7 +35,7 @@ denningOnline
       angular.element($element[0].getElementsByClassName("select-all")).prop("indeterminate", (checked != 0 && unchecked != 0));
     }, true);
 
-    folderService.getList($stateParams.id, $stateParams.type).then(function(data) {
+    folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
       self.title = data.name;
       self.data = [];
       var id = 0;
@@ -61,7 +59,7 @@ denningOnline
       initializeTable();
     });
 
-    function download(file, open=false) {
+    self.download = function (file, open=false) {
       folderService.download(file.URL).then(function(response) {
         var fileName = file.name + file.ext;
         var contentTypes = {
