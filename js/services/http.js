@@ -6,12 +6,13 @@ denningOnline
   .service('http', function($http, Auth, refactorService) {
     var service = {};
 
-    service.GET = function (url, params) {
+    service.GET = function (url, params, responseType) {
       return $http({
         method: 'GET',
         url: Auth.getBaseURL() + url,
         headers: Auth.isAuthenticated(),
-        params: params
+        params: params,
+        responseType: responseType
       }).then(function (response) {
         return response;
       })
