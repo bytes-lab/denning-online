@@ -84,12 +84,12 @@ denningOnline
 
                 const a = document.createElement('a');
                 a.style = 'display: none';
-                document.body.appendChild(a);
+                // document.body.appendChild(a);
                 
                 a.href = objectUrl;
                 a.download = fileName;
                 a.click();
-                window.URL.revokeObjectURL(objectUrl);
+                // window.URL.revokeObjectURL(objectUrl);
               }
           } catch (exc) {
               console.log("Save Blob method failed with the following exception.");
