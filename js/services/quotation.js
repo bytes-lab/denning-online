@@ -1,34 +1,22 @@
 denningOnline
-  // =========================================================================
-  // Billing Items
-  // =========================================================================
-  
-  .service('quotationService', function(Auth, $http) {
+  .service('quotationService', function(http) {
     var service = {};
 
-    service.getList = getList;
-    service.getItem = getItem;
-    service.headers = Auth.isAuthenticated();
-
-    function getList(page=1, pagesize=25, keyword) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/QuotationX/all?page='+page+'&pagesize='+pagesize+'&search='+keyword,
-        headers: service.headers
-      }).then(function(resp) {
+    service.getList = function (page=1, pagesize=25, keyword) {
+      return http.GET('/v1/Quotation', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
         return resp;
       });  
     }
 
-    function getItem(code) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/app/bank/branch/'+code,
-        headers: service.headers
-      }).then(function(resp) {
+    service.getItem = function (code) {
+      return http.GET('/v1/app/bank/branch/'+code).then(function (resp) {
         return resp.data;
       });  
     }
 
-    return service;    
+    return service;
   })
