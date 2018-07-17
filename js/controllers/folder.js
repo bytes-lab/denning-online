@@ -82,12 +82,21 @@ denningOnline
               } else {
                 var objectUrl = URL.createObjectURL(blob);
 
-                var anchor = angular.element('<a/>');
-                anchor.attr({
-                   href: objectUrl,
-                   target: '_blank',
-                   download: fileName
-                })[0].click();
+                // var anchor = angular.element('<a/>');
+                // anchor.attr({
+                //    href: objectUrl,
+                //    target: '_blank',
+                //    download: fileName
+                // })[0].click();
+
+                const a = document.createElement('a');
+                a.style = 'display: none';
+                document.body.appendChild(a);
+                
+                a.href = objectUrl;
+                a.download = fileName;
+                a.click();
+                window.URL.revokeObjectURL(url);
               }
           } catch (exc) {
               console.log("Save Blob method failed with the following exception.");
