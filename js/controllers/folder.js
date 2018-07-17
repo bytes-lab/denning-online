@@ -88,7 +88,7 @@ denningOnline
                 
                 a.href = objectUrl;
                 a.download = fileName;
-                a.click();
+                // a.click();
                 // window.URL.revokeObjectURL(objectUrl);
               }
           } catch (exc) {
