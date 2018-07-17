@@ -12,8 +12,13 @@ denningOnline
         firstDay = new Date(y, m, 1),
         lastDay = new Date(y, m + 1, 0);
 
-    self.firstDay = moment(firstDay).format('YYYY-MM-DD');
-    self.lastDay = moment(lastDay).format('YYYY-MM-DD');
+    if (self.keyword) {
+      self.firstDay = '2000-01-01';
+      self.lastDay = '2100-01-01';
+    } else {
+      self.firstDay = moment(firstDay).format('YYYY-MM-DD');
+      self.lastDay = moment(lastDay).format('YYYY-MM-DD');
+    }
 
     self.clickHandler = function (item) {
       $state.go('courtdiaries.edit', {'id': item.code});
@@ -21,10 +26,7 @@ denningOnline
 
     self.tableFilter = new NgTableParams({
       page: 1,
-      count: 25,
-      sorting: {
-        name: 'asc'
-      }
+      count: 25
     }, {
       getData: function(params) {
         return courtdiaryService.getCalendar(self.firstDay, self.lastDay, self.filter, params.page(), params.count(), self.keyword).then(function(data) {
