@@ -276,12 +276,12 @@ denningOnline
             self.login = 0;
           } else {
             Auth.staffLogin(userData.password)
+            .then(function (res) {
+              $state.go('home');
+            })
             .catch(function (err) {
               self.errorMessage = err.message;
             })
-            .then(function (res) {
-              $state.go('home');
-            });
           }
         }).catch(function (err) {
           self.errorMessage = err.statusText;
@@ -290,17 +290,17 @@ denningOnline
 
     self.checkTAC = function(userData) {
       return Auth.tac(userData.email, userData.tac)
-        .catch(function (err) {
-          self.errorMessage = "TAC is not correct.";
-        })
         .then(function (res) {
           Auth.staffLogin(userData.password)
+          .then(function (res) {
+            $state.go('home');
+          })
           .catch(function (err) {
             self.errorMessage = err.message;
           })
-          .then(function (res) {
-            $state.go('home');
-          });
+        })
+        .catch(function (err) {
+          self.errorMessage = "TAC is not correct.";
         })
     }
 

@@ -1,5 +1,5 @@
 denningOnline
-  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element, growlService, ngClipboard) {
+  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element, growlService, ngClipboard, $timeout) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -59,38 +59,29 @@ denningOnline
       initializeTable();
     });
 
-    function openInNewTab(url) {
-      var a = document.createElement("a");
-      a.target = "_blank";
-      a.href = url;
-      a.click();
-    }
-
     self.download = function ($event, file, open=false) {
-      folderService.download(file.URL).then(function(response) {
-        var fileName = file.name + file.ext;
-        var contentTypes = {
-          '.jpg': 'image/jpeg',
-          '.png': 'image/png'
-        };
+      var openFiles = ['.pdf', '.jpg', '.png'];
 
-        var contentType = contentTypes[file.ext] || response.headers('content-type');
+      if (open && openFiles.indexOf(file.ext) > -1) {
+        $event.target.href = $state.href('open-file', { url: JSON.stringify(file) });
+      } else {
+        folderService.download(file.URL).then(function(response) {
+          var fileName = file.name + file.ext;
+          var contentTypes = {
+            '.jpg': 'image/jpeg',
+            '.png': 'image/png'
+          };
 
-        try {
-            var blob = new Blob([response.data], {type: contentType});
-            //IE handles it differently than chrome/webkit
-            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-              window.navigator.msSaveOrOpenBlob(blob, fileName);
-            } else {
-              var objectUrl = URL.createObjectURL(blob);
-              var openFiles = ['.pdf', '.jpg', '.png'];
+          var contentType = contentTypes[file.ext] || response.headers('content-type');
 
-              if (open && openFiles.indexOf(file.ext) > -1) {
-                var win = window.open(objectUrl, '_blank');
-                // win.location;
-                // openInNewTab(objectUrl);
-                // Object.assign(document.createElement('a'), { target: '_blank', href: objectUrl}).click();
+          try {
+              var blob = new Blob([response.data], {type: contentType});
+              //IE handles it differently than chrome/webkit
+              if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(blob, fileName);
               } else {
+                var objectUrl = URL.createObjectURL(blob);
+
                 var anchor = angular.element('<a/>');
                 anchor.attr({
                    href: objectUrl,
@@ -98,12 +89,12 @@ denningOnline
                    download: fileName
                 })[0].click();
               }
-            }
-        } catch (exc) {
-            console.log("Save Blob method failed with the following exception.");
-            console.log(exc);
-        }
-      })
+          } catch (exc) {
+              console.log("Save Blob method failed with the following exception.");
+              console.log(exc);
+          }
+        })
+      }
     }
 
     function initializeTable () {
@@ -200,3 +191,33 @@ denningOnline
       growlService.growl('Link copied successfully!', 'success'); 
     }
   })
+
+  .controller('openFileCtrl', function($stateParams, folderService, $state, $scope, $element, growlService, ngClipboard, $timeout) {
+      var file = JSON.parse($stateParams.url);
+      folderService.download(file.URL).then(function(response) {
+        var fileName = file.name + file.ext;
+        var contentTypes = {
+          '.jpg': 'image/jpeg',
+          '.png': 'image/png'
+        };
+
+        var contentType = contentTypes[file.ext] || response.headers('content-type');
+
+        try {
+            var blob = new Blob([response.data], {type: contentType});
+            //IE handles it differently than chrome/webkit
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+              window.navigator.msSaveOrOpenBlob(blob, fileName);
+            } else {
+              var objectUrl = URL.createObjectURL(blob);
+              var openFiles = ['.pdf', '.jpg', '.png'];
+
+              location.href = objectUrl;
+            }
+        } catch (exc) {
+            console.log("Save Blob method failed with the following exception.");
+            console.log(exc);
+        }
+      })    
+  })
+

@@ -35,11 +35,11 @@
             </tr>
             <tr ng-hide="group.$hideRows" ng-repeat="file in group.data" ng-repeat-end>
               <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" /></td>
-              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="ng-table-fixed-column-60" ng-click="vm.download($event, file, true);">
+              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="ng-table-fixed-column-60">
                 <i class="zmdi zmdi-collection-pdf" ng-if="file.ext=='.pdf'"></i>
                 <i class="zmdi zmdi-collection-image" ng-if="file.ext=='.jpg' || file.ext=='.png'"></i>
                 <i class="zmdi zmdi-collection-text" ng-if="file.ext!='.pdf' && file.ext!='.jpg' && file.ext!='.png'"></i>&nbsp;
-                {{file.name}}
+                <a href="" ng-click="vm.download($event, file, true);" target="_blank">{{file.name}}</a>
               </td>
               <td sortable="'ext'" data-title="'Ext'" class="ng-table-fixed-column-15">
                 {{file.ext}}

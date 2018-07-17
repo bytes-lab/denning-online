@@ -26,8 +26,16 @@ denningOnline
         },
         url: '/home',
         templateUrl: 'views/home.html'
-      })    
+      })
 
+      .state ('open-file', {
+        data: {
+          access: '@'
+        },
+        url: '/open-file/:url',
+        controller: 'openFileCtrl as vm',
+        templateUrl: 'views/tmp-open-file.html'
+      })
       //------------------------------
       // SEARCH
       //------------------------------
