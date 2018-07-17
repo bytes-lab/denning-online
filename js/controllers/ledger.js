@@ -11,6 +11,10 @@ denningOnline
       $state.go('accounts.list2', {'fileNo': $stateParams.fileNo, 'fileName': self.fileName, 'category': category});
     }
 
+    ledgerService.getSummary(self.fileNo).then(function (data) {
+      self.summary = data.accountType;
+    })
+
     self.quotationTable = new NgTableParams({
       page: 1,      
       count: 5,
@@ -57,11 +61,15 @@ denningOnline
       {'key': 'disb', 'val': 'Disbursement'}, 
       {'key': 'advance', 'val': 'Advanced'}, 
       {'key': 'other', 'val': 'Other'},
-      {'key': 'receivables', 'val': 'Receivables'},
+      {'key': 'recv', 'val': 'Receivables'},
     ];
 
     self.select_all = false;
     self.categories = [$stateParams.category];
+
+    ledgerService.getSummary(self.fileNo).then(function (data) {
+      self.summary = data.accountType;
+    })
 
     function toggleAll() {
       if (self.select_all) {

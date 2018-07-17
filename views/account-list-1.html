@@ -28,27 +28,27 @@
               <div class="pmbb-view">
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('client')">
                     <dt>Client</dt>
-                    <dd>0.00</dd>
+                    <dd>{{ vm.summary[0].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('disb')">
                     <dt>Disbursement</dt>
-                    <dd>540.00</dd>
+                    <dd>{{ vm.summary[1].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('fd')">
                     <dt>FD</dt>
-                    <dd>0.00</dd>
+                    <dd>{{ vm.summary[2].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('advance')">
                     <dt>Advance</dt>
-                    <dd>0.00</dd>
+                    <dd>{{ vm.summary[3].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('other')">
                     <dt>Other</dt>
-                    <dd>0.00</dd>
+                    <dd>{{ vm.summary[4].currentBalance }}</dd>
                 </dl>
-                <dl class="dl-horizontal" ng-click="vm.ledger_level2('client')">
+                <dl class="dl-horizontal" ng-click="vm.ledger_level2('recv')">
                     <dt>Receivables</dt>
-                    <dd>0.00</dd>
+                    <dd>{{ vm.summary[5].currentBalance }}</dd>
                 </dl>
               </div>
             </div>
@@ -100,13 +100,13 @@
                         03/05/2017
                       </td>
                       <td data-title="'No'" class="ng-table-fixed-column-20">
-                        {{ w.invoiceNo }}
+                        {{ w.documentNo }}
                       </td>
                       <td data-title="'To'" class="ng-table-fixed-column-20">
-                        {{ w.fileName }}
+                        {{ w.issueToName }}
                       </td>
                       <td data-title="'Amount'" class="ng-table-fixed-column-20">
-                        {{ w.amount }}
+                        {{ w.spaPrice }}
                       </td>
                       <td data-title="'Paid'">
                         {{ w.fileNo }}
