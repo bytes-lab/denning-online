@@ -171,7 +171,7 @@ denningOnline
         data: data
       }).then(function(response) {
         var tEmail = service.userInfo.email,
-          tSessionID = service.userInfo.sessionID;
+            tSessionID = service.userInfo.sessionID;
 
         service.userInfo = response.data;
         service.userInfo.email = tEmail;

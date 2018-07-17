@@ -59,7 +59,14 @@ denningOnline
       initializeTable();
     });
 
-    self.download = function (file, open=false) {
+    function openInNewTab(url) {
+      var a = document.createElement("a");
+      a.target = "_blank";
+      a.href = url;
+      a.click();
+    }
+
+    self.download = function ($event, file, open=false) {
       folderService.download(file.URL).then(function(response) {
         var fileName = file.name + file.ext;
         var contentTypes = {
@@ -79,7 +86,10 @@ denningOnline
               var openFiles = ['.pdf', '.jpg', '.png'];
 
               if (open && openFiles.indexOf(file.ext) > -1) {
-                window.open(objectUrl);
+                var win = window.open(objectUrl, '_blank');
+                // win.location;
+                // openInNewTab(objectUrl);
+                // Object.assign(document.createElement('a'), { target: '_blank', href: objectUrl}).click();
               } else {
                 var anchor = angular.element('<a/>');
                 anchor.attr({

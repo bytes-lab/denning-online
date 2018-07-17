@@ -269,10 +269,8 @@ denningOnline
       
     self.doLogin = function (userData) {
       return Auth.login(userData.email, userData.password)
-        .catch(function (err) {
-          self.errorMessage = err.statusText;
-        })
         .then(function (res) {
+          self.errorMessage = '';
           if (res.statusCode == 250) {
             self.verification = 1;
             self.login = 0;
@@ -285,6 +283,8 @@ denningOnline
               $state.go('home');
             });
           }
+        }).catch(function (err) {
+          self.errorMessage = err.statusText;
         });
     }
 

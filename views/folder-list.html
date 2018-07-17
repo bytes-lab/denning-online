@@ -35,7 +35,7 @@
             </tr>
             <tr ng-hide="group.$hideRows" ng-repeat="file in group.data" ng-repeat-end>
               <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" /></td>
-              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="ng-table-fixed-column-60" ng-click="vm.download(file, true);">
+              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="ng-table-fixed-column-60" ng-click="vm.download($event, file, true);">
                 <i class="zmdi zmdi-collection-pdf" ng-if="file.ext=='.pdf'"></i>
                 <i class="zmdi zmdi-collection-image" ng-if="file.ext=='.jpg' || file.ext=='.png'"></i>
                 <i class="zmdi zmdi-collection-text" ng-if="file.ext!='.pdf' && file.ext!='.jpg' && file.ext!='.png'"></i>&nbsp;
@@ -51,7 +51,7 @@
                 <button class="btn btn-default" title="Rename">
                   <i class="zmdi zmdi-edit"></i>
                 </button>
-                <button class="btn btn-default m-l-5" title="Download" ng-click="vm.download(file)">
+                <button class="btn btn-default m-l-5" title="Download" ng-click="vm.download($event, file)">
                   <i class="zmdi zmdi-download"></i>
                 </button>
                 <button class="btn btn-default m-l-5" ngclipboard ngclipboard-success="vm.copySuccess(e);" data-clipboard-text="{{ file.name }}{{ file.ext }}" title="Copy link"><i class="zmdi zmdi-collection-text"></i></button>
