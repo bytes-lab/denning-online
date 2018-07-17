@@ -270,7 +270,7 @@ denningOnline
     self.doLogin = function (userData) {
       return Auth.login(userData.email, userData.password)
         .catch(function (err) {
-          self.errorMessage = err.message;
+          self.errorMessage = err.statusText;
         })
         .then(function (res) {
           if (res.statusCode == 250) {
