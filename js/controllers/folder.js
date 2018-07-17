@@ -79,14 +79,14 @@ denningOnline
               var openFiles = ['.pdf', '.jpg', '.png'];
 
               if (open && openFiles.indexOf(file.ext) > -1) {
-                window.open(objectUrl);                  
+                window.open(objectUrl);
               } else {
                 var anchor = angular.element('<a/>');
                 anchor.attr({
                    href: objectUrl,
                    target: '_blank',
                    download: fileName
-                })[0].click();                          
+                })[0].click();
               }
             }
         } catch (exc) {

@@ -21,7 +21,7 @@ denningOnline
 
     self.tableFilter = new NgTableParams({
       page: 1,
-      count: 5,
+      count: 25,
       sorting: {
         name: 'asc'
       }
