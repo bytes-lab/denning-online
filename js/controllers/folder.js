@@ -90,6 +90,7 @@ denningOnline
                 a.download = fileName;
                 // a.click();
                 // window.URL.revokeObjectURL(objectUrl);
+                Object.assign(document.createElement('a'), { href: objectUrl, download: fileName}).click();
               }
           } catch (exc) {
               console.log("Save Blob method failed with the following exception.");
