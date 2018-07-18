@@ -109,3 +109,8 @@
 .md-virtual-repeat-container.md-autocomplete-suggestions-container {
     z-index: 2000;
 }
+
+md-autocomplete input:not(.md-input) {
+    line-height: 20px;
+    padding-left: 10px;
+}

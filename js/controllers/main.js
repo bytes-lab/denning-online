@@ -173,7 +173,7 @@ denningOnline
         self.searchRes = data;
         if ($state.current.name != 'search')
           $state.go('search');
-      });    
+      });
     }
 
     /**
