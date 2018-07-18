@@ -172,14 +172,16 @@ denningOnline
     };
 
     self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
+      var lastModifiedDate = typeof file.lastModified === "number" ? new Date(file.lastModified) : file.lastModifiedDate;
+
       var info = {
         "fileNo1": self.contact.code,
         "documents":[
           {
             "FileName": fileObj.filename,
             "MimeType": fileObj.filetype,
-            "dateCreate": file.lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
-            "dateModify": file.lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "dateCreate": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "dateModify": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
             "fileLength": fileObj.filesize,
             "base64": fileObj.base64
           }

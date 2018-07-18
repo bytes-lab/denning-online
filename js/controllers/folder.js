@@ -60,7 +60,7 @@ denningOnline
     });
 
     self.download = function ($event, file, open=false) {
-      var openFiles = ['.pdf', '.jpg', '.png'];
+      var openFiles = ['.pdf', '.jpg', '.png', '.jpeg'];
 
       if (open && openFiles.indexOf(file.ext) > -1) {
         $event.target.href = $state.href('open-file', { url: JSON.stringify(file) });
@@ -202,6 +202,7 @@ denningOnline
         var fileName = file.name + file.ext;
         var contentTypes = {
           '.jpg': 'image/jpeg',
+          '.jpeg': 'image/jpeg',
           '.png': 'image/png'
         };
 
@@ -214,7 +215,6 @@ denningOnline
               window.navigator.msSaveOrOpenBlob(blob, fileName);
             } else {
               var objectUrl = URL.createObjectURL(blob);
-              var openFiles = ['.pdf', '.jpg', '.png'];
 
               location.href = objectUrl;
             }
