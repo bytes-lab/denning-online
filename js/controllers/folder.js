@@ -124,7 +124,7 @@ denningOnline
     }
     
     self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      var lastModifiedDate = typeof file.lastModifiedDate === "number" ? new Date(file.lastModifiedDate) : file.lastModifiedDate;
+      var lastModifiedDate = typeof file.lastModified === "number" ? new Date(file.lastModified) : file.lastModifiedDate;
 
       var info = {
         "fileNo1": $stateParams.id,
