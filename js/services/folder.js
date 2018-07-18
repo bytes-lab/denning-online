@@ -52,7 +52,7 @@ denningOnline
     }
 
     service.deleteDocument = function (url) {
-      return http.GET('/v1/document/matter/{strFileNo}/{strSubFolder}/{strFilename}.{strExtension}').then(function(resp) {
+      return http.DELETE('/'+url).then(function (resp) {
         return resp;
       });
     }

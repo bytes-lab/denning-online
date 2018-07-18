@@ -170,7 +170,22 @@ denningOnline
     self.delete_file = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to delete.');
-      }      
+        return false;
+      }
+
+      var deletes = [];
+      var ids = Object.keys(self.checkboxes.items);
+
+      angular.forEach(self.data, function(value, key) {
+        if (ids.indexOf(value.id.toString()) > -1) {
+          deletes.push(folderService.deleteDocument(value.URL));
+        }
+      })
+
+      Promise.all(deletes).then(function (data) {
+        growlService.growl('Files deleted successfully!', 'success');
+        $state.reload();
+      })
     }
     self.attach_file = function() {
       if (angular.equals(self.checkboxes.items, {})) {

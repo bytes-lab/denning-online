@@ -39,7 +39,7 @@ denningOnline
       return do_('PUT', url, data);
     };
 
-    service.DELETE = function (url, data) {
+    service.DELETE = function (url, data={}) {
       return do_('DELETE', url, data);
     };
 
