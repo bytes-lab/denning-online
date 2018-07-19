@@ -155,13 +155,13 @@ denningOnline
       });
     };
 
-    self.copy_file = function() {
+    self.copyFile = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to copy.');
       }
     }
 
-    self.move_file = function() {
+    self.moveFile = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to move.');
         return false;
@@ -197,13 +197,33 @@ denningOnline
       });
     }
 
-    self.share_file = function() {
+    self.renameDoc = function (file) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'fileModal.html',
+        controller: 'renameDocModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          file: function () {
+            return file;
+          }, 
+          matter: function () {
+            return $stateParams.id;
+          }
+        }
+      });
+
+    }
+
+    self.shareFile = function () {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to share.');
       }
     }
 
-    self.delete_file = function() {
+    self.deleteFile = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to delete.');
         return false;
@@ -224,7 +244,7 @@ denningOnline
       })
     }
 
-    self.attach_file = function() {
+    self.attachFile = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to attach.');
         return;
@@ -286,7 +306,7 @@ denningOnline
       if (!$scope.folderName.trim()) {
         $scope.is_valid = 'has-error';
       } else {
-        $scope.is_valid =  '';
+        $scope.is_valid = '';
       }
     }
 
@@ -308,11 +328,44 @@ denningOnline
       }
 
       Promise.all(moves).then(function (data) {
+        $uibModalInstance.close();
         growlService.growl('Files moved successfully!', 'success');
         $state.reload();
       })
 
+    };
+
+    $scope.cancel = function () {
       $uibModalInstance.close();
+    };
+  })
+
+  .controller('renameDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, file, matter) {
+    $scope.is_valid = 'initial';
+
+    $scope.validate = function () {
+      if (!$scope.fileName.trim()) {
+        $scope.is_valid = 'has-error';
+      } else {
+        $scope.is_valid = '';
+      }
+    }
+
+    $scope.ok = function () {
+      if ($scope.is_valid) {
+        return false;
+      }
+
+      data = {
+        targetFileNo : matter,
+        newName : $scope.fileName+file.ext
+      }
+      
+      folderService.renameDocument(file.URL, data).then(function () {
+        $uibModalInstance.close();
+        growlService.growl('The file renamed successfully!', 'success');
+        $state.reload();        
+      })
     };
 
     $scope.cancel = function () {

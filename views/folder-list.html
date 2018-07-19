@@ -8,11 +8,11 @@
       <div class="row">
         <div class="col-md-12">
           <h2 class="c-purple f-500 f-20">{{ vm.title }}</h2>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Attach files for email" ng-click="vm.attach_file()"><i class="zmdi zmdi-attachment-alt"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.copy_file()"><i class="zmdi zmdi-copy"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Move files" ng-click="vm.move_file()"><i class="zmdi zmdi-mail-send"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Share files" ng-click="vm.share_file()"><i class="zmdi zmdi-share"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.delete_file()"><i class="zmdi zmdi-delete"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Attach files for email" ng-click="vm.attachFile()"><i class="zmdi zmdi-attachment-alt"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.copyFile()"><i class="zmdi zmdi-copy"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Move files" ng-click="vm.moveFile()"><i class="zmdi zmdi-mail-send"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Share files" ng-click="vm.shareFile()"><i class="zmdi zmdi-share"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.deleteFile()"><i class="zmdi zmdi-delete"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.refresh()"><i class="zmdi zmdi-refresh-alt"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.upload()"><i class="zmdi zmdi-upload"></i></button>
           <input type="file" class="file-upload hidden" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
@@ -48,7 +48,7 @@
                 {{file.date}}
               </td>
               <td data-title="'Action'" class="f-16">
-                <button class="btn btn-default" title="Rename">
+                <button class="btn btn-default" title="Rename" ng-click="vm.renameDoc(file)">
                   <i class="zmdi zmdi-edit"></i>
                 </button>
                 <button class="btn btn-default m-l-5" title="Download" ng-click="vm.download($event, file)">
@@ -77,6 +77,25 @@
           <select class="form-control" ng-options="item for item in folders" ng-model="folderName" ng-change="validate()">
           </select>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+
+
+<script type="text/ng-template" id="fileModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Rename Document</h4>
+  </div>
+  <div class="modal-body">
+    <p>New File Name</p>
+    <div class="form-group" ng-class="is_valid">
+      <div class="fg-line">
+        <input type="text" class="form-control" ng-model="fileName" ng-change="validate()">
       </div>
     </div>
   </div>

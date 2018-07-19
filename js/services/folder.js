@@ -21,14 +21,14 @@ denningOnline
       });
     }
 
-    service.renameDocument = function (url) {
-      return http.GET('/v1/document/rename').then(function(resp) {
+    service.renameDocument = function (url, data) {
+      return http.PUT('/'+url, data).then(function(resp) {
         return resp;
       });
     }
 
-    service.renameFolder = function (url) {
-      return http.GET('/v1/document/subFolder/rename').then(function(resp) {
+    service.renameFolder = function (url, data) {
+      return http.PUT('/'+url, data).then(function(resp) {
         return resp;
       });
     }
