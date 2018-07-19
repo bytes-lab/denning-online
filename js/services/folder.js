@@ -33,12 +33,6 @@ denningOnline
       });
     }
 
-    service.deleteSubFolder = function (url) {
-      return http.GET('/v1/document/matter/{strFileNo}/{strSubFolder}').then(function(resp) {
-        return resp;
-      });
-    }
-
     service.moveDocument = function (data) {
       return http.PUT('/v1/document/move', data).then(function(resp) {
         return resp;

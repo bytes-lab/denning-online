@@ -259,6 +259,21 @@ denningOnline
       }
     }
 
+    self.deleteFolder = function (folderName) {
+      var folder;
+      for (ii in self.folders) {
+        if (self.folders[ii].name == folderName) {
+          folder = self.folders[ii];
+          break;
+        }
+      }
+
+      folderService.deleteDocument(folder.URL).then(function () {
+        growlService.growl('The Folder deleted successfully!', 'success');
+        $state.reload();
+      })
+    }
+
     self.deleteFile = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to delete.');
