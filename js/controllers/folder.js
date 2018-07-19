@@ -44,7 +44,7 @@ denningOnline
 
       angular.forEach(data.documents, function(value, key) {
         id = id + 1;
-        value['folder'] = 'Files';
+        value['folder'] = 'FILES';
         value['id'] = id;
         self.data.push(value);
       })
@@ -52,12 +52,17 @@ denningOnline
       angular.forEach(data.folders, function(folder, key) {
         self.folders.push(folder.name);
 
-        angular.forEach(folder.documents, function(value, key) {
-          value['folder'] = folder.name;
-          id = id + 1;
-          value['id'] = id;
-          self.data.push(value);
-        })
+        if (folder.documents.length == 0) {
+            id = id + 1;
+            self.data.push({ folder: folder.name });
+        } else {
+          angular.forEach(folder.documents, function(value, key) {
+            value['folder'] = folder.name;
+            id = id + 1;
+            value['id'] = id;
+            self.data.push(value);
+          })
+        }
       })
 
       initializeTable();
@@ -360,7 +365,7 @@ denningOnline
         targetFileNo : matter,
         newName : $scope.fileName+file.ext
       }
-      
+
       folderService.renameDocument(file.URL, data).then(function () {
         $uibModalInstance.close();
         growlService.growl('The file renamed successfully!', 'success');
