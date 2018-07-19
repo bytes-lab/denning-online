@@ -27,12 +27,6 @@ denningOnline
       });
     }
 
-    service.renameFolder = function (url, data) {
-      return http.PUT('/'+url, data).then(function(resp) {
-        return resp;
-      });
-    }
-
     service.createSubFolder = function (url) {
       return http.GET('/v1/document/subFolder').then(function(resp) {
         return resp;

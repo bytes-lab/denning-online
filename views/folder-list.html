@@ -32,13 +32,15 @@
                   <strong>{{ group.value.toUpperCase() }}</strong>
                 </a>
               </td>
-              <td data-title="'Action'" class="f-16">
-                <button class="btn btn-default" title="Rename" ng-click="vm.renameDoc(group.value)">
-                  <i class="zmdi zmdi-edit"></i>
-                </button>
-                <button class="btn btn-default m-l-5" title="Delete" ng-click="vm.deleteFolder(group.value)">
-                  <i class="zmdi zmdi-delete"></i>
-                </button>
+              <td class="f-16">
+                <div ng-if="group.value!='FILES'">
+                  <button class="btn btn-default" title="Rename" ng-click="vm.renameFolder(group.value)">
+                    <i class="zmdi zmdi-edit"></i>
+                  </button>
+                  <button class="btn btn-default m-l-5" title="Delete" ng-click="vm.deleteFolder(group.value)">
+                    <i class="zmdi zmdi-delete"></i>
+                  </button>                  
+                </div>
               </td>              
             </tr>
             <tr ng-hide="group.$hideRows" ng-if="file.name" ng-repeat="file in group.data" ng-repeat-end>
@@ -82,7 +84,8 @@
     <div class="form-group" ng-class="is_valid">
       <div class="fg-line">
         <div class="select">
-          <select class="form-control" ng-options="item for item in folders" ng-model="folderName" ng-change="validate()">
+          <select class="form-control" ng-model="folderName" ng-change="validate()">
+            <option ng-repeat="item in folders" value="{{ item.name }}">{{ item.name }}</option>
           </select>
         </div>
       </div>
@@ -97,10 +100,10 @@
 
 <script type="text/ng-template" id="fileModal.html">
   <div class="modal-header">
-    <h4 class="modal-title">Rename Document</h4>
+    <h4 class="modal-title">Rename {{ type }}</h4>
   </div>
   <div class="modal-body">
-    <p>New File Name</p>
+    <p>New Name</p>
     <div class="form-group" ng-class="is_valid">
       <div class="fg-line">
         <input type="text" class="form-control" ng-model="fileName" ng-change="validate()">

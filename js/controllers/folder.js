@@ -50,11 +50,10 @@ denningOnline
       })
 
       angular.forEach(data.folders, function(folder, key) {
-        self.folders.push(folder.name);
+        self.folders.push(folder);
 
         if (folder.documents.length == 0) {
-            id = id + 1;
-            self.data.push({ folder: folder.name });
+            self.data.push({ id: ++id, folder: folder.name });
         } else {
           angular.forEach(folder.documents, function(value, key) {
             value['folder'] = folder.name;
@@ -202,6 +201,36 @@ denningOnline
       });
     }
 
+    self.renameFolder = function (folderName) {
+      var folder;
+      for (ii in self.folders) {
+        if (self.folders[ii].name == folderName) {
+          folder = self.folders[ii];
+          break;
+        }
+      }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'fileModal.html',
+        controller: 'renameDocModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          file: function () {
+            return folder;
+          }, 
+          matter: function () {
+            return $stateParams.id;
+          },
+          type: function () {
+            return 'Folder';
+          }
+        }
+      });
+    }
+
     self.renameDoc = function (file) {
       var modalInstance = $uibModal.open({
         animation: true,
@@ -216,10 +245,12 @@ denningOnline
           }, 
           matter: function () {
             return $stateParams.id;
+          },
+          type: function () {
+            return 'Document';
           }
         }
       });
-
     }
 
     self.shareFile = function () {
@@ -304,7 +335,7 @@ denningOnline
 
   .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, files, matter, folders) {
     $scope.folders = folders;
-    $scope.folderName = folders[0];
+    $scope.folderName = folders[0].name;
     $scope.files = files;
 
     $scope.validate = function () {
@@ -337,7 +368,6 @@ denningOnline
         growlService.growl('Files moved successfully!', 'success');
         $state.reload();
       })
-
     };
 
     $scope.cancel = function () {
@@ -345,8 +375,10 @@ denningOnline
     };
   })
 
-  .controller('renameDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, file, matter) {
+  .controller('renameDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, file, matter, type) {
     $scope.is_valid = 'initial';
+    $scope.fileName = file.name;
+    $scope.type = type;
 
     $scope.validate = function () {
       if (!$scope.fileName.trim()) {
@@ -363,7 +395,7 @@ denningOnline
 
       data = {
         targetFileNo : matter,
-        newName : $scope.fileName+file.ext
+        newName : $scope.type == "Folder" ? $scope.fileName : $scope.fileName+file.ext
       }
 
       folderService.renameDocument(file.URL, data).then(function () {
