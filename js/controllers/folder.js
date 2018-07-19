@@ -38,6 +38,8 @@ denningOnline
     folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
       self.title = data.name;
       self.data = [];
+      self.folders = [];
+
       var id = 0;
 
       angular.forEach(data.documents, function(value, key) {
@@ -48,6 +50,8 @@ denningOnline
       })
 
       angular.forEach(data.folders, function(folder, key) {
+        self.folders.push(folder.name);
+
         angular.forEach(folder.documents, function(value, key) {
           value['folder'] = folder.name;
           id = id + 1;
@@ -163,12 +167,12 @@ denningOnline
         return false;
       }
 
-      var urls = [];
+      var files = [];
       var ids = Object.keys(self.checkboxes.items);
 
       angular.forEach(self.data, function(value, key) {
         if (ids.indexOf(value.id.toString()) > -1) {
-          urls.push(value.URL);
+          files.push(value);
         }
       })
 
@@ -180,11 +184,14 @@ denningOnline
         backdrop: 'static',
         keyboard: true,
         resolve: {
-          urls: function () {
-            return urls;
+          files: function () {
+            return files;
           }, 
           matter: function () {
             return $stateParams.id;
+          },
+          folders: function () {
+            return self.folders;
           }
         }
       });
@@ -270,7 +277,11 @@ denningOnline
       })    
   })
 
-  .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, folderService, urls, matter) {
+  .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, files, matter, folders) {
+    $scope.folders = folders;
+    $scope.folderName = folders[0];
+    $scope.files = files;
+
     $scope.validate = function () {
       if (!$scope.folderName.trim()) {
         $scope.is_valid = 'has-error';
@@ -283,22 +294,29 @@ denningOnline
       if ($scope.is_valid) {
         return false;
       }
-      // service.delete(entity).then(function () {
-      //   if (on_list) {
-      //     $state.reload();
-      //   } else {
-      //     $state.go(return_state);
-      //   }
-      // }).catch(function(err){
-      //   //$scope.formname.contactInfo.$error.push({meessage:''});
-      // });
+
+      var moves = [];
+      for (ii in $scope.files) {
+        file = $scope.files[ii];
+        var data = {
+          "sourceFileURL" : file.URL,
+          "newFileNo" : matter,
+          "newSubFolder" : $scope.folderName,
+          "newName" : file.name+file.ext
+        };
+
+        moves.push(folderService.moveDocument(data));
+      }
+
+      Promise.all(moves).then(function (data) {
+        growlService.growl('Files moved successfully!', 'success');
+        $state.reload();
+      })
+
       $uibModalInstance.close();
     };
 
     $scope.cancel = function () {
       $uibModalInstance.close();
-      // if (on_list) {
-      //   $state.go(return_state);
-      // }
     };
   })

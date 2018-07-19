@@ -70,10 +70,13 @@
     <h4 class="modal-title">Move Documents</h4>
   </div>
   <div class="modal-body">
-    <p>Sub Folder Title</p>
+    <p>Destination Sub Folder</p>
     <div class="form-group" ng-class="is_valid">
       <div class="fg-line">
-        <input type="text" class="form-control" placeholder="Search" ng-model="folderName" ng-change="validate()">
+        <div class="select">
+          <select class="form-control" ng-options="item for item in folders" ng-model="folderName" ng-change="validate()">
+          </select>
+        </div>
       </div>
     </div>
   </div>

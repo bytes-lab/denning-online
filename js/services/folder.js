@@ -45,8 +45,8 @@ denningOnline
       });
     }
 
-    service.moveDocument = function (url) {
-      return http.GET('/v1/document/move').then(function(resp) {
+    service.moveDocument = function (url, data) {
+      return http.PUT('/v1/document/move', data).then(function(resp) {
         return resp;
       });
     }
