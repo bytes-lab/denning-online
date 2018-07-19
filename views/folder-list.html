@@ -14,6 +14,7 @@
           <button class="btn btn-default pull-right m-r-5 f-15" title="Share files" ng-click="vm.shareFile()"><i class="zmdi zmdi-share"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.deleteFile()"><i class="zmdi zmdi-delete"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.refresh()"><i class="zmdi zmdi-refresh-alt"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Create a folder" ng-click="vm.createFolder()"><i class="zmdi zmdi-collection-plus"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.upload()"><i class="zmdi zmdi-upload"></i></button>
           <input type="file" class="file-upload hidden" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
         </div>
@@ -104,6 +105,24 @@
   </div>
   <div class="modal-body">
     <p>New Name</p>
+    <div class="form-group" ng-class="is_valid">
+      <div class="fg-line">
+        <input type="text" class="form-control" ng-model="fileName" ng-change="validate()">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="newFolderModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Create a sub folder</h4>
+  </div>
+  <div class="modal-body">
+    <p>Sub Folder Name</p>
     <div class="form-group" ng-class="is_valid">
       <div class="fg-line">
         <input type="text" class="form-control" ng-model="fileName" ng-change="validate()">

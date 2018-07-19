@@ -274,6 +274,22 @@ denningOnline
       })
     }
 
+    self.createFolder = function() {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'newFolderModal.html',
+        controller: 'newFolderModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          matter: function () {
+            return $stateParams.id;
+          }
+        }
+      });
+    }
+
     self.deleteFile = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to delete.');
@@ -416,6 +432,38 @@ denningOnline
       folderService.renameDocument(file.URL, data).then(function () {
         $uibModalInstance.close();
         growlService.growl('The file renamed successfully!', 'success');
+        $state.reload();        
+      })
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.close();
+    };
+  })
+
+  .controller('newFolderModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, matter) {
+    $scope.is_valid = 'initial';
+
+    $scope.validate = function () {
+      if (!$scope.fileName.trim()) {
+        $scope.is_valid = 'has-error';
+      } else {
+        $scope.is_valid = '';
+      }
+    }
+
+    $scope.ok = function () {
+      if ($scope.is_valid) {
+        return false;
+      }
+
+      data = {
+        targetFileNo : matter,
+        newName : $scope.fileName
+      }
+
+      folderService.createSubFolder(data).then(function () {
+        $uibModalInstance.close();
         $state.reload();        
       })
     };
