@@ -298,14 +298,13 @@ denningOnline
       var moves = [];
       for (ii in $scope.files) {
         file = $scope.files[ii];
-        var data = {
+
+        moves.push(folderService.moveDocument({
           "sourceFileURL" : file.URL,
           "newFileNo" : matter,
           "newSubFolder" : $scope.folderName,
           "newName" : file.name+file.ext
-        };
-
-        moves.push(folderService.moveDocument(data));
+        }));
       }
 
       Promise.all(moves).then(function (data) {
