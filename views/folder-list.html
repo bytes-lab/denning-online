@@ -64,3 +64,21 @@
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="folderModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Move Documents</h4>
+  </div>
+  <div class="modal-body">
+    <p>Sub Folder Title</p>
+    <div class="form-group" ng-class="is_valid">
+      <div class="fg-line">
+        <input type="text" class="form-control" placeholder="Search" ng-model="folderName" ng-change="validate()">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>

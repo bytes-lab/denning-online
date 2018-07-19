@@ -1,5 +1,5 @@
 denningOnline
-  .controller('folderListCtrl', function(NgTableParams, $stateParams, folderService, contactService, $state, Auth, $scope, $element, growlService, ngClipboard, $timeout) {
+  .controller('folderListCtrl', function(NgTableParams, $stateParams, $uibModal, folderService, contactService, $state, Auth, $scope, $element, growlService, ngClipboard) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -154,19 +154,48 @@ denningOnline
     self.copy_file = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to copy.');
-      }      
+      }
     }
 
     self.move_file = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to move.');
-      }      
+        return false;
+      }
+
+      var urls = [];
+      var ids = Object.keys(self.checkboxes.items);
+
+      angular.forEach(self.data, function(value, key) {
+        if (ids.indexOf(value.id.toString()) > -1) {
+          urls.push(value.URL);
+        }
+      })
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'folderModal.html',
+        controller: 'moveDocModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          urls: function () {
+            return urls;
+          }, 
+          matter: function () {
+            return $stateParams.id;
+          }
+        }
+      });
     }
+
     self.share_file = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to share.');
-      }      
+      }
     }
+
     self.delete_file = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to delete.');
@@ -187,6 +216,7 @@ denningOnline
         $state.reload();
       })
     }
+
     self.attach_file = function() {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to attach.');
@@ -211,7 +241,7 @@ denningOnline
     }
   })
 
-  .controller('openFileCtrl', function($stateParams, folderService, $state, $scope, $element, growlService, ngClipboard, $timeout) {
+  .controller('openFileCtrl', function($stateParams, folderService) {
       var file = JSON.parse($stateParams.url);
       folderService.download(file.URL).then(function(response) {
         var fileName = file.name + file.ext;
@@ -240,3 +270,35 @@ denningOnline
       })    
   })
 
+  .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, folderService, urls, matter) {
+    $scope.validate = function () {
+      if (!$scope.folderName.trim()) {
+        $scope.is_valid = 'has-error';
+      } else {
+        $scope.is_valid =  '';
+      }
+    }
+
+    $scope.ok = function () {
+      if ($scope.is_valid) {
+        return false;
+      }
+      // service.delete(entity).then(function () {
+      //   if (on_list) {
+      //     $state.reload();
+      //   } else {
+      //     $state.go(return_state);
+      //   }
+      // }).catch(function(err){
+      //   //$scope.formname.contactInfo.$error.push({meessage:''});
+      // });
+      $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.close();
+      // if (on_list) {
+      //   $state.go(return_state);
+      // }
+    };
+  })

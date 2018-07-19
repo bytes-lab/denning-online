@@ -1,5 +1,5 @@
 denningOnline
-  .controller('contactListCtrl', function($uibModal, NgTableParams, contactService, Auth, $state) {
+  .controller('contactListCtrl', function(NgTableParams, contactService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
     self.keyword = '';
