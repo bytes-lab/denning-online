@@ -6,11 +6,9 @@
   <div class="card">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-8">
-          <h2 class="f-20 f-500 c-purple">IRD Branch List</h2>
-        </div>
-        <div class="col-md-4" ng-if="vm.userInfo.priority.irbbranch.create">
-          <a ui-sref="IRD-branches.new" class="btn bgm-cyan pull-right"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New IRD Branch</a>
+        <div class="col-md-12">
+          <span class="f-20 f-500 c-purple">IRD Branch List</span>
+          <a ui-sref="IRD-branches.new" ng-if="vm.userInfo.priority.irbbranch.create" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
         </div>
       </div>
     </div>
