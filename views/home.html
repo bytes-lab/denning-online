@@ -1,23 +1,23 @@
 <header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
 
 <section id="main">
-    <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+  <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
 
-    <section id="content">
-
-        <div class="container">
-            <div class="row">
-            <div class="col-md-8" style="margin-top: 100px;">
-                <h2 class="pull-right" style="color: grey; font-style: italic; font-weight: 700; line-height: 50px;">"Unlike my brother judge here, who is concerned with law,"<br>he once teased at a legal dinner, "I am concerned with justice."</h2>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-md-8">
-                <h2 class="pull-right" style="color: grey;">- Lord Denning</h2>
-            </div>
-            </div>
-        </div>
-    </section>
+  <section id="content">
+    <div class="container">
+      <div class="row">
+      <div class="col-md-offset-1 col-md-10" style="margin-top: 100px;">
+        <h2 class="text-left c-gray f-700" style="font-style: italic; font-size: 30px; line-height: 60px;">
+          "Unlike my brother judge here, who is concerned with law", <span style="font-size: 26px !important;">he once teased at a legal dinner</span>, "I am concerned with justice."
+        </h2>
+      </div>
+      </div>
+      <div class="row m-t-25">
+      <div class="col-md-10 m-t-25">
+        <h3 class="pull-right c-gray">- Lord Denning</h3>
+      </div>
+      </div>
+    </div>
+  </section>
 </section>
 
-<footer id="footer" data-ng-include="'template/footer.html'"></footer>

@@ -35,12 +35,12 @@
               <div class="fg-line">
                 <div class="select">
                   <select class="form-control" ng-model="vm.filter" ng-change="vm.search();">
+                    <option value="0All">Today</option>
                     <option value="0All">All</option>
                     <option value="1court">Future Cases</option>
-                    <option value="2office">Attended Past Cases</option>
-                    <option value="3personal">Attended Past Cases & Next Date To Be Given</option>
-                    <option value="0All4">Postponed Cases</option>
-                    <option value="0All5">Other</option>
+                    <option value="2office">Past Cases</option>
+                    <option value="3personal">Past Cases with no Hearing Date</option>
+                    <option value="0All4">Unattended Past Cases</option>
                   </select>
                 </div>
               </div>
