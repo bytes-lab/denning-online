@@ -118,3 +118,41 @@ md-autocomplete input:not(.md-input) {
 .md-whiteframe-1dp, .md-whiteframe-z1 {
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px -1px rgba(0, 0, 0, 0.12);
 }
+
+.btn-header {
+    display: inline-block;
+    margin-top: -7px;
+    margin-left: 30px;
+}
+
+.bgm-green-0 {
+    background-color: #145A32;
+}
+
+.bgm-green-1 {
+    background-color: #A9DFBF;
+}
+
+.bgm-green-2 {
+    background-color: #7DCEA0;
+}
+
+.bgm-green-3 {
+    background-color: #52BE80;
+}
+
+.bgm-green-4 {
+    background-color: #27AE60;
+}
+
+.bgm-green-5 {
+    background-color: #229954;
+}
+
+.bgm-green-6 {
+    background-color: #1E8449;
+}
+
+.bgm-green-7 {
+    background-color: #196F3D;
+}

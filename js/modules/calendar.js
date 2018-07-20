@@ -84,13 +84,13 @@ denningOnline
       },
       link: function(scope, element, attrs) {
         var colors = {
-          'Land Office': 'bgm-blue',
-          'High Court': 'bgm-green',
-          'Magistrates Court': 'bgm-gray',
-          'Sessions Court': 'bgm-teal',
-          'Small Estate Department': 'bgm-pink',
-          'Federal Court': 'bgm-purple',
-          'Court of Appeal': 'bgm-cyan'
+          'Land Office': 'bgm-green-0',
+          'High Court': 'bgm-green-1',
+          'Magistrates Court': 'bgm-green-2',
+          'Sessions Court': 'bgm-green-3',
+          'Small Estate Department': 'bgm-green-4',
+          'Federal Court': 'bgm-green-5',
+          'Court of Appeal': 'bgm-green-6'
         };
 
         var getType = function (strType) {
@@ -149,7 +149,7 @@ denningOnline
                   if (event in colors) {
                     color = colors[event];
                   } else {
-                    color = 'bgm-brown';
+                    color = 'bgm-green-7';
                   }
 
                   events.push({
