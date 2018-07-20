@@ -32,13 +32,19 @@
       <a data-ui-sref="overview" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-view-dashboard"></i> Overview</a>
     </li>
     <li data-ui-sref-active="active">
-      <a data-ui-sref="file-matters.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-file-text"></i> Matter</a>
+      <a data-ui-sref="file-matters.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-file-text"></i> Matter List</a>
+    </li>
+    <li data-ui-sref-active="active">
+      <a data-ui-sref="file-matters.new" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-file-plus"></i> New Matter</a>
     </li>
     <li data-ui-sref-active="active" ng-if="app.userInfo.priority.contact.list">
       <a data-ui-sref="contacts.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-folder-person"></i> Contact</a>
     </li>
     <li data-ui-sref-active="active" ng-if="app.userInfo.priority.property.list">
       <a data-ui-sref="properties.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-layers"></i> Property</a>
+    </li>
+    <li data-ui-sref-active="active">
+      <a data-ui-sref="courtdiary({ keyword: '' })" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-calendar-check"></i> Calendar</a>
     </li>
 
     <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('billingitems') || mactrl.$state.includes('presetbills') || mactrl.$state.includes('quotations') || mactrl.$state.includes('invoices') || mactrl.$state.includes('receipts')  }">
@@ -52,10 +58,6 @@
       </ul>
     </li>
     
-    <li data-ui-sref-active="active">
-      <a data-ui-sref="courtdiary({ keyword: '' })" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-calendar-check"></i> Calendar</a>
-    </li>
-
     <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('tables') }">
       <a href="" toggle-submenu><i class="zmdi zmdi-pin-account"></i> Clients Account</a>
       <ul>
@@ -111,8 +113,13 @@
     <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('matter-forms') || mactrl.$state.includes('matter-codes') }" ng-if="app.userInfo.priority.matter.list">
       <a href="" toggle-submenu><i class="zmdi zmdi-settings"></i> Settings</a>
       <ul>
-        <li><a data-ui-sref-active="active" data-ui-sref="matter-forms.list" data-ng-click="mactrl.sidebarStat($event)">Matter Form</a></li>
-        <li><a data-ui-sref-active="active" data-ui-sref="matter-codes.list" data-ng-click="mactrl.sidebarStat($event)">Matter Code</a></li>
+        <li class="sub-menu">
+          <a href="" toggle-submenu>Matter</a>
+          <ul>
+            <li><a data-ui-sref-active="active" data-ui-sref="matter-forms.list" data-ng-click="mactrl.sidebarStat($event)">Matter Form</a></li>
+            <li><a data-ui-sref-active="active" data-ui-sref="matter-codes.list" data-ng-click="mactrl.sidebarStat($event)">Matter Code</a></li>            
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>

@@ -84,13 +84,13 @@ denningOnline
       },
       link: function(scope, element, attrs) {
         var colors = {
-          'Land Office': 'bgm-green-0',
-          'High Court': 'bgm-green-1',
+          'Land Office': 'bgm-green-4',
+          'High Court': 'bgm-green-6',
           'Magistrates Court': 'bgm-green-2',
           'Sessions Court': 'bgm-green-3',
-          'Small Estate Department': 'bgm-green-4',
+          'Small Estate Department': 'bgm-green-0',
           'Federal Court': 'bgm-green-5',
-          'Court of Appeal': 'bgm-green-6'
+          'Court of Appeal': 'bgm-green-1'
         };
 
         var getType = function (strType) {
