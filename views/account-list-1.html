@@ -97,22 +97,22 @@
                   <table ng-table="vm.invoiceTable" class="table table-vmiddle" show-filter="true">
                     <tr ng-repeat="w in $data">
                       <td data-title="'Date'">
-                        03/05/2017
+                        {{ w.invoiceDate|ddate }}
                       </td>
                       <td data-title="'No'" class="ng-table-fixed-column-20">
-                        {{ w.documentNo }}
+                        {{ w.invoiceNo }}
                       </td>
                       <td data-title="'To'" class="ng-table-fixed-column-20">
                         {{ w.issueToName }}
                       </td>
                       <td data-title="'Amount'" class="ng-table-fixed-column-20">
-                        {{ w.spaPrice }}
+                        {{ w.amount }}
                       </td>
                       <td data-title="'Paid'">
-                        {{ w.fileNo }}
+                        {{ w.paid }}
                       </td>
                       <td data-title="'Balance'">
-                        {{ w.fileNo }}
+                        {{ w.balance }}
                       </td>                    
                     </tr>
                     <tr ng-if="$data.length==0">
