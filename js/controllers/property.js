@@ -30,7 +30,7 @@ denningOnline
     }
   })
 
-  .controller('propertyEditCtrl', function($stateParams, propertyService, $state, Auth, $uibModal, contactService) {
+  .controller('propertyEditCtrl', function($stateParams, propertyService, $state, Auth, $uibModal, contactService, refactorService) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -43,8 +43,9 @@ denningOnline
     self.types = {};
 
     if($stateParams.id) {
-      propertyService.getItem($stateParams.id).then(function(item){
+      propertyService.getItem($stateParams.id).then(function (item) {
         self.property = item;
+        self.property_ = angular.copy(self.property);
       });
     } else {
       self.property = {};
@@ -95,7 +96,8 @@ denningOnline
     }
 
     self.save = function () {
-      propertyService.save(self.property).then(function(property) {
+      entity = refactorService.getDiff(self.property_, self.property);
+      propertyService.save(entity).then(function (property) {
         if (property) {
           self.property = property;
         }

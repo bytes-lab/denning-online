@@ -282,11 +282,17 @@ denningOnline
               $state.go('home');
             })
             .catch(function (err) {
-              self.errorMessage = err.message;
+              self.errorMessage = err.statusText;
+              if (!err.statusText) {
+                self.errorMessage = 'Cannot call staff login API. Please check the API status.';
+              }
             })
           }
         }).catch(function (err) {
           self.errorMessage = err.statusText;
+          if (!err.statusText) {
+            self.errorMessage = 'Cannot call login API. Please check the API status.';
+          }
         });
     }
 
