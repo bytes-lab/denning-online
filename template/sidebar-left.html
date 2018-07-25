@@ -27,9 +27,13 @@
     </ul>
   </div>
 
-  <ul class="main-menu">    
-    <li data-ui-sref-active="active">
-      <a data-ui-sref="overview" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-view-dashboard"></i> Overview</a>
+  <ul class="main-menu">
+    <li data-ui-sref-active="active" ng-class="{ 'sub-menu': mitem.submenus }"  ng-repeat="mitem in app.menu">
+      <a data-ui-sref="{{ mitem.url }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!mitem.submenus"><i class="zmdi {{ mitem.icon }}"></i> {{ mitem.title }}</a>
+      <a href="" toggle-submenu ng-if="mitem.submenus"><i class="zmdi {{ mitem.icon }}"></i> {{ mitem.title }}</a>
+      <ul>
+        <li ng-repeat="sitem in mitem.submenus"><a data-ui-sref-active="active" data-ui-sref="{{ sitem.url }}" data-ng-click="mactrl.sidebarStat($event)">{{ sitem.title }}</a></li>
+      </ul>      
     </li>
     <li data-ui-sref-active="active">
       <a data-ui-sref="file-matters.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-file-text"></i> Matter List</a>
