@@ -14,12 +14,13 @@ denningOnline
     this.searchFilterFlex = 20;
     var width = $(window).width();
 
-    if (width < 780)
+    if (width < 780) {
       this.searchFilterFlex = 50;
-    else if (width < 1300)
+    } else if (width < 1300) {
       this.searchFilterFlex = 33;
-    else if (width < 1441)
+    } else if (width < 1441) {
       this.searchFilterFlex = 25;
+    }
 
     // Detact Mobile Browser
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -107,33 +108,27 @@ denningOnline
     }
     
     self.states    = [];
-    self.querySearch   = querySearch;
-    self.selectedItemChange = selectedItemChange;
-    self.searchTextChange   = searchTextChange;
-    self.searchKeyPressed   = searchKeyPressed;
-    self.searchFilterChange = searchFilterChange;
-    self.newState = newState;
     self.searchRes = [];
     self.selectedItem = '';
     self.currentText = '';    
 
-    function newState(state) {
+    self.newState = function (state) {
     }
 
-    function searchKeyPressed(events, item) {
+    self.searchKeyPressed = function (events, item) {
       if(event.which == 13){        
         // hide list for not keyword
         $('#search_filter').focus();
-        selectedItemChange(self.selectedItem || self.currentText);
+        self.selectedItemChange(self.selectedItem || self.currentText);
       }
     }
 
-    function searchFilterChange() {
+    self.searchFilterChange = function () {
       self.showFilterCategory = false;
-      selectedItemChange(self.selectedItem || self.currentText);
+      self.selectedItemChange(self.selectedItem || self.currentText);
     }
 
-    function querySearch (query) {
+    self.querySearch = function (query) {
       self.showFilterCategory = false;
 
       return searchService.keyword(query).then(function (data) {
@@ -141,14 +136,14 @@ denningOnline
       });
     }
 
-    function searchTextChange(text) {
+    self.searchTextChange = function (text) {
       self.selectedSearchCategory = 0;
       self.currentText = {value: text, display: text};
       if (text.trim() == '')
         self.searchRes = [];
     }
 
-    function selectedItemChange(item) {
+    self.selectedItemChange = function (item) {
       self.showFilterCategory = false;
 
       if(angular.isUndefined(item))
@@ -159,12 +154,6 @@ denningOnline
         if ($state.current.name != 'search')
           $state.go('search');
       });
-    }
-
-    /**
-     * Build `states` list of key/value pairs
-     */ 
-    function loadAll() {      
     }
 
     self.payments = function(item) {
@@ -242,14 +231,17 @@ denningOnline
       };
     }
   })
+
   .controller('loginCtrl', function ($rootScope, $scope, Auth, $window, $state, legalFirmService) {
     var self = this;
     self.login = 1;
     self.register = 0;
     self.forgot = 0;
     self.verification = 0;
+    self.resetPassword_ = 0;
     self.errorMessage = '';
-    
+    self.passwords = {};
+
     self.doLogin = function (userData) {
       return Auth.login(userData.email, userData.password)
         .then(function (res) {
@@ -293,6 +285,22 @@ denningOnline
         .catch(function (err) {
           self.errorMessage = "TAC is not correct.";
         })
+    }
+
+    self.resetPassword = function () {
+      if (!self.passwords.old) {
+        self.errorMessage = 'Please type old password.';
+        return false;
+      } else if (!self.passwords.new) {
+        self.errorMessage = 'Please type new password.';
+        return false;
+      } else if (self.passwords.new != self.passwords.new_) {
+        self.errorMessage = 'Passwords are not matching. Please type again.';
+        return false;
+      } else if (self.passwords.old != self.user.password) {
+        self.errorMessage = 'Old password is not correct. Please type again.';
+        return false;        
+      }
     }
 
     self.searchKeyPressed = function(events) {

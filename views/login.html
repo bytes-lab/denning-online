@@ -119,6 +119,36 @@
     </ul>
   </div>
 
+  <!-- Reset Password -->
+  <div class="lc-block" id="l-reset-password" data-ng-class="{ 'toggled': lctrl.resetPassword_ === 1 }" data-ng-if="lctrl.resetPassword_ === 1">
+    <div class="c-red m-b-10">{{ lctrl.errorMessage }}</div>
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+      <div class="fg-line">
+        <input type="password" class="form-control" placeholder="Old Password" ng-model="lctrl.passwords.old">
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+      <div class="fg-line">
+        <input type="password" class="form-control" placeholder="New Password" ng-model="lctrl.passwords.new">
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+      <div class="fg-line">
+        <input type="password" class="form-control" placeholder="Confirm Passsword" ng-model="lctrl.passwords.new_">
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.resetPassword()"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+  </div>
   <!-- Forgot Password -->
   <div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.forgot === 1 }" data-ng-if="lctrl.forgot === 1">
     <p class="text-left">Please provide your email address. You can get a verification code shortly.</p>

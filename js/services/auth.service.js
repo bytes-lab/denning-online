@@ -1,7 +1,7 @@
 denningOnline
   .factory('Auth', function ($http, $window, $timeout, $q) {
     var service = {
-      baseUrl: 'https://43.252.215.163/denningapi'
+      baseUrl: 'https://denningchat.com/denningapi'
     };
 
     service.rememberMe = false;
@@ -186,7 +186,7 @@ denningOnline
       data.sessionID = service.userInfo.sessionID;
       data.password = pass;
 
-      baseUrl = 'https://43.252.215.81/denningwcf';
+      baseUrl = service.getBaseURL();
 
       return $http({
         method: 'POST',
@@ -234,8 +234,7 @@ denningOnline
 
     service.getBaseURL = function () {
       var baseUrl = this.getUserInfo().catDenning[0].APIServer;
-
-      return 'https://43.252.215.81/denningwcf';
+      return baseUrl;
     }
 
     service.logout = function () {
