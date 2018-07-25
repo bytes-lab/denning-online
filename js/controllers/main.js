@@ -232,7 +232,7 @@ denningOnline
     }
   })
 
-  .controller('loginCtrl', function ($rootScope, $scope, Auth, $window, $state, legalFirmService) {
+  .controller('loginCtrl', function ($rootScope, $scope, Auth, $window, $state) {
     var self = this;
     self.login = 1;
     self.register = 0;

@@ -3,38 +3,32 @@ denningOnline
   // LEGAL FIRMS / SOLICITORS
   // =========================================================================
   
-  .service('legalFirmService', function($http, Auth){
+  .service('legalFirmService', function(http) {
     var service = {};
-    service.getList = getList;
-    service.getItem = getItem;
 
-    function getList(page=1, pagesize=25, keyword='') {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/Solicitor?page='+page+'&pagesize='+pagesize+'&search='+keyword,
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
+    service.getList = function (page=1, pagesize=25, keyword='') {
+      return http.GET('v1/Solicitor', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
         return resp;
-      });  
+      });
     }
 
     service.getTableList = function (page=1, pagesize=25, keyword='') {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/table/Lawyer?page='+page+'&pagesize='+pagesize+'&search='+keyword,
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
+      return http.GET('v1/table/Lawyer', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
         return resp;
-      });  
+      });
     };
 
-    function getItem(code) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/table/Lawyer/'+code,
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
-        return resp.data;
+    service.getItem = function (code) {
+      return http.GET('v1/table/Lawyer'+code).then(function (resp) {
+        return resp;
       });
     }
     return service;
