@@ -3,7 +3,7 @@ denningOnline
     var service = {};
 
     service.getList = function (page=1, pagesize=25, keyword) {
-      return http.GET('/v1/Quotation', {
+      return http.GET('/v1/QuotationX/all', {
         page: page,
         pagesize: pagesize,
         search: keyword

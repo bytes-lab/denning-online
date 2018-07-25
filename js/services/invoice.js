@@ -3,10 +3,10 @@ denningOnline
     var service = {};
 
     service.getList = function (page=1, pagesize=25, keyword) {
-      return http.GET('/v1/TaxInvoiceX/outstanding', {
+      return http.GET('/v1/TaxInvoiceX/all', {
         page: page,
         pagesize: pagesize,
-        fileno: keyword
+        search: keyword
       }).then(function (resp) {
         return resp;
       });

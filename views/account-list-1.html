@@ -66,16 +66,16 @@
                   <table ng-table="vm.quotationTable" class="table table-vmiddle" show-filter="true">
                     <tr ng-repeat="w in $data">
                       <td data-title="'Date'">
-                        {{ w.issueDate|ddate }}
+                        {{ w.invoiceDate|ddate }}
                       </td>
                       <td data-title="'No'">
-                        {{ w.documentNo }}
+                        {{ w.invoiceNo }}
                       </td>
                       <td data-title="'To'">
                         {{ w.issueToName }}
                       </td>
                       <td data-title="'Amount'">
-                        {{ w.spaPrice }}
+                        {{ w.amount }}
                       </td>
                     </tr>
                     <tr ng-if="$data.length==0">

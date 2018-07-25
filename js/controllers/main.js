@@ -285,7 +285,9 @@ denningOnline
             $state.go('home');
           })
           .catch(function (err) {
-            self.errorMessage = err.message;
+            if (!err.statusText) {
+              self.errorMessage = 'Cannot call TAC API. Please check the API status.';
+            }
           })
         })
         .catch(function (err) {
