@@ -3,7 +3,7 @@ denningOnline
   // Search Data
   // =========================================================================
 
-  .service('searchService', function (http) {
+  .service('searchService', function (http, Auth) {
     this.getFilter = function () {
       return http.GET('/v1/generalSearch/category').then(function (resp) {
         return resp.data;
@@ -45,4 +45,10 @@ denningOnline
         return results;
       });
     };
+
+    this.getMenu = function () {
+      return http.GET('/v2/web/menu/'+Auth.getUserInfo().name).then(function(resp) {
+        return resp.data;
+      });      
+    }
   })
