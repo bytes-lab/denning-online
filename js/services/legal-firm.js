@@ -28,7 +28,7 @@ denningOnline
 
     service.getItem = function (code) {
       return http.GET('v1/table/Lawyer'+code).then(function (resp) {
-        return resp;
+        return resp.data;
       });
     }
     return service;

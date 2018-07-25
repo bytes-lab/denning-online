@@ -3,45 +3,34 @@ denningOnline
   // DOC TEMPLATE
   // =========================================================================
   
-  .service('templateService', function($http, Auth){
+  .service('templateService', function(http) {
     var service = {};
-    service.getCategories = getCategories;
-    service.getTypes = getTypes;
-    service.getTemplates = getTemplates;
 
-    function getCategories() {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/Table/cbotemplatecategory/only',
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
+    service.getCategories = function () {
+      return http.GET('v1/table/cbotemplatecategory/only').then(function (resp) {
         return resp.data;
       });
     }
 
-    function getTypes(category) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/Table/cbotemplatecategory?filter='+category,
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
+    service.getTypes = function (category) {
+      return http.GET('v1/table/cbotemplatecategory', {
+        filter: category
+      }).then(function (resp) {
         return resp.data;
       });
     }
 
-    function getTemplates(category, type, source, fileNo) {
-      if (!fileNo) {
-        fileNo ='2000-1077';
-      }
-      
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/Table/cboTemplate?fileno='+fileNo+'&Online='+source.toLowerCase()+'&category='+category+'&Type='+type,
-        headers: Auth.isAuthenticated()
-      }).then(function(resp) {
+    service.getTemplates = function (category, type, source, fileno='2000-1077') {
+      return http.GET('v1/table/cboTemplate', {
+        fileno: fileno,
+        Online: source.toLowerCase(),
+        category: category,
+        type: type
+      }).then(function (resp) {
         return resp;
       });
     }
 
     return service;    
   })
+
