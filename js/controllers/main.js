@@ -249,6 +249,9 @@ denningOnline
           if (res.statusCode == 250) {
             self.verification = 1;
             self.login = 0;
+          } else if (res.statusCode == 280) {
+            self.resetPassword_ = 1;
+            self.login = 0;
           } else {
             Auth.staffLogin(userData.password)
             .then(function (res) {
@@ -283,6 +286,7 @@ denningOnline
           })
         })
         .catch(function (err) {
+          console.log(err);
           self.errorMessage = "TAC is not correct.";
         })
     }
@@ -301,6 +305,14 @@ denningOnline
         self.errorMessage = 'Old password is not correct. Please type again.';
         return false;        
       }
+
+      Auth.resetPassword(self.user.email, self.passwords.new)
+      .then(function (data) {
+        $state.go('home');
+      })
+      .catch(function (err) {
+        self.errorMessage = err.statusText;
+      })
     }
 
     self.searchKeyPressed = function(events) {

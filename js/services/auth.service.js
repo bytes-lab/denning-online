@@ -180,6 +180,24 @@ denningOnline
       });
     };
 
+    service.resetPassword = function (email, pass) {
+      data = angular.copy(service.preData);
+      data.email = email;
+      data.password = pass;
+
+      return $http({
+        method: 'POST',
+        url: service.baseUrl + '/v1/password/new',
+        headers: service.headers,
+        data: data
+      }).then(function(response) {
+        service.userInfo = response.data;
+        service.userInfo.priority = service.demoPriority;
+        service.setUserInfo(service.userInfo);
+        return response.data;
+      });
+    };
+
     service.staffLogin = function (pass) {
       data = angular.copy(service.preData);
       data.email = service.userInfo.email;
