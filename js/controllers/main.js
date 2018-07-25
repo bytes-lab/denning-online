@@ -305,10 +305,26 @@ denningOnline
   // =========================================================================
   // Header
   // =========================================================================
-  .controller('headerCtrl', function($scope, Auth, searchService){
+  .controller('headerCtrl', function($scope, $state, Auth, searchService){
     $scope.app.loadChat = true;
     $scope.app.userInfo = Auth.getUserInfo();
     $scope.app.chat_url = '/chat/index.html?uid=';
+    
+    $scope.app.getCls = function (mitem) {
+      var cls = '';
+      if (mitem.submenus) {
+        cls = 'sub-menu ';
+        for (ii in mitem.submenus) {
+          stat = mitem.submenus[ii].url.split('.')[0];
+          if ($state.includes(stat)) {
+            cls += 'active toggled';
+            break;
+          }
+        }        
+      }
+
+      return cls;
+    }
 
     searchService.getMenu().then(function (data) {
       $scope.app.menu = data;
