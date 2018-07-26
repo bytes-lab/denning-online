@@ -662,36 +662,42 @@ denningOnline
       name: 'gen-doc',
       templateUrl: 'gen-doc.html',
       controller: function($scope, $filter, NgTableParams, templateService) {
-        templateService.getCategories().then(function(data) {
-          $scope.categories = data;
-        });    
-
-        $scope.updateType = function() {
-          templateService.getTypes($scope.model[$scope.options.key+'_category']).then(function(data) {
-            $scope.types = data;
-          });    
-        }
-
-        $scope.updateTemplates = function() {
-          if ($scope.model[$scope.options.key+'_category'] && $scope.model[$scope.options.key+'_type'] && $scope.model[$scope.options.key+'_source']) {
-            $scope.tableFilter = new NgTableParams({
-              page: 1,            // show first page
-              count: 10,
-              sorting: {
-                name: 'asc'       // initial sorting
-              }
-            }, {
-              getData: function(params) {
-                return templateService.getTemplates($scope.model[$scope.options.key+'_category'], $scope.model[$scope.options.key+'_type'], $scope.model[$scope.options.key+'_source'], $scope.model.strFileNo1).then(function(data) {
-                  params.total(data.headers('x-total-count'));
-                  return data.data;
-                });
-              }
-            })    
-          }
+        $scope.sources = ['All', 'Online', 'User'];        
+        $scope.docInfo = {
+          fileno: $scope.model.strFileNo1,
+          source: 'All'
         };
 
-        $scope.sources = ['All', 'Online', 'User'];
+        $scope.updateTemplates = function() {
+          $scope.tableFilter = new NgTableParams({
+            page: 1,
+            count: 15,
+            sorting: {
+              name: 'asc'
+            }
+          }, {
+            getData: function(params) {
+              return templateService.getTemplates($scope.docInfo, params.page(), params.count(), $scope.keyword).then(function(data) {
+                params.total(data.headers('x-total-count'));
+                return data.data;
+              });
+            }
+          })
+        };
+
+        $scope.updateType = function() {
+          templateService.getTypes($scope.docInfo.category).then(function (data) {
+            $scope.types = data;
+            $scope.docInfo.type = data[0].strTypeCode;
+            $scope.updateTemplates();
+          });
+        }
+
+        templateService.getCategories().then(function(data) {
+          $scope.categories = data;
+          $scope.docInfo.category = data[0];
+          $scope.updateType();
+        });
       }
     });
     
@@ -717,7 +723,7 @@ denningOnline
           $scope.datepicker.opened = !$scope.datepicker.opened;
         };
       }]
-    });  
+    });
   })
 
   .run(function(formlyConfig) {
