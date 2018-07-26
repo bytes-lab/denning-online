@@ -7,13 +7,13 @@ denningOnline
     var service = {};
 
     service.getWidget1 = function () {
-      return http.GET('/v1/WebOverView/Type1/W001').then(function(resp) {
+      return http.GET('v1/WebOverView/Type1/widget1').then(function(resp) {
         return resp.data;
       });
     }
 
     service.getWidget2 = function () {
-      return http.GET('/v1/WebOverView/Type2/W002').then(function(resp) {
+      return http.GET('v1/WebOverView/Type1/widget2').then(function(resp) {
         return resp.data;
       });
     }
