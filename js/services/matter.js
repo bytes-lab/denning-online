@@ -6,7 +6,7 @@ denningOnline
   .service('fileMatterService', function(http) {
     var service = {};
 
-    service.getList = function (page=1, pagesize=25, keyword) {
+    service.getList = function (page, pagesize, keyword) {
       return http.GET('/v1/generalSearch/file?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
         return resp;
       });  
@@ -61,7 +61,7 @@ denningOnline
   .service('matterCodeService', function(http){
     var service = {};
 
-    service.getList = function (page=1, pagesize=500, keyword='') {
+    service.getList = function (page, pagesize, keyword='') {
       return http.GET('/v1/table/MatterCode', {
         page: page,
         pagesize: pagesize,
@@ -97,7 +97,7 @@ denningOnline
   .service('matterFormService', function(http){
     var service = {};
 
-    service.getList = function (page=1, pagesize=500, keyword='') {
+    service.getList = function (page, pagesize, keyword='') {
       return http.GET('/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
         return resp.data;
       });  
