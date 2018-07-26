@@ -20,7 +20,7 @@ denningOnline
       });
     }
 
-    service.getTemplates = function (docInfo, page, pagesize, keyword='') {
+    service.getTemplates = function (docInfo, page, pagesize, keyword) {
       return http.GET('v1/table/cboTemplate', {
         fileno: docInfo.fileno,
         Online: docInfo.source.toLowerCase(),

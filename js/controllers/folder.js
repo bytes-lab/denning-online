@@ -67,7 +67,7 @@ denningOnline
       initializeTable();
     });
 
-    self.download = function ($event, file, open=false) {
+    self.download = function ($event, file, open) {
       var openFiles = ['.pdf', '.jpg', '.png', '.jpeg'];
 
       if (open && openFiles.indexOf(file.ext) > -1) {

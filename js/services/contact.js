@@ -6,19 +6,19 @@ denningOnline
   .service('contactService', function (http) {
     var service = {};
 
-    service.getList = function (page=1, pagesize=25, keyword='') {
+    service.getList = function (page=1, pagesize=25, keyword) {
       return http.GET('/v1/party?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
         return resp;
       });
     }
 
-    service.getStaffList = function (page=1, pagesize=25, keyword='') {
+    service.getStaffList = function (page=1, pagesize=25, keyword) {
       return http.GET('/v1/table/Staff?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
         return resp;
       });
     };
 
-    service.getCustomerList = function (page=1, pagesize=25, keyword='') {
+    service.getCustomerList = function (page=1, pagesize=25, keyword) {
       return http.GET('/v1/table/Customer?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
         return resp;
       });

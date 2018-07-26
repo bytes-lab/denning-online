@@ -6,7 +6,7 @@ denningOnline
   .service('courtdiaryService', function(http) {
     var service = {};
 
-    service.getList = function (page, pagesize, keyword='') {
+    service.getList = function (page, pagesize, keyword) {
       return http.GET('/v1/table/courtdiary', {
         page: page,
         pagesize: pagesize,
@@ -16,7 +16,7 @@ denningOnline
       });
     }
 
-    service.getCalendar = function (start, end, filter, page, pagesize, keyword='') {
+    service.getCalendar = function (start, end, filter, page, pagesize, keyword) {
       return http.GET("/v1/DenningCalendar", {
         dateStart: start,
         dateEnd: end,

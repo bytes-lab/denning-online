@@ -6,13 +6,13 @@ denningOnline
 .service('IRDBranchService', function(http){
   var service = {};
 
-  service.getList = function (page=1, pagesize=20, search='') {
+  service.getList = function (page, pagesize, search) {
     return http.GET('/v1/IRDBranch?page='+page+'&pagesize='+pagesize+'&search='+search).then(function(resp) {
       return resp.data;
     });
   }
 
-  service.getTableList = function (page=1, pagesize=20, search='') {
+  service.getTableList = function (page, pagesize, search) {
     return http.GET('/v1/table/IRDBranch?page='+page+'&pagesize='+pagesize+'&search='+search).then(function(resp) {
       return resp.data;
     });

@@ -2,10 +2,10 @@ denningOnline
   .service('quotationService', function(http) {
     var service = {};
 
-    service.getList = function (page=1, pagesize=25, keyword) {
+    service.getList = function (page, pagesize, keyword) {
       return http.GET('/v1/QuotationX/all', {
-        page: page,
-        pagesize: pagesize,
+        page: page || 1,
+        pagesize: pagesize || 25,
         search: keyword
       }).then(function (resp) {
         return resp;

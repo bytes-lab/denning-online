@@ -6,7 +6,7 @@ denningOnline
   .service('fileMatterService', function(http) {
     var service = {};
 
-    service.getList = function (page=1, pagesize=25, keyword='') {
+    service.getList = function (page=1, pagesize=25, keyword) {
       return http.GET('/v1/generalSearch/file?page='+page+'&pagesize='+pagesize+'&search='+keyword).then(function(resp) {
         return resp;
       });  

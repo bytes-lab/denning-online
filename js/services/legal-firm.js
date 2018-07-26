@@ -6,7 +6,7 @@ denningOnline
   .service('legalFirmService', function(http) {
     var service = {};
 
-    service.getList = function (page=1, pagesize=25, keyword='') {
+    service.getList = function (page, pagesize, keyword) {
       return http.GET('v1/Solicitor', {
         page: page,
         pagesize: pagesize,
@@ -16,7 +16,7 @@ denningOnline
       });
     }
 
-    service.getTableList = function (page=1, pagesize=25, keyword='') {
+    service.getTableList = function (page, pagesize, keyword) {
       return http.GET('v1/table/Lawyer', {
         page: page,
         pagesize: pagesize,
