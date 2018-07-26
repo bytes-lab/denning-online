@@ -47,7 +47,7 @@ denningOnline
     };
 
     this.getMenu = function () {
-      return http.GET('/v2/web/menu/'+Auth.getUserInfo().name).then(function(resp) {
+      return http.GET('/v2/web/menu').then(function(resp) {
         return resp.data;
       });      
     }
