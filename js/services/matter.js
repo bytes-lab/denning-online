@@ -61,7 +61,7 @@ denningOnline
   .service('matterCodeService', function(http){
     var service = {};
 
-    service.getList = function (page, pagesize, keyword='') {
+    service.getList = function (page, pagesize, keyword) {
       return http.GET('/v1/table/MatterCode', {
         page: page,
         pagesize: pagesize,
