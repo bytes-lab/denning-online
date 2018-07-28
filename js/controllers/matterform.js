@@ -663,18 +663,18 @@ denningOnline
             }
           }
           vm.idxTab = idxTab;
-          vm.tabs.push(vm.tabDict['Offers']);
-          vm.tabs.push(vm.tabDict['RPGT']);
-          vm.tabs.push(vm.tabDict['Chain']);
-          vm.tabs.push(vm.tabDict['Beneficiary']);
-          vm.tabs.push(vm.tabDict['Arrears']);
-          vm.tabs.push(vm.tabDict['Reports']);
-          vm.tabs.push(vm.tabDict['Estate Agent']);
-          vm.tabs.push(vm.tabDict['Vehicles']);
-          vm.tabs.push(vm.tabDict['Tenancy']);
-          vm.tabs.push(vm.tabDict['Term']);
-          vm.tabs.push(vm.tabDict['Others']);
-          vm.tabs.push(vm.tabDict['Premises & Rent']);
+          // vm.tabs.push(vm.tabDict['Offers']);
+          // vm.tabs.push(vm.tabDict['RPGT']);
+          // vm.tabs.push(vm.tabDict['Chain']);
+          // vm.tabs.push(vm.tabDict['Beneficiary']);
+          // vm.tabs.push(vm.tabDict['Arrears']);
+          // vm.tabs.push(vm.tabDict['Reports']);
+          // vm.tabs.push(vm.tabDict['Estate Agent']);
+          // vm.tabs.push(vm.tabDict['Vehicles']);
+          // vm.tabs.push(vm.tabDict['Tenancy']);
+          // vm.tabs.push(vm.tabDict['Term']);
+          // vm.tabs.push(vm.tabDict['Others']);
+          // vm.tabs.push(vm.tabDict['Premises & Rent']);
         });
       }
     }
