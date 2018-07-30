@@ -26,10 +26,24 @@
 
   <ul class="main-menu">
     <li data-ui-sref-active="active" ng-class="app.getCls(mitem)"  ng-repeat="mitem in app.menu">
-      <a data-ui-sref="{{ mitem.url }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!mitem.submenus"><i class="zmdi {{ mitem.icon }}"></i> {{ mitem.title }}</a>
-      <a href="" toggle-submenu ng-if="mitem.submenus"><i class="zmdi {{ mitem.icon }}"></i> {{ mitem.title }}</a>
+      <a data-ui-sref="{{ mitem.url || 'empty' }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!mitem.submenus">
+        <i class="zmdi {{ mitem.icon }}"></i> {{ mitem.title }}
+      </a>
+      <a href="" toggle-submenu ng-if="mitem.submenus">
+        <i class="zmdi {{ mitem.icon }}"></i> {{ mitem.title }}
+      </a>
       <ul>
-        <li ng-repeat="sitem in mitem.submenus"><a data-ui-sref-active="active" data-ui-sref="{{ sitem.url }}" data-ng-click="mactrl.sidebarStat($event)">{{ sitem.title }}</a></li>
+        <li ng-repeat="sitem in mitem.submenus">
+          <a data-ui-sref-active="active" data-ui-sref="{{ sitem.url || 'empty' }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!sitem.submenus">{{ sitem.title }}</a>
+          <a href="" toggle-submenu ng-if="sitem.submenus">{{ sitem.title }}</a>
+          <ul ng-if="sitem.submenus">
+            <li ng-repeat="citem in sitem.submenus">
+              <a data-ui-sref="{{ citem.url || 'empty' }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!citem.submenus">
+                 {{ citem.title }}
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
