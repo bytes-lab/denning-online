@@ -3,7 +3,7 @@ denningOnline
   // File Matter, Matter Code, Matter Form
   // =========================================================================
   
-  .service('fileMatterService', function(http) {
+  .service('fileMatterService', function (http) {
     var service = {};
 
     service.getList = function (page, pagesize, keyword) {
@@ -58,7 +58,7 @@ denningOnline
     return service;
   })
 
-  .service('matterCodeService', function(http){
+  .service('matterCodeService', function (http) {
     var service = {};
 
     service.getList = function (page, pagesize, keyword) {
@@ -94,34 +94,34 @@ denningOnline
     return service;
   })
 
-  .service('matterFormService', function(http){
+  .service('matterFormService', function (http) {
     var service = {};
 
     service.getList = function (page, pagesize, keyword) {
-      return http.GET('/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize+'&search='+(keyword || '')).then(function(resp) {
+      return http.GET('/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize+'&search='+(keyword || '')).then(function (resp) {
         return resp.data;
       });  
     }
 
     service.getItem = function (code) {
-      return http.GET('/v1/table/MatterCodeEditForm/'+code).then(function(resp) {
+      return http.GET('/v1/table/MatterCodeEditForm/'+code).then(function (resp) {
         return resp.data;
       });    
     }
 
     service.save = function (entity) {
-      if (!entity.code || entity.code.length == 0) {
+      var method = entity.code ? 'PUT': 'POST';
+      if (!entity.code) {
         entity.code = 'frmFile' + entity.strDisplayName.replace(' ', '');
       }
 
-      var method = entity.code ? 'PUT': 'POST';
-      return http[method]('/v1/table/MatterCodeEditForm', entity).then(function(response) {
+      return http[method]('/v1/table/MatterCodeEditForm', entity).then(function (resp) {
         return response ? response.data : null;
       });
     }
 
     service.delete = function (entity) {
-      return http.DELETE('/v1/table/matterform', { code: entity.code }).then(function (response) {
+      return http.DELETE('/v1/table/matterform', { code: entity.code }).then(function (resp) {
         return response;
       });
     }

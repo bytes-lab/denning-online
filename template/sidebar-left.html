@@ -34,7 +34,9 @@
       </a>
       <ul>
         <li ng-repeat="sitem in mitem.submenus">
-          <a data-ui-sref-active="active" data-ui-sref="{{ sitem.url || 'empty' }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!sitem.submenus">{{ sitem.title }}</a>
+          <a data-ui-sref-active="active" data-ui-sref="{{ sitem.url || 'empty' }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!sitem.submenus">
+            {{ sitem.title }}
+          </a>
           <a href="" toggle-submenu ng-if="sitem.submenus">{{ sitem.title }}</a>
           <ul ng-if="sitem.submenus">
             <li ng-repeat="citem in sitem.submenus">

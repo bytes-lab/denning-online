@@ -786,7 +786,7 @@ denningOnline
     }
   })
 
-  .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, Auth, $uibModal) {
+  .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, Auth, $uibModal, growlService, refactorService) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -804,10 +804,11 @@ denningOnline
                     'Chain', 'RPGT', 'Offers'];
 
     if($stateParams.code) {
-      matterFormService.getItem($stateParams.code).then(function(item){
+      matterFormService.getItem($stateParams.code).then(function (item) {
         self.matterForm = item;
+        self.matterForm_ = angular.copy(item);
 
-        angular.forEach(JSON.parse(item.jsonTabs), function(value, key) {
+        angular.forEach(JSON.parse(item.jsonTabs), function (value, key) {
           self.matterform[value.TabName] = true;
           self.matterform.selected.push(value.TabName);
         })
@@ -853,6 +854,17 @@ denningOnline
     self.save = function () {
       var selected = [];
       var i = 0;
+
+      if (!self.matterForm.strDisplayName || !self.matterForm.strDisplayName.trim()) {
+        alert('Please provide form name.');
+        return false;
+      }
+
+      if (!self.matterform.selected.length) {
+        alert('Please choose tabs.');
+        return false;
+      }
+
       angular.forEach(self.matterform.selected, function(value, key) {
         selected.push({
           TabName: value,
@@ -862,9 +874,11 @@ denningOnline
       })
 
       self.matterForm.jsonTabs = JSON.stringify(selected);
-      matterFormService.save(self.matterForm).then(function(matterform) {
-        self.matterForm = matterform;
-        alert('Saved successfully.');
+      entity = refactorService.getDiff(self.matterForm_, self.matterForm);
+
+      matterFormService.save(entity).then(function (matterform) {
+        $state.go('matter-forms.edit', {'code': matterform.code});
+        growlService.growl('Saved successfully!', 'success');
       });
     }
 

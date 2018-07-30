@@ -16,13 +16,17 @@ denningOnline
     }
     
     service.getDiff = function (model1, model2) {
-      var model = { code: model1.code };
-      for (ii in model1) {
-        if (model1[ii] != model2[ii]) {
-          model[ii] = model2[ii];
+      if (!model1) {
+        return model2;
+      } else {
+        var model = { code: model1.code };
+        for (ii in model1) {
+          if (model1[ii] != model2[ii]) {
+            model[ii] = model2[ii];
+          }
         }
+        return model;        
       }
-      return model;
     }
 
     return service;
