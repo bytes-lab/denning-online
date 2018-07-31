@@ -22,7 +22,7 @@ denningOnline
       return false;
     };
 
-    function getLabel(arr, key) {
+    function getLabel (arr, key) {
       for (var i = 0; i < arr.length; i++) {
         if (arr[i].JsonField == key) {
           return arr[i].Label;
@@ -30,7 +30,7 @@ denningOnline
       }
     }
 
-    function buildTabDict(clsMatterCode) {
+    function buildTabDict (clsMatterCode) {
       var matter_code = [];
       if (clsMatterCode && clsMatterCode.jsonFieldLabels) {
         matter_code = JSON.parse(clsMatterCode.jsonFieldLabels);
@@ -640,7 +640,7 @@ denningOnline
       };
     }
 
-    function buildTabs(clsMatterCode) {
+    function buildTabs (clsMatterCode) {
       buildTabDict(clsMatterCode);
 
       vm.tabs = [];
@@ -663,18 +663,6 @@ denningOnline
             }
           }
           vm.idxTab = idxTab;
-          // vm.tabs.push(vm.tabDict['Offers']);
-          // vm.tabs.push(vm.tabDict['RPGT']);
-          // vm.tabs.push(vm.tabDict['Chain']);
-          // vm.tabs.push(vm.tabDict['Beneficiary']);
-          // vm.tabs.push(vm.tabDict['Arrears']);
-          // vm.tabs.push(vm.tabDict['Reports']);
-          // vm.tabs.push(vm.tabDict['Estate Agent']);
-          // vm.tabs.push(vm.tabDict['Vehicles']);
-          // vm.tabs.push(vm.tabDict['Tenancy']);
-          // vm.tabs.push(vm.tabDict['Term']);
-          // vm.tabs.push(vm.tabDict['Others']);
-          // vm.tabs.push(vm.tabDict['Premises & Rent']);
         });
       }
     }
@@ -718,23 +706,23 @@ denningOnline
       }
     };
 
-    vm.notes = function() {
+    vm.notes = function () {
       $state.go('notes.list', {fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName});
     }
 
-    vm.accounts = function() {
+    vm.accounts = function () {
       $state.go('accounts.list', {fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName});
     }
 
-    vm.openFolder = function() {
+    vm.openFolder = function () {
       $state.go('folders.list', {id: vm.model.strFileNo1, type: 'matter'});
     }
 
-    vm.payments = function() {
+    vm.payments = function () {
       $state.go('payment-records.list', {fileNo: vm.model.strFileNo1});
     };
 
-    vm.upload = function() {
+    vm.upload = function () {
       vm.uploadType = 'matter';
       vm.uploaded = 0;
       angular.element('.matter-upload').click();
@@ -894,7 +882,7 @@ denningOnline
         resolve: {
           entity: function () {
             return entity;
-          }, 
+          },
           on_list: function () {
             return false;
           },
