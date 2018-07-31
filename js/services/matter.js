@@ -44,14 +44,14 @@ denningOnline
 
     service.save = function (matter) {
       var method = matter.strFileNo1 ? 'PUT': 'POST';
-      return http[method]('/v1/table/File', matter).then(function(response) {
-        return response ? response.data : null;
+      return http[method]('/v1/table/File', matter).then(function(resp) {
+        return resp ? resp.data : null;
       });
     }
 
     service.delete = function (entity) {
-      return http.DELETE('/v1/table/File', { code: entity.strFileNo1 }).then(function (response) {
-        return response;
+      return http.DELETE('/v1/table/File', { code: entity.strFileNo1 }).then(function (resp) {
+        return resp;
       });
     }
 
@@ -98,13 +98,17 @@ denningOnline
     var service = {};
 
     service.getList = function (page, pagesize, keyword) {
-      return http.GET('/v1/table/MatterCodeEditForm?page='+page+'&pagesize='+pagesize+'&search='+(keyword || '')).then(function (resp) {
+      return http.GET('v1/table/MatterCodeEditForm', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
         return resp.data;
       });  
     }
 
     service.getItem = function (code) {
-      return http.GET('/v1/table/MatterCodeEditForm/'+code).then(function (resp) {
+      return http.GET('v1/table/MatterCodeEditForm/'+code).then(function (resp) {
         return resp.data;
       });    
     }
@@ -115,14 +119,16 @@ denningOnline
         entity.code = 'frmFile' + entity.strDisplayName.replace(' ', '');
       }
 
-      return http[method]('/v1/table/MatterCodeEditForm', entity).then(function (resp) {
-        return response ? response.data : null;
+      return http[method]('v1/table/MatterCodeEditForm', entity).then(function (resp) {
+        return resp ? resp.data : null;
       });
     }
 
     service.delete = function (entity) {
-      return http.DELETE('/v1/table/matterform', { code: entity.code }).then(function (resp) {
-        return response;
+      return http.DELETE('v1/table/MatterCodeEditForm', { 
+        code: entity.code 
+      }).then(function (resp) {
+        return resp;
       });
     }
 

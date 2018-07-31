@@ -808,7 +808,7 @@ denningOnline
         self.matterForm = item;
         self.matterForm_ = angular.copy(item);
 
-        angular.forEach(JSON.parse(item.jsonTabs), function (value, key) {
+        angular.forEach(JSON.parse(item.jsonTabs || "{}"), function (value, key) {
           self.matterform[value.TabName] = true;
           self.matterform.selected.push(value.TabName);
         })
@@ -827,28 +827,27 @@ denningOnline
     };
 
     self.changeOrder = function (x, y) {
-      if (x < 0)
+      if (x < 0) {
         return;
-      if (y == self.matterform.selected.length)
+      } else if (y == self.matterform.selected.length) {
         return;
+      }
       self.matterform.selected.splice(y, 1, self.matterform.selected.splice(x, 1, self.matterform.selected[y])[0]);
     };
 
     self.new_ = function new_() {
-      self.matterForm = {};
-      self.matterform = {
-        selected: []
-      };      
-      self.can_edit = true;
-      self.create_new = true;
+      $state.go('matter-forms.new');
     }
 
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
-      
+      self.matterForm_ = null;
+
       delete self.matterForm.code;
       delete self.matterForm.strDisplayName;
+      delete self.matterForm.dtDateEntered;
+      delete self.matterForm.dtDateUpdated;
     }
 
     self.save = function () {
@@ -881,6 +880,36 @@ denningOnline
         growlService.growl('Saved successfully!', 'success');
       });
     }
+
+    self.openDelete = function (event, entity) {
+      event.stopPropagation();
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'deleteEntityModal.html',
+        controller: 'deleteEntityModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          entity: function () {
+            return entity;
+          }, 
+          on_list: function () {
+            return false;
+          },
+          entity_type: function () {
+            return 'matter form';
+          },
+          service: function () {
+            return matterFormService;
+          },
+          return_state: function () {
+            return 'matter-forms.list';
+          }
+        }
+      });
+    };
 
     self.cancel = function () {
       $state.go('matter-forms.list');

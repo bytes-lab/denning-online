@@ -8,7 +8,7 @@
         <div class="col-md-11 col-sm-12">
           <h2 class="f-20 f-500 c-purple" style="display: inline;">Edit Matter Form</h2>
           <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.matterform)" ng-if="vm.userInfo.priority.matterform.delete && !vm.create_new && !vm.viewMode">Delete</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.matterForm)" ng-if="vm.userInfo.priority.matterform.delete && !vm.create_new && !vm.viewMode">Delete</a>
           <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.matterform.update && vm.can_edit">Save</a>
           <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.matterform.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
           <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.matterform.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>

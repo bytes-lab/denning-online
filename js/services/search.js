@@ -5,13 +5,13 @@ denningOnline
 
   .service('searchService', function (http, Auth) {
     this.getFilter = function () {
-      return http.GET('/v1/generalSearch/category').then(function (resp) {
+      return http.GET('v1/generalSearch/category').then(function (resp) {
         return resp.data;
       })
     };
 
     this.search = function (keyword, category) {
-      return http.GET('/v1/generalSearch', {
+      return http.GET('v1/generalSearch', {
           search: keyword,
           category: category,
           isAutoComplete: 1
@@ -31,7 +31,7 @@ denningOnline
     };
 
     this.keyword = function (query) {
-      return http.GET('/v1/generalSearch/keyword', {
+      return http.GET('v1/generalSearch/keyword', {
         search: query
       }).then(function(resp) {
         var results = [];
@@ -47,7 +47,7 @@ denningOnline
     };
 
     this.getMenu = function () {
-      return http.GET('/v2/web/menu').then(function(resp) {
+      return http.GET('v2/web/menu').then(function (resp) {
         return resp.data;
       });      
     }
