@@ -1,5 +1,5 @@
 denningOnline
-  .controller('contactListCtrl', function(NgTableParams, contactService, Auth, $state) {
+  .controller('contactListCtrl', function (NgTableParams, contactService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
     self.keyword = '';
@@ -28,7 +28,7 @@ denningOnline
     }
   })
 
-  .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService, raceService, religionService, IRDBranchService) {
+  .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService, raceService, religionService, IRDBranchService) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create

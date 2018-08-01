@@ -308,7 +308,7 @@ denningOnline
 
       Auth.resetPassword(self.user.email, self.passwords.new)
       .then(function (data) {
-        $state.go('home');
+        $state.reload();
       })
       .catch(function (err) {
         self.errorMessage = err.statusText;
