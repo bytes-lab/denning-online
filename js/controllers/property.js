@@ -1,21 +1,15 @@
 denningOnline
   .controller('propertyListCtrl', function (NgTableParams, propertyService, $state, Auth) {
     var self = this;
-    self.dataReady = false;
     self.userInfo = Auth.getUserInfo();
-    self.search = search;
-    self.keyword = '';
 
     self.clickHandler = function (item) {
       $state.go('properties.edit', {'id': item.code});
     }
 
     self.tableFilter = new NgTableParams({
-      page: 1,        // show first page
-      count: 25,
-      sorting: {
-        name: 'asc'   // initial sorting
-      }
+      page: 1, 
+      count: 25
     }, {
       getData: function (params) {
         return propertyService.getList(params.page(), params.count(), self.keyword).then(function(data) {
@@ -25,12 +19,12 @@ denningOnline
       }
     });
 
-    function search() {
+    self.search = function () {
       self.tableFilter.reload();
     }
   })
 
-  .controller('propertyEditCtrl', function($stateParams, propertyService, $state, Auth, $uibModal, contactService, refactorService) {
+  .controller('propertyEditCtrl', function($stateParams, growlService, propertyService, $state, Auth, $uibModal, contactService, refactorService) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -52,13 +46,13 @@ denningOnline
     }
 
     self.queryContacts = function (searchText) {
-      return contactService.getCustomerList(1, 10, searchText).then(function(resp) {
+      return contactService.getCustomerList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     };
 
     self.queryStaffs = function (searchText) {
-      return contactService.getStaffList(1, 10, searchText).then(function(resp) {
+      return contactService.getStaffList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     }
@@ -84,32 +78,25 @@ denningOnline
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
-      
-      delete self.property.code;
-      delete self.property.IDNo;
-      delete self.property.old_ic;
-      delete self.property.name;
-      delete self.property.emailAddress;
-      delete self.property.webSite;
-      delete self.property.dateBirth;
-      delete self.property.taxFileNo;
+      self.property_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strPropertyID'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.property[key];
+      }
     }
 
     self.save = function () {
       entity = refactorService.getDiff(self.property_, self.property);
       propertyService.save(entity).then(function (property) {
-        if (property) {
-          self.property = property;
+        if (self.property_) {
+          $state.reload();
+        } else {
+          $state.go('properties.edit', { 'id': property.code });
         }
+        growlService.growl('Saved successfully!', 'success');
       });
-    }
-
-    self.relatedMatter = function() {
-      $state.go('properties.matters', {id: self.property.code});
-    }
-
-    self.cancel = function () {
-      $state.go('properties.list');
     }
 
     angular.forEach(self.refList, function (value, key) {

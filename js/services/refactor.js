@@ -15,14 +15,14 @@ denningOnline
       return model;
     }
     
-    service.getDiff = function (model1, model2) {
-      if (!model1) {
-        return model2;
+    service.getDiff = function (modelOriginal, modelNew) {
+      if (!modelOriginal) {
+        return modelNew;
       } else {
-        var model = { code: model1.code };
-        for (ii in model1) {
-          if (model1[ii] != model2[ii]) {
-            model[ii] = model2[ii];
+        var model = { code: modelOriginal.code };
+        for (ii in modelOriginal) {
+          if (modelOriginal[ii] != modelNew[ii]) {
+            model[ii] = modelNew[ii];
           }
         }
         return model;        

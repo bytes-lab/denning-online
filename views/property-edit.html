@@ -7,16 +7,16 @@
       <div class="row">
       <div class="col-md-11 col-sm-12">
         <h2 class="f-20 f-500 c-purple" style="display: inline;">Edit Property</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="properties.list" >Cancel</a>
         <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.property)" ng-if="vm.userInfo.priority.property.delete && !vm.create_new && !vm.viewMode">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.property.update && vm.can_edit">Save</a>
         <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.property.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
         <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.property.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.property.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="properties.new" ng-if="vm.userInfo.priority.property.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
       </div>
       <div class="clearfix"></div>
       <div class="col-sm-12 col-md-10 p-l-10" ng-if="!vm.create_new">
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()">Matters</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" data-ui-sref="properties.matters({ id: vm.property.code })">Matters</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.openFolder()">Folder</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>
       </div>
