@@ -24,7 +24,9 @@ denningOnline
     }
   })
 
-  .controller('propertyEditCtrl', function($stateParams, growlService, propertyService, $state, Auth, $uibModal, contactService, refactorService) {
+  .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, 
+                                           $state, Auth, $uibModal, contactService, 
+                                           refactorService, uibDateParser) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -39,7 +41,7 @@ denningOnline
 
     if($stateParams.id) {
       propertyService.getItem($stateParams.id).then(function (item) {
-        self.entity = refactorService.convertBool(item, true);
+        self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
       });
     } else {
@@ -101,10 +103,24 @@ denningOnline
     }
 
     angular.forEach(self.refList, function (value, key) {
-      propertyService.getTypeList(value).then(function(data) {
+      propertyService.getTypeList(value).then(function (data) {
         self.types[value] = data;
       });
     });
+
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
+
+    $scope.dateOptions = {
+      formatYear: 'yyyy',
+      startingDay: 1
+    };
+
+    $scope.format = 'dd/MM/yyyy';
 
     //Prevent Outside Click
     self.openDelete = function (event, entity) {

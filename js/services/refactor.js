@@ -3,7 +3,7 @@ denningOnline
   // Refactor models when save or update
   // =========================================================================
   
-  .service('refactorService', function() {
+  .service('refactorService', function(uibDateParser) {
     var service = {};
 
     service.removeEmpty = function (model) {
@@ -17,12 +17,16 @@ denningOnline
     
     function compare(fieldOriginal, fieldNew) {
       if (typeof(fieldNew) == 'object') {
-        for (var ii in fieldNew) {
-          if (fieldOriginal[ii] != fieldNew[ii]) {
-            return false;
+        if (typeof fieldNew.getMonth === 'function') {
+          return fieldOriginal.getTime() === fieldNew.getTime();
+        } else {
+          for (var ii in fieldNew) {
+            if (fieldOriginal[ii] != fieldNew[ii]) {
+              return false;
+            }
           }
+          return true;          
         }
-        return true;
       } else {
         return fieldOriginal == fieldNew;
       }
@@ -56,5 +60,23 @@ denningOnline
       return model;
     }
 
+    service.convertDate = function (model, convert) {
+      for (var ii in model) {
+        if (ii.startsWith('dt') && model[ii]) {
+          if (convert) {
+            model[ii] = uibDateParser.parse(model[ii], 'yyyy-MM-dd HH:mm:ss');
+          } else {
+            model[ii] = moment(model[ii]).format('YYYY-MM-DD');
+          }
+        }
+      }
+      return model;
+    }
+
+    service.preConvert = function (model, convert) {
+      var res = service.convertBool(model, convert);
+      res = service.convertDate(res, convert);
+      return res;
+    }
     return service;
   })

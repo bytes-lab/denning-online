@@ -23,7 +23,7 @@ denningOnline
         method: method,
         url: Auth.getBaseURL() + url,
         headers: Auth.isAuthenticated(),
-        data: refactorService.convertBool(data, false)
+        data: refactorService.preConvert(data, false)
       }).then(function (response) {
         return response;
       }).catch(function (err) {
