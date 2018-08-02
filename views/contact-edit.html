@@ -8,7 +8,7 @@
       <div class="col-md-11 col-sm-12">
         <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Contact</h2>
         <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="contacts.list" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
         <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
         <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
@@ -16,8 +16,8 @@
       </div>
       <div class="clearfix"></div>
       <div class="col-sm-12 col-md-10 p-l-10" ng-if="!vm.create_new">
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()" data-ui-sref="contacts.matters({id: vm.contact.code})">Matters</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" data-ui-sref="folders.list({ id: vm.contact.code, type: 'contact' })">Folder</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()" data-ui-sref="contacts.matters({id: vm.entity.code})">Matters</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" data-ui-sref="folders.list({ id: vm.entity.code, type: 'contact' })">Folder</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>
       </div>
       </div>
@@ -32,7 +32,7 @@
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.strName" ng-readonly="!vm.can_edit" type="text" class="form-control f-500" camel-case>
+                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control f-500" camel-case>
               </div>
             </dd>
           </dl>
@@ -42,14 +42,14 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.strTitle"
+                  md-selected-item="vm.entity.strTitle"
                   md-search-text="searchText"
                   md-items="item in vm.queryFields('Salutations', searchText)"
                   md-item-text="item.description"
                   md-min-length="0"
                   class="default-input">
                   <md-item-template>
-                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.description}}</span>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.description }}</span>
                   </md-item-template>
                 </md-autocomplete>
               </div>
@@ -61,7 +61,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.clsIDType"
+                  md-selected-item="vm.entity.clsIDType"
                   md-search-text="q"
                   md-items="item in vm.queryFields('IDTypes', q)"
                   md-item-text="item.strDescription"
@@ -78,7 +78,7 @@
             <dt class="p-t-10">ID No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strIDNo" placeholder="000000-00-0000">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" placeholder="000000-00-0000">
               </div>
             </dd>
           </dl>
@@ -86,7 +86,7 @@
             <dt class="p-t-10">Old IC</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strIDNoOld">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNoOld">
               </div>
             </dd>
           </dl>
@@ -94,7 +94,7 @@
             <dt class="p-t-10">Date of Birth</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.contact.dtDateBirth" is-open="opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateBirth" is-open="opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -104,7 +104,7 @@
             <dt class="p-t-10">Citizenship</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strCitizenship">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCitizenship">
               </div>
             </dd>
           </dl>
@@ -112,7 +112,7 @@
             <dt class="p-t-10">Occupation</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.contact.clsOccupation"
+                md-selected-item="vm.entity.clsOccupation"
                 md-search-text="qsop"
                 md-items="item in vm.queryOccupation(qsop)"
                 md-item-text="item.strEnglish ? item.strEnglish: ' '"
@@ -131,7 +131,7 @@
             <dt class="p-t-10">Contact Type</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.occupation.description" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -139,7 +139,7 @@
             <dt class="">
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" ng-model="vm.contact.boolDeceased">
+                  <input type="checkbox" ng-model="vm.entity.boolDeceased">
                   <i class="input-helper"></i>
                   Deceased
                 </label>
@@ -147,14 +147,14 @@
             </dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.contact.dtDateDeceased" is-open="opened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date of death" />
+                <input ng-click="open($event, 'opened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateDeceased" is-open="opened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date of death" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.contact.add_favourite">
+                <input type="checkbox" ng-model="vm.entity.add_favourite">
                 <i class="input-helper"></i>
                 Add to Favourites
               </label>
@@ -163,7 +163,7 @@
           <dl class="dl-horizontal" style="padding-top: 1px;">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.contact.InviteToDenning">
+                <input type="checkbox" ng-model="vm.entity.InviteToDenning">
                 <i class="input-helper"></i>
                 Invite To Denning
               </label>
@@ -180,7 +180,7 @@
             <dt class="p-t-10">Address (Line 1)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
               </div>
             </dd>
           </dl>
@@ -188,7 +188,7 @@
             <dt class="p-t-10">Address (Line 2)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strAddressLine2" camel-case>
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAddressLine2" camel-case>
               </div>
             </dd>
           </dl>
@@ -196,7 +196,7 @@
             <dt class="p-t-10">Address (Line 3)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strAddressLine3" camel-case>
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAddressLine3" camel-case>
               </div>
             </dd>
           </dl>
@@ -204,7 +204,7 @@
             <dt class="p-t-10">Postcode</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -212,7 +212,7 @@
             <dt class="p-t-10">Town</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strCity">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCity">
               </div>
             </dd>
           </dl>
@@ -220,7 +220,7 @@
             <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strState">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strState">
               </div>
             </dd>
           </dl>
@@ -228,7 +228,7 @@
             <dt class="p-t-10">Country</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.strCountry" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strCountry" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -238,7 +238,7 @@
             <dt class="p-t-10">Contact Person</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strContactPerson">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strContactPerson">
               </div>
             </dd>
           </dl>
@@ -246,7 +246,7 @@
             <dt class="p-t-10">Phone Home</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strPhone1">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPhone1">
               </div>
             </dd>
           </dl>
@@ -254,7 +254,7 @@
             <dt class="p-t-10">Phone Mobile</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strPhoneMobile">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPhoneMobile">
               </div>
             </dd>
           </dl>
@@ -262,7 +262,7 @@
             <dt class="p-t-10">Phone Office</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.contact.strPhone3" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strPhone3" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -270,7 +270,7 @@
             <dt class="p-t-10">Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strPhoneFax">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPhoneFax">
               </div>
             </dd>
           </dl>
@@ -278,7 +278,7 @@
             <dt class="p-t-10">Email</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strEmailAddress">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strEmailAddress">
               </div>
             </dd>
           </dl>
@@ -286,7 +286,7 @@
             <dt class="p-t-10">Website</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strWebSite">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strWebSite">
               </div>
             </dd>
           </dl>
@@ -301,7 +301,7 @@
             <dt class="p-t-10">Tax Reference No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
               </div>
             </dd>
           </dl>
@@ -313,7 +313,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.contact.clsIrdBranch"
+                  md-selected-item="vm.entity.clsIrdBranch"
                   md-search-text="qsird"
                   md-items="item in vm.queryIRDBranch(qsird)"
                   md-item-text="item.strName ? item.strName : ' '"
@@ -335,7 +335,7 @@
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.contact.boolIsGSTRegistered">
+                <input type="checkbox" ng-model="vm.entity.boolIsGSTRegistered">
                 <i class="input-helper"></i>
                 GST Registered
               </label>
@@ -345,7 +345,7 @@
             <dt class="p-t-10">GST Reg. No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strGSTNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strGSTNo">
               </div>
             </dd>
           </dl>
@@ -353,7 +353,7 @@
             <dt class="p-t-10">RMCD Approval No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strGSTRMCDNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strGSTRMCDNo">
               </div>
             </dd>
           </dl>
@@ -362,7 +362,7 @@
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.contact.boolGSTStatusVerified">
+                <input type="checkbox" ng-model="vm.entity.boolGSTStatusVerified">
                 <i class="input-helper"></i>
                 GST Status Verified
               </label>
@@ -372,7 +372,7 @@
             <dt class="p-t-10">Last GST Status Verified Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.dtGSTStatusVerifiedDate">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.dtGSTStatusVerifiedDate">
               </div>
             </dd>
           </dl>
@@ -380,7 +380,7 @@
             <dt class="p-t-10">Bank</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.taxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.taxFileNo">
               </div>
             </dd>
           </dl>
@@ -388,7 +388,7 @@
             <dt class="p-t-10">Account No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strSupplierAccNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSupplierAccNo">
               </div>
             </dd>
           </dl>
@@ -400,7 +400,7 @@
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.contact.same_as_above">
+                <input type="checkbox" ng-model="vm.entity.same_as_above">
                 <i class="input-helper"></i>
                 Same as above
               </label>
@@ -410,7 +410,7 @@
             <dt class="p-t-10">Office Address</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strRegOff">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strRegOff">
               </div>
             </dd>
           </dl>
@@ -418,7 +418,7 @@
             <dt class="p-t-10">Secretary</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.contact.clsSecretary"
+                md-selected-item="vm.entity.clsSecretary"
                 md-search-text="qssc"
                 md-items="item in vm.queryContacts(qssc)"
                 md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
@@ -443,7 +443,7 @@
             <dt class="p-t-10">Director 1</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.contact.clsDirector1"
+                md-selected-item="vm.entity.clsDirector1"
                 md-search-text="qsdl"
                 md-items="item in vm.queryContacts(qsdl)"
                 md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
@@ -462,7 +462,7 @@
             <dt class="p-t-10">Director 2</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.contact.clsDirector2"
+                md-selected-item="vm.entity.clsDirector2"
                 md-search-text="qsdl2"
                 md-items="item in vm.queryContacts(qsdl2)"
                 md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
@@ -486,7 +486,7 @@
             <dt class="p-t-10">Spouse Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strSpouseName">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSpouseName">
               </div>
             </dd>
           </dl>
@@ -494,7 +494,7 @@
             <dt class="p-t-10">Spouse Occupation</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.contact.clsSpouseOccupation"
+                md-selected-item="vm.entity.clsSpouseOccupation"
                 md-search-text="qssp"
                 md-items="item in vm.queryOccupation(qssp)"
                 md-item-text="item.strEnglish ? item.strEnglish: ' '"
@@ -513,7 +513,7 @@
             <dt class="p-t-10">Race</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.contact.clsRace"
+                md-selected-item="vm.entity.clsRace"
                 md-search-text="qsrc"
                 md-items="item in vm.queryRace(qsrc)"
                 md-item-text="item.strEnglish ? item.strEnglish: ' '"
@@ -532,7 +532,7 @@
             <dt class="p-t-10">Religion</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.contact.clsReligion"
+                md-selected-item="vm.entity.clsReligion"
                 md-search-text="qsrg"
                 md-items="item in vm.queryRace(qsrg)"
                 md-item-text="item.strEnglish ? item.strEnglish: ' '"
@@ -551,7 +551,7 @@
             <dt class="p-t-10">Sex</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strSex">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSex">
               </div>
             </dd>
           </dl>
@@ -561,7 +561,7 @@
             <dt class="p-t-10">Monthly Income</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.decMonthlyIncome">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.decMonthlyIncome">
               </div>
             </dd>
           </dl>
@@ -569,7 +569,7 @@
             <dt class="p-t-10">Place of Work</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strPlaceofWork">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPlaceofWork">
               </div>
             </dd>
           </dl>
@@ -577,7 +577,7 @@
             <dt class="p-t-10">Place of Birth</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strPlaceBirth">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPlaceBirth">
               </div>
             </dd>
           </dl>
@@ -585,7 +585,7 @@
             <dt class="p-t-10">Education Level</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
               </div>
             </dd>
           </dl>
@@ -593,7 +593,7 @@
             <dt class="p-t-10">Institution</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
               </div>
             </dd>
           </dl>
@@ -606,7 +606,7 @@
             <dt class="p-t-10">Extra 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strExtra1">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra1">
               </div>
             </dd>
           </dl>
@@ -614,7 +614,7 @@
             <dt class="p-t-10">Extra 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strExtra2">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra2">
               </div>
             </dd>
           </dl>
@@ -622,7 +622,7 @@
             <dt class="p-t-10">Extra 3</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strExtra3">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra3">
               </div>
             </dd>
           </dl>
@@ -632,7 +632,7 @@
             <dt class="p-t-10">Extra 4</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strExtra4">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra4">
               </div>
             </dd>
           </dl>
@@ -640,7 +640,7 @@
             <dt class="p-t-10">Extra 5</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strExtra5">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra5">
               </div>
             </dd>
           </dl>
@@ -653,7 +653,7 @@
             <dt class="p-t-10">Correspondence Address</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.strCorrespondingAdd">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCorrespondingAdd">
               </div>
             </dd>
           </dl>
@@ -661,7 +661,7 @@
             <dt class="p-t-10">Extra Address 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
               </div>
             </dd>
           </dl>
@@ -671,7 +671,7 @@
             <dt class="p-t-10">Extra Address 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
               </div>
             </dd>
           </dl>
@@ -679,7 +679,7 @@
             <dt class="p-t-10">Extra Address 3</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.contact.registeredOffice">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
               </div>
             </dd>
           </dl>
@@ -692,7 +692,7 @@
             <dt class="p-t-10">Remark</dt>
             <dd>
               <div class="fg-line">
-                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.contact.strRemarks" placeholder="type here...."></textarea>
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strRemarks" placeholder="type here...."></textarea>
               </div>
             </dd>
           </dl>
@@ -704,14 +704,14 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Entered by</dt>
             <dd>
-              <input type="text" class="form-control" readonly="" ng-model="vm.contact.clsEnteredBy.strInitials">
+              <input type="text" class="form-control" readonly="" ng-model="vm.entity.clsEnteredBy.strInitials">
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="true" class="form-control" ng-value="vm.contact.dtDateEntered|ddate">
+                <input type='text' ng-readonly="true" class="form-control" ng-value="vm.entity.dtDateEntered|ddate">
               </div>
             </dd>
           </dl>          
@@ -720,14 +720,14 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Updated by</dt>
             <dd>
-              <input type="text" class="form-control" readonly="" ng-model="vm.contact.clsUpdatedBy.strInitials">
+              <input type="text" class="form-control" readonly="" ng-model="vm.entity.clsUpdatedBy.strInitials">
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="true" class="form-control" ng-value="vm.contact.dtDateUpdated|ddate">
+                <input type='text' ng-readonly="true" class="form-control" ng-value="vm.entity.dtDateUpdated|ddate">
               </div>
             </dd>
           </dl>          
@@ -741,7 +741,7 @@
             <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>
             <input ng-if="!vm.create_new" type="file" class="hidden contact-upload" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
             <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
             <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>

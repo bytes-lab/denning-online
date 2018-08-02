@@ -8,7 +8,7 @@ denningOnline
     }
 
     self.tableFilter = new NgTableParams({
-      page: 1,            // show first page
+      page: 1,
       count: 25,
     }, {
       getData: function(params) {
@@ -24,7 +24,10 @@ denningOnline
     }
   })
 
-  .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, growlService, contactService, $state, Auth, $scope, occupationService, raceService, religionService, IRDBranchService) {
+  .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, growlService, 
+                                           contactService, $state, Auth, $scope, 
+                                           refactorService, occupationService, raceService, 
+                                           religionService, IRDBranchService) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -34,7 +37,6 @@ denningOnline
 
     self.IDTypes = [];
     self.Salutations = [];
-    self.IRDBranches = [];
 
     $("#back-top").hide();
     $(window).scroll(function() {
@@ -54,8 +56,12 @@ denningOnline
       return false;
     };
 
-    contactService.getSalutationList().then (function(data) {
+    contactService.getSalutationList().then (function (data) {
       self.Salutations = data;
+    });
+
+    contactService.getIDTypeList().then (function (data) {
+      self.IDTypes = data;
     });
 
     self.queryContacts = function (searchText) {
@@ -95,44 +101,37 @@ denningOnline
     }
 
     self.queryFields = function (field, searchText) {
-      return self[field].filter(function(c) {
-        return c.description.search(new RegExp(searchText, "i")) > -1;
+      return self[field].filter(function (c) {
+        return (c.strDescription || c.description).search(new RegExp(searchText, "i")) > -1;
       });
     }
 
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
-      self.contact_ = null;
+      self.entity_ = null;
 
-      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strPropertyID'];
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'IDNo', 'old_ic', 'name', 
+                        'emailAddress', 'webSite', 'dateBirth', 'taxFileNo'];
       for (ii in deleteList) {
         key = deleteList[ii];
-        delete self.property[key];
+        delete self.entity[key];
       }
-
-      delete self.contact.code;
-      delete self.contact.IDNo;
-      delete self.contact.old_ic;
-      delete self.contact.name;
-      delete self.contact.emailAddress;
-      delete self.contact.webSite;
-      delete self.contact.dateBirth;
-      delete self.contact.taxFileNo;
     }
 
     if ($stateParams.id) {
-      contactService.getItem($stateParams.id).then(function(item){
-        self.contact = item
-        self.contact_ = angular.copy(item);
+      contactService.getItem($stateParams.id).then(function (item) {
+        self.entity = item
+        self.entity_ = angular.copy(self.entity);
       });
     } else {
-      self.contact = {};
+      self.entity = {};
     }
 
     self.save = function () {
-      contactService.save(self.contact).then(function (contact) {
-        if (self.contact_) {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      contactService.save(entity).then(function (contact) {
+        if (self.entity_) {
           $state.reload();
         } else {
           $state.go('contacts.edit', { 'id': contact.code });
@@ -164,7 +163,7 @@ denningOnline
       var lastModifiedDate = typeof file.lastModified === "number" ? new Date(file.lastModified) : file.lastModifiedDate;
 
       var info = {
-        "fileNo1": self.contact.code,
+        "fileNo1": self.entity.code,
         "documents":[
           {
             "FileName": fileObj.filename,
@@ -253,10 +252,10 @@ denningOnline
 
     if (viewMode) {
       contactService.getItem(party.code).then(function(item){
-        self.contact = item;
+        self.entity = item;
       });
     } else {
-      self.contact = {};
+      self.entity = {};
     }
 
     contactService.getSalutationList().then(function(data) {
@@ -276,7 +275,7 @@ denningOnline
     }
 
     self.save = function () {
-      contactService.save(self.contact).then(function(contact) {
+      contactService.save(self.entity).then(function(contact) {
         $uibModalInstance.close(contact);
       })
       .catch(function(err){
