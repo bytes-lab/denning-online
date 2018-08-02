@@ -84,7 +84,7 @@ denningOnline
       },
       link: function(scope, element, attrs) {
         var colors = {
-          'Land Office': 'bgm-green-4',
+          'Land Office': 'bgm-orange',
           'High Court': 'bgm-green-5',
           'Magistrates Court': 'bgm-green-2',
           'Sessions Court': 'bgm-green-3',
