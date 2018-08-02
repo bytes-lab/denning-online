@@ -2,7 +2,6 @@ denningOnline
   .controller('contactListCtrl', function (NgTableParams, contactService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-    self.keyword = '';
 
     self.clickHandler = function (item) {
       $state.go('contacts.edit', {'id': item.code});
@@ -11,9 +10,6 @@ denningOnline
     self.tableFilter = new NgTableParams({
       page: 1,            // show first page
       count: 25,
-      sorting: {
-        name: 'asc'       // initial sorting
-      }
     }, {
       getData: function(params) {
         return contactService.getList(params.page(), params.count(), self.keyword).then(function(data) {
@@ -28,7 +24,7 @@ denningOnline
     }
   })
 
-  .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, contactService, $state, Auth, $scope, occupationService, raceService, religionService, IRDBranchService) {
+  .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, growlService, contactService, $state, Auth, $scope, occupationService, raceService, religionService, IRDBranchService) {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -58,42 +54,42 @@ denningOnline
       return false;
     };
 
-    contactService.getSalutationList().then(function(data) {
+    contactService.getSalutationList().then (function(data) {
       self.Salutations = data;
     });
 
     self.queryContacts = function (searchText) {
-      return contactService.getCustomerList(1, 10, searchText).then(function(resp) {
+      return contactService.getCustomerList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     };
 
     self.queryStaffs = function (searchText) {
-      return contactService.getStaffList(1, 10, searchText).then(function(resp) {
+      return contactService.getStaffList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     }
 
     self.queryOccupation = function (searchText) {
-      return occupationService.getList(1, 10, searchText).then(function(resp) {
+      return occupationService.getList(1, 10, searchText).then(function (resp) {
         return resp;
       });
     }
 
     self.queryRace = function (searchText) {
-      return raceService.getList(1, 10, searchText).then(function(resp) {
+      return raceService.getList(1, 10, searchText).then(function (resp) {
         return resp;
       });
     }
 
     self.queryIRDBranch = function (searchText) {
-      return IRDBranchService.getList(1, 10, searchText).then(function(resp) {
+      return IRDBranchService.getList(1, 10, searchText).then(function (resp) {
         return resp;
       });
     }
 
     self.queryReligion = function (searchText) {
-      return religionService.getList(1, 10, searchText).then(function(resp) {
+      return religionService.getList(1, 10, searchText).then(function (resp) {
         return resp;
       });
     }
@@ -104,16 +100,17 @@ denningOnline
       });
     }
 
-    self.new_ = function new_() {
-      self.contact = {};
-      self.can_edit = true;
-      self.create_new = true;
-    }
-
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
-      
+      self.contact_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strPropertyID'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.property[key];
+      }
+
       delete self.contact.code;
       delete self.contact.IDNo;
       delete self.contact.old_ic;
@@ -126,22 +123,22 @@ denningOnline
 
     if ($stateParams.id) {
       contactService.getItem($stateParams.id).then(function(item){
-        self.contact = angular.copy(item);  // important
+        self.contact = item
+        self.contact_ = angular.copy(item);
       });
     } else {
       self.contact = {};
     }
 
     self.save = function () {
-      contactService.save(self.contact).then(function(contact) {
-        if (contact) {
-          self.contact = contact;
+      contactService.save(self.contact).then(function (contact) {
+        if (self.contact_) {
+          $state.reload();
+        } else {
+          $state.go('contacts.edit', { 'id': contact.code });
         }
+        growlService.growl('Saved successfully!', 'success');
       });
-    }
-
-    self.cancel = function () {
-      $state.go('contacts.list');
     }
 
     $scope.open = function($event, opened) {
@@ -157,14 +154,6 @@ denningOnline
     };
 
     $scope.format = 'dd/MM/yyyy';
-
-    self.relatedMatter = function() {
-      $state.go('contacts.matters', {id: self.contact.code});
-    }
-
-    self.openFolder = function() {
-      $state.go('folders.list', {id: self.contact.code, type: 'contact'});
-    }
 
     self.upload = function() {
       self.uploaded = 0;
@@ -191,7 +180,7 @@ denningOnline
       contactService.upload(info, 'contact').then(function(res) {
         self.uploaded = self.uploaded + 1;
         if (fileList.length == self.uploaded) {
-          alert('The file(s) uploaded successfully.');
+          growlService('The file(s) uploaded successfully.', 'success');
         }
       })
       .catch(function(err){
