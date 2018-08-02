@@ -35,14 +35,15 @@ denningOnline
     self.refList = ['MukimType', 'LotType', 'TitleType', 'ParcelType', 'LandUse', 
                     'RestrictionAgainst', 'TenureType', 'AreaType'];
     self.types = {};
+    self.true = true;
 
     if($stateParams.id) {
       propertyService.getItem($stateParams.id).then(function (item) {
-        self.property = item;
-        self.property_ = angular.copy(self.property);
+        self.entity = refactorService.convertBool(item, true);
+        self.entity_ = angular.copy(self.entity);
       });
     } else {
-      self.property = {};
+      self.entity = {};
     }
 
     self.queryContacts = function (searchText) {
@@ -78,19 +79,19 @@ denningOnline
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
-      self.property_ = null;
+      self.entity_ = null;
 
       var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strPropertyID'];
       for (ii in deleteList) {
         key = deleteList[ii];
-        delete self.property[key];
+        delete self.entity[key];
       }
     }
 
     self.save = function () {
-      entity = refactorService.getDiff(self.property_, self.property);
+      entity = refactorService.getDiff(self.entity_, self.entity);
       propertyService.save(entity).then(function (property) {
-        if (self.property_) {
+        if (self.entity_) {
           $state.reload();
         } else {
           $state.go('properties.edit', { 'id': property.code });
@@ -151,10 +152,10 @@ denningOnline
     if (viewMode) {
       propertyService.getItem(property.code)
       .then(function(item){
-        self.property = item;
+        self.entity = item;
       });
     } else {
-      self.property = {};
+      self.entity = {};
     }
 
     angular.forEach(self.refList, function (value, key) {
@@ -164,7 +165,7 @@ denningOnline
     });
 
     self.save = function () {
-      propertyService.save(self.property).then(function(property) {
+      propertyService.save(self.entity).then(function(property) {
         $uibuibModalInstance.close(property);
       })
       .catch(function(err){

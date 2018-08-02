@@ -43,5 +43,18 @@ denningOnline
       }
     }
 
+    service.convertBool = function (model, toBool) {
+      for (var ii in model) {
+        if (ii.startsWith('bool')) {
+          if (toBool) {
+            model[ii] = model[ii] == "1" ? true: false;
+          } else {
+            model[ii] = model[ii] ? "1": "0";
+          }
+        }
+      }
+      return model;
+    }
+
     return service;
   })
