@@ -3,34 +3,26 @@ denningOnline
   // Notes
   // =========================================================================
   
-  .service('noteService', function($http, Auth){
+  .service('noteService', function(http) {
     var service = {};
-    service.getList = getList;
-    service.getItem = getItem;
-    service.save = save;
-    service.headers = Auth.isAuthenticated();
 
-    function getList(fileNo, page, pagesize) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/table/Note?fileNo='+fileNo+'&page='+page+'&pagesize='+pagesize,
-        headers: service.headers
+    service.getList = function (fileNo, page, pagesize) {
+      return http.GET('v1/table/Note', {
+        fileNo: fileNo,
+        page: page,
+        pagesize: pagesize
       }).then(function(resp) {
         return resp.data;
       });  
     }
 
-    function getItem(code) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/table/Note/'+code,
-        headers: service.headers
-      }).then(function(resp) {
+    service.getItem = function(code) {
+      return http.GET(`v1/table/Note/${code}`).then(function(resp) {
         return resp.data;
       });    
     }
 
-    function save(note) {
+    service.save = function (note) {
       var method = note.code ? 'PUT': 'POST';
       var note_ = {
         code: note.code,
@@ -39,13 +31,8 @@ denningOnline
         strNote: note.strNote
       }
 
-      return $http({
-        method: method,
-        url: 'https://43.252.215.81/denningwcf/v1/table/Note',
-        headers: service.headers,
-        data: note_
-      }).then(function(response) {
-        return response.data;
+      return http[method]('v1/table/Note', note_).then(function (resp) {
+        return resp ? resp.data : null;
       });
     }
 
@@ -56,17 +43,11 @@ denningOnline
   // Payment Records
   // =========================================================================
   
-  .service('paymentRecordService', function($http, Auth){
+  .service('paymentRecordService', function(http) {
     var service = {};
-    service.getList = getList;
-    service.headers = Auth.isAuthenticated();
 
-    function getList(fileNo) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/app/PaymentRecord/'+fileNo,
-        headers: service.headers
-      }).then(function(resp) {
+    service.getList = function (fileNo) {
+      return http.GET(`v1/app/PaymentRecord/${fileNo}`).then(function(resp) {
         return resp.data;
       });  
     }

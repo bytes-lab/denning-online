@@ -2,7 +2,6 @@ denningOnline
   .controller('noteListCtrl', function($stateParams, NgTableParams, noteService, $state) {
     var self = this;
     self.dataReady = false;
-    self.clickHandler = clickHandler;
     self.fileNo = $stateParams.fileNo;
     self.fileName = $stateParams.fileName;
 
@@ -22,7 +21,7 @@ denningOnline
       initializeTable();
     });    
 
-    function clickHandler(item) {
+    self.clickHandler = function (item) {
       $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': item.code, 'fileName': $stateParams.fileName});
     }
     
@@ -40,10 +39,8 @@ denningOnline
     }  
   })
 
-  .controller('noteEditCtrl', function($stateParams, noteService, $state, Auth, $scope) {
+  .controller('noteEditCtrl', function($stateParams, growlService, noteService, $state, Auth, $scope) {
     var self = this;
-    self.save = save;
-    self.cancel = cancel;
     self.can_edit = $state.$current.data.can_edit;
     self.userInfo = Auth.getUserInfo();
     self.fileNo = $stateParams.fileNo;
@@ -64,16 +61,18 @@ denningOnline
       self.title = 'New Note';
     }
 
-    function save() {
+    self.save = function () {
       noteService.save(self.note).then(function(note) {
-        self.note = note;
-        $state.go('notes.list', {'fileNo': $stateParams.fileNo, 'fileName': $stateParams.fileName});
-      })
-      .catch(function(err){
+        if (self.note.code) {
+          $state.reload();
+        } else {
+          $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': note.code, 'fileName': $stateParams.fileName});
+        }
+        growlService.growl('Saved successfully!', 'success');
       });
     }
 
-    function cancel() {
+    self.cancel = function () {
       $state.go('notes.list', {'fileNo': $stateParams.fileNo, 'fileName': $stateParams.fileName});
     }
 
