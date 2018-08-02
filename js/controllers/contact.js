@@ -111,8 +111,8 @@ denningOnline
       self.can_edit = true;
       self.entity_ = null;
 
-      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'IDNo', 'old_ic', 'name', 
-                        'emailAddress', 'webSite', 'dateBirth', 'taxFileNo'];
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strIDNo', 'strIDNoOld', 'strName', 
+                        'strEmailAddress', 'strWebSite', 'dtDateBirth', 'dtDateDeceased', 'strTaxFileNo'];
       for (ii in deleteList) {
         key = deleteList[ii];
         delete self.entity[key];
