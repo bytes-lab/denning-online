@@ -88,7 +88,7 @@ denningOnline
           'High Court': 'bgm-green-5',
           'Magistrates Court': 'bgm-green-2',
           'Sessions Court': 'bgm-green-3',
-          'Small Estate Department': 'bgm-green-0',
+          'Small Estate Department': 'bgm-orange-0',
           'Federal Court': 'bgm-green-6',
           'Court of Appeal': 'bgm-green-1'
         };
