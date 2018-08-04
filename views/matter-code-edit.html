@@ -7,12 +7,12 @@
       <div class="row">
       <div class="col-md-11 col-sm-12" ng-if="!vm.viewMode">
         <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Matter Code</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.matterCode)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
+        <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="matter-codes.list">Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.mattercode.update && vm.can_edit">Save</a>
         <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.mattercode.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
         <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-codes.new" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
       </div>
       <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
         <h2 class="c-purple f-500 f-20" style="display: inline;">Matter Code Detail</h2>
@@ -30,7 +30,7 @@
             <dt class="p-t-10">Matter Code</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.matterCode.code" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+                <input ng-model="vm.entity.code" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
               </div>
             </dd>
           </dl>
@@ -40,7 +40,7 @@
             <dt class="p-t-10">Description</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.strDescription" camel-case>
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strDescription" camel-case>
               </div>
             </dd>
           </dl>
@@ -51,7 +51,7 @@
             <dt class="p-t-10">Category</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.strCategory" camel-case>
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCategory" camel-case>
               </div>
             </dd>
           </dl>
@@ -59,7 +59,7 @@
             <dt class="p-t-10">Department</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.matterCode.strDept" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strDept" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -69,7 +69,7 @@
               <div class="fg-line">
 <!--                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strPresetCodeG1"
+                  md-selected-item="vm.entity.strPresetCodeG1"
                   md-search-text="searchText"
                   md-items="item in queryFields(searchText)"
                   md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
@@ -89,7 +89,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.matterCode.clsPresetBill.code"
+                md-selected-item="vm.entity.clsPresetBill.code"
                 md-search-text="qpsb1"
                 md-items="item in vm.queryBills(qpsb1)"
                 md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
@@ -108,7 +108,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.matterCode.clsPresetBill1.code"
+                md-selected-item="vm.entity.clsPresetBill1.code"
                 md-search-text="qpsb2"
                 md-items="item in vm.queryBills(qpsb2)"
                 md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
@@ -129,7 +129,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.matterCode.clsFormName"
+                md-selected-item="vm.entity.clsFormName"
                 md-search-text="qsmf"
                 md-items="item in vm.queryForms(qsmf)"
                 md-item-text="item.strDisplayName ? item.strDisplayName+' ( '+item.code+' )': ' '"
@@ -147,7 +147,7 @@
             <dt class="p-t-10">Turnaround Time(Days)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.intTurnaroundTime">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.intTurnaroundTime">
               </div>
             </dd>
           </dl>
@@ -155,7 +155,7 @@
             <dt class="p-t-10">Track Subsale CD</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterCode.trackSubsaleCD">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.trackSubsaleCD">
               </div>
             </dd>
           </dl>
@@ -217,7 +217,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupC1"
+                  md-selected-item="vm.entity.strGroupC1"
                   md-search-text="qp1"
                   md-items="item in vm.queryList(vm.partyLabels, qp1)"
                   md-item-text="item"
@@ -237,7 +237,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupC2"
+                  md-selected-item="vm.entity.strGroupC2"
                   md-search-text="qp2"
                   md-items="item in vm.queryList(vm.partyLabels, qp2)"
                   md-item-text="item"
@@ -257,7 +257,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupC3"
+                  md-selected-item="vm.entity.strGroupC3"
                   md-search-text="qp3"
                   md-items="item in vm.queryList(vm.partyLabels, qp3)"
                   md-item-text="item"
@@ -279,7 +279,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupC4"
+                  md-selected-item="vm.entity.strGroupC4"
                   md-search-text="qp4"
                   md-items="item in vm.queryList(vm.partyLabels, qp4)"
                   md-item-text="item"
@@ -299,7 +299,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupC5"
+                  md-selected-item="vm.entity.strGroupC5"
                   md-search-text="qp5"
                   md-items="item in vm.queryList(vm.partyLabels, qp5)"
                   md-item-text="item"
@@ -319,7 +319,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupC6"
+                  md-selected-item="vm.entity.strGroupC6"
                   md-search-text="qp6"
                   md-items="item in vm.queryList(vm.partyLabels, qp6)"
                   md-item-text="item"
@@ -346,7 +346,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupL1"
+                  md-selected-item="vm.entity.strGroupL1"
                   md-search-text="ql1"
                   md-items="item in vm.queryList(vm.lawyerLabels, ql1)"
                   md-item-text="item"
@@ -366,7 +366,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupL2"
+                  md-selected-item="vm.entity.strGroupL2"
                   md-search-text="ql2"
                   md-items="item in vm.queryList(vm.lawyerLabels, ql2)"
                   md-item-text="item"
@@ -388,7 +388,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupL3"
+                  md-selected-item="vm.entity.strGroupL3"
                   md-search-text="ql3"
                   md-items="item in vm.queryList(vm.lawyerLabels, ql3)"
                   md-item-text="item"
@@ -408,7 +408,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.matterCode.strGroupL4"
+                  md-selected-item="vm.entity.strGroupL4"
                   md-search-text="ql4"
                   md-items="item in vm.queryList(vm.lawyerLabels, ql4)"
                   md-item-text="item"
@@ -718,12 +718,12 @@
       <div class="row">
         <div class="col-md-11 col-sm-12 no-padding" ng-if="!vm.viewMode">
           <div class="m-t-30 p-l-15">
-            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.matterCode)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
+            <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="matter-codes.list">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.mattercode.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.mattercode.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
             <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-codes.new" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
         <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">

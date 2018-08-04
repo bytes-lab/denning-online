@@ -63,12 +63,12 @@
         <div class="col-md-11 col-sm-12 no-padding">
           <div class="m-t-30 p-l-15">
             <input ng-if="!vm.create_new" type="file" class="hidden matter form-upload" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
-            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="matter-forms.list">Cancel</a>
             <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.matterform)" ng-if="vm.userInfo.priority.matterform.delete && !vm.create_new && !vm.viewMode">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.matterform.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.matterform.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
             <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.matterform.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.matterform.create && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-forms.new" ng-if="vm.userInfo.priority.matterform.create && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>

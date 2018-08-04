@@ -76,12 +76,9 @@ denningOnline
     self.tableFilter = new NgTableParams({
       page: 1,
       count: 25,
-      sorting: {
-        name: 'asc'
-      }
     }, {
       getData: function(params) {
-        return matterCodeService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+        return matterCodeService.getList(params.page(), params.count(), self.keyword).then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
@@ -93,7 +90,9 @@ denningOnline
     }
   })
 
-  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, matterCodeService, $state, Auth, presetbillService, matterFormService) {
+  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, matterCodeService, $state, 
+                                             Auth, presetbillService, matterFormService) 
+  {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -170,7 +169,7 @@ denningOnline
 
     if ($stateParams.id) {
       matterCodeService.getItem($stateParams.id).then(function(item){
-        self.matterCode = item;
+        self.entity = item;
         
         angular.forEach(JSON.parse(item.jsonFieldLabels || "{}"), function(value, key) {
           self.mattercode[value.Field] = value;
@@ -182,7 +181,7 @@ denningOnline
         // self.mattercode.staff4 = {'Label': 'Team'};
       });
     } else {
-      self.matterCode = {};
+      self.entity = {};
     }
 
     self.range = function(min, max, step) {
@@ -194,17 +193,11 @@ denningOnline
         return input;
     };
 
-    self.new_ = function new_() {
-      self.matterCode = {};
-      self.can_edit = true;
-      self.create_new = true;
-    }
-
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
       
-      delete self.matterCode.code;
+      delete self.entity.code;
     }
 
     self.save = function () {
@@ -213,17 +206,13 @@ denningOnline
         selected.push(value);
       })
 
-      self.matterCode.jsonFieldLabels = JSON.stringify(selected);
-      matterCodeService.save(self.matterCode).then(function(matterCode) {
-        // self.matterCode = matterCode;
+      self.entity.jsonFieldLabels = JSON.stringify(selected);
+      matterCodeService.save(self.entity).then(function(matterCode) {
+        // self.entity = matterCode;
         $state.go('matter-codes.edit', {'code': matterCode.code});
       });
     }
 
-    self.cancel = function () {
-      $state.go('matter-codes.list');      
-    }
-    
     self.openDelete = function (event, entity) {
       event.stopPropagation();
 
