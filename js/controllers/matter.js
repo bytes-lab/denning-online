@@ -91,7 +91,8 @@ denningOnline
   })
 
   .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, matterCodeService, $state, 
-                                             Auth, presetbillService, matterFormService) 
+                                             Auth, presetbillService, matterFormService, growlService,
+                                             refactorService) 
   {
     var self = this;
     self.isDialog = false;
@@ -168,8 +169,9 @@ denningOnline
     };
 
     if ($stateParams.id) {
-      matterCodeService.getItem($stateParams.id).then(function(item){
+      matterCodeService.getItem($stateParams.id).then(function (item){
         self.entity = item;
+        self.entity_ = angular.copy(self.entity);
         
         angular.forEach(JSON.parse(item.jsonFieldLabels || "{}"), function(value, key) {
           self.mattercode[value.Field] = value;
@@ -196,8 +198,13 @@ denningOnline
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
-      
-      delete self.entity.code;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
     }
 
     self.save = function () {
@@ -207,9 +214,15 @@ denningOnline
       })
 
       self.entity.jsonFieldLabels = JSON.stringify(selected);
-      matterCodeService.save(self.entity).then(function(matterCode) {
-        // self.entity = matterCode;
-        $state.go('matter-codes.edit', {'code': matterCode.code});
+
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      matterCodeService.save(entity).then(function (entity) {
+        if (self.entity_) {
+          $state.reload();
+        } else {
+          $state.go('matter-codes.edit', { 'id': entity.code });
+        }
+        growlService.growl('Saved successfully!', 'success');
       });
     }
 
