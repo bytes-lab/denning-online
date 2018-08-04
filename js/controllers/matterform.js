@@ -1,5 +1,7 @@
 denningOnline
-  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService, Auth) {
+  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, 
+                                             $state, matterFormService, Auth) 
+  {
     var vm = this;
     vm.userInfo = Auth.getUserInfo();
 
@@ -774,7 +776,9 @@ denningOnline
     }
   })
 
-  .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, Auth, $uibModal, growlService, refactorService) {
+  .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, Auth, 
+                                             $uibModal, growlService, refactorService) 
+  {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -822,10 +826,6 @@ denningOnline
       }
       self.matterform.selected.splice(y, 1, self.matterform.selected.splice(x, 1, self.matterform.selected[y])[0]);
     };
-
-    self.new_ = function new_() {
-      $state.go('matter-forms.new');
-    }
 
     self.copy = function () {
       self.create_new = true;
@@ -898,10 +898,6 @@ denningOnline
         }
       });
     };
-
-    self.cancel = function () {
-      $state.go('matter-forms.list');
-    }
   })
 
   .controller('matterformListCtrl', function($uibModal, NgTableParams, matterFormService, Auth, $state) {
@@ -918,7 +914,6 @@ denningOnline
     });
 
     function initializeTable () {
-      //Filtering
       self.tableFilter = new NgTableParams({
         page: 1,      
         count: 25,
