@@ -7,7 +7,7 @@
     display:block;
     overflow-x:scroll;
     cursor: pointer;
-    -ms-overflow-style: scroll;
+    -ms-overflow-style: scrollbar;
 }
 
 .table-list tr th:last-child {
