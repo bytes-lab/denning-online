@@ -57,32 +57,44 @@ denningOnline
     }
   })
 
-  .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, courtdiaryService, 
-                                             $state, Auth, $scope, uibDateParser) {
+  .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, refactorService, courtdiaryService, 
+                                             $state, Auth, $scope, growlService) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
     self.create_new = $state.$current.data.can_edit;
     self.can_edit = $state.$current.data.can_edit;
 
     if ($stateParams.id) {
-      courtdiaryService.getItem($stateParams.id).then(function (item){
-        self.courtdiary = item;
-        angular.forEach(self.courtdiary, function (value, key) {
-          if (key.indexOf('dt') == 0) {
-            self.courtdiary[key] = uibDateParser.parse(self.courtdiary[key], 'yyyy-MM-dd HH:mm:ss');
-          }
-        })
+      courtdiaryService.getItem($stateParams.id).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
       });
     } else {
-      self.courtdiary = {};
+      self.entity = {};
+    }
+
+    self.copy = function () {
+      self.create_new = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'dtPreviousDate', 'clsEnteredBy',
+                        'clsUpdatedBy'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
     }
 
     self.save = function () {
-      courtdiaryService.save(self.courtdiary).then(function(courtdiary) {
-        self.courtdiary = courtdiary;
-      })
-      .catch(function(err){
-        //Handler
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      courtdiaryService.save(entity).then(function (entity) {
+        if (self.entity_) {
+          $state.reload();
+        } else {
+          $state.go('courtdiaries.edit', { 'id': entity.code });
+        }
+        growlService.growl('Saved successfully!', 'success');
       });
     }
 
@@ -104,29 +116,33 @@ denningOnline
 
     $scope.format = 'dd/MM/yyyy';
 
-    //Create Modal
-    function modalInstances1(animation, size, backdrop, keyboard, contact) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          contact: function () {
-            return contact;
-          }, 
-          on_list: function () {
-            return false;
-          }
-        }
-      });
-    }
-
     //Prevent Outside Click
     self.openDelete = function (event, contact) {
       event.stopPropagation();
-      modalInstances1(true, '', 'static', true, contact)
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'deleteEntityModal.html',
+        controller: 'deleteEntityModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          entity: function () {
+            return entity;
+          }, 
+          on_list: function () {
+            return false;
+          },
+          entity_type: function () {
+            return 'court diary';
+          },
+          service: function () {
+            return courtdiaryService;
+          },
+          return_state: function () {
+            return 'courtdiaries.list';
+          }
+        }
+      });
     };
   })

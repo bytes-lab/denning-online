@@ -4,10 +4,11 @@
       <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
         <h2 class="f-20 f-500 c-purple" style="display: inline;">Court Diary Edit</h2>
         <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.courtdiary)" ng-if="vm.userInfo.priority.courtdiary.delete && !vm.create_new">Delete</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.courtdiary.delete && !vm.create_new">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
         <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-        <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="courtdiaries.new" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
       </div>
       <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
         <h2 style="display: inline;">Court Diary Detail</h2>
@@ -24,7 +25,7 @@
             <dt class="p-t-10">File No.1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.courtdiary.strFileNo1">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strFileNo1">
               </div>
             </dd>
           </dl>
@@ -32,7 +33,7 @@
             <dt class="p-t-10">Previous Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.courtdiary.dtPreviousDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtPreviousDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -40,7 +41,7 @@
             <dt class="p-t-10">Hearing Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.courtdiary.dtEventDate" is-open="opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtEventDate" is-open="opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -48,7 +49,7 @@
             <dt class="p-t-10">Court Type</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.courtdiary.clsCourtPlace.strTypeE" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.clsCourtPlace.strTypeE" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -56,7 +57,7 @@
             <dt class="p-t-10">Place</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.clsCourtPlace.strPlace">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.clsCourtPlace.strPlace">
               </div>
             </dd>
           </dl>
@@ -66,7 +67,7 @@
             <dt class="p-t-10">Hearing Type</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.strHearingType">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strHearingType">
               </div>
             </dd>
           </dl>
@@ -74,7 +75,7 @@
             <dt class="p-t-10">Enclosure</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.courtdiary.strEnclosure" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strEnclosure" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -82,7 +83,7 @@
             <dt class="p-t-10">Case No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.courtInfo.CaseNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.courtInfo.CaseNo">
               </div>
             </dd>
           </dl>
@@ -90,7 +91,7 @@
             <dt class="p-t-10">Case Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.courtInfo.CaseName">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.courtInfo.CaseName">
               </div>
             </dd>
           </dl>
@@ -106,23 +107,23 @@
           </label>
 
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="MOB" ng-model="vm.courtdiary.clsAttendedStatus.description">
+            <input type="radio" value="MOB" ng-model="vm.entity.clsAttendedStatus.description">
             <i class="input-helper"></i>
             MOB
           </label>
 
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="Postponed" ng-model="vm.courtdiary.clsAttendedStatus.description">
+            <input type="radio" value="Postponed" ng-model="vm.entity.clsAttendedStatus.description">
             <i class="input-helper"></i>
             Postponed
           </label>
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="Absent" ng-model="vm.courtdiary.clsAttendedStatus.description">
+            <input type="radio" value="Absent" ng-model="vm.entity.clsAttendedStatus.description">
             <i class="input-helper"></i>
             Absent
           </label>
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="None" ng-model="vm.courtdiary.clsAttendedStatus.description">
+            <input type="radio" value="None" ng-model="vm.entity.clsAttendedStatus.description">
             <i class="input-helper"></i>
             None
           </label>
@@ -134,7 +135,7 @@
             <dt class="p-t-10">Counsel Assigned</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.courtdiary.strCounselAssigned" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strCounselAssigned" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -142,7 +143,7 @@
             <dt class="p-t-10">Counsel Attended</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.strCounselAttended">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCounselAttended">
               </div>
             </dd>
           </dl>
@@ -151,7 +152,7 @@
             <dt class="p-t-10">Coram</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.courtdiary.intCoram" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.intCoram" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
 
             </dd>
@@ -160,7 +161,7 @@
             <dt class="p-t-10">Opponent's Counsel</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.strOpponentCounsel">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strOpponentCounsel">
               </div>
             </dd>
           </dl>
@@ -168,7 +169,7 @@
             <dt class="p-t-10">Court Decision</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.strCourtDecision">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCourtDecision">
               </div>
             </dd>
           </dl>
@@ -176,7 +177,7 @@
             <dt class="p-t-10">Action Required</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.courtdiary.strActionRequired" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strActionRequired" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -186,7 +187,7 @@
             <dt class="p-t-10">Action To be Completed By</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.phoneHome">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.phoneHome">
               </div>
             </dd>
           </dl>
@@ -194,7 +195,7 @@
             <dt class="p-t-10">Remarks</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.strRemarks">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strRemarks">
               </div>
             </dd>
           </dl>
@@ -202,7 +203,7 @@
             <dt class="p-t-10">Next Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.courtdiary.dtNextDate" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.dtNextDate" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
 
             </dd>
@@ -211,7 +212,7 @@
             <dt class="p-t-10">No Next Event</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.phoneFax">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.phoneFax">
               </div>
             </dd>
           </dl>
@@ -219,7 +220,7 @@
             <dt class="p-t-10">Next Date To Be Given</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.courtdiary.emailAddress">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.emailAddress">
               </div>
             </dd>
           </dl>
@@ -230,10 +231,11 @@
         <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.courtdiary)" ng-if="vm.userInfo.priority.courtdiary.delete && !vm.create_new">Delete</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.courtdiary.delete && !vm.create_new">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn bgm-green btn-sm pull-right" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="courtdiaries.new" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
         <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">

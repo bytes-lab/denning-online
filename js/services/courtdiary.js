@@ -43,5 +43,11 @@ denningOnline
       });
     }
 
+    service.delete = function (entity) {
+      return http.DELETE('v1/table/courtdiary', { code: entity.code }).then(function (resp) {
+        return resp;
+      });
+    }
+
     return service;
   })
