@@ -7,17 +7,17 @@ denningOnline
     var service = {};
 
     service.getList = function (page, pagesize, keyword) {
-      return http.GET('/v1/table/courtdiary', {
+      return http.GET('v1/table/courtdiary', {
         page: page,
         pagesize: pagesize,
         search:keyword
-      }).then(function(resp) {
+      }).then(function (resp) {
         return resp;
       });
     }
 
     service.getCalendar = function (start, end, filter, page, pagesize, keyword) {
-      return http.GET("/v1/DenningCalendar", {
+      return http.GET("v1/DenningCalendar", {
         dateStart: start,
         dateEnd: end,
         filterBy: filter,
@@ -30,7 +30,7 @@ denningOnline
     }
 
     service.getItem = function (code) {
-      return http.GET('/v1/table/courtdiary/'+code).then(function(resp) {
+      return http.GET(`v1/table/courtdiary/${code}`).then(function (resp) {
         return resp.data;
       });
     }
@@ -38,8 +38,8 @@ denningOnline
     service.save = function (entity) {
       var method = entity.code ? 'PUT': 'POST';
 
-      return http[method]('/v1/table/courtdiary', entity).then(function(response) {
-        return response ? response.data : null;
+      return http[method]('v1/table/courtdiary', entity).then(function (resp) {
+        return resp ? resp.data : null;
       });
     }
 

@@ -5,8 +5,7 @@
 
   <section id="content" data-ng-controller="courtdiaryListCtrl as vm">
     <div class="container c-alt m-b-20">
-      <div id="calendar" data-calendar data-select="vm.onSelect(start, end)">
-      </div>
+      <div id="calendar" data-calendar data-select="vm.onSelect(start, end)"></div>
     </div>
     <div class="clearfix"></div>
     <div class="container">
@@ -34,13 +33,13 @@
             <div class="form-group pull-right">
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="vm.filter" ng-change="vm.search();">
-                    <option value="0All">Today</option>
-                    <option value="0All">All</option>
-                    <option value="1court">Future Cases</option>
-                    <option value="2office">Past Cases</option>
-                    <option value="3personal">Past Cases with no Hearing Date</option>
-                    <option value="0All4">Unattended Past Cases</option>
+                  <select class="form-control" ng-model="vm.option" ng-change="vm.changeFilter();">
+                    <option value="today,today,0All">Today</option>
+                    <option value="1900-01-01,2999-01-01,0All">All</option>
+                    <option value="today,2999-01-01,0All">Future Cases</option>
+                    <option value="1900-01-01,yesterday,0All">Past Cases</option>
+                    <option value="1900-01-01,yesterday,4unattend">Past Cases with no Hearing Date</option>
+                    <option value="1900-01-01,yesterday,5nodate">Unattended Past Cases</option>
                   </select>
                 </div>
               </div>

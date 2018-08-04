@@ -114,10 +114,6 @@ denningOnline
           selectHelper: true,
           editable: true,
 
-          //Add Events
-          // events: events,
-          
-          //On Day Select
           select: function(start, end, allDay) {
             scope.select({
               start: start, 
@@ -125,7 +121,9 @@ denningOnline
             });
           },
           viewRender: function (view, elem) {
-            courtdiaryService.getCalendar(view.start.format('YYYY-MM-DD'), view.end.format('YYYY-MM-DD'), '0All', 1, 100, '').then(function(res) {
+            courtdiaryService.getCalendar(view.start.format('YYYY-MM-DD'), view.end.format('YYYY-MM-DD'), 
+                                          '0All', 1, 100)
+            .then(function (res) {
               var eventObj = {};
               angular.forEach(res.data, function(value, key) {
                 var type_ = getType(value.location);
@@ -153,10 +151,10 @@ denningOnline
                   }
 
                   events.push({
-                      title: '['+count+'] '+event,
-                      start: uibDateParser.parse(date, 'yyyy-MM-dd HH:mm:ss'),
-                      allDay: true,
-                      className: color
+                    title: '['+count+'] '+event,
+                    start: uibDateParser.parse(date, 'yyyy-MM-dd HH:mm:ss'),
+                    allDay: true,
+                    className: color
                   })
                 })
               })

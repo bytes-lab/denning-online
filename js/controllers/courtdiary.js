@@ -1,24 +1,14 @@
 denningOnline
-  .controller('courtdiaryListCtrl', function($filter, $uibModal, $stateParams, NgTableParams, courtdiaryService, $state, Auth) {
+  .controller('courtdiaryListCtrl', function($stateParams, NgTableParams, 
+                                             courtdiaryService, $state, Auth) {
     var self = this;
 
     self.userInfo = Auth.getUserInfo();
     self.keyword = $stateParams.keyword;
+    self.option = 'today,today,0All';
     self.filter = '0All';
-
-    var date = new Date(), 
-        y = date.getFullYear(), 
-        m = date.getMonth(),
-        firstDay = new Date(y, m, 1),
-        lastDay = new Date(y, m + 1, 0);
-
-    if (self.keyword) {
-      self.firstDay = '2000-01-01';
-      self.lastDay = '2100-01-01';
-    } else {
-      self.firstDay = moment(firstDay).format('YYYY-MM-DD');
-      self.lastDay = moment(lastDay).format('YYYY-MM-DD');
-    }
+    self.firstDay = moment(new Date()).format('YYYY-MM-DD');
+    self.lastDay = moment(new Date()).format('YYYY-MM-DD');
 
     self.clickHandler = function (item) {
       $state.go('courtdiaries.edit', {'id': item.code});
@@ -29,7 +19,9 @@ denningOnline
       count: 25
     }, {
       getData: function(params) {
-        return courtdiaryService.getCalendar(self.firstDay, self.lastDay, self.filter, params.page(), params.count(), self.keyword).then(function(data) {
+        return courtdiaryService.getCalendar(self.firstDay, self.lastDay, self.filter, params.page(), 
+                                             params.count(), self.keyword)
+        .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
@@ -40,69 +32,33 @@ denningOnline
       self.tableFilter.reload();
     }
 
+    function parseDate(strDate) {
+      if (strDate == "today") {
+        return moment(new Date()).format('YYYY-MM-DD');
+      } else if (strDate == "yesterday") {
+        return moment(new Date()).add(-1, 'days').format('YYYY-MM-DD');
+      } else {
+        return strDate;
+      }
+    }
+
+    self.changeFilter = function () {
+      var option = self.option.split(',');
+      self.firstDay = parseDate(option[0]);
+      self.lastDay = parseDate(option[1]);
+      self.filter = option[2];
+      self.tableFilter.reload();
+    }
+
     self.onSelect = function(argStart, argEnd) {
       self.firstDay = argStart.toISOString();
       self.lastDay = moment(argEnd).add(-1, 'days').format('YYYY-MM-DD');
       self.tableFilter.reload();
-      // ad event on calendar
-      // var modalInstance  = $uibModal.open({
-      //   templateUrl: 'addEvent.html',
-      //   controller: 'addeventCtrl',
-      //   backdrop: 'static',
-      //   keyboard: false,
-      //   resolve: {
-      //     calendarData: function() {
-      //       var x = [argStart, argEnd];
-      //       return x;
-      //     }
-      //   }
-      // });
     }
-
-    //Create Modal
-    function modalInstances(animation, size, backdrop, keyboard, courtdiary) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'CourtDiaryDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          courtdiary: function () {
-            return courtdiary;
-          }
-        }      
-      });
-    }
-
-    //Prevent Outside Click
-    self.openDelete = function (event, courtdiary) {
-      event.stopPropagation();
-      modalInstances(true, '', 'static', true, courtdiary)
-    };    
   })
 
-  .controller('CourtDiaryDeleteModalCtrl', function ($scope, $uibModalInstance, courtdiary, courtdiaryService, $state) {
-    $scope.ok = function () {
-      courtdiaryService.delete(courtdiary).then(function(courtdiary) {
-        $state.reload();
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.courtdiaryInfo.$error.push({meessage:''});
-      });
-      $uibModalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $uibModalInstance.close();
-      $state.go('courtdiary');
-    };
-  })
-
-  .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, courtdiaryService, $state, Auth, $scope, uibDateParser) {
+  .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, courtdiaryService, 
+                                             $state, Auth, $scope, uibDateParser) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
     self.create_new = $state.$current.data.can_edit;
