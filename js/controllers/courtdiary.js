@@ -57,7 +57,7 @@ denningOnline
     }
   })
 
-  .controller('courtdiaryEditCtrl', function($filter, $uibModal, $stateParams, refactorService, courtdiaryService, 
+  .controller('courtdiaryEditCtrl', function($uibModal, $stateParams, refactorService, courtdiaryService, 
                                              $state, Auth, $scope, growlService) {
     var self = this;
     self.userInfo = Auth.getUserInfo();

@@ -7,6 +7,11 @@
     display:block;
     overflow-x:scroll;
     cursor: pointer;
+    -ms-overflow-style: scroll;
+}
+
+.table-list tr th:last-child {
+    width: 50%;
 }
 
 .ng-table-fixed-column-60 {
