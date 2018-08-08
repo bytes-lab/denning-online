@@ -936,31 +936,31 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label-210">Purchase Price [A]</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:45%;">
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:30%;" ng-change="calcForm(model)">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label-210">Earnest Deposit [B]</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" style="width:30%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label-210">Balance Deposit [C]</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM18" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM18" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label-210">Total Deposit [D] = B + C</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM2" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM2" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label-210">Balance Purchase Price [ A - D ]</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM19" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM19" style="width:45%;">
     </div>
   </div>
   <div class="clearfix"></div>
@@ -968,25 +968,25 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Extra 1 [X]</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM3" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM3" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Extra 2 [Y]</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM20" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM20" style="width:45%;">
     </div>
   </div>  
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Extra 3 [Z]</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM21" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM21" style="width:45%;">
     </div>
   </div>  
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Total [ A + X + Y + Z ]</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM22" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM22" style="width:45%;">
     </div>
   </div>  
   <div class="clearfix"></div>
@@ -994,19 +994,19 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">GST</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decPriceGst" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decPriceGst" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">GST Price Value</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM36" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM36" style="width:45%;">
     </div>
   </div>  
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Purchase Price</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
     </div>
   </div>  
   </div>
@@ -1468,7 +1468,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Term Loan Amount</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.decRM4" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM4" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1476,7 +1476,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Repayment Period (TL)</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.strF1" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.strF1" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1484,7 +1484,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">DO Loan Amount</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.decRM5" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM5" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1492,7 +1492,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Interest Rate (TL)</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.strF2" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.strF2" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1500,7 +1500,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;MRTA</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.decRM6" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM6" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1508,7 +1508,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Monthly Installment (TL)</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.decRM7" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM7" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1517,7 +1517,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Legal Fee</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.decRM23" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM23" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1525,7 +1525,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Interest Rate (DO)</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.strF8" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.strF8" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>     
@@ -1533,7 +1533,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Other</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.decRM24" ng-readonly="!model.tmp.can_edit" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-model="model.decRM24" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1541,7 +1541,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Islamic Loan</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_islamic_loan']" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_islamic_loan']" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>     
@@ -1549,7 +1549,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Total Loan</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM25" class="form-control input-sm" id="inputEmail3">
+        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM25" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>
@@ -1559,7 +1559,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Selling Price</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_selling_price']" class="form-control input-sm" id="inputEmail3">
+        <input type="number" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_selling_price']" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>      
@@ -1567,7 +1567,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Purchase Price</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_purchase_price']" class="form-control input-sm" id="inputEmail3">
+        <input type="number" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_purchase_price']" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>      

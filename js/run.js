@@ -513,7 +513,14 @@ denningOnline
     // price attribute
     formlyConfig.setType({
       name: 'price',
-      templateUrl: 'price.html'
+      templateUrl: 'price.html',
+      controller: function ($scope, refactorService) {
+        $scope.calcForm = function (model) {
+          console.log(model.decRM1);
+          console.log(refactorService.convertFloat(model.decRM1));
+          model.decRM17 = 'sum';
+        }
+      }
     });  
 
     // loan attribute

@@ -47,6 +47,11 @@ denningOnline
       }
     }
 
+    service.convertFloat = function(strVal) {
+      var val = strVal.replace(/[^0-9\.]/g, '');
+      return parseFloat(val);
+    }
+
     service.convertBool = function (model, toBool) {
       for (var ii in model) {
         if (ii.startsWith('bool')) {

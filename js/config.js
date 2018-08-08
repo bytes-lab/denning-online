@@ -103,7 +103,19 @@ denningOnline
         },        
         url: '/edit/:fileNo/:tab',
         controller: 'fileMatterEditCtrl as vm',
-        templateUrl: 'views/file-matter-edit.html'
+        templateUrl: 'views/file-matter-edit.html',
+        resolve: {
+          loadPlugin: function($ocLazyLoad) {
+            return $ocLazyLoad.load ([
+              {
+                name: 'vendors',
+                files: [
+                  'vendors/input-mask/input-mask.min.js',
+                ]
+              }
+            ])
+          }
+        }
       })
 
       .state ('file-matters.new', {
