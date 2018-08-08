@@ -52,6 +52,11 @@ denningOnline
       return parseFloat(val);
     }
 
+    service.formatFloat = function(fVal) {
+      fVal = (fVal + 0.01).toLocaleString();
+      return fVal.substr(0, fVal.length-1)+'0';
+    }
+
     service.convertBool = function (model, toBool) {
       for (var ii in model) {
         if (ii.startsWith('bool')) {

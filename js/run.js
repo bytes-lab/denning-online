@@ -515,14 +515,22 @@ denningOnline
       name: 'price',
       templateUrl: 'price.html',
       controller: function ($scope, $timeout, refactorService) {
+
         $scope.calcForm = function (model) {
           $timeout(function () {
-            var v17 = refactorService.convertFloat(angular.element('.rm17').val()),
-                v18 = refactorService.convertFloat(angular.element('.rm18').val());
+            var v1 = refactorService.convertFloat(angular.element('.rm1').val()),
+                v3 = refactorService.convertFloat(angular.element('.rm3').val()),
+                v17 = refactorService.convertFloat(angular.element('.rm17').val()),
+                v20 = refactorService.convertFloat(angular.element('.rm20').val()),
+                v21 = refactorService.convertFloat(angular.element('.rm21').val());
 
-            val = (v17+v18+0.01).toLocaleString();
-            model.decRM2 = val.substr(0, val.length-1)+'0';
-          }, 200);          
+            model.decRM18 = refactorService.formatFloat(v1*0.1-v17);
+            v18 = refactorService.convertFloat(model.decRM18);
+            model.decRM2 = refactorService.formatFloat(v17+v18);
+            v2 = refactorService.convertFloat(model.decRM2);
+            model.decRM19 = refactorService.formatFloat(v1-v2);
+            model.decRM22 = refactorService.formatFloat(v1+v3+v20+v21);
+          }, 200);
         }
       }
     });  
