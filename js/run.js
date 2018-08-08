@@ -514,11 +514,15 @@ denningOnline
     formlyConfig.setType({
       name: 'price',
       templateUrl: 'price.html',
-      controller: function ($scope, refactorService) {
+      controller: function ($scope, $timeout, refactorService) {
         $scope.calcForm = function (model) {
-          console.log(model.decRM1);
-          console.log(refactorService.convertFloat(model.decRM1));
-          model.decRM17 = 'sum';
+          $timeout(function () {
+            var v17 = refactorService.convertFloat(angular.element('.rm17').val()),
+                v18 = refactorService.convertFloat(angular.element('.rm18').val());
+
+            val = (v17+v18+0.01).toLocaleString();
+            model.decRM2 = val.substr(0, val.length-1)+'0';
+          }, 200);          
         }
       }
     });  
