@@ -57,6 +57,15 @@ denningOnline
       return fVal.substr(0, fVal.length-1)+'0';
     }
 
+    service.convertDouble = function (model) {
+      for (var ii in model) {
+        if (ii.startsWith('decRM')) {
+          model[ii] = service.convertFloat(model[ii]);
+        }
+      }
+      return model;
+    }
+
     service.convertBool = function (model, toBool) {
       for (var ii in model) {
         if (ii.startsWith('bool')) {
@@ -86,6 +95,7 @@ denningOnline
     service.preConvert = function (model, convert) {
       var res = service.convertBool(model, convert);
       res = service.convertDate(res, convert);
+      res = service.convertDouble(res);
       return res;
     }
     return service;

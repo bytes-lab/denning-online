@@ -165,3 +165,7 @@ md-autocomplete input:not(.md-input) {
 .bgm-orange-0 {
     background-color: #F0C700;
 }
+
+tr.selected {
+    background-color: #d7d7d7;
+}

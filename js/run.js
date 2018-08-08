@@ -687,6 +687,20 @@ denningOnline
           source: 'All'
         };
 
+        $scope.chooseTemplate = function (tpl) {
+          $scope.tpl = tpl;
+        };
+
+        $scope.generate = function () {
+          if (!$scope.tpl) {
+            alert("Please choose a template.");
+            return false;
+          }
+          templateService.generateDoc($scope.tpl).then(function (data) {
+            console.log(data);
+          })
+        }
+
         $scope.updateTemplates = function() {
           $scope.tableFilter = new NgTableParams({
             page: 1,
