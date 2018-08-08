@@ -11,7 +11,7 @@ denningOnline
         page: page,
         pagesize: pagesize,
         search: keyword
-      }).then(function(resp) {
+      }).then(function (resp) {
         return resp;
       });  
     }
@@ -84,14 +84,14 @@ denningOnline
     service.save = function (entity) {
       var method = entity.code ? 'PUT': 'POST';
 
-      return http[method]('v1/table/MatterCode', entity).then(function (response) {
-        return response ? response.data : null;
+      return http[method]('v1/table/MatterCode', entity).then(function (resp) {
+        return resp ? resp.data : null;
       });
     }
 
     service.delete = function (entity) {
-      return http.DELETE('v1/table/MatterCode', { code: entity.code }).then(function (response) {
-        return response;
+      return http.DELETE('v1/table/MatterCode', { code: entity.code }).then(function (resp) {
+        return resp;
       });
     }
 

@@ -1,6 +1,6 @@
 denningOnline
   .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, 
-                                             $state, matterFormService, Auth) 
+                                             $state, matterFormService, Auth, refactorService, growlService) 
   {
     var vm = this;
     vm.userInfo = Auth.getUserInfo();
@@ -680,6 +680,7 @@ denningOnline
         if (item) {
           vm.idxTab = 5;  // any none zero value
           vm.model = item;
+          vm.model_ = angular.copy(vm.model);
           vm.model.tmp = editControl;
           vm.model.tmp.oldMatterCode = item.clsMatterCode;
           
@@ -759,11 +760,23 @@ denningOnline
     // function definition
     vm.save = function () {
       delete vm.model.tmp;
-      fileMatterService.save(vm.model).then(function (data) {
-        if (data) {
-          vm.model = data;
+      model = refactorService.getDiff(vm.model_, vm.model);
+
+      if (vm.model_) {
+        model.strFileNo1 = vm.model_.strFileNo1;
+      }
+
+      fileMatterService.save(model).then(function (data) {
+        if (vm.model_) {
+          // vm.model = data;
+          vm.model.tmp = editControl;
+          vm.model.tmp.oldMatterCode = data.clsMatterCode;
+          
           // $state.reload();
+        } else {
+          $state.go('file-matters.edit', { 'fileNo': data.strFileNo1 });
         }
+        growlService.growl('Saved successfully!', 'success');
       })
     }
 

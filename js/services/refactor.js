@@ -16,7 +16,7 @@ denningOnline
     }
     
     function compare(fieldOriginal, fieldNew) {
-      if (typeof(fieldNew) == 'object') {
+      if (typeof(fieldNew) == 'object' && fieldNew != null) {
         if (typeof fieldNew.getMonth === 'function') {
           return fieldOriginal.getTime() === fieldNew.getTime();
         } else {
