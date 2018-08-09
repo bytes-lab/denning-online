@@ -15,6 +15,8 @@ denningOnline
         responseType: responseType
       }).then(function (response) {
         return response;
+      }).catch(function (err) {
+        alert('Error: '+err.statusText);
       })
     };
 

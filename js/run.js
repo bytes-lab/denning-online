@@ -697,7 +697,22 @@ denningOnline
             return false;
           }
           templateService.generateDoc($scope.tpl).then(function (data) {
-            console.log(data);
+            var fileName = $scope.tpl.strDescription + '.docx';
+            var contentType = data.headers('content-type');
+
+            try {
+                var blob = new Blob([data.data], { type: contentType });
+                //IE handles it differently than chrome/webkit
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                  window.navigator.msSaveOrOpenBlob(blob, fileName);
+                } else {
+                  var objectUrl = URL.createObjectURL(blob);
+                  Object.assign(document.createElement('a'), { href: objectUrl, download: fileName}).click();
+                }
+            } catch (exc) {
+                console.log("Save Blob method failed with the following exception.");
+                console.log(exc);
+            }
           })
         }
 
