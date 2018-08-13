@@ -35,9 +35,9 @@ denningOnline
     }
 
     service.generateDoc = function (entity) {
-      return http.POST('v1/generateDocument', JSON.parse(entity.generateBody), 'arraybuffer')
+      return http.POST('v1/GenerateDocumentnPreview', JSON.parse(entity.generateBody))
       .then(function (resp) {
-        return resp;
+        return resp.data;
       })
     }
 

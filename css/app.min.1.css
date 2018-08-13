@@ -7802,6 +7802,12 @@ button.close {
   }
 }
 
+@media (min-width: 1400px) {
+  .modal-lg {
+    width: 1160px;
+  }
+}
+
 .tooltip {
   position: absolute;
   z-index: 1070;

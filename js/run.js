@@ -680,7 +680,7 @@ denningOnline
     formlyConfig.setType({
       name: 'gen-doc',
       templateUrl: 'gen-doc.html',
-      controller: function($scope, $filter, NgTableParams, templateService) {
+      controller: function($scope, $filter, NgTableParams, templateService, $uibModal) {
         $scope.sources = ['All', 'Online', 'User'];        
         $scope.docInfo = {
           fileno: $scope.model.strFileNo1,
@@ -696,23 +696,18 @@ denningOnline
             alert("Please choose a template.");
             return false;
           }
-          templateService.generateDoc($scope.tpl).then(function (data) {
-            var fileName = $scope.tpl.strDescription + '.docx';
-            var contentType = data.headers('content-type');
 
-            try {
-                var blob = new Blob([data.data], { type: contentType });
-                //IE handles it differently than chrome/webkit
-                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                  window.navigator.msSaveOrOpenBlob(blob, fileName);
-                } else {
-                  var objectUrl = URL.createObjectURL(blob);
-                  Object.assign(document.createElement('a'), { href: objectUrl, download: fileName}).click();
-                }
-            } catch (exc) {
-                console.log("Save Blob method failed with the following exception.");
-                console.log(exc);
-            }
+          templateService.generateDoc($scope.tpl).then(function (data) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'preview-doc.html',
+              controller: function ($scope, $sce) {
+                var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/${ data }&embedded=true`;
+                $scope.url = $sce.trustAsResourceUrl(url);
+              },
+              size: 'lg',
+              keyboard: true
+            });
           })
         }
 
