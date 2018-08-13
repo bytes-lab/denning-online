@@ -169,3 +169,12 @@ md-autocomplete input:not(.md-input) {
 tr.selected {
     background-color: #d7d7d7;
 }
+
+.table.folder td {
+    border: none;
+    padding: 3px;
+}
+
+.table.folder input {
+    margin-left: 18px;
+}

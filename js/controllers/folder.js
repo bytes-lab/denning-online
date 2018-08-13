@@ -1,5 +1,8 @@
 denningOnline
-  .controller('folderListCtrl', function(NgTableParams, $stateParams, $uibModal, folderService, contactService, $state, Auth, $scope, $element, growlService, ngClipboard) {
+  .controller('folderListCtrl', function(NgTableParams, $sce, $stateParams, $uibModal, folderService, 
+                                         contactService, $state, Auth, $scope, $element, 
+                                         growlService, ngClipboard) 
+  {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -70,8 +73,21 @@ denningOnline
     self.download = function ($event, file, open) {
       var openFiles = ['.pdf', '.jpg', '.png', '.jpeg'];
 
-      if (open && openFiles.indexOf(file.ext) > -1) {
-        $event.target.href = $state.href('open-file', { url: JSON.stringify(file) });
+      // if (open && openFiles.indexOf(file.ext) > -1) {
+        // $event.target.href = $state.href('open-file', { url: JSON.stringify(file) });
+      if (open) {
+        folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'preview-doc.html',
+            controller: function ($scope, $sce) {
+              var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/${ data }&embedded=true`;
+              $scope.url = $sce.trustAsResourceUrl(url);
+            },
+            size: 'lg',
+            keyboard: true
+          });
+        });
       } else {
         folderService.download(file.URL).then(function(response) {
           var fileName = file.name + file.ext;
