@@ -77,16 +77,22 @@ denningOnline
         // $event.target.href = $state.href('open-file', { url: JSON.stringify(file) });
       if (open) {
         folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
+          // data = 'test3rdPartyViewer/docx';
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'preview-doc.html',
             controller: function ($scope, $sce) {
               var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/${ data }&embedded=true`;
+              if (openFiles.indexOf(file.ext) > -1) {
+                url = `https://denningchat.com.my/denningwcf/${ data }`;
+              }
               $scope.url = $sce.trustAsResourceUrl(url);
+              $scope.filename = file.name + file.ext;
+              $scope.origin_url = `https://denningchat.com.my/denningwcf/${ data }`;
             },
             size: 'lg',
             keyboard: true
-          });
+          }).result.then(function () {}, function (res) {});
         });
       } else {
         folderService.download(file.URL).then(function(response) {
