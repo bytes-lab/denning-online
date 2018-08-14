@@ -6,7 +6,7 @@
   <div class="card">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-11 col-lg-9">
+        <div class="col-lg-11">
           <h2 class="c-purple f-500 f-20">{{ vm.title }}</h2>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Attach files for email" ng-click="vm.attachFile()"><i class="zmdi zmdi-attachment-alt"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.copyFile()"><i class="zmdi zmdi-copy"></i></button>
@@ -23,9 +23,9 @@
 
     <div class="card-body">
       <div class="row">
-      <div class="col-md-11 col-lg-9">
+      <div class="col-lg-11">
         <div class="table-responsive table-div p-15 f-14"> 
-          <table ng-table="vm.tableFilter" class="table folder table-vmiddle">
+          <table ng-table="vm.tableFilter" class="table folder table-vmiddle table-list">
             <tr class="ng-table-group" ng-repeat-start="group in $groups">
               <td colspan="4">
                 <a href="" ng-click="group.$hideRows = !group.$hideRows">
