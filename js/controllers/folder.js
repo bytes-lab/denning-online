@@ -98,39 +98,31 @@ denningOnline
       })
     }
 
-    self.preview = function ($event, file, open) {
-      var openFiles = ['.pdf', '.jpg', '.png', '.jpeg'];
+    self.preview = function (file) {
+      var openFiles = ['.jpg', '.png', '.jpeg'];
+      folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
+        // data = 'test3rdPartyViewer/docx';
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'preview-doc.html',
+          controller: function ($scope, $sce) {
+            var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/${ data }&embedded=true`;
+            if (openFiles.indexOf(file.ext) > -1) {
+              url = `https://denningchat.com.my/denningwcf/${ data }`;
+            }
 
-      if (open) {
-        folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
-          // data = 'test3rdPartyViewer/docx';
-          var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'preview-doc.html',
-            controller: function ($scope, $sce) {
-              var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/${ data }&embedded=true`;
-              if (openFiles.indexOf(file.ext) > -1) {
-                url = `https://denningchat.com.my/denningwcf/${ data }`;
-              }
+            $scope.url = $sce.trustAsResourceUrl(url);
+            $scope.filename = file.name + file.ext;
+            $scope.origin_url = `https://denningchat.com.my/denningwcf/${ data }`;
 
-              $scope.url = $sce.trustAsResourceUrl(url);
-              $scope.filename = file.name + file.ext;
-              $scope.origin_url = `https://denningchat.com.my/denningwcf/${ data }`;
-
-              $scope.download = function () {
-                Object.assign(document.createElement('a'), { 
-                  href: $scope.origin_url, 
-                  download: $scope.filename})
-                .click();                
-              }
-            },
-            size: 'lg',
-            keyboard: true
-          }).result.then(function () {}, function (res) {});
-        });
-      } else {
-
-      }
+            $scope.download = function () {
+              self.download(file);
+            }
+          },
+          size: 'lg',
+          keyboard: true
+        }).result.then(function () {}, function (res) {});
+      });
     }
 
     function initializeTable () {
