@@ -102,6 +102,10 @@ denningOnline
       });
     }
 
+    self.cancel = function () {
+      $state.go('properties.list');
+    }
+    
     angular.forEach(self.refList, function (value, key) {
       propertyService.getTypeList(value).then(function (data) {
         self.types[value] = data;

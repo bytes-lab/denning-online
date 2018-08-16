@@ -315,9 +315,15 @@ denningOnline
       })
     }
 
-    self.searchKeyPressed = function(events) {
-      if(event.which == 13){        
+    self.searchKeyPressed = function (events) {
+      if(event.which == 13) {
         self.doLogin(self.user);
+      }
+    }
+
+    self.enterTAC = function (event) {
+      if(event.which == 13) {
+        self.checkTAC(self.user);
       }
     }
   })

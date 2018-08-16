@@ -12,7 +12,8 @@ denningOnline
       count: 25,
     }, {
       getData: function(params) {
-        return contactService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+        return contactService.getList(params.page(), params.count(), self.keyword)
+        .then(function(data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
@@ -27,7 +28,8 @@ denningOnline
   .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, growlService, 
                                            contactService, $state, Auth, $scope, 
                                            refactorService, occupationService, raceService, 
-                                           religionService, IRDBranchService) {
+                                           religionService, IRDBranchService) 
+  {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -111,8 +113,9 @@ denningOnline
       self.can_edit = true;
       self.entity_ = null;
 
-      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strIDNo', 'strIDNoOld', 'strName', 
-                        'strEmailAddress', 'strWebSite', 'dtDateBirth', 'dtDateDeceased', 'strTaxFileNo'];
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strIDNo', 'strIDNoOld', 
+                        'strName', 'strEmailAddress', 'strWebSite', 'dtDateBirth', 'dtDateDeceased', 
+                        'strTaxFileNo'];
       for (ii in deleteList) {
         key = deleteList[ii];
         delete self.entity[key];
@@ -140,6 +143,10 @@ denningOnline
       });
     }
 
+    self.cancel = function () {
+      $state.go('contacts.list');
+    }
+    
     $scope.open = function($event, opened) {
       $event.preventDefault();
       $event.stopPropagation();

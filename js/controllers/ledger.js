@@ -1,5 +1,7 @@
 denningOnline
-  .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, quotationService, invoiceService, $state) {
+  .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, 
+                                          quotationService, invoiceService, $state) 
+  {
     var self = this;
     self.fileNo = $stateParams.fileNo;
     self.fileName = $stateParams.fileName;
@@ -8,7 +10,9 @@ denningOnline
     self.dataReady = false;
 
     function ledger_level2(category) {
-      $state.go('accounts.list2', {'fileNo': $stateParams.fileNo, 'fileName': self.fileName, 'category': category});
+      $state.go('accounts.list2', {'fileNo': $stateParams.fileNo, 
+                                   'fileName': self.fileName, 
+                                   'category': category});
     }
 
     ledgerService.getSummary(self.fileNo).then(function (data) {
