@@ -29,7 +29,7 @@ denningOnline
       }).then(function (response) {
         return response;
       }).catch(function (err) {
-        alert('Error: '+err.statusText);
+        alert('Error: ' + err.statusText);
       })
     }
     

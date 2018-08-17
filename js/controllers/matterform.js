@@ -767,16 +767,19 @@ denningOnline
       }
 
       fileMatterService.save(model).then(function (data) {
-        if (vm.model_) {
-          // vm.model = data;
-          vm.model.tmp = editControl;
-          vm.model.tmp.oldMatterCode = data.clsMatterCode;
-          
-          // $state.reload();
-        } else {
-          $state.go('file-matters.edit', { 'fileNo': data.strFileNo1 });
+        vm.model.tmp = editControl;
+     
+        if (data) { // create success or update
+          if (vm.model_) {
+            // vm.model = data;
+            vm.model.tmp.oldMatterCode = data.clsMatterCode;
+            
+            // $state.reload();
+          } else {
+            $state.go('file-matters.edit', { 'fileNo': data.strFileNo1 });
+          }
+          growlService.growl('Saved successfully!', 'success');          
         }
-        growlService.growl('Saved successfully!', 'success');
       })
     }
 
