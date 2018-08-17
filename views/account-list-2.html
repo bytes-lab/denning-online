@@ -21,7 +21,7 @@
               ng-checked="vm.categories.indexOf(category.key) > -1"
               ng-click="vm.toggleSelection(category.key)">
             <i class="input-helper"></i>
-            {{ category.val }}            
+            {{ category.val }}
           </div>
           <div class="f-500 c-purple">
             {{ vm.summary[$index].currentBalance }}
@@ -47,14 +47,14 @@
             <td data-title="'Description'" filter="{ 'description': 'text' }" sortable="'description'">
               {{ w.description }}
             </td>
-            <td data-title="'Dr'" filter="{ 'amountCR': 'text' }" sortable="'amountCR'">
+            <td data-title="'Dr'" filter="{ 'amountCR': 'text' }" sortable="'amountCR'" class="text-right">
               {{ w.amountCR }}
             </td>
-            <td data-title="'Cr'" filter="{ 'amountDR': 'text' }" sortable="'amountDR'">
+            <td data-title="'Cr'" filter="{ 'amountDR': 'text' }" sortable="'amountDR'" class="text-right">
               {{ w.amountDR }}
             </td>
-            <td data-title="'Balance'" filter="{ 'displayAmount': 'text' }" sortable="'displayAmount'">
-              {{ w.displayAmount }}
+            <td data-title="'Balance'" filter="{ 'displayAmount': 'text' }" sortable="'displayAmount'" class="text-right">
+              {{ w.runningBalance }}
             </td>
             <td data-title="'Mode'" filter="{ 'paymentMode': 'text' }" sortable="'paymentMode'">
               {{ w.paymentMode }}

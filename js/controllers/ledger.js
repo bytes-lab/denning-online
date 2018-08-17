@@ -61,8 +61,8 @@ denningOnline
     self.toggleAll = toggleAll;
     self.all_categories = [
       {'key': 'client', 'val': 'Client'}, 
-      {'key': 'fd', 'val': 'FD'}, 
       {'key': 'disb', 'val': 'Disbursement'}, 
+      {'key': 'fd', 'val': 'FD Control'}, 
       {'key': 'advance', 'val': 'Advanced'}, 
       {'key': 'other', 'val': 'Other'},
       {'key': 'recv', 'val': 'Receivables'},

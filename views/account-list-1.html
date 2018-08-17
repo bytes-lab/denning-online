@@ -5,16 +5,16 @@
         <div class="col-md-4">
           <div class="pmb-block">
             <div class="pmbb-header">
-                <h2 class="c-purple f-500">Matter</h2>
+                <h2 class="c-purple f-500 f-20">ACCOUNTS</h2>
             </div>
             <div class="pmbb-body p-l-20">
               <div class="pmbb-view">
                 <dl class="dl-horizontal">
-                    <dt>File No</dt>
+                    <dt>Matter No</dt>
                     <dd>{{ vm.fileNo }}</dd>
                 </dl>
                 <dl class="dl-horizontal">
-                    <dt>File Name</dt>
+                    <dt>Client</dt>
                     <dd>{{ vm.fileName }}</dd>
                 </dl>
               </div>
@@ -28,27 +28,27 @@
               <div class="pmbb-view">
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('client')">
                     <dt>Client</dt>
-                    <dd>{{ vm.summary[0].currentBalance }}</dd>
+                    <dd class="text-right">{{ vm.summary[0].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('disb')">
                     <dt>Disbursement</dt>
-                    <dd>{{ vm.summary[1].currentBalance }}</dd>
+                    <dd class="text-right">{{ vm.summary[1].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('fd')">
-                    <dt>FD</dt>
-                    <dd>{{ vm.summary[2].currentBalance }}</dd>
+                    <dt>FD Contorl</dt>
+                    <dd class="text-right">{{ vm.summary[2].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('advance')">
                     <dt>Advance</dt>
-                    <dd>{{ vm.summary[3].currentBalance }}</dd>
+                    <dd class="text-right">{{ vm.summary[3].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('other')">
                     <dt>Other</dt>
-                    <dd>{{ vm.summary[4].currentBalance }}</dd>
+                    <dd class="text-right">{{ vm.summary[4].currentBalance }}</dd>
                 </dl>
                 <dl class="dl-horizontal" ng-click="vm.ledger_level2('recv')">
                     <dt>Receivables</dt>
-                    <dd>{{ vm.summary[5].currentBalance }}</dd>
+                    <dd class="text-right">{{ vm.summary[5].currentBalance }}</dd>
                 </dl>
               </div>
             </div>
@@ -74,7 +74,7 @@
                       <td data-title="'To'">
                         {{ w.issueToName }}
                       </td>
-                      <td data-title="'Amount'">
+                      <td data-title="'Amount'" class="text-right">
                         {{ w.amount }}
                       </td>
                     </tr>
@@ -105,13 +105,13 @@
                       <td data-title="'To'" class="ng-table-fixed-column-20">
                         {{ w.issueToName }}
                       </td>
-                      <td data-title="'Amount'" class="ng-table-fixed-column-20">
+                      <td data-title="'Amount'" class="ng-table-fixed-column-20 text-right">
                         {{ w.amount }}
                       </td>
-                      <td data-title="'Paid'">
+                      <td data-title="'Paid'" class="text-right">
                         {{ w.paid }}
                       </td>
-                      <td data-title="'Balance'">
+                      <td data-title="'Balance'" class="text-right">
                         {{ w.balance }}
                       </td>                    
                     </tr>

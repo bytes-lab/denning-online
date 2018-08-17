@@ -97,7 +97,7 @@ denningOnline
     self.fileNo = $stateParams.fileNo;
 
     paymentRecordService.getList($stateParams.fileNo).then(function(data) {
-      self.title = 'Payment Records: '+data.strFileNo1+' ( '+data.strFilename+' )';
+      self.title = data.strFileNo1+' ( '+data.strFilename+' )';
       self.data = [];
 
       angular.forEach(data.section1, function(value, key) {
