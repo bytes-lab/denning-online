@@ -1,7 +1,7 @@
 denningOnline
   .controller('folderListCtrl', function(NgTableParams, $sce, $stateParams, $uibModal, folderService, 
                                          contactService, $state, Auth, $scope, $element, 
-                                         growlService, ngClipboard) 
+                                         growlService, ngClipboard, refactorService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -40,6 +40,7 @@ denningOnline
 
     folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
       self.title = data.name;
+      self.file = refactorService.parseFileNo(data.name);
       self.data = [];
       self.folders = [];
 

@@ -98,5 +98,13 @@ denningOnline
       res = service.convertDouble(res);
       return res;
     }
+
+    service.parseFileNo = function (strName) {
+      return { 
+        no: strName.split('(')[0],
+        name: strName.split('(')[1].split(')')[0]
+      }
+    }
+
     return service;
   })

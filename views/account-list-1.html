@@ -5,8 +5,8 @@
         <div class="col-md-4">
           <div class="pmb-block">
             <div class="pmbb-header">
-              <h2 class="c-purple f-500 f-20">ACCOUNTS</h2>
-              <ul class="actions">
+              <span class="d-header">ACCOUNTS</span>
+              <ul class="actions matter-action m-l-20">
                 <li class="dropdown" uib-dropdown>
                   <a href="" uib-dropdown-toggle>
                     <i class="zmdi zmdi-more"></i>
@@ -14,10 +14,22 @@
 
                   <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                      <a href="" ng-click="vm.editTab($index)">Edit</a>
+                      <a ui-sref="folders.list({ id: vm.fileNo, type: 'matter' })">FOLDER</a>
                     </li>
                     <li>
-                      <a href="" ng-click="vm.deleteTab($index)">Delete</a>
+                      <a ui-sref="notes.list({ fileNo: vm.fileNo, fileName: vm.fileName })">NOTES</a>
+                    </li>
+                    <li>
+                      <a ui-sref="payment-records.list({ fileNo: vm.fileNo })">PAYMENTS</a>
+                    </li>
+                    <li>
+                      <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'template' })">TEMPLATES</a>
+                    </li>
+                    <li>
+                      <a ui-sref="courtdiary({ keyword: vm.fileNo })">CALENDAR</a>
+                    </li>
+                    <li>
+                      <a href="">CHECKLIST</a>
                     </li>
                   </ul>
                 </li>

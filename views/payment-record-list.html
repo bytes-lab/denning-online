@@ -3,7 +3,36 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md-10">
-          <h2 class="c-purple f-500 f-20 m-b-15">PAYMENT RECORDS</h2>
+          <span class="d-header">PAYMENT RECORDS</span>
+          <ul class="actions matter-action m-l-20">
+            <li class="dropdown" uib-dropdown>
+              <a href="" uib-dropdown-toggle>
+                <i class="zmdi zmdi-more"></i>
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a ui-sref="folders.list({ id: vm.fileNo, type: 'matter' })">FOLDER</a>
+                </li>
+                <li>
+                  <a ui-sref="accounts.list({ fileNo: vm.fileNo, fileName: vm.fileName })">ACCOUNTS</a>
+                </li>
+                <li>
+                  <a ui-sref="notes.list({ fileNo: vm.fileNo, fileName: vm.fileName })">NOTES</a>
+                </li>
+                <li>
+                  <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'template' })">TEMPLATES</a>
+                </li>
+                <li>
+                  <a ui-sref="courtdiary({ keyword: vm.fileNo })">CALENDAR</a>
+                </li>
+                <li>
+                  <a href="">CHECKLIST</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
           <span class="c-purple f-500 f-18">{{ vm.title }}</span>
           <a class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
         </div>
