@@ -178,3 +178,15 @@ tr.selected {
 .table.folder input {
     margin-left: 18px;
 }
+
+.matter-action {
+    position: static !important;
+    display: inline-block;
+}
+
+.d-header {
+    color: #9c27b0 !important;
+    line-height: 45px;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+}

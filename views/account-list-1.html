@@ -5,7 +5,23 @@
         <div class="col-md-4">
           <div class="pmb-block">
             <div class="pmbb-header">
-                <h2 class="c-purple f-500 f-20">ACCOUNTS</h2>
+              <h2 class="c-purple f-500 f-20">ACCOUNTS</h2>
+              <ul class="actions">
+                <li class="dropdown" uib-dropdown>
+                  <a href="" uib-dropdown-toggle>
+                    <i class="zmdi zmdi-more"></i>
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                      <a href="" ng-click="vm.editTab($index)">Edit</a>
+                    </li>
+                    <li>
+                      <a href="" ng-click="vm.deleteTab($index)">Delete</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </div>
             <div class="pmbb-body p-l-20">
               <div class="pmbb-view">
