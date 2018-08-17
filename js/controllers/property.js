@@ -12,7 +12,8 @@ denningOnline
       count: 25
     }, {
       getData: function (params) {
-        return propertyService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+        return propertyService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
@@ -26,7 +27,8 @@ denningOnline
 
   .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, 
                                            $state, Auth, $uibModal, contactService, 
-                                           refactorService, uibDateParser) {
+                                           refactorService, uibDateParser) 
+  {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -158,7 +160,9 @@ denningOnline
     };
   })
 
-  .controller('propertyCreateModalCtrl', function ($uibuibModalInstance, property, viewMode, propertyService, Auth) {
+  .controller('propertyCreateModalCtrl', function ($uibModalInstance, property, viewMode, 
+                                                   propertyService, Auth) 
+  {
     var self = this;
     self.isDialog = true;
     self.viewMode = viewMode;
@@ -186,13 +190,13 @@ denningOnline
 
     self.save = function () {
       propertyService.save(self.entity).then(function(property) {
-        $uibuibModalInstance.close(property);
+        $uibModalInstance.close(property);
       })
       .catch(function(err){
       });
     };
 
     self.cancel = function () {
-      $uibuibModalInstance.close();
+      $uibModalInstance.close();
     };
   })
