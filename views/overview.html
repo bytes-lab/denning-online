@@ -6,6 +6,7 @@
   <section id="content">
 
     <div class="container">
+      <h2 class="f-400 m-b-25 m-l-10" style="color: #454545;">Dashboard ( {{ vm.today }} )</h2>
       <uib-tabset active="vm.idxTab" class="overview-tabs">
         <uib-tab ng-repeat="tab in vm.tabs" index="$index">
           <uib-tab-heading>
@@ -31,15 +32,32 @@
               </div>              
             </div>
           </uib-tab-heading>          
-          <div class="row">
+          <div class="row m-t-5">
+            <ul class="actions manage-widget">
+              <li class="dropdown" uib-dropdown>
+                <a href="" uib-dropdown-toggle class="btn btn-primary" style="width: 140px;height: 29px;padding-top: 5px;">
+                  Manage widgets {{ $index }}
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li>
+                    <a href="">Widget 1</a>
+                  </li>
+                  <li>
+                    <a href="">Widget 2</a>
+                  </li>
+                  <li>
+                    <a href="">Widget 3</a>
+                  </li>
+                  <li>
+                    <a href="">Widget 4</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
             <div ng-repeat="section in tab.sections" class="col-sm-12 section">
               <div class="row m-b-20">
-  <!--               <div class="group1">
-                  <div class="form-group">
-                    <input class="form-control group-label" ng-model="vm.model[group.key+'-title']" ng-value="section.title" />
-                  </div>
-                </div>
-   -->              
                 <ul class="actions">
                   <li class="dropdown" uib-dropdown>
                     <a href="" uib-dropdown-toggle>
@@ -70,7 +88,7 @@
               <span>&nbsp;New</span>
             </div>
           </uib-tab-heading>
-        </uib-tab>        
+        </uib-tab>
       </uib-tabset>
     </div>
     </section>

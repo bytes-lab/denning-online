@@ -2,6 +2,7 @@ denningOnline
   .controller('overviewCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService, Auth) {
     var vm = this;
     vm.idxTab = 0;
+    vm.today = moment(new Date()).format('ddd, MMM D, YYYY');
     vm.tabs = [
       {
         "title": "Matter Overview",

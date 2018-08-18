@@ -190,3 +190,9 @@ tr.selected {
     font-weight: 500 !important;
     font-size: 20px !important;
 }
+
+.manage-widget {
+    position: absolute !important;
+    top: 176px;
+    right: 30px;
+}
