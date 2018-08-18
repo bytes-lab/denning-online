@@ -1,5 +1,5 @@
 denningOnline
-  .controller('overviewCtrl', function($scope, $stateParams, fileMatterService, contactService, $state, matterFormService, Auth) {
+  .controller('overviewCtrl', function (overviewService) {
     var vm = this;
     vm.idxTab = 0;
     vm.today = moment(new Date()).format('ddd, MMM D, YYYY');
@@ -156,6 +156,10 @@ denningOnline
       ]
     ]
 
+    // overviewService.getWidgetList().then(function (data) {
+
+    // })
+    
     vm.deleteTab = function (idx) {
       vm.tabs.splice(idx, 1);
       vm.idxTab = idx -1;

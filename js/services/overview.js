@@ -6,31 +6,22 @@ denningOnline
   .service('overviewService', function(http) {
     var service = {};
 
-    service.getWidget1 = function () {
-      return http.GET('v1/WebOverView/Type1/widget1').then(function(resp) {
+    service.getWidget = function (url) {
+      return http.GET(url).then(function (resp) {
         return resp.data;
       });
     }
 
-    service.getWidget2 = function () {
-      return http.GET('v1/WebOverView/Type1/widget2').then(function(resp) {
+    service.getWidgetList = function () {
+      return http.GET('v1/WebOverView/Widget').then(function (resp) {
         return resp.data;
       });
     }
 
     service.save = function (entity) {
-      delete entity.dtDateEntered;
-      delete entity.dtDateUpdated;
-
-      if (entity.code) {
-        return http.PUT('/v1/table/Overview', entity).then(function(response) {
-          return response.data;
-        });
-      } else {
-        return http.POST('/v1/table/Overview', entity).then(function(response) {
-          return response.data;
-        });
-      }
+      return http.PUT('v1/WebOverView', entity).then(function (resp) {
+        return resp.data;
+      });
     }
     
     return service;
