@@ -35,22 +35,25 @@
           <div class="row m-t-5">
             <ul class="actions manage-widget">
               <li class="dropdown" uib-dropdown>
-                <a href="" uib-dropdown-toggle class="btn btn-primary" style="width: 140px;height: 29px;padding-top: 5px;">
-                  Manage widgets {{ $index }}
-                </a>
+                <a href="" uib-dropdown-toggle class="btn btn-primary" style="width: 140px;height: 29px;padding-top: 5px;">Manage widgets</a>
 
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li>
-                    <a href="">Widget 1</a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="item in vm.permittedWidgets[0]">
+                    <a href="" ng-click="vm.manageWidget($parent.$index, 0, item.type)">
+                      <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$index, 0, item.type, true)"></i>
+                      <span style="width: 19px;display: inline-block;" ng-if="!vm.checkWidget($parent.$index, 0, item.type, true)"></span>
+                      {{ item.title }}
+                    </a>
                   </li>
                   <li>
-                    <a href="">Widget 2</a>
+                    <hr>
                   </li>
-                  <li>
-                    <a href="">Widget 3</a>
-                  </li>
-                  <li>
-                    <a href="">Widget 4</a>
+                  <li ng-repeat="item in vm.permittedWidgets[1]">
+                    <a href="" ng-click="vm.manageWidget($parent.$index, 1, item.type)">
+                      <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$index, 1, item.type, true)"></i>
+                      <span style="width: 19px;display: inline-block;" ng-if="!vm.checkWidget($parent.$index, 1, item.type, true)"></span>
+                      {{ item.title }}
+                    </a>
                   </li>
                 </ul>
               </li>
@@ -58,23 +61,6 @@
 
             <div ng-repeat="section in tab.sections" class="col-sm-12 section">
               <div class="row m-b-20">
-                <ul class="actions">
-                  <li class="dropdown" uib-dropdown>
-                    <a href="" uib-dropdown-toggle>
-                      <i class="zmdi zmdi-more-vert"></i>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-right">
-                      <li ng-repeat="item in vm.permittedWidgets[$index]">
-                        <a href="" ng-click="vm.manageWidget($parent.$parent.$index, $parent.$index, item.type)">
-                          <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$parent.$index, $parent.$index, item.type, true)"></i>
-                          {{ item.title }}
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-
                 <formly-form model="vm.model" fields="section.widgets">
                 </formly-form>
               </div>
