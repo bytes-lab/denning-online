@@ -373,13 +373,3 @@ denningOnline
     
     this.bsResult = bestsellingService.getBestselling(this.img, this.name, this.range);
   })
-
-  .controller('recentitemCtrl', function(recentitemService){
-    
-    //Get Recent Items Widget Data
-    this.id = recentitemService.id;
-    this.name = recentitemService.name;
-    this.parseInt = recentitemService.price;
-    
-    this.riResult = recentitemService.getRecentitem(this.id, this.name, this.price);
-  })

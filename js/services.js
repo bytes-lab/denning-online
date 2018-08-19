@@ -47,24 +47,6 @@ denningOnline
     }
   }])
 
-
-  // =========================================================================
-  // Recent Items Widget Data
-  // =========================================================================
-  
-  .service('recentitemService', ['$resource', function($resource){
-    this.getRecentitem = function(id, name, price) {
-      var recentitemList = $resource("data/recent-items.json");
-      
-      return recentitemList.get ({
-        id: id,
-        name: name,
-        price: price
-      })
-    }
-  }])
-
-
   // =========================================================================
   // Recent Posts Widget Data
   // =========================================================================
