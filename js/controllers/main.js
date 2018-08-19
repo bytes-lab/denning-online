@@ -253,8 +253,7 @@ denningOnline
             self.resetPassword_ = 1;
             self.login = 0;
           } else {
-            Auth.staffLogin(userData.password)
-            .then(function (res) {
+            Auth.staffLogin(userData.password).then(function (res) {
               $state.go('home');
             })
             .catch(function (err) {
@@ -331,11 +330,11 @@ denningOnline
   // =========================================================================
   // Header
   // =========================================================================
-  .controller('headerCtrl', function($scope, $state, Auth, searchService){
+  .controller('headerCtrl', function($scope, $state, Auth, searchService) {
     $scope.app.loadChat = true;
     $scope.app.userInfo = Auth.getUserInfo();
     $scope.app.chat_url = '/chat/index.html?uid=';
-    
+
     $scope.app.getCls = function (mitem) {
       var cls = '';
       if (mitem.submenus) {

@@ -1,5 +1,5 @@
 denningOnline
-  .controller('overviewCtrl', function ($rootScope, overviewService) {
+  .controller('overviewCtrl', function ($rootScope, overviewService, formlyConfig) {
     var vm = this;
     vm.idxTab = 0;
     vm.today = moment(new Date()).format('ddd, MMM D, YYYY');
@@ -10,42 +10,68 @@ denningOnline
       6: 'col-sm-6'
     }
 
-    overviewService.getOverview().then(function (data) {
-      vm.tabs = data.tabs;
-      for (ii in vm.tabs) {
-        for (jj in vm.tabs[ii].sections) {
-          for (ij in vm.tabs[ii].sections[jj].widgets) {
-            vm.tabs[ii].sections[jj].widgets[ij].type = vm.tabs[ii].sections[jj].widgets[ij].name;
-            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.title = vm.tabs[ii].sections[jj].widgets[ij].title;
-            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.api = vm.tabs[ii].sections[jj].widgets[ij].api;
-            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.name = vm.tabs[ii].sections[jj].widgets[ij].name;
-            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.getClass[vm.tabs[ii].sections[jj].widgets[ij].colSpan];
+    vm.loadOverview = function () {
+      overviewService.getOverview().then(function (data) {
+        vm.tabs = data.tabs;
+        for (ii in vm.tabs) {
+          for (jj in vm.tabs[ii].sections) {
+            for (ij in vm.tabs[ii].sections[jj].widgets) {
+              vm.tabs[ii].sections[jj].widgets[ij].type = vm.tabs[ii].sections[jj].widgets[ij].name;
+              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.title = vm.tabs[ii].sections[jj].widgets[ij].title;
+              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.api = vm.tabs[ii].sections[jj].widgets[ij].api;
+              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.name = vm.tabs[ii].sections[jj].widgets[ij].name;
+              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.getClass[vm.tabs[ii].sections[jj].widgets[ij].colSpan];
 
-            delete vm.tabs[ii].sections[jj].widgets[ij].api;
-            delete vm.tabs[ii].sections[jj].widgets[ij].category;
-            delete vm.tabs[ii].sections[jj].widgets[ij].colSpan;
-            delete vm.tabs[ii].sections[jj].widgets[ij].heightSize;
-            delete vm.tabs[ii].sections[jj].widgets[ij].industry;
-            delete vm.tabs[ii].sections[jj].widgets[ij].name;
-            delete vm.tabs[ii].sections[jj].widgets[ij].ordering;
-            delete vm.tabs[ii].sections[jj].widgets[ij].title;
+              delete vm.tabs[ii].sections[jj].widgets[ij].api;
+              delete vm.tabs[ii].sections[jj].widgets[ij].category;
+              delete vm.tabs[ii].sections[jj].widgets[ij].colSpan;
+              delete vm.tabs[ii].sections[jj].widgets[ij].heightSize;
+              delete vm.tabs[ii].sections[jj].widgets[ij].industry;
+              delete vm.tabs[ii].sections[jj].widgets[ij].name;
+              delete vm.tabs[ii].sections[jj].widgets[ij].ordering;
+              delete vm.tabs[ii].sections[jj].widgets[ij].title;
+            }
           }
         }
-      }
-    })
+      })
 
-    vm.permittedWidgets = [[], []];
-    var data = $rootScope.overviewWidgets;
-    for (ii in data) {
-      var item = data[ii];
-      delete item.templateOptions;
-      item.type = item.name;
+      vm.permittedWidgets = [[], []];
+      var data = $rootScope.overviewWidgets;
+      for (ii in data) {
+        var item = data[ii];
+        // delete item.templateOptions;
+        item.type = item.name;
 
-      if (item.heightSize == 'small') {
-        vm.permittedWidgets[0].push(item);
-      } else {
-        vm.permittedWidgets[1].push(item);
+        if (item.heightSize == 'small') {
+          vm.permittedWidgets[0].push(item);
+        } else {
+          vm.permittedWidgets[1].push(item);
+        }
+
       }
+    }
+
+    // build overview widgets
+    if (!$rootScope.overviewWidgets) {
+      overviewService.getWidgetList().then(function (data) {
+        $rootScope.overviewWidgets = data;
+
+        for (ii in data) {
+          formlyConfig.setType({
+            name: data[ii].name,
+            templateUrl: `widget_t${data[ii].type}.html`,
+            controller: function ($scope, overviewService) {
+              overviewService.getWidget($scope.to.api).then(function (data) {
+                $scope.data = data;
+              });
+            } 
+          });
+        }
+
+        vm.loadOverview();        
+      })      
+    } else {
+      vm.loadOverview();
     }
 
     vm.deleteTab = function (idx) {
@@ -87,12 +113,26 @@ denningOnline
           vm.tabs[tabIdx].sections[secIdx].widgets.splice(idx-1, 1)
         }
       } else {
+        // get templateOptions for a new widget
+        var to;
+        for (ii = 0; ii < 2; ii++) {
+          for (jj in vm.permittedWidgets[ii]) {
+            if (vm.permittedWidgets[ii][jj].type == type) {
+              var item = vm.permittedWidgets[ii][jj];
+              to = {
+                api: item.api,
+                colSpan: vm.getClass[item.colSpan],
+                title: item.title,
+                name: item.name
+              }
+              break;
+            }
+          }
+        }
+
         vm.tabs[tabIdx].sections[secIdx].widgets.push({
           "type": type,
-          "templateOptions": {
-            "position": [2, 3], 
-            "num_matters": 3,
-          }
+          "templateOptions": to
         })
       }
     }

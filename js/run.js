@@ -771,21 +771,3 @@ denningOnline
       }]
     });
   })
-
-  .run(function ($rootScope, formlyConfig, overviewService) {
-    overviewService.getWidgetList().then(function (data) {
-      $rootScope.overviewWidgets = data;
-
-      for (ii in data) {
-        formlyConfig.setType({
-          name: data[ii].name,
-          templateUrl: `widget_t${data[ii].type}.html`,
-          controller: function ($scope, overviewService) {
-            overviewService.getWidget($scope.to.api).then(function (data) {
-              $scope.data = data;
-            });
-          } 
-        });
-      }
-    })
-  })
