@@ -4,6 +4,12 @@ denningOnline
     vm.idxTab = 0;
     vm.today = moment(new Date()).format('ddd, MMM D, YYYY');
 
+    vm.getClass = {
+      3: 'col-lg-3 col-md-4 col-sm-6',
+      4: 'col-md-4 col-sm-6',
+      6: 'col-sm-6'
+    }
+
     overviewService.getOverview().then(function (data) {
       vm.tabs = data.tabs;
       for (ii in vm.tabs) {
@@ -12,8 +18,8 @@ denningOnline
             vm.tabs[ii].sections[jj].widgets[ij].type = vm.tabs[ii].sections[jj].widgets[ij].name;
             vm.tabs[ii].sections[jj].widgets[ij].templateOptions.title = vm.tabs[ii].sections[jj].widgets[ij].title;
             vm.tabs[ii].sections[jj].widgets[ij].templateOptions.api = vm.tabs[ii].sections[jj].widgets[ij].api;
-            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.tabs[ii].sections[jj].widgets[ij].colSpan;
             vm.tabs[ii].sections[jj].widgets[ij].templateOptions.name = vm.tabs[ii].sections[jj].widgets[ij].name;
+            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.getClass[vm.tabs[ii].sections[jj].widgets[ij].colSpan];
 
             delete vm.tabs[ii].sections[jj].widgets[ij].api;
             delete vm.tabs[ii].sections[jj].widgets[ij].category;

@@ -85,8 +85,7 @@
 
 
 <script type="text/ng-template" id="widget_t1.html">
-  <div class="col-sm-6 col-md-4" ng-if="!to.hide">
-    
+  <div ng-class="to.colSpan" ng-if="!to.hide">
     <div class="bs-item z-depth-1">
       <ul class="actions">
         <li class="dropdown" uib-dropdown>
@@ -128,7 +127,46 @@
 </script>
 
 <script type="text/ng-template" id="widget_t5.html">
-  <div class="col-sm-6" ng-if="!to.hide">
+  <div ng-class="to.colSpan" ng-if="!to.hide">
+    <!-- Calendar -->
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ to.title }}</h2>
+        <ul class="actions">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="" ng-click="to.hide=true">Delete</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-body m-t-0">
+        <table class="table table-inner table-vmiddle table-list">
+          <thead>
+            <tr>
+              <th ng-repeat="w in data.table.header.values">{{ w }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat="row in data.table.rows">
+              <td ng-repeat="w in row.values track by $index" ng-class="{ 'c-cyan': $index == 0 }">{{ w }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>          
+  </div>      
+</script>
+
+<script type="text/ng-template" id="widget_t6.html">
+  <div ng-class="to.colSpan" ng-if="!to.hide">
     <!-- Calendar -->
     <div class="card">
       <div class="card-header">
@@ -166,13 +204,13 @@
   </div>      
 </script>
 
-<script type="text/ng-template" id="widget_t6.html">
-  <div class="col-sm-6" ng-if="!to.hide">
-    <!-- Calendar -->
-    <div class="card">
-      <div class="card-header">
-        <h2>{{ to.title }}</h2>
-        <ul class="actions">
+
+<script type="text/ng-template" id="widget_t2.html">
+  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
+    <div id="best-selling" class="dash-widget-item" data-ng-controller="bestsellingCtrl as wctrl">
+      <div class="dash-widget-header">
+        <div class="dash-widget-title">Best Sellings</div>
+        <ul class="actions actions-alt">
           <li class="dropdown" uib-dropdown>
             <a href="" uib-dropdown-toggle>
               <i class="zmdi zmdi-more-vert"></i>
@@ -184,25 +222,35 @@
               </li>
             </ul>
           </li>
-        </ul>
+        </ul>        
+        <img src="img/widgets/alpha.jpg" alt="">
+        <div class="main-item">
+          <small>Samsung Galaxy Alpha</small>
+          <h2>$799.99</h2>
+        </div>
       </div>
 
-      <div class="card-body m-t-0">
-        <table class="table table-inner table-vmiddle">
-          <thead>
-            <tr>
-              <th ng-repeat="w in data.table.header.values">{{ w }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr data-ng-repeat="row in data.table.rows">
-              <td ng-repeat="w in row.values track by $index" ng-class="{ 'c-cyan': $index == 0 }">{{ w }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="listview p-t-5">
+        <a class="lv-item" href="" data-ng-repeat="w in wctrl.bsResult.list">
+          <div class="media">
+            <div class="pull-left">
+              <img class="lv-img-sm" data-ng-src="img/widgets/{{ w.img }}" alt="">
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{ w.name }}</div>
+              <small class="lv-small">{{ w.range }}</small>
+            </div>
+          </div>
+        </a>
+
+        <div class="clearfix"></div>
+
+        <a class="lv-footer" href="">
+          View All
+        </a>
       </div>
-    </div>          
-  </div>      
+    </div>
+  </div>
 </script>
 
 <script type="text/ng-template" id="widget_t3.html">
@@ -289,54 +337,6 @@
           <div class="percent">84</div>
           <div class="pie-title">Total Opened</div>
         </div>
-      </div>
-    </div>
-  </div>
-</script>
-
-<script type="text/ng-template" id="widget_t2.html">
-  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
-    <div id="best-selling" class="dash-widget-item" data-ng-controller="bestsellingCtrl as wctrl">
-      <div class="dash-widget-header">
-        <div class="dash-widget-title">Best Sellings</div>
-        <ul class="actions actions-alt">
-          <li class="dropdown" uib-dropdown>
-            <a href="" uib-dropdown-toggle>
-              <i class="zmdi zmdi-more-vert"></i>
-            </a>
-
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li>
-                <a href="" ng-click="to.hide=true">Delete</a>
-              </li>
-            </ul>
-          </li>
-        </ul>        
-        <img src="img/widgets/alpha.jpg" alt="">
-        <div class="main-item">
-          <small>Samsung Galaxy Alpha</small>
-          <h2>$799.99</h2>
-        </div>
-      </div>
-
-      <div class="listview p-t-5">
-        <a class="lv-item" href="" data-ng-repeat="w in wctrl.bsResult.list">
-          <div class="media">
-            <div class="pull-left">
-              <img class="lv-img-sm" data-ng-src="img/widgets/{{ w.img }}" alt="">
-            </div>
-            <div class="media-body">
-              <div class="lv-title">{{ w.name }}</div>
-              <small class="lv-small">{{ w.range }}</small>
-            </div>
-          </div>
-        </a>
-
-        <div class="clearfix"></div>
-
-        <a class="lv-footer" href="">
-          View All
-        </a>
       </div>
     </div>
   </div>

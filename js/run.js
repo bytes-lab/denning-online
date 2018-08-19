@@ -777,17 +777,15 @@ denningOnline
       $rootScope.overviewWidgets = data;
 
       for (ii in data) {
-        var item = data[ii];
-
         formlyConfig.setType({
-          name: item.name,
-          templateUrl: `widget_t${item.type}.html`,
+          name: data[ii].name,
+          templateUrl: `widget_t${data[ii].type}.html`,
           controller: function ($scope, overviewService) {
             overviewService.getWidget($scope.to.api).then(function (data) {
               $scope.data = data;
             });
           } 
-        });      
+        });
       }
     })
   })
