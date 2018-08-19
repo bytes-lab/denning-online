@@ -798,7 +798,12 @@ denningOnline
 
     formlyConfig.setType({
       name: 'widget3',
-      templateUrl: 'widget3.html'
+      templateUrl: 'widget3.html',
+      controller: function ($scope, overviewService) {
+        overviewService.getWidget('v1/WebOverView/Type1/widget3').then(function (data) {
+          $scope.data = data;
+        });
+      }
     });
 
     formlyConfig.setType({

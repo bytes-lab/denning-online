@@ -11,6 +11,7 @@ denningOnline
           for (ij in vm.tabs[ii].sections[jj].widgets) {
             vm.tabs[ii].sections[jj].widgets[ij].type = vm.tabs[ii].sections[jj].widgets[ij].name;
             vm.tabs[ii].sections[jj].widgets[ij].templateOptions.title = vm.tabs[ii].sections[jj].widgets[ij].title;
+            
             delete vm.tabs[ii].sections[jj].widgets[ij].api;
             delete vm.tabs[ii].sections[jj].widgets[ij].category;
             delete vm.tabs[ii].sections[jj].widgets[ij].colSpan;
