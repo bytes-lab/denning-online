@@ -813,7 +813,12 @@ denningOnline
 
     formlyConfig.setType({
       name: 'widget5',
-      templateUrl: 'widget5.html'
+      templateUrl: 'widget5.html',
+      controller: function ($scope, overviewService) {
+        overviewService.getWidget('v1/WebOverView/Type5/widget5').then(function (data) {
+          $scope.data = data;
+        });
+      }
     });
 
     formlyConfig.setType({

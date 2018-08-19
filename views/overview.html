@@ -64,6 +64,7 @@
                 <formly-form model="vm.model" fields="section.widgets">
                 </formly-form>
               </div>
+              <div class="clearfix"></div>
             </div>
           </div>
         </uib-tab>
@@ -270,9 +271,9 @@
 <script type="text/ng-template" id="widget5.html">
   <div class="col-sm-6" ng-if="!to.hide">
     <!-- Calendar -->
-    <div class="card" data-ng-controller="recentitemCtrl as rictrl">
+    <div class="card">
       <div class="card-header">
-        <h2>Matter Collection <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
+        <h2>Monthly Matter Growth</h2>
         <ul class="actions">
           <li class="dropdown" uib-dropdown>
             <a href="" uib-dropdown-toggle>
@@ -291,18 +292,14 @@
       <div class="card-body m-t-0">
         <table class="table table-inner table-vmiddle">
           <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th style="width: 60px">Price</th>
-          </tr>
+            <tr>
+              <th ng-repeat="w in data.table.header.values">{{ w }}</th>
+            </tr>
           </thead>
           <tbody>
-          <tr data-ng-repeat="w in rictrl.riResult.list">
-            <td class="f-500 c-cyan">{{ w.id }}</td>
-            <td>{{ w.name }}</td>
-            <td class="f-500 c-cyan">{{ w.price }}</td>
-          </tr>
+            <tr data-ng-repeat="row in data.table.rows">
+              <td ng-repeat="w in row.values track by $index" ng-class="{ 'c-cyan': $index == 0 }">{{ w }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
