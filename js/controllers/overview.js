@@ -156,10 +156,41 @@ denningOnline
       ]
     ]
 
-    // overviewService.getWidgetList().then(function (data) {
+    overviewService.getOverview().then(function (data) {
+      vm.tabs = data.tabs;
+      for (ii in vm.tabs) {
+        for (jj in vm.tabs[ii].sections) {
+          for (ij in vm.tabs[ii].sections[jj].widgets) {
+            vm.tabs[ii].sections[jj].widgets[ij].type = vm.tabs[ii].sections[jj].widgets[ij].name;
+            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.title = vm.tabs[ii].sections[jj].widgets[ij].title;
+            delete vm.tabs[ii].sections[jj].widgets[ij].api;
+            delete vm.tabs[ii].sections[jj].widgets[ij].category;
+            delete vm.tabs[ii].sections[jj].widgets[ij].colSpan;
+            delete vm.tabs[ii].sections[jj].widgets[ij].heightSize;
+            delete vm.tabs[ii].sections[jj].widgets[ij].industry;
+            delete vm.tabs[ii].sections[jj].widgets[ij].name;
+            delete vm.tabs[ii].sections[jj].widgets[ij].ordering;
+            delete vm.tabs[ii].sections[jj].widgets[ij].title;
+          }
+        }
+      }
+    })
 
-    // })
-    
+    vm.permittedWidgets = [[], []];
+    overviewService.getWidgetList().then(function (data) {
+      for (ii in data) {
+        var item = data[ii];
+        delete item.templateOptions;
+        item.type = item.name;
+
+        if (item.heightSize == 'small') {
+          vm.permittedWidgets[0].push(item);
+        } else {
+          vm.permittedWidgets[1].push(item);
+        }
+      }
+    })
+
     vm.deleteTab = function (idx) {
       vm.tabs.splice(idx, 1);
       vm.idxTab = idx -1;

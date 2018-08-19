@@ -20,7 +20,9 @@ denningOnline
     });
   })
 
-  .run(function(formlyConfig, contactService, propertyService, legalFirmService, presetbillService, spaChecklistService, bankBranchService) {
+  .run(function(formlyConfig, contactService, propertyService, legalFirmService, 
+                presetbillService, spaChecklistService, bankBranchService) 
+  {
     var attributes = [
       'date-disabled',
       'custom-class',
@@ -824,8 +826,11 @@ denningOnline
       templateUrl: 'widget8.html'
     });
 
-    formlyConfig.setType({
-      name: 'widget9',
-      templateUrl: 'widget9.html'
-    });
+    // dummy widgets
+    for (var i = 9; i < 34; i++) {
+      formlyConfig.setType({
+        name: 'widget'+i,
+        templateUrl: 'widget9.html'
+      });
+    }
   })

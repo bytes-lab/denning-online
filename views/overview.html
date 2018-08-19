@@ -11,7 +11,7 @@
         <uib-tab ng-repeat="tab in vm.tabs" index="$index">
           <uib-tab-heading>
             <div>
-              <span contenteditable="false" spellcheck=false class="m-r-5 tab-title-{{ $index }}" ng-blur="vm.finishEdit($index)" ng-keydown="vm.editTitle($event, $index)">{{ tab.title }}</span>
+              <span contenteditable="false" spellcheck=false class="m-r-5 tab-title-{{ $index }}" ng-blur="vm.finishEdit($index)" ng-keydown="vm.editTitle($event, $index)">{{ tab.displayName }}</span>
               <div class="pull-right">
                 <ul class="actions">
                   <li class="dropdown" uib-dropdown>
@@ -37,7 +37,7 @@
               <li class="dropdown" uib-dropdown>
                 <a href="" uib-dropdown-toggle class="btn btn-primary" style="width: 140px;height: 29px;padding-top: 5px;">Manage widgets</a>
 
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" style="left: -135px;">
                   <li ng-repeat="item in vm.permittedWidgets[0]">
                     <a href="" ng-click="vm.manageWidget($parent.$index, 0, item.type)">
                       <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$index, 0, item.type, true)"></i>
