@@ -547,7 +547,8 @@ denningOnline
       name: 'premises-rent',
       templateUrl: 'premises-rent.html',
       controller: function ($scope) {
-        $scope.types = ['Dwelling House', 'Apartment', 'Condominium', 'Shop', 'Office', 'Factory', 'Workshop', 'Land'];
+        $scope.types = ['Dwelling House', 'Apartment', 'Condominium', 'Shop', 'Office', 
+                        'Factory', 'Workshop', 'Land'];
         $scope.queryList = function (q) {
           return $scope.types.filter(function(item) {
             return item.search(new RegExp(q, "i")) > -1;
@@ -771,76 +772,22 @@ denningOnline
     });
   })
 
-  .run(function (formlyConfig) {
-    formlyConfig.setType({
-      name: 'widget1',
-      templateUrl: 'widget1.html',
-      controller: function ($scope, $state, overviewService) {
-        overviewService.getWidget('v1/WebOverView/Type1/widget1').then(function (data) {
-          $scope.data = data;
-        });
+  .run(function ($rootScope, formlyConfig, overviewService) {
+    overviewService.getWidgetList().then(function (data) {
+      $rootScope.overviewWidgets = data;
 
-        $scope.showMatter = function (item) {          
-          $state.go('file-matters.edit', {'fileNo': item.values[0]});
-        }
+      for (ii in data) {
+        var item = data[ii];
+
+        formlyConfig.setType({
+          name: item.name,
+          templateUrl: `widget_t${item.type}.html`,
+          controller: function ($scope, overviewService) {
+            overviewService.getWidget($scope.to.api).then(function (data) {
+              $scope.data = data;
+            });
+          } 
+        });      
       }
-    });
-
-    formlyConfig.setType({
-      name: 'widget2',
-      templateUrl: 'widget2.html',
-      controller: function ($scope, overviewService) {
-        overviewService.getWidget('v1/WebOverView/Type1/widget2').then(function (data) {
-          $scope.data = data;
-        });
-      }
-    });
-
-    formlyConfig.setType({
-      name: 'widget3',
-      templateUrl: 'widget3.html',
-      controller: function ($scope, overviewService) {
-        overviewService.getWidget('v1/WebOverView/Type1/widget3').then(function (data) {
-          $scope.data = data;
-        });
-      }
-    });
-
-    formlyConfig.setType({
-      name: 'widget4',
-      templateUrl: 'widget4.html'
-    });
-
-    formlyConfig.setType({
-      name: 'widget5',
-      templateUrl: 'widget5.html',
-      controller: function ($scope, overviewService) {
-        overviewService.getWidget('v1/WebOverView/Type5/widget5').then(function (data) {
-          $scope.data = data;
-        });
-      }
-    });
-
-    formlyConfig.setType({
-      name: 'widget6',
-      templateUrl: 'widget6.html'
-    });
-
-    formlyConfig.setType({
-      name: 'widget7',
-      templateUrl: 'widget7.html'
-    });
-
-    formlyConfig.setType({
-      name: 'widget8',
-      templateUrl: 'widget8.html'
-    });
-
-    // dummy widgets
-    for (var i = 9; i < 34; i++) {
-      formlyConfig.setType({
-        name: 'widget'+i,
-        templateUrl: 'widget9.html'
-      });
-    }
+    })
   })

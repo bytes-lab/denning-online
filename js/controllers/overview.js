@@ -1,5 +1,5 @@
 denningOnline
-  .controller('overviewCtrl', function (overviewService) {
+  .controller('overviewCtrl', function ($rootScope, overviewService) {
     var vm = this;
     vm.idxTab = 0;
     vm.today = moment(new Date()).format('ddd, MMM D, YYYY');
@@ -11,7 +11,10 @@ denningOnline
           for (ij in vm.tabs[ii].sections[jj].widgets) {
             vm.tabs[ii].sections[jj].widgets[ij].type = vm.tabs[ii].sections[jj].widgets[ij].name;
             vm.tabs[ii].sections[jj].widgets[ij].templateOptions.title = vm.tabs[ii].sections[jj].widgets[ij].title;
-            
+            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.api = vm.tabs[ii].sections[jj].widgets[ij].api;
+            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.tabs[ii].sections[jj].widgets[ij].colSpan;
+            vm.tabs[ii].sections[jj].widgets[ij].templateOptions.name = vm.tabs[ii].sections[jj].widgets[ij].name;
+
             delete vm.tabs[ii].sections[jj].widgets[ij].api;
             delete vm.tabs[ii].sections[jj].widgets[ij].category;
             delete vm.tabs[ii].sections[jj].widgets[ij].colSpan;
@@ -26,19 +29,18 @@ denningOnline
     })
 
     vm.permittedWidgets = [[], []];
-    overviewService.getWidgetList().then(function (data) {
-      for (ii in data) {
-        var item = data[ii];
-        delete item.templateOptions;
-        item.type = item.name;
+    var data = $rootScope.overviewWidgets;
+    for (ii in data) {
+      var item = data[ii];
+      delete item.templateOptions;
+      item.type = item.name;
 
-        if (item.heightSize == 'small') {
-          vm.permittedWidgets[0].push(item);
-        } else {
-          vm.permittedWidgets[1].push(item);
-        }
+      if (item.heightSize == 'small') {
+        vm.permittedWidgets[0].push(item);
+      } else {
+        vm.permittedWidgets[1].push(item);
       }
-    })
+    }
 
     vm.deleteTab = function (idx) {
       vm.tabs.splice(idx, 1);
