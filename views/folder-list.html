@@ -42,7 +42,7 @@
           <button class="btn btn-default pull-right m-r-5 f-15" title="Move files" ng-click="vm.moveFile()"><i class="zmdi zmdi-mail-send"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Share files" ng-click="vm.shareFile()"><i class="zmdi zmdi-share"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.deleteFile()"><i class="zmdi zmdi-delete"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.refresh()"><i class="zmdi zmdi-refresh-alt"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Refresh" ng-click="vm.refresh()"><i class="zmdi zmdi-refresh-alt"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Create a folder" ng-click="vm.createFolder()"><i class="zmdi zmdi-collection-plus"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.upload()"><i class="zmdi zmdi-upload"></i></button>
           <input type="file" class="file-upload hidden" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
@@ -94,7 +94,7 @@
                 <button class="btn btn-default btn-sm waves-circle m-l-5" title="Download" ng-click="vm.download(file)">
                   <i class="zmdi zmdi-download"></i>
                 </button>
-                <button class="btn btn-default btn-sm waves-circle m-l-5" ngclipboard ngclipboard-success="vm.copySuccess(e);" data-clipboard-text="{{ file.name }}{{ file.ext }}" title="Copy link"><i class="zmdi zmdi-collection-text"></i></button>
+                <button class="btn btn-default btn-sm waves-circle m-l-5" ng-click="vm.copyLink(file)" title="Copy link"><i class="zmdi zmdi-collection-text"></i></button>
               </td>
             </tr>
           </table>

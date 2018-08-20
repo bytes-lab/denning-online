@@ -338,18 +338,31 @@ denningOnline
       var urls = '';
       var ids = Object.keys(self.checkboxes.items);
 
+      var links = [];
       angular.forEach(self.data, function(value, key) {
         if (ids.indexOf(value.id.toString()) > -1) {
-          urls += value.name + value.ext + '\n';
+          links.push(folderService.getLink(value.URL.replace('/matter/', '/getOneTimeLink/')));
         }
       })
-      ngClipboard.toClipboard(urls);
-      growlService.growl('Links copied successfully!', 'success');
+
+      Promise.all(links).then(function (data) {
+        var links = ''
+        for (ii in data) {
+          links += `https://denningchat.com.my/denningwcf/${data[ii]}\n`;
+        }
+
+        console.log(links);
+        ngClipboard.toClipboard(links);
+        growlService.growl('Links copied successfully!', 'success');
+      })
     }
 
-    self.copySuccess = function(e) {
-      e.clearSelection();
-      growlService.growl('Link copied successfully!', 'success'); 
+    self.copyLink = function(file) {
+      folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
+        var link = `https://denningchat.com.my/denningwcf/${data}`;
+        ngClipboard.toClipboard(link);
+        growlService.growl('Link copied successfully!', 'success'); 
+      })
     }
   })
 
