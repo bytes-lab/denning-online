@@ -42,7 +42,7 @@
                     <a href="" ng-click="vm.manageWidget($parent.$index, 0, item.type)">
                       <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$index, 0, item.type, true)"></i>
                       <span style="width: 19px;display: inline-block;" ng-if="!vm.checkWidget($parent.$index, 0, item.type, true)"></span>
-                      {{ item.title }}
+                      {{ item.templateOptions.title }}
                     </a>
                   </li>
                   <li>
@@ -52,7 +52,7 @@
                     <a href="" ng-click="vm.manageWidget($parent.$index, 1, item.type)">
                       <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$index, 1, item.type, true)"></i>
                       <span style="width: 19px;display: inline-block;" ng-if="!vm.checkWidget($parent.$index, 1, item.type, true)"></span>
-                      {{ item.title }}
+                      {{ item.templateOptions.title }}
                     </a>
                   </li>
                 </ul>
@@ -107,13 +107,13 @@
         </div>
         <div class="col-xs-8" style="text-align: left;">
           <ul style="list-style-type: none;">
-            <li ng-repeat="item in data.table.rows" style="cursor: pointer;" ui-sref="file-matters.edit({ fileNo: item.values[0] })" ng-if="to.name == 'widget1'">
+            <li ng-repeat="item in data.table.rows" style="cursor: pointer;" ui-sref="file-matters.edit({ fileNo: item.values[0] })" ng-if="to.ordering == 1">
               <span>{{ item.values[0] }} {{ item.values[1] }}</span>
               <div class="c-cyan f-10">
                 Added {{ item.updatedDate }}
               </div>
             </li>
-            <li ng-repeat="item in data.table.rows" ng-if="to.name == 'widget2'">
+            <li ng-repeat="item in data.table.rows" ng-if="to.ordering == 2">
               <div class="c-cyan f-12 m-r-10" style="display: inline;">
                 {{ item.values[0] }}
               </div>

@@ -16,20 +16,7 @@ denningOnline
         for (ii in vm.tabs) {
           for (jj in vm.tabs[ii].sections) {
             for (ij in vm.tabs[ii].sections[jj].widgets) {
-              vm.tabs[ii].sections[jj].widgets[ij].type = vm.tabs[ii].sections[jj].widgets[ij].name;
-              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.title = vm.tabs[ii].sections[jj].widgets[ij].title;
-              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.api = vm.tabs[ii].sections[jj].widgets[ij].api;
-              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.name = vm.tabs[ii].sections[jj].widgets[ij].name;
-              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.getClass[vm.tabs[ii].sections[jj].widgets[ij].colSpan];
-
-              delete vm.tabs[ii].sections[jj].widgets[ij].api;
-              delete vm.tabs[ii].sections[jj].widgets[ij].category;
-              delete vm.tabs[ii].sections[jj].widgets[ij].colSpan;
-              delete vm.tabs[ii].sections[jj].widgets[ij].heightSize;
-              delete vm.tabs[ii].sections[jj].widgets[ij].industry;
-              delete vm.tabs[ii].sections[jj].widgets[ij].name;
-              delete vm.tabs[ii].sections[jj].widgets[ij].ordering;
-              delete vm.tabs[ii].sections[jj].widgets[ij].title;
+              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.getClass[vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan];
             }
           }
         }
@@ -39,15 +26,12 @@ denningOnline
       var data = $rootScope.overviewWidgets;
       for (ii in data) {
         var item = data[ii];
-        // delete item.templateOptions;
-        item.type = item.name;
-
-        if (item.heightSize == 'small') {
+        item.templateOptions.colSpan = vm.getClass[item.templateOptions.colSpan];
+        if (item.templateOptions.heightSize == 'small') {
           vm.permittedWidgets[0].push(item);
         } else {
           vm.permittedWidgets[1].push(item);
         }
-
       }
     }
 
@@ -58,8 +42,8 @@ denningOnline
 
         for (ii in data) {
           formlyConfig.setType({
-            name: data[ii].name,
-            templateUrl: `widget_t${data[ii].type}.html`,
+            name: data[ii].type,
+            templateUrl: `widget_t${data[ii].templateOptions.subCategory}.html`,
             controller: function ($scope, overviewService) {
               overviewService.getWidget($scope.to.api).then(function (data) {
                 $scope.data = data;
@@ -68,7 +52,7 @@ denningOnline
           });
         }
 
-        vm.loadOverview();        
+        vm.loadOverview();
       })      
     } else {
       vm.loadOverview();
@@ -82,7 +66,7 @@ denningOnline
 
     vm.newTab = function () {
       vm.tabs.push({
-        'title': 'New Tab',
+        'displayName': 'New Tab',
         'sections': [{}, {}]
       })
 
@@ -101,11 +85,16 @@ denningOnline
       if (event.which == 13) {
         event.stopPropagation();
         vm.finishEdit(idx);
+        vm.saveOverview();
       }
     }
 
     vm.manageWidget = function (tabIdx, secIdx, type) {
       var idx = vm.checkWidget(tabIdx, secIdx, type);
+      if (idx < 0) {  // new tab
+        return false;
+      }
+
       if (idx > 0) {
         if (vm.tabs[tabIdx].sections[secIdx].widgets[idx-1].templateOptions.hide) {
           vm.tabs[tabIdx].sections[secIdx].widgets[idx-1].templateOptions.hide = false;
@@ -119,12 +108,7 @@ denningOnline
           for (jj in vm.permittedWidgets[ii]) {
             if (vm.permittedWidgets[ii][jj].type == type) {
               var item = vm.permittedWidgets[ii][jj];
-              to = {
-                api: item.api,
-                colSpan: vm.getClass[item.colSpan],
-                title: item.title,
-                name: item.name
-              }
+              to = item.templateOptions;
               break;
             }
           }
@@ -141,6 +125,10 @@ denningOnline
       var flag = -1,
           hide = false,
           widgets = vm.tabs[tabIdx].sections[secIdx].widgets;
+
+      if (typeof widgets == "undefined") {
+        return -1;
+      }
 
       for (var i = 0; i < widgets.length; i++) {
         if (widgets[i].type == type) {
