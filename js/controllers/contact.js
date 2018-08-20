@@ -128,7 +128,9 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
       });
     } else {
-      self.entity = {};
+      self.entity = {
+        strCitizenship: 'Malaysia Citizen'
+      };
     }
 
     self.save = function () {

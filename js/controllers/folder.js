@@ -357,12 +357,18 @@ denningOnline
       })
     }
 
-    self.copyLink = function(file) {
+    self.copyLink = function(file) {      
       folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
         var link = `https://denningchat.com.my/denningwcf/${data}`;
-        ngClipboard.toClipboard(link);
+        console.log(link);
+        // ngClipboard.toClipboard(link);
+        self.copyClipboard(link);
         growlService.growl('Link copied successfully!', 'success'); 
       })
+    }
+
+    self.copyClipboard = function (body) {
+      ngClipboard.toClipboard('body');
     }
   })
 
