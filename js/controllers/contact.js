@@ -28,7 +28,7 @@ denningOnline
   .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, growlService, 
                                            contactService, $state, Auth, $scope, 
                                            refactorService, occupationService, raceService, 
-                                           religionService, IRDBranchService) 
+                                           religionService, IRDBranchService, cityService) 
   {
     var self = this;
     self.isDialog = false;
@@ -81,6 +81,21 @@ denningOnline
     self.queryOccupation = function (searchText) {
       return occupationService.getList(1, 10, searchText).then(function (resp) {
         return resp;
+      });
+    }
+
+    self.postcodeChange = function (item) {
+      if (item) {
+        self.entity.strPostCode = item.postcode;
+        self.entity.strCity = item.city;
+        self.entity.strState = item.state;
+        self.entity.strCountry = item.country;        
+      }
+    }
+
+    self.queryPostcodes = function (searchText) {
+      return cityService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
       });
     }
 

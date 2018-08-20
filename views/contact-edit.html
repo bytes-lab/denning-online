@@ -204,7 +204,20 @@
             <dt class="p-t-10">Postcode</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-search-text="qsct"
+                  md-items="item in vm.queryPostcodes(qsct)"
+                  md-selected-item-change="vm.postcodeChange(item)"
+                  md-item-text="item.postcode"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+                      {{ item.postcode }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
