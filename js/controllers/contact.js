@@ -13,7 +13,7 @@ denningOnline
     }, {
       getData: function(params) {
         return contactService.getList(params.page(), params.count(), self.keyword)
-        .then(function(data) {
+        .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
@@ -169,7 +169,10 @@ denningOnline
     };
 
     self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      var lastModifiedDate = typeof file.lastModified === "number" ? new Date(file.lastModified) : file.lastModifiedDate;
+      var lastModifiedDate = file.lastModifiedDate;
+      if (typeof file.lastModified === "number") {
+        lastModifiedDate = new Date(file.lastModified);
+      }
 
       var info = {
         "fileNo1": self.entity.code,
@@ -191,7 +194,7 @@ denningOnline
           growlService('The file(s) uploaded successfully.', 'success');
         }
       })
-      .catch(function(err){
+      .catch(function (err) {
       });
     };
 
@@ -227,7 +230,9 @@ denningOnline
     };
   })
 
-  .controller('deleteEntityModalCtrl', function ($scope, $uibModalInstance, $state, entity, on_list, entity_type, service, return_state) {
+  .controller('deleteEntityModalCtrl', function ($scope, $uibModalInstance, $state, entity, on_list, 
+                                                 entity_type, service, return_state) 
+  {
     $scope.entity_type = entity_type;
 
     $scope.ok = function () {
@@ -251,7 +256,9 @@ denningOnline
     };
   })
 
-  .controller('contactCreateModalCtrl', function ($uibModalInstance, party, viewMode, contactService, IRDBranchService, Auth) {
+  .controller('contactCreateModalCtrl', function ($uibModalInstance, party, viewMode, contactService, 
+                                                  IRDBranchService, Auth) 
+  {
     var self = this;
     self.isDialog = true;
     self.viewMode = viewMode;
