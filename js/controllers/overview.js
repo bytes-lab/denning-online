@@ -74,8 +74,10 @@ denningOnline
 
     vm.newTab = function () {
       vm.tabs.push({
-        'displayName': 'New Tab',
-        'sections': [{}, {}]
+        'displayName': `OverviewTab${vm.tabs.length+1}`,
+        'sections': [{}, {}],
+        'isActive': true,
+        'isDefault': false
       })
 
       vm.saveOverview();

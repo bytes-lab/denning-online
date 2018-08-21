@@ -132,7 +132,19 @@
             <dt class="p-t-10">Contact Type</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strCustomerType" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.entity.strCustomerType"
+                  md-search-text="ql1"
+                  md-items="item in vm.queryList(vm.contactTypes, ql1)"
+                  md-item-text="item"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="ql1" class="col-1" md-highlight-flags="i">{{ item }}</span>
+                </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
