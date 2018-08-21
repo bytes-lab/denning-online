@@ -42,11 +42,12 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.entity.strTitle"
-                  md-search-text="searchText"
-                  md-items="item in vm.queryFields('Salutations', searchText)"
+                  md-selected-item="vm.strTitle_"
+                  md-search-text="qstl"
+                  md-items="item in vm.queryFields('Salutations', qstl)"
                   md-item-text="item.description"
                   md-min-length="0"
+                  md-selected-item-change="vm.titleChange(item)"
                   class="default-input">
                   <md-item-template>
                     <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.description }}</span>
@@ -206,6 +207,7 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strPostCode_"
                   md-search-text="qsct"
                   md-items="item in vm.queryPostcodes(qsct)"
                   md-selected-item-change="vm.postcodeChange(item)"
@@ -326,14 +328,17 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.entity.clsIrdBranch"
+                  md-selected-item="vm.clsIrdBranch_"
                   md-search-text="qsird"
                   md-items="item in vm.queryIRDBranch(qsird)"
-                  md-item-text="item.strName ? item.strName : ' '"
+                  md-item-text="item.description ? item.description : ' '"
+                  md-selected-item-change="vm.irdBranchChange(item)"
                   md-min-length="0"
                   class="default-input">
                   <md-item-template>
-                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+                      {{ item.description }}
+                    </span>
                   </md-item-template>
                 </md-autocomplete>  
               </div>
