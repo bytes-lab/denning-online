@@ -102,7 +102,6 @@ denningOnline
     self.preview = function (file) {
       var openFiles = ['.jpg', '.png', '.jpeg'];
       folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
-        // data = 'test3rdPartyViewer/docx';
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'preview-doc.html',
@@ -335,15 +334,27 @@ denningOnline
         return;
       }
 
-      var urls = '';
       var ids = Object.keys(self.checkboxes.items);
 
-      var links = [];
+      var files = [];
       angular.forEach(self.data, function(value, key) {
         if (ids.indexOf(value.id.toString()) > -1) {
-          links.push(folderService.getLink(value.URL.replace('/matter/', '/getOneTimeLink/')));
+          files.push(value);
         }
       })
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'linksModal.html',
+        controller: 'linksModalCtrl',
+        size: '',
+        keyboard: true,
+        resolve: {
+          files: function () {
+            return files;
+          }
+        }
+      });
     }
 
     self.copyLink = function(file) {
@@ -377,22 +388,31 @@ denningOnline
       ngClipboard.toClipboard($scope.link);
       growlService.growl('Link copied successfully!', 'success'); 
     }
-      // Promise.all(links).then(function (data) {
-      //   var links = ''
-      //   for (ii in data) {
-      //     links += `https://denningchat.com.my/denningwcf/${data[ii]}\n`;
-      //   }
+  })
 
-      //   // console.log(links);
-      //   self.mmm = links;
-      //   // ngClipboard.toClipboard(links);
-      //   // $(window).blur(function () {
-      //   //   // console.log(links);
-      //   //   self.copyToClipboard(links);
-      //   //   $(window).off('blur');
-      //   // })
-      //   growlService.growl('Links copied successfully!', 'success');
-      // })
+  .controller('linksModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
+                                         folderService, files, ngClipboard) 
+  {
+    $scope.files = files;
+    $scope.getLink = function () {
+      $scope.glink = true;
+      var links = [];
+      angular.forEach(files, function(value, key) {
+        links.push(folderService.getLink(value.URL.replace('/matter/', '/getOneTimeLink/')));
+      })
+
+      Promise.all(links).then(function (data) {
+        $scope.links = ''
+        for (ii in data) {
+          $scope.links += `https://denningchat.com.my/denningwcf/${data[ii]}\n`;
+        }
+      })
+    }
+
+    $scope.copyLink = function () {
+      ngClipboard.toClipboard($scope.links);
+      growlService.growl('Links copied successfully!', 'success'); 
+    }
   })
 
   .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, files, matter, folders) {
