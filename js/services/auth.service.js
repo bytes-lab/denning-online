@@ -1,7 +1,7 @@
 denningOnline
   .factory('Auth', function ($http, $window, $timeout, $q) {
     var service = {
-      baseUrl: 'https://denningchat.com/denningapi'
+      baseUrl: 'https://denningonline.com.my/denningapi'
     };
 
     service.rememberMe = false;
