@@ -110,16 +110,37 @@
     <h4 class="modal-title">Move Documents</h4>
   </div>
   <div class="modal-body">
-    <p>Destination Sub Folder</p>
-    <div class="form-group" ng-class="is_valid">
-      <div class="fg-line">
-        <div class="select">
-          <select class="form-control" ng-model="folderName" ng-change="validate()">
-            <option ng-repeat="item in folders" value="{{ item.name }}">{{ item.name }}</option>
-          </select>
+    <dl class="dl-horizontal">
+      <dt class="p-t-10">Matter</dt>
+      <dd>
+        <div class="fg-line">
+          <md-autocomplete
+            md-selected-item="matter"
+            md-search-text="qstl"
+            md-items="item in vm.queryMatters(qstl)"
+            md-item-text="item.strFileNo1"
+            md-min-length="0"
+            md-selected-item-change="vm.titleChange(item)"
+            class="default-input">
+            <md-item-template>
+              <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.strFileNo1 }}</span>
+            </md-item-template>
+          </md-autocomplete>
         </div>
-      </div>
-    </div>
+      </dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt class="p-t-10">Folder</dt>
+      <dd>
+        <div class="fg-line">
+          <div class="select">
+            <select class="form-control" ng-model="folderName" ng-change="validate()">
+              <option ng-repeat="item in folders" value="{{ item.name }}">{{ item.name }}</option>
+            </select>
+          </div>
+        </div>
+      </dd>
+    </dl>
   </div>
   <div class="modal-footer">
     <button class="btn btn-link" ng-click="ok()">OK</button>
