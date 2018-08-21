@@ -1,5 +1,5 @@
 denningOnline
-  .controller('overviewCtrl', function ($rootScope, overviewService, formlyConfig) {
+  .controller('overviewCtrl', function ($rootScope, overviewService, formlyConfig, growlService) {
     var vm = this;
     vm.idxTab = 0;
     vm.today = moment(new Date()).format('ddd, MMM D, YYYY');
@@ -10,13 +10,21 @@ denningOnline
       6: 'col-sm-6'
     }
 
+    vm.getClass_ = {
+      'col-lg-3 col-md-4 col-sm-6': 3,
+      'col-md-4 col-sm-6': 4,
+      'col-sm-6': 6
+    }
+
     vm.loadOverview = function () {
       overviewService.getOverview().then(function (data) {
+        vm.overview = data;
         vm.tabs = data.tabs;
         for (ii in vm.tabs) {
           for (jj in vm.tabs[ii].sections) {
             for (ij in vm.tabs[ii].sections[jj].widgets) {
               vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.getClass[vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan];
+              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.updateOverview = vm.saveOverview;
             }
           }
         }
@@ -119,6 +127,8 @@ denningOnline
           "templateOptions": to
         })
       }
+
+      vm.saveOverview();
     }
 
     vm.checkWidget = function (tabIdx, secIdx, type, checkHide) {
@@ -143,7 +153,32 @@ denningOnline
     }
 
     vm.saveOverview = function () {
-      // save vm.tabs
-      // filter to.hide == true
+      var tabs = angular.copy(vm.tabs);
+      for (ii in tabs) {
+        tab = tabs[ii];
+        for (jj in tab.sections) {
+          section = tab.sections[jj];
+          widgets = [];
+          for (kk in section.widgets) {
+            widget = section.widgets[kk];
+            // filter to.hide == true
+            if (!widget.templateOptions.hide) {
+              for (ll in widget) {
+                if (ll != "templateOptions" && ll != "type") {
+                  delete widget[ll];
+                }
+              }
+              widget.templateOptions.colSpan = vm.getClass_[widget.templateOptions.colSpan];
+              widgets.push(widget);
+            }
+          }
+          section.widgets = widgets;
+        }
+      }
+
+      vm.overview.tabs = tabs;
+      overviewService.save(vm.overview).then(function () {
+        growlService.growl('Saved successfully!', 'success');
+      })
     }
   })
