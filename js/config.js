@@ -243,7 +243,19 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'contactEditCtrl as vm',
-        templateUrl: 'views/contact-edit.html'
+        templateUrl: 'views/contact-edit.html',
+        resolve: {
+          loadPlugin: function($ocLazyLoad) {
+            return $ocLazyLoad.load ([
+              {
+                name: 'vendors',
+                files: [
+                  'vendors/input-mask/input-mask.min.js',
+                ]
+              }
+            ])
+          }
+        }
       })
       .state ('contacts.new', {
         data: {
@@ -252,7 +264,19 @@ denningOnline
         },
         url: '/new/',
         controller: 'contactEditCtrl as vm',
-        templateUrl: 'views/contact-edit.html'
+        templateUrl: 'views/contact-edit.html',
+        resolve: {
+          loadPlugin: function($ocLazyLoad) {
+            return $ocLazyLoad.load ([
+              {
+                name: 'vendors',
+                files: [
+                  'vendors/input-mask/input-mask.min.js',
+                ]
+              }
+            ])
+          }
+        }        
       })
       .state ('contacts.matters', {
         data: {
