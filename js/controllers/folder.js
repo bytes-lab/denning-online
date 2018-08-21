@@ -1,7 +1,7 @@
 denningOnline
   .controller('folderListCtrl', function(NgTableParams, $sce, $stateParams, $uibModal, folderService, 
                                          contactService, $state, Auth, $scope, $element, 
-                                         growlService, ngClipboard, refactorService) 
+                                         growlService, refactorService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -344,61 +344,55 @@ denningOnline
           links.push(folderService.getLink(value.URL.replace('/matter/', '/getOneTimeLink/')));
         }
       })
+    }
 
-      Promise.all(links).then(function (data) {
-        var links = ''
-        for (ii in data) {
-          links += `https://denningchat.com.my/denningwcf/${data[ii]}\n`;
+    self.copyLink = function(file) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'linkModal.html',
+        controller: 'linkModalCtrl',
+        size: '',
+        keyboard: true,
+        resolve: {
+          file: function () {
+            return file;
+          }
         }
-
-        console.log(links);
-        ngClipboard.toClipboard(links);
-        growlService.growl('Links copied successfully!', 'success');
-      })
-    }
-
-    self.copyLink = function(file) {      
-      folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
-        var link = `https://denningchat.com.my/denningwcf/${data}`;
-        console.log(link);
-        // ngClipboard.toClipboard(link);
-        self.copyClipboard(link);
-        growlService.growl('Link copied successfully!', 'success'); 
-      })
-    }
-
-    self.copyClipboard = function (body) {
-      ngClipboard.toClipboard('body');
-    }
+      });
+    }  
   })
 
-  .controller('openFileCtrl', function($stateParams, folderService) {
-      var file = JSON.parse($stateParams.url);
-      folderService.download(file.URL).then(function(response) {
-        var fileName = file.name + file.ext;
-        var contentTypes = {
-          '.jpg': 'image/jpeg',
-          '.jpeg': 'image/jpeg',
-          '.png': 'image/png'
-        };
+  .controller('linkModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
+                                         folderService, file, ngClipboard) 
+  {
+    $scope.file = file;
+    $scope.getLink = function () {
+      $scope.glink = true;
+      folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
+        $scope.link = `https://denningchat.com.my/denningwcf/${data}`;
+      })
+    }
 
-        var contentType = contentTypes[file.ext] || response.headers('content-type');
+    $scope.copyLink = function () {
+      ngClipboard.toClipboard($scope.link);
+      growlService.growl('Link copied successfully!', 'success'); 
+    }
+      // Promise.all(links).then(function (data) {
+      //   var links = ''
+      //   for (ii in data) {
+      //     links += `https://denningchat.com.my/denningwcf/${data[ii]}\n`;
+      //   }
 
-        try {
-            var blob = new Blob([response.data], {type: contentType});
-            //IE handles it differently than chrome/webkit
-            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-              window.navigator.msSaveOrOpenBlob(blob, fileName);
-            } else {
-              var objectUrl = URL.createObjectURL(blob);
-
-              location.href = objectUrl;
-            }
-        } catch (exc) {
-            console.log("Save Blob method failed with the following exception.");
-            console.log(exc);
-        }
-      })    
+      //   // console.log(links);
+      //   self.mmm = links;
+      //   // ngClipboard.toClipboard(links);
+      //   // $(window).blur(function () {
+      //   //   // console.log(links);
+      //   //   self.copyToClipboard(links);
+      //   //   $(window).off('blur');
+      //   // })
+      //   growlService.growl('Links copied successfully!', 'success');
+      // })
   })
 
   .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, files, matter, folders) {

@@ -127,6 +127,35 @@
   </div>
 </script>
 
+<script type="text/ng-template" id="linkModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Link of {{ file.name }}{{ file.ext }}</h4>
+  </div>
+  <div class="modal-body p-b-20">
+    <dl class="dl-horizontal m-l-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="set_expiration">
+          <i class="input-helper"></i>
+          Set expiration date
+        </label>
+      </div>
+    </dl>
+    <dl class="dl-horizontal m-l-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="set_password">
+          <i class="input-helper"></i>
+          Set password
+        </label>
+      </div>
+    </dl>
+    <button class="btn btn-info btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-link"></i></button>
+    <a href="" class="m-l-15 f-15" ng-show="!glink" ng-click="getLink()"> Get a link</a>
+    <input type="text" class="form-control m-l-10" ng-show="glink" style="display: inline; width: 360px;" ng-model="link">
+    <button class="btn bgm-cyan waves-effect m-l-10" ng-show="glink" ng-click="copyLink()">Copy</button>
+  </div>
+</script>
 
 <script type="text/ng-template" id="fileModal.html">
   <div class="modal-header">
