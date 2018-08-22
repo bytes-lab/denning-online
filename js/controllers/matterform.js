@@ -60,6 +60,19 @@ denningOnline
           ]
         },
         "Summary": {
+          "groups": [
+            {
+              "key": "summary",
+              "attrs": [
+                {
+                  "key": "summary",
+                  "type": "summary",
+                  "templateOptions": {
+                  }
+                }
+              ]
+            }
+          ]          
         },
         "Parties-S": {
           "groups": [

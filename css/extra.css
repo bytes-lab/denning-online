@@ -196,3 +196,11 @@ tr.selected {
     top: 180px;
     right: 35px;
 }
+
+.summary {
+    background: white;
+}
+
+.summary .attr-label-1 {
+    background: white;
+}

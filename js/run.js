@@ -580,6 +580,11 @@ denningOnline
     });  
 
     formlyConfig.setType({
+      name: 'summary',
+      templateUrl: 'summary.html'
+    });  
+
+    formlyConfig.setType({
       name: 'rpgt',
       templateUrl: 'rpgt.html'
     });  
