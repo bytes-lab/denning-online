@@ -416,13 +416,17 @@ denningOnline
   })
 
   .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
-                                            folderService, files, matter, folders) 
+                                            folderService, files, matter, folders, fileMatterService) 
   {
     $scope.folders = folders;
     $scope.folderName = folders[0].name;
     $scope.files = files;
 
-    console.log(files);
+    $scope.queryMatters = function (search) {
+      return fileMatterService.getList(1, 5, search).then(function (resp) {
+        return resp.data
+      })
+    }
 
     $scope.validate = function () {
       if (!$scope.folderName.trim()) {

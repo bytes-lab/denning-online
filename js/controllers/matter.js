@@ -16,7 +16,8 @@ denningOnline
       }
     }, {
       getData: function(params) {
-        return fileMatterService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+        return fileMatterService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
           var data_ = [];
           params.total(data.headers('x-total-count'));
           angular.forEach(data.data, function(value, key) {

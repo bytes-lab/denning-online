@@ -117,13 +117,13 @@
           <md-autocomplete
             md-selected-item="matter"
             md-search-text="qstl"
-            md-items="item in vm.queryMatters(qstl)"
-            md-item-text="item.strFileNo1"
+            md-items="item in queryMatters(qstl)"
+            md-item-text="item.Title"
             md-min-length="0"
             md-selected-item-change="vm.titleChange(item)"
             class="default-input">
             <md-item-template>
-              <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.strFileNo1 }}</span>
+              <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
             </md-item-template>
           </md-autocomplete>
         </div>
