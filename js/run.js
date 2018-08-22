@@ -370,8 +370,25 @@ denningOnline
     formlyConfig.setType({
       name: 'file',
       templateUrl: 'file.html',
-      controller: function ($scope, legalFirmService, contactService, matterCodeService, Auth, $uibModal, $filter) {
+      controller: function ($scope, legalFirmService, matterCodeService, Auth, $uibModal, 
+                            fileMatterService) 
+      {
         $scope.userInfo = Auth.getUserInfo();
+        $scope.rmatter = {
+          key: $scope.model.strRelatedFile
+        }
+
+        $scope.queryMatters = function (search) {
+          return fileMatterService.getList(1, 5, search).then(function (resp) {
+            return resp.data
+          })
+        }
+
+        $scope.matterChange = function (matter) {
+          if (matter) {
+            $scope.model.strRelatedFile = matter.key;
+          }
+        }
 
         $scope.viewContact = function(party) {
           if (party) {

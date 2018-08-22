@@ -833,10 +833,22 @@
   <h4 class="p-5 m-b-15 group-label">Related Matter</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
-    <label class="form-control attr-label">Related Matter</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strRelatedFile" style="width:45%;">
+      <label class="form-control attr-label">Related Matter</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="rmatter"
+        md-search-text="qstl"
+        md-items="item in queryMatters(qstl)"
+        md-item-text="item.key"
+        md-min-length="0"
+        md-selected-item-change="matterChange(item)"
+        class="default-input" style="width:45%;">
+        <md-item-template>
+          <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
+        </md-item-template>
+      </md-autocomplete>
     </div>
-  </div>  
+  </div>
   <div class="clearfix"></div>
   <h4 class="p-5 m-b-15 group-label">Remarks</h4>
   <div class="form-group col-md-12">
