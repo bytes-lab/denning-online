@@ -207,12 +207,6 @@ denningOnline
         resolve: {
           files: function () {
             return files;
-          }, 
-          matter: function () {
-            return $stateParams.id;
-          },
-          folders: function () {
-            return self.folders;
           }
         }
       });
@@ -416,16 +410,34 @@ denningOnline
   })
 
   .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
-                                            folderService, files, matter, folders, fileMatterService) 
+                                            folderService, files, fileMatterService) 
   {
-    $scope.folders = folders;
-    $scope.folderName = folders[0].name;
     $scope.files = files;
+    $scope.folderName = '';
+    $scope.is_valid = ' ';
 
     $scope.queryMatters = function (search) {
       return fileMatterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
+    }
+
+    $scope.matterChange = function (matter) {
+      if (matter) {
+        $scope.matter = matter;
+        $scope.folders = [];
+        $scope.folderName = '';
+
+        folderService.getList(matter.key, 'matter').then(function (data) {
+          angular.forEach(data.folders, function(folder, key) {
+            $scope.folders.push(folder);
+          })
+        })
+
+        if ($scope.folders.length > 0) {
+          $scope.folderName = $scope.folders[0].name;
+        }
+      }
     }
 
     $scope.validate = function () {
@@ -447,7 +459,7 @@ denningOnline
 
         moves.push(folderService.moveDocument({
           "sourceFileURL" : file.URL,
-          "newFileNo" : matter,
+          "newFileNo" : $scope.matter.key,
           "newSubFolder" : $scope.folderName,
           "newName" : file.name+file.ext
         }));

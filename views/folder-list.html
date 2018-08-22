@@ -120,7 +120,7 @@
             md-items="item in queryMatters(qstl)"
             md-item-text="item.Title"
             md-min-length="0"
-            md-selected-item-change="vm.titleChange(item)"
+            md-selected-item-change="matterChange(item)"
             class="default-input">
             <md-item-template>
               <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
