@@ -375,7 +375,7 @@ denningOnline
       {
         $scope.userInfo = Auth.getUserInfo();
         $scope.rmatter = {
-          key: $scope.model.strRelatedFile
+          key: $scope.model.strRelatedFile || ' '
         }
 
         $scope.queryMatters = function (search) {
