@@ -17,8 +17,13 @@ denningOnline
     
     function compare(fieldOriginal, fieldNew) {
       if (typeof(fieldNew) == 'object' && fieldNew != null) {
-        if (typeof fieldNew.getMonth === 'function') {
-          return fieldOriginal.getTime() === fieldNew.getTime();
+        // compare date
+        if (typeof fieldNew.getMonth === 'function' || typeof fieldOriginal.getMonth === 'function') {
+          try {
+            return fieldOriginal.getTime() === fieldNew.getTime();
+          } catch (exc) {
+            return false;
+          }
         } else {
           for (var ii in fieldNew) {
             if (fieldOriginal[ii] != fieldNew[ii]) {

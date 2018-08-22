@@ -28,7 +28,8 @@ denningOnline
   .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, growlService, 
                                            contactService, $state, Auth, $scope, 
                                            refactorService, occupationService, raceService, 
-                                           religionService, IRDBranchService, cityService) 
+                                           religionService, IRDBranchService, cityService,
+                                           uibDateParser) 
   {
     var self = this;
     self.isDialog = false;
@@ -153,6 +154,22 @@ denningOnline
       });
     }
 
+    self.parseBirth = function () {
+      if (self.entity.strIDNo) {
+        var sdate = self.entity.strIDNo.split('-')[0];
+        var pdate = uibDateParser.parse(sdate, 'yyMMdd', new Date());
+        if (!pdate) {
+          alert('Your ID No is not valid. Please provide again.');
+        } else {
+          // check over current year
+          if (pdate.getFullYear() > (new Date()).getFullYear()) {
+            pdate = uibDateParser.parse('19'+sdate, 'yyyyMMdd', new Date());
+          }
+          self.entity.dtDateBirth = pdate;
+        }
+      }
+    }
+
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
@@ -169,10 +186,10 @@ denningOnline
 
     if ($stateParams.id) {
       contactService.getItem($stateParams.id).then(function (item) {
-        self.entity = item
+        self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
 
-        // wrapper attrs
+        // wrapper attrs for auto complete
         self.strTitle_ = { 
           description: self.entity.strTitle 
         };

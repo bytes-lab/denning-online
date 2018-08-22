@@ -79,7 +79,7 @@
             <dt class="p-t-10">ID No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' data-input-mask="{ mask: '000000-00-0000' }" ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" placeholder="000000-00-0000">
+                <input type='text' data-input-mask="{ mask: '000000-00-0000' }" ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" placeholder="000000-00-0000" ng-blur="vm.parseBirth()">
               </div>
             </dd>
           </dl>
