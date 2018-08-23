@@ -204,3 +204,7 @@ tr.selected {
 .summary .attr-label-1 {
     background: white;
 }
+
+.summary h4 {
+    color: #006400;
+}

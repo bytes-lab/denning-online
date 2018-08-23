@@ -560,11 +560,6 @@
   </div>
 </script>
 
-<script type="text/ng-template" id="summary.html">  
-  <div class="form-group col-md-12">
-  </div>
-</script>
-
 <!-- FILE INFORMATION -->
 <script type="text/ng-template" id="file.html">  
   <div class="form-group col-md-12" ng-if="to.party">
@@ -1859,7 +1854,8 @@
 <script type="text/ng-template" id="summary.html">
   <div class="row summary">
     <div class="col-md-10 col-md-offset-1">
-      <h4>{{ model.strFileNo1 }} ( {{ model.clsPrimaryClient.strName }} )</h4>
+      <h2 class="c-purple p-b-15 title" style="font-size: 25px;">SUMMARY</h2>
+      <h5 class="f-16">{{ model.strFileNo1 }} ( {{ model.clsPrimaryClient.strName }} )</h5>
     </div>
     <div class="col-md-5 col-md-offset-1">
       <h4 class="m-t-25 m-b-20">Matter Information</h4>
