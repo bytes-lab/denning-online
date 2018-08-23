@@ -276,7 +276,7 @@ denningOnline
     formlyConfig.setType({
       name: 'property',
       templateUrl: 'property.html',
-      controller: function ($scope, propertyService, Auth, $uibModal) {        
+      controller: function ($scope, propertyService, $uibModal) {        
         function initProperty(item) {
           if (item && item.code) {
             propertyService.getItem(item.code)
@@ -581,7 +581,15 @@ denningOnline
 
     formlyConfig.setType({
       name: 'summary',
-      templateUrl: 'summary.html'
+      templateUrl: 'summary.html',
+      controller: function ($scope, propertyService) {
+        // property detail
+        if ($scope.model.clsP1.code) {
+          propertyService.getItem($scope.model.clsP1.code).then(function(item) {
+            $scope.property = item;
+          });
+        }
+      }
     });  
 
     formlyConfig.setType({

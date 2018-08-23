@@ -5,10 +5,10 @@
     <div class="preview">
     <section layout="row" layout-sm="column" layout-align="start center" layout-wrap style="margin-left: -8px;">
       <div class="col-sm-12 col-md-10 m-b-25">
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.openFolder()">Folder</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.accounts()">Accounts</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.notes()">Notes</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.payments()">Payments</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="folders.list({id: vm.model.strFileNo1, type: 'matter'})">Folder</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="accounts.list({fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName})">Accounts</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="notes.list({fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName})">Notes</md-button>
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="payment-records.list({fileNo: vm.model.strFileNo1})">Payments</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.upload()">Upload</md-button>
         <input type="file" class="hidden" ng-class="'matter-upload'" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" data-ui-sref="courtdiary({ keyword: vm.model.strFileNo1 })">Calendar</md-button>
@@ -1993,134 +1993,147 @@
         <label>{{ model.clsC30.strName }}</label>
       </dl>
 
-      <h4 class="m-t-25 m-b-20">Solicitors 1 Label</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Firm</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Location</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Tel / Fax / Email</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Staff</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <h4 class="m-t-25 m-b-20">Solicitors 2 Label</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Firm</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Location</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Tel / Fax / Email</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Staff</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <h4 class="m-t-25 m-b-20">Solicitors 3 Label</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Firm</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Location</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Tel / Fax / Email</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Staff</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <h4 class="m-t-25 m-b-20">Solicitors 4 Label</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Firm</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Location</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Tel / Fax / Email</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Staff</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
+      <div ng-if="model.clsLawyer1.strName">
+        <h4 class="m-t-25 m-b-20">Solicitors 1 Label</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Firm</dt>
+          <dd>{{ model.clsLawyer1.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Location</dt>
+          <dd>{{ model.clsLawyer1.strCity }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tel / Fax / Email</dt>
+          <dd>{{ model.clsLawyer1.strPhone1 }} / {{ model.clsLawyer1.strEmailAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Staff</dt>
+          <dd>{{ model.strLawyer1Ref }}</dd>
+        </dl>
+      </div>
+
+      <div ng-if="model.clsLawyer2.strName">
+        <h4 class="m-t-25 m-b-20">Solicitors 2 Label</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Firm</dt>
+          <dd>{{ model.clsLawyer2.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Location</dt>
+          <dd>{{ model.clsLawyer2.strCity }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tel / Fax / Email</dt>
+          <dd>{{ model.clsLawyer2.strPhone1 }} / {{ model.clsLawyer2.strEmailAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Staff</dt>
+          <dd>{{ model.strLawyer2Ref }}</dd>
+        </dl>
+      </div>
+
+      <div ng-if="model.clsLawyer3.strName">
+        <h4 class="m-t-25 m-b-20">Solicitors 3 Label</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Firm</dt>
+          <dd>{{ model.clsLawyer3.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Location</dt>
+          <dd>{{ model.clsLawyer3.strCity }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tel / Fax / Email</dt>
+          <dd>{{ model.clsLawyer3.strPhone1 }} / {{ model.clsLawyer3.strEmailAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Staff</dt>
+          <dd>{{ model.strLawyer3Ref }}</dd>
+        </dl>
+      </div>
+
+      <div ng-if="model.clsLawyer4.strName">
+        <h4 class="m-t-25 m-b-20">Solicitors 4 Label</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Firm</dt>
+          <dd>{{ model.clsLawyer4.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Location</dt>
+          <dd>{{ model.clsLawyer4.strCity }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tel / Fax / Email</dt>
+          <dd>{{ model.clsLawyer4.strPhone1 }} / {{ model.clsLawyer4.strEmailAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Staff</dt>
+          <dd>{{ model.strLawyer4Ref }}</dd>
+        </dl>
+      </div>
     </div>
     <div class="col-md-5">
-      <h4 class="m-t-25 m-b-20">Case Name</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Full Case Name</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Court Place + Court Type</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Case No</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
-      </dl>
+      <div ng-if="false">
+        <h4 class="m-t-25 m-b-20">Case Name</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Full Case Name</dt>
+          <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Court Place + Court Type</dt>
+          <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Case No</dt>
+          <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        </dl>
+      </div>
 
       <h4 class="m-t-25 m-b-20">Property 1</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Title</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.strAddress }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Area</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.strArea }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Tenure</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.strLandTenure }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Expiry Date</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.dtLeaseExpDate|ddate }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Restriction</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.strRestrictionAgainst }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Use</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.strPropertyUse }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Type</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.strPropertyType }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Postal Add</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.strAddress }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Project</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.strProjectName }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Developer</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.clsDeveloper.strName }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Proprietor</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ property.clsProprietor.strName }}</dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20">Price</h4>

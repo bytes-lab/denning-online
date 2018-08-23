@@ -1,6 +1,7 @@
 denningOnline
   .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, 
-                                             $state, matterFormService, Auth, refactorService, growlService) 
+                                             $state, matterFormService, Auth, refactorService, 
+                                             growlService) 
   {
     var vm = this;
     vm.userInfo = Auth.getUserInfo();
@@ -698,9 +699,8 @@ denningOnline
           vm.model = item;
           vm.model_ = angular.copy(vm.model);
           vm.model.tmp = editControl;
-          vm.model.tmp.oldMatterCode = item.clsMatterCode;
-          
-          vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + vm.model.clsPrimaryClient.strName + ' )';           
+          vm.model.tmp.oldMatterCode = item.clsMatterCode;          
+          vm.title = `Matter : ${vm.model.strFileNo1} ( ${vm.model.clsPrimaryClient.strName} )`;
         } else {
           vm.idxTab = 0;
           vm.model = { 
@@ -723,22 +723,6 @@ denningOnline
       formState: {
         awesomeIsForced: false
       }
-    };
-
-    vm.notes = function () {
-      $state.go('notes.list', {fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName});
-    }
-
-    vm.accounts = function () {
-      $state.go('accounts.list', {fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName});
-    }
-
-    vm.openFolder = function () {
-      $state.go('folders.list', {id: vm.model.strFileNo1, type: 'matter'});
-    }
-
-    vm.payments = function () {
-      $state.go('payment-records.list', {fileNo: vm.model.strFileNo1});
     };
 
     vm.upload = function () {
@@ -773,7 +757,7 @@ denningOnline
       .catch(function(err) {
       });
     };
-    // function definition
+    
     vm.save = function () {
       delete vm.model.tmp;
       model = refactorService.getDiff(vm.model_, vm.model);
@@ -789,7 +773,6 @@ denningOnline
           if (vm.model_) {
             // vm.model = data;
             vm.model.tmp.oldMatterCode = data.clsMatterCode;
-            
             // $state.reload();
           } else {
             $state.go('file-matters.edit', { 'fileNo': data.strFileNo1 });
@@ -932,7 +915,8 @@ denningOnline
     };
   })
 
-  .controller('matterformListCtrl', function($uibModal, NgTableParams, matterFormService, Auth, $state) {
+  .controller('matterformListCtrl', function($uibModal, NgTableParams, matterFormService, Auth, $state) 
+  {
     var self = this;
 
     self.clickHandler = function (item) {
