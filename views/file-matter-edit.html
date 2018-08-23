@@ -1859,116 +1859,406 @@
 <script type="text/ng-template" id="summary.html">
   <div class="row summary">
     <div class="col-md-10 col-md-offset-1">
-      <h4 class="m-t-20 m-b-20">Matter Information</h4>
+      <h4>{{ model.strFileNo1 }} ( {{ model.clsPrimaryClient.strName }} )</h4>
     </div>
-    <div class="form-group col-md-5 col-md-offset-1">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Primary Client</label>
-      <div class="col-sm-7">
-        <div class="fg-line">
-          <label>{{ model.clsPrimaryClient.strName }}</label>
-        </div>
-      </div>
+    <div class="col-md-5 col-md-offset-1">
+      <h4 class="m-t-25 m-b-20">Matter Information</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Other Ref</dt>
+        <dd>{{ model.strFileNo2 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Matter Description</dt>
+        <dd>{{ model.clsMatterCode.strDescription }} ( {{ model.clsMatterCode.code }} )</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Staff</dt>
+        <dd>{{ model.clsPartnerInCharge.strName }}</dd>
+        <dd>{{ model.clsLAInCharge.strName }}</dd>
+        <dd>{{ model.clsClerkInCharge.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Loc / Poc / Arc</dt>
+        <dd>{{ model.strFileLoc }}</dd>
+        <dd>{{ model.strPocketFile }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Status</dt>
+        <dd>{{ model.clsFileStatus.strDescription }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Open ( Closed )</dt>
+        <dd>{{ model.dtDateOpenFile|ddate }} ( {{ model.dtDateCloseFile|ddate }} )</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Party Group 1</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C1</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C2</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C3</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C4</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C5</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <h4 class="m-t-25 m-b-20">Party Group 2</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C1</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C2</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C3</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C4</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C5</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <h4 class="m-t-25 m-b-20">Party Group 3</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C1</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C2</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C3</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C4</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C5</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <h4 class="m-t-25 m-b-20">Party Group 4</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C1</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C2</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C3</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C4</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C5</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <h4 class="m-t-25 m-b-20">Party Group 5</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C1</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C2</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C3</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C4</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C5</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <h4 class="m-t-25 m-b-20">Party Group 6</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C1</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C2</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C3</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C4</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>C5</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Solicitors 1 Label</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Firm</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Location</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Tel / Fax / Email</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Staff</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <h4 class="m-t-25 m-b-20">Solicitors 2 Label</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Firm</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Location</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Tel / Fax / Email</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Staff</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <h4 class="m-t-25 m-b-20">Solicitors 3 Label</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Firm</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Location</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Tel / Fax / Email</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Staff</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <h4 class="m-t-25 m-b-20">Solicitors 4 Label</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Firm</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Location</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Tel / Fax / Email</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Staff</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
     </div>
-    <div class="form-group col-md-5">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Ref 1 (Automatic)</label>
-      <div class="col-sm-7">
-        <div class="fg-line">
-          <label>{{ model.strFileNo1 }}</label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-5 col-md-offset-1">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Matter Code</label>
-      <div class="col-sm-7">
-        <label>{{ model.clsMatterCode.strDescription }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-5">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Ref 2 (Manual)</label>
-      <div class="col-sm-7">
-        <label>{{ model.strFileNo2 }}</label>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="form-group col-md-5 col-md-offset-1">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Term Loan Amount</label>
-      <div class="col-sm-7">
-        <label>{{ model.strF1 }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-5">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Repayment Period (TL)</label>
-      <div class="col-sm-7">
-        <label>{{ model.strF1 }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-5 col-md-offset-1">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Term Loan Amount</label>
-      <div class="col-sm-7">
-        <label>{{ model.strF1 }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-5">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Repayment Period (TL)</label>
-      <div class="col-sm-7">
-        <label>{{ model.strF1 }}</label>
-      </div>
-    </div>
-    <div class="col-md-10 col-md-offset-1">
-      <h4 class="m-t-20 m-b-20">Matter Information</h4>
-    </div>
-    <div class="form-group col-md-5 col-md-offset-1">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Primary Client</label>
-      <div class="col-sm-7">
-        <div class="fg-line">
-          <label>{{ model.clsPrimaryClient.strName }}</label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-5">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Ref 1 (Automatic)</label>
-      <div class="col-sm-7">
-        <div class="fg-line">
-          <label>{{ model.strFileNo1 }}</label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-5 col-md-offset-1">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Matter Code</label>
-      <div class="col-sm-7">
-        <label>{{ model.clsMatterCode.strDescription }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-5">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Ref 2 (Manual)</label>
-      <div class="col-sm-7">
-        <label>{{ model.strFileNo2 }}</label>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="form-group col-md-5 col-md-offset-1">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Term Loan Amount</label>
-      <div class="col-sm-7">
-        <label>{{ model.strF1 }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-5">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Repayment Period (TL)</label>
-      <div class="col-sm-7">
-        <label>{{ model.strF1 }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-5 col-md-offset-1">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Term Loan Amount</label>
-      <div class="col-sm-7">
-        <label>{{ model.strF1 }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-5">
-      <label for="inputEmail3" class="col-sm-5 attr-label-1">Repayment Period (TL)</label>
-      <div class="col-sm-7">
-        <label>{{ model.strF1 }}</label>
-      </div>
+    <div class="col-md-5">
+      <h4 class="m-t-25 m-b-20">Case Name</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Full Case Name</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Court Place + Court Type</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Case No</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Property 1</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Title</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Area</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Tenure</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Expiry Date</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Restriction</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Use</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Type</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Postal Add</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Project</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Developer</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Proprietor</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Price</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Purchase Price</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Earnest Deposit</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Balance Deposit</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Deposit</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Balance PP</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Loan</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Diff Sum</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Loan</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Loan Type</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Term Loan</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>OD Loan</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>+ MRTA</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>+ Legal Fee</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>+ Other</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-25">
+        <dt>Total Loan</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Bank Purchase Price</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Bank Selling Price</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Chagee / Assignee Bank </h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Bank</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Branch</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Ref</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Redemption Amt</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Redemption Date</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Financing Bank</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Bank</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Branch</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Ref</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>LO Date</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Instruction Date</dt>
+        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+      </dl>
     </div>
   </div>
 </script>
