@@ -785,10 +785,6 @@ denningOnline
     vm.reset = function () {
       $state.reload();
     }
-
-    vm.cancel = function () {
-      $state.go('file-matters.list');
-    }
   })
 
   .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, Auth, 

@@ -585,7 +585,7 @@ denningOnline
       controller: function ($scope, propertyService) {
         // property detail
         if ($scope.model.clsP1.code) {
-          propertyService.getItem($scope.model.clsP1.code).then(function(item) {
+          propertyService.getItem($scope.model.clsP1.code).then(function (item) {
             $scope.property = item;
           });
         }

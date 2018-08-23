@@ -42,7 +42,7 @@
           <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid" ng-if="vm.userInfo.priority.filematter.update && vm.model.tmp.can_edit" style="margin-top: 2px;" ng-click="vm.save()">Save</button>
           <a class="btn bgm-cyan btn-sm m-l-5" type="submit" ng-click="vm.model.tmp.can_edit=true;" ng-if="vm.userInfo.priority.filematter.update && !vm.model.tmp.can_edit" style="padding-bottom: 7px;margin-top: 2px;"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
           <button type="button" class="btn btn-default m-l-5" ng-click="vm.reset()">Reset</button>
-          <button type="button" class="btn btn-default m-l-5 m-r-20" ng-click="vm.cancel()">Cancel</button>
+          <button type="button" class="btn btn-default m-l-5 m-r-20" ui-sref="file-matters.list">Cancel</button>
         </div>
       </div>
     </form>
@@ -81,7 +81,7 @@
 
         <md-autocomplete
           ng-disabled="!model.tmp.can_edit"
-          md-selected-item="model['clsBank1']"
+          md-selected-item="model.clsBank1"
           md-search-text="searchText"
           md-items="item in queryBanks(searchText)"
           md-item-text="item.strName ? item.strName: ' '"
@@ -173,7 +173,7 @@
     <div class="form-group col-md-12 m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Bank</label>
-      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank2'].clsBankCode.strName" style="width:45%;">
+      <input type="text" class="form-control" readonly="true" ng-model="model.clsBank2.clsBankCode.strName" style="width:45%;">
       </div>
     </div>
     <div class="form-group col-md-12 m-l-15">
@@ -2139,113 +2139,113 @@
       <h4 class="m-t-25 m-b-20">Price</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Purchase Price</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM1 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Earnest Deposit</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM17 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Balance Deposit</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM18 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Deposit</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM2 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Balance PP</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM19 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Loan</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.strName1 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Diff Sum</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.strName1 }}</dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20">Loan</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Loan Type</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.strF3 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Term Loan</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM4 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
-        <dt>OD Loan</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dt>DO Loan</dt>
+        <dd>{{ model.decRM5 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>+ MRTA</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM6 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>+ Legal Fee</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM23 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>+ Other</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM24 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-25">
         <dt>Total Loan</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM25 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank Purchase Price</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.strName1 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank Selling Price</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.strName1 }}</dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20">Chagee / Assignee Bank </h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.clsPrimaryClient.clsBankCode.strName }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Branch</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.clsBank1.strName }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Ref</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.strBank1Ref }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Redemption Amt</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.decRM10 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Redemption Date</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.dtDate15|ddate }}</dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20">Financing Bank</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.clsBank2.clsBankCode.strName }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Branch</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.clsBank2.strName }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Ref</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.strBank2Ref }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>LO Date</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.dtDate8|ddate }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Instruction Date</dt>
-        <dd>{{ model.clsPrimaryClient.strName }}</dd>
+        <dd>{{ model.dtDate9|ddate }}</dd>
       </dl>
     </div>
   </div>
