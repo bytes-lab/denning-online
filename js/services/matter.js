@@ -13,7 +13,7 @@ denningOnline
         search: keyword
       }).then(function (resp) {
         return resp;
-      });  
+      });
     }
 
     service.getRelatedMatters = function (type, code) {
@@ -25,7 +25,7 @@ denningOnline
     service.getItem = function (code) {
       return http.GET(`v1/table/File/${code}`).then(function (resp) {
         return resp.data;
-      });  
+      });
     }
 
     service.getIDTypeList = function () {

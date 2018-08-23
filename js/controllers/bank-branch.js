@@ -17,7 +17,8 @@ denningOnline
       }
     }, {
       getData: function(params) {
-        return bankBranchService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+        return bankBranchService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
@@ -29,7 +30,9 @@ denningOnline
     }
   })
 
-  .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state, Auth, bankService, bankCACService) {
+  .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state, Auth, 
+                                             bankService, bankCACService) 
+  {
     var self = this;
     self.isDialog = false;
     self.viewMode = false;  // for edit / create
@@ -59,7 +62,10 @@ denningOnline
     }
   })
 
-  .controller('bankBranchCreateModalCtrl', function ($uibModalInstance, party, viewMode, bankBranchService, Auth, bankService, bankCACService) {
+  .controller('bankBranchCreateModalCtrl', function ($uibModalInstance, party, viewMode, 
+                                                     bankBranchService, Auth, bankService, 
+                                                     bankCACService) 
+  {
     var self = this;
     self.save = save;
     self.cancel = cancel;
