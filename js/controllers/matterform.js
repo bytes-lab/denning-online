@@ -732,7 +732,10 @@ denningOnline
     };
 
     vm.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      var lastModifiedDate = typeof file.lastModified === "number" ? new Date(file.lastModified) : file.lastModifiedDate;
+      var lastModifiedDate = file.lastModifiedDate;
+      if (typeof file.lastModified === "number") {
+        lastModified = new Date(file.lastModified);
+      }
 
       var info = {
         "fileNo1": vm.model.strFileNo1,
@@ -835,7 +838,9 @@ denningOnline
       } else if (y == self.matterform.selected.length) {
         return;
       }
-      self.matterform.selected.splice(y, 1, self.matterform.selected.splice(x, 1, self.matterform.selected[y])[0]);
+
+      var arr = self.matterform.selected.splice(x, 1, self.matterform.selected[y]);
+      self.matterform.selected.splice(y, 1, arr[0]);
     };
 
     self.copy = function () {

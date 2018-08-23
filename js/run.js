@@ -151,13 +151,15 @@ denningOnline
       name: 'contact',
       templateUrl: 'contact.html',
       controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        $scope.represent_this = $scope.model['strLawyer'+$scope.to.idx+'Ref'] && $scope.model['strLawyer'+$scope.to.idx+'Ref'].indexOf('tmho') > -1;
+        $scope.represent_this = $scope.model['strLawyer'+$scope.to.idx+'Ref'] && 
+                                $scope.model['strLawyer'+$scope.to.idx+'Ref'].indexOf('tmho') > -1;
         $scope.userInfo = Auth.getUserInfo();
         
         $scope.representChange = function() {
           $scope.represent_this = !$scope.represent_this;
           // if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
-            // $scope.model['strLawyer'+$scope.to.idx+'Ref'] = $scope.userInfo.catPersonal[0].LawFirm.name;
+            // $scope.model['strLawyer'+$scope.to.idx+'Ref'] = 
+            // $scope.userInfo.catPersonal[0].LawFirm.name;
           if ($scope.represent_this) {
             // 6000-2862/0/tmho/Siti/501
             $scope.model['strLawyer'+$scope.to.idx+'Ref'] = $scope.model.strFileNo1 + "/0/tmho";
@@ -222,7 +224,6 @@ denningOnline
           return getSolicitors(1, 10, searchText);
         }
 
-        //Create Contact Modal
         $scope.contactDialog = function(party, viewMode) {
           var modalInstance = $uibModal.open({
             animation: true,
@@ -414,7 +415,8 @@ denningOnline
 
         $scope.matterCodeChange = function (item) {
           if (item && $scope.model.clsMatterCode != $scope.model.tmp.oldMatterCode) {
-            if (confirm('Are you sure to change the matter code? \n Changing matter code could lead to change of tabs.')) {
+            if (confirm('Are you sure to change the matter code? \nChanging matter ' + 
+                        'code could lead to change of tabs.')) {
               $scope.model.tmp.matterCodeChange(item);
               $scope.model.tmp.oldMatterCode = item;
             } else {
@@ -457,7 +459,7 @@ denningOnline
     formlyConfig.setType({
       name: 'case',
       templateUrl: 'case.html',
-      controller: ['$scope', 'legalFirmService', 'contactService', 'Auth', '$uibModal', function ($scope, legalFirmService, contactService, Auth, $uibModal) {
+      controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
         initContacts();
 
         $scope.getNumber = function(num) {
@@ -494,7 +496,8 @@ denningOnline
 
         $scope.queryContacts = function(searchText) {
           return $scope.contacts.filter(function(c) {
-            return c && (c.name.search(new RegExp(searchText, "i")) > -1 || c.IDNo.search(new RegExp(searchText, "i")) > -1);
+            return c && (c.name.search(new RegExp(searchText, "i")) > -1 || 
+                                       c.IDNo.search(new RegExp(searchText, "i")) > -1);
           });
         }
 
@@ -502,7 +505,6 @@ denningOnline
           $scope.legalFirms = data;
         });
 
-        //Create Modal
         $scope.contactDialog = function(party, viewMode) {
           var modalInstance = $uibModal.open({
             animation: true,
@@ -525,8 +527,7 @@ denningOnline
             $scope.contacts.push(contact);
           })
         }
-
-      }]
+      }
     });
 
     // price attribute
@@ -741,7 +742,8 @@ denningOnline
               animation: true,
               templateUrl: 'preview-doc.html',
               controller: function ($scope, $sce) {
-                var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/${ data }&embedded=true`;
+                var url = `https://docs.google.com/gview?url=https://denningchat.com.my/`+
+                          `denningwcf/${ data }&embedded=true`;
                 $scope.url = $sce.trustAsResourceUrl(url);
               },
               size: 'lg',
@@ -759,7 +761,9 @@ denningOnline
             }
           }, {
             getData: function(params) {
-              return templateService.getTemplates($scope.docInfo, params.page(), params.count(), $scope.keyword).then(function(data) {
+              return templateService.getTemplates($scope.docInfo, params.page(), params.count(), 
+                                                  $scope.keyword)
+              .then(function (data) {
                 params.total(data.headers('x-total-count'));
                 return data.data;
               });
