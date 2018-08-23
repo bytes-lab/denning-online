@@ -589,6 +589,12 @@ denningOnline
             $scope.property = item;
           });
         }
+
+        // group labels from matter code
+        $scope.matterCode = [];
+        if ($scope.model.clsMatterCode && $scope.model.clsMatterCode.jsonFieldLabels) {
+          $scope.matterCode = JSON.parse($scope.model.clsMatterCode.jsonFieldLabels);
+        }
       }
     });  
 

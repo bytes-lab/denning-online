@@ -427,7 +427,7 @@ denningOnline
           "groups": [
             {
               "key": "bank-info",
-              "label": "Bank 1 Information",
+              "label": clsMatterCode ? getLabel(matter_code, 'clsBank1') : '',
               "attrs": [
                 {
                   "key": "bank1",
@@ -439,7 +439,7 @@ denningOnline
             },
             {
               "key": "bank-info",
-              "label": "Bank 2 Information",
+              "label": clsMatterCode ? getLabel(matter_code, 'clsBank2') : '',
               "attrs": [
                 {
                   "key": "bank2",

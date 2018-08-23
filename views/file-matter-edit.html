@@ -1891,7 +1891,7 @@
         <dd>{{ model.dtDateOpenFile|ddate }} ( {{ model.dtDateCloseFile|ddate }} )</dd>
       </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="model.clsC1.strName">Party Group 1</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC1.strName">{{ model.clsMatterCode.strGroupC1 }}</h4>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC1.strName">
         <label>{{ model.clsC1.strName }}</label>
       </dl>
@@ -1908,7 +1908,7 @@
         <label>{{ model.clsC5.strName }}</label>
       </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="model.clsC6.strName">Party Group 2</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC6.strName">{{ model.clsMatterCode.strGroupC2 }}</h4>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC6.strName">
         <label>{{ model.clsC6.strName }}</label>
       </dl>
@@ -1925,7 +1925,7 @@
         <label>{{ model.clsC10.strName }}</label>
       </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="model.clsC11.strName">Party Group 3</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC11.strName">{{ model.clsMatterCode.strGroupC3 }}</h4>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC11.strName">
         <label>{{ model.clsC11.strName }}</label>
       </dl>
@@ -1942,7 +1942,7 @@
         <label>{{ model.clsC15.strName }}</label>
       </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="model.clsC16.strName">Party Group 4</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC16.strName">{{ model.clsMatterCode.strGroupC4 }}</h4>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC16.strName">
         <label>{{ model.clsC16.strName }}</label>
       </dl>
@@ -1959,7 +1959,7 @@
         <label>{{ model.clsC20.strName }}</label>
       </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="model.clsC21.strName">Party Group 5</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC21.strName">{{ model.clsMatterCode.strGroupC5 }}</h4>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC21.strName">
         <label>{{ model.clsC21.strName }}</label>
       </dl>
@@ -1976,7 +1976,7 @@
         <label>{{ model.clsC25.strName }}</label>
       </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="model.clsC26.strName">Party Group 6</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC26.strName">{{ model.clsMatterCode.strGroupC6 }}</h4>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC26.strName">
         <label>{{ model.clsC26.strName }}</label>
       </dl>
@@ -1994,7 +1994,7 @@
       </dl>
 
       <div ng-if="model.clsLawyer1.strName">
-        <h4 class="m-t-25 m-b-20">Solicitors 1 Label</h4>
+        <h4 class="m-t-25 m-b-20">{{ matterCode[26].Label }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer1.strName }}</dd>
@@ -2014,7 +2014,7 @@
       </div>
 
       <div ng-if="model.clsLawyer2.strName">
-        <h4 class="m-t-25 m-b-20">Solicitors 2 Label</h4>
+        <h4 class="m-t-25 m-b-20">{{ matterCode[27].Label }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer2.strName }}</dd>
@@ -2034,7 +2034,7 @@
       </div>
 
       <div ng-if="model.clsLawyer3.strName">
-        <h4 class="m-t-25 m-b-20">Solicitors 3 Label</h4>
+        <h4 class="m-t-25 m-b-20">{{ matterCode[28].Label }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer3.strName }}</dd>
@@ -2054,7 +2054,7 @@
       </div>
 
       <div ng-if="model.clsLawyer4.strName">
-        <h4 class="m-t-25 m-b-20">Solicitors 4 Label</h4>
+        <h4 class="m-t-25 m-b-20">{{ matterCode[29].Label }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer4.strName }}</dd>
@@ -2090,7 +2090,7 @@
         </dl>
       </div>
 
-      <h4 class="m-t-25 m-b-20">Property 1</h4>
+      <h4 class="m-t-25 m-b-20">{{ matterCode[101].Label }}</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Title</dt>
         <dd>{{ property.strAddress }}</dd>
@@ -2204,7 +2204,7 @@
         <dd>{{ model.strName1 }}</dd>
       </dl>
 
-      <h4 class="m-t-25 m-b-20">Chagee / Assignee Bank </h4>
+      <h4 class="m-t-25 m-b-20">{{ matterCode[30].Label }} </h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank</dt>
         <dd>{{ model.clsPrimaryClient.clsBankCode.strName }}</dd>
@@ -2226,7 +2226,7 @@
         <dd>{{ model.dtDate15|ddate }}</dd>
       </dl>
 
-      <h4 class="m-t-25 m-b-20">Financing Bank</h4>
+      <h4 class="m-t-25 m-b-20">{{ matterCode[31].Label }}</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank</dt>
         <dd>{{ model.clsBank2.clsBankCode.strName }}</dd>
