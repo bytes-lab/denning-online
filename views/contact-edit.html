@@ -66,6 +66,7 @@
                   md-search-text="q"
                   md-items="item in vm.queryFields('IDTypes', q)"
                   md-item-text="item.strDescription"
+                  md-selected-item-change="vm.IDTypeChange(item)"
                   md-min-length="0"
                   class="default-input">
                   <md-item-template>
@@ -79,7 +80,8 @@
             <dt class="p-t-10">ID No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' data-input-mask="{ mask: '000000-00-0000' }" ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" placeholder="000000-00-0000" ng-blur="vm.parseBirth()">
+                <input type='text' data-input-mask="{ mask: '000000-00-0000' }" ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" placeholder="000000-00-0000" ng-blur="vm.parseBirth()" ng-if="vm.myIC">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" ng-if="!vm.myIC">
               </div>
             </dd>
           </dl>
@@ -615,7 +617,19 @@
             <dt class="p-t-10">Education Level</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.entity.strEdu"
+                  md-search-text="qlel"
+                  md-items="item in vm.queryList(vm.eduLevels, qlel)"
+                  md-item-text="item"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qlel" class="col-1" md-highlight-flags="i">{{ item }}</span>
+                </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>

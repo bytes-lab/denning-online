@@ -3,10 +3,6 @@ denningOnline
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
-    self.clickHandler = function (item) {
-      $state.go('contacts.edit', {'id': item.code});
-    }
-
     self.tableFilter = new NgTableParams({
       page: 1,
       count: 25,
@@ -50,6 +46,12 @@ denningOnline
       'Others'
     ];
 
+    self.eduLevels = [
+      'Primary',
+      'Secondary',
+      'University'
+    ];
+    
     self.queryList = function (labels, q) {
       return labels.filter(function(item) {
         return item.search(new RegExp(q, "i")) > -1;
@@ -106,6 +108,15 @@ denningOnline
         self.entity.strCity = item.city;
         self.entity.strState = item.state;
         self.entity.strCountry = item.country;
+      }
+    }
+
+    self.IDTypeChange = function (item) {
+      if (item) {
+        self.myIC = false;
+        if (item.code == '1' || item.code == '2') {
+          self.myIC = true;
+        }        
       }
     }
 
@@ -189,6 +200,7 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
 
+        self.IDTypeChange(self.entity.clsIDType);
         // wrapper attrs for auto complete
         self.strTitle_ = { 
           description: self.entity.strTitle 
