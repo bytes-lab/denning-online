@@ -111,7 +111,7 @@ denningOnline
     }
 
     function getSolicitors(page, pagesize, keyword) {
-      return legalFirmService.getTableList(page, pagesize, keyword).then(function(resp) {
+      return legalFirmService.getTableList(page, pagesize, keyword).then(function (resp) {
         return resp.data;
       });
     }
@@ -207,7 +207,7 @@ denningOnline
         }
 
         $scope.viewLegalFirm = function(party) {
-          if (party) {
+          if (party && party.code) {
             $scope.legalfirmDialog(party, true);
           } else {
             alert('Please select a solicitor.')
