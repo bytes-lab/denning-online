@@ -675,6 +675,9 @@ denningOnline
 
             if (value.TabName.toLowerCase() == $stateParams.tab) {
               idxTab = parseInt(idx);
+              if ($stateParams.tab.toLowerCase() == 'summary') {
+                idxTab = 1;
+              }
             }
           }
           vm.idxTab = idxTab;
