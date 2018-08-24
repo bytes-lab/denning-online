@@ -618,7 +618,20 @@
             <dt class="p-t-10">Place of Work</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPlaceofWork">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strPlaceofWork_"
+                  md-search-text="qlpw"
+                  md-items="item in vm.queryPostcodes(qlpw)"
+                  md-selected-item-change="vm.workPlaceChange(item)"
+                  md-item-text="item.city"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qlpw" class="col-1" md-highlight-flags="i">{{ item.city }}</span>
+                </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
@@ -626,7 +639,20 @@
             <dt class="p-t-10">Place of Birth</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPlaceBirth">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strPlaceBirth_"
+                  md-search-text="qlpb"
+                  md-items="item in vm.queryPostcodes(qlpb)"
+                  md-selected-item-change="vm.birthPlaceChange(item)"
+                  md-item-text="item.city"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qlpb" class="col-1" md-highlight-flags="i">{{ item.city }}</span>
+                </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>

@@ -208,3 +208,7 @@ tr.selected {
 .summary h4 {
     color: #006400;
 }
+
+.summary dt {
+    color: #808080;
+}

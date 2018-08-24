@@ -119,6 +119,18 @@ denningOnline
       });
     }
 
+    self.workPlaceChange = function (item) {
+      if (item) {
+        self.entity.strPlaceofWork = item.city;
+      }
+    }
+
+    self.birthPlaceChange = function (item) {
+      if (item) {
+        self.entity.strPlaceBirth = item.city;
+      }
+    }
+
     self.postcodeChange = function (item) {
       if (item) {
         self.entity.strPostCode = item.postcode;
@@ -218,9 +230,18 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
 
         self.IDTypeChange(self.entity.clsIDType);
+
         // wrapper attrs for auto complete
         self.strTitle_ = { 
           description: self.entity.strTitle 
+        };
+
+        self.strPlaceofWork_ = { 
+          city: self.entity.strPlaceofWork
+        };
+
+        self.strPlaceBirth_ = { 
+          city: self.entity.strPlaceBirth
         };
 
         self.clsIrdBranch_ = { 
