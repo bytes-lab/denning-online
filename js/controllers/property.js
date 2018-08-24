@@ -3,10 +3,6 @@ denningOnline
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
-    self.clickHandler = function (item) {
-      $state.go('properties.edit', {'id': item.code});
-    }
-
     self.tableFilter = new NgTableParams({
       page: 1, 
       count: 25
@@ -47,7 +43,9 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
       });
     } else {
-      self.entity = {};
+      self.entity = {
+        strMukimType: 'Mukim'
+      };
     }
 
     self.queryContacts = function (searchText) {
@@ -174,16 +172,17 @@ denningOnline
     self.types = {};
 
     if (viewMode) {
-      propertyService.getItem(property.code)
-      .then(function(item){
+      propertyService.getItem(property.code).then(function(item){
         self.entity = item;
       });
     } else {
-      self.entity = {};
+      self.entity = {
+        strMukimType: 'Mukim'
+      };
     }
 
     angular.forEach(self.refList, function (value, key) {
-      propertyService.getTypeList(value).then(function(data) {
+      propertyService.getTypeList(value).then(function (data) {
         self.types[value] = data;
       });
     });

@@ -109,7 +109,10 @@
           </dl>
           <dl class="dl-horizontal">
             <dt>
-              <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strMukimType">
+              <div class="select">
+                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strMukimType" ng-options="x for x in vm.types.MukimType">
+                </select>
+              </div>
             </dt>
             <dd>
               <div class="fg-line">
@@ -136,11 +139,12 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Area</dt>
             <dd>
-              <input type='text' ng-readonly="!vm.can_edit" class="form-control half-width" ng-model="vm.entity.strArea">
-              <select class="form-control half-width" ng-model="vm.entity.strAreaDescription">
-                <option ng-repeat="item in vm.types['AreaType']" ng-value="item" ng-selected="vm.entity.area.type == item">
+              <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strArea" style="width: 64%; display: inline;">
+              <select class="form-control" ng-model="vm.entity.strAreaDescription" ng-disabled="!vm.can_edit" style="width: 34%; display: inline;">
+                <option value="">Select Unit</option>
+                <option ng-repeat="item in vm.types.AreaType" ng-value="item">
                   {{ item }}
-                </option>
+                </option>                
               </select>
             </dd>
           </dl>
