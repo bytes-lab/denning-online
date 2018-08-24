@@ -48,5 +48,11 @@ denningOnline
       });
     }
 
+    service.getApprovingAuthorityList = function () {
+      return http.GET('v1/generalSelection/frmProperty/ApprovingAuthority').then(function (resp) {
+        return resp.data;
+      });
+    }
+
     return service;
   })

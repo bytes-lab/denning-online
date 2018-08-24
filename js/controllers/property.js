@@ -23,7 +23,7 @@ denningOnline
 
   .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, 
                                            $state, Auth, $uibModal, contactService, 
-                                           refactorService, uibDateParser) 
+                                           refactorService, uibDateParser, mukimService) 
   {
     var self = this;
     self.isDialog = false;
@@ -41,6 +41,17 @@ denningOnline
       propertyService.getItem($stateParams.id).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+
+        // wrapper attrs for auto complete
+        self.strMukim_ = { 
+          mukim: self.entity.strMukim,
+          daerah: self.entity.strDaerah,
+          negeri: self.entity.strNegeri 
+        };
+
+        self.strApprovingAuthority_ = {
+          description: self.entity.strApprovingAuthority
+        }
       });
     } else {
       self.entity = {
@@ -58,6 +69,35 @@ denningOnline
       return contactService.getStaffList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
+    }
+
+    self.queryMukims = function (searchText) {
+      return mukimService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    // get approving authorities
+    propertyService.getApprovingAuthorityList().then(function (data) {
+      self.aaList = data;
+    })
+
+    self.queryAAs = function (searchText) {
+      return self.aaList;
+    }
+
+    self.aaChange = function (item) {
+      if (item) {
+        self.entity.strApprovingAuthority = item.description;
+      }
+    }
+
+    self.mukimChange = function (item) {
+      if (item) {
+        self.entity.strMukim = item.mukim;
+        self.entity.strDaerah = item.daerah;
+        self.entity.strNegeri = item.negeri;
+      }
     }
 
     $("#back-top").hide();

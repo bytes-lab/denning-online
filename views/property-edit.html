@@ -67,18 +67,17 @@
             <dt class="p-t-10">ID</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="true" class="form-control" ng-model="vm.entity.strPropertyID">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPropertyID">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Title Type</dt>
             <dd>
-              <select class="form-control" ng-model="vm.entity.strTitleType">
-                <option ng-repeat="item in vm.types['TitleType']" ng-value="item" ng-selected="vm.entity.strTitleType == item">
-                  {{ item }}
-                </option>
-              </select>
+              <div class="select">
+                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strTitleType" ng-options="x for x in vm.types.TitleType">
+                </select>
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -92,11 +91,10 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Lot Type</dt>
             <dd>
-              <select class="form-control" ng-model="vm.entity.strLotType">
-                <option ng-repeat="item in vm.types['LotType']" ng-value="item" ng-selected="vm.entity.strLotType == item">
-                  {{ item }}
-                </option>
-              </select>
+              <div class="select">
+                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strLotType" ng-options="x for x in vm.types.LotType">
+                </select>
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -110,13 +108,27 @@
           <dl class="dl-horizontal">
             <dt>
               <div class="select">
-                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strMukimType" ng-options="x for x in vm.types.MukimType">
+                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strMukimType" ng-options="x for x in vm.types.MukimType" style="padding-left: 0 !important;">
                 </select>
               </div>
             </dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strMukim">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strMukim_"
+                  md-search-text="qsmk"
+                  md-items="item in vm.queryMukims(qsmk)"
+                  md-selected-item-change="vm.mukimChange(item)"
+                  md-item-text="item.mukim"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="qsmk" class="col-1" md-highlight-flags="i">
+                      {{ item.mukim }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
@@ -151,11 +163,10 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Tenure</dt>
             <dd>
-              <select class="form-control" ng-model="vm.entity.strLandTenure">
-                <option ng-repeat="item in vm.types['TenureType']" ng-value="item" ng-selected="vm.entity.strLandTenure == item">
-                  {{ item }}
-                </option>
-              </select>
+              <div class="select">
+                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strLandTenure" ng-options="x for x in vm.types.TenureType">
+                </select>
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -204,18 +215,31 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Restriction Against</dt>
             <dd>
-              <select class="form-control" ng-model="vm.entity.strRestrictionAgainst">
-                <option ng-repeat="item in vm.types['RestrictionAgainst']" ng-value="item" ng-selected="vm.entity.strRestrictionAgainst == item">
-                  {{ item }}
-                </option>
-              </select>
+              <div class="select">
+                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strRestrictionAgainst" ng-options="x for x in vm.types.RestrictionAgainst">
+                </select>
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Approving Authority</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strApprovingAuthority">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strApprovingAuthority_"
+                  md-search-text="qsaa"
+                  md-items="item in vm.queryAAs(qsaa)"
+                  md-selected-item-change="vm.aaChange(item)"
+                  md-item-text="item.description"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="qsaa" class="col-1" md-highlight-flags="i">
+                      {{ item.description }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
@@ -230,7 +254,8 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Category of Land Use</dt>
             <dd>
-              <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPropertyUse">
+                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strPropertyUse" ng-options="x for x in vm.types.LandUse">
+                </select>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -375,16 +400,15 @@
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="">
-              <select class="form-control" ng-model="vm.entity.spaParcel.type">
-                <option ng-repeat="item in vm.types['ParcelType']" ng-value="item" ng-selected="vm.entity.spaParcel.type == item">
-                  {{ item }}
-                </option>
-              </select>
+            <dt>
+              <div class="select">
+                <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strUnitParcelLabel" ng-options="x for x in vm.types.ParcelType" style="padding-left: 0 !important;">
+                </select>
+              </div>
             </dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.spaParcel.value">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strUnitParcelNo">
               </div>
             </dd>
           </dl>
