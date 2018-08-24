@@ -25,7 +25,7 @@ denningOnline
                                            contactService, $state, Auth, $scope, 
                                            refactorService, occupationService, raceService, 
                                            religionService, IRDBranchService, cityService,
-                                           uibDateParser) 
+                                           uibDateParser, bankService) 
   {
     var self = this;
     self.isDialog = false;
@@ -51,7 +51,7 @@ denningOnline
       'Secondary',
       'University'
     ];
-    
+
     self.queryList = function (labels, q) {
       return labels.filter(function(item) {
         return item.search(new RegExp(q, "i")) > -1;
@@ -84,8 +84,25 @@ denningOnline
       self.IDTypes = data;
     });
 
+    self.sameOfficeAddr = function (flag) {
+      if (flag) {
+        self.entity.strRegOff = self.entity.strAddressLine1 + 
+                                self.entity.strAddressLine2 + 
+                                self.entity.strAddressLine3 +
+                                self.entity.strPostCode + ' ' +
+                                self.entity.strCity + ', ' +
+                                self.entity.strState;
+      }
+    }
+
     self.queryContacts = function (searchText) {
       return contactService.getCustomerList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryBanks = function (searchText) {
+      return bankService.getTableList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     };
@@ -321,8 +338,8 @@ denningOnline
     };
   })
 
-  .controller('deleteEntityModalCtrl', function ($scope, $uibModalInstance, $state, entity, on_list, 
-                                                 entity_type, service, return_state) 
+  .controller('deleteEntityModalCtrl', function ($scope, $uibModalInstance, $state, entity, 
+                                                 entity_type, service, return_state, on_list) 
   {
     $scope.entity_type = entity_type;
 
@@ -347,8 +364,8 @@ denningOnline
     };
   })
 
-  .controller('contactCreateModalCtrl', function ($uibModalInstance, party, viewMode, contactService, 
-                                                  IRDBranchService, Auth) 
+  .controller('contactCreateModalCtrl', function ($uibModalInstance, party, viewMode, 
+                                                  contactService, IRDBranchService, Auth) 
   {
     var self = this;
     self.isDialog = true;
