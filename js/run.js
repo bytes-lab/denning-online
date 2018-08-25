@@ -584,6 +584,66 @@ denningOnline
       name: 'summary',
       templateUrl: 'summary.html',
       controller: function ($scope, propertyService) {
+        $scope.print = function () {
+          var content = document.getElementById('summary').innerHTML;
+          var printWindow = window.open('');
+
+          printWindow.document.write(`<html><head><style type="text/css" media="print"> 
+            .hidden-print { display: none; } 
+            h2 { 
+              color: #9c27b0 !important; 
+            } 
+            h4 { 
+              color: #006400; 
+              margin-bottom: 10px;
+            } 
+            h5 {
+              font-size: 16px;
+              margin-bottom: 0px;
+            }            
+            .col-md-5 { 
+              width: 49%;
+              float: left; 
+            }
+            .col-md-5.first { 
+              padding-right: 7px;
+            }
+            .col-md-5.second { 
+              padding-left: 7px;
+            }
+            dt {
+              color: #808080;
+              font-weight: 700;
+            }
+            .dl-horizontal dt {
+              float: left;
+              text-align: left;
+              width: 130px;
+            }
+            .dl-horizontal dd {
+              margin-left: 145px;
+            }
+            dt, dd {
+              line-height: 1.32;
+              font-size: 13px;
+            }
+            dl {
+              display: table;
+              clear: both;
+              margin-top: 6px;
+              margin-bottom: 6px;
+            }
+            @page {
+              margin-top: 50px;
+            }
+          </style>`);
+          printWindow.document.write('</head><body class="summary">');
+          printWindow.document.write(content);
+          printWindow.document.write('</body></html>');
+          printWindow.print();
+          printWindow.close();
+        }
+
         // property detail
         if ($scope.model.clsP1.code) {
           propertyService.getItem($scope.model.clsP1.code).then(function (item) {

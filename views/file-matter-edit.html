@@ -1852,12 +1852,15 @@
 </script>
 
 <script type="text/ng-template" id="summary.html">
-  <div class="row summary">
-    <div class="col-md-10 col-md-offset-1">
+  <div class="row summary" id="summary">
+    <div class="col-md-8 col-md-offset-1">
       <h2 class="c-purple p-b-15 title" style="font-size: 25px;">SUMMARY</h2>
       <h5 class="f-16">{{ model.strFileNo1 }} ( {{ model.clsPrimaryClient.strName }} )</h5>
     </div>
-    <div class="col-md-5 col-md-offset-1">
+    <div class="col-md-2">
+      <button class="btn btn-primary hidden-print m-t-25" ng-click="print()">Print</button>
+    </div>
+    <div class="col-md-5 first col-md-offset-1">
       <h4 class="m-t-25 m-b-20">Matter Information</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Other Ref</dt>
@@ -2115,7 +2118,7 @@
         </dl>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5 second">
       <div ng-if="false">
         <h4 class="m-t-25 m-b-20">Case Name</h4>
         <dl class="dl-horizontal m-b-10">
