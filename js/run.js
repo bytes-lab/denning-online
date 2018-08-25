@@ -642,6 +642,7 @@ denningOnline
           printWindow.document.write('</body></html>');
           printWindow.print();
           printWindow.close();
+          return true;
         }
 
         // property detail
