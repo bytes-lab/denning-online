@@ -606,10 +606,10 @@ denningOnline
               float: left; 
             }
             .col-md-5.first { 
-              // padding-right: 7px;
+              padding-right: 5px;
             }
             .col-md-5.second { 
-              // padding-left: 7px;
+              padding-left: 5px;
             }
             dt {
               color: #808080;
@@ -640,7 +640,6 @@ denningOnline
           printWindow.document.write('</head><body class="summary">');
           printWindow.document.write(content);
           printWindow.document.write('</body></html>');
-          printWindow.document.close();
           printWindow.print();
           printWindow.close();
         }
