@@ -908,31 +908,31 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Case Type</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_case_type']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.strF3" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Case No.</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_case_no']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.strF4" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Party Type</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_party_type']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.strF5" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">SAR</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_SAR']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.strF6" style="width:45%;">
     </div>
   </div>  
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Judge</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_judge']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.strF7" style="width:45%;">
     </div>
   </div>  
   </div>
@@ -1488,7 +1488,7 @@
     </div>
   </div>
   <div class="form-group col-md-6">
-    <label for="inputEmail3" class="col-sm-4 attr-label-1">DO Loan Amount</label>
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">OD Loan Amount</label>
     <div class="col-sm-8">
       <div class="fg-line">
         <input type="text" ng-model="model.decRM5" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
@@ -1529,7 +1529,7 @@
     </div>
   </div>
   <div class="form-group col-md-6">
-    <label for="inputEmail3" class="col-sm-4 attr-label-1">Interest Rate (DO)</label>
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Interest Rate (OD)</label>
     <div class="col-sm-8">
       <div class="fg-line">
         <input type="text" ng-model="model.strF8" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
@@ -1544,7 +1544,7 @@
       </div>
     </div>
   </div>
-  <div class="form-group col-md-6">
+<!--   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Islamic Loan</label>
     <div class="col-sm-8">
       <div class="fg-line">
@@ -1552,7 +1552,9 @@
       </div>
     </div>
   </div>     
-  <div class="form-group col-md-6">
+ -->  
+  <div class="clearfix"></div>
+  <div class="form-group col-md-6 m-t-10">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Total Loan</label>
     <div class="col-sm-8">
       <div class="fg-line">
@@ -1566,7 +1568,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Selling Price</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_selling_price']" class="form-control input-sm text-right" id="inputEmail3">
+        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM9" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>      
@@ -1574,7 +1576,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Purchase Price</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="number" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_purchase_price']" class="form-control input-sm text-right" id="inputEmail3">
+        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM8" class="form-control input-sm text-right" id="inputEmail3">
       </div>
     </div>
   </div>      
@@ -1864,17 +1866,19 @@
     <div class="col-md-5 first col-md-offset-1">
       <h4 class="m-t-25 m-b-20">Matter Information</h4>
       <dl class="dl-horizontal m-b-10">
-        <dt>Other Ref</dt>
-        <dd>{{ model.strFileNo2 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
         <dt>Matter Description</dt>
         <dd>{{ model.clsMatterCode.strDescription }} ( {{ model.clsMatterCode.code }} )</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
-        <dt>Staff</dt>
+        <dt>Partner</dt>
         <dd>{{ model.clsPartnerInCharge.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>LA</dt>
         <dd>{{ model.clsLAInCharge.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Clerk</dt>
         <dd>{{ model.clsClerkInCharge.strName }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
@@ -1890,49 +1894,53 @@
         <dt>Open ( Closed )</dt>
         <dd>{{ model.dtDateOpenFile|ddate }} ( {{ model.dtDateCloseFile|ddate }} )</dd>
       </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Other Ref</dt>
+        <dd>{{ model.strFileNo2 }}</dd>
+      </dl>
 
       <h4 class="m-t-25 m-b-20" ng-if="model.clsC1.strName">{{ model.clsMatterCode.strGroupC1 }}</h4>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC1.strName">
         <dt>{{ model.clsC1.strIDNo }}</dt>
-        <dd>{{ model.clsC1.strName }}</dd>
+        <dd>{{ model.clsC1.strName }} <span ng-if="model.strShareC1">( {{ model.strShareC1 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC2.strName">
         <dt>{{ model.clsC2.strIDNo }}</dt>
-        <dd>{{ model.clsC2.strName }}</dd>
+        <dd>{{ model.clsC2.strName }} <span ng-if="model.strShareC2">( {{ model.strShareC2 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC3.strName">
         <dt>{{ model.clsC3.strIDNo }}</dt>
-        <dd>{{ model.clsC3.strName }}</dd>
+        <dd>{{ model.clsC3.strName }} <span ng-if="model.strShareC3">( {{ model.strShareC3 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC4.strName">
         <dt>{{ model.clsC4.strIDNo }}</dt>
-        <dd>{{ model.clsC4.strName }}</dd>
+        <dd>{{ model.clsC4.strName }} <span ng-if="model.strShareC4">( {{ model.strShareC4 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC5.strName">
         <dt>{{ model.clsC5.strIDNo }}</dt>
-        <dd>{{ model.clsC5.strName }}</dd>
+        <dd>{{ model.clsC5.strName }} <span ng-if="model.strShareC5">( {{ model.strShareC5 }} )</span></dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20" ng-if="model.clsC6.strName">{{ model.clsMatterCode.strGroupC2 }}</h4>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC6.strName">
         <dt>{{ model.clsC6.strIDNo }}</dt>
-        <dd>{{ model.clsC6.strName }}</dd>
+        <dd>{{ model.clsC6.strName }} <span ng-if="model.strShareC6">( {{ model.strShareC6 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC7.strName">
         <dt>{{ model.clsC7.strIDNo }}</dt>
-        <dd>{{ model.clsC7.strName }}</dd>
+        <dd>{{ model.clsC7.strName }} <span ng-if="model.strShareC7">( {{ model.strShareC7 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC8.strName">
         <dt>{{ model.clsC8.strIDNo }}</dt>
-        <dd>{{ model.clsC8.strName }}</dd>
+        <dd>{{ model.clsC8.strName }} <span ng-if="model.strShareC8">( {{ model.strShareC8 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC9.strName">
         <dt>{{ model.clsC9.strIDNo }}</dt>
-        <dd>{{ model.clsC9.strName }}</dd>
+        <dd>{{ model.clsC9.strName }} <span ng-if="model.strShareC9">( {{ model.strShareC9 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10" ng-if="model.clsC10.strName">
         <dt>{{ model.clsC10.strIDNo }}</dt>
-        <dd>{{ model.clsC10.strName }}</dd>
+        <dd>{{ model.clsC10.strName }} <span ng-if="model.strShareC10">( {{ model.strShareC10 }} )</span></dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20" ng-if="model.clsC11.strName">{{ model.clsMatterCode.strGroupC3 }}</h4>
@@ -2124,15 +2132,15 @@
         <h4 class="m-t-25 m-b-20">Case Name</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Full Case Name</dt>
+          <dd>{{ model.strF211 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Court</dt>
           <dd>{{ model.strF2 }}</dd>
         </dl>
         <dl class="dl-horizontal m-b-10">
-          <dt>Court Place + Court Type</dt>
-          <dd>{{ model.strName }}</dd>
-        </dl>
-        <dl class="dl-horizontal m-b-10">
           <dt>Case No</dt>
-          <dd>{{ model.strName }}</dd>
+          <dd>{{ model.strF4 }}</dd>
         </dl>
       </div>
 
@@ -2143,7 +2151,7 @@
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Area</dt>
-        <dd>{{ property.strArea }}</dd>
+        <dd>{{ property.strArea }} {{ property.strAreaDescription }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Tenure</dt>
@@ -2155,7 +2163,7 @@
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Restriction</dt>
-        <dd>{{ property.strRestrictionAgainst }}</dd>
+        <dd>{{ property.strRestrictionAgainst }} <span ng-if="property.strApprovingAuthority">( {{ property.strApprovingAuthority }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Use</dt>
@@ -2167,7 +2175,7 @@
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Postal Add</dt>
-        <dd>{{ property.strAddress }}</dd>
+        <dd>{{ property.strPropertyAdr }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Project</dt>
@@ -2215,14 +2223,14 @@
       <h4 class="m-t-25 m-b-20">Loan</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Loan Type</dt>
-        <dd>{{ model.strF3 }}</dd>
+        <dd>{{ model.strF3 }} <span ng-if="model.strF4"> ( {{ model.strF4 }} )</span></dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Term Loan</dt>
         <dd>{{ model.decRM4 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
-        <dt>DO Loan</dt>
+        <dt>OD Loan</dt>
         <dd>{{ model.decRM5 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
@@ -2243,17 +2251,17 @@
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank Purchase Price</dt>
-        <dd>{{ model.strName1 }}</dd>
+        <dd>{{ model.decRM8 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank Selling Price</dt>
-        <dd>{{ model.strName1 }}</dd>
+        <dd>{{ model.decRM9 }}</dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20">{{ getLabel('clsBank1') }} </h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank</dt>
-        <dd>{{ model.clsPrimaryClient.clsBankCode.strName }}</dd>
+        <dd>{{ model.clsBank1.clsBankCode.strName }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Branch</dt>

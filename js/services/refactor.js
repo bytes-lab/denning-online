@@ -25,6 +25,11 @@ denningOnline
             return false;
           }
         } else {
+          // compare number of fields first
+          if (Object.keys(fieldOriginal).length != Object.keys(fieldNew).length) {
+            return false;
+          }
+
           for (var ii in fieldNew) {
             if (fieldOriginal[ii] != fieldNew[ii]) {
               return false;

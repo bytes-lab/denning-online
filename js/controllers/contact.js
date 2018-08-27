@@ -359,6 +359,7 @@ denningOnline
     };
   })
 
+  // for general delete
   .controller('deleteEntityModalCtrl', function ($scope, $uibModalInstance, $state, entity, 
                                                  entity_type, service, return_state, on_list) 
   {

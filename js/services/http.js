@@ -34,7 +34,8 @@ denningOnline
     }
     
     service.POST = function (url, data) {
-      return do_('POST', url, refactorService.removeEmpty(data));
+      return do_('POST', url, data);
+      // return do_('POST', url, refactorService.removeEmpty(data));
     };
 
     service.PUT = function (url, data) {

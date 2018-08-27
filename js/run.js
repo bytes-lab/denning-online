@@ -172,6 +172,14 @@ denningOnline
           return range(min, max, step);
         };
 
+        if ($scope.to.party) {
+          for (var i = $scope.to.c_start; i <= $scope.to.c_end; i++) {
+            if ($scope.model['clsC'+i].code) {
+              $scope.model.tmp['clsC'+i] = true;
+            }
+          }
+        }
+
         $scope.addParty = function(start, end) {
           var flag = false;
           for(var i = start; i <= end; i++) {
@@ -197,7 +205,12 @@ denningOnline
             $scope.model.tmp['clsC'+i] = $scope.model.tmp['clsC'+(i+1)];
           }
           $scope.model.tmp['clsC'+last] = false;
-          $scope.model['clsC'+last] = {};
+          $scope.model['clsC'+last] = {
+            code: null,
+            strCitizenship: "",
+            strIDNo: "",
+            strName: ""
+          };
         }
 
         $scope.viewContact = function(party) {
@@ -458,76 +471,7 @@ denningOnline
     // case attribute
     formlyConfig.setType({
       name: 'case',
-      templateUrl: 'case.html',
-      controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        initContacts();
-
-        $scope.getNumber = function(num) {
-          return new Array(num);   
-        }
-
-        $scope.represent_this = false;
-        $scope.userInfo = Auth.getUserInfo();
-
-        $scope.solicitor = {};
-
-        $scope.changeSolicitor = function(item) {
-          $scope.solicitor = item;
-        }
-
-        $scope.viewContact = function(party) {
-          if (party.party) {
-            $scope.contactDialog(party, true);
-          } else {
-            alert('Please select a party.')
-          }
-        }
-
-        $scope.removeParty = function(idx) {
-          if ($scope.model[$scope.options.key].length > 1)
-            $scope.model[$scope.options.key].splice(idx, 1);
-        }
-
-        function initContacts() {
-          contactService.getList().then(function(data) {
-            $scope.contacts = data;
-          });
-        }
-
-        $scope.queryContacts = function(searchText) {
-          return $scope.contacts.filter(function(c) {
-            return c && (c.name.search(new RegExp(searchText, "i")) > -1 || 
-                                       c.IDNo.search(new RegExp(searchText, "i")) > -1);
-          });
-        }
-
-        legalFirmService.getList().then(function(data) {
-          $scope.legalFirms = data;
-        });
-
-        $scope.contactDialog = function(party, viewMode) {
-          var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'views/contact-edit.html',
-            controller: 'contactCreateModalCtrl',
-            controllerAs: 'vm',
-            size: 'lg',
-            backdrop: 'static',
-            keyboard: true,
-            resolve: {
-              viewMode: viewMode,
-              party: party,
-              initContacts: function(){
-                return initContacts;
-              }
-            }
-          });
-
-          modalInstance.result.then(function(contact){
-            $scope.contacts.push(contact);
-          })
-        }
-      }
+      templateUrl: 'case.html'
     });
 
     // price attribute
@@ -625,10 +569,10 @@ denningOnline
             }
             dt {
               color: #eee;
-              font-weight: 700;
+              font-weight: 500;
             }
             dd {
-              color: #5e5e5e;
+              color: #eee;
             }
             .dl-horizontal dt {
               float: left;
@@ -637,14 +581,18 @@ denningOnline
             }
             .dl-horizontal dd {
               margin-left: 145px;
+              word-wrap: break-word;
             }
             dt, dd {
               line-height: 1.32;
               font-size: 13px;
             }
-            dl {
+            .dl-horizontal dd:after {
               display: table;
+              content: ' ';
               clear: both;
+            }
+            dl {
               margin-top: 6px;
               margin-bottom: 6px;
             }
