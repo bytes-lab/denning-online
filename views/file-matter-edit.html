@@ -23,7 +23,7 @@
           <div ng-repeat="group in tab.groups" class="col-lg-10 no-padding">  
             <div class="group">
               <div class="form-group" ng-if="group.label">
-                <input id="{{group.key}}-label" name="{{group.key}}-label" class="form-control group-label" ng-model="vm.model[group.key+'-label']" ng-value="group.label" />
+                <label class="form-control group-label" style="padding-top: 4px;">{{ group.label }}</label>
               </div>
               <formly-form model="vm.model" fields="group.attrs" form="vm.form" options="group.options">
               </formly-form>

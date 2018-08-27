@@ -25,7 +25,7 @@ denningOnline
                                            contactService, $state, Auth, $scope, 
                                            refactorService, occupationService, raceService, 
                                            religionService, IRDBranchService, cityService,
-                                           uibDateParser, bankService) 
+                                           uibDateParser, bankService, $uibModalInstance, party) 
   {
     var self = this;
     self.isDialog = false;
@@ -34,6 +34,7 @@ denningOnline
     self.can_edit = $state.$current.data.can_edit;
     self.create_new = $state.$current.data.can_edit;
 
+    console.log($uibModalInstance);
     self.IDTypes = [];
     self.Salutations = [];
     self.contactTypes = [

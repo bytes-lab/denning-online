@@ -254,6 +254,12 @@ denningOnline
                 ]
               }
             ])
+          },
+          "$uibModalInstance": function () {
+            return null;
+          },
+          party: function () {
+            return null;
           }
         }
       })
