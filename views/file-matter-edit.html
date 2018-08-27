@@ -890,7 +890,7 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Court</label>
-    <input type="text" class="form-control" ng-model="model[options.key+'_court']" style="width:45%;">
+    <input type="text" class="form-control" ng-model="model.strF2" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
@@ -2024,7 +2024,7 @@
       </dl>
 
       <div ng-if="model.clsLawyer1.strName">
-        <h4 class="m-t-25 m-b-20">{{ matterCode[26].Label }}</h4>
+        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer1') }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer1.strName }}</dd>
@@ -2048,7 +2048,7 @@
       </div>
 
       <div ng-if="model.clsLawyer2.strName">
-        <h4 class="m-t-25 m-b-20">{{ matterCode[27].Label }}</h4>
+        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer2') }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer2.strName }}</dd>
@@ -2072,7 +2072,7 @@
       </div>
 
       <div ng-if="model.clsLawyer3.strName">
-        <h4 class="m-t-25 m-b-20">{{ matterCode[28].Label }}</h4>
+        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer3') }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer3.strName }}</dd>
@@ -2096,7 +2096,7 @@
       </div>
 
       <div ng-if="model.clsLawyer4.strName">
-        <h4 class="m-t-25 m-b-20">{{ matterCode[29].Label }}</h4>
+        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer4') }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer4.strName }}</dd>
@@ -2120,23 +2120,23 @@
       </div>
     </div>
     <div class="col-md-5 second">
-      <div ng-if="false">
+      <div ng-if="model.strF2">
         <h4 class="m-t-25 m-b-20">Case Name</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Full Case Name</dt>
-          <dd>{{ model.clsPrimaryClient.strName }}</dd>
+          <dd>{{ model.strF2 }}</dd>
         </dl>
         <dl class="dl-horizontal m-b-10">
           <dt>Court Place + Court Type</dt>
-          <dd>{{ model.clsPrimaryClient.strName }}</dd>
+          <dd>{{ model.strName }}</dd>
         </dl>
         <dl class="dl-horizontal m-b-10">
           <dt>Case No</dt>
-          <dd>{{ model.clsPrimaryClient.strName }}</dd>
+          <dd>{{ model.strName }}</dd>
         </dl>
       </div>
 
-      <h4 class="m-t-25 m-b-20">{{ matterCode[101].Label }}</h4>
+      <h4 class="m-t-25 m-b-20">{{ getLabel('clsP1') }}</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Title</dt>
         <dd>{{ property.strAddress }}</dd>
@@ -2250,7 +2250,7 @@
         <dd>{{ model.strName1 }}</dd>
       </dl>
 
-      <h4 class="m-t-25 m-b-20">{{ matterCode[30].Label }} </h4>
+      <h4 class="m-t-25 m-b-20">{{ getLabel('clsBank1') }} </h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank</dt>
         <dd>{{ model.clsPrimaryClient.clsBankCode.strName }}</dd>
@@ -2272,7 +2272,7 @@
         <dd>{{ model.dtDate15|ddate }}</dd>
       </dl>
 
-      <h4 class="m-t-25 m-b-20">{{ matterCode[31].Label }}</h4>
+      <h4 class="m-t-25 m-b-20">{{ getLabel('clsBank2') }}</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Bank</dt>
         <dd>{{ model.clsBank2.clsBankCode.strName }}</dd>

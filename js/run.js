@@ -589,7 +589,19 @@ denningOnline
           var printWindow = window.open('');
 
           printWindow.document.write(`<html><head><style> 
-            .hidden-print { display: none; } 
+            @font-face {
+              font-family: roboto;
+              src: url('fonts/roboto/Roboto-Regular-webfont.eot');
+              src: url('fonts/roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/roboto/Roboto-Regular-webfont.woff') format('woff'), url('fonts/roboto/Roboto-Regular-webfont.ttf') format('truetype'), url('fonts/roboto/Roboto-Regular-webfont.svg#icon') format('svg');
+              font-weight: 400;
+              font-style: normal;
+            }            
+            * {
+              font-family: roboto;
+            }
+            .hidden-print { 
+              display: none; 
+            } 
             h2 { 
               color: #9c27b0 !important; 
             } 
@@ -612,8 +624,11 @@ denningOnline
               padding-left: 5px;
             }
             dt {
-              color: #808080;
+              color: #eee;
               font-weight: 700;
+            }
+            dd {
+              color: #5e5e5e;
             }
             .dl-horizontal dt {
               float: left;
@@ -647,7 +662,7 @@ denningOnline
           printWindow.document.write(content);
           printWindow.document.write('</body></html>');
           printWindow.print();
-          printWindow.close();
+          // printWindow.close();
         }
 
         // property detail
@@ -661,6 +676,14 @@ denningOnline
         $scope.matterCode = [];
         if ($scope.model.clsMatterCode && $scope.model.clsMatterCode.jsonFieldLabels) {
           $scope.matterCode = JSON.parse($scope.model.clsMatterCode.jsonFieldLabels);
+        }
+
+        $scope.getLabel = function (key) {
+          for (var i = 0; i < $scope.matterCode.length; i++) {
+            if ($scope.matterCode[i].JsonField == key) {
+              return $scope.matterCode[i].Label;
+            }
+          }
         }
       }
     });  
