@@ -212,3 +212,7 @@ tr.selected {
 .summary dt {
     color: #808080;
 }
+
+.logo-summary-report {
+    display: none;
+}

@@ -588,7 +588,7 @@ denningOnline
           var content = document.getElementById('summary').innerHTML;
           var printWindow = window.open('');
 
-          printWindow.document.write(`<html><head><style type="text/css" media="print"> 
+          printWindow.document.write(`<html><head><style> 
             .hidden-print { display: none; } 
             h2 { 
               color: #9c27b0 !important; 
@@ -636,6 +636,12 @@ denningOnline
             @page {
               margin-top: 50px;
             }
+            .logo-summary-report {
+              width: 72px;
+              position: absolute;
+              top: 2px;
+              right: 10px;
+            }            
           </style>`);
           printWindow.document.write('</head><body class="summary">');
           printWindow.document.write(content);
