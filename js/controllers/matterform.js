@@ -38,15 +38,16 @@ denningOnline
       if (clsMatterCode && clsMatterCode.jsonFieldLabels) {
         matter_code = JSON.parse(clsMatterCode.jsonFieldLabels);
       }
-
       vm.tabDict = {
         "Matter": {
           "label": "Info",
           "groups": [
             {
+              "key": "file-info",
               "label": "Primary Client",
               "attrs": [
                 {
+                  "key": "matter1",
                   "type": "file",
                   "templateOptions": {
                     "share": false,
@@ -61,8 +62,10 @@ denningOnline
         "Summary": {
           "groups": [
             {
+              "key": "summary",
               "attrs": [
                 {
+                  "key": "summary",
                   "type": "summary",
                   "templateOptions": {
                   }
@@ -74,9 +77,11 @@ denningOnline
         "Parties-S": {
           "groups": [
             {
+              "key": "vendor-group",
               "label": clsMatterCode ? clsMatterCode.strGroupC1 : '',
               "attrs": [
                 {
+                  "key": "party1",
                   "type": "contact",
                   "templateOptions": {
                     "share": true,
@@ -87,9 +92,11 @@ denningOnline
               ]
             },
             {
+              "key": "purchaser-group",
               "label": clsMatterCode ? clsMatterCode.strGroupC2 : '',
               "attrs": [
                 {
+                  "key": "purchaser1",
                   "type": "contact",
                   "templateOptions": {
                     "share": true,
@@ -646,6 +653,7 @@ denningOnline
           ]
         }
       };
+
     }
 
     function buildTabs (clsMatterCode) {

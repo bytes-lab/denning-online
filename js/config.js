@@ -281,8 +281,14 @@ denningOnline
                 ]
               }
             ])
+          },
+          "$uibModalInstance": function () {
+            return null;
+          },
+          party: function () {
+            return null;
           }
-        }        
+        }
       })
       .state ('contacts.matters', {
         data: {
