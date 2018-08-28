@@ -110,25 +110,58 @@
     <h4 class="modal-title">Move Documents</h4>
   </div>
   <div class="modal-body">
-    <dl class="dl-horizontal">
-      <dt class="p-t-10">Matter</dt>
-      <dd>
-        <div class="fg-line">
-          <md-autocomplete
-            md-selected-item="matter"
-            md-search-text="qstl"
-            md-items="item in queryMatters(qstl)"
-            md-item-text="item.Title"
-            md-min-length="0"
-            md-selected-item-change="matterChange(item)"
-            class="default-input">
-            <md-item-template>
-              <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
-            </md-item-template>
-          </md-autocomplete>
-        </div>
-      </dd>
-    </dl>
+    <ul class="f-15 c-blue m-b-20 p-l-20">
+      <li ng-repeat="file in files track by $index">{{ file.name }}{{ file.ext }}</li>
+    </ul>
+    <h5>Destination</h5>
+    <div class="radio col-sm-3">
+      <label>
+        <input type="radio" value="0" ng-model="searchCategory">
+        <i class="input-helper"></i>
+        All
+      </label>
+    </div>
+    <div class="radio col-sm-3">
+      <label>
+        <input type="radio" value="1" ng-model="searchCategory">
+        <i class="input-helper"></i>
+        Matter
+      </label>
+    </div>
+    <div class="radio col-sm-3">
+      <label>
+        <input type="radio" value="2" ng-model="searchCategory">
+        <i class="input-helper"></i>
+        Contact
+      </label>
+    </div>
+    <div class="radio col-sm-3">
+      <label>
+        <input type="radio" value="10" ng-model="searchCategory">
+        <i class="input-helper"></i>
+        Transit
+      </label>
+    </div>
+    <div class="col-md-12 m-b-15 m-t-10">
+      <md-autocomplete
+        md-selected-item="dest"
+        md-search-text="qstl"
+        md-items="item in search(qstl)"
+        md-item-text="item.keyword"
+        md-min-length="0"
+        md-selected-item-change="mainSearch(item)"
+        class="default-input">
+        <md-item-template>
+          <span md-highlight-text="qstl" class="col-1" md-highlight-flags="i">
+            {{ item.keyword }}
+          </span>
+        </md-item-template>
+        <md-not-found>
+          No results matching "{{ qstl }}" were found.
+        </md-not-found>
+      </md-autocomplete>
+    </div>
+    <div class="clearfix"></div>
     <dl class="dl-horizontal">
       <dt class="p-t-10">Folder</dt>
       <dd>

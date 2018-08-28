@@ -168,7 +168,7 @@ denningOnline
       contactService.upload(info, 'matter', fileOjects).then(function(res) {
         self.uploaded = self.uploaded + 1;
         if (fileList.length == self.uploaded) {
-          alert('The file(s) uploaded successfully.');
+          growlService.growl('The file(s) uploaded successfully.', 'success');
           $state.reload();
         }
       })
@@ -410,33 +410,38 @@ denningOnline
   })
 
   .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
-                                            folderService, files, fileMatterService) 
+                                            folderService, files, searchService) 
   {
     $scope.files = files;
+    $scope.searchCategory = "0";
     $scope.folderName = '';
     $scope.is_valid = ' ';
 
-    $scope.queryMatters = function (search) {
+    $scope.search = function (search) {
+      return searchService.keyword(query).then(function (data) {
+        return data;
+      });
+      
       return fileMatterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
     }
 
-    $scope.matterChange = function (matter) {
+    $scope.mainSearch = function (item) {
       if (matter) {
-        $scope.matter = matter;
-        $scope.folders = [];
-        $scope.folderName = '';
+        // $scope.matter = matter;
+        // $scope.folders = [];
+        // $scope.folderName = '';
 
-        folderService.getList(matter.key, 'matter').then(function (data) {
-          angular.forEach(data.folders, function(folder, key) {
-            $scope.folders.push(folder);
-          })
-        })
+        // folderService.getList(matter.key, 'matter').then(function (data) {
+        //   angular.forEach(data.folders, function(folder, key) {
+        //     $scope.folders.push(folder);
+        //   })
+        // })
 
-        if ($scope.folders.length > 0) {
-          $scope.folderName = $scope.folders[0].name;
-        }
+        // if ($scope.folders.length > 0) {
+        //   $scope.folderName = $scope.folders[0].name;
+        // }
       }
     }
 

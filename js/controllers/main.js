@@ -149,7 +149,7 @@ denningOnline
       if(angular.isUndefined(item))
         return;
 
-      searchService.search(item.value, self.selectedSearchCategory).then(function (data) {
+      searchService.search(item.keyword, self.selectedSearchCategory).then(function (data) {
         self.searchRes = data;
         if ($state.current.name != 'search')
           $state.go('search');

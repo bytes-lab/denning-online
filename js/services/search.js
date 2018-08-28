@@ -3,7 +3,7 @@ denningOnline
   // Search Data
   // =========================================================================
 
-  .service('searchService', function (http, Auth) {
+  .service('searchService', function (http) {
     this.getFilter = function () {
       return http.GET('v1/generalSearch/category').then(function (resp) {
         return resp.data;
@@ -33,16 +33,8 @@ denningOnline
     this.keyword = function (query) {
       return http.GET('v1/generalSearch/keyword', {
         search: query
-      }).then(function(resp) {
-        var results = [];
-        resp.data.forEach(function(item){
-          results.push({
-            value: item.keyword,
-            display: item.keyword
-          })
-        });
-        
-        return results;
+      }).then(function (resp) {
+        return resp.data;
       });
     };
 

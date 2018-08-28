@@ -28,16 +28,16 @@
         md-search-text="mactrl.searchText"
         md-selected-item-change="mactrl.selectedItemChange(item)"
         md-items="item in mactrl.querySearch(mactrl.searchText)"
-        md-item-text="item.display"
+        md-item-text="item.keyword"
         md-min-length="1"
         md-autoselect="false"
         ng-keypress="mactrl.searchKeyPressed($event)"
         placeholder="Search for matters, contacts, properties ...">
         <md-item-template>
-          <span md-highlight-text="mactrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          <span md-highlight-text="mactrl.searchText" md-highlight-flags="^i">{{ item.keyword }}</span>
         </md-item-template>
         <md-not-found>
-          No results matching "{{mactrl.searchText}}" were found.
+          No results matching "{{ mactrl.searchText }}" were found.
         </md-not-found>
       </md-autocomplete>
       
