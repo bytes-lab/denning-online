@@ -38,8 +38,8 @@
             </ul>
           <h2 class="c-purple f-500 f-18 m-t-15">{{ vm.title }}</h2>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Attach files for email" ng-click="vm.attachFile()"><i class="zmdi zmdi-attachment-alt"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.copyFile()"><i class="zmdi zmdi-copy"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Move files" ng-click="vm.moveFile()"><i class="zmdi zmdi-mail-send"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.moveFile('Copy')"><i class="zmdi zmdi-copy"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Move files" ng-click="vm.moveFile('Move')"><i class="zmdi zmdi-mail-send"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Share files" ng-click="vm.shareFile()"><i class="zmdi zmdi-share"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.deleteFile()"><i class="zmdi zmdi-delete"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Refresh" ng-click="vm.refresh()"><i class="zmdi zmdi-refresh-alt"></i></button>
@@ -107,7 +107,7 @@
 
 <script type="text/ng-template" id="folderModal.html">
   <div class="modal-header">
-    <h4 class="modal-title">Move Documents</h4>
+    <h4 class="modal-title">{{ actionType }} Documents</h4>
   </div>
   <div class="modal-body">
     <ul class="f-15 c-blue m-b-20 p-l-20">

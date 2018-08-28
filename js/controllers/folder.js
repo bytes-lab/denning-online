@@ -182,9 +182,9 @@ denningOnline
       }
     }
 
-    self.moveFile = function() {
+    self.moveFile = function(operation) {
       if (angular.equals(self.checkboxes.items, {})) {
-        alert('Please select files to move.');
+        alert('Please select files to move / copy.');
         return false;
       }
 
@@ -213,6 +213,9 @@ denningOnline
           },
           folders: function () {
             return self.folders;
+          },
+          actionType: function () {
+            return operation;
           }
         }
       });
@@ -416,7 +419,8 @@ denningOnline
   })
 
   .controller('moveDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
-                                            folderService, files, searchService, choosen, folders) 
+                                            folderService, files, searchService, choosen, 
+                                            folders, actionType) 
   {
     $scope.data = {
       folderName: ''
@@ -431,6 +435,7 @@ denningOnline
     $scope.choosen = choosen;
     $scope.choosen_ = angular.copy($scope.choosen);
     $scope.folders = folders;
+    $scope.actionType = actionType;
 
     $scope.search = function (query) {
       return searchService.keyword(query).then(function (data) {
@@ -507,18 +512,27 @@ denningOnline
       var moves = [];
       for (ii in $scope.files) {
         file = $scope.files[ii];
-
-        moves.push(folderService.moveDocument({
+        param = {
           "sourceFileURL" : file.URL,
           "newFileNo" : $scope.choosen.key,
           "newSubFolder" : $scope.data.folderName,
           "newName" : file.name+file.ext
-        }));
+        };
+
+        if ($scope.actionType == 'Move') {
+          moves.push(folderService.moveDocument(param));
+        } else {
+          moves.push(folderService.copyDocument(param));
+        }
       }
 
       Promise.all(moves).then(function (data) {
         $uibModalInstance.close();
-        growlService.growl('Files moved successfully!', 'success');
+        if ($scope.actionType == 'Move') {
+          growlService.growl('Files moved successfully!', 'success');
+        } else {
+          growlService.growl('Files copied successfully!', 'success');
+        }
         $state.reload();
       })
     };
