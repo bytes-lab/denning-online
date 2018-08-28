@@ -82,10 +82,10 @@ input.form-control, label.form-control, select.form-control {
   background: #00bcd4;
   font-weight: 500;
   font-size: 15px;
-  padding-left: 16px !important;
   margin-top: 0;
-  padding-top: 6px !important;
-  padding-bottom: 7px !important;
+  padding-left: 16px;
+  padding-top: 6px;
+  padding-bottom: 7px;
 }
 
 .group {
@@ -145,4 +145,15 @@ md-autocomplete.default-input input:not(.md-input) {
     display: inline-block;
     /*overflow-x: hidden;*/
     /*padding-right: 10px;*/
+}
+
+.btn-em-add {
+    padding: 3px 4px 3px 7px;
+    max-height: 30px;
+    margin-left: 50px;
+}
+
+.group-label-wrapper {
+    padding-top: 3px;
+    padding-bottom: 3px;
 }

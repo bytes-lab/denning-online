@@ -49,7 +49,7 @@
 </div>  
 <!-- BANK GROUP -->
 <script type="text/ng-template" id="bank1.html">
-  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>  
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>  
   <div class="form-group">
     <div class="form-group col-md-12">
       <div style="display: flex;">
@@ -118,7 +118,7 @@
 </script>
 
 <script type="text/ng-template" id="bank2.html">
-  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
     <div class="form-group m-l-15">
       <div style="display: flex;">
@@ -198,8 +198,13 @@
 
 <!-- CONTACT GROUP -->
 <script type="text/ng-template" id="contact.html">
-  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
-  <div class="form-group col-md-12" ng-repeat="n in range(to.c_start, to.c_end)" ng-if="to.party && (model['clsC'+n].code || model.tmp['clsC'+n])">
+  <div class="m-b-15 group-label group-label-wrapper">
+    <span class="">{{ to.label }}</span>
+    <button ng-disabled="!model.tmp.can_edit" ng-if="to.party" class="btn btn-default btn-em-add" ng-click="addParty(to.c_start, to.c_end)" title="Add a new party to group">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="form-group m-l-15" ng-repeat="n in range(to.c_start, to.c_end)" ng-if="to.party && (model['clsC'+n].code || model.tmp['clsC'+n])">
     <div style="display: flex;">
       <label class="form-control attr-label short-label">{{ $index+1 }}</label>
 
@@ -231,13 +236,8 @@
       </a>
     </div>
   </div>
-  <div style="margin-bottom: 30px;" ng-if="to.party">
-    <button ng-disabled="!model.tmp.can_edit" class="btn btn-primary short-btn" style="margin-left: 50px;" ng-click="addParty(to.c_start, to.c_end)" title="Add a new party to group">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new party
-    </button>
-  </div>
   <div ng-if="to.solicitor">
-    <div class="form-group">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Firm</label>
       <md-autocomplete
@@ -269,7 +269,7 @@
       </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
         <label class="form-control attr-label">Tel / Fax / Email</label>
         <label class="form-control p-t-5" style="width:45%;">
@@ -277,19 +277,19 @@
         </label>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Location</label>
       <input type="text" class="form-control" readonly="true" ng-model="model[to.field].strCity" style="width:45%;">
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Staff in Charge</label>
       <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_staff']" style="width:45%;">
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Solicitor Ref.</label>
       <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model['strLawyer'+to.idx+'Ref']" style="width:45%;">
@@ -300,7 +300,7 @@
 
 <!-- PROPERTY GROUP -->
 <script type="text/ng-template" id="property.html">
-  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group col-md-12" ng-repeat="n in range(1, 5)" ng-if="to.property && (model['clsP'+n].code || model.tmp['clsP'+n])">
     <div style="display: flex;">
       <label class="form-control attr-label short-label">{{ n }}</label>
@@ -342,7 +342,7 @@
   <div class="form-group">
   <div class="clearfix"></div>
   <div class="col-md-12 p-l-25">
-    <h4 class="p-5 m-b-15 group-label">Property 1 Information</h4>    
+    <h4 class="m-b-15 group-label">Property 1 Information</h4>    
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Title</label>
@@ -477,7 +477,7 @@
   </div>
   <div class="clearfix"></div>
   <div class="col-md-12 p-l-25">
-    <h4 class="p-5 m-b-15 group-label">Details Principla SPA</h4>
+    <h4 class="m-b-15 group-label">Details Principla SPA</h4>
     <div class="form-group col-md-6">
       <label for="inputEmail3" class="col-sm-4 attr-label-1">Unit No.</label>
       <div class="col-sm-8">
@@ -541,7 +541,7 @@
 
 <!-- FILE INFORMATION -->
 <script type="text/ng-template" id="file.html">  
-  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group col-md-12" ng-if="to.party">
     <div style="display: flex;">
       <label class="form-control attr-label">Primary Client</label>
@@ -573,7 +573,7 @@
   </div>
   <div ng-if="to.solicitor">
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">References</h4>
+  <h4 class="m-b-15 group-label">References</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Ref 1 (Automatic)</label>
@@ -587,7 +587,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Matter Type</h4>
+  <h4 class="m-b-15 group-label">Matter Type</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Matter Code</label>
@@ -622,7 +622,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Checklist</h4>
+  <h4 class="m-b-15 group-label">Checklist</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Checklist</label>
@@ -647,7 +647,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Billing Code</h4>
+  <h4 class="m-b-15 group-label">Billing Code</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Billing Code</label>
@@ -672,7 +672,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Status</h4>
+  <h4 class="m-b-15 group-label">Status</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Open Date</label>
@@ -699,7 +699,7 @@
   </div>
 
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Staff in Charge</h4>
+  <h4 class="m-b-15 group-label">Staff in Charge</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Partner in charge</label>
@@ -785,7 +785,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Location</h4>
+  <h4 class="m-b-15 group-label">Location</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Pocket Location</label>
@@ -805,7 +805,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Related Matter</h4>
+  <h4 class="m-b-15 group-label">Related Matter</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Related Matter</label>
@@ -825,7 +825,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Remarks</h4>
+  <h4 class="m-b-15 group-label">Remarks</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Remarks</label>
@@ -833,7 +833,7 @@
     </div>
   </div>  
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Office Use</h4>
+  <h4 class="m-b-15 group-label">Office Use</h4>
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Entered by</label>
     <div class="col-sm-8">
@@ -920,7 +920,7 @@
 </script>
 
 <script type="text/ng-template" id="price.html">
-  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
   <div class="form-group col-md-12">
     <div style="display: flex;">
@@ -953,7 +953,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Extra Price</h4>
+  <h4 class="m-b-15 group-label">Extra Price</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label-210">Extra 1 [X]</label>
@@ -979,7 +979,7 @@
     </div>
   </div>  
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">SST / GST</h4>
+  <h4 class="m-b-15 group-label">SST / GST</h4>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label-210">GST</label>
@@ -1022,7 +1022,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Insurance Settlement Offer</h4>
+    <h4 class="m-b-15 group-label">Insurance Settlement Offer</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">First Offer</label>
@@ -1072,7 +1072,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Defendant Vehicle Detail</h4>
+    <h4 class="m-b-15 group-label">Defendant Vehicle Detail</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">First Offer</label>
@@ -1122,7 +1122,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Notes</h4>
+    <h4 class="m-b-15 group-label">Notes</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">First Offer</label>
@@ -1173,7 +1173,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Insurance Settlement Offer</h4>
+    <h4 class="m-b-15 group-label">Insurance Settlement Offer</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">First Offer</label>
@@ -1286,7 +1286,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Purpose / Use</h4>
+    <h4 class="m-b-15 group-label">Purpose / Use</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Purpose / Use</label>
@@ -1294,7 +1294,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Rental Information</h4>
+    <h4 class="m-b-15 group-label">Rental Information</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Monthly Rental</label>
@@ -1302,7 +1302,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Deposits</h4>
+    <h4 class="m-b-15 group-label">Deposits</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Rental</label>
@@ -1365,7 +1365,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Optional Term</h4>
+    <h4 class="m-b-15 group-label">Optional Term</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Optional Term</label>
@@ -1397,7 +1397,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Termination</h4>
+    <h4 class="m-b-15 group-label">Termination</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">By Landlord</label>
@@ -1417,7 +1417,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Party Paying Legal Fee & Stamp Duty</h4>
+    <h4 class="m-b-15 group-label">Party Paying Legal Fee & Stamp Duty</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Party Paying Legal Fee</label>
@@ -1431,7 +1431,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Date of Tenancy Agreement</h4>
+    <h4 class="m-b-15 group-label">Date of Tenancy Agreement</h4>
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Date of Tenancy Agreement</label>
@@ -1457,7 +1457,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Loan Amount</h4>  
+  <h4 class="m-b-15 group-label">Loan Amount</h4>  
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Term Loan Amount</label>
     <div class="col-sm-8">
@@ -1550,7 +1550,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="p-5 m-b-15 group-label">Klamnic Loan</h4>  
+  <h4 class="m-b-15 group-label">Klamnic Loan</h4>  
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Selling Price</label>
     <div class="col-sm-8">
@@ -1597,7 +1597,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Outstanding Utilities</h4>  
+    <h4 class="m-b-15 group-label">Outstanding Utilities</h4>  
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Electricty Bill</label>
@@ -1724,7 +1724,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Chain of Ownership - Second and Subsequent Purchases</h4>  
+    <h4 class="m-b-15 group-label">Chain of Ownership - Second and Subsequent Purchases</h4>  
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Electricty Bill</label>
@@ -1767,7 +1767,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Spouse(s)</h4>  
+    <h4 class="m-b-15 group-label">Spouse(s)</h4>  
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">1. </label>
@@ -1781,7 +1781,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">Issues (Children)</h4>  
+    <h4 class="m-b-15 group-label">Issues (Children)</h4>  
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">1. </label>
@@ -1812,7 +1812,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">More Information</h4>  
+    <h4 class="m-b-15 group-label">More Information</h4>  
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Date 1</label>
@@ -2293,7 +2293,7 @@
 </script>
 
 <script type="text/ng-template" id="rpgt.html">
-  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
     <div class="form-group col-md-12">
       <div style="display: flex;">
@@ -2320,7 +2320,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">A. Deposal Information</h4>  
+    <h4 class="m-b-15 group-label">A. Deposal Information</h4>  
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Date of SPA</label>
@@ -2364,7 +2364,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">B. Acquisition Information</h4>  
+    <h4 class="m-b-15 group-label">B. Acquisition Information</h4>  
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Date of SPA</label>
@@ -2414,7 +2414,7 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="p-5 m-b-15 group-label">C. Date of CKHT</h4>  
+    <h4 class="m-b-15 group-label">C. Date of CKHT</h4>  
     <div class="form-group col-md-12">
       <div style="display: flex;">
       <label class="form-control attr-label">Date of Filing</label>
@@ -2444,7 +2444,7 @@
 
 <!-- GENERATE DOCUMENT GROUP -->
 <script type="text/ng-template" id="gen-doc.html">
-  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
   <div style="display: flex; margin-bottom: 20px;">
     <label class="form-control attr-label-v1">Category</label>

@@ -205,12 +205,7 @@ denningOnline
             $scope.model.tmp['clsC'+i] = $scope.model.tmp['clsC'+(i+1)];
           }
           $scope.model.tmp['clsC'+last] = false;
-          $scope.model['clsC'+last] = {
-            code: null,
-            strCitizenship: "",
-            strIDNo: "",
-            strName: ""
-          };
+          $scope.model['clsC'+last] = {};
         }
 
         $scope.viewContact = function(party) {
