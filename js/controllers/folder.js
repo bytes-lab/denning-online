@@ -416,33 +416,43 @@ denningOnline
     $scope.searchCategory = "0";
     $scope.folderName = '';
     $scope.is_valid = ' ';
+    $scope.searchRes = [];
 
-    $scope.search = function (search) {
+    $scope.search = function (query) {
       return searchService.keyword(query).then(function (data) {
         return data;
-      });
-      
-      return fileMatterService.getList(1, 5, search).then(function (resp) {
-        return resp.data
-      })
+      });      
     }
 
     $scope.mainSearch = function (item) {
-      if (matter) {
-        // $scope.matter = matter;
-        // $scope.folders = [];
-        // $scope.folderName = '';
-
-        // folderService.getList(matter.key, 'matter').then(function (data) {
-        //   angular.forEach(data.folders, function(folder, key) {
-        //     $scope.folders.push(folder);
-        //   })
-        // })
-
-        // if ($scope.folders.length > 0) {
-        //   $scope.folderName = $scope.folders[0].name;
-        // }
+      if (item) {
+        searchService.search(item.keyword, $scope.searchCategory).then(function (data) {
+          $scope.searchRes = data;
+        });
       }
+    }
+
+    $scope.chooseItem = function (item) {
+      $scope.choosen = item;
+      $scope.folders = [];
+      $scope.folderName = '';
+
+      if (item.Title.indexOf('Contact') == 0) {
+
+      } else if (item.Title.indexOf('File No') == 0 || item.Title.indexOf('Matter') == 0) {
+        folderService.getList(item.key, 'matter').then(function (data) {
+          angular.forEach(data.folders, function(folder, key) {
+            $scope.folders.push(folder);
+          })
+        })
+
+        if ($scope.folders.length > 0) {
+          $scope.folderName = $scope.folders[0].name;
+        }
+      } else if (item.Title.indexOf('Property') == 0) {
+
+      }
+      
     }
 
     $scope.validate = function () {

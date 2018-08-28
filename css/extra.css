@@ -216,3 +216,14 @@ tr.selected {
 .logo-summary-report {
     display: none;
 }
+
+.a4536 {
+    max-height: 360px;
+    overflow-y: scroll;
+    padding-left: 7px;
+    padding-right: 0px;
+}
+
+.b4325.active {
+    background: #ccc;
+}

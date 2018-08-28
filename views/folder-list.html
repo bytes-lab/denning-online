@@ -142,7 +142,7 @@
         Transit
       </label>
     </div>
-    <div class="col-md-12 m-b-15 m-t-10">
+    <div class="col-md-12 m-t-10 m-b-5">
       <md-autocomplete
         md-selected-item="dest"
         md-search-text="qstl"
@@ -156,13 +156,25 @@
             {{ item.keyword }}
           </span>
         </md-item-template>
-        <md-not-found>
-          No results matching "{{ qstl }}" were found.
-        </md-not-found>
       </md-autocomplete>
     </div>
-    <div class="clearfix"></div>
-    <dl class="dl-horizontal">
+    <div class="col-md-12 m-b-15 a4536" ng-if="searchRes.length">
+      <md-card>
+        <md-list class="p-t-0">
+          <div ng-repeat="item in searchRes" class="b4325" ng-class="{ 'active': item.key == choosen.key }">
+            <md-list-item class="md-3-line" ng-click="chooseItem(item)">
+              <div class="md-list-item-text p-b-10" layout="column">
+                <h3 class="f-16 f-500 c-purple m-t-5">{{ item.Title }}</h3>
+                <p>{{ item.Desc }}</p>
+              </div>
+            </md-list-item>
+            <md-divider ng-if="!$last"></md-divider>
+          </div>
+        </md-list>
+      </md-card>
+    </div>
+
+    <div class="col-md-12 m-b-15">
       <dt class="p-t-10">Folder</dt>
       <dd>
         <div class="fg-line">
@@ -173,7 +185,16 @@
           </div>
         </div>
       </dd>
-    </dl>
+    </div>
+    <div class="col-md-12 m-b-15">
+      <div class="p-t-10 f-700">File Name</div>
+      <ul class="f-15 c-blue m-b-20 p-l-20">
+        <li ng-repeat="file in files track by $index">
+          <input type="text" ng-model="file.name" class="form-control" style="display:inline; width:80%;">
+          {{ file.ext }}
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-link" ng-click="ok()">OK</button>

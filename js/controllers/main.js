@@ -152,7 +152,7 @@ denningOnline
       searchService.search(item.keyword, self.selectedSearchCategory).then(function (data) {
         self.searchRes = data;
         if ($state.current.name != 'search')
-          $state.go('search');
+          $state.go('search');        
       });
     }
 

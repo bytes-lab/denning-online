@@ -15,8 +15,8 @@ denningOnline
           search: keyword,
           category: category,
           isAutoComplete: 1
-      }).then(function(resp) {
-        var searchRes = resp.data.map(function(item) {
+      }).then(function (resp) {
+        var searchRes = resp.data.map(function (item) {
           var newItem = angular.copy(item);
           try {
             newItem.parseJSON = JSON.parse(item.JSON);
