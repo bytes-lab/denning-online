@@ -38,415 +38,271 @@ denningOnline
       if (clsMatterCode && clsMatterCode.jsonFieldLabels) {
         matter_code = JSON.parse(clsMatterCode.jsonFieldLabels);
       }
+
       vm.tabDict = {
         "Matter": {
           "label": "Info",
           "groups": [
             {
-              "key": "file-info",
-              "label": "Primary Client",
-              "attrs": [
-                {
-                  "key": "matter1",
-                  "type": "file",
-                  "templateOptions": {
-                    "share": false,
-                    "solicitor": true,
-                    "party": true
-                  }
-                }
-              ]
+              "type": "file",
+              "templateOptions": {
+                "label": "Primary Client",
+                "share": false,
+                "solicitor": true,
+                "party": true
+              }
             }
           ]
         },
         "Summary": {
           "groups": [
             {
-              "key": "summary",
-              "attrs": [
-                {
-                  "key": "summary",
-                  "type": "summary",
-                  "templateOptions": {
-                  }
-                }
-              ]
+              "type": "summary",
+              "templateOptions": { }
             }
           ]          
         },
         "Parties-S": {
           "groups": [
             {
-              "key": "vendor-group",
-              "label": clsMatterCode ? clsMatterCode.strGroupC1 : '',
-              "attrs": [
-                {
-                  "key": "party1",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": true
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC1 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
             },
             {
-              "key": "purchaser-group",
-              "label": clsMatterCode ? clsMatterCode.strGroupC2 : '',
-              "attrs": [
-                {
-                  "key": "purchaser1",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": true
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC2 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
             },
             {
-              "key": "vendor-group3",
-              "label": clsMatterCode ? clsMatterCode.strGroupC3 : '',
-              "attrs": [
-                {
-                  "key": "party3",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": true
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC3 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
             },
             {
-              "key": "vendor-group4",
-              "label": clsMatterCode ? clsMatterCode.strGroupC4 : '',
-              "attrs": [
-                {
-                  "key": "party4",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": true
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC4 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
             },
             {
-              "key": "vendor-group5",
-              "label": clsMatterCode ? clsMatterCode.strGroupC5 : '',
-              "attrs": [
-                {
-                  "key": "party5",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": true
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC5 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
             },
             {
-              "key": "vendor-group6",
-              "label": clsMatterCode ? clsMatterCode.strGroupL1 : '',
-              "attrs": [
-                {
-                  "key": "party6",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": true
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupL1 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
             },
             {
-              "key": "vendor-group7",
-              "label": clsMatterCode ? clsMatterCode.strGroupL2 : '',
-              "attrs": [
-                {
-                  "key": "party7",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": true
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupL2 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
             }
           ]
         },
         "Parties": {
           "groups": [
             {
-              "key": "vendor-group11",
-              "label": clsMatterCode ? clsMatterCode.strGroupC1 : '',
-              "attrs": [
-                {
-                  "key": "party11",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": false,
-                    "party": true,
-                    "c_start": 1,
-                    "c_end": 5
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC1 : '',
+                "share": true,
+                "solicitor": false,
+                "party": true,
+                "c_start": 1,
+                "c_end": 5
+              }
             },
             {
-              "key": "purchaser-group11",
-              "label": clsMatterCode ? clsMatterCode.strGroupC2 : '',
-              "attrs": [
-                {
-                  "key": "purchaser11",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": false,
-                    "party": true,
-                    "c_start": 6,
-                    "c_end": 10
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC2 : '',
+                "share": true,
+                "solicitor": false,
+                "party": true,
+                "c_start": 6,
+                "c_end": 10
+              }
             },
             {
-              "key": "vendor-group31",
-              "label": clsMatterCode ? clsMatterCode.strGroupC3 : '',
-              "attrs": [
-                {
-                  "key": "party31",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": false,
-                    "solicitor": false,
-                    "party": true,
-                    "c_start": 11,
-                    "c_end": 15
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC3 : '',
+                "share": false,
+                "solicitor": false,
+                "party": true,
+                "c_start": 11,
+                "c_end": 15
+              }
             },
             {
-              "key": "vendor-group41",
-              "label": clsMatterCode ? clsMatterCode.strGroupC4 : '',
-              "attrs": [
-                {
-                  "key": "party41",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": false,
-                    "solicitor": false,
-                    "party": true,
-                    "c_start": 16,
-                    "c_end": 20
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC4 : '',
+                "share": false,
+                "solicitor": false,
+                "party": true,
+                "c_start": 16,
+                "c_end": 20
+              }
             },
             {
-              "key": "vendor-group51",
-              "label": clsMatterCode ? clsMatterCode.strGroupC5 : '',
-              "attrs": [
-                {
-                  "key": "party51",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": false,
-                    "solicitor": false,
-                    "party": true,
-                    "c_start": 21,
-                    "c_end": 25
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC5 : '',
+                "share": false,
+                "solicitor": false,
+                "party": true,
+                "c_start": 21,
+                "c_end": 25
+              }
             },
             {
-              "key": "vendor-group61",
-              "label": clsMatterCode ? clsMatterCode.strGroupC6 : '',
-              "attrs": [
-                {
-                  "key": "party61",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": false,
-                    "solicitor": false,
-                    "party": true,
-                    "c_start": 26,
-                    "c_end": 26
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC6 : '',
+                "share": false,
+                "solicitor": false,
+                "party": true,
+                "c_start": 26,
+                "c_end": 26
+              }
             }
           ]
         },
         "Solicitors": {
           "groups": [
             {
-              "key": "vendor-group111",
-              "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer1') : '',
-              "attrs": [
-                {
-                  "key": "party12",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": false,
-                    "field": "clsLawyer1",
-                    "idx": 1
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer1') : '',
+                "share": true,
+                "solicitor": true,
+                "party": false,
+                "field": "clsLawyer1",
+                "idx": 1
+              }
             },
             {
-              "key": "purchaser-group111",
-              "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer2') : '',
-              "attrs": [
-                {
-                  "key": "purchaser12",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": false,
-                    "solicitor": true,
-                    "party": false,
-                    "field": "clsLawyer2",
-                    "idx": 2
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer2') : '',
+                "share": false,
+                "solicitor": true,
+                "party": false,
+                "field": "clsLawyer2",
+                "idx": 2
+              }
             },
             {
-              "key": "vendor-group13",
-              "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer3') : '',
-              "attrs": [
-                {
-                  "key": "party13",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": false,
-                    "field": "clsLawyer3",
-                    "idx": 3
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer3') : '',
+                "share": true,
+                "solicitor": true,
+                "party": false,
+                "field": "clsLawyer3",
+                "idx": 3
+              }
             },
             {
-              "key": "vendor-group14",
-              "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer4') : '',
-              "attrs": [
-                {
-                  "key": "party14",
-                  "type": "contact",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "party": false,
-                    "field": "clsLawyer4",
-                    "idx": 4
-                  }
-                }
-              ]
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer4') : '',
+                "share": true,
+                "solicitor": true,
+                "party": false,
+                "field": "clsLawyer4",
+                "idx": 4
+              }
             }
           ]
         },
         "Case": {
           "groups": [
             {
-              "key": "case-info",
-              "label": "Case Information",
-              "attrs": [
-                {
-                  "key": "case1",
-                  "type": "case"
-                }
-              ]
+              "type": "case",
+              "templateOptions": {
+                "label": "Case Information",                
+              }
             }
           ]
         },
         "Price": {
           "groups": [
             {
-              "key": "price-info",
-              "label": "Price",
-              "attrs": [
-                {
-                  "key": "price1",
-                  "type": "price"
-                }
-              ]
+              "type": "price",
+              "templateOptions": {
+                "label": "Price",
+              }
             }
           ]
         },        
         "Loan": {
           "groups": [
             {
-              "key": "loan-info",
-              "label": "Loan Type",
-              "attrs": [
-                {
-                  "key": "loan1",
-                  "type": "loan"
-                }
-              ]
+              "type": "loan",
+              "templateOptions": {
+                "label": "Loan Type",
+              }
             }
           ]
         }, 
         "Property": {
           "groups": [
             {
-              "key": "property-group1",
-              "label": "Property Information",
-              "attrs": [
-                {
-                  "key": "property1",
-                  "type": "property",
-                  "templateOptions": {
-                    "share": true,
-                    "solicitor": true,
-                    "property": true
-                  }
-                }
-              ]
+              "type": "property",
+              "templateOptions": {
+                "label": "Property Information",
+                "share": true,
+                "solicitor": true,
+                "property": true
+              }
             }
           ]
         },
         "Bank": {
           "groups": [
             {
-              "key": "bank-info",
-              "label": clsMatterCode ? getLabel(matter_code, 'clsBank1') : '',
-              "attrs": [
-                {
-                  "key": "bank1",
-                  "type": "bank1",
-                  "templateOptions": {
-                  }
-                }
-              ]
+              "type": "bank1",
+              "templateOptions": {
+                "label": clsMatterCode ? getLabel(matter_code, 'clsBank1') : '',
+              }
             },
             {
-              "key": "bank-info",
-              "label": clsMatterCode ? getLabel(matter_code, 'clsBank2') : '',
-              "attrs": [
-                {
-                  "key": "bank2",
-                  "type": "bank2",
-                  "templateOptions": {
-                  }
-                }
-              ]
+              "type": "bank2",
+              "templateOptions": {
+                "label": clsMatterCode ? getLabel(matter_code, 'clsBank2') : '',
+              }
             }
           ]            
         },
@@ -459,201 +315,134 @@ denningOnline
         "Template": {
           "groups": [
             {
-              "key": "gen-docs-group",
-              "label": "Template",
-              "attrs": [
-                {
-                  "key": "template",
-                  "type": "gen-doc",
-                  "templateOptions": {
-                  }                
-                }
-              ]
+              "type": "gen-doc",
+              "templateOptions": {
+                "label": "Template",
+              }
             }
           ]
         },
         "Premises & Rent": {
-          "label": "Premises & Rent",
           "groups": [
             {
-              "key": "premises-rent-group",
-              "label": "Premises Details",
-              "attrs": [
-                {
-                  "key": "premises-rent",
-                  "type": "premises-rent"
-                }
-              ]
+              "type": "premises-rent",
+              "templateOptions": {
+                "label": "Premises Details",
+              }
             }
           ]
         },
         "Term": {
-          "label": "Term",
           "groups": [
             {
-              "key": "term-group",
-              "label": "Term",
-              "attrs": [
-                {
-                  "key": "term",
-                  "type": "term"
-                }
-              ]
+              "type": "term",
+              "templateOptions": {
+                "label": "Term",
+              }
             }
           ]
         },
         "Tenancy": {
-          "label": "Tenancy",
           "groups": [
             {
-              "key": "tenancy-group",
-              "label": "Party Paying Council Rates & Outgoings",
-              "attrs": [
-                {
-                  "key": "tenancy",
-                  "type": "tenancy"
-                }
-              ]
+              "type": "tenancy",
+              "templateOptions": {
+                "label": "Party Paying Council Rates & Outgoings",
+              }
             }
           ]
         },
         "Vehicles": {
-          "label": "Vehicles",
           "groups": [
             {
-              "key": "vehicle-group",
-              "label": "Claimant's Vehicle Detail",
-              "attrs": [
-                {
-                  "key": "vehicle",
-                  "type": "vehicle"
-                }
-              ]
+              "type": "vehicle",
+              "templateOptions": {
+                "label": "Claimant's Vehicle Detail",
+              }
             }
           ]
         },
         "Others": {
-          "label": "Others",
           "groups": [
             {
-              "key": "other-group",
-              "label": "Loan Tier",
-              "attrs": [
-                {
-                  "key": "other",
-                  "type": "other"
-                }
-              ]
+              "type": "other",
+              "templateOptions": {
+                "label": "Loan Tier"
+              }
             }
           ]
         },
         "Estate Agent": {
-          "label": "Estate Agent",
           "groups": [
             {
-              "key": "estate-agent-group",
-              "label": "Estate Agent",
-              "attrs": [
-                {
-                  "key": "estate-agent",
-                  "type": "estate-agent"
-                }
-              ]
+              "type": "estate-agent",
+              "templateOptions": {
+                "label": "Estate Agent"
+              }
             }
           ]
         },
         "Reports": {
-          "label": "Reports",
           "groups": [
             {
-              "key": "report-group",
-              "label": "Reports",
-              "attrs": [
-                {
-                  "key": "report",
-                  "type": "report"
-                }
-              ]
+              "type": "report",
+              "templateOptions": {
+                "label": "Reports"
+              }
             }
           ]
         },
         "Arrears": {
-          "label": "Arrears",
           "groups": [
             {
-              "key": "arrear-group",
-              "label": "Rent in Arrears / Distress",
-              "attrs": [
-                {
-                  "key": "arrear",
-                  "type": "arrear"
-                }
-              ]
+              "type": "arrear",
+              "templateOptions": {
+                "label": "Rent in Arrears / Distress",
+              }
             }
           ]
         },
         "Beneficiary": {
-          "label": "Beneficiary",
           "groups": [
             {
-              "key": "beneficiary-group",
-              "label": "Parent(s)",
-              "attrs": [
-                {
-                  "key": "beneficiary",
-                  "type": "beneficiary"
-                }
-              ]
+              "type": "beneficiary",
+              "templateOptions": {
+                "label": "Parent(s)"
+              }
             }
           ]
         },
         "Chain": {
-          "label": "Chain",
           "groups": [
             {
-              "key": "chain-group",
-              "label": "Principle SPA Details",
-              "attrs": [
-                {
-                  "key": "chain",
-                  "type": "chain"
-                }
-              ]
+              "type": "chain",
+              "templateOptions": {
+                "label": "Principle SPA Details"
+              }
             }
           ]
         },
         "RPGT": {
-          "label": "RPGT",
           "groups": [
             {
-              "key": "rpgt-group",
-              "label": "CKHT Information",
-              "attrs": [
-                {
-                  "key": "rpgt",
-                  "type": "rpgt"
-                }
-              ]
+              "type": "rpgt",
+              "templateOptions": {
+                "label": "CKHT Information"
+              }
             }
           ]
         },
         "Offers": {
-          "label": "Offers",
           "groups": [
             {
-              "key": "offer-group",
-              "label": "Claim Details",
-              "attrs": [
-                {
-                  "key": "offer",
-                  "type": "offer"
-                }
-              ]
+              "type": "offer",
+              "templateOptions": {
+                "label": "Claim Details"
+              }
             }
           ]
         }
       };
-
     }
 
     function buildTabs (clsMatterCode) {

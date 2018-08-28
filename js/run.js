@@ -823,28 +823,4 @@ denningOnline
         });
       }
     });
-    
-    formlyConfig.setType({
-      name: 'datepicker',
-      templateUrl:  'datepicker.html',
-      wrapper: ['bootstrapLabel', 'bootstrapHasError'],
-      defaultOptions: {
-        ngModelAttrs: ngModelAttrs,
-        templateOptions: {
-          datepickerOptions: {
-          format: 'MM.dd.yyyy',
-          initDate: new Date()
-          }
-        }
-      },
-      controller: ['$scope', function ($scope) {
-        $scope.datepicker = {};
-      
-        $scope.datepicker.opened = false;  
-
-        $scope.datepicker.open = function ($event) {
-          $scope.datepicker.opened = !$scope.datepicker.opened;
-        };
-      }]
-    });
   })

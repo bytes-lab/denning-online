@@ -20,14 +20,9 @@
     <form name="vm.form" novalidate>
       <uib-tabset active="vm.idxTab">
         <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
-          <div ng-repeat="group in tab.groups" class="col-lg-10 no-padding">  
-            <div class="group">
-              <div class="form-group" ng-if="group.label">
-                <label class="form-control group-label" style="padding-top: 4px;">{{ group.label }}</label>
-              </div>
-              <formly-form model="vm.model" fields="group.attrs" form="vm.form" options="group.options">
-              </formly-form>
-            </div>
+          <div class="group col-lg-10 no-padding">
+            <formly-form model="vm.model" fields="tab.groups">
+            </formly-form>
           </div>
         </uib-tab>
       </uib-tabset>
@@ -52,29 +47,10 @@
   </div>
   </div>
 </div>  
-
-<!-- Put custom templates here -->
-<script type="text/ng-template" id="datepicker.html">
-  <p class="input-group">
-  <input  type="text"
-      id="{{::id}}"
-      name="{{::id}}"
-      ng-model="model[options.key]"
-      class="form-control"
-      ng-click="datepicker.open($event)"
-      is-open="datepicker.opened"
-      datepicker-options="to.datepickerOptions" />
-  <span class="input-group-btn">
-    <button type="button" class="btn btn-default" ng-click="datepicker.open($event)" ng-disabled="to.disabled">
-    <i class="glyphicon glyphicon-calendar"></i>
-    </button>
-  </span>
-  </p>
-</script>
-
 <!-- BANK GROUP -->
 <script type="text/ng-template" id="bank1.html">
-  <div class="form-group col-md-12">
+  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>  
+  <div class="form-group">
     <div class="form-group col-md-12">
       <div style="display: flex;">
         <label class="form-control attr-label"> Bank Branch</label>
@@ -102,37 +78,37 @@
         </a>
       </div>
     </div>
-    <div class="form-group col-md-12 m-l-15">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Bank Name</label>
       <input type="text" class="form-control" readonly="true" ng-model="model['clsBank1'].clsBankCode.strName" style="width:45%;">
       </div>
     </div>
-    <div class="form-group col-md-12 m-l-15">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">PA Name</label>
       <input type="text" class="form-control" readonly="true" ng-model="model.strBank1PANo" style="width:45%;">
       </div>
     </div>
-    <div class="form-group col-md-12 m-l-15">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Chargee Ref.</label>
       <input type="text" class="form-control" readonly="" ng-model="model.strBank1Ref" style="width:45%;">
       </div>
     </div>
-    <div class="form-group col-md-12 m-l-15">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Existing Charge Presentation No.</label>
       <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn1" style="width:45%;">
       </div>
     </div>
-    <div class="form-group col-md-12 m-l-15">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Redemption Date</label>
       <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate15" style="width:45%;">
       </div>
     </div>
-    <div class="form-group col-md-12 m-l-15">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
       <label class="form-control attr-label">Redemption Sum</label>
       <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM10" style="width:45%;">
@@ -142,8 +118,9 @@
 </script>
 
 <script type="text/ng-template" id="bank2.html">
-  <div class="form-group col-md-12">
-    <div class="form-group col-md-12">
+  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+    <div class="form-group m-l-15">
       <div style="display: flex;">
         <label class="form-control attr-label"> Bank Branch</label>
 
@@ -221,6 +198,7 @@
 
 <!-- CONTACT GROUP -->
 <script type="text/ng-template" id="contact.html">
+  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group col-md-12" ng-repeat="n in range(to.c_start, to.c_end)" ng-if="to.party && (model['clsC'+n].code || model.tmp['clsC'+n])">
     <div style="display: flex;">
       <label class="form-control attr-label short-label">{{ $index+1 }}</label>
@@ -259,7 +237,7 @@
     </button>
   </div>
   <div ng-if="to.solicitor">
-    <div class="form-group col-md-12">
+    <div class="form-group">
       <div style="display: flex;">
       <label class="form-control attr-label">Firm</label>
       <md-autocomplete
@@ -291,7 +269,7 @@
       </div>
       </div>
     </div>
-    <div class="form-group col-md-12">
+    <div class="form-group">
       <div style="display: flex;">
         <label class="form-control attr-label">Tel / Fax / Email</label>
         <label class="form-control p-t-5" style="width:45%;">
@@ -299,19 +277,19 @@
         </label>
       </div>
     </div>
-    <div class="form-group col-md-12">
+    <div class="form-group">
       <div style="display: flex;">
       <label class="form-control attr-label">Location</label>
       <input type="text" class="form-control" readonly="true" ng-model="model[to.field].strCity" style="width:45%;">
       </div>
     </div>
-    <div class="form-group col-md-12">
+    <div class="form-group">
       <div style="display: flex;">
       <label class="form-control attr-label">Staff in Charge</label>
       <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_staff']" style="width:45%;">
       </div>
     </div>
-    <div class="form-group col-md-12">
+    <div class="form-group">
       <div style="display: flex;">
       <label class="form-control attr-label">Solicitor Ref.</label>
       <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model['strLawyer'+to.idx+'Ref']" style="width:45%;">
@@ -321,7 +299,8 @@
 </script>
 
 <!-- PROPERTY GROUP -->
-<script type="text/ng-template" id="property.html">  
+<script type="text/ng-template" id="property.html">
+  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group col-md-12" ng-repeat="n in range(1, 5)" ng-if="to.property && (model['clsP'+n].code || model.tmp['clsP'+n])">
     <div style="display: flex;">
       <label class="form-control attr-label short-label">{{ n }}</label>
@@ -562,6 +541,7 @@
 
 <!-- FILE INFORMATION -->
 <script type="text/ng-template" id="file.html">  
+  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group col-md-12" ng-if="to.party">
     <div style="display: flex;">
       <label class="form-control attr-label">Primary Client</label>
@@ -886,6 +866,7 @@
 </script>
 
 <script type="text/ng-template" id="case.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
   <div class="form-group col-md-12">
     <div style="display: flex;">
@@ -939,6 +920,7 @@
 </script>
 
 <script type="text/ng-template" id="price.html">
+  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
   <div class="form-group col-md-12">
     <div style="display: flex;">
@@ -1170,6 +1152,7 @@
 </script>
 
 <script type="text/ng-template" id="estate-agent.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
     <div class="form-group col-md-12">
       <div style="display: flex;">
@@ -1220,6 +1203,7 @@
 </script>
 
 <script type="text/ng-template" id="report.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
     <div class="form-group col-md-12">
       <div style="display: flex;">
@@ -1262,6 +1246,7 @@
 </script>
 
 <script type="text/ng-template" id="premises-rent.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
     <div class="form-group col-md-12">
       <div style="display: flex;">
@@ -1359,6 +1344,7 @@
 </script>
 
 <script type="text/ng-template" id="term.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
     <div class="form-group col-md-12">
       <div style="display: flex;">
@@ -1456,6 +1442,7 @@
 </script>
 
 <script type="text/ng-template" id="loan.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
   <div class="form-group col-md-12">
     <div style="display: flex;">
@@ -2306,6 +2293,7 @@
 </script>
 
 <script type="text/ng-template" id="rpgt.html">
+  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
     <div class="form-group col-md-12">
       <div style="display: flex;">
@@ -2456,6 +2444,7 @@
 
 <!-- GENERATE DOCUMENT GROUP -->
 <script type="text/ng-template" id="gen-doc.html">
+  <h4 class="p-5 m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
   <div style="display: flex; margin-bottom: 20px;">
     <label class="form-control attr-label-v1">Category</label>
