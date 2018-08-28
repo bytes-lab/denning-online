@@ -45,6 +45,12 @@ denningOnline
       });
     }
 
+    service.copyDocument = function (data) {
+      return http.PUT('v1/document/copy', data).then(function (resp) {
+        return resp;
+      });
+    }
+
     service.deleteDocument = function (url) {
       return http.DELETE(url).then(function (resp) {
         return resp;

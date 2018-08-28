@@ -114,36 +114,51 @@
       <li ng-repeat="file in files track by $index">{{ file.name }}{{ file.ext }}</li>
     </ul>
     <h5>Destination</h5>
-    <div class="radio col-sm-3">
+    <div class="radio col-sm-2">
       <label>
-        <input type="radio" value="0" ng-model="searchCategory">
+        <input type="radio" value="0" ng-model="searchCategory" ng-change="categoryChange()">
         <i class="input-helper"></i>
         All
       </label>
     </div>
-    <div class="radio col-sm-3">
+    <div class="radio col-sm-2">
       <label>
-        <input type="radio" value="1" ng-model="searchCategory">
+        <input type="radio" value="2" ng-model="searchCategory" ng-change="categoryChange()">
         <i class="input-helper"></i>
         Matter
       </label>
     </div>
-    <div class="radio col-sm-3">
+    <div class="radio col-sm-2">
       <label>
-        <input type="radio" value="2" ng-model="searchCategory">
+        <input type="radio" value="1" ng-model="searchCategory" ng-change="categoryChange()">
         <i class="input-helper"></i>
         Contact
       </label>
     </div>
-    <div class="radio col-sm-3">
+    <div class="radio col-sm-2">
       <label>
-        <input type="radio" value="10" ng-model="searchCategory">
+        <input type="radio" value="4" ng-model="searchCategory" ng-change="categoryChange()">
+        <i class="input-helper"></i>
+        Property
+      </label>
+    </div>
+    <div class="radio col-sm-2">
+      <label>
+        <input type="radio" value="transit" ng-model="searchCategory" ng-change="categoryChange()">
         <i class="input-helper"></i>
         Transit
       </label>
     </div>
+    <div class="radio col-sm-2">
+      <label>
+        <input type="radio" value="self" ng-model="searchCategory">
+        <i class="input-helper"></i>
+        Self
+      </label>
+    </div>
     <div class="col-md-12 m-t-10 m-b-5">
       <md-autocomplete
+        ng-disabled="selfFolder"
         md-selected-item="dest"
         md-search-text="qstl"
         md-items="item in search(qstl)"
@@ -174,12 +189,13 @@
       </md-card>
     </div>
 
-    <div class="col-md-12 m-b-15">
+    <div class="col-md-12 m-b-15" ng-if="hasFolder">
       <dt class="p-t-10">Folder</dt>
       <dd>
         <div class="fg-line">
           <div class="select">
-            <select class="form-control" ng-model="folderName" ng-change="validate()">
+            <select class="form-control" ng-model="data.folderName" ng-change="validate()">
+              <option value="">FILES</option>
               <option ng-repeat="item in folders" value="{{ item.name }}">{{ item.name }}</option>
             </select>
           </div>
