@@ -217,11 +217,14 @@ tr.selected {
     display: none;
 }
 
-.a4536 {
-    max-height: 360px;
-    overflow-y: scroll;
-    padding-left: 7px;
-    padding-right: 0px;
+.a4536efwe.md-autocomplete-suggestions li {
+    height: auto;
+}
+
+.a4536efwe.md-autocomplete-suggestions li .desc {
+    white-space: normal;
+    line-height: 25px;
+    color: #777;
 }
 
 .b4325.active {

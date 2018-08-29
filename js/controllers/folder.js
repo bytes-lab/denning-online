@@ -464,7 +464,7 @@ denningOnline
       if (["transit", "self"].indexOf($scope.searchCategory) < 0) {
         $scope.selfFolder = false;
         $scope.mainSearch($scope.queryItem);
-        $scope.choosen = {};
+        $scope.choosen = null;
       } else {
         $scope.selfFolder = true;
         $scope.is_valid = '';
@@ -478,20 +478,22 @@ denningOnline
     }
 
     $scope.chooseItem = function (item) {
-      $scope.choosen = item;
-      $scope.folders = [];
-      $scope.data.folderName = '';
+      if (item) {
+        $scope.choosen = item;
+        $scope.folders = [];
+        $scope.data.folderName = '';
 
-      if (item.Title.indexOf('File No') == 0 || item.Title.indexOf('Matter') == 0) {
-        folderService.getList(item.key, 'matter').then(function (data) {
-          angular.forEach(data.folders, function(folder, key) {
-            $scope.folders.push(folder);
+        if (item.Title.indexOf('File No') == 0 || item.Title.indexOf('Matter') == 0) {
+          folderService.getList(item.key, 'matter').then(function (data) {
+            angular.forEach(data.folders, function(folder, key) {
+              $scope.folders.push(folder);
+            })
           })
-        })
 
-        if ($scope.folders.length > 0) {
-          $scope.data.folderName = $scope.folders[0].name;
-        }
+          if ($scope.folders.length > 0) {
+            $scope.data.folderName = $scope.folders[0].name;
+          }
+        }        
       }
     }
 

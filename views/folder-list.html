@@ -174,6 +174,20 @@
       </md-autocomplete>
     </div>
     <div class="col-md-12 m-b-15 a4536" ng-if="searchRes.length">
+      <md-autocomplete
+        md-selected-item="choosen"
+        md-items="item in searchRes"
+        md-item-text="item.Title"
+        md-min-length="0"
+        md-selected-item-change="chooseItem(item)"
+        md-menu-class="a4536efwe"
+        class="default-input">
+        <md-item-template>
+          <h3 class="f-16 f-500 c-purple m-t-10">{{ item.Title }}</h3>
+          <div class="desc m-b-10">{{ item.Desc }}</div>
+        </md-item-template>
+      </md-autocomplete>
+<!-- 
       <md-card>
         <md-list class="p-t-0">
           <div ng-repeat="item in searchRes" class="b4325" ng-class="{ 'active': item.key == choosen.key }">
@@ -186,7 +200,7 @@
             <md-divider ng-if="!$last"></md-divider>
           </div>
         </md-list>
-      </md-card>
+      </md-card> -->
     </div>
 
     <div class="col-md-12 m-b-15" ng-if="hasFolder">
