@@ -176,12 +176,6 @@ denningOnline
       });
     };
 
-    self.copyFile = function() {
-      if (angular.equals(self.checkboxes.items, {})) {
-        alert('Please select files to copy.');
-      }
-    }
-
     self.moveFile = function(operation) {
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to move / copy.');
@@ -357,7 +351,7 @@ denningOnline
             return files;
           }
         }
-      });
+      }).result.then(function () {}, function (res) {});
     }
 
     self.copyLink = function(file) {
@@ -372,7 +366,7 @@ denningOnline
             return file;
           }
         }
-      });
+      }).result.then(function () {}, function (res) {});
     }  
   })
 
