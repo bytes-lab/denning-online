@@ -374,11 +374,43 @@ denningOnline
                                          folderService, file, ngClipboard) 
   {
     $scope.file = file;
+    $scope.inputType = 'password';
+    $scope.btnIcon = 'zmdi-eye';
+    $scope.showIcon = false;
+    $scope.minDate = new Date();
+    $scope.data = {
+      expireDate: new Date()
+    };
+
     $scope.getLink = function () {
       $scope.glink = true;
-      folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
+      url = file.URL.replace('/matter/', '/getOneTimeLink/');
+      if ($scope.set_expiration) {
+        url += `?exp=${$scope.data.expireDate.toISOString().split('T')[0]}`;
+      }
+
+      if ($scope.set_password) {
+        if ($scope.set_expiration) {
+          url += `&pwd=${$scope.password}`;
+        } else {
+          url += `?pwd=${$scope.password}`;
+        }
+      }
+
+      folderService.getLink(url).then(function (data) {
         $scope.link = `https://denningchat.com.my/denningwcf/${data}`;
       })
+    }
+
+    $scope.togglePass = function () {
+      $scope.showIcon = !$scope.showIcon;
+      if ($scope.showIcon) {
+        $scope.inputType = 'text';
+        $scope.btnIcon = 'zmdi-eye-off';        
+      } else {
+        $scope.inputType = 'password';
+        $scope.btnIcon = 'zmdi-eye';        
+      }
     }
 
     $scope.copyLink = function () {

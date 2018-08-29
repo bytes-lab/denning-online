@@ -230,3 +230,7 @@ tr.selected {
 .b4325.active {
     background: #ccc;
 }
+
+.md-datepicker-calendar-pane.md-pane-open {
+    z-index: 9999;
+}

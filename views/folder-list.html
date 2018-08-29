@@ -238,26 +238,34 @@
   </div>
   <div class="modal-body p-b-20">
     <dl class="dl-horizontal m-l-10">
-      <div class="checkbox">
+      <div class="checkbox" style="display: inline;">
         <label>
           <input type="checkbox" ng-model="set_expiration">
           <i class="input-helper"></i>
           Set expiration date
         </label>
       </div>
+      <md-datepicker ng-if="set_expiration" ng-model="data.expireDate" md-placeholder="Enter date"
+            md-min-date="minDate"></md-datepicker>
     </dl>
     <dl class="dl-horizontal m-l-10">
-      <div class="checkbox">
+      <div class="checkbox" style="display: inline;">
         <label>
           <input type="checkbox" ng-model="set_password">
           <i class="input-helper"></i>
           Set password
         </label>
       </div>
+      <input type="{{ inputType }}" class="form-control m-l-15" ng-show="set_password" style="display: inline; width: 320px;" ng-model="password">
+      <button class="m-l-5 btn btn-info bgm-gray btn-sm btn-icon waves-effect waves-circle waves-float" ng-if="set_password" ng-click="togglePass()" style="width: 32px; height: 32px;">
+        <i class="zmdi {{ btnIcon }}"></i>
+      </button>
     </dl>
-    <button class="btn btn-info btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-link"></i></button>
+    <button class="btn btn-info btn-icon waves-effect waves-circle waves-float">
+      <i class="zmdi zmdi-link"></i>
+    </button>
     <a href="" class="m-l-15 f-15" ng-show="!glink" ng-click="getLink()"> Get a link</a>
-    <input type="text" class="form-control m-l-10" ng-show="glink" style="display: inline; width: 360px;" ng-model="link">
+    <input type="text" class="form-control m-l-10" ng-show="glink" style="display: inline; width: 300px;" ng-model="link">
     <button class="btn bgm-cyan waves-effect m-l-10" ng-show="glink" ng-click="copyLink()">Copy</button>
     <div class="clearfix m-t-10"></div>
 
