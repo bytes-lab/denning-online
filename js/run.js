@@ -123,23 +123,7 @@ denningOnline
           input.push(i);
       }
       return input;
-    }
-
-    // set templates here
-    formlyConfig.setType({
-      name: 'price_w_currency',
-      templateUrl: 'price_w_currency.html'
-    });
-    
-    formlyConfig.setType({
-      name: 'group_label',
-      templateUrl: 'group_label.html'
-    });
-    
-    formlyConfig.setType({
-      name: 'text',
-      templateUrl: 'text.html'
-    });
+    } 
 
     formlyConfig.setType({
       name: 'offer',
@@ -675,18 +659,6 @@ denningOnline
       name: 'estate-agent',
       templateUrl: 'estate-agent.html'
     });  
-
-    // legal firm attribute
-    formlyConfig.setType({
-      name: 'legalFirm',
-      templateUrl: 'legalFirm.html',
-      controller: ['$scope', function ($scope) {
-        legalFirmService.getList().then(function(data) {
-          $scope.legalFirms = data;
-          $scope.dataReady = true;
-        });
-      }]
-    });
 
     // bank group
     function bankCtrl ($scope, $uibModal) {

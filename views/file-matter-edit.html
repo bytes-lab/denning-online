@@ -367,7 +367,7 @@
       <label for="inputEmail3" class="col-sm-4 attr-label-1">Category of Land Use</label>
       <div class="col-sm-8">
         <div class="fg-line">
-          <input type="text" readonly ng-model="model[options.key+'_repayment_period']" class="form-control input-sm" id="inputEmail3">
+          <input type="text" readonly ng-model="property.strPropertyUse" class="form-control input-sm" id="inputEmail3">
         </div>
       </div>
     </div>
@@ -668,7 +668,7 @@
       </md-autocomplete>
       <a class="btn btn-primary short-btn" target="_new" ng-click="viewBillingCode(model.clsPrimaryClient)">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
-      </a>      
+      </a>
     </div>
   </div>
   <div class="clearfix"></div>
@@ -789,13 +789,13 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Pocket Location</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strPocketFile" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div style="display: flex;">
     <label class="form-control attr-label">Physical File Location</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strFileLoc" style="width:45%;">
     </div>
   </div>
   <div class="form-group col-md-12">
@@ -1870,8 +1870,7 @@
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Loc / Poc / Arc</dt>
-        <dd>{{ model.strFileLoc }}</dd>
-        <dd>{{ model.strPocketFile }}</dd>
+        <dd>{{ model.strFileLoc }} / {{ model.strPocketFile }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Status</dt>
@@ -2491,54 +2490,5 @@
     <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Customize</a>
     <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="generate()">Generate</a>
   </div>
-  </div>
-</script>
-
-<script type="text/ng-template" id="legalFirm.html">
-  <div class="form-group">
-  <div style="display: flex;">
-  <input id="{{::id}}-label" name="{{::id}}-label" class="form-control attr-label" ng-model="model[options.key+'-label']" ng-value="options.templateOptions.label" />    
-  <select class="form-control" ng-model="model[options.key]" style="width:300px;">
-    <option ng-repeat="item in legalFirms" ng-value="item.id">{{item.name}}</option>
-  </select>
-  <a class="btn btn-primary short-btn"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-  </div>
-  </div>
-  <div class="clear-fix"></div> 
-</script>
-
-<script type="text/ng-template" id="text.html">
-  <div class="form-group">
-  <div style="display: flex;">
-    <input id="{{::id}}-label" name="{{::id}}-label" class="form-control attr-label" ng-model="model[options.key+'-label']" ng-value="options.templateOptions.label" />    
-    <input type="text" class="form-control" ng-model="model[options.key]" style="width:300px;">
-  </div>
-  </div>
-</script>
-
-<script type="text/ng-template" id="price_w_currency.html">
-  <div class="form-group">
-  <input id="{{::id}}-label" name="{{::id}}-label" class="form-control attr-label col-sm-1" ng-model="model[options.key+'-label']" ng-value="options.templateOptions.label" />
-  <div style="display: flex;">
-  <select class="form-control col-sm-2" ng-model="model[options.key+'-currency']" style="width:60px;">
-    <option value="USD">USD</option>
-    <option value="RM">RM</option>
-    <option value="RMB">RMB</option>
-  </select>
-  <input id="{{::id}}" name="{{::id}}" class="col-sm-6" ng-model="model[options.key]" />
-  </div>
-  </div>
-</script>
-
-<script type="text/ng-template" id="group_label.html">
-  <div class="form-group">
-  <input id="{{::id}}" name="{{::id}}" class="form-control group-label" ng-model="model[options.key]" />
-  </div>
-</script>
-
-<script type="text/ng-template" id="example-directive.html">
-  <div class="form-group">
-  <label for="{{::id}}">{{options.templateOptions.label}}</label>
-  <input id="{{::id}}" name="{{::id}}" class="form-control" ng-model="model[options.key]" />
   </div>
 </script>
