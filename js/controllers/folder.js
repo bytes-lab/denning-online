@@ -278,11 +278,7 @@ denningOnline
       });
     }
 
-    self.shareFile = function () {
-      if (angular.equals(self.checkboxes.items, {})) {
-        alert('Please select files to share.');
-      }
-
+    self.shareFile = function (file) {
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'shareModal.html',
@@ -290,8 +286,8 @@ denningOnline
         size: '',
         keyboard: true,
         resolve: {
-          files: function () {
-            return getSelectedFiles();
+          file: function () {
+            return file;
           },
           matter: function () {
             return $stateParams.id;
@@ -662,8 +658,57 @@ denningOnline
   })
 
   .controller('shareModalCtrl', function ($scope, $uibModalInstance, growlService, folderService, 
-                                          matter, files) 
+                                          matter, file, fileMatterService) 
   {
-    $scope.matter = matter;
-    $scope.files = files;
+    $scope.data = {
+      fileNo: matter,
+      file: file,
+      contacts: [],
+      shared: {}
+    };
+
+    $scope.range = function (min, max, step) {
+      step = step || 1;
+      var input = [];
+      for (var i = min; i <= max; i += step) {
+          input.push(i);
+      }
+      return input;
+    } 
+
+    fileMatterService.getItem(matter).then(function (item) {
+      $scope.data.matter = item;
+      for (var i = 1; i <= 6; i++) {
+        $scope.data.contacts.push({
+          label: item.clsMatterCode['strGroupC'+i],
+          start: (i - 1) * 5 + 1,
+          end: (i - 1) * 5 + 5
+        })
+      }
+      
+      // get shared info
+      folderService.getShares(file.URL).then(function (item) {
+        for (var i = 1; i <= 30; i++) {
+          $scope.data.shared[i] = 'No';
+          for (jj in item) {
+            if (item[jj].clsContact.code == $scope.data.matter['clsC'+i].code) {
+              $scope.data.shared[i] = 'Yes';
+              break;
+            }            
+          }
+        }
+      })
+    })
+
+
+    $scope.share = function (contact) {
+      data = {
+          clsContact: { code: contact.code },
+          boolIsActive: 1
+      }
+
+      folderService.share(file.URL, data).then(function (item) {
+        
+      })
+    }
   })
