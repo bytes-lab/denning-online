@@ -1,7 +1,7 @@
 denningOnline
-  .controller('folderListCtrl', function(NgTableParams, $sce, $stateParams, $uibModal, folderService, 
+  .controller('folderListCtrl', function(NgTableParams, $sce, $stateParams, $uibModal, 
                                          contactService, $state, Auth, $scope, $element, 
-                                         growlService, refactorService) 
+                                         growlService, refactorService, folderService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -35,7 +35,8 @@ denningOnline
         self.checkboxes.checked = (checked == total);
       }
       // grayed checkbox
-      angular.element($element[0].getElementsByClassName("select-all")).prop("indeterminate", (checked != 0 && unchecked != 0));
+      angular.element($element[0].getElementsByClassName("select-all")).prop("indeterminate", 
+        (checked != 0 && unchecked != 0));
     }, true);
 
     folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
@@ -101,12 +102,14 @@ denningOnline
 
     self.preview = function (file) {
       var openFiles = ['.jpg', '.png', '.jpeg'];
-      folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/')).then(function (data) {
+      folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/'))
+      .then(function (data) {
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'preview-doc.html',
           controller: function ($scope, $sce) {
-            var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/${ data }&embedded=true`;
+            var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/
+                       ${ data }&embedded=true`;
             if (openFiles.indexOf(file.ext) > -1) {
               url = `https://denningchat.com.my/denningwcf/${ data }`;
             }
@@ -149,7 +152,10 @@ denningOnline
     }
     
     self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      var lastModifiedDate = typeof file.lastModified === "number" ? new Date(file.lastModified) : file.lastModifiedDate;
+      var lastModifiedDate = file.lastModifiedDate;
+      if (typeof file.lastModified === "number") {
+        lastModifiedDate = new Date(file.lastModified);
+      }
 
       var info = {
         "fileNo1": $stateParams.id,
@@ -176,12 +182,7 @@ denningOnline
       });
     };
 
-    self.moveFile = function(operation) {
-      if (angular.equals(self.checkboxes.items, {})) {
-        alert('Please select files to move / copy.');
-        return false;
-      }
-
+    getSelectedFiles = function () {
       var files = [];
       var ids = Object.keys(self.checkboxes.items);
 
@@ -190,6 +191,16 @@ denningOnline
           files.push(value);
         }
       })
+      return files;
+    }
+
+    self.moveFile = function(operation) {
+      if (angular.equals(self.checkboxes.items, {})) {
+        alert('Please select files to move / copy.');
+        return false;
+      }
+
+      var files = getSelectedFiles();
 
       var modalInstance = $uibModal.open({
         animation: true,
@@ -271,6 +282,22 @@ denningOnline
       if (angular.equals(self.checkboxes.items, {})) {
         alert('Please select files to share.');
       }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'shareModal.html',
+        controller: 'shareModalCtrl',
+        size: '',
+        keyboard: true,
+        resolve: {
+          files: function () {
+            return getSelectedFiles();
+          },
+          matter: function () {
+            return $stateParams.id;
+          }
+        }
+      }).result.then(function () {}, function (res) {});
     }
 
     self.deleteFolder = function (folderName) {
@@ -331,14 +358,7 @@ denningOnline
         return;
       }
 
-      var ids = Object.keys(self.checkboxes.items);
-
-      var files = [];
-      angular.forEach(self.data, function(value, key) {
-        if (ids.indexOf(value.id.toString()) > -1) {
-          files.push(value);
-        }
-      })
+      var files = getSelectedFiles();
 
       var modalInstance = $uibModal.open({
         animation: true,
@@ -570,7 +590,9 @@ denningOnline
     };
   })
 
-  .controller('renameDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, file, matter, type) {
+  .controller('renameDocModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
+                                              folderService, file, matter, type) 
+  {
     $scope.is_valid = 'initial';
     $scope.fileName = file.name;
     $scope.type = type;
@@ -605,7 +627,9 @@ denningOnline
     };
   })
 
-  .controller('newFolderModalCtrl', function ($scope, $uibModalInstance, $state, growlService, folderService, matter) {
+  .controller('newFolderModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
+                                              folderService, matter) 
+  {
     $scope.is_valid = 'initial';
 
     $scope.validate = function () {
@@ -635,4 +659,11 @@ denningOnline
     $scope.cancel = function () {
       $uibModalInstance.close();
     };
+  })
+
+  .controller('shareModalCtrl', function ($scope, $uibModalInstance, growlService, folderService, 
+                                          matter, files) 
+  {
+    $scope.matter = matter;
+    $scope.files = files;
   })

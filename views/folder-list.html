@@ -332,3 +332,21 @@
     <button class="btn btn-link" ng-click="cancel()">Cancel</button>
   </div>
 </script>
+
+<script type="text/ng-template" id="shareModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Create a sub folder</h4>
+  </div>
+  <div class="modal-body">
+    <p>Sub Folder Name</p>
+    <div class="form-group" ng-class="is_valid">
+      <div class="fg-line">
+        <input type="text" class="form-control" ng-model="fileName" ng-change="validate()">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
