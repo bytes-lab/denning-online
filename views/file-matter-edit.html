@@ -822,6 +822,9 @@
           <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
         </md-item-template>
       </md-autocomplete>
+      <a class="btn btn-primary short-btn" target="_new" ui-sref="file-matters.edit({ fileNo: rmatter.key })">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the matter"></span>
+      </a>      
     </div>
   </div>
   <div class="clearfix"></div>
