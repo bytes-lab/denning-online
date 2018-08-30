@@ -464,90 +464,103 @@ denningOnline
     formlyConfig.setType({
       name: 'summary',
       templateUrl: 'summary.html',
-      controller: function ($scope, propertyService) {
-        $scope.print = function () {
-          var content = document.getElementById('summary').innerHTML;
-          var printWindow = window.open('');
+      controller: function ($scope, $uibModal, propertyService) {
+        $scope.preview = function () {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'preview-summary.html',
+            controller: function ($scope, $sce) {
+              $scope.content = $sce.trustAsHtml(document.getElementById('summary').innerHTML);
 
-          printWindow.document.write(`<html><head><style> 
-            @font-face {
-              font-family: roboto;
-              src: url('fonts/roboto/Roboto-Regular-webfont.eot');
-              src: url('fonts/roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/roboto/Roboto-Regular-webfont.woff') format('woff'), url('fonts/roboto/Roboto-Regular-webfont.ttf') format('truetype'), url('fonts/roboto/Roboto-Regular-webfont.svg#icon') format('svg');
-              font-weight: 400;
-              font-style: normal;
-            }            
-            * {
-              font-family: roboto;
-            }
-            .hidden-print { 
-              display: none; 
-            } 
-            h2 { 
-              color: #9c27b0 !important; 
-            } 
-            h4 { 
-              color: #006400; 
-              margin-bottom: 10px;
-            } 
-            h5 {
-              font-size: 16px;
-              margin-bottom: 0px;
-            }            
-            .col-md-5 { 
-              width: 49%;
-              float: left; 
-            }
-            .col-md-5.first { 
-              padding-right: 5px;
-            }
-            .col-md-5.second { 
-              padding-left: 5px;
-            }
-            dt {
-              color: #eee;
-              font-weight: 500;
-            }
-            dd {
-              color: #eee;
-            }
-            .dl-horizontal dt {
-              float: left;
-              text-align: left;
-              width: 130px;
-            }
-            .dl-horizontal dd {
-              margin-left: 145px;
-              word-wrap: break-word;
-            }
-            dt, dd {
-              line-height: 1.32;
-              font-size: 13px;
-            }
-            .dl-horizontal dd:after {
-              display: table;
-              content: ' ';
-              clear: both;
-            }
-            dl {
-              margin-top: 6px;
-              margin-bottom: 6px;
-            }
-            @page {
-              margin-top: 50px;
-            }
-            .logo-summary-report {
-              width: 72px;
-              position: absolute;
-              top: 2px;
-              right: 10px;
-            }            
-          </style>`);
-          printWindow.document.write('</head><body class="summary">');
-          printWindow.document.write(content);
-          printWindow.document.write('</body></html>');
-          printWindow.print();
-          // printWindow.close();
+              $scope.print = function () {
+                var content = document.getElementById('summary').innerHTML;
+                var printWindow = window.open('');
+
+                printWindow.document.write(`<html><head><style> 
+                  @font-face {
+                    font-family: roboto;
+                    src: url('fonts/roboto/Roboto-Regular-webfont.eot');
+                    src: url('fonts/roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/roboto/Roboto-Regular-webfont.woff') format('woff'), url('fonts/roboto/Roboto-Regular-webfont.ttf') format('truetype'), url('fonts/roboto/Roboto-Regular-webfont.svg#icon') format('svg');
+                    font-weight: 400;
+                    font-style: normal;
+                  }            
+                  * {
+                    font-family: roboto;
+                  }
+                  .hidden-print { 
+                    display: none; 
+                  } 
+                  h2 { 
+                    color: #9c27b0 !important; 
+                  } 
+                  h4 { 
+                    color: #006400; 
+                    margin-bottom: 10px;
+                  } 
+                  h5 {
+                    font-size: 16px;
+                    margin-bottom: 0px;
+                  }            
+                  .col-md-5 { 
+                    width: 49%;
+                    float: left; 
+                  }
+                  .col-md-5.first { 
+                    padding-right: 5px;
+                  }
+                  .col-md-5.second { 
+                    padding-left: 5px;
+                  }
+                  dt {
+                    color: #eee;
+                    font-weight: 500;
+                  }
+                  dd {
+                    color: #eee;
+                  }
+                  .dl-horizontal dt {
+                    float: left;
+                    text-align: left;
+                    width: 130px;
+                  }
+                  .dl-horizontal dd {
+                    margin-left: 145px;
+                    word-wrap: break-word;
+                  }
+                  dt, dd {
+                    line-height: 1.32;
+                    font-size: 13px;
+                  }
+                  .dl-horizontal dd:after {
+                    display: table;
+                    content: ' ';
+                    clear: both;
+                  }
+                  dl {
+                    margin-top: 6px;
+                    margin-bottom: 6px;
+                  }
+                  @page {
+                    margin-top: 50px;
+                  }
+                  .logo-summary-report {
+                    width: 72px;
+                    position: absolute;
+                    top: 2px;
+                    right: 10px;
+                  }            
+                </style>`);
+                printWindow.document.write('</head><body class="summary">');
+                printWindow.document.write(content);
+                printWindow.document.write('</body></html>');
+                printWindow.print();
+                // printWindow.close();
+              }
+
+            },
+            size: 'lg',
+            keyboard: true
+          }).result.then(function () {}, function (res) {});
         }
 
         // property detail

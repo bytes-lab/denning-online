@@ -238,3 +238,19 @@ tr.selected {
 .table tr {
     cursor: pointer;
 }
+
+.summary-preview-content {
+    height: calc(100vh - 135px);
+    overflow-y: scroll;
+    border: 18px solid #ccc;
+    padding-top: 40px;
+    padding-bottom: 20px;    
+}
+
+.summary-preview-content .hidden-print {
+    display: none;
+}
+
+.summary-preview-content h4 {
+    color: #006400;
+}

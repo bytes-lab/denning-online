@@ -1851,7 +1851,7 @@
       <img src="img/app-icon.png" class="logo-summary-report">
     </div>
     <div class="col-md-2">
-      <button class="btn btn-primary hidden-print m-t-25" ng-click="print()">Print</button>
+      <button class="btn btn-primary hidden-print m-t-25" ng-click="preview()">Preview</button>
     </div>
     <div class="col-md-5 first col-md-offset-1">
       <h4 class="m-t-25 m-b-20">Matter Information</h4>
@@ -2493,5 +2493,19 @@
     <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Customize</a>
     <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="generate()">Generate</a>
   </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="preview-summary.html">
+  <div class="modal-header">
+    <span class="modal-title f-16 f-500 c-black m-r-10">Preview Summary Report</span>
+    <a class="btn btn-default btn-sm m-l-25 bgm-gray" title="Print" ng-click="print()">
+      <i class="zmdi zmdi-print"></i>
+    </a>
+    <a class="btn btn-default btn-sm m-l-10 bgm-gray" ng-click="">
+      Save to Folder
+    </a>
+  </div>
+  <div class="summary-preview-content" ng-bind-html="content">
   </div>
 </script>
