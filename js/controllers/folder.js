@@ -465,37 +465,46 @@ denningOnline
                                             folders, actionType) 
   {
     $scope.data = {
-      folderName: ''
+      folderName: '',
+      choosen: choosen,
+      searchRes: [],
+      dest: null
     };
 
     $scope.files = files;
     $scope.searchCategory = "self";
     $scope.is_valid = ' ';
-    $scope.searchRes = [];
     $scope.hasFolder = true;
     $scope.selfFolder = true;
-    $scope.choosen = choosen;
-    $scope.choosen_ = angular.copy($scope.choosen);
+    $scope.choosen_ = angular.copy(choosen);
     $scope.folders = folders;
     $scope.actionType = actionType;
 
     $scope.search = function (query) {
       return searchService.keyword(query).then(function (data) {
         return data;
-      });      
+      });
     }
 
     $scope.mainSearch = function (item) {
       if (item) {
-        $scope.queryItem = item;
-        searchService.search(item.keyword, $scope.searchCategory).then(function (data) {
-          $scope.searchRes = data;
+        $scope.data.choosen = null;
+        $scope.data.searchRes = [];
+        
+        searchService.search(item.keyword, $scope.searchCategory, 1, 0).then(function (data) {
+          $scope.data.searchRes = data;
         });
       }
     }
 
+    $scope.getResults = function (keyword) {
+      return $scope.data.searchRes.filter(function(item) {
+        return (item.Title || item.Desc).search(new RegExp(keyword, "i")) > -1;
+      });
+    }
+
     $scope.categoryChange = function (item) {
-      $scope.searchRes = [];
+      $scope.data.searchRes = [];
       if (["0", "2", "self"].indexOf($scope.searchCategory) > -1) {
         $scope.hasFolder = true;
       } else {
@@ -505,23 +514,21 @@ denningOnline
 
       if (["transit", "self"].indexOf($scope.searchCategory) < 0) {
         $scope.selfFolder = false;
-        $scope.mainSearch($scope.queryItem);
-        $scope.choosen = null;
+        $scope.data.choosen = null;
       } else {
         $scope.selfFolder = true;
         $scope.is_valid = '';
 
         if ($scope.searchCategory == "self") {
-          $scope.choosen = $scope.choosen_;
+          $scope.data.choosen = $scope.choosen_;
         } else {
-          $scope.choosen = { key: "transit folder" };
+          $scope.data.choosen = { key: "transit folder" };
         }
       }
     }
 
     $scope.chooseItem = function (item) {
       if (item) {
-        $scope.choosen = item;
         $scope.folders = [];
         $scope.data.folderName = '';
 
@@ -535,7 +542,7 @@ denningOnline
           if ($scope.folders.length > 0) {
             $scope.data.folderName = $scope.folders[0].name;
           }
-        }        
+        }
       }
     }
 
@@ -548,7 +555,7 @@ denningOnline
     }
 
     $scope.ok = function () {
-      if ($scope.is_valid || !$scope.choosen.key) {
+      if ($scope.is_valid || !$scope.data.choosen.key) {
         alert("Choose a proper destination!");
         return false;
       }
@@ -558,7 +565,7 @@ denningOnline
         file = $scope.files[ii];
         param = {
           "sourceFileURL" : file.URL,
-          "newFileNo" : $scope.choosen.key,
+          "newFileNo" : $scope.data.choosen.key,
           "newSubFolder" : $scope.data.folderName,
           "newName" : file.name+file.ext
         };
@@ -614,7 +621,7 @@ denningOnline
       folderService.renameDocument(file.URL, data).then(function () {
         $uibModalInstance.close();
         growlService.growl('The file renamed successfully!', 'success');
-        $state.reload();        
+        $state.reload();
       })
     };
 
@@ -648,7 +655,7 @@ denningOnline
 
       folderService.createSubFolder(data).then(function () {
         $uibModalInstance.close();
-        $state.reload();        
+        $state.reload();
       })
     };
 
@@ -694,7 +701,7 @@ denningOnline
             if (item[jj].clsContact.code == $scope.data.matter['clsC'+i].code) {
               $scope.data.shared[i] = 'Yes';
               break;
-            }            
+            }
           }
         }
       })

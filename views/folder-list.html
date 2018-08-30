@@ -107,7 +107,7 @@
 
 <script type="text/ng-template" id="folderModal.html">
   <div class="modal-header">
-    <h4 class="modal-title">{{ actionType }} Documents</h4>
+    <h4 class="modal-title">{{ actionType }} Files</h4>
   </div>
   <div class="modal-body">
     <ul class="f-15 c-blue m-b-20 p-l-20">
@@ -156,10 +156,9 @@
         Self
       </label>
     </div>
-    <div class="col-md-12 m-t-10 m-b-5">
+    <div class="col-md-12 m-t-10 m-b-5" ng-if="!selfFolder">
       <md-autocomplete
-        ng-disabled="selfFolder"
-        md-selected-item="dest"
+        md-selected-item="data.dest"
         md-search-text="qstl"
         md-items="item in search(qstl)"
         md-item-text="item.keyword"
@@ -174,12 +173,15 @@
         </md-item-template>
       </md-autocomplete>
     </div>
-    <div class="col-md-12 m-b-15 a4536" ng-if="searchRes.length">
+    <div class="col-md-12 m-b-15 a4536" ng-if="!selfFolder">
       <md-autocomplete
-        md-selected-item="choosen"
-        md-items="item in searchRes"
+        ng-disabled="!data.dest || data.searchRes.length==0"
+        md-selected-item="data.choosen"
+        md-search-text="qsch"
+        md-items="item in getResults(qsch)"
         md-item-text="item.Title"
         md-min-length="0"
+        md-no-cache="true"
         md-selected-item-change="chooseItem(item)"
         md-menu-class="a4536efwe"
         placeholder="Click here to select destination folder"
@@ -219,7 +221,7 @@
       </dd>
     </div>
     <div class="col-md-12 m-b-15">
-      <div class="p-t-10 f-700">File Name</div>
+      <div class="p-t-10 f-700">Rename Files</div>
       <ul class="f-15 c-blue m-b-20 p-l-20">
         <li ng-repeat="file in files track by $index">
           <input type="text" ng-model="file.name" class="form-control" style="display:inline; width:80%;">

@@ -10,10 +10,12 @@ denningOnline
       })
     };
 
-    this.search = function (keyword, category) {
+    this.search = function (keyword, category, page, pagesize) {
       return http.GET('v1/generalSearch', {
           search: keyword,
           category: category,
+          page: page,
+          pagesize: pagesize,
           isAutoComplete: 1
       }).then(function (resp) {
         var searchRes = resp.data.map(function (item) {
