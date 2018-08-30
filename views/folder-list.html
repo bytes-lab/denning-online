@@ -1,6 +1,6 @@
 <div class="container">
   <script type="text/ng-template" id="headerCheckbox.html">
-    <input type="checkbox" ng-model="vm.checkboxes.checked" class="select-all" value="" />
+    <input type="checkbox" ng-model="vm.checkboxes.checked" class="select-all" />
   </script>
 
   <div class="card">
@@ -76,8 +76,8 @@
               <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" /></td>
               <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="ng-table-fixed-column-60">
                 <i class="zmdi zmdi-collection-pdf" ng-if="file.ext=='.pdf'"></i>
-                <i class="zmdi zmdi-collection-image" ng-if="file.ext=='.jpg' || file.ext=='.png'"></i>
-                <i class="zmdi zmdi-collection-text" ng-if="file.ext!='.pdf' && file.ext!='.jpg' && file.ext!='.png'"></i>&nbsp;
+                <i class="zmdi zmdi-collection-image" ng-if="file.ext=='.jpg' || file.ext=='.png' || file.ext=='.jpeg'"></i>
+                <i class="zmdi zmdi-collection-text" ng-if="file.ext!='.pdf' && file.ext!='.jpg' && file.ext!='.png' && file.ext!='.jpeg'"></i>&nbsp;
                 <a href="" ng-click="vm.preview(file);" class="c-black">{{file.name}}</a>
               </td>
               <td sortable="'ext'" data-title="'Ext'" class="ng-table-fixed-column-15">

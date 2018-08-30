@@ -16,27 +16,34 @@ denningOnline
     $scope.$watch(function() {
       return self.checkboxes.checked;
     }, function(value) {
-      angular.forEach(self.data, function(item) {
-        self.checkboxes.items[item.id] = value;
-      });
+      if (self.data.length > 0) {
+        angular.forEach(self.data, function(item) {
+          self.checkboxes.items[item.id] = value;
+        });        
+      }
     });
     
     // watch for data checkboxes
     $scope.$watch(function() {
       return self.checkboxes.items;
     }, function(values) {
-      var checked = 0, unchecked = 0,
-          total = self.data.length;
-      angular.forEach(self.data, function(item) {
-        checked   +=  (self.checkboxes.items[item.id]) || 0;
-        unchecked += (!self.checkboxes.items[item.id]) || 0;
-      });
-      if ((unchecked == 0) || (checked == 0)) {
-        self.checkboxes.checked = (checked == total);
+      if (self.data.length > 0) {
+        var checked = 0, 
+            unchecked = 0,
+            total = self.data.length;
+
+        angular.forEach(self.data, function(item) {
+          checked   +=  (self.checkboxes.items[item.id]) || 0;
+          unchecked += (!self.checkboxes.items[item.id]) || 0;
+        });
+
+        if (unchecked == 0 || checked == 0) {
+          self.checkboxes.checked = (checked == total);
+        }
+        // grayed checkbox
+        angular.element($element[0].getElementsByClassName("select-all")).prop("indeterminate", 
+          (checked != 0 && unchecked != 0));
       }
-      // grayed checkbox
-      angular.element($element[0].getElementsByClassName("select-all")).prop("indeterminate", 
-        (checked != 0 && unchecked != 0));
     }, true);
 
     folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
@@ -183,8 +190,14 @@ denningOnline
     };
 
     getSelectedFiles = function () {
-      var files = [];
-      var ids = Object.keys(self.checkboxes.items);
+      var files = [],
+          ids = [];
+
+      for (ii in self.checkboxes.items) {
+        if (self.checkboxes.items[ii]) {
+          ids.push(ii);
+        }
+      }
 
       angular.forEach(self.data, function(value, key) {
         if (ids.indexOf(value.id.toString()) > -1) {
@@ -195,12 +208,11 @@ denningOnline
     }
 
     self.moveFile = function(operation) {
-      if (angular.equals(self.checkboxes.items, {})) {
+      var files = getSelectedFiles();
+      if (files.length == 0) {
         alert('Please select files to move / copy.');
         return false;
       }
-
-      var files = getSelectedFiles();
 
       var modalInstance = $uibModal.open({
         animation: true,
@@ -328,18 +340,15 @@ denningOnline
     }
 
     self.deleteFile = function() {
-      if (angular.equals(self.checkboxes.items, {})) {
+      var files = getSelectedFiles();
+      if (files.length == 0) {
         alert('Please select files to delete.');
         return false;
       }
 
       var deletes = [];
-      var ids = Object.keys(self.checkboxes.items);
-
-      angular.forEach(self.data, function(value, key) {
-        if (ids.indexOf(value.id.toString()) > -1) {
-          deletes.push(folderService.deleteDocument(value.URL));
-        }
+      angular.forEach(files, function(value, key) {
+        deletes.push(folderService.deleteDocument(value.URL));
       })
 
       Promise.all(deletes).then(function (data) {
@@ -349,12 +358,11 @@ denningOnline
     }
 
     self.attachFile = function() {
-      if (angular.equals(self.checkboxes.items, {})) {
+      var files = getSelectedFiles();
+      if (files.length == 0) {
         alert('Please select files to attach.');
         return;
       }
-
-      var files = getSelectedFiles();
 
       var modalInstance = $uibModal.open({
         animation: true,
