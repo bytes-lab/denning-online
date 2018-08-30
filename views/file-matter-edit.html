@@ -540,7 +540,7 @@
 </script>
 
 <!-- FILE INFORMATION -->
-<script type="text/ng-template" id="file.html">  
+<script type="text/ng-template" id="info.html">  
   <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group col-md-12" ng-if="to.party">
     <div style="display: flex;">
@@ -822,7 +822,7 @@
           <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
         </md-item-template>
       </md-autocomplete>
-      <a class="btn btn-primary short-btn" target="_new" ui-sref="file-matters.edit({ fileNo: rmatter.key })">
+      <a class="btn btn-primary short-btn" target="_new" ui-sref="file-matters.edit({ fileNo: rmatter.key })" ng-if="rmatter.key.trim()">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the matter"></span>
       </a>      
     </div>

@@ -234,3 +234,7 @@ tr.selected {
 .md-datepicker-calendar-pane.md-pane-open {
     z-index: 9999;
 }
+
+.table tr {
+    cursor: pointer;
+}

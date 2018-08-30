@@ -23,47 +23,6 @@ denningOnline
   .run(function(formlyConfig, contactService, propertyService, legalFirmService, 
                 presetbillService, spaChecklistService, bankBranchService) 
   {
-    var attributes = [
-      'date-disabled',
-      'custom-class',
-      'show-weeks',
-      'starting-day',
-      'init-date',
-      'min-mode',
-      'max-mode',
-      'format-day',
-      'format-month',
-      'format-year',
-      'format-day-header',
-      'format-day-title',
-      'format-month-title',
-      'year-range',
-      'shortcut-propagation',
-      'datepicker-popup',
-      'show-button-bar',
-      'current-text',
-      'clear-text',
-      'close-text',
-      'close-on-date-selection',
-      'datepicker-append-to-body'
-    ];
-
-    var bindings = [
-      'datepicker-mode',
-      'min-date',
-      'max-date'
-    ];
-      
-    var ngModelAttrs = {};
-
-    angular.forEach(attributes, function(attr) {
-      ngModelAttrs[camelize(attr)] = {attribute: attr};
-    });
-
-    angular.forEach(bindings, function(binding) {
-      ngModelAttrs[camelize(binding)] = {bound: binding};
-    });
-      
     function camelize(string) {
       string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
         return chr ? chr.toUpperCase() : '';
@@ -75,37 +34,37 @@ denningOnline
     }    
     
     function getContacts(page, pagesize, keyword) {
-      return contactService.getCustomerList(page, pagesize, keyword).then(function(resp) {
+      return contactService.getCustomerList(page, pagesize, keyword).then(function (resp) {
         return resp.data;
       });
     }
 
     function getBankBranches(page, pagesize, keyword) {
-      return bankBranchService.getTableList(page, pagesize, keyword).then(function(resp) {
+      return bankBranchService.getTableList(page, pagesize, keyword).then(function (resp) {
         return resp.data;
       });
     }
 
     function getStaffs(page, pagesize, keyword) {
-      return contactService.getStaffList(1, 10, keyword).then(function(resp) {
+      return contactService.getStaffList(1, 10, keyword).then(function (resp) {
         return resp.data;
       });
     }
 
     function getPresetBills(page, pagesize, keyword) {
-      return presetbillService.getTableList(page, pagesize, keyword).then(function(resp) {
+      return presetbillService.getTableList(page, pagesize, keyword).then(function (resp) {
         return resp;
       });
     }
 
     function getPresetChecklist(page, pagesize, keyword) {
-      return spaChecklistService.getTableList(page, pagesize, keyword).then(function(resp) {
+      return spaChecklistService.getTableList(page, pagesize, keyword).then(function (resp) {
         return resp;
       });
     }
 
     function getProperties(page, pagesize, keyword) {
-      return propertyService.getTableList(page, pagesize, keyword).then(function(resp) {
+      return propertyService.getTableList(page, pagesize, keyword).then(function (resp) {
         return resp.data;
       });
     }
@@ -272,8 +231,7 @@ denningOnline
       controller: function ($scope, propertyService, $uibModal) {        
         function initProperty(item) {
           if (item && item.code) {
-            propertyService.getItem(item.code)
-            .then(function(item) {
+            propertyService.getItem(item.code).then(function (item) {
               $scope.property = item;
             });
           } else {
@@ -361,8 +319,8 @@ denningOnline
 
     // file attribute
     formlyConfig.setType({
-      name: 'file',
-      templateUrl: 'file.html',
+      name: 'info',
+      templateUrl: 'info.html',
       controller: function ($scope, legalFirmService, matterCodeService, Auth, $uibModal, 
                             fileMatterService) 
       {

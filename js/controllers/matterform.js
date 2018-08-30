@@ -1,7 +1,7 @@
 denningOnline
-  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, contactService, 
+  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, 
                                              $state, matterFormService, Auth, refactorService, 
-                                             growlService) 
+                                             growlService, contactService) 
   {
     var vm = this;
     vm.userInfo = Auth.getUserInfo();
@@ -44,7 +44,7 @@ denningOnline
           "label": "Info",
           "groups": [
             {
-              "type": "file",
+              "type": "info",
               "templateOptions": {
                 "label": "Primary Client",
                 "share": false,
@@ -579,8 +579,8 @@ denningOnline
     }
   })
 
-  .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, Auth, 
-                                             $uibModal, growlService, refactorService) 
+  .controller('matterformEditCtrl', function($filter, $stateParams, matterFormService, $state, 
+                                             $uibModal, growlService, refactorService, Auth)
   {
     var self = this;
     self.isDialog = false;
@@ -705,27 +705,20 @@ denningOnline
     };
   })
 
-  .controller('matterformListCtrl', function($uibModal, NgTableParams, matterFormService, Auth, $state) 
+  .controller('matterformListCtrl', function($uibModal, NgTableParams, matterFormService, 
+                                             Auth, $state) 
   {
     var self = this;
 
-    self.clickHandler = function (item) {
-      $state.go('matter-forms.edit', {'code': item.code});
-    }
-
     matterFormService.getList(1, 500).then(function(data) {
       self.data = data;
-      self.dataReady = true;
       initializeTable();
     });
 
     function initializeTable () {
       self.tableFilter = new NgTableParams({
-        page: 1,      
-        count: 25,
-        sorting: {
-          name: 'asc' 
-        }
+        page: 1,
+        count: 25
       }, {
         dataset: self.data
       })
