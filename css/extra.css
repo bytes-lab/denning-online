@@ -254,3 +254,11 @@ tr.selected {
 .summary-preview-content h4 {
     color: #006400;
 }
+
+.summary-preview-content .logo-summary-report {
+    display: inline;
+    width: 72px;
+    position: absolute;
+    top: 20px;
+    right: 10px;    
+}

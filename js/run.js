@@ -470,7 +470,9 @@ denningOnline
             animation: true,
             templateUrl: 'preview-summary.html',
             controller: function ($scope, $sce) {
-              $scope.content = $sce.trustAsHtml(document.getElementById('summary').innerHTML);
+              var content = document.getElementById('summary').innerHTML;
+              content = content.replace('col-md-8 col-md-offset-1', 'col-md-10 col-md-offset-1')
+              $scope.content = $sce.trustAsHtml(content);
 
               $scope.print = function () {
                 var content = document.getElementById('summary').innerHTML;
