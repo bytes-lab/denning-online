@@ -472,8 +472,8 @@ denningOnline
     };
 
     $scope.files = files;
+    $scope.files_ = angular.copy(files);
     $scope.searchCategory = "self";
-    $scope.is_valid = ' ';
     $scope.hasFolder = true;
     $scope.selfFolder = true;
     $scope.choosen_ = angular.copy(choosen);
@@ -490,7 +490,7 @@ denningOnline
       if (item) {
         $scope.data.choosen = null;
         $scope.data.searchRes = [];
-        
+
         searchService.search(item.keyword, $scope.searchCategory, 1, 0).then(function (data) {
           $scope.data.searchRes = data;
         });
@@ -509,7 +509,6 @@ denningOnline
         $scope.hasFolder = true;
       } else {
         $scope.hasFolder = false;
-        $scope.is_valid = '';
       }
 
       if (["transit", "self"].indexOf($scope.searchCategory) < 0) {
@@ -517,7 +516,6 @@ denningOnline
         $scope.data.choosen = null;
       } else {
         $scope.selfFolder = true;
-        $scope.is_valid = '';
 
         if ($scope.searchCategory == "self") {
           $scope.data.choosen = $scope.choosen_;
@@ -546,23 +544,16 @@ denningOnline
       }
     }
 
-    $scope.validate = function () {
-      if (!$scope.data.folderName.trim()) {
-        $scope.is_valid = 'has-error';
-      } else {
-        $scope.is_valid = '';
-      }
-    }
-
     $scope.ok = function () {
-      if ($scope.is_valid || !$scope.data.choosen.key) {
+      if (!$scope.data.choosen.key) {
         alert("Choose a proper destination!");
         return false;
       }
 
       var moves = [];
-      for (ii in $scope.files) {
-        file = $scope.files[ii];
+      for (ii in $scope.files_) {
+        file = $scope.files_[ii];
+
         param = {
           "sourceFileURL" : file.URL,
           "newFileNo" : $scope.data.choosen.key,

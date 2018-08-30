@@ -212,8 +212,8 @@
       <dd>
         <div class="fg-line">
           <div class="select">
-            <select class="form-control" ng-model="data.folderName" ng-change="validate()">
-              <option value="">FILES</option>
+            <select class="form-control" ng-model="data.folderName">
+              <option value="">FILES</option> 
               <option ng-repeat="item in folders" value="{{ item.name }}">{{ item.name }}</option>
             </select>
           </div>
@@ -223,7 +223,7 @@
     <div class="col-md-12 m-b-15">
       <div class="p-t-10 f-700">Rename Files</div>
       <ul class="f-15 c-blue m-b-20 p-l-20">
-        <li ng-repeat="file in files track by $index">
+        <li ng-repeat="file in files_ track by $index">
           <input type="text" ng-model="file.name" class="form-control" style="display:inline; width:80%;">
           {{ file.ext }}
         </li>
