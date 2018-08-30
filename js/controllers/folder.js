@@ -108,8 +108,8 @@ denningOnline
           animation: true,
           templateUrl: 'preview-doc.html',
           controller: function ($scope, $sce) {
-            var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/
-                       ${ data }&embedded=true`;
+            var url = `https://docs.google.com/gview?url=https://denningchat.com.my/denningwcf/`+
+                      `${ data }&embedded=true`;
             if (openFiles.indexOf(file.ext) > -1) {
               url = `https://denningchat.com.my/denningwcf/${ data }`;
             }
