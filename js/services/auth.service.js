@@ -1,5 +1,5 @@
 denningOnline
-  .factory('Auth', function ($http, $window, $timeout, $q) {
+  .factory('Auth', function ($http, $window) {
     var service = {
       baseUrl: 'https://denningonline.com.my/denningapi'
     };

@@ -3,7 +3,9 @@ denningOnline
   // Base controller for common functions
   // =========================================================================
 
-  .controller('denningOnlineCtrl', function($timeout, $state, $scope, growlService, $http, $q, searchService, $rootScope, Auth, contactService){
+  .controller('denningOnlineCtrl', function($state, $scope, growlService, Auth, 
+                                            searchService, $rootScope, contactService)
+  {
     var self = this;
 
     $scope.app = { 

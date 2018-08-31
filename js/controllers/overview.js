@@ -105,7 +105,7 @@ denningOnline
                     })
                   }
 
-                  if($(`.pie-chart-${$scope.to.tab}-${$scope.to.ordering}`)[0]){
+                  if ($(`.pie-chart-${$scope.to.tab}-${$scope.to.ordering}`)[0]) {
                     $.plot(`.pie-chart-${$scope.to.tab}-${$scope.to.ordering}`, pieData, {
                       series: {
                         pie: {
@@ -205,6 +205,7 @@ denningOnline
             if (vm.permittedWidgets[ii][jj].type == type) {
               var item = vm.permittedWidgets[ii][jj];
               to = item.templateOptions;
+              to.tab = tabIdx;
               break;
             }
           }
