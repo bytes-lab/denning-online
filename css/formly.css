@@ -148,12 +148,14 @@ md-autocomplete.default-input input:not(.md-input) {
 }
 
 .btn-em-add {
-    padding: 3px 4px 3px 7px;
+    padding: 2px 4px 2px 6px;
     max-height: 30px;
     margin-left: 50px;
+    position: absolute;
+    left: 180px;    
 }
 
 .group-label-wrapper {
     padding-top: 3px;
-    padding-bottom: 3px;
+    padding-bottom: 4px;
 }

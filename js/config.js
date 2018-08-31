@@ -258,15 +258,20 @@ denningOnline
           "$uibModalInstance": function () {
             return null;
           },
-          party: function () {
+          entityCode: function () {
             return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
           }
         }
       })
       .state ('contacts.new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },
         url: '/new/',
         controller: 'contactEditCtrl as vm',
@@ -285,8 +290,14 @@ denningOnline
           "$uibModalInstance": function () {
             return null;
           },
-          party: function () {
+          entityCode: function () {
             return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
           }
         }
       })

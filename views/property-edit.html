@@ -286,7 +286,7 @@
             <dt class="p-t-10">Postal Address</dt>
             <dd>
               <div class="fg-line">
-                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strPropertyAdr" placeholder="type here...."></textarea>
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strPropertyAdr" placeholder="type here...." camel-case></textarea>
               </div>
             </dd>
           </dl>
@@ -374,7 +374,7 @@
             <dt class="p-t-10">Units of Shares</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.unitShare">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strShares">
               </div>
             </dd>
           </dl>

@@ -179,15 +179,18 @@ denningOnline
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'views/contact-edit.html',
-            controller: 'contactCreateModalCtrl',
+            controller: 'contactEditCtrl',
             controllerAs: 'vm',
             size: 'lg',
             backdrop: 'static',
             keyboard: true,
             resolve: {
-              viewMode: viewMode,
-              party: party
-            }      
+              isNew: !viewMode,
+              entityCode: function () {
+                return party.code;
+              },
+              isDialog: true
+            }
           });
 
           modalInstance.result.then(function(contact){
@@ -391,14 +394,17 @@ denningOnline
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'views/contact-edit.html',
-            controller: 'contactCreateModalCtrl',
+            controller: 'contactEditCtrl',
             controllerAs: 'vm',
             size: 'lg',
             backdrop: 'static',
             keyboard: true,
             resolve: {
-              viewMode: viewMode,
-              party: party
+              isNew: !viewMode,
+              entityCode: function () {
+                return party.code;
+              },
+              isDialog: true
             }
           });
         }

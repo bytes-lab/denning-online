@@ -224,7 +224,7 @@
       </md-item-template>
       </md-autocomplete>
 
-      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(model['clsC'+n], false)">
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog({}, false)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
       </a>
       <a class="btn btn-primary short-btn" ng-click="viewContact(model['clsC'+n])">
@@ -562,7 +562,7 @@
       </md-item-template>
       </md-autocomplete>
 
-      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog(model.clsPrimaryClient, false)">
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog({}, false)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
       </a>
       <a class="btn btn-primary short-btn" target="_new" ng-click="viewContact(model.clsPrimaryClient)">

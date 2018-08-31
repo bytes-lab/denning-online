@@ -8,14 +8,14 @@
       <div class="col-md-11 col-sm-12">
         <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Contact</h2>
         <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew && !vm.isDialog">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
         <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="contacts.new" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew && !vm.isDialog"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="contacts.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew && !vm.isDialog"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
       </div>
       <div class="clearfix"></div>
-      <div class="col-sm-12 col-md-10 p-l-10" ng-if="!vm.create_new">
+      <div class="col-sm-12 col-md-10 p-l-10" ng-if="!vm.isNew">
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()" data-ui-sref="contacts.matters({id: vm.entity.code})">Matters</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" data-ui-sref="folders.list({ id: vm.entity.code, type: 'contact' })">Folder</md-button>
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>
@@ -115,6 +115,7 @@
             <dt class="p-t-10">Occupation</dt>
             <dd>
               <md-autocomplete
+                ng-disabled="!vm.can_edit"
                 md-selected-item="vm.entity.clsOccupation"
                 md-search-text="qsop"
                 md-items="item in vm.queryOccupation(qsop)"
@@ -823,16 +824,16 @@
       <div class="row">
         <div class="col-md-11 col-sm-12 no-padding">
           <div class="m-t-30 p-l-15">
-            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()">Matters</md-button>
-            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.openFolder()">Folder</md-button>
-            <md-button ng-if="!vm.create_new" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>
-            <input ng-if="!vm.create_new" type="file" class="hidden contact-upload" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
+            <md-button ng-if="!vm.isNew" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()">Matters</md-button>
+            <md-button ng-if="!vm.isNew" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.openFolder()">Folder</md-button>
+            <md-button ng-if="!vm.isNew" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.upload()">Upload</md-button>
+            <input ng-if="!vm.isNew" type="file" class="hidden contact-upload" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
             <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew && !vm.isDialog">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="contacts.new" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew && !vm.isDialog"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="contacts.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew && !vm.isDialog"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>

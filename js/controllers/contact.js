@@ -25,16 +25,17 @@ denningOnline
                                            contactService, $state, Auth, $scope, 
                                            refactorService, occupationService, raceService, 
                                            religionService, IRDBranchService, cityService,
-                                           uibDateParser, bankService, $uibModalInstance, party) 
+                                           uibDateParser, bankService, $uibModalInstance, 
+                                           entityCode, isDialog, isNew) 
   {
     var self = this;
-    self.isDialog = false;
-    self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
-    self.can_edit = $state.$current.data.can_edit;
-    self.create_new = $state.$current.data.can_edit;
 
-    console.log($uibModalInstance);
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog? entityCode: $stateParams.id;
+
     self.IDTypes = [];
     self.Salutations = [];
     self.contactTypes = [
@@ -212,7 +213,7 @@ denningOnline
     }
 
     self.copy = function () {
-      self.create_new = true;
+      self.isNew = true;
       self.can_edit = true;
       self.entity_ = null;
 
@@ -225,17 +226,21 @@ denningOnline
       }
     }
 
-    if ($stateParams.id) {
-      contactService.getItem($stateParams.id).then(function (item) {
+    if (self.entityCode) {
+      contactService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
 
         self.IDTypeChange(self.entity.clsIDType);
 
         // wrapper attrs for auto complete
-        self.strTitle_ = { 
-          description: self.entity.strTitle 
-        };
+        if (self.entity.strTitle) {
+          self.strTitle_ = { 
+            description: self.entity.strTitle 
+          };          
+        } else {
+          self.strTitle_ = null;
+        }
 
         self.strPlaceofWork_ = { 
           city: self.entity.strPlaceofWork
@@ -266,17 +271,25 @@ denningOnline
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       contactService.save(entity).then(function (contact) {
-        if (self.entity_) {
-          $state.reload();
+        if (self.isDialog) {
+          $uibModalInstance.close(contact);
         } else {
-          $state.go('contacts.edit', { 'id': contact.code });
+          if (self.entity_) {
+            $state.reload();
+          } else {
+            $state.go('contacts.edit', { 'id': contact.code });
+          }
+          growlService.growl('Saved successfully!', 'success');          
         }
-        growlService.growl('Saved successfully!', 'success');
       });
     }
 
     self.cancel = function () {
-      $state.go('contacts.list');
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('contacts.list');
+      }
     }
     
     $scope.open = function($event, opened) {
@@ -384,52 +397,5 @@ denningOnline
       if (on_list) {
         $state.go(return_state);
       }
-    };
-  })
-
-  .controller('contactCreateModalCtrl', function ($uibModalInstance, party, viewMode, 
-                                                  contactService, IRDBranchService, Auth) 
-  {
-    var self = this;
-    self.isDialog = true;
-    self.viewMode = viewMode;
-    self.can_edit = !viewMode;
-    self.create_new = !viewMode;
-    self.userInfo = Auth.getUserInfo();
-
-    if (viewMode) {
-      contactService.getItem(party.code).then(function(item){
-        self.entity = item;
-      });
-    } else {
-      self.entity = {};
-    }
-
-    contactService.getSalutationList().then(function(data) {
-      self.Salutations = data;
-    });
-
-    self.queryIRDBranch = function (searchText) {
-      return IRDBranchService.getList(1, 10, searchText).then(function(resp) {
-        return resp;
-      });
-    }
-
-    self.queryFields = function (field, searchText) {
-      return self[field].filter(function(c) {
-        return c.description.search(new RegExp(searchText, "i")) > -1;
-      });
-    }
-
-    self.save = function () {
-      contactService.save(self.entity).then(function(contact) {
-        $uibModalInstance.close(contact);
-      })
-      .catch(function(err){
-      });
-    };
-
-    self.cancel = function () {
-      $uibModalInstance.close();
     };
   })
