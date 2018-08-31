@@ -93,6 +93,52 @@ denningOnline
                       {data: d3, lines: { show: true }, label: resp.lineChart.yAxisTitle, color: '#00bcd4' }
                     ], options);
                   }
+                } else if (resp.templateOptions.subCategory == 6) {
+                  var colors = ['#FFEB3B', '#8BC34A', '#03A9F4'],
+                      pieData = [];
+
+                  for (var i = 0; i < 3; i++) {
+                    pieData.push({
+                      data: resp.pieChart.dataValues[i], 
+                      color: colors[i], 
+                      label: resp.pieChart.dataLabels[i]
+                    })
+                  }
+
+                  if($(`.pie-chart-${$scope.to.tab}-${$scope.to.ordering}`)[0]){
+                    $.plot(`.pie-chart-${$scope.to.tab}-${$scope.to.ordering}`, pieData, {
+                      series: {
+                        pie: {
+                          show: true,
+                          stroke: { 
+                            width: 2,
+                          },
+                        },
+                      },
+                      legend: {
+                        container: '.flc-pie',
+                        backgroundOpacity: 0.5,
+                        noColumns: 0,
+                        backgroundColor: "white",
+                        lineWidth: 0
+                      },
+                      grid: {
+                        hoverable: true,
+                        clickable: true
+                      },
+                      tooltip: true,
+                      tooltipOpts: {
+                        content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                        shifts: {
+                          x: 20,
+                          y: 0
+                        },
+                        defaultTheme: false,
+                        cssClass: 'flot-tooltip'
+                      }
+
+                    });
+                  }
                 }
               });
             } 
