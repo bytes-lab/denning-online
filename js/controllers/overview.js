@@ -25,6 +25,7 @@ denningOnline
             for (ij in vm.tabs[ii].sections[jj].widgets) {
               vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan = vm.getClass[vm.tabs[ii].sections[jj].widgets[ij].templateOptions.colSpan];
               vm.tabs[ii].sections[jj].widgets[ij].templateOptions.updateOverview = vm.saveOverview;
+              vm.tabs[ii].sections[jj].widgets[ij].templateOptions.tab = ii;
             }
           }
         }
@@ -53,8 +54,46 @@ denningOnline
             name: data[ii].type,
             templateUrl: `widget_t${data[ii].templateOptions.subCategory}.html`,
             controller: function ($scope, overviewService) {
-              overviewService.getWidget($scope.to.api).then(function (data) {
-                $scope.data = data;
+              overviewService.getWidget($scope.to.api).then(function (resp) {
+                $scope.data = resp;
+
+                if (resp.templateOptions.subCategory == 5) {
+                  var d3 = [];
+                  
+                  for (var i = 0; i < 12; i += 1) {
+                    d3.push([resp.lineChart.dataLabels[i], parseInt(resp.lineChart.dataValues[i])]);
+                  }
+
+                  var options = {
+                    grid: {
+                      borderWidth: {
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        bottom: 1
+                      },
+                      borderColor: "#ccc",
+                      labelMargin:10,
+                      hoverable: true,
+                      clickable: true,
+                      mouseActiveRadius:6,
+                    },
+                    xaxis: {
+                      mode: "categories",
+                      tickLength: 0
+                    },
+                    yaxis: {
+                      tickLength: 0
+                    }
+                  };
+
+                  /* Regular Line Chart */
+                  if ($(`.line-chart-${$scope.to.tab}-${$scope.to.ordering}`)[0]) {
+                    $.plot($(`.line-chart-${$scope.to.tab}-${$scope.to.ordering}`), [
+                      {data: d3, lines: { show: true }, label: resp.lineChart.yAxisTitle, color: '#00bcd4' }
+                    ], options);
+                  }
+                }
               });
             } 
           });

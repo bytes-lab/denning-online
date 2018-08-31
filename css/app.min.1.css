@@ -12024,9 +12024,9 @@ a.lv-footer:hover {
  */
 
 #recent-items-chart {
-  width: calc(100% + 19px);
+  width: calc(100% - 20px);
   height: 150px;
-  margin: -20px -10px 0;
+  margin: -15px 10px 17px 10px;
   bottom: -10px;
 }
 
