@@ -51,16 +51,12 @@ denningOnline
             daerah: self.entity.strDaerah,
             negeri: self.entity.strNegeri 
           };          
-        } else {
-          self.strMukim_ = null;
         }
 
         if (self.entity.strApprovingAuthority) {
           self.strApprovingAuthority_ = {
             description: self.entity.strApprovingAuthority
           }          
-        } else {
-          self.strApprovingAuthority_ = null;
         }
       });
     } else {

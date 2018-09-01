@@ -23,16 +23,6 @@ denningOnline
   .run(function(formlyConfig, contactService, propertyService, legalFirmService, 
                 presetbillService, spaChecklistService, bankBranchService) 
   {
-    function camelize(string) {
-      string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
-        return chr ? chr.toUpperCase() : '';
-      });
-      // Ensure 1st char is always lowercase
-      return string.replace(/^([A-Z])/, function(match, chr) {
-        return chr ? chr.toLowerCase() : '';
-      });
-    }    
-    
     function getContacts(page, pagesize, keyword) {
       return contactService.getCustomerList(page, pagesize, keyword).then(function (resp) {
         return resp.data;

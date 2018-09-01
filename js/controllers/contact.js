@@ -91,8 +91,8 @@ denningOnline
         self.entity.strRegOff = self.entity.strAddressLine1 + 
                                 self.entity.strAddressLine2 + 
                                 self.entity.strAddressLine3 +
-                                self.entity.strPostCode + ' ' +
-                                self.entity.strCity + ', ' +
+                                self.entity.strPostCode.trim() + ' ' +
+                                self.entity.strCity.trim() + ', ' +
                                 self.entity.strState;
       }
     }
@@ -238,29 +238,35 @@ denningOnline
           self.strTitle_ = { 
             description: self.entity.strTitle 
           };          
-        } else {
-          self.strTitle_ = null;
         }
 
-        self.strPlaceofWork_ = { 
-          city: self.entity.strPlaceofWork
-        };
+        if (self.entity.strPlaceofWork) {
+          self.strPlaceofWork_ = { 
+            city: self.entity.strPlaceofWork
+          };          
+        }
 
-        self.strPlaceBirth_ = { 
-          city: self.entity.strPlaceBirth
-        };
+        if (self.entity.strPlaceBirth) {
+          self.strPlaceBirth_ = { 
+            city: self.entity.strPlaceBirth
+          };          
+        }
 
-        self.clsIrdBranch_ = { 
-          code: self.entity.clsIrdBranch.code, 
-          description: self.entity.clsIrdBranch.strName 
-        };
+        if (self.entity.clsIrdBranch.code) {
+          self.clsIrdBranch_ = { 
+            code: self.entity.clsIrdBranch.code, 
+            description: self.entity.clsIrdBranch.strName 
+          };          
+        }
 
-        self.strPostCode_ = {
-          postcode: self.entity.strPostCode,
-          city: self.entity.strCity,
-          state: self.entity.strState,
-          country: self.entity.strCountry
-        };
+        if (self.entity.strPostCode) {
+          self.strPostCode_ = {
+            postcode: self.entity.strPostCode,
+            city: self.entity.strCity,
+            state: self.entity.strState,
+            country: self.entity.strCountry
+          };          
+        }
       });
     } else {
       self.entity = {
