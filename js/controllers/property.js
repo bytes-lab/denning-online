@@ -45,14 +45,22 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
 
         // wrapper attrs for auto complete
-        self.strMukim_ = { 
-          mukim: self.entity.strMukim,
-          daerah: self.entity.strDaerah,
-          negeri: self.entity.strNegeri 
-        };
+        if (self.entity.strMukim) {
+          self.strMukim_ = { 
+            mukim: self.entity.strMukim,
+            daerah: self.entity.strDaerah,
+            negeri: self.entity.strNegeri 
+          };          
+        } else {
+          self.strMukim_ = null;
+        }
 
-        self.strApprovingAuthority_ = {
-          description: self.entity.strApprovingAuthority
+        if (self.entity.strApprovingAuthority) {
+          self.strApprovingAuthority_ = {
+            description: self.entity.strApprovingAuthority
+          }          
+        } else {
+          self.strApprovingAuthority_ = null;
         }
       });
     } else {
