@@ -490,7 +490,7 @@ denningOnline
           vm.model.tmp = editControl;
           vm.model.tmp.oldMatterCode = item.clsMatterCode;          
           vm.title = `Matter : ${vm.model.strFileNo1} ( ${vm.model.clsPrimaryClient.strName} )`;
-        } else {
+        } else {  // is it possible?
           vm.idxTab = 0;
           vm.model = { 
             tmp: editControl
@@ -504,6 +504,7 @@ denningOnline
       vm.model = { 
         tmp: editControl
       };
+      vm.title = 'New Matter';
 
       buildTabs(vm.model.clsMatterCode);
     }
