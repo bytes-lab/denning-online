@@ -649,16 +649,43 @@ denningOnline
         },        
         url: '/edit/:id',
         controller: 'propertyEditCtrl as vm',
-        templateUrl: 'views/property-edit.html'
+        templateUrl: 'views/property-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('properties.new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },        
         url: '/new',
         controller: 'propertyEditCtrl as vm',
-        templateUrl: 'views/property-edit.html'
+        templateUrl: 'views/property-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
       .state ('properties.matters', {
         data: {

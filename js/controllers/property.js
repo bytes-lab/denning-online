@@ -22,23 +22,25 @@ denningOnline
   })
 
   .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, 
-                                           $state, Auth, $uibModal, contactService, 
-                                           refactorService, uibDateParser, mukimService) 
+                                           $state, Auth, $uibModal, contactService, refactorService,
+                                           uibDateParser, mukimService, $uibModalInstance, 
+                                           entityCode, isDialog, isNew) 
   {
     var self = this;
-    self.isDialog = false;
-    self.viewMode = false;  // for edit / create
     self.userInfo = Auth.getUserInfo();
-    self.can_edit = $state.$current.data.can_edit;
-    self.create_new = $state.$current.data.can_edit;
+    
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog? entityCode: $stateParams.id;
 
     self.refList = ['MukimType', 'LotType', 'TitleType', 'ParcelType', 'LandUse', 
                     'RestrictionAgainst', 'TenureType', 'AreaType'];
     self.types = {};
     self.true = true;
 
-    if($stateParams.id) {
-      propertyService.getItem($stateParams.id).then(function (item) {
+    if(self.entityCode) {
+      propertyService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
 
@@ -119,7 +121,7 @@ denningOnline
     };
     
     self.copy = function () {
-      self.create_new = true;
+      self.isNew = true;
       self.can_edit = true;
       self.entity_ = null;
 
@@ -133,17 +135,25 @@ denningOnline
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       propertyService.save(entity).then(function (property) {
-        if (self.entity_) {
-          $state.reload();
+        if (self.isDialog) {
+          $uibModalInstance.close(property);
         } else {
-          $state.go('properties.edit', { 'id': property.code });
+          if (self.entity_) {
+            $state.reload();
+          } else {
+            $state.go('properties.edit', { 'id': property.code });
+          }
+          growlService.growl('Saved successfully!', 'success');
         }
-        growlService.growl('Saved successfully!', 'success');
       });
     }
 
     self.cancel = function () {
-      $state.go('properties.list');
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('properties.list');
+      }
     }
     
     angular.forEach(self.refList, function (value, key) {
@@ -195,47 +205,5 @@ denningOnline
           }
         }
       });
-    };
-  })
-
-  .controller('propertyCreateModalCtrl', function ($uibModalInstance, property, viewMode, 
-                                                   propertyService, Auth) 
-  {
-    var self = this;
-    self.isDialog = true;
-    self.viewMode = viewMode;
-    self.userInfo = Auth.getUserInfo();
-    self.create_new = !viewMode;
-    self.can_edit = !viewMode;
-    self.refList = ['MukimType', 'LotType', 'TitleType', 'ParcelType', 'LandUse', 
-                    'RestrictionAgainst', 'TenureType', 'AreaType'];
-    self.types = {};
-
-    if (viewMode) {
-      propertyService.getItem(property.code).then(function(item){
-        self.entity = item;
-      });
-    } else {
-      self.entity = {
-        strMukimType: 'Mukim'
-      };
-    }
-
-    angular.forEach(self.refList, function (value, key) {
-      propertyService.getTypeList(value).then(function (data) {
-        self.types[value] = data;
-      });
-    });
-
-    self.save = function () {
-      propertyService.save(self.entity).then(function(property) {
-        $uibModalInstance.close(property);
-      })
-      .catch(function(err){
-      });
-    };
-
-    self.cancel = function () {
-      $uibModalInstance.close();
     };
   })

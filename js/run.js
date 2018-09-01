@@ -299,14 +299,17 @@ denningOnline
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'views/property-edit.html',
-            controller: 'propertyCreateModalCtrl',
+            controller: 'propertyEditCtrl',
             controllerAs: 'vm',
             size: 'lg',
             backdrop: 'static',
             keyboard: true,
             resolve: {
-              viewMode: viewMode,
-              property: property
+              isNew: !viewMode,
+              entityCode: function () {
+                return property.code;
+              },
+              isDialog: true
             }      
           });
 
