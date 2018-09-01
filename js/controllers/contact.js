@@ -54,6 +54,10 @@ denningOnline
       'University'
     ];
 
+    self.citizenships = ['Malaysia', 'India', 'New Zealand', 'Australia', 'Korea', 'Vietnam',
+      'Singapore', 'United Kingdom', 'United States of America', 'France', 'Germany', 'PR China',
+      'Thailand', 'Japan', 'Indonesia', 'Bangladesh'];
+
     self.queryList = function (labels, q) {
       return labels.filter(function(item) {
         return item.search(new RegExp(q, "i")) > -1;
@@ -270,7 +274,7 @@ denningOnline
       });
     } else {
       self.entity = {
-        strCitizenship: 'Malaysia Citizen'
+        strCitizenship: 'Malaysia'
       };
     }
 

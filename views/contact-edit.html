@@ -106,9 +106,19 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Citizenship</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCitizenship">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.strCitizenship"
+                md-search-text="qlcz"
+                md-items="item in vm.queryList(vm.citizenships, qlcz)"
+                md-item-text="item"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qlcz" class="col-1" md-highlight-flags="i">{{ item }}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">

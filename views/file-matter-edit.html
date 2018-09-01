@@ -300,7 +300,13 @@
 
 <!-- PROPERTY GROUP -->
 <script type="text/ng-template" id="property.html">
-  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="m-b-15 group-label group-label-wrapper">
+    <span class="">{{ to.label }}</span>
+    <button ng-disabled="!model.tmp.can_edit" class="btn btn-default btn-em-add" ng-click="addProperty(1, 5)" title="Add a new property to group">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+  </div>
+
   <div class="form-group col-md-12" ng-repeat="n in range(1, 5)" ng-if="to.property && (model['clsP'+n].code || model.tmp['clsP'+n])">
     <div style="display: flex;">
       <label class="form-control attr-label short-label">{{ n }}</label>
@@ -333,11 +339,6 @@
         <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this property from group"></span>
       </a>
     </div>
-  </div>
-  <div style="margin-bottom: 30px;" ng-if="to.property">
-    <button class="btn btn-primary short-btn" ng-disabled="!model.tmp.can_edit" style="margin-left: 50px;" ng-click="addProperty(1, 5)" title="Add a new property to group">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;Add a new property
-    </button>
   </div>
   <div class="form-group">
   <div class="clearfix"></div>

@@ -107,7 +107,7 @@ denningOnline
 
         if ($scope.to.party) {
           for (var i = $scope.to.c_start; i <= $scope.to.c_end; i++) {
-            if ($scope.model['clsC'+i].code) {
+            if ($scope.model['clsC'+i] && $scope.model['clsC'+i].code) {
               $scope.model.tmp['clsC'+i] = true;
             }
           }
@@ -116,7 +116,7 @@ denningOnline
         $scope.addParty = function(start, end) {
           var flag = false;
           for(var i = start; i <= end; i++) {
-            if (!$scope.model.tmp['clsC'+i] && !$scope.model['clsC'+i].code) {
+            if (!$scope.model.tmp['clsC'+i] && (!$scope.model['clsC'+i] || !$scope.model['clsC'+i].code)) {
               $scope.model.tmp['clsC'+i] = true;
               flag = true;
               break;
@@ -247,7 +247,7 @@ denningOnline
         $scope.addProperty = function(start, end) {
           var flag = false;
           for(var i = start; i <= end; i++) {
-            if (!$scope.model.tmp['clsP'+i] && !$scope.model['clsP'+i].code) {
+            if (!$scope.model.tmp['clsP'+i] && (!$scope.model['clsP'+i] || !$scope.model['clsP'+i].code)) {
               $scope.model.tmp['clsP'+i] = true;
               flag = true;
               break;
@@ -361,7 +361,7 @@ denningOnline
 
         $scope.matterCodeChange = function (item) {
           if (item && $scope.model.clsMatterCode != $scope.model.tmp.oldMatterCode) {
-            if (confirm('Are you sure to change the matter code? \nChanging matter ' + 
+            if (!$scope.model.strFileNo1 || confirm('Are you sure to change the matter code? \nChanging matter ' + 
                         'code could lead to change of tabs.')) {
               $scope.model.tmp.matterCodeChange(item);
               $scope.model.tmp.oldMatterCode = item;
@@ -565,7 +565,7 @@ denningOnline
         }
 
         // property detail
-        if ($scope.model.clsP1.code) {
+        if ($scope.model.clsP1 && $scope.model.clsP1.code) {
           propertyService.getItem($scope.model.clsP1.code).then(function (item) {
             $scope.property = item;
           });
