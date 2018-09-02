@@ -281,15 +281,17 @@ denningOnline
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       contactService.save(entity).then(function (contact) {
-        if (self.isDialog) {
-          $uibModalInstance.close(contact);
-        } else {
-          if (self.entity_) {
-            $state.reload();
+        if (contact) {  // ignore when errors
+          if (self.isDialog) {
+            $uibModalInstance.close(contact);
           } else {
-            $state.go('contacts.edit', { 'id': contact.code });
-          }
-          growlService.growl('Saved successfully!', 'success');          
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('contacts.edit', { 'id': contact.code });
+            }
+            growlService.growl('Saved successfully!', 'success');          
+          }          
         }
       });
     }

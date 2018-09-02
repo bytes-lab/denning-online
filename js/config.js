@@ -18,6 +18,9 @@ denningOnline
           dialogTitle: function () {
             return false;
           },
+          method: function () {
+            return null;
+          },
           "$uibModalInstance": function () {
             return null;
           }

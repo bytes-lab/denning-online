@@ -223,7 +223,7 @@ denningOnline
   })
 
   .controller('loginCtrl', function ($rootScope, $scope, $uibModalInstance, Auth, $window, 
-                                     $state, dialogTitle) 
+                                     $state, http, dialogTitle, method) 
   {
     var self = this;
     self.login = 1;
@@ -255,6 +255,11 @@ denningOnline
             Auth.staffLogin(userData.password).then(function (res) {
               if (self.dialogTitle) {
                 $uibModalInstance.close();
+                http.openSessionDialog = false;
+                
+                if (method == 'GET') {
+                  $state.reload();
+                }
               } else {
                 $state.go('home');
               }
