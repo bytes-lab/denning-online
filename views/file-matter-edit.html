@@ -328,10 +328,10 @@
       </md-item-template>
       </md-autocomplete>
 
-      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="propertyDialog({}, false)">
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="propertyDialog('clsP'+n, false)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new property and choose it"></span>
       </a>
-      <a class="btn btn-primary short-btn" ng-click="viewProperty(model['clsP'+n])">
+      <a class="btn btn-primary short-btn" ng-click="propertyDialog('clsP'+n, true)">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of property"></span>
       </a>
       <input class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model['strShare'+n]" ng-if="to.share" style="width: 15%;" placeholder="Share" />

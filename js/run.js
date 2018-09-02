@@ -103,7 +103,7 @@ denningOnline
       });
 
       modalInstance.result.then(function (contact) {
-        if (!viewMode && contact) {  // should be integrated with service
+        if (!viewMode && contact) {
           model[key] = {
             code: contact.code,
             strCitizenship: contact.strCitizenship,
@@ -277,20 +277,17 @@ denningOnline
           $scope.model['clsP'+last] = {};
         }
 
-        $scope.viewProperty = function(property) {
-          if (property && property.code) {
-            $scope.propertyDialog(property, true);
-          } else {
-            alert('Please select a property.')
-          }
-        }
-
         $scope.queryProperties = function(searchText) {
           return getProperties(1, 10, searchText);
         }
 
         //Create Property Modal
-        $scope.propertyDialog = function(property, viewMode) {
+        $scope.propertyDialog = function(key, viewMode) {
+          if (viewMode && !$scope.model[key].code) {
+            alert('Please select a property.');
+            return false;
+          }
+
           var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'views/property-edit.html',
@@ -302,16 +299,23 @@ denningOnline
             resolve: {
               isNew: !viewMode,
               entityCode: function () {
-                return property.code;
+                return viewMode ? $scope.model[key].code : null;
               },
               isDialog: true
             }      
           });
 
-          modalInstance.result.then(function(property){
-            if (property) {  // should be integrated with service
-              property.property = property;
-              $scope.properties.push(property);
+          modalInstance.result.then(function (property) {
+            if (!viewMode && property) {
+              $scope.model[key] = {
+                code: property.code,
+                strAddress: property.strAddress,
+                strLotPTNo: property.strLotPTNo,
+                strLotType: property.strLotType,
+                strPropertyAdr: property.strPropertyAdr,
+                strTitleNo: property.strTitleNo,
+                strTitleType: property.strTitleType
+              };
             }
           })
         }
