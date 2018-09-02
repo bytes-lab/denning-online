@@ -218,12 +218,14 @@ denningOnline
 
       entity = refactorService.getDiff(self.entity_, self.entity);
       matterCodeService.save(entity).then(function (entity) {
-        if (self.entity_) {
-          $state.reload();
-        } else {
-          $state.go('matter-codes.edit', { 'id': entity.code });
+        if (entity) {
+          if (self.entity_) {
+            $state.reload();
+          } else {
+            $state.go('matter-codes.edit', { 'id': entity.code });
+          }
+          growlService.growl('Saved successfully!', 'success');          
         }
-        growlService.growl('Saved successfully!', 'success');
       });
     }
 

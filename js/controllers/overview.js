@@ -266,8 +266,10 @@ denningOnline
       }
 
       vm.overview.tabs = tabs;
-      overviewService.save(vm.overview).then(function () {
-        growlService.growl('Saved successfully!', 'success');
+      overviewService.save(vm.overview).then(function (data) {
+        if (data) {
+          growlService.growl('Saved successfully!', 'success');
+        }
       })
     }
   })

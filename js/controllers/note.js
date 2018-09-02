@@ -63,12 +63,14 @@ denningOnline
 
     self.save = function () {
       noteService.save(self.note).then(function(note) {
-        if (self.note.code) {
-          $state.reload();
-        } else {
-          $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': note.code, 'fileName': $stateParams.fileName});
+        if (note) {
+          if (self.note.code) {
+            $state.reload();
+          } else {
+            $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': note.code, 'fileName': $stateParams.fileName});
+          }
+          growlService.growl('Saved successfully!', 'success');          
         }
-        growlService.growl('Saved successfully!', 'success');
       });
     }
 

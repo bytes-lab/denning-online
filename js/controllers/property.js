@@ -139,15 +139,17 @@ denningOnline
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       propertyService.save(entity).then(function (property) {
-        if (self.isDialog) {
-          $uibModalInstance.close(property);
-        } else {
-          if (self.entity_) {
-            $state.reload();
+        if (property) {
+          if (self.isDialog) {
+            $uibModalInstance.close(property);
           } else {
-            $state.go('properties.edit', { 'id': property.code });
-          }
-          growlService.growl('Saved successfully!', 'success');
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('properties.edit', { 'id': property.code });
+            }
+            growlService.growl('Saved successfully!', 'success');
+          }          
         }
       });
     }

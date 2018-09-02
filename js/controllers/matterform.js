@@ -670,8 +670,10 @@ denningOnline
       entity = refactorService.getDiff(self.matterForm_, self.matterForm);
 
       matterFormService.save(entity).then(function (matterform) {
-        $state.go('matter-forms.edit', {'code': matterform.code});
-        growlService.growl('Saved successfully!', 'success');
+        if (matterform) {
+          $state.go('matter-forms.edit', {'code': matterform.code});
+          growlService.growl('Saved successfully!', 'success');          
+        }
       });
     }
 
