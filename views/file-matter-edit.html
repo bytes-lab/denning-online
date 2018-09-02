@@ -224,10 +224,10 @@
       </md-item-template>
       </md-autocomplete>
 
-      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog({}, false)">
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog('clsC'+n, false)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
       </a>
-      <a class="btn btn-primary short-btn" ng-click="viewContact(model['clsC'+n])">
+      <a class="btn btn-primary short-btn" ng-click="contactDialog('clsC'+n, true)">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
       </a>
       <input class="form-control" ng-model="model['strShareC'+n]" ng-if="to.share" style="width: 15%;" placeholder="Share" />
@@ -563,10 +563,10 @@
       </md-item-template>
       </md-autocomplete>
 
-      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog({}, false)">
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog('clsPrimaryClient', false)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
       </a>
-      <a class="btn btn-primary short-btn" target="_new" ng-click="viewContact(model.clsPrimaryClient)">
+      <a class="btn btn-primary short-btn" target="_new" ng-click="contactDialog('clsPrimaryClient', true)">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
       </a>
       <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="model.clsPrimaryClient.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />

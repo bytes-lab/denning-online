@@ -20,7 +20,7 @@ denningOnline
     });
   })
 
-  .run(function(formlyConfig, contactService, propertyService, legalFirmService, 
+  .run(function($uibModal, formlyConfig, contactService, propertyService, legalFirmService, 
                 presetbillService, spaChecklistService, bankBranchService) 
   {
     function getContacts(page, pagesize, keyword) {
@@ -78,6 +78,41 @@ denningOnline
       name: 'offer',
       templateUrl: 'offer.html'
     });
+
+    function contactDialog (model, key, viewMode) {
+      if (viewMode && !model[key].code) {
+        alert('Please select a party.');
+        return false;
+      }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'views/contact-edit.html',
+        controller: 'contactEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: !viewMode,
+          entityCode: function () {
+            return viewMode ? model[key].code : null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (contact) {
+        if (!viewMode && contact) {  // should be integrated with service
+          model[key] = {
+            code: contact.code,
+            strCitizenship: contact.strCitizenship,
+            strIDNo: contact.strIDNo,
+            strName: contact.strName
+          };
+        }
+      })
+    }
 
     // contact attribute
     formlyConfig.setType({
@@ -141,14 +176,6 @@ denningOnline
           $scope.model['clsC'+last] = {};
         }
 
-        $scope.viewContact = function(party) {
-          if (party) {
-            $scope.contactDialog(party, true);
-          } else {
-            alert('Please select a party.')
-          }
-        }
-
         $scope.viewLegalFirm = function(party) {
           if (party && party.code) {
             $scope.legalfirmDialog(party, true);
@@ -165,30 +192,8 @@ denningOnline
           return getSolicitors(1, 10, searchText);
         }
 
-        $scope.contactDialog = function(party, viewMode) {
-          var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'views/contact-edit.html',
-            controller: 'contactEditCtrl',
-            controllerAs: 'vm',
-            size: 'lg',
-            backdrop: 'static',
-            keyboard: true,
-            resolve: {
-              isNew: !viewMode,
-              entityCode: function () {
-                return party.code;
-              },
-              isDialog: true
-            }
-          });
-
-          modalInstance.result.then(function(contact){
-            if (contact) {  // should be integrated with service
-              party.party = contact;
-              $scope.contacts.push(contact);
-            }
-          })
+        $scope.contactDialog = function(key, viewMode) {
+          contactDialog($scope.model, key, viewMode);
         }
 
         //Create legal firm Modal
@@ -337,14 +342,6 @@ denningOnline
           }
         }
 
-        $scope.viewContact = function(party) {
-          if (party) {
-            $scope.contactDialog(party, true);
-          } else {
-            alert('Please select a party.')
-          }
-        }
-
         $scope.queryContacts = function(searchText) {
           return getContacts(1, 10, searchText);
         }
@@ -383,23 +380,8 @@ denningOnline
           $scope.legalFirms = resp.data;
         });
 
-        $scope.contactDialog = function(party, viewMode) {
-          var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'views/contact-edit.html',
-            controller: 'contactEditCtrl',
-            controllerAs: 'vm',
-            size: 'lg',
-            backdrop: 'static',
-            keyboard: true,
-            resolve: {
-              isNew: !viewMode,
-              entityCode: function () {
-                return party.code;
-              },
-              isDialog: true
-            }
-          });
+        $scope.contactDialog = function(key, viewMode) {
+          contactDialog($scope.model, key, viewMode);
         }
       }
     });

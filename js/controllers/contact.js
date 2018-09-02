@@ -273,9 +273,16 @@ denningOnline
         }
       });
     } else {
+      // default values
       self.entity = {
-        strCitizenship: 'Malaysia'
+        strCitizenship: 'Malaysia',
+        clsIDType: {
+          code: 2,
+          strDescription: 'New IC'
+        }
       };
+
+      self.IDTypeChange(self.entity.clsIDType);
     }
 
     self.save = function () {
