@@ -13,7 +13,15 @@ denningOnline
         },
         url: '/login',
         controller: 'loginCtrl as lctrl',
-        templateUrl: 'views/login.html'        
+        templateUrl: 'views/login.html',
+        resolve: {
+          dialogTitle: function () {
+            return false;
+          },
+          "$uibModalInstance": function () {
+            return null;
+          }
+        }
       })    
 
       //------------------------------

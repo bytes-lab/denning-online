@@ -1,7 +1,4 @@
 denningOnline
-  // =========================================================================
-  // Base controller for common functions
-  // =========================================================================
 
   .controller('denningOnlineCtrl', function($state, $scope, growlService, Auth, 
                                             searchService, $rootScope, contactService)
@@ -55,6 +52,7 @@ denningOnline
     $rootScope.isAuthenticated = function () {
       return Auth.isAuthenticated();
     };
+
     $rootScope.logout = function () {
       Auth.logout();
       self.sidebarToggle.right = false;
@@ -78,16 +76,6 @@ denningOnline
     this.lvSearch = function() {
       this.listviewSearchStat = true; 
     }
-    
-    //Listview menu toggle in small screens
-    this.lvMenuStat = false;
-    
-    //Blog
-    this.wallCommenting = [];
-    
-    this.wallImage = false;
-    this.wallVideo = false;
-    this.wallLink = false;
 
     //Skin Switch
     this.currentSkin = 'blue';
@@ -234,7 +222,9 @@ denningOnline
     }
   })
 
-  .controller('loginCtrl', function ($rootScope, $scope, Auth, $window, $state) {
+  .controller('loginCtrl', function ($rootScope, $scope, $uibModalInstance, Auth, $window, 
+                                     $state, dialogTitle) 
+  {
     var self = this;
     self.login = 1;
     self.register = 0;
@@ -243,6 +233,13 @@ denningOnline
     self.resetPassword_ = 0;
     self.errorMessage = '';
     self.passwords = {};
+    self.dialogTitle = dialogTitle;
+
+    if (dialogTitle) {
+      self.user = {
+        email: Auth.getUserInfo().email
+      };
+    }
 
     self.doLogin = function (userData) {
       return Auth.login(userData.email, userData.password)
@@ -256,7 +253,11 @@ denningOnline
             self.login = 0;
           } else {
             Auth.staffLogin(userData.password).then(function (res) {
-              $state.go('home');
+              if (self.dialogTitle) {
+                $uibModalInstance.close();
+              } else {
+                $state.go('home');
+              }
             })
             .catch(function (err) {
               self.errorMessage = err.statusText;

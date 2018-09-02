@@ -3,8 +3,10 @@ denningOnline
   // $http wrapper with refactoring model
   // =========================================================================
   
-  .service('http', function($http, Auth, refactorService) {
-    var service = {};
+  .service('http', function($http, $uibModal, Auth, refactorService) {
+    var service = {
+      openSessionDialog: false
+    };
 
     service.GET = function (url, params, responseType) {
       return $http({
@@ -16,7 +18,29 @@ denningOnline
       }).then(function (response) {
         return response;
       }).catch(function (err) {
-        alert('Error: '+err.statusText);
+        if (err.status == 408) {
+          // ensure open only once
+          if (!service.openSessionDialog) {
+            service.openSessionDialog = true;
+
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'loginModal.html',
+              controller: 'loginCtrl as lctrl',
+              size: '',
+              backdrop: 'static',
+              keyboard: true,
+              windowClass: 'login-modal',
+              resolve: {
+                dialogTitle: function () {
+                  return err.statusText;
+                }
+              }
+            });
+          }
+        } else {
+          alert('Error: '+err.statusText);
+        }
       })
     };
 
