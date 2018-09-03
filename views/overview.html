@@ -113,12 +113,18 @@
                 Added {{ item.updatedDate }}
               </div>
             </li>
-            <li ng-repeat="item in data.table.rows" ng-if="to.ordering == 2">
-              <div class="c-cyan f-12 m-r-10" style="display: inline;">
+            <li ng-repeat="item in data.table.rows" ng-if="to.ordering == 2 || to.ordering == 20">
+              <div class="c-cyan f-14 m-r-10" style="display: inline; opacity: 0.85;">
                 {{ item.values[0] }}
               </div>
               {{ item.values[1] }}
-            </li>            
+            </li>
+            <li ng-repeat="item in data.table.rows" ng-if="[3, 4, 18, 19].indexOf(to.ordering) > -1">
+              <div class="c-cyan f-15 m-r-10" style="opacity: 0.8;">
+                <i class="zmdi zmdi-caret-right"></i>&nbsp;
+                {{ item.values[0] }}
+              </div>
+            </li>
           </ul>
         </div>
       </div>
