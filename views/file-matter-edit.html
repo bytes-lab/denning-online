@@ -3,17 +3,38 @@
   <div class="card-body card-padding">
     <h2 class="c-purple p-b-15 title">{{ vm.title }}</h2>
     <div class="preview">
-    <section layout="row" layout-sm="column" layout-align="start center" layout-wrap style="margin-left: -8px;">
-      <div class="col-sm-12 col-md-10 m-b-25">
+    <section>
+      <div class="pull-left">
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="folders.list({id: vm.model.strFileNo1, type: 'matter'})">Folder</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="accounts.list({fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName})">Accounts</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="notes.list({fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName})">Notes</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="payment-records.list({fileNo: vm.model.strFileNo1})">Payments</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ng-click="vm.upload()">Upload</md-button>
-        <input type="file" class="hidden" ng-class="'matter-upload'" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" data-ui-sref="courtdiary({ keyword: vm.model.strFileNo1 })">Calendar</md-button>
-        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;">Checklist</md-button>
-        <!-- <md-button class="btn-sm md-raised md-warn" style="min-height: 0;">Tasks</md-button> -->
+          <ul class="actions matter-action m-l-5 m-r-15">
+            <li class="dropdown" uib-dropdown>
+              <a href="" uib-dropdown-toggle>
+                <i class="zmdi zmdi-more"></i>
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a ui-sref="accounts.list({fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName})">ACCOUNTS</a>
+                </li>
+                <li>
+                  <a ui-sref="notes.list({fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName})">NOTES</a>
+                </li>
+                <li>
+                  <a ui-sref="payment-records.list({fileNo: vm.model.strFileNo1})">PAYMENTS</a>
+                </li>
+                <li>
+                  <a ng-click="vm.upload()" style="cursor: pointer;">UPLOAD</a>
+                </li>
+                <li>
+                  <a ui-sref="courtdiary({ keyword: vm.model.strFileNo1 })">CALENDAR</a>
+                </li>
+                <li>
+                  <a href="">CHECKLIST</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <input type="file" class="hidden" ng-class="'matter-upload'" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
       </div>
     </section>
 

@@ -544,7 +544,7 @@ denningOnline
       contactService.upload(info, vm.uploadType).then(function(res) {
         vm.uploaded = vm.uploaded + 1;
         if (fileList.length == vm.uploaded) {
-          alert('The file(s) uploaded successfully.');
+          growlService.growl('The file(s) uploaded successfully.', 'success');
         }
       })
       .catch(function(err) {
