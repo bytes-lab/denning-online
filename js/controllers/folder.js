@@ -339,8 +339,7 @@ denningOnline
       });
     }
 
-    self.deleteFile = function() {
-      var files = getSelectedFiles();
+    self.deleteFile_ = function (files) {
       if (files.length == 0) {
         alert('Please select files to delete.');
         return false;
@@ -355,6 +354,17 @@ denningOnline
         growlService.growl('Files deleted successfully!', 'success');
         $state.reload();
       })
+    }
+
+    self.deleteFiles = function () {
+      var files = getSelectedFiles();
+      self.deleteFile_(files);
+    }
+
+    self.deleteFile = function (file) {
+      if (confirm("Are you sure to delete this file?")) {
+        self.deleteFile_([file]);
+      }
     }
 
     self.attachFile = function() {

@@ -40,7 +40,7 @@
           <button class="btn btn-default pull-right m-r-5 f-15" title="Attach files for email" ng-click="vm.attachFile()"><i class="zmdi zmdi-attachment-alt"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.moveFile('Copy')"><i class="zmdi zmdi-copy"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Move files" ng-click="vm.moveFile('Move')"><i class="zmdi zmdi-mail-send"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.deleteFile()"><i class="zmdi zmdi-delete"></i></button>
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.deleteFiles()"><i class="zmdi zmdi-delete"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Refresh" ng-click="vm.refresh()"><i class="zmdi zmdi-refresh-alt"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Create a folder" ng-click="vm.createFolder()"><i class="zmdi zmdi-collection-plus"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.upload()"><i class="zmdi zmdi-upload"></i></button>
@@ -95,6 +95,7 @@
                 </button>
                 <button class="btn btn-default btn-sm waves-circle m-l-5" ng-click="vm.copyLink(file)" title="Copy link"><i class="zmdi zmdi-collection-text"></i></button>
                 <button class="btn btn-default btn-sm waves-circle m-l-5" ng-click="vm.shareFile(file)" title="Share"><i class="zmdi zmdi-share"></i></button>
+                <button class="btn btn-default btn-sm waves-circle m-l-5" ng-click="vm.deleteFile(file)" title="Delete"><i class="zmdi zmdi-delete"></i></button>
               </td>
             </tr>
           </table>
