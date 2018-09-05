@@ -93,7 +93,9 @@ denningOnline
     $scope.format = 'dd-MM-yyyy';
   })
 
-  .controller('paymentRecordListCtrl', function($stateParams, NgTableParams, paymentRecordService, $state) {
+  .controller('paymentRecordListCtrl', function($stateParams, NgTableParams, paymentRecordService, 
+                                                $state) 
+  {
     var self = this;
     self.dataReady = false;
     self.fileNo = $stateParams.fileNo;
@@ -136,4 +138,31 @@ denningOnline
         counts: []
       })    
     }  
+  })
+
+  .controller('paymentRecordEditCtrl', function($stateParams, paymentRecordService, Auth,
+                                                $state, growlService) 
+  {
+    var self = this;
+    self.isDialog = false;
+    self.viewMode = false;  // for edit / create
+    self.userInfo = Auth.getUserInfo();
+    self.can_edit = $state.$current.data.can_edit;
+    self.create_new = $state.$current.data.can_edit;
+    self.fileNo = $stateParams.fileNo;
+
+    if ($stateParams.id) {
+    } else {
+      self.entity = {
+
+      }
+    }
+
+    self.save = function () {
+      growlService.growl('Saved successfully!', 'success');
+    }
+
+    self.cancel = function () {
+      $state.go('payment-records.list', { fileNo: self.fileNo });
+    }
   })

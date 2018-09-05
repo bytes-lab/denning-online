@@ -393,6 +393,16 @@ denningOnline
         templateUrl: 'views/payment-record-list.html'
       })
 
+      .state ('payment-records.new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },        
+        url: '/:fileNo/new',
+        controller: 'paymentRecordEditCtrl as vm',
+        templateUrl: 'views/payment-record-edit.html'
+      })  
+
       //------------------------------
       // ACCOUNTS
       //------------------------------
