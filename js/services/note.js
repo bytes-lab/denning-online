@@ -49,7 +49,13 @@ denningOnline
     service.getList = function (fileNo) {
       return http.GET(`v1/app/PaymentRecord/${fileNo}`).then(function(resp) {
         return resp.data;
-      });  
+      });
+    }
+
+    service.getPaymentMethodList = function () {
+      return http.GET('v1/Table/cboPaymentMode').then(function (resp) {
+        return resp.data;
+      });
     }
 
     return service;

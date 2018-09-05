@@ -3,7 +3,7 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md-12">
-          <h2 class="c-purple f-500 f-20">{{ vm.fileNo }} ( {{ vm.fileName }})</h2>
+          <h2 class="c-purple f-500 f-20">New Payment Record ( {{ vm.fileNo }} )</h2>
         </div>
       </div>
     </div>
@@ -11,37 +11,81 @@
       <div class="clearfix"></div>
       <h4 class="m-t-25">{{ vm.title }}</h4>
       <div class="row">
-        <div class="col-md-8 col-lg-7 p-l-25">
+        <div class="col-md-6 col-lg-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Date</dt>
+            <dt class="p-t-10">Date Paid</dt>
             <dd>
               <div class="fg-line">
-                <input type="text" class="form-control" value="{{ vm.note.dtDate | date : 'dd-MM-yyyy' }}" ng-disabled="true" ng-required="true" />
+                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDatePaid" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Note</dt>
+            <dt class="p-t-10">File No.</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.rmatter"
+                md-search-text="qstl"
+                md-items="item in vm.queryMatters(qstl)"
+                md-item-text="item.key"
+                md-min-length="0"
+                md-selected-item-change="vm.matterChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Payment Mode</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strPaymentMethod"
+                md-search-text="qspm"
+                md-items="item in vm.queryPaymentMethodType(qspm)"
+                md-item-text="item.strDescription"
+                md-min-length="0"
+                md-selected-item-change="vm.paymentMethodChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qspm" class="col-1" md-highlight-flags="i">{{ item.strDescription }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Cheque No. / Ref. No.</dt>
             <dd>
               <div class="fg-line">
-                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.note.strNote" placeholder="type here...."></textarea>
+                <input type="text" class="form-control" value="{{ vm.entity.dtDate | date : 'dd-MM-yyyy' }}" ng-readonly="!vm.can_edit" ng-required="true" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Made by</dt>
+            <dt class="p-t-10">Paid To</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.userInfo.name" ng-readonly="true" type="text" class="form-control">
+                <input type="text" class="form-control" value="{{ vm.entity.dtDate | date : 'dd-MM-yyyy' }}" ng-readonly="!vm.can_edit" ng-required="true" />
               </div>
             </dd>
-          </dl>          
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Amount</dt>
+            <dd>
+              <div class="fg-line">
+                <input type="text" class="form-control" value="{{ vm.entity.dtDate | date : 'dd-MM-yyyy' }}" ng-readonly="!vm.can_edit" ng-required="true" />
+              </div>
+            </dd>
+          </dl>
         </div>
       </div>
       <div class="clearfix"></div>
       
       <div class="row">   
-        <div class="col-md-6 no-padding">
+        <div class="col-md-5 no-padding">
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
             <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.note.delete">Delete</a>

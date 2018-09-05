@@ -141,7 +141,8 @@ denningOnline
   })
 
   .controller('paymentRecordEditCtrl', function($stateParams, paymentRecordService, Auth,
-                                                $state, growlService) 
+                                                $state, growlService, fileMatterService, $scope,
+                                                uibDateParser, $filter) 
   {
     var self = this;
     self.isDialog = false;
@@ -154,9 +155,45 @@ denningOnline
     if ($stateParams.id) {
     } else {
       self.entity = {
-
+        dtDatePaid: uibDateParser.parse(new Date())
       }
     }
+
+    paymentRecordService.getPaymentMethodList().then(function (data) {
+      self.paymentMethodList = data;
+    })
+
+    self.queryMatters = function (search) {
+      return fileMatterService.getList(1, 5, search).then(function (resp) {
+        return resp.data
+      })
+    }
+
+    self.queryPaymentMethodType = function (search) {
+      return self.paymentMethodList.filter(function (item) {
+        return item.strDescription.search(new RegExp(search, "i")) > -1;
+      });
+    }
+
+    self.matterChange = function (item) {
+      if (item) {
+        self.entity.strFileNo1 = item.key;
+      }
+    }
+
+    $scope.dateOptions = {
+      formatYear: 'yyyy',
+      startingDay: 1
+    };
+
+    $scope.format = 'dd/MM/yyyy';
+
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
 
     self.save = function () {
       growlService.growl('Saved successfully!', 'success');
