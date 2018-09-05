@@ -1,6 +1,7 @@
 denningOnline
   .controller('courtdiaryListCtrl', function($stateParams, NgTableParams, 
-                                             courtdiaryService, $state, Auth) {
+                                             courtdiaryService, $state, Auth) 
+  {
     var self = this;
 
     self.userInfo = Auth.getUserInfo();
@@ -9,10 +10,6 @@ denningOnline
     self.filter = '0All';
     self.firstDay = moment(new Date()).format('YYYY-MM-DD');
     self.lastDay = moment(new Date()).format('YYYY-MM-DD');
-
-    self.clickHandler = function (item) {
-      $state.go('courtdiaries.edit', {'id': item.code});
-    }
 
     self.tableFilter = new NgTableParams({
       page: 1,
@@ -57,8 +54,10 @@ denningOnline
     }
   })
 
-  .controller('courtdiaryEditCtrl', function($uibModal, $stateParams, refactorService, courtdiaryService, 
-                                             $state, Auth, $scope, growlService) {
+  .controller('courtdiaryEditCtrl', function($state, $uibModal, $stateParams, refactorService, 
+                                             Auth, $scope, growlService, courtdiaryService, 
+                                             fileMatterService) 
+  {
     var self = this;
     self.userInfo = Auth.getUserInfo();
     self.create_new = $state.$current.data.can_edit;
@@ -68,9 +67,45 @@ denningOnline
       courtdiaryService.getItem($stateParams.id).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+
+        if (self.entity.strFileNo1) {
+          self.rmatter = {
+            key: self.entity.strFileNo1
+          }
+        }
+
+        if (self.entity.strHearingType) {
+          self.strHearingType = {
+            description: self.entity.strHearingType
+          }
+        }
       });
     } else {
       self.entity = {};
+    }
+
+    self.queryMatters = function (search) {
+      return fileMatterService.getList(1, 5, search).then(function (resp) {
+        return resp.data
+      })
+    }
+
+    self.matterChange = function (item) {
+      if (item) {
+        self.entity.strFileNo1 = item.key;
+      }
+    }
+
+    self.queryHearingType = function (search) {
+      return courtdiaryService.getHearingTypeList(1, 10, search).then(function (resp) {
+        return resp;
+      })
+    }
+    
+    self.hearingTypeChange = function (item) {
+      if (item) {
+        self.entity.strHearingType = item.description
+      }
     }
 
     self.copy = function () {

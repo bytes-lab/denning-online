@@ -16,6 +16,16 @@ denningOnline
       });
     }
 
+    service.getHearingTypeList = function (page, pagesize, keyword) {
+      return http.GET('v1/courtDiary/hearingType', {
+        page: page,
+        pagesize: pagesize,
+        search:keyword
+      }).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     service.getCalendar = function (start, end, filter, page, pagesize, keyword) {
       return http.GET("v1/DenningCalendar", {
         dateStart: start,
