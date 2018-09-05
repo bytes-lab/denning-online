@@ -22,7 +22,17 @@ denningOnline
         pagesize: pagesize,
         search:keyword
       }).then(function (resp) {
-        return resp.data;
+        return resp;
+      });
+    }
+
+    service.getCoramList = function (page, pagesize, keyword) {
+      return http.GET('v1/courtDiary/coram', {
+        page: page,
+        pagesize: pagesize,
+        search:keyword
+      }).then(function (resp) {
+        return resp;
       });
     }
 

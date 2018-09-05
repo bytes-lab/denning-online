@@ -121,29 +121,29 @@
       <div class="row">
         <div class="col-md-10 m-b-20" style="margin-left: 190px;">
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="Attended" ng-model="vm.clsAttendedStatus.description">
+            <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
             <i class="input-helper"></i>
             Attended 
           </label>
 
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="MOB" ng-model="vm.entity.clsAttendedStatus.description">
+            <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
             <i class="input-helper"></i>
             MOB
           </label>
 
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="Postponed" ng-model="vm.entity.clsAttendedStatus.description">
+            <input type="radio" value="3-Postponed" ng-model="vm.clsAttendedStatus">
             <i class="input-helper"></i>
             Postponed
           </label>
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="Absent" ng-model="vm.entity.clsAttendedStatus.description">
+            <input type="radio" value="4-Absent" ng-model="vm.clsAttendedStatus">
             <i class="input-helper"></i>
             Absent
           </label>
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="None" ng-model="vm.entity.clsAttendedStatus.description">
+            <input type="radio" value="0-None" ng-model="vm.clsAttendedStatus">
             <i class="input-helper"></i>
             None
           </label>
@@ -154,27 +154,56 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Counsel Assigned</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strCounselAssigned" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strCounselAssigned"
+                md-search-text="qsca"
+                md-items="item in vm.queryStaff(qsca)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.caChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strInitials }}</span>
+                </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Counsel Attended</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCounselAttended">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strCounselAttended"
+                md-search-text="qscd"
+                md-items="item in vm.queryStaff(qscd)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.cdChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qscd" class="col-1" md-highlight-flags="i">{{ item.strInitials }}</span>
+                </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
  
           <dl class="dl-horizontal">
             <dt class="p-t-10">Coram</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.intCoram" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
-
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.intCoram"
+                md-search-text="qsic"
+                md-items="item in vm.queryCoram(qsic)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.coramChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qsic" class="col-1" md-highlight-flags="i">{{ item.name }}</span>
+                </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -223,9 +252,8 @@
             <dt class="p-t-10">Next Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.dtNextDate" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-click="open($event, 'openednd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="openednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
-
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -240,7 +268,7 @@
             <dt class="p-t-10">Next Date To Be Given</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.emailAddress">
+                <input ng-click="open($event, 'openeded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtActionEndDate" is-open="openeded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
