@@ -164,7 +164,7 @@ denningOnline
     })
 
     self.queryMatters = function (search) {
-      return fileMatterService.getList(1, 5, search).then(function (resp) {
+      return fileMatterService.getList(1, 10, search).then(function (resp) {
         return resp.data
       })
     }
