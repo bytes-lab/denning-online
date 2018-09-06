@@ -20,7 +20,7 @@
     <div class="pmbb-view" data-ng-if="pctrl.editInfo === 0">
       <dl class="dl-horizontal">
         <dt>Full Name</dt>
-        <dd>{{ pctrl.profile.fullName }}</dd>
+        <dd>{{ pctrl.userInfo.name }}</dd>
       </dl>
       <dl class="dl-horizontal">
         <dt>ID #</dt>
@@ -37,9 +37,8 @@
         <dt class="p-t-10">Full Name</dt>
         <dd>
           <div class="fg-line">
-            <input ng-model="pctrl.profile.fullName" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
+            <input ng-model="pctrl.userInfo.name" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
           </div>
-
         </dd>
       </dl>
       <dl class="dl-horizontal">
@@ -85,12 +84,12 @@
       </li>
     </ul>
   </div>
-  <div class="pmbb-body p-l-30">
+  <div class="pmbb-body p-l-30 p-b-25">
     <div class="pmbb-view" data-ng-if="pctrl.editContact === 0">
       <div class="col-md-6">
         <dl class="dl-horizontal">
           <dt>Name</dt>
-          <dd>{{ pctrl.profile.firmName }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.name }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Initials</dt>
@@ -98,53 +97,53 @@
         </dl>
         <dl class="dl-horizontal">
           <dt>Description</dt>
-          <dd>{{ pctrl.profile.description1 }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.IDNo }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Address1</dt>
-          <dd>{{ pctrl.profile.address1 }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.address.line1 }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Address2</dt>
-          <dd>{{ pctrl.profile.address2 }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.address.line2 }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Address3</dt>
-          <dd>{{ pctrl.profile.address3 }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.address.line3 }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Postcode</dt>
-          <dd>{{ pctrl.profile.postcode }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.address.postcode }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>State</dt>
-          <dd>{{ pctrl.profile.state }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.address.state }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>City</dt>
-          <dd>{{ pctrl.profile.city }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.address.city }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Country</dt>
-          <dd>{{ pctrl.profile.country }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.address.country }}</dd>
         </dl>
       </div>
       <div class="col-md-6">
         <dl class="dl-horizontal">
           <dt>Phone1</dt>
-          <dd>{{ pctrl.profile.phone1 }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.phoneHome }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Phone2</dt>
-          <dd>{{ pctrl.profile.phone2 }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.phoneMobile }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Fax1</dt>
-          <dd>{{ pctrl.profile.fax1 }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.phoneFax }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Fax2</dt>
-          <dd>{{ pctrl.profile.fax2 }}</dd>
+          <dd>{{ pctrl.userInfo.catDenning[0].LawFirm.phoneOffice }}</dd>
         </dl>
         <dl class="dl-horizontal">
           <dt>Website</dt>
@@ -178,7 +177,7 @@
         <dt class="p-t-10">Mobile Phone</dt>
         <dd>
           <div class="fg-line">
-            <input data-ng-model="pctrl.mobileNumber" type="text" class="form-control" placeholder="eg. 00971 12345678 9">
+            <input data-ng-model="pctrl.userInfo.hpNumber" type="text" class="form-control" placeholder="eg. 00971 12345678 9">
           </div>
         </dd>
       </dl>
@@ -186,7 +185,7 @@
         <dt class="p-t-10">Email Address</dt>
         <dd>
           <div class="fg-line">
-            <input data-ng-model="pctrl.emailAddress" type="email" class="form-control" placeholder="eg. malinda.h@gmail.com">
+            <input data-ng-model="pctrl.userInfo.email" type="email" class="form-control" placeholder="eg. malinda.h@gmail.com">
           </div>
         </dd>
       </dl>
