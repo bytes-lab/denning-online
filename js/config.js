@@ -78,7 +78,15 @@ denningOnline
         }
       })
 
-
+      .state ('profile', {
+        url: '/profile',
+        templateUrl: 'views/profile.html'
+      })
+  
+      .state ('profile.about', {
+        url: '/about',
+        templateUrl: 'views/profile-about.html'
+      })
       //------------------------------
       // FILE MATTER
       //------------------------------
