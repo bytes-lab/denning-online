@@ -1,0 +1,83 @@
+<header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+  <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+  <section id="content">
+    <div class="container">
+      <ul class="tab-nav o-visible m-b-5">
+        <li class="btn-wave" data-ui-sref-active="active">
+          <a data-ui-sref="billing.quotations-list">Quotation</a>
+        </li>
+        <li class="btn-wave" data-ui-sref-active="active">
+          <a data-ui-sref="billing.invoices-list">Invoice</a>
+        </li>
+        <li class="btn-wave" data-ui-sref-active="active">
+          <a data-ui-sref="billing.receipts-list">Receipt</a>
+        </li>
+        <li class="btn-wave" data-ui-sref-active="active">
+          <a data-ui-sref="billing.presetbills-list">Payment Requisitions</a>
+        </li>
+        <li class="dropdown" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            <i class="zmdi zmdi-more"></i>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a ui-sref="billing.items-list">Credit Note</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Debit Note</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">General Journal (GJ)</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Inter Bank Accounts Transfer (IAT)</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Bill items Listing</a>
+            </li>
+            <li>
+              <a ui-sref="billing.presetbills-list">Preset Bills Listing</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Quotation Listing</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Bills Listing</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Payment Requsitions Listing</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Fees Transfer Listing</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Transactions Listing</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Bank Recon</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Trial Balance</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Bank Accounts Listing</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Opening Balance</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Accounting Period Lock</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <data ui-view></data>
+  </section>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>

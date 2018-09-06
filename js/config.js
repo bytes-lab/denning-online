@@ -344,18 +344,138 @@ denningOnline
       })
 
       //------------------------------
-      // BILLING ITEMS
+      // BILLING
       //------------------------------
-    
-      .state ('billingitems', {
+
+      .state ('billing', {
         data: {
           access: '@'
         },        
-        url: '/billingitems',
-        templateUrl: 'views/common.html'
+        url: '/billing',
+        templateUrl: 'views/billing.html'
+      })
+
+      //------------------------------
+      // QUOTATIONS
+      //------------------------------
+            
+      .state ('billing.quotations-list', {
+        data: {
+          access: '@'
+        },        
+        url: '/',
+        controller: 'quotationListCtrl as vm',
+        templateUrl: 'views/quotation-list.html'
+      })
+
+      .state ('billing.quotations-edit', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/:id',
+        controller: 'quotationEditCtrl as vm',
+        templateUrl: 'views/quotation-edit.html'
+      })
+      .state ('billing.quotations-new', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/',
+        controller: 'quotationEditCtrl as vm',
+        templateUrl: 'views/quotation-edit.html'
+      })
+
+      //------------------------------
+      // INVOICES
+      //------------------------------
+            
+      .state ('billing.invoices-list', {
+        data: {
+          access: '@'
+        },        
+        url: '/',
+        controller: 'invoiceListCtrl as vm',
+        templateUrl: 'views/invoice-list.html'
+      })
+
+      .state ('billing.invoices-edit', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/:id',
+        controller: 'invoiceEditCtrl as vm',
+        templateUrl: 'views/invoice-edit.html'
+      })
+      .state ('billing.invoices-new', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/',
+        controller: 'invoiceEditCtrl as vm',
+        templateUrl: 'views/invoice-edit.html'
+      })
+
+      //------------------------------
+      // RECEIPTS
+      //------------------------------
+            
+      .state ('billing.receipts-list', {
+        data: {
+          access: '@'
+        },        
+        url: '/',
+        controller: 'receiptListCtrl as vm',
+        templateUrl: 'views/receipt-list.html'
+      })
+
+      .state ('billing.receipts-edit', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/:id',
+        controller: 'receiptEditCtrl as vm',
+        templateUrl: 'views/receipt-edit.html'
+      })
+      .state ('billing.receipts-new', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/',
+        controller: 'receiptEditCtrl as vm',
+        templateUrl: 'views/receipt-edit.html'
+      })
+
+      //------------------------------
+      // PRESET BILLS
+      //------------------------------
+
+      .state ('billing.presetbills-list', {
+        data: {
+          access: '@'
+        },        
+        url: '/',
+        controller: 'presetbillListCtrl as vm',
+        templateUrl: 'views/presetbill-list.html'
+      })
+
+      .state ('billing.presetbills-edit', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/:id',
+        controller: 'presetbillEditCtrl as vm',
+        templateUrl: 'views/presetbill-edit.html'
+      })
+      .state ('billing.presetbills-new', {
+        data: {
+          access: '@'
+        },        
+        url: '/edit/',
+        controller: 'presetbillEditCtrl as vm',
+        templateUrl: 'views/presetbill-edit.html'
       })
             
-      .state ('billingitems.list', {
+      .state ('billing.items-list', {
         data: {
           access: '@'
         },        
@@ -364,7 +484,7 @@ denningOnline
         templateUrl: 'views/billingitem-list.html'
       })
 
-      .state ('billingitems.edit', {
+      .state ('billing.items-edit', {
         data: {
           access: '@'
         },        
@@ -372,7 +492,7 @@ denningOnline
         controller: 'billingitemEditCtrl as vm',
         templateUrl: 'views/billingitem-edit.html'
       })
-      .state ('billingitems.new', {
+      .state ('billing.items-new', {
         data: {
           access: '@'
         },        
@@ -502,167 +622,6 @@ denningOnline
           }
         }        
       })
-
-
-      //------------------------------
-      // QUOTATIONS
-      //------------------------------
-    
-      .state ('quotations', {
-        data: {
-          access: '@'
-        },        
-        url: '/quotations',
-        templateUrl: 'views/common.html'
-      })
-            
-      .state ('quotations.list', {
-        data: {
-          access: '@'
-        },        
-        url: '/',
-        controller: 'quotationListCtrl as vm',
-        templateUrl: 'views/quotation-list.html'
-      })
-
-      .state ('quotations.edit', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/:id',
-        controller: 'quotationEditCtrl as vm',
-        templateUrl: 'views/quotation-edit.html'
-      })
-      .state ('quotations.new', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/',
-        controller: 'quotationEditCtrl as vm',
-        templateUrl: 'views/quotation-edit.html'
-      })
-
-
-
-      //------------------------------
-      // INVOICES
-      //------------------------------
-    
-      .state ('invoices', {
-        data: {
-          access: '@'
-        },        
-        url: '/invoices',
-        templateUrl: 'views/common.html'
-      })
-            
-      .state ('invoices.list', {
-        data: {
-          access: '@'
-        },        
-        url: '/',
-        controller: 'invoiceListCtrl as vm',
-        templateUrl: 'views/invoice-list.html'
-      })
-
-      .state ('invoices.edit', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/:id',
-        controller: 'invoiceEditCtrl as vm',
-        templateUrl: 'views/invoice-edit.html'
-      })
-      .state ('invoices.new', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/',
-        controller: 'invoiceEditCtrl as vm',
-        templateUrl: 'views/invoice-edit.html'
-      })
-
-
-
-      //------------------------------
-      // RECEIPTS
-      //------------------------------
-    
-      .state ('receipts', {
-        data: {
-          access: '@'
-        },        
-        url: '/receipts',
-        templateUrl: 'views/common.html'
-      })
-            
-      .state ('receipts.list', {
-        data: {
-          access: '@'
-        },        
-        url: '/',
-        controller: 'receiptListCtrl as vm',
-        templateUrl: 'views/receipt-list.html'
-      })
-
-      .state ('receipts.edit', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/:id',
-        controller: 'receiptEditCtrl as vm',
-        templateUrl: 'views/receipt-edit.html'
-      })
-      .state ('receipts.new', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/',
-        controller: 'receiptEditCtrl as vm',
-        templateUrl: 'views/receipt-edit.html'
-      })
-
-
-
-      //------------------------------
-      // PRESET BILLS
-      //------------------------------
-    
-      .state ('presetbills', {
-        data: {
-          access: '@'
-        },        
-        url: '/presetbills',
-        templateUrl: 'views/common.html'
-      })
-            
-      .state ('presetbills.list', {
-        data: {
-          access: '@'
-        },        
-        url: '/',
-        controller: 'presetbillListCtrl as vm',
-        templateUrl: 'views/presetbill-list.html'
-      })
-
-      .state ('presetbills.edit', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/:id',
-        controller: 'presetbillEditCtrl as vm',
-        templateUrl: 'views/presetbill-edit.html'
-      })
-      .state ('presetbills.new', {
-        data: {
-          access: '@'
-        },        
-        url: '/edit/',
-        controller: 'presetbillEditCtrl as vm',
-        templateUrl: 'views/presetbill-edit.html'
-      })
-
-
 
       //------------------------------
       // PROPERTIES

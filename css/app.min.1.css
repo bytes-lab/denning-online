@@ -10183,7 +10183,7 @@ h6 small,
 }
 
 @media (min-width: 1200px) {
-  body.sw-toggled #content > .container {
+  body.sw-toggled #content .container {
     width: calc(100% - 30px);
   }
 }
