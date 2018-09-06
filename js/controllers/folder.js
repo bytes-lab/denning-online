@@ -90,19 +90,19 @@ denningOnline
         var contentType = contentTypes[file.ext] || response.headers('content-type');
 
         try {
-            var blob = new Blob([response.data], {type: contentType});
+          var blob = new Blob([response.data], {type: contentType});
 
-            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-              window.navigator.msSaveOrOpenBlob(blob, fileName);
-            } else {
-              Object.assign(document.createElement('a'), { 
-                href: URL.createObjectURL(blob), 
-                download: fileName})
-              .click();
-            }
+          if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blob, fileName);
+          } else {
+            Object.assign(document.createElement('a'), { 
+              href: URL.createObjectURL(blob), 
+              download: fileName})
+            .click();
+          }
         } catch (exc) {
-            console.log("Save Blob method failed with the following exception.");
-            console.log(exc);
+          console.log("Save Blob method failed with the following exception.");
+          console.log(exc);
         }
       })
     }
@@ -309,6 +309,10 @@ denningOnline
     }
 
     self.deleteFolder = function (folderName) {
+      if (!confirm("Are you sure to delete this folder?")) {
+        return false;
+      }
+
       var folder;
       for (ii in self.folders) {
         if (self.folders[ii].name == folderName) {
@@ -345,15 +349,17 @@ denningOnline
         return false;
       }
 
-      var deletes = [];
-      angular.forEach(files, function(value, key) {
-        deletes.push(folderService.deleteDocument(value.URL));
-      })
+      if (confirm("Are you sure to delete this file?")) {
+        var deletes = [];
+        angular.forEach(files, function(value, key) {
+          deletes.push(folderService.deleteDocument(value.URL));
+        })
 
-      Promise.all(deletes).then(function (data) {
-        growlService.growl('Files deleted successfully!', 'success');
-        $state.reload();
-      })
+        Promise.all(deletes).then(function (data) {
+          growlService.growl('Files deleted successfully!', 'success');
+          $state.reload();
+        })
+      }
     }
 
     self.deleteFiles = function () {
@@ -362,9 +368,7 @@ denningOnline
     }
 
     self.deleteFile = function (file) {
-      if (confirm("Are you sure to delete this file?")) {
-        self.deleteFile_([file]);
-      }
+      self.deleteFile_([file]);
     }
 
     self.attachFile = function() {

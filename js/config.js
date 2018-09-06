@@ -87,6 +87,7 @@ denningOnline
         url: '/about',
         templateUrl: 'views/profile-about.html'
       })
+      
       //------------------------------
       // FILE MATTER
       //------------------------------

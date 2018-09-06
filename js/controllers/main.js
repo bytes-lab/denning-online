@@ -1,6 +1,6 @@
 denningOnline
 
-  .controller('denningOnlineCtrl', function($state, $scope, growlService, Auth, 
+  .controller('denningOnlineCtrl', function($state, $scope, growlService, Auth, http, $interval,
                                             searchService, $rootScope, contactService)
   {
     var self = this;
@@ -210,15 +210,11 @@ denningOnline
     self.accounts = function(item) {
       $state.go('accounts.list', {fileNo: item.key, fileName: JSON.parse(item.JsonDesc.replace(/[\u0000-\u0019]+/g,"")).primaryClient.name});
     }
-    /**
-     * Create filter function for a query string
-     */
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
 
-      return function filterFn(state) {
-        return (state.value.indexOf(lowercaseQuery) === 0);
-      };
+    $scope.startPing = function () {
+      // $interval(function () {
+      //   http.GET('v1/staffLogin/ping');
+      // }, 1000);
     }
   })
 
@@ -261,6 +257,8 @@ denningOnline
                   $state.reload();
                 }
               } else {
+                $scope.startPing();
+
                 $state.go('home');
               }
             })
@@ -374,40 +372,40 @@ denningOnline
   //=================================================
 
   .controller('profileCtrl', function(Auth, growlService){
-      this.userInfo = Auth.getUserInfo();
-      
-      this.gender = "female";
-      this.birthDay = "23/06/1988";
-      this.martialStatus = "Single";
-      this.twitter = "@malinda";
-      this.twitterUrl = "twitter.com/malinda";
-      this.skype = "malinda.hollaway";
-      this.addressSuite = "44-46 Morningside Road";
-      this.addressCity = "Edinburgh";
-      this.addressCountry = "Scotland";
+    this.userInfo = Auth.getUserInfo();
 
-      //Edit
-      this.editSummary = 0;
-      this.editInfo = 0;
-      this.editContact = 0;
-  
-      
-      this.submit = function(item, message) {            
-        if(item === 'profileSummary') {
-            this.editSummary = 0;
-        }
-        
-        if(item === 'profileInfo') {
-            this.editInfo = 0;
-        }
-        
-        if(item === 'profileContact') {
-            this.editContact = 0;
-        }
-        
-        growlService.growl(message+' has updated Successfully!', 'inverse'); 
+    this.gender = "female";
+    this.birthDay = "23/06/1988";
+    this.martialStatus = "Single";
+    this.twitter = "@malinda";
+    this.twitterUrl = "twitter.com/malinda";
+    this.skype = "malinda.hollaway";
+    this.addressSuite = "44-46 Morningside Road";
+    this.addressCity = "Edinburgh";
+    this.addressCountry = "Scotland";
+
+    //Edit
+    this.editSummary = 0;
+    this.editInfo = 0;
+    this.editContact = 0;
+
+    this.submit = function(item, message) {            
+      if(item === 'profileSummary') {
+          this.editSummary = 0;
       }
-    })
+      
+      if(item === 'profileInfo') {
+          this.editInfo = 0;
+      }
+      
+      if(item === 'profileContact') {
+          this.editContact = 0;
+      }
+      
+      growlService.growl(message+' has updated Successfully!', 'inverse'); 
+    }
+  })
+
   // =========================================================================
   // used in overview, could be replaced soon
   // =========================================================================
