@@ -5,18 +5,18 @@
 
   <section id="content">
     <div class="container">
-      <ul class="tab-nav o-visible m-b-5">
+      <ul class="tab-nav o-visible m-b-25">
         <li class="btn-wave" data-ui-sref-active="active">
-          <a data-ui-sref="billing.quotations-list">Quotation</a>
+          <a data-ui-sref="billing.quotations-edit"><i class="zmdi zmdi-plus"></i> Quotation</a>
         </li>
         <li class="btn-wave" data-ui-sref-active="active">
-          <a data-ui-sref="billing.invoices-list">Invoice</a>
+          <a data-ui-sref="billing.invoices-edit"><i class="zmdi zmdi-plus"></i> Invoice</a>
         </li>
         <li class="btn-wave" data-ui-sref-active="active">
-          <a data-ui-sref="billing.receipts-list">Receipt</a>
+          <a data-ui-sref="billing.receipts-edit"><i class="zmdi zmdi-plus"></i> Receipt</a>
         </li>
         <li class="btn-wave" data-ui-sref-active="active">
-          <a data-ui-sref="billing.presetbills-list">Payment Requisitions</a>
+          <a data-ui-sref="billing.presetbills-edit"><i class="zmdi zmdi-plus"></i> Payment Requisitions</a>
         </li>
         <li class="dropdown" uib-dropdown>
           <a href="" uib-dropdown-toggle>
@@ -43,10 +43,10 @@
               <a ui-sref="billing.presetbills-list">Preset Bills Listing</a>
             </li>
             <li>
-              <a ui-sref="billing.items-list">Quotation Listing</a>
+              <a ui-sref="billing.quotations-list">Quotation Listing</a>
             </li>
             <li>
-              <a ui-sref="billing.items-list">Bills Listing</a>
+              <a ui-sref="billing.invoices-list">Invoices Listing</a>
             </li>
             <li>
               <a ui-sref="billing.items-list">Payment Requsitions Listing</a>
@@ -55,7 +55,7 @@
               <a ui-sref="billing.items-list">Fees Transfer Listing</a>
             </li>
             <li>
-              <a ui-sref="billing.items-list">Transactions Listing</a>
+              <a ui-sref="billing.receipts-list">Transactions Listing</a>
             </li>
             <li>
               <a ui-sref="billing.items-list">Bank Recon</a>
@@ -64,13 +64,16 @@
               <a ui-sref="billing.items-list">Trial Balance</a>
             </li>
             <li>
-              <a ui-sref="billing.items-list">Bank Accounts Listing</a>
+              <a ui-sref="billing.items-list">Settings</a>
             </li>
             <li>
-              <a ui-sref="billing.items-list">Opening Balance</a>
+              <a class="c-gray" ui-sref="billing.items-list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bank Accounts Listing</a>
             </li>
             <li>
-              <a ui-sref="billing.items-list">Accounting Period Lock</a>
+              <a class="c-gray" ui-sref="billing.items-list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opening Balance</a>
+            </li>
+            <li>
+              <a class="c-gray" ui-sref="billing.items-list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accounting Period Lock</a>
             </li>
           </ul>
         </li>
