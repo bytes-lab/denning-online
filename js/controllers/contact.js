@@ -82,6 +82,20 @@ denningOnline
       return false;
     };
 
+    self.relatedMatter = function () {
+      if ($uibModalInstance) {
+        $uibModalInstance.close();
+      }
+      $state.go('contacts.matters', {id: self.entity.code});
+    }
+
+    self.openFolder = function () {
+      if ($uibModalInstance) {
+        $uibModalInstance.close();
+      }
+      $state.go('folders.list', {id: self.entity.code, type: 'contact'});
+    }
+
     contactService.getSalutationList().then (function (data) {
       self.Salutations = data;
     });

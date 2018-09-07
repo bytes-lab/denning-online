@@ -87,7 +87,7 @@ denningOnline
 
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'views/contact-edit.html',
+        templateUrl: 'contact-modal.html',
         controller: 'contactEditCtrl',
         controllerAs: 'vm',
         size: 'lg',

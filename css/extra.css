@@ -239,6 +239,11 @@ tr.selected {
     cursor: pointer;
 }
 
+.contact-modal-content {
+    height: calc(100vh - 135px);
+    border: 15px solid #ccc;
+}
+
 .summary-preview-content {
     height: calc(100vh - 135px);
     overflow-y: scroll;
@@ -265,4 +270,22 @@ tr.selected {
 
 .login-modal .modal-dialog {
     width: 500px; 
+}
+
+.contact-modal-header .md-warn {
+    min-height: 0;
+    margin: -8px 3px 0 0;
+}
+
+.pop-out {
+    background-image: url(../img/v-sprite12.svg)!important;
+    background-position: 8px -1552px;
+    height: 40px;
+    width: 40px;
+    margin-top: -3px;
+    position: absolute;
+    background-color: rgba(0,0,0,0.75);
+    right: 15px;
+    top: 93px;
+    z-index: 5;
 }
