@@ -77,7 +77,7 @@ denningOnline
 
     function toggleAll() {
       if (self.select_all) {
-        self.categories = ['client', 'fd', 'disb', 'advance', 'other'];
+        self.categories = ['client', 'disb', 'fd', 'advance', 'other', 'recv'];
       } else {
         self.categories = [];
       }

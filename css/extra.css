@@ -184,8 +184,12 @@ tr.selected {
     display: inline-block;
 }
 
+.matter-action i {
+    color: rgb(255,67,24) !important;
+}
+
 .d-header {
-    color: #9c27b0 !important;
+    color: rgb(255,67,24) !important;
     line-height: 45px;
     font-weight: 500 !important;
     font-size: 20px !important;
@@ -288,4 +292,9 @@ tr.selected {
     right: 15px;
     top: 93px;
     z-index: 5;
+}
+
+.ledgers-category label {
+    margin-left: 0 !important;
+    min-width: 50px;
 }
