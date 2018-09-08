@@ -84,14 +84,14 @@
         </div>
         <div class="col-md-8">
           <div class="col-md-9">
-            <div class="pmb-block">
+            <div class="pmb-block m-b-0">
               <div class="pmbb-header">
                   <h2 class="c-purple f-500" style="display: inline-block;">Quotations</h2>
-                  <button class="btn btn-default bgm-purple f-15" title="Upload files" ng-click="vm.upload()" style="margin-left: 65px;"><i class="zmdi zmdi-plus"></i></button>
+                  <button class="btn btn-default bgm-purple f-15" title="Upload files" ng-click="vm.upload()" style="margin-left: 115px;"><i class="zmdi zmdi-plus"></i></button>
               </div>
               <div class="pmbb-body">
                 <div class="table-responsive table-div no-pager"> 
-                  <table ng-table="vm.quotationTable" class="table table-vmiddle" show-filter="true">
+                  <table ng-table="vm.quotationTable" class="table table-vmiddle">
                     <tr ng-repeat="w in $data">
                       <td data-title="'Date'">
                         {{ w.invoiceDate|ddate }}
@@ -115,14 +115,14 @@
             </div>
           </div>
           <div class="col-md-11">
-            <div class="pmb-block">
+            <div class="pmb-block m-b-0">
               <div class="pmbb-header">
                   <h2 class="c-purple f-500" style="display: inline-block;">Invoices</h2>
-                  <button class="btn btn-default bgm-purple f-15" title="Upload files" ng-click="vm.upload()" style="margin-left: 90px;"><i class="zmdi zmdi-plus"></i></button>
+                  <button class="btn btn-default bgm-purple f-15" title="Upload files" ng-click="vm.upload()" style="margin-left: 140px;"><i class="zmdi zmdi-plus"></i></button>
               </div>
               <div class="pmbb-body">
                 <div class="table-responsive table-div no-pager"> 
-                  <table ng-table="vm.invoiceTable" class="table table-vmiddle" show-filter="true">
+                  <table ng-table="vm.invoiceTable" class="table table-vmiddle">
                     <tr ng-repeat="w in $data">
                       <td data-title="'Date'">
                         {{ w.invoiceDate|ddate }}
@@ -140,6 +140,46 @@
                         {{ w.paid }}
                       </td>
                       <td data-title="'Balance'" class="text-right">
+                        {{ w.balance }}
+                      </td>                    
+                    </tr>
+                    <tr ng-if="$data.length==0">
+                      <td colspan="12">No record</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11">
+            <div class="pmb-block">
+              <div class="pmbb-header">
+                  <h2 class="c-purple f-500" style="display: inline-block;">Payment Requests</h2>
+                  <button class="btn btn-default bgm-purple f-15" title="Upload files" ng-click="vm.upload()" style="margin-left: 45px;"><i class="zmdi zmdi-plus"></i></button>
+              </div>
+              <div class="pmbb-body">
+                <div class="table-responsive table-div no-pager"> 
+                  <table ng-table="vm.paymentRequestTable" class="table table-vmiddle">
+                    <tr ng-repeat="w in $data">
+                      <td data-title="'Date'">
+                        {{ w.invoiceDate|ddate }}
+                      </td>
+                      <td data-title="'No'" class="ng-table-fixed-column-20">
+                        {{ w.invoiceNo }}
+                      </td>
+                      <td data-title="'To'" class="ng-table-fixed-column-20">
+                        {{ w.issueToName }}
+                      </td>
+                      <td data-title="'Reason'" class="ng-table-fixed-column-20">
+                        {{ w.issueToName }}
+                      </td>
+                      <td data-title="'Amount'" class="ng-table-fixed-column-20 text-right">
+                        {{ w.amount }}
+                      </td>
+                      <td data-title="'Status'" class="text-right">
+                        {{ w.paid }}
+                      </td>
+                      <td data-title="'Date Paid'" class="text-right">
                         {{ w.balance }}
                       </td>                    
                     </tr>
