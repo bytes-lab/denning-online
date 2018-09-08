@@ -16,7 +16,53 @@
           <a data-ui-sref="billing.receipts-edit"><i class="zmdi zmdi-plus"></i> Receipt</a>
         </li>
         <li class="btn-wave" data-ui-sref-active="active">
-          <a data-ui-sref="billing.presetbills-edit"><i class="zmdi zmdi-plus"></i> Payment Requisitions</a>
+          <a data-ui-sref="billing.presetbills-edit"><i class="zmdi zmdi-plus"></i> Payment Requests</a>
+        </li>
+        <li class="dropdown" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            Adjustments
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> Credit Note</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> Debit Note</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> General Journal ( GJ )</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            Listings
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a ui-sref="billing.items-list">Bill items</a>
+            </li>
+            <li>
+              <a ui-sref="billing.presetbills-list">Preset Bills</a>
+            </li>
+            <li>
+              <a ui-sref="billing.quotations-list">Quotation</a>
+            </li>
+            <li>
+              <a ui-sref="billing.invoices-list">Invoices</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Payment Requsitions</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Fees Transfer</a>
+            </li>
+            <li>
+              <a ui-sref="billing.receipts-list">Transactions</a>
+            </li>
+          </ul>
         </li>
         <li class="dropdown" uib-dropdown>
           <a href="" uib-dropdown-toggle>
@@ -25,37 +71,7 @@
 
           <ul class="dropdown-menu">
             <li>
-              <a ui-sref="billing.items-list">Credit Note</a>
-            </li>
-            <li>
-              <a ui-sref="billing.items-list">Debit Note</a>
-            </li>
-            <li>
-              <a ui-sref="billing.items-list">General Journal (GJ)</a>
-            </li>
-            <li>
-              <a ui-sref="billing.items-list">Inter Bank Accounts Transfer (IAT)</a>
-            </li>
-            <li>
-              <a ui-sref="billing.items-list">Bill items Listing</a>
-            </li>
-            <li>
-              <a ui-sref="billing.presetbills-list">Preset Bills Listing</a>
-            </li>
-            <li>
-              <a ui-sref="billing.quotations-list">Quotation Listing</a>
-            </li>
-            <li>
-              <a ui-sref="billing.invoices-list">Invoices Listing</a>
-            </li>
-            <li>
-              <a ui-sref="billing.items-list">Payment Requsitions Listing</a>
-            </li>
-            <li>
-              <a ui-sref="billing.items-list">Fees Transfer Listing</a>
-            </li>
-            <li>
-              <a ui-sref="billing.receipts-list">Transactions Listing</a>
+              <a ui-sref="billing.items-list">Inter Bank Accounts Transfer ( IBT )</a>
             </li>
             <li>
               <a ui-sref="billing.items-list">Bank Recon</a>
