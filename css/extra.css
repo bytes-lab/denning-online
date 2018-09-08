@@ -175,7 +175,7 @@ tr.selected {
     padding: 3px;
 }
 
-.table.folder input {
+.table.folder input[type="checkbox"] {
     margin-left: 18px;
 }
 
