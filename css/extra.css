@@ -304,3 +304,7 @@ tr.selected {
         width: 50%;
     }
 }
+
+.file-actions .dropdown-menu {
+    min-width: 0;
+}

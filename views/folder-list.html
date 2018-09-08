@@ -96,9 +96,23 @@
                 <button class="btn btn-default btn-sm waves-circle m-l-5" title="Download" ng-click="vm.download(file)">
                   <i class="zmdi zmdi-download"></i>
                 </button>
-                <button class="btn btn-default btn-sm waves-circle m-l-5" ng-click="vm.copyLink(file)" title="Copy link"><i class="zmdi zmdi-collection-text"></i></button>
-                <button class="btn btn-default btn-sm waves-circle m-l-5" ng-click="vm.shareFile(file)" title="Share"><i class="zmdi zmdi-share"></i></button>
-                <button class="btn btn-default btn-sm waves-circle m-l-5" ng-click="vm.deleteFile(file)" title="Delete"><i class="zmdi zmdi-delete"></i></button>
+                <div class="dropdown file-actions" uib-dropdown style="display: inline;">
+                  <button class="btn btn-default btn-sm waves-circle m-l-5" uib-dropdown-toggle>
+                    <i class="zmdi zmdi-more"></i>
+                  </button>
+
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a ng-click="vm.copyLink(file)"><i class="zmdi zmdi-collection-text"></i> Copy link</a>
+                    </li>
+                    <li>
+                      <a ng-click="vm.shareFile(file)"><i class="zmdi zmdi-share"></i> Share</a>
+                    </li>
+                    <li>
+                      <a ng-click="vm.deleteFile(file)"><i class="zmdi zmdi-delete"></i> Delete</a>
+                    </li>
+                  </ul>
+                </div>
               </td>
             </tr>
           </table>
