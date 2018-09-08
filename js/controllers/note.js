@@ -100,7 +100,7 @@ denningOnline
     self.dataReady = false;
     self.fileNo = $stateParams.fileNo;
 
-    paymentRecordService.getList($stateParams.fileNo).then(function(data) {
+    paymentRecordService.getList($stateParams.fileNo).then(function (data) {
       self.title = data.strFileNo1+' ( '+data.strFilename+' )';
       self.fileName = data.strFilename;
       self.data = [];
@@ -113,12 +113,12 @@ denningOnline
       })
 
       angular.forEach(data.section2, function(value, key) {
-        value['folder'] = '  ';
+        value['folder'] = '   ';
         self.data.push(value);
       })
 
       angular.forEach(data.section3, function(value, key) {
-        value['folder'] = '   ';
+        value['folder'] = '  ';
         self.data.push(value);
       })
 

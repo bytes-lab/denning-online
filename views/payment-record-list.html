@@ -41,24 +41,20 @@
 
     <div class="card-body">
       <div class="row">
-      <div class="col-lg-6 col-md-8">
+      <div class="col-md-8 lg-6">
         <div class="table-responsive table-div p-15 f-14"> 
           <table ng-table="vm.tableFilter" class="table table-vmiddle table-list">
-            <tr class="ng-table-group" ng-repeat-start="group in $groups">
-              <td colspan="3">
-                <a href="" ng-click="group.$hideRows = !group.$hideRows">                  
-                  <strong ng-if="group.value!=' '">&nbsp;</strong>
-                </a>
-              </td>
+            <tr class="ng-table-group" ng-repeat-start="group in $groups" ng-if="group.value!=' '">
+              <td colspan="3"><a href=""><strong>&nbsp;</strong></a></td>
             </tr>
-            <tr ng-hide="group.$hideRows" ng-repeat="file in group.data" ng-repeat-end>
-              <td data-title="'Date Paid'" class="ng-table-fixed-column-40">
+            <tr ng-repeat="file in group.data" ng-repeat-end>
+              <td data-title="'Date Paid'" class="ng-table-fixed-column-40" ng-class="{'f-700': group.value == '  '}">
                 {{ file.strDescription }}
               </td>
               <td data-title="'Paid to'" class="ng-table-fixed-column-50">
                 {{file.strPaidTo}}
               </td>
-              <td data-title="'Amount'" class="ng-table-fixed-column-30 text-right">
+              <td data-title="'Amount'" class="ng-table-fixed-column-30 text-right" ng-class="{'f-700': group.value == '  '}">
                 {{file.strValue}}
               </td>
             </tr>
