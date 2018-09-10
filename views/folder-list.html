@@ -8,38 +8,10 @@
       <div class="row">
         <div class="col-lg-11">
           <span class="d-header">FOLDER</span>
-          <ul class="actions matter-action m-l-20">
-            <li class="dropdown" uib-dropdown>
-              <a href="" uib-dropdown-toggle>
-                <i class="zmdi zmdi-more"></i>
-              </a>
+          <ul class="actions matter-action m-l-20" data-ng-include src="'matter-action.html'" ng-if="vm.type=='matter'"></ul>
+          <div class="clearfix"></div>
+          <span class="c-purple f-500 f-18">{{ vm.fileNo }} ( {{ vm.fileName }} )</span>
 
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li>
-                  <a ui-sref="accounts.list({ fileNo: vm.file.no, fileName: vm.file.name })">ACCOUNTS</a>
-                </li>
-                <li>
-                  <a ui-sref="notes.list({ fileNo: vm.file.no, fileName: vm.file.name })">NOTES</a>
-                </li>
-                <li>
-                  <a ui-sref="payment-records.list({ fileNo: vm.file.no })">PAYMENTS</a>
-                </li>
-                <li>
-                  <a ui-sref="file-matters.edit({ fileNo: vm.file.no, tab: 'template' })">TEMPLATES</a>
-                </li>
-                <li>
-                  <a ui-sref="courtdiary({ keyword: vm.file.no })">CALENDAR</a>
-                </li>
-                <li>
-                  <a href="">CHECKLIST</a>
-                </li>
-                <li>
-                  <a ui-sref="file-matters.edit({ fileNo: vm.file.no, tab: 'summary' })">SUMMARY</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <h2 class="c-purple f-500 f-18 m-t-15">{{ vm.title }}</h2>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Attach files for email" ng-click="vm.attachFile()"><i class="zmdi zmdi-attachment-alt"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.moveFile('Copy')"><i class="zmdi zmdi-copy"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Move files" ng-click="vm.moveFile('Move')"><i class="zmdi zmdi-mail-send"></i></button>

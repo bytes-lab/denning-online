@@ -483,6 +483,9 @@ denningOnline
 
     if ($stateParams.fileNo) {
       fileMatterService.getItem($stateParams.fileNo).then(function (item) {
+        vm.fileNo = $stateParams.fileNo;
+        vm.fileName = item.clsPrimaryClient.strName;
+        
         if (item) {
           vm.idxTab = 5;  // any none zero value
           vm.model = item;

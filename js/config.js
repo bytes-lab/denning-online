@@ -527,7 +527,7 @@ denningOnline
           access: '@',
           can_edit: true
         },        
-        url: '/:fileNo/new',
+        url: '/:fileNo/:fileName/new',
         controller: 'paymentRecordEditCtrl as vm',
         templateUrl: 'views/payment-record-edit.html'
       })  

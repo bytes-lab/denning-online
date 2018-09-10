@@ -12,6 +12,8 @@ denningOnline
       items: {}
     };
 
+    self.type = $stateParams.type;
+
     // watch for check all checkbox
     $scope.$watch(function() {
       return self.checkboxes.checked;
@@ -47,8 +49,9 @@ denningOnline
     }, true);
 
     folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
-      self.title = data.name;
-      self.file = refactorService.parseFileNo(data.name);
+      self.fileNo = refactorService.parseFileNo(data.name).no;
+      self.fileName = refactorService.parseFileNo(data.name).name;
+
       self.data = [];
       self.folders = [];
 

@@ -43,6 +43,7 @@ denningOnline
     var self = this;
     self.can_edit = $state.$current.data.can_edit;
     self.userInfo = Auth.getUserInfo();
+
     self.fileNo = $stateParams.fileNo;
     self.fileName = $stateParams.fileName;
     
@@ -51,7 +52,7 @@ denningOnline
       .then(function(item){
         self.note = angular.copy(item);  // important
         self.note.dtDate = item.dtDate.split(' ')[0];
-        self.title = 'Note Information';
+        self.title = 'Note Edit';
       });
     } else {
       self.note = {
@@ -150,7 +151,10 @@ denningOnline
     self.userInfo = Auth.getUserInfo();
     self.can_edit = $state.$current.data.can_edit;
     self.create_new = $state.$current.data.can_edit;
+
     self.fileNo = $stateParams.fileNo;
+    self.fileName = $stateParams.fileName;
+    self.title = self.fileNo+' ( '+self.fileName+' )';
 
     if ($stateParams.id) {
     } else {

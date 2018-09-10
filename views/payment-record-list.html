@@ -5,10 +5,10 @@
         <div class="col-md-10">
           <span class="d-header">PAYMENT RECORDS</span>
           <ul class="actions matter-action m-l-20" data-ng-include src="'matter-action.html'"></ul>
-          
+
           <div class="clearfix"></div>
           <span class="c-purple f-500 f-18">{{ vm.title }}</span>
-          <a class="btn btn-info btn-header" ui-sref="payment-records.new({ fileNo: vm.fileNo })"><i class="zmdi zmdi-plus"></i></a>
+          <a class="btn btn-info btn-header" ui-sref="payment-records.new({ fileNo: vm.fileNo, fileName: vm.fileName })"><i class="zmdi zmdi-plus"></i></a>
         </div>
       </div>
     </div>

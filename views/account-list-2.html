@@ -5,40 +5,8 @@
         <div class="col-md-10 col-lg-9">
           <div class="col-md-10">
             <span class="d-header">LEDGERS</span>
-            <ul class="actions matter-action m-l-20">
-              <li class="dropdown" uib-dropdown>
-                <a href="" uib-dropdown-toggle>
-                  <i class="zmdi zmdi-more"></i>
-                </a>
+            <ul class="actions matter-action m-l-20" data-ng-include src="'matter-action.html'"></ul>
 
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li>
-                    <a ui-sref="folders.list({ id: vm.fileNo, type: 'matter' })">FOLDER</a>
-                  </li>
-                  <li>
-                    <a ui-sref="accounts.list({ fileNo: vm.fileNo, fileName: vm.fileName })">ACCOUNTS</a>
-                  </li>
-                  <li>
-                    <a ui-sref="notes.list({ fileNo: vm.fileNo, fileName: vm.fileName })">NOTES</a>
-                  </li>
-                  <li>
-                    <a ui-sref="payment-records.list({ fileNo: vm.fileNo })">PAYMENTS</a>
-                  </li>
-                  <li>
-                    <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'template' })">TEMPLATES</a>
-                  </li>
-                  <li>
-                    <a ui-sref="courtdiary({ keyword: vm.fileNo })">CALENDAR</a>
-                  </li>
-                  <li>
-                    <a href="">CHECKLIST</a>
-                  </li>
-                  <li>
-                    <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'summary' })">SUMMARY</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
             <div class="clearfix"></div>
             <span class="c-purple f-500 f-18">{{ vm.fileNo }} ( {{ vm.fileName }} )</span>
             <a ui-sref="notes.new({fileNo: vm.fileNo, fileName: vm.fileName})" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>

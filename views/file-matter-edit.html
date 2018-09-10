@@ -6,35 +6,8 @@
     <section>
       <div class="pull-left">
         <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="folders.list({id: vm.model.strFileNo1, type: 'matter'})">Folder</md-button>
-          <ul class="actions matter-action m-l-5 m-r-15">
-            <li class="dropdown" uib-dropdown>
-              <a href="" uib-dropdown-toggle>
-                <i class="zmdi zmdi-more" style="color: rgb(255,87,34);"></i>
-              </a>
-
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li>
-                  <a ui-sref="accounts.list({fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName})">ACCOUNTS</a>
-                </li>
-                <li>
-                  <a ui-sref="notes.list({fileNo: vm.model.strFileNo1, fileName: vm.model.clsPrimaryClient.strName})">NOTES</a>
-                </li>
-                <li>
-                  <a ui-sref="payment-records.list({fileNo: vm.model.strFileNo1})">PAYMENTS</a>
-                </li>
-                <li>
-                  <a ng-click="vm.upload()" style="cursor: pointer;">UPLOAD</a>
-                </li>
-                <li>
-                  <a ui-sref="courtdiary({ keyword: vm.model.strFileNo1 })">CALENDAR</a>
-                </li>
-                <li>
-                  <a href="">CHECKLIST</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <input type="file" class="hidden" ng-class="'matter-upload'" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
+        <ul class="actions matter-action m-l-5 m-r-15" data-ng-include src="'matter-action.html'"></ul>
+        <input type="file" class="hidden" ng-class="'matter-upload'" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
       </div>
     </section>
 
