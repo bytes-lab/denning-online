@@ -49,3 +49,38 @@
     <div data-ng-include src="'views/contact-edit.html'"></div>
   </div>
 </script>
+
+<script type="text/ng-template" id="matter-action.html">
+  <li class="dropdown" uib-dropdown>
+    <a href="" uib-dropdown-toggle>
+      <i class="zmdi zmdi-more"></i>
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-right">
+      <li>
+        <a ui-sref="folders.list({ id: vm.fileNo, type: 'matter' })">FOLDER</a>
+      </li>
+      <li>
+        <a ui-sref="accounts.list({ fileNo: vm.fileNo, fileName: vm.fileName })">ACCOUNTS</a>
+      </li>
+      <li>
+        <a ui-sref="notes.list({ fileNo: vm.fileNo, fileName: vm.fileName })">NOTES</a>
+      </li>
+      <li>
+        <a ui-sref="payment-records.list({ fileNo: vm.fileNo })">PAYMENTS</a>
+      </li>
+      <li>
+        <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'template' })">TEMPLATES</a>
+      </li>
+      <li>
+        <a ui-sref="courtdiary({ keyword: vm.fileNo })">CALENDAR</a>
+      </li>
+      <li>
+        <a href="">CHECKLIST</a>
+      </li>
+      <li>
+        <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'summary' })">SUMMARY</a>
+      </li>
+    </ul>
+  </li>
+</script>
