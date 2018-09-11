@@ -35,7 +35,9 @@ denningOnline
     }
   })
 
-  .controller('relatedMatterCtrl', function($filter, $stateParams, NgTableParams, fileMatterService, $state) {
+  .controller('relatedMatterCtrl', function($filter, $stateParams, NgTableParams, 
+                                            fileMatterService, $state) 
+  {
     var type = $state.$current.data.type;
     var self = this;
     self.filter = true;
@@ -91,9 +93,9 @@ denningOnline
     }
   })
 
-  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, matterCodeService, $state, 
-                                             Auth, presetbillService, matterFormService, growlService,
-                                             refactorService) 
+  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, matterCodeService, 
+                                             Auth, presetbillService, matterFormService, $state,
+                                             refactorService, growlService) 
   {
     var self = this;
     self.isDialog = false;

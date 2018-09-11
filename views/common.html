@@ -84,3 +84,31 @@
     </ul>
   </li>
 </script>
+
+<script type="text/ng-template" id="contact-action.html">
+  <li class="dropdown" uib-dropdown>
+    <a href="" uib-dropdown-toggle>
+      <i class="zmdi zmdi-more"></i>
+    </a>
+
+    <ul class="dropdown-menu">
+      <li>
+        <a ui-sref="contacts.matters({id: vm.fileNo}))">Related Matter</a>
+      </li>
+    </ul>
+  </li>  
+</script>
+
+<script type="text/ng-template" id="property-action.html">
+  <li class="dropdown" uib-dropdown>
+    <a href="" uib-dropdown-toggle>
+      <i class="zmdi zmdi-more"></i>
+    </a>
+
+    <ul class="dropdown-menu">
+      <li>
+        <a ui-sref="properties.matters({id: vm.fileNo}))">Related Matter</a>
+      </li>
+    </ul>
+  </li>  
+</script>
