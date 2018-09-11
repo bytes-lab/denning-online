@@ -1,7 +1,16 @@
 <div class="container">
   <div class="card">
   <div class="card-body card-padding">
-    <h2 class="c-purple p-b-15 title f-22">{{ vm.title }}</h2>
+    <div class="col-md-10 m-b-15 no-padding">
+      <span class="c-purple title f-22">{{ vm.title }}</span>
+      <div class="pull-right m-r-30 m-t-5">
+        <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid" ng-if="vm.userInfo.priority.filematter.update && vm.model.tmp.can_edit" style="margin-top: 2px;" ng-click="vm.save()">Save</button>
+        <a class="btn bgm-cyan btn-sm m-l-5" type="submit" ng-click="vm.model.tmp.can_edit=true;" ng-if="vm.userInfo.priority.filematter.update && !vm.model.tmp.can_edit" style="padding-bottom: 7px;margin-top: 2px;"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+        <button type="button" class="btn btn-default m-l-5" ng-click="vm.reset()">Reset</button>
+        <button type="button" class="btn btn-default m-l-5 m-r-20" ui-sref="file-matters.list">Cancel</button>
+      </div>
+    </div>
+    <div class="clearfix"></div>
     <div class="preview">
     <section>
       <div class="pull-left">
@@ -21,7 +30,7 @@
         </uib-tab>
       </uib-tabset>
       <div class="clearfix"></div>
-      <div class="col-md-9">
+      <div class="col-md-10">
         <div class="pull-left">
           <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.prevTab()"><i class="zmdi zmdi-arrow-back"></i> Back</button>
           <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.scrollUp()"><i class="zmdi zmdi-long-arrow-up"></i> Up</button>
@@ -549,6 +558,7 @@
         md-item-text="item.strName+' ( '+item.strIDNo+' )'"
         md-min-length="1"
         md-autoselect="false"
+        placeholder="Enter existing contact name or ID"
         class="default-input"
         style="width:72%">
       <md-item-template>
@@ -558,10 +568,10 @@
       </md-autocomplete>
 
       <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog('clsPrimaryClient', false)">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" title="New Contact"></span>
       </a>
       <a class="btn btn-primary short-btn" target="_new" ng-click="contactDialog('clsPrimaryClient', true)">
-        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="View Details"></span>
       </a>
       <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="model.clsPrimaryClient.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
     </div>
@@ -578,7 +588,7 @@
   <div class="form-group col-md-12">
     <div style="display: flex;">
       <label class="form-control attr-label">Ref 2 (Manual)</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strFileNo2" style="width:45%;">
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strFileNo2" style="width:45%;" placeholder="Enter existing Ref (if any)">
     </div>
   </div>
   <div class="clearfix"></div>
