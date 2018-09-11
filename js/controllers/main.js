@@ -187,7 +187,7 @@ denningOnline
     $scope.startPing = function () {
       // $interval(function () {
       //   http.GET('v1/staffLogin/ping');
-      // }, 1000);
+      // }, 60000);
     }
   })
 
