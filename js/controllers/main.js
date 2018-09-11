@@ -4,22 +4,12 @@ denningOnline
                                             searchService, $rootScope, contactService)
   {
     var self = this;
+    self.searchCategory = 0;
 
     $scope.app = { 
       loadChat: false,
       userInfo: null
     };
-
-    this.searchFilterFlex = 20;
-    var width = $(window).width();
-
-    if (width < 780) {
-      this.searchFilterFlex = 50;
-    } else if (width < 1300) {
-      this.searchFilterFlex = 33;
-    } else if (width < 1441) {
-      this.searchFilterFlex = 25;
-    }
 
     // Detact Mobile Browser
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -33,8 +23,6 @@ denningOnline
       task: false,
       border: 'border-line'
     }
-    // FilterList;
-    this.searchFilterCategories = [];
     // By default template has a boxed layout
     this.layoutType = localStorage.getItem('ma-layout-status');
     
@@ -80,23 +68,10 @@ denningOnline
     //Skin Switch
     this.currentSkin = 'blue';
 
-    self.getSearchFilterCategories = function () {
-      if (self.searchFilterCategories.length > 0) {
-        return self.searchFilterCategories;
-      } else {
-        self.searchFilterCategories = ['loading'];
-        if (Auth.isAuthenticated()) {
-          searchService.getFilter().then(function (data) {
-            self.searchFilterCategories = [];
-            data.forEach(function(item){
-              self.searchFilterCategories.push(item);
-            })
-            return self.searchFilterCategories;
-          })
-        }        
-      }
-    }
-    
+    searchService.getFilter().then(function (data) {
+      self.searchCategories = data;
+    });
+
     self.states    = [];
     self.searchRes = [];
     self.selectedItem = '';
@@ -113,33 +88,31 @@ denningOnline
       }
     }
 
-    self.searchFilterChange = function () {
-      self.showFilterCategory = false;
+    self.searchFilterChange = function (category) {
+      self.searchCategory = category;
       self.selectedItemChange(self.selectedItem || self.currentText);
     }
 
     self.querySearch = function (query) {
-      self.showFilterCategory = false;
-
       return searchService.keyword(query).then(function (data) {
         return data;
       });
     }
 
     self.searchTextChange = function (text) {
-      self.selectedSearchCategory = 0;
-      self.currentText = {value: text, display: text};
-      if (text.trim() == '')
+      // self.searchCategory = 0;
+      self.currentText = { value: text, display: text };
+      if (text.trim() == '') {
         self.searchRes = [];
+      }
     }
 
     self.selectedItemChange = function (item) {
-      self.showFilterCategory = false;
-
-      if(angular.isUndefined(item))
+      if(angular.isUndefined(item)) {
         return;
+      }
 
-      searchService.search(item.keyword, self.selectedSearchCategory).then(function (data) {
+      searchService.search(item.keyword, self.searchCategory).then(function (data) {
         self.searchRes = data;
         if ($state.current.name != 'search')
           $state.go('search');        

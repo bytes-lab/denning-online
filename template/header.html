@@ -40,20 +40,24 @@
           No results matching "{{ mactrl.searchText }}" were found.
         </md-not-found>
       </md-autocomplete>
-      
-      <md-card ng-show="mactrl.showFilterCategory" style="margin: 0px" >
-        <md-radio-group ng-model="mactrl.selectedSearchCategory" ng-init="mactrl.selectedSearchCategory=0" layout-wrap layout="row" layout-padding ng-change="mactrl.searchFilterChange()">
-          <md-radio-button flex="{{ mactrl.searchFilterFlex }}"  ng-repeat="item in mactrl.getSearchFilterCategories()" ng-value="item.ID" style="margin-right: 0px">
-          {{item.Category}}
-          </md-radio-button>
-        </md-radio-group>
-      </md-card>
     </div>
   </li>
   <li class="pull-right">
     <ul class="top-menu">      
-      <li class="search-filter">
-        <a href="" ng-click="mactrl.showFilterCategory = !mactrl.showFilterCategory" id="search_filter"><i class="tm-icon zmdi zmdi-filter-list"></i></a>
+      <li class="search-filter dropdown" uib-dropdown>
+        <a href="" uib-dropdown-toggle>
+          <i class="tm-icon zmdi zmdi-filter-list"></i>
+        </a>
+
+        <ul class="dropdown-menu">
+          <li ng-repeat="item in mactrl.searchCategories">
+            <a ng-click="mactrl.searchFilterChange(item.ID)" style="cursor: pointer;">
+              <i class="zmdi zmdi-check m-r-5" ng-if="item.ID == mactrl.searchCategory"></i> 
+              <span style="width: 14px; display: inline-block;" ng-if="item.ID != mactrl.searchCategory"></span>
+              {{ item.Category }}
+            </a>
+          </li>
+        </ul>
       </li>
       <li class="dropdown" uib-dropdown>
         <a uib-dropdown-toggle href="">
