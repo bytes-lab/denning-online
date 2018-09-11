@@ -13,7 +13,7 @@ denningOnline
     };
 
     self.type = $stateParams.type;
-    self.fileNo = $stateParams.id;
+    self.code = $stateParams.id;  // for contact / property
 
     // watch for check all checkbox
     $scope.$watch(function() {
@@ -50,6 +50,7 @@ denningOnline
     }, true);
 
     folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
+      self.fileNo = refactorService.parseFileNo(data.name).no;
       self.fileName = refactorService.parseFileNo(data.name).name;
 
       self.data = [];
