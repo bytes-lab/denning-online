@@ -1,54 +1,23 @@
 denningOnline
   .controller('presetbillListCtrl', function($filter, $uibModal, NgTableParams, presetbillService, $state) {
     var self = this;
-    self.dataReady = false;
-    self.openDelete = openDelete;
-    self.clickHandler = clickHandler;
 
     presetbillService.getList(1, 500).then(function(data) {
       self.data = data;
-      self.dataReady = true;
       initializeTable();
     });
-    
-    function clickHandler(item) {
-      $state.go('presetbills.edit', {'id': item.code});
-    }
 
     function initializeTable () {
-      //Filtering
       self.tableFilter = new NgTableParams({
-        page: 1,      
+        page: 1,
         count: 25,
         sorting: {
           name: 'asc' 
         }
       }, {
         dataset: self.data
-      })    
+      })
     }
-
-    //Create Modal
-    function modalInstances(animation, size, backdrop, keyboard, presetbill) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'PresetbillDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          presetbill: function () {
-            return presetbill;
-          }
-        }      
-      });
-    }
-
-    //Prevent Outside Click
-    function openDelete(presetbill) {
-      modalInstances(true, '', 'static', true, presetbill)
-    };    
   })
 
   .controller('PresetbillDeleteModalCtrl', function ($scope, $uibModalInstance, presetbill, presetbillService, $state) {

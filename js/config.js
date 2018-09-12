@@ -363,7 +363,7 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/',
+        url: '/quotations',
         controller: 'quotationListCtrl as vm',
         templateUrl: 'views/quotation-list.html'
       })
@@ -372,7 +372,7 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/edit/:id',
+        url: '/quotation/edit/:id',
         controller: 'quotationEditCtrl as vm',
         templateUrl: 'views/quotation-edit.html'
       })
@@ -381,7 +381,7 @@ denningOnline
           access: '@',
           can_edit: true
         },        
-        url: '/new',
+        url: '/quotation/new',
         controller: 'quotationEditCtrl as vm',
         templateUrl: 'views/quotation-edit.html'
       })
@@ -394,7 +394,7 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/',
+        url: '/invoices',
         controller: 'invoiceListCtrl as vm',
         templateUrl: 'views/invoice-list.html'
       })
@@ -403,15 +403,16 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/edit/:id',
+        url: '/invoice/edit/:id',
         controller: 'invoiceEditCtrl as vm',
         templateUrl: 'views/invoice-edit.html'
       })
       .state ('billing.invoices-new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/',
+        url: '/invoice/new',
         controller: 'invoiceEditCtrl as vm',
         templateUrl: 'views/invoice-edit.html'
       })
@@ -424,7 +425,7 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/',
+        url: '/receipts',
         controller: 'receiptListCtrl as vm',
         templateUrl: 'views/receipt-list.html'
       })
@@ -433,15 +434,16 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/edit/:id',
+        url: '/receipt/edit/:id',
         controller: 'receiptEditCtrl as vm',
         templateUrl: 'views/receipt-edit.html'
       })
       .state ('billing.receipts-new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/',
+        url: '/receipt/new',
         controller: 'receiptEditCtrl as vm',
         templateUrl: 'views/receipt-edit.html'
       })
@@ -454,7 +456,7 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/',
+        url: '/presetbills',
         controller: 'presetbillListCtrl as vm',
         templateUrl: 'views/presetbill-list.html'
       })
@@ -463,15 +465,16 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/edit/:id',
+        url: '/presetbill/edit/:id',
         controller: 'presetbillEditCtrl as vm',
         templateUrl: 'views/presetbill-edit.html'
       })
       .state ('billing.presetbills-new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/',
+        url: '/presetbill/new',
         controller: 'presetbillEditCtrl as vm',
         templateUrl: 'views/presetbill-edit.html'
       })
@@ -480,7 +483,7 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/',
+        url: '/items',
         controller: 'billingitemListCtrl as vm',
         templateUrl: 'views/billingitem-list.html'
       })
@@ -489,15 +492,16 @@ denningOnline
         data: {
           access: '@'
         },        
-        url: '/edit/:id',
+        url: '/item/edit/:id',
         controller: 'billingitemEditCtrl as vm',
         templateUrl: 'views/billingitem-edit.html'
       })
       .state ('billing.items-new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/',
+        url: '/item/new',
         controller: 'billingitemEditCtrl as vm',
         templateUrl: 'views/billingitem-edit.html'
       })
