@@ -1,38 +1,24 @@
 denningOnline
-  .controller('quotationListCtrl', function($filter, $uibModal, NgTableParams, quotationService, $state) {
+  .controller('quotationListCtrl', function(NgTableParams, quotationService, Auth, $state) {
     var self = this;
-    self.dataReady = false;
-    self.clickHandler = clickHandler;
+    self.userInfo = Auth.getUserInfo();
 
-    quotationService.getList().then(function(data) {
-      self.data = data;
-      self.dataReady = true;
-      initializeTable();
-    });    
-    
-    function clickHandler(item) {
-      // $state.go('quotations.edit', {'id': item.code});
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 25,
+    }, {
+      getData: function(params) {
+        return quotationService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    })
+
+    self.search = function () {
+      self.tableFilter.reload();
     }
-
-    function initializeTable () {
-      //Filtering
-      self.tableFilter = new NgTableParams({
-        page: 1,      // show first page
-        count: 10,
-        sorting: {
-          name: 'asc'   // initial sorting
-        }
-      }, {
-        total: self.data.length, // length of data
-        getData: function(params) {
-          // use build-in angular filter
-          var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-          orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-          params.total(orderedData.length); // set total for recalc pagination
-          return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-        }
-      })
-    }  
   })
 
   .controller('quotationEditCtrl', function($stateParams, quotationService, $state, Auth,
@@ -54,9 +40,5 @@ denningOnline
     } else {
       self.title = 'New Quotation';
       self.entity = {};
-    }
-
-    self.cancel = function () {
-      $state.go('quotations.list');
     }
   })
