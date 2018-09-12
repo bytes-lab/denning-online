@@ -308,3 +308,15 @@ tr.selected {
 .file-actions .dropdown-menu {
     min-width: 0;
 }
+
+.group {
+    background: #fafafa !important;
+}
+
+.attr-label {
+    background: #fafafa !important;
+}
+
+md-autocomplete.md-default-theme[disabled]:not([md-floating-label]), md-autocomplete[disabled]:not([md-floating-label]) {
+    background: #fafafa !important;
+}
