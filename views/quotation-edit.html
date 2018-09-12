@@ -135,41 +135,98 @@
       <h4 class="m-t-25">Quotation Analysis</h4>
       <div class="row">
         <div class="col-md-11 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Professional Fees</dt>
-            <dd>
+          <div class="col-md-offset-2 col-md-3 p-l-25">
+            <label>Grosss</label>
+          </div>
+          <div class="col-md-3 p-l-25">
+            <label>GST</label>
+          </div>
+          <div class="col-md-3 p-l-25">
+            <label>Nett</label>
+          </div>
+        </div>
+        <div class="col-md-11 p-l-25">
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2 m-t-10">
+              <label class="f-700">Professional Fees</label>
+            </div>
+            <div class="col-md-3">
               <div class="fg-line">
                 <input ng-model="vm.entity.address.line1" type="text" class="form-control">
               </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Disb. with GST</dt>
-            <dd>
+            </div>
+            <div class="col-md-3">
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.address.line2">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
               </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Disbursement</dt>
-            <dd>
+            </div>
+            <div class="col-md-3">
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.address.line3">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
               </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Total</dt>
-            <dd>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2 m-t-10">
+              <label class="f-700">Disb. with GST</label>
+            </div>
+            <div class="col-md-3">
               <div class="fg-line">
-                <input ng-model="vm.entity.address.postcode" type="text" class="form-control">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
               </div>
-
-            </dd>
-          </dl>          
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2 m-t-10">
+              <label class="f-700">Disbursement</label>
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2 m-t-10">
+              <label class="f-700">Total</label>
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="fg-line">
+                <input ng-model="vm.entity.address.line1" type="text" class="form-control">
+              </div>
+            </div>
+          </div>   
         </div>
-              
       </div>      
       <div class="clearfix"></div>
       <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Remark&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
