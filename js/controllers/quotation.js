@@ -23,7 +23,7 @@ denningOnline
 
   .controller('quotationEditCtrl', function($stateParams, quotationService, $state, Auth,
                                             refactorService, fileMatterService, 
-                                            matterCodeService) 
+                                            matterCodeService, presetbillService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -53,6 +53,12 @@ denningOnline
       });
     }
 
+    self.queryBills = function (keyword) {
+      return presetbillService.getTableList(1, 10, keyword).then(function (resp) {
+        return resp;
+      });
+    }
+
     self.matterCodeChange = function (item) {
       if (item && item.strDescription) {
         self.matterDescription = item.strDescription;
@@ -70,6 +76,10 @@ denningOnline
         }
 
         self.matterDescription = self.entity.matter.description;
+        self.presetCode = {
+          code: self.entity.presetCode.code,
+          strDescription: self.entity.presetCode.description
+        }
       });
     } else {
       self.title = 'New Quotation';

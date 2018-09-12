@@ -103,9 +103,20 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Preset Code</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.num_children">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.presetCode"
+                md-search-text="qpsb1"
+                md-items="item in vm.queryBills(qpsb1)"
+                md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -278,12 +289,10 @@
             <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.quotations-list">Cancel</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Convert Tax Invoice</a>
+            <a class="btn btn-success btn-sm pull-right" type="submit" ng-click="vm.save()">Convert Tax Invoice</a>
           </div>    
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
