@@ -18,5 +18,13 @@ denningOnline
       });
     }
 
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
+
+      return http[method]('v1/table/quotation', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
+
     return service;
   })

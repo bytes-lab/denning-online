@@ -65,12 +65,12 @@
               <div class="pmbb-body">
                 <div class="table-responsive table-div no-pager"> 
                   <table ng-table="vm.quotationTable" class="table table-vmiddle">
-                    <tr ng-repeat="w in $data">
+                    <tr ng-repeat="w in $data" ui-sref="billing.quotations-edit({id: w.documentNo})">
                       <td data-title="'Date'">
-                        {{ w.invoiceDate|ddate }}
+                        {{ w.issueDate|ddate }}
                       </td>
                       <td data-title="'No'">
-                        {{ w.invoiceNo }}
+                        {{ w.documentNo }}
                       </td>
                       <td data-title="'To'">
                         {{ w.issueToName }}
@@ -96,7 +96,7 @@
               <div class="pmbb-body">
                 <div class="table-responsive table-div no-pager"> 
                   <table ng-table="vm.invoiceTable" class="table table-vmiddle">
-                    <tr ng-repeat="w in $data">
+                    <tr ng-repeat="w in $data" ui-sref="billing.invoices-edit({id: w.invoiceNo})">
                       <td data-title="'Date'">
                         {{ w.invoiceDate|ddate }}
                       </td>
