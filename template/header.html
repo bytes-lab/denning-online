@@ -50,7 +50,7 @@
         </a>
 
         <ul class="dropdown-menu">
-          <li ng-repeat="item in mactrl.searchCategories">
+          <li ng-repeat="item in mactrl.getSearchCategories()">
             <a ng-click="mactrl.searchFilterChange(item.ID)" style="cursor: pointer;">
               <i class="zmdi zmdi-check m-r-5" ng-if="item.ID == mactrl.searchCategory"></i> 
               <span style="width: 14px; display: inline-block;" ng-if="item.ID != mactrl.searchCategory"></span>

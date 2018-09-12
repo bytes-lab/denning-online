@@ -68,9 +68,17 @@ denningOnline
     //Skin Switch
     this.currentSkin = 'blue';
 
-    searchService.getFilter().then(function (data) {
-      self.searchCategories = data;
-    });
+    self.getSearchCategories = function () {
+      if (self.searchCategories) {
+        return self.searchCategories;
+      } else {
+        self.searchCategories = ['loading'];
+        searchService.getFilter().then(function (data) {
+          self.searchCategories = data;
+          return self.searchCategories;
+        });
+      }
+    }
 
     self.states    = [];
     self.searchRes = [];
