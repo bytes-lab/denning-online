@@ -378,9 +378,10 @@ denningOnline
       })
       .state ('billing.quotations-new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },        
-        url: '/edit/',
+        url: '/new',
         controller: 'quotationEditCtrl as vm',
         templateUrl: 'views/quotation-edit.html'
       })

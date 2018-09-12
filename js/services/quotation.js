@@ -3,17 +3,17 @@ denningOnline
     var service = {};
 
     service.getList = function (page, pagesize, keyword) {
-      return http.GET('/v1/QuotationX/all', {
-        page: page || 1,
-        pagesize: pagesize || 25,
-        search: keyword
+      return http.GET('v1/Quotation', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword 
       }).then(function (resp) {
         return resp;
       });
     }
 
     service.getItem = function (code) {
-      return http.GET('/v1/app/bank/branch/'+code).then(function (resp) {
+      return http.GET(`v1/Quotation/${code}`).then(function (resp) {
         return resp.data;
       });
     }

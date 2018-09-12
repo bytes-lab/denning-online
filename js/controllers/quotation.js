@@ -35,18 +35,28 @@ denningOnline
     }  
   })
 
-  .controller('quotationEditCtrl', function($filter, $stateParams, quotationService, $state) {
+  .controller('quotationEditCtrl', function($stateParams, quotationService, $state, Auth,
+                                            refactorService) 
+  {
     var self = this;
-    self.cancel = cancel;
+    self.userInfo = Auth.getUserInfo();
+
     self.isDialog = false;
-    self.viewMode = false;  // for edit / create
+    self.can_edit = $state.$current.data.can_edit;
+    self.isNew = $state.$current.data.can_edit;
 
-    quotationService.getItem($stateParams.id)
-    .then(function(item){
-      self.quotation = angular.copy(item);  // important
-    });
+    if ($stateParams.id) {
+      self.title = 'Edit Quotation';
+      quotationService.getItem($stateParams.id).then(function(item){
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+      });
+    } else {
+      self.title = 'New Quotation';
+      self.entity = {};
+    }
 
-    function cancel() {
-      $state.go('quotations.list');      
+    self.cancel = function () {
+      $state.go('quotations.list');
     }
   })

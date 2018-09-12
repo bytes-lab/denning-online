@@ -81,7 +81,8 @@ denningOnline
       count: 25,
     }, {
       getData: function(params) {
-        return matterCodeService.getList(params.page(), params.count(), self.keyword).then(function (data) {
+        return matterCodeService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
@@ -268,12 +269,15 @@ denningOnline
     };
 
     self.queryForms = function (searchText) {
-      return matterFormService.getList(1, 10, searchText).then(function(data) { return data; });
+      return matterFormService.getList(1, 10, searchText).then(function (data) { 
+        return data; 
+      });
     };
 
     self.queryBills = function (searchText) {
       return self.presetBills.filter(function(c) {
-        return c.code.search(new RegExp(searchText, "i")) > -1 || c.description.search(new RegExp(searchText, "i")) > -1;
+        return c.code.search(new RegExp(searchText, "i")) > -1 || 
+               c.description.search(new RegExp(searchText, "i")) > -1;
       });
     }
   })
