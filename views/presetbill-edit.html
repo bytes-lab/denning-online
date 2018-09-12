@@ -1,99 +1,90 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
 
-    <div class="card">
-        <div class="card-header">
-            <h2 ng-if="!vm.viewMode">Preset Bill Edit</h2>
-            <h2 ng-if="vm.viewMode">Preset Bill Detail</h2>
-        </div>
-                
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <h4>Preset Bill Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">                    
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Item Code</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.presetbill.code" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Description</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <textarea class="form-control" rows="3" ng-model="vm.presetbill.description" placeholder=""></textarea>
-                            </div>
-                        </dd>
-                    </dl>                                     
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <div class="select">
-                                    <select class="form-control" ng-model="vm.presetbill.state" ng-options="v for v in vm.states">
-                                    </select>                                                                
-                                </div>
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Category</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <div class="select">
-                                    <select class="form-control" ng-model="vm.presetbill.category" ng-options="v for v in vm.categories">
-                                    </select>                                
-                                </div>
-                            </div>
-                        </dd>
-                    </dl>                                       
-                </div>                
-            </div>
- 
-            <div class="clearfix"></div>
-            <div class="btn-group btn-group-lg btn-group-category">
-                <button type="button" class="btn btn-info"><div>All</div><small>$342.22</small></button>
-                <button type="button" class="btn btn-info"><div>Fee</div><small>$342.22</small></button>
-                <button type="button" class="btn btn-info"><div>Disbursement</div><small>$342.22</small></button>
-                <button type="button" class="btn btn-info"><div>GST</div><small>$342.22</small></button>
-            </div>
-
-            <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Remark&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
-            <div class="row" ng-show="vm.showRemark">
-                <div class="col-md-10 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Remark</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <textarea class="form-control" rows="5" placeholder=""></textarea>
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>   
-            <div class="clearfix"></div>
-       
-            <div class="row">     
-                <div class="col-md-10" ng-if="!vm.viewMode">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
-                    </div>        
-                </div>
-                <div class="col-md-10" ng-if="vm.viewMode">
-                    <div class="m-t-30">
-                        <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-                    </div>        
-                </div>
-            </div>
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="c-purple f-500 f-20" style="display: inline;">{{ vm.title }}</h2>
     </div>
-         
+        
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+
+      <h4>Preset Bill Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">          
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Item Code</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.presetbill.code">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Description</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.presetbill.description">
+              </div>
+            </dd>
+          </dl>                   
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <div class="select">
+                  <select class="form-control" ng-model="vm.presetbill.state" ng-options="v for v in vm.states">
+                  </select>                                
+                </div>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Category</dt>
+            <dd>
+              <div class="fg-line">
+                <div class="select">
+                  <select class="form-control" ng-model="vm.presetbill.category" ng-options="v for v in vm.categories">
+                  </select>                
+                </div>
+              </div>
+            </dd>
+          </dl>                     
+        </div>        
+      </div>
+ 
+      <div class="clearfix"></div>
+      <div class="btn-group btn-group-lg btn-group-category">
+        <button type="button" class="btn btn-info"><div>All</div><small>$342.22</small></button>
+        <button type="button" class="btn btn-info"><div>Fee</div><small>$342.22</small></button>
+        <button type="button" class="btn btn-info"><div>Disbursement</div><small>$342.22</small></button>
+        <button type="button" class="btn btn-info"><div>GST</div><small>$342.22</small></button>
+      </div>
+
+      <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Remark&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
+      <div class="row" ng-show="vm.showRemark">
+        <div class="col-md-10 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remark</dt>
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control" rows="5"></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>        
+      </div>   
+      <div class="clearfix"></div>
+     
+      <div class="row">   
+        <div class="col-md-10" ng-if="!vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.presetbills-list" >Cancel</a>
+            <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
+          </div>    
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-

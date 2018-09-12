@@ -20,31 +20,10 @@ denningOnline
     }
   })
 
-  .controller('PresetbillDeleteModalCtrl', function ($scope, $uibModalInstance, presetbill, presetbillService, $state) {
-    $scope.ok = function () {
-      presetbillService.delete(presetbill).then(function(presetbill) {
-        $state.reload();
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.presetbillInfo.$error.push({meessage:''});
-      });
-      $uibModalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $uibModalInstance.close();
-      $state.go('presetbills.list');
-    };
-  })
-
   .controller('presetbillEditCtrl', function($filter, $stateParams, presetbillService, $state) {
     var self = this;
-    self.save = save;
-    self.cancel = cancel;
     self.isDialog = false;
-    self.viewMode = false;  // for edit / create
+
     self.states = [
       'Common',
       'Johor',
@@ -77,11 +56,12 @@ denningOnline
       'Common'
     ];
     if ($stateParams.id) {
-      presetbillService.getItem($stateParams.id)
-      .then(function(item){
-        self.presetbill = angular.copy(item);  // important
+      self.title = 'Preset Bill Edit';
+      presetbillService.getItem($stateParams.id).then(function (item){
+        self.presetbill = angular.copy(item);
       });
     } else {
+      self.title = 'New Preset Bill';
       self.presetbill = {
         code: 'P' + Math.floor(Math.random() * 1000 + 1),
         state: 'Common',
@@ -89,17 +69,10 @@ denningOnline
       };
     }
 
-    function save() {
+    self.save = function () {
       presetbillService.save(self.presetbill).then(function(presetbill) {
         self.presetbill = presetbill;
-        $state.go('presetbills.list');
-      })
-      .catch(function(err){
-        //Handler
+        $state.go('billing.presetbills-list');
       });
-    }
-
-    function cancel() {
-      $state.go('presetbills.list');      
     }
   })
