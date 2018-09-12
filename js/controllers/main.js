@@ -80,6 +80,21 @@ denningOnline
       }
     }
 
+    // format date over the site
+    $scope.dateOptions = {
+      formatYear: 'yyyy',
+      startingDay: 1
+    };
+
+    $scope.format = 'dd/MM/yyyy';
+
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
+
     self.states    = [];
     self.searchRes = [];
     self.selectedItem = '';

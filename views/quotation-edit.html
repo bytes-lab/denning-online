@@ -15,23 +15,33 @@
             <dt class="p-t-10">Quotation No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.idType.code">
+                <input type='text' class="form-control" readonly="true" ng-model="vm.entity.documentNo">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">File No.</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.fileNo">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.rmatter"
+                md-search-text="qstl"
+                md-items="item in vm.queryMatters(qstl)"
+                md-item-text="item.key"
+                md-min-length="0"
+                md-selected-item-change="vm.matterChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qstl" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
+                </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">File Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.old_ic">
+                <input type='text' class="form-control" ng-model="vm.entity.primaryClient">
               </div>
             </dd>
           </dl>
@@ -39,16 +49,36 @@
             <dt class="p-t-10">Quotation To</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.name" type="text" class="form-control">
+                <input ng-model="vm.entity.issueToName" type="text" class="form-control">
               </div>
 
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Matter Code</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.matter"
+                md-search-text="qmc"
+                md-items="item in vm.queryCodes(qmc)"
+                md-selected-item-change="vm.matterCodeChange(item)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qmc" class="col-360" md-highlight-flags="i">{{item.strDescription}}</span>
+                <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Quotation Matter</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.title">
+                <input type='text' class="form-control" ng-model="vm.matterDescription">
               </div>
             </dd>
           </dl>
@@ -82,9 +112,8 @@
             <dt class="p-t-10">Quotation Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.occupation" type="text" class="form-control">
+                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.issueDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
-
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -247,7 +276,8 @@
         <div class="col-md-10">
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.quotations-list">Cancel</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()">Save</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
             <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Convert Tax Invoice</a>
           </div>    
         </div>

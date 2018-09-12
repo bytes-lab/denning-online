@@ -80,20 +80,6 @@ denningOnline
     self.cancel = function () {
       $state.go('notes.list', {'fileNo': $stateParams.fileNo, 'fileName': $stateParams.fileName});
     }
-
-    $scope.open = function($event, opened) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope[opened] = true;
-    };
-
-    $scope.dateOptions = {
-        formatYear: 'yyyy',
-        startingDay: 1
-    };
-
-    $scope.format = 'dd-MM-yyyy';
   })
 
   .controller('paymentRecordListCtrl', function($stateParams, NgTableParams, paymentRecordService, 
@@ -188,20 +174,6 @@ denningOnline
         self.entity.strFileNo1 = item.key;
       }
     }
-
-    $scope.dateOptions = {
-      formatYear: 'yyyy',
-      startingDay: 1
-    };
-
-    $scope.format = 'dd/MM/yyyy';
-
-    $scope.open = function($event, opened) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[opened] = true;
-    };
 
     self.save = function () {
       growlService.growl('Saved successfully!', 'success');

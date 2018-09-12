@@ -331,20 +331,6 @@ denningOnline
       }
     }
     
-    $scope.open = function($event, opened) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[opened] = true;
-    };
-
-    $scope.dateOptions = {
-      formatYear: 'yyyy',
-      startingDay: 1
-    };
-
-    $scope.format = 'dd/MM/yyyy';
-
     self.upload = function() {
       self.uploaded = 0;
       angular.element('.contact-upload').click();

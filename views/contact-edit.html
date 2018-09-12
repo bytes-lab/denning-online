@@ -97,7 +97,7 @@
             <dt class="p-t-10">Date of Birth</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateBirth" is-open="opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'copened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateBirth" is-open="copened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -173,7 +173,7 @@
             </dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateDeceased" is-open="opened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date of death" />
+                <input ng-click="open($event, 'copened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateDeceased" is-open="copened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date of death" />
               </div>
             </dd>
           </dl>

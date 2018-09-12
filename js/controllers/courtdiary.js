@@ -195,20 +195,6 @@ denningOnline
       $state.go('courtdiary');
     }
 
-    $scope.open = function($event, opened) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope[opened] = true;
-    };
-
-    $scope.dateOptions = {
-      formatYear: 'yyyy',
-      startingDay: 1
-    };
-
-    $scope.format = 'dd/MM/yyyy';
-
     //Prevent Outside Click
     self.openDelete = function (event, contact) {
       event.stopPropagation();
