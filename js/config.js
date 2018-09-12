@@ -509,7 +509,7 @@ denningOnline
       .state ('payment-records', {
         data: {
           access: '@'
-        },        
+        },
         url: '/payment-records',
         templateUrl: 'views/common.html'
       })
@@ -517,21 +517,30 @@ denningOnline
       .state ('payment-records.list', {
         data: {
           access: '@'
-        },        
+        },
         url: '/:fileNo',
         controller: 'paymentRecordListCtrl as vm',
         templateUrl: 'views/payment-record-list.html'
+      })
+
+      .state ('payment-records.edit', {
+        data: {
+          access: '@'
+        },
+        url: '/:fileNo/:fileName/edit/:id',
+        controller: 'paymentRecordEditCtrl as vm',
+        templateUrl: 'views/payment-record-edit.html'
       })
 
       .state ('payment-records.new', {
         data: {
           access: '@',
           can_edit: true
-        },        
+        },
         url: '/:fileNo/:fileName/new',
         controller: 'paymentRecordEditCtrl as vm',
         templateUrl: 'views/payment-record-edit.html'
-      })  
+      })
 
       //------------------------------
       // ACCOUNTS

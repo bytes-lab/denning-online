@@ -21,7 +21,7 @@
             <tr class="ng-table-group" ng-repeat-start="group in $groups" ng-if="group.value!=' '">
               <td colspan="3"><a href=""><strong>&nbsp;</strong></a></td>
             </tr>
-            <tr ng-repeat="file in group.data" ng-repeat-end>
+            <tr ng-repeat="file in group.data" ng-repeat-end ui-sref="payment-records.edit({ fileNo: vm.fileNo, fileName: vm.fileName, id:file.code })">
               <td data-title="'Date Paid'" class="ng-table-fixed-column-40" ng-class="{'f-700': group.value == '  '}">
                 {{ file.strDescription }}
               </td>

@@ -39,7 +39,9 @@ denningOnline
     }  
   })
 
-  .controller('noteEditCtrl', function($stateParams, growlService, noteService, $state, Auth, $scope) {
+  .controller('noteEditCtrl', function($stateParams, growlService, noteService, $state, Auth, 
+                                       $scope) 
+  {
     var self = this;
     self.can_edit = $state.$current.data.can_edit;
     self.userInfo = Auth.getUserInfo();
@@ -154,10 +156,12 @@ denningOnline
 
     self.fileNo = $stateParams.fileNo;
     self.fileName = $stateParams.fileName;
-    self.title = self.fileNo+' ( '+self.fileName+' )';
+    self.title_ = self.fileNo+' ( '+self.fileName+' )';
 
     if ($stateParams.id) {
+      self.title = "Payment Record Edit";
     } else {
+      self.title = "New Payment Record";
       self.entity = {
         dtDatePaid: uibDateParser.parse(new Date())
       }
