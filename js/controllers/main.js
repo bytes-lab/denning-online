@@ -123,7 +123,7 @@ denningOnline
     }
 
     self.searchTextChange = function (text) {
-      // self.searchCategory = 0;
+      self.searchCategory = 0;
       self.currentText = { value: text, display: text };
       if (text.trim() == '') {
         self.searchRes = [];

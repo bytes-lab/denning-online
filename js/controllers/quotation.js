@@ -23,7 +23,8 @@ denningOnline
 
   .controller('quotationEditCtrl', function($stateParams, quotationService, $state, Auth,
                                             refactorService, fileMatterService, 
-                                            matterCodeService, presetbillService) 
+                                            matterCodeService, presetbillService,
+                                            uibDateParser) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -41,7 +42,14 @@ denningOnline
     self.matterChange = function (matter) {
       if (matter && matter.JsonDesc) {
         self.entity.fileNo = matter.key;
-        var clsPrimaryClient = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,"")).primaryClient;
+        var matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+        var clsPrimaryClient = matterInfo.primaryClient;
+
+        self.entity.matter = matterInfo.matter;
+        self.matterDescription = self.entity.matter.description;
+        if (matterInfo.propertyGroup[0]) {
+          self.entity.property = matterInfo.propertyGroup[0].fullTitle;
+        }
         self.entity.issueToName = clsPrimaryClient.name;
         self.entity.primaryClient = clsPrimaryClient.name;
       }
@@ -66,7 +74,7 @@ denningOnline
     }
 
     if ($stateParams.id) {
-      self.title = 'Edit Quotation';
+      self.title = 'EDIT QUOTATION';
       quotationService.getItem($stateParams.id).then(function(item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
@@ -80,9 +88,12 @@ denningOnline
           code: self.entity.presetCode.code,
           strDescription: self.entity.presetCode.description
         }
+
+        self.entity.issueDate = uibDateParser.parse(self.entity.issueDate, 'yyyy-MM-dd HH:mm:ss')
       });
     } else {
-      self.title = 'New Quotation';
+      self.title = 'NEW QUOTATION';
       self.entity = {};
+      self.entity.issueDate = uibDateParser.parse(new Date());
     }
   })

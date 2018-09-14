@@ -58,19 +58,7 @@
 
     <ul class="dropdown-menu">
       <li>
-        <a ui-sref="folders.list({ id: vm.fileNo, type: 'matter' })">FOLDER</a>
-      </li>
-      <li>
         <a ui-sref="accounts.list({ fileNo: vm.fileNo, fileName: vm.fileName })">ACCOUNTS</a>
-      </li>
-      <li>
-        <a ui-sref="notes.list({ fileNo: vm.fileNo, fileName: vm.fileName })">NOTES</a>
-      </li>
-      <li>
-        <a ui-sref="payment-records.list({ fileNo: vm.fileNo })">PAYMENTS</a>
-      </li>
-      <li>
-        <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'template' })">TEMPLATES</a>
       </li>
       <li>
         <a ui-sref="courtdiary({ keyword: vm.fileNo })">CALENDAR</a>
@@ -79,7 +67,22 @@
         <a href="">CHECKLIST</a>
       </li>
       <li>
+        <a ui-sref="folders.list({ id: vm.fileNo, type: 'matter' })">MATTER FOLDER</a>
+      </li>
+      <li>
+        <a ui-sref="notes.list({ fileNo: vm.fileNo, fileName: vm.fileName })">NOTES</a>
+      </li>
+      <li>
+        <a ui-sref="payment-records.list({ fileNo: vm.fileNo })">PAYMENTS</a>
+      </li>
+      <li>
         <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'summary' })">SUMMARY</a>
+      </li>
+      <li>
+        <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'template' })">TEMPLATES</a>
+      </li>
+      <li>
+        <a ng-click="vm.upload()" ng-if="vm.upload">UPLOAD</a>
       </li>
     </ul>
   </li>
@@ -93,7 +96,7 @@
 
     <ul class="dropdown-menu">
       <li>
-        <a ui-sref="contacts.matters({id: vm.code})">Related Matter</a>
+        <a ui-sref="contacts.matters({id: vm.code})">Related Matters</a>
       </li>
     </ul>
   </li>  
@@ -107,7 +110,7 @@
 
     <ul class="dropdown-menu">
       <li>
-        <a ui-sref="properties.matters({id: vm.code})">Related Matter</a>
+        <a ui-sref="properties.matters({id: vm.code})">Related Matters</a>
       </li>
     </ul>
   </li>  
