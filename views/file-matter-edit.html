@@ -64,7 +64,7 @@
           md-search-text="searchText"
           md-items="item in queryBanks(searchText)"
           md-item-text="item.strName ? item.strName: ' '"
-          md-min-length="1"
+          md-min-length="0"
           md-autoselect="false"
           class="default-input"
           style="width:72%">
@@ -133,7 +133,7 @@
           md-search-text="searchText"
           md-items="item in queryBanks(searchText)"
           md-item-text="item.strName ? item.strName: ' '"
-          md-min-length="1"
+          md-min-length="0"
           md-autoselect="false"
           class="default-input"
           style="width:72%">
@@ -217,7 +217,7 @@
         md-search-text="searchText"
         md-items="item in queryContacts(searchText)"
         md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:72%">
@@ -249,7 +249,7 @@
         md-search-text="q_lf"
         md-items="item in queryLFs(q_lf)"
         md-item-text="item.strName ? item.strName: ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:45%">
@@ -321,7 +321,7 @@
         md-items="item in queryProperties(qspp)"
         md-selected-item-change="propertyChange(item, n)"
         md-item-text="item.strAddress ? item.strAddress : ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:72%">
@@ -556,7 +556,7 @@
         md-search-text="qspc"
         md-items="item in queryContacts(qspc)"
         md-item-text="item.strName+' ( '+item.strIDNo+' )'"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         placeholder="Enter existing contact name or ID"
         class="default-input"
@@ -637,7 +637,7 @@
         md-search-text="qpscl"
         md-items="item in queryChecklist(qpscl)"
         md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:45%;">
@@ -662,7 +662,7 @@
         md-search-text="qpsb1"
         md-items="item in queryBills(qpsb1)"
         md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:45%;">
@@ -714,7 +714,7 @@
         md-search-text="qspic"
         md-items="item in queryStaffs(qspic)"
         md-item-text="item.strInitials ? item.strInitials: ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:45%;">
@@ -735,7 +735,7 @@
         md-search-text="qslic"
         md-items="item in queryStaffs(qslic)"
         md-item-text="item.strInitials ? item.strInitials: ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:45%;">
@@ -756,7 +756,7 @@
         md-search-text="qscic"
         md-items="item in queryStaffs(qscic)"
         md-item-text="item.strInitials ? item.strInitials: ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:45%;">
@@ -777,7 +777,7 @@
         md-search-text="qsctc"
         md-items="item in queryStaffs(qsctc)"
         md-item-text="item.strInitials ? item.strInitials: ' '"
-        md-min-length="1"
+        md-min-length="0"
         md-autoselect="false"
         class="default-input"
         style="width:45%;">
@@ -829,7 +829,7 @@
       </md-autocomplete>
       <a class="btn btn-primary short-btn" target="_new" ui-sref="file-matters.edit({ fileNo: rmatter.key })" ng-if="rmatter.key.trim()">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the matter"></span>
-      </a>      
+      </a>
     </div>
   </div>
   <div class="clearfix"></div>
@@ -845,29 +845,26 @@
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Entered by</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" readonly="" ng-model="model.clsEnteredBy.strInitials">
+      <label>{{ model.clsEnteredBy.strInitials }}</label>
     </div>
   </div>
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Updated by</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" readonly="" ng-model="model.clsUpdatedBy.strInitials">
+      <label>{{ model.clsUpdatedBy.strInitials }}</label>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Date</label>
+    <div class="col-sm-8">
+      <label>{{ model.dtDateEntered | ddate }}</label>
     </div>
   </div>
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Date</label>
     <div class="col-sm-8">
-      <div class="fg-line">
-        <input type="text" readonly="" ng-value="model.dtDateEntered | ddate" class="form-control input-sm" id="inputEmail3">
-      </div>
-    </div>
-  </div>
-  <div class="form-group col-md-6">
-    <label for="inputEmail3" class="col-sm-4 attr-label-1">Date</label>
-    <div class="col-sm-8">
-      <div class="fg-line">        
-        <label class="form-control input-sm" id="inputEmail3">{{ model.dtDateUpdated | ddate }}</label>
-      </div>
+      <label>{{ model.dtDateUpdated | ddate }}</label>
     </div>
   </div>
   </div>
@@ -1271,7 +1268,7 @@
           md-search-text="qp1"
           md-items="item in queryList(qp1)"
           md-item-text="item"
-          md-min-length="1"
+          md-min-length="0"
           md-autoselect="false"
           class="default-input"
           style="width:45%;">

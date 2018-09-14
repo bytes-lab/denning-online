@@ -2,19 +2,27 @@
 
   <div class="card">
     <div class="card-header">
-      <h2 class="c-purple f-500 f-20" style="display: inline;">{{ vm.title }}</h2>
+      <div class="row">
+        <div class="col-md-10">
+          <span class="d-header">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-t-10" ui-sref="billing.quotations-list">Cancel</a>
+          <a class="btn btn-primary btn-sm pull-right m-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn btn-success btn-sm pull-right m-t-10" type="submit" ng-click="vm.save()">Convert Tax Invoice</a>
+        </div>
+      </div>
     </div>
         
     <div class="card-body card-padding">
       <div class="clearfix"></div>
 
-      <h4 class="m-b-10">DETAILS</h4>
+      <h4 class="m-b-20">DETAILS</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Quotation No.</dt>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Quotation No.</dt>
             <dd>
-              <input type='text' class="form-control" readonly="true" ng-model="vm.entity.documentNo">
+              <label class="p-l-10">{{ vm.entity.code }}</label>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -22,10 +30,10 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.rmatter"
+                md-selected-item="vm.entity.clsFileNo"
                 md-search-text="qstl"
                 md-items="item in vm.queryMatters(qstl)"
-                md-item-text="item.key"
+                md-item-text="item.strFileNo1"
                 md-min-length="0"
                 md-selected-item-change="vm.matterChange(item)"
                 placeholder="Enter matter No (if any)"
@@ -36,17 +44,17 @@
               </md-autocomplete>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">File Name</dt>
+          <dl class="dl-horizontal m-b-10">
+            <dt>File Name</dt>
             <dd>
-              <input type='text' class="form-control" ng-model="vm.entity.primaryClient">
+              <label class="p-l-10">{{ vm.entity.clsFileNo.clsPrimaryClient.strName }}</label>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Quotation To</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.issueToName" type="text" class="form-control">
+                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
               </div>
 
             </dd>
@@ -56,7 +64,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.matter"
+                md-selected-item="vm.entity.clsMatterCode"
                 md-search-text="qmc"
                 md-items="item in vm.queryCodes(qmc)"
                 md-selected-item-change="vm.matterCodeChange(item)"
@@ -75,15 +83,15 @@
             <dt class="p-t-10">Quotation Matter</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.matterDescription">
+                <input type='text' class="form-control" ng-model="vm.entity.strBillingMatter">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
+            <dt class="p-t-10">Quotation Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.citizenship">
+                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtCreateDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -105,7 +113,7 @@
                 md-selected-item="vm.presetCode"
                 md-search-text="qpsb1"
                 md-items="item in vm.queryBills(qpsb1)"
-                md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
+                md-item-text="item.code"
                 md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
@@ -117,18 +125,18 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Quotation Date</dt>
+            <dt class="p-t-10">Property</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.issueDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input type='text' class="form-control" ng-model="vm.entity.strPropertyAddress">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Property</dt>
+            <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.property">
+                <input type='text' class="form-control" ng-model="vm.entity.strState">
               </div>
             </dd>
           </dl>
@@ -141,10 +149,10 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Adjusticated Value</dt>
+            <dt class="p-t-10">Adjudicated Value</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.customer_type">
+                <input type='text' class="form-control" ng-model="vm.entity.decAdjPrice">
               </div>
             </dd>
           </dl>
@@ -152,7 +160,7 @@
             <dt class="p-t-10">Purchase Price</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.government_department">
+                <input type='text' class="form-control" ng-model="vm.entity.decPrice">
               </div>
             </dd>
           </dl>
@@ -160,7 +168,7 @@
             <dt class="p-t-10">Loan Amount</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.government_department">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
               </div>
             </dd>
           </dl>        
@@ -276,17 +284,17 @@
               </div>
             </dd>
           </dl>
-        </div>        
-      </div>   
+        </div>
+      </div>
    
-      <div class="row">   
+      <div class="row">
         <div class="col-md-10">
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.quotations-list">Cancel</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
             <a class="btn btn-success btn-sm pull-right" type="submit" ng-click="vm.save()">Convert Tax Invoice</a>
-          </div>    
+          </div>
         </div>
       </div>
     </div>

@@ -43,15 +43,17 @@ denningOnline
       if (matter && matter.JsonDesc) {
         self.entity.fileNo = matter.key;
         var matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+        console.log(matterInfo);
         var clsPrimaryClient = matterInfo.primaryClient;
 
         self.entity.matter = matterInfo.matter;
         self.matterDescription = self.entity.matter.description;
         if (matterInfo.propertyGroup[0]) {
-          self.entity.property = matterInfo.propertyGroup[0].fullTitle;
+          self.entity.strPropertyAddress = matterInfo.propertyGroup[0].fullTitle;
+          self.entity.strState = matterInfo.propertyGroup[0]
         }
         self.entity.issueToName = clsPrimaryClient.name;
-        self.entity.primaryClient = clsPrimaryClient.name;
+        self.entity.strClientName = clsPrimaryClient.name;
       }
     }
 
@@ -79,21 +81,16 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
 
-        self.rmatter = {
-          key: self.entity.fileNo || ' '
+        if (self.entity.strBillName) {
+          self.presetCode = {
+            code: self.entity.strBillName
+          }          
         }
-
-        self.matterDescription = self.entity.matter.description;
-        self.presetCode = {
-          code: self.entity.presetCode.code,
-          strDescription: self.entity.presetCode.description
-        }
-
-        self.entity.issueDate = uibDateParser.parse(self.entity.issueDate, 'yyyy-MM-dd HH:mm:ss')
       });
     } else {
       self.title = 'NEW QUOTATION';
-      self.entity = {};
-      self.entity.issueDate = uibDateParser.parse(new Date());
+      self.entity = {
+        dtCreateDate: uibDateParser.parse(new Date())
+      };
     }
   })

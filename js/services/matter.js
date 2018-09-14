@@ -19,7 +19,7 @@ denningOnline
     service.getRelatedMatters = function (type, code) {
       return http.GET(`v1/table/${type}/relatedmatter/${code}`).then(function (resp) {
         return resp.data;
-      });  
+      });
     }
 
     service.getItem = function (code) {
@@ -31,13 +31,13 @@ denningOnline
     service.getIDTypeList = function () {
       return http.GET('v1/IDType').then(function (resp) {
         return resp.data;
-      });  
+      });
     }
 
     service.getSalutationList = function () {
       return http.GET('v1/Salutation').then(function (resp) {
         return resp.data;
-      });  
+      });
     }
 
     service.getIRDBranchList = function () {
@@ -108,13 +108,13 @@ denningOnline
         search: keyword
       }).then(function (resp) {
         return resp.data;
-      });  
+      });
     }
 
     service.getItem = function (code) {
       return http.GET(`v1/table/MatterCodeEditForm/${code}`).then(function (resp) {
         return resp.data;
-      });    
+      });
     }
 
     service.save = function (entity) {

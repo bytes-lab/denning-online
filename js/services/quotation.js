@@ -13,7 +13,7 @@ denningOnline
     }
 
     service.getItem = function (code) {
-      return http.GET(`v1/Quotation/${code}`).then(function (resp) {
+      return http.GET(`v1/table/quotation/${code}`).then(function (resp) {
         return resp.data;
       });
     }

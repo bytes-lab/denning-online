@@ -330,8 +330,11 @@ denningOnline
                             fileMatterService) 
       {
         $scope.userInfo = Auth.getUserInfo();
-        $scope.rmatter = {
-          key: $scope.model.strRelatedFile || ' '
+
+        if ($scope.model.strRelatedFile) {
+          $scope.rmatter = {
+            key: $scope.model.strRelatedFile
+          }          
         }
 
         $scope.queryMatters = function (search) {
