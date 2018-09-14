@@ -56,13 +56,13 @@ denningOnline
       'Common'
     ];
     if ($stateParams.id) {
-      self.title = 'Preset Bill Edit';
+      self.title = 'PRESET BILL EDIT';
       presetbillService.getItem($stateParams.id).then(function (item){
-        self.presetbill = angular.copy(item);
+        self.entity = angular.copy(item);
       });
     } else {
-      self.title = 'New Preset Bill';
-      self.presetbill = {
+      self.title = 'NEW PRESET BILL';
+      self.entity = {
         code: 'P' + Math.floor(Math.random() * 1000 + 1),
         state: 'Common',
         category: 'Conveyancing',
@@ -70,8 +70,8 @@ denningOnline
     }
 
     self.save = function () {
-      presetbillService.save(self.presetbill).then(function(presetbill) {
-        self.presetbill = presetbill;
+      presetbillService.save(self.entity).then(function (presetbill) {
+        self.entity = presetbill;
         $state.go('billing.presetbills-list');
       });
     }

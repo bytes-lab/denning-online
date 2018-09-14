@@ -343,203 +343,51 @@
       </a>
     </div>
   </div>
-  <div class="form-group">
-  <div class="clearfix"></div>
-  <div class="col-md-12 p-l-25">
-    <h4 class="m-b-15 group-label">Property 1 Information</h4>    
-    <div class="form-group col-md-12">
-      <div style="display: flex;">
-      <label class="form-control attr-label">Title</label>
-      <input type="text" readonly class="form-control" ng-model="property.strAddress">
-      </div>
-    </div>
-    <div class="form-group col-md-12">
-      <div style="display: flex;">
-      <label class="form-control attr-label">{{ property.strTitleType }}</label>
-      <label class="form-control attr-label">{{ property.boolTitleComeOut }}</label>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Area</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strArea" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Category of Land Use</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strPropertyUse" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Tenure</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strLandTenure" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Express Condition</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strExpressCondition" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Lease Expiry Date</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.dtLeaseExpDate" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group1 col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Building Type</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strBuildingCultivationType" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="form-group1 col-md-6">
-      <div class="checkbox" style="margin: 6px 0 6px 18px;">
-        <label>
-          <input type="checkbox" ng-model="property.boolRestrictionInInterest" readonly="">
-          <i class="input-helper"></i>
-          NO Restriction In Interest
-        </label>
-      </div>    
-    </div>
-    <div class="form-group1 col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Restriction Against</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strRestrictionAgainst" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Approving Authority</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strApprovingAuthority" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>        
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Annual Quit Rent</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.decAnnualQuit" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>     
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Assessment Rate</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="model[options.key+'_islamic_loan']" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>     
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Previous Title</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strPreviousTitle" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>      
-    <div class="form-group col-sm-10">
-      <div class="radio col-sm-4">
-        <label>
-          <input type="radio" readonly name="propertyType" value="0" ng-model="vm.property.propertyType.code">
-          <i class="input-helper"></i>
-          ( Price / Area )
-        </label>
-      </div>
-      <div class="radio col-sm-4">
-        <label>
-          <input type="radio" readonly name="propertyType" value="1" ng-model="vm.property.propertyType.code">
-          <i class="input-helper"></i>
-          Fixed Adjustment Rate
-        </label>
-      </div>
-      <div class="radio col-sm-4">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="model[options.key+'_selling_price']" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="col-md-12 p-l-25">
-    <h4 class="m-b-15 group-label">Details Principla SPA</h4>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Unit No.</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strUnitParcelNo" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Project Name</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strProjectName" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Unit Area</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strUnitArea" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Building Description</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="model[options.key+'_selling_price']" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Developer</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.clsDeveloper.strName" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Proprietor</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text"  readonlyng-model="property.clsProprietor
-  .strName" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-md-6 col-md-offset-6">
-      <label for="inputEmail3" class="col-sm-4 attr-label-1">Block / Master Title</label>
-      <div class="col-sm-8">
-        <div class="fg-line">
-          <input type="text" readonly ng-model="property.strBlockMasterTitleAdd" class="form-control input-sm" id="inputEmail3">
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="col-sm-offset-1 col-sm-9 m-t-20 m-b-20">
+    <dl class="dl-horizontal m-b-10">
+      <dt>Title</dt>
+      <dd>{{ property.strAddress }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Area</dt>
+      <dd>{{ property.strArea }} {{ property.strAreaDescription }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Tenure</dt>
+      <dd>{{ property.strLandTenure }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Expiry Date</dt>
+      <dd>{{ property.dtLeaseExpDate|ddate }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Restriction</dt>
+      <dd>{{ property.strRestrictionAgainst }} <span ng-if="property.strApprovingAuthority">( {{ property.strApprovingAuthority }} )</span></dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Use</dt>
+      <dd>{{ property.strPropertyUse }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Type</dt>
+      <dd>{{ property.strPropertyType }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Postal Add</dt>
+      <dd>{{ property.strPropertyAdr }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Project</dt>
+      <dd>{{ property.strProjectName }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Developer</dt>
+      <dd>{{ property.clsDeveloper.strName }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Proprietor</dt>
+      <dd>{{ property.clsProprietor.strName }}</dd>
+    </dl>
   </div>
 </script>
 

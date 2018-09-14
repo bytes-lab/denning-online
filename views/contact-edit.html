@@ -796,41 +796,9 @@
           </dl>
         </div>
       </div>
-      <h4 class="m-t-25">Office Use</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Entered by</dt>
-            <dd>
-              <input type="text" class="form-control" readonly="" ng-model="vm.entity.clsEnteredBy.strInitials">
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Date</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="true" class="form-control" ng-value="vm.entity.dtDateEntered|ddate">
-              </div>
-            </dd>
-          </dl>          
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Updated by</dt>
-            <dd>
-              <input type="text" class="form-control" readonly="" ng-model="vm.entity.clsUpdatedBy.strInitials">
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Date</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="true" class="form-control" ng-value="vm.entity.dtDateUpdated|ddate">
-              </div>
-            </dd>
-          </dl>          
-        </div>
-      </div>
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
       <input ng-if="!vm.isNew" type="file" class="hidden contact-upload" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
       <div class="row" ng-if="!vm.isDialog">
         <div class="col-md-11 col-sm-12 no-padding">
