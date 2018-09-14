@@ -1,176 +1,96 @@
 denningOnline
-    .controller('billingitemListCtrl', function($filter, $uibModal, NgTableParams, billingitemService) {
-        var self = this;
-        self.dataReady = false;
-        self.openDelete = openDelete;
+  .controller('billingitemListCtrl', function(NgTableParams, billingitemService, Auth, $state) {
+    var self = this;
+    self.userInfo = Auth.getUserInfo();
 
-        billingitemService.getList().then(function(data) {
-            self.data = data;
-            self.dataReady = true;
-            initializeTable();
-        });        
-        
-        function initializeTable () {
-            //Filtering
-            self.tableFilter = new NgTableParams({
-                page: 1,            // show first page
-                count: 10,
-                sorting: {
-                    name: 'asc'     // initial sorting
-                }
-            }, {
-                total: self.data.length, // length of data
-                getData: function(params) {
-                    // use build-in angular filter
-                    var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-                    orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-                    params.total(orderedData.length); // set total for recalc pagination
-                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                }
-            })      
-        }
-
-        //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, billingitem) {
-            var modalInstance = $uibModal.open({
-                animation: animation,
-                templateUrl: 'myModalContent.html',
-                controller: 'BillingitemDeleteModalCtrl',
-                size: size,
-                backdrop: backdrop,
-                keyboard: keyboard,
-                resolve: {
-                    billingitem: function () {
-                        return billingitem;
-                    }
-                }            
-            });
-        }
-
-        //Prevent Outside Click
-        function openDelete(billingitem) {
-            modalInstances(true, '', 'static', true, billingitem)
-        };        
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 25,
+    }, {
+      getData: function(params) {
+        return billingitemService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
     })
 
-    .controller('BillingitemDeleteModalCtrl', function ($scope, $uibModalInstance, billingitem, billingitemService, $state) {
-        $scope.ok = function () {
-            billingitemService.delete(billingitem).then(function(billingitem) {
-                $state.reload();
-            })
-            .catch(function(err){
-                //Handler
+    self.search = function () {
+      self.tableFilter.reload();
+    }
+  })
 
-                //$scope.formname.billingitemInfo.$error.push({meessage:''});
-            });
-            $uibModalInstance.close();
-        };
+  .controller('billingitemEditCtrl', function($stateParams, billingitemService, $state, Auth,
+                                            refactorService, fileMatterService, 
+                                            matterCodeService, presetbillService,
+                                            uibDateParser) 
+  {
+    var self = this;
+    self.userInfo = Auth.getUserInfo();
 
-        $scope.cancel = function () {
-            $uibModalInstance.close();
-            $state.go('billingitems.list');
-        };
-    })
+    self.isDialog = false;
+    self.can_edit = $state.$current.data.can_edit;
+    self.isNew = $state.$current.data.can_edit;
 
-    .controller('billingitemEditCtrl', function($filter, $stateParams, billingitemService, $state) {
-        var self = this;
-        self.save = save;
-        self.cancel = cancel;
-        self.get_code = get_code;
-        self.queryBillItems = queryBillItems;
-        self.isDialog = false;
-        self.viewMode = false;  // for edit / create
-        self.types = [
-            'Professional Fee',
-            'Disbursement',
-            'Disb. with GST',
-            'Service Tax'
-        ];
+    self.queryMatters = function (search) {
+      return fileMatterService.getList(1, 5, search).then(function (resp) {
+        return resp.data
+      })
+    }
 
-        self.states = [
-            'Common',
-            'Johor',
-            'Kedah',
-            'Kelantan',
-            'Kuala Lumpur',
-            'Malacca',
-            'Negeri Sembilan',
-            'Pahang',
-            'Perak',
-            'Perlis',
-            'Penang',
-            'Sabah',
-            'Sarawk',
-            'Selangor',
-            'Terengganu'
-        ];
+    self.matterChange = function (matter) {
+      if (matter && matter.JsonDesc) {
+        self.entity.fileNo = matter.key;
+        var matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+        console.log(matterInfo);
+        var clsPrimaryClient = matterInfo.primaryClient;
 
-        self.categories = [
-            'Conveyancing',
-            'Agreement',
-            'Litigation',
-            'Will',
-            'Estate Admin',
-            'Tenancy',
-            'Discharge of Charge',
-            'Divorce',
-            'Corporate Secretarial',
-            'General',
-            'Common'
-        ];
-
-        billingitemService.getList().then(function(data) {
-            self.data = data;
-        });        
-
-        function queryBillItems(searchText) {
-            return self.data.filter(function(c) {
-                return c.code.search(new RegExp(searchText, "i")) > -1;
-            });
+        self.entity.matter = matterInfo.matter;
+        self.matterDescription = self.entity.matter.description;
+        if (matterInfo.propertyGroup[0]) {
+          self.entity.strPropertyAddress = matterInfo.propertyGroup[0].fullTitle;
+          self.entity.strState = matterInfo.propertyGroup[0]
         }
+        self.entity.issueToName = clsPrimaryClient.name;
+        self.entity.strClientName = clsPrimaryClient.name;
+      }
+    }
 
-        if ($stateParams.id) {
-            billingitemService.getItem($stateParams.id)
-            .then(function(item){
-                self.billingitem = angular.copy(item);  // important
-            });
-        } else {
-            self.billingitem = {
-                type: self.types[0],
-                code: 'F' + Math.floor(Math.random() * 1000 + 1),
-                priority: 1,
-                state: 'Common',
-                category: 'Conveyancing',
-                invoice: {
-                    price: 0.00,
-                    unit: 1.00
-                },
-                voucher: {
-                    price: 0.00,
-                    unit: 0.00
-                }
-            };
-        }
+    self.queryCodes = function(searchText) {
+      return matterCodeService.getList(1, 10, searchText).then(function (data) {
+        return data.data;
+      });
+    }
 
-        function get_code() {
-            if ($stateParams.id) 
-                return;
-            // get from server
-            var idx = self.types.map(function(c) { return c; }).indexOf(self.billingitem.type);
-            self.billingitem.code = 'FDGS'[idx] + Math.floor(Math.random() * 1000 + 1);
-        }
+    self.queryBills = function (keyword) {
+      return presetbillService.getTableList(1, 10, keyword).then(function (resp) {
+        return resp;
+      });
+    }
 
-        function save() {
-            billingitemService.save(self.billingitem).then(function(billingitem) {
-                self.billingitem = billingitem;
-                $state.go('billingitems.list');
-            })
-            .catch(function(err){
-                //Handler
-            });
-        }
+    self.matterCodeChange = function (item) {
+      if (item && item.strDescription) {
+        self.matterDescription = item.strDescription;
+      }
+    }
 
-        function cancel() {
-            $state.go('billingitems.list');            
+    if ($stateParams.id) {
+      self.title = 'EDIT QUOTATION';
+      billingitemService.getItem($stateParams.id).then(function(item){
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+
+        if (self.entity.strBillName) {
+          self.presetCode = {
+            code: self.entity.strBillName
+          }
         }
-    })
+      });
+    } else {
+      self.title = 'NEW QUOTATION';
+      self.entity = {
+        dtCreateDate: uibDateParser.parse(new Date())
+      };
+    }
+  })
