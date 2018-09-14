@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-        
+
     <div class="card-body">
       <div class="col-sm-4 p-l-25">
         <div class="input-group input-group-lg">
@@ -38,7 +38,7 @@
               {{ w.matter.code }}
             </td>
             <td data-title="'Fees'" class="text-right">
-              {{ w.spaAdj }}
+              {{ w.spaAdj | number:2 }}
             </td>
             <td data-title="'Disb (GST)'" class="text-right">
               {{ w.fileNo1 }}
@@ -53,10 +53,10 @@
               {{ w.amount }}
             </td>
             <td data-title="'Price'" class="text-right">
-              {{ w.spaPrice }}
+              {{ w.spaPrice | number:2 }}
             </td>
             <td data-title="'Loan'" class="text-right">
-              {{ w.spaLoan }}
+              {{ w.spaLoan | number:2 }}
             </td>
             <td data-title="'Aging'">
               {{ w.aging }}

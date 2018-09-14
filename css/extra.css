@@ -118,6 +118,7 @@
 md-autocomplete input:not(.md-input) {
     line-height: 20px;
     padding-left: 10px;
+    font-size: 13px;
 }
 
 .md-whiteframe-1dp, .md-whiteframe-z1 {

@@ -1,7 +1,7 @@
 denningOnline
   .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, 
                                              $state, matterFormService, Auth, refactorService, 
-                                             growlService, contactService) 
+                                             growlService, contactService, uibDateParser) 
   {
     var vm = this;
     vm.userInfo = Auth.getUserInfo();
@@ -505,7 +505,8 @@ denningOnline
     } else {
       vm.idxTab = 0;
       vm.model = { 
-        tmp: editControl
+        tmp: editControl,
+        dtDateOpenFile: uibDateParser.parse(new Date())
       };
       vm.title = 'New Matter';
 
