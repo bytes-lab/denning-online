@@ -1,5 +1,7 @@
 denningOnline
-  .controller('billingitemListCtrl', function(NgTableParams, billingitemService, Auth, $state) {
+  .controller('billingitemListCtrl', function(NgTableParams, billingitemService, Auth, 
+                                              $state) 
+  {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -21,10 +23,10 @@ denningOnline
     }
   })
 
-  .controller('billingitemEditCtrl', function($stateParams, billingitemService, $state, Auth,
-                                            refactorService, fileMatterService, 
-                                            matterCodeService, presetbillService,
-                                            uibDateParser) 
+  .controller('billingitemEditCtrl', function($stateParams, billingitemService, $state,
+                                              refactorService, fileMatterService, Auth, 
+                                              matterCodeService, presetbillService,
+                                              uibDateParser) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -32,6 +34,24 @@ denningOnline
     self.isDialog = false;
     self.can_edit = $state.$current.data.can_edit;
     self.isNew = $state.$current.data.can_edit;
+
+    self.categories = [
+        'Conveyancing',
+        'Agreement',
+        'Litigation',
+        'Will',
+        'Estate Admin',
+        'Tenancy',
+        'Discharge of Charge',
+        'Divorce',
+        'Corporate Secretarial',
+        'General',
+        'Common'
+    ];
+
+    billingitemService.getStateList().then(function (resp) {
+      self.states = resp.data;
+    })
 
     self.queryMatters = function (search) {
       return fileMatterService.getList(1, 5, search).then(function (resp) {
@@ -76,7 +96,7 @@ denningOnline
     }
 
     if ($stateParams.id) {
-      self.title = 'EDIT QUOTATION';
+      self.title = 'EDIT BILL ITEM';
       billingitemService.getItem($stateParams.id).then(function(item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
@@ -88,7 +108,7 @@ denningOnline
         }
       });
     } else {
-      self.title = 'NEW QUOTATION';
+      self.title = 'NEW BILL ITEM';
       self.entity = {
         dtCreateDate: uibDateParser.parse(new Date())
       };

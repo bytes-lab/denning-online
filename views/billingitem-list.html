@@ -21,7 +21,7 @@
       <div class="clearfix"></div>
       <div class="table-responsive table-div p-15">
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
-          <tr ng-repeat="w in $data" ui-sref="billing.quotations-edit({'id': w.documentNo})">
+          <tr ng-repeat="w in $data" ui-sref="billing.items-edit({'id': w.strItemCode})">
             <td data-title="'Item Code'">
               {{ w.strItemCode }}
             </td>

@@ -12,6 +12,12 @@ denningOnline
       });
     }
 
+    service.getStateList = function () {
+      return http.GET('v1/table/cboState').then(function (resp) {
+        return resp;
+      });
+    }
+
     service.getItem = function (code) {
       return http.GET(`v1/table/BillItem/${code}`).then(function (resp) {
         return resp.data;
