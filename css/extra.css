@@ -321,3 +321,18 @@ tr.selected {
 md-autocomplete.md-default-theme[disabled]:not([md-floating-label]), md-autocomplete[disabled]:not([md-floating-label]) {
     background: #fafafa !important;
 }
+
+.item-type {
+    background: #eee;
+    padding: 5px 16px;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 3px;
+    color: #333;
+    cursor: pointer;
+}
+
+.item-type.active {
+    background: #00bcd4;
+    color: white;
+}

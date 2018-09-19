@@ -11,26 +11,26 @@
         
     <div class="card-body">
       <div class="row">
-      <div class="col-md-10">
-        <div class="table-responsive table-div p-15"> 
-          <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
-            <tr ng-repeat="w in $data" ui-sref="billing.presetbills-edit({id: w.code})">
-              <td data-title="'Preset Code'" filter="{ 'code': 'text' }" sortable="'code'">
-                {{ w.code }}
-              </td>
-              <td data-title="'Description'" filter="{ 'description': 'text' }" sortable="'description'">
-                {{ w.description }}
-              </td>
-              <td data-title="'State'" filter="{ 'state': 'text' }" sortable="'state'">
-                {{ w.state }}
-              </td>
-              <td data-title="'Category'" filter="{ 'category': 'text' }" sortable="'category'">
-                {{ w.category }}
-              </td>
-            </tr>
-          </table>
+        <div class="col-md-10">
+          <div class="table-responsive table-div p-15"> 
+            <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+              <tr ng-repeat="w in $data" ui-sref="billing.presetbills-edit({id: w.code})">
+                <td data-title="'Preset Code'" filter="{ 'code': 'text' }" sortable="'code'">
+                  {{ w.code }}
+                </td>
+                <td data-title="'Description'" filter="{ 'description': 'text' }" sortable="'description'">
+                  {{ w.description }}
+                </td>
+                <td data-title="'State'" filter="{ 'state': 'text' }" sortable="'state'">
+                  {{ w.state }}
+                </td>
+                <td data-title="'Category'" filter="{ 'category': 'text' }" sortable="'category'">
+                  {{ w.category }}
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </div>

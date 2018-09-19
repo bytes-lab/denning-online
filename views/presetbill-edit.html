@@ -53,14 +53,66 @@
         </div>
       </div>
  
-      <div class="clearfix"></div>
-      <div class="btn-group btn-group-lg btn-group-category">
-        <button type="button" class="btn btn-info"><div>All</div><small>$342.22</small></button>
-        <button type="button" class="btn btn-info"><div>Fee</div><small>$342.22</small></button>
-        <button type="button" class="btn btn-info"><div>Disbursement</div><small>$342.22</small></button>
-        <button type="button" class="btn btn-info"><div>GST</div><small>$342.22</small></button>
+      <h4 class="m-t-25">BILL ITEMS</h4>
+      <div class="row">
+        <div class="col-md-8 p-l-30 m-t-15">
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>$342.89</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>$342.89</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>$342.89</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">GST ( <small>$342.89</small> )</div>
+        </div>
+        <div class="col-md-8">
+          <div class="table-responsive table-div p-15"> 
+            <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle">
+              <tr ng-repeat="w in $data">
+                <td data-title="'Item Code'">
+                  {{ w.strItemCode }}
+                </td>
+                <td data-title="'Description'">
+                  {{ w.strDescription }}
+                </td>
+                <td data-title="'Formula'" class="p-0">
+                  <div class="checkbox m-5">
+                    <label>
+                      <input type="checkbox" ng-checked="w.boolIsFormula=='1'" readonly>
+                      <i class="input-helper"></i>
+                    </label>
+                  </div>
+                </td>
+                <td data-title="'Unit'" class="text-right">
+                  {{ w.decUnit }}
+                </td>
+                <td data-title="'Unit Price'" class="text-right">
+                  {{ w.decUnitPrice | number:2 }}
+                </td>
+                <td data-title="'Charges'" class="text-right">
+                  {{ w.decUnitCost }}
+                </td>
+                <td data-title="'Tax Code'">
+                  {{ w.strTaxCode }}
+                </td>
+                <td data-title="'GST (%)'">
+                  {{ w.decTaxRate * 100 | number:2 }}
+                </td>
+                <td data-title="''" class="p-5">
+                  <button class="btn btn-default btn-sm" title="Rename" ng-click="vm.renameDoc(file)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-chevron-up"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" title="Download" ng-click="vm.download(file)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-chevron-down"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" title="Download" ng-click="vm.download(file)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-plus"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" title="Download" ng-click="vm.download(file)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-close"></i>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
-
       <h4 class="m-t-25">REMARK</h4>
       <div class="row">
         <div class="col-md-10 p-l-25">
