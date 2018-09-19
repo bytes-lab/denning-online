@@ -1,6 +1,6 @@
 denningOnline
   // =========================================================================
-  // Preset Billing Items
+  // Preset Bills
   // =========================================================================
   
   .service('presetbillService', function(http) {
@@ -26,7 +26,7 @@ denningOnline
     }
 
     service.getItem = function (code) {
-      return http.GET(`v1/PresetBill/${code}`).then(function (resp) {
+      return http.GET(`v1/table/PresetBill/${code}`).then(function (resp) {
         return resp.data;
       });
     }

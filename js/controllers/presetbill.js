@@ -1,5 +1,7 @@
 denningOnline
-  .controller('presetbillListCtrl', function($filter, $uibModal, NgTableParams, presetbillService, $state) {
+  .controller('presetbillListCtrl', function($filter, $uibModal, NgTableParams, $state, 
+                                             presetbillService) 
+  {
     var self = this;
 
     presetbillService.getList(1, 500).then(function(data) {
@@ -20,27 +22,15 @@ denningOnline
     }
   })
 
-  .controller('presetbillEditCtrl', function($filter, $stateParams, presetbillService, $state) {
+  .controller('presetbillEditCtrl', function($filter, $stateParams, presetbillService, 
+                                             $state, billingitemService, refactorService) 
+  {
     var self = this;
     self.isDialog = false;
 
-    self.states = [
-      'Common',
-      'Johor',
-      'Kedah',
-      'Kelantan',
-      'Kuala Lumpur',
-      'Malacca',
-      'Negeri Sembilan',
-      'Pahang',
-      'Perak',
-      'Perlis',
-      'Penang',
-      'Sabah',
-      'Sarawk',
-      'Selangor',
-      'Terengganu'
-    ];
+    billingitemService.getStateList().then(function (resp) {
+      self.states = resp.data;
+    })
 
     self.categories = [
       'Conveyancing',
@@ -55,17 +45,19 @@ denningOnline
       'General',
       'Common'
     ];
+
     if ($stateParams.id) {
       self.title = 'PRESET BILL EDIT';
       presetbillService.getItem($stateParams.id).then(function (item){
-        self.entity = angular.copy(item);
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
       });
     } else {
       self.title = 'NEW PRESET BILL';
       self.entity = {
         code: 'P' + Math.floor(Math.random() * 1000 + 1),
-        state: 'Common',
-        category: 'Conveyancing',
+        strState: 'Common',
+        strCategory: 'Conveyancing',
       };
     }
 
