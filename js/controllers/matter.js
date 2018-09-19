@@ -214,6 +214,7 @@ denningOnline
     self.save = function () {
       var selected = [];
       angular.forEach(self.mattercode, function(value, key) {
+        value.Field = key;
         selected.push(value);
       })
 

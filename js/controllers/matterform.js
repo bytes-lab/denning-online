@@ -27,7 +27,7 @@ denningOnline
 
     function getLabel (arr, key) {
       for (var i = 0; i < arr.length; i++) {
-        if (arr[i].JsonField == key) {
+        if (arr[i].Field == key) {
           return arr[i].Label;
         }
       }
@@ -204,7 +204,7 @@ denningOnline
             {
               "type": "contact",
               "templateOptions": {
-                "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer1') : '',
+                "label": clsMatterCode ? clsMatterCode.strGroupL1 : '',
                 "share": true,
                 "solicitor": true,
                 "party": false,
@@ -215,7 +215,7 @@ denningOnline
             {
               "type": "contact",
               "templateOptions": {
-                "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer2') : '',
+                "label": clsMatterCode ? clsMatterCode.strGroupL2 : '',
                 "share": false,
                 "solicitor": true,
                 "party": false,
@@ -226,7 +226,7 @@ denningOnline
             {
               "type": "contact",
               "templateOptions": {
-                "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer3') : '',
+                "label": clsMatterCode ? clsMatterCode.strGroupL3 : '',
                 "share": true,
                 "solicitor": true,
                 "party": false,
@@ -237,7 +237,7 @@ denningOnline
             {
               "type": "contact",
               "templateOptions": {
-                "label": clsMatterCode ? getLabel(matter_code, 'clsLawyer4') : '',
+                "label": clsMatterCode ? clsMatterCode.strGroupL4 : '',
                 "share": true,
                 "solicitor": true,
                 "party": false,
@@ -295,16 +295,16 @@ denningOnline
             {
               "type": "bank1",
               "templateOptions": {
-                "label": clsMatterCode ? getLabel(matter_code, 'clsBank1') : '',
+                "label": clsMatterCode ? getLabel(matter_code, 'Bank1') : '',
               }
             },
             {
               "type": "bank2",
               "templateOptions": {
-                "label": clsMatterCode ? getLabel(matter_code, 'clsBank2') : '',
+                "label": clsMatterCode ? getLabel(matter_code, 'Bank2') : '',
               }
             }
-          ]            
+          ]
         },
         "$": {
         },
