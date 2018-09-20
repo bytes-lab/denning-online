@@ -2,11 +2,13 @@ denningOnline
   .service('billingitemService', function(http) {
     var service = {};
 
-    service.getList = function (page, pagesize, keyword) {
-      return http.GET('v1/table/billitem/All', {
+    service.getList = function (type, page, pagesize, keyword, state, category) {
+      return http.GET(`v1/table/billitem/${type}`, {
         page: page,
         pagesize: pagesize,
-        search: keyword 
+        search: keyword,
+        state: state,
+        category: category
       }).then(function (resp) {
         return resp;
       });

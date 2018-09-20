@@ -24,7 +24,7 @@ denningOnline
 
   .controller('presetbillEditCtrl', function($filter, $stateParams, presetbillService, 
                                              $state, billingitemService, refactorService,
-                                             NgTableParams) 
+                                             NgTableParams, $uibModal) 
   {
     var self = this;
     self.isDialog = false;
@@ -48,6 +48,31 @@ denningOnline
       'General',
       'Common'
     ];
+
+    self.insert = function (idx) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'billItemModal.html',
+        controller: 'billItemModalCtrl as vm',
+        size: 'lg',
+        keyboard: true,
+        resolve: {
+          state: function () {
+            return self.entity.strState;
+          },
+          category: function () {
+            return self.entity.strCategory;
+          }
+        }
+      }).result.then(function (res) {
+        if (res.length > 0) {
+          for (ii in res) {
+            self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
+          }
+          self.tableFilter.reload();          
+        }
+      }, function (res) {});
+    }
 
     function initializeTable () {
       self.tableFilter = new NgTableParams({
