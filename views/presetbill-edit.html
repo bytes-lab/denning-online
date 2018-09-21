@@ -167,7 +167,7 @@
 
     <div class="table-responsive table-div p-15"> 
       <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
-        <tr ng-repeat="w in $data">
+        <tr ng-repeat="w in $data" ng-dblclick="vm._addItems([w]);">
           <td data-title="''"><input type="checkbox" ng-model="vm.items[w.strItemCode]" /></td>
           <td data-title="'Item Code'">
             {{ w.strItemCode }}
@@ -219,7 +219,7 @@
         <div class="m-t-10">
           <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()">Cancel</a>
           <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.addItems()">Add Items</a>
-          <a class="btn btn-info btn-sm pull-right" type="submit" ng-click="vm.createItem()">Create New Item</a>
+          <!-- <a class="btn btn-info btn-sm pull-right" type="submit" ng-click="vm.createItem()">Create New Item</a> -->
         </div>
       </div>
     </div>

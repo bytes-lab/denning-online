@@ -65,8 +65,8 @@ denningOnline
     }
   })
 
-  .controller('billItemModalCtrl', function(NgTableParams, billingitemService, Auth, 
-                                            $state, $uibModalInstance, state, category) 
+  .controller('billItemModalCtrl', function(NgTableParams, billingitemService, Auth, $state, 
+                                            $uibModalInstance, state, category, excludes) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -86,8 +86,10 @@ denningOnline
       getData: function(params) {
         return billingitemService.getList(self.itemType, params.page(), params.count(), self.keyword,
                                           state, category).then(function (data) {
-          params.total(data.headers('x-total-count'));
-          return data.data;
+          params.total(data.headers('x-total-count') - excludes.length);
+          return data.data.filter(function (item) {
+            return excludes.indexOf(item.strItemCode) == -1;
+          });
         });
       }
     })
@@ -100,6 +102,30 @@ denningOnline
       $uibModalInstance.close();
     }
 
+    self._addItems = function (items) {
+      var res = [];
+      for (ii in items) {
+        item = items[ii];
+
+        res.push({
+          "boolIsDelete": "0",
+          "boolIsFormula": item.boolFormula,
+          "boolIsPrimaryFee": item.boolIsPrimary,
+          "decTaxRate": item.decTaxRate,
+          "decUnit": item.decDefaultUnit,
+          "decUnitCost": parseFloat(item.decPricePerUnit) * parseFloat(item.decDefaultUnit),
+          "decUnitPrice": item.decPricePerUnit,
+          "intRank": item.intRank,
+          "strBillItemType": item.strType == 'F' ? "Fees" : item.strType == 'D' ? "Disb" : "DisbWithTax",
+          "strDescription": item.strDescription,
+          "strItemCode": item.strItemCode,
+          "strTaxCode": item.strTaxCode
+        });
+      }
+
+      $uibModalInstance.close(res);
+    }
+
     self.addItems = function () {
       var items = [];
       for (key in self.items) {
@@ -107,26 +133,12 @@ denningOnline
           for (ii in self.tableFilter.data) {
             item = self.tableFilter.data[ii];
             if (item.strItemCode == key) {
-              items.push({
-                "boolIsDelete": "0",
-                "boolIsFormula": item.boolFormula,
-                "boolIsPrimaryFee": item.boolIsPrimary,
-                "decTaxRate": item.decTaxRate,
-                "decUnit": item.decDefaultUnit,
-                "decUnitCost": parseFloat(item.decPricePerUnit) * parseFloat(item.decDefaultUnit),
-                "decUnitPrice": item.decPricePerUnit,
-                "intRank": item.intRank,
-                "strBillItemType": item.strType == 'F' ? "Fees" : item.strType == 'D' ? "Disb" : "DisbWithTax",
-                "strDescription": item.strDescription,
-                "strItemCode": item.strItemCode,
-                "strTaxCode": item.strTaxCode
-              });
+              items.push(item);
             }
           }
         }
       }
-
-      $uibModalInstance.close(items);
+      self._addItems(items);
     }
 
     self.createItem = function () {

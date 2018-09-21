@@ -62,10 +62,18 @@ denningOnline
           },
           category: function () {
             return self.entity.strCategory;
+          },
+          excludes: function () {
+            var arr = [];
+            for (ii in self.entity.listBilledItems) {
+              var item = self.entity.listBilledItems[ii];
+              arr.push(item.strItemCode);
+            }
+            return arr;
           }
         }
       }).result.then(function (res) {
-        if (res.length > 0) {
+        if (res && res.length > 0) {
           for (ii in res) {
             self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
           }
