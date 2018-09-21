@@ -1,416 +1,355 @@
 <header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
 
 <section id="main">
-    <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+  <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
 
-    <aside id="chat" data-ng-include src="'template/task.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.task === true }"></aside>
-    <section id="content">
+  <section id="content">
 
-        <div class="container">
-            <div class="block-header">
-                <h2>Overview</h2>
-
+    <div class="container">
+      <h2 class="f-400 m-b-25 m-l-10" style="color: #454545;">Dashboard ( {{ vm.today }} )</h2>
+      <uib-tabset active="vm.idxTab" class="overview-tabs">
+        <uib-tab ng-repeat="tab in vm.tabs" index="$index">
+          <uib-tab-heading>
+            <div>
+              <span contenteditable="false" spellcheck=false class="m-r-5 tab-title-{{ $index }}" ng-blur="vm.finishEdit($index)" ng-keydown="vm.editTitle($event, $index)">{{ tab.displayName }}</span>
+              <div class="pull-right">
                 <ul class="actions">
-                    <li>
-                        <a href="">
-                            <i class="zmdi zmdi-trending-up"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="zmdi zmdi-check-all"></i>
-                        </a>
-                    </li>
-                    <li class="dropdown" uib-dropdown>
-                        <a href="" uib-dropdown-toggle>
-                            <i class="zmdi zmdi-more-vert"></i>
-                        </a>
+                  <li class="dropdown" uib-dropdown>
+                    <a href="" uib-dropdown-toggle>
+                      <i class="zmdi zmdi-chevron-down"></i>
+                    </a>
 
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a href="">Refresh</a>
-                            </li>
-                            <li>
-                                <a href="">Manage Widgets</a>
-                            </li>
-                            <li>
-                                <a href="">Widgets Settings</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li>
+                        <a href="" ng-click="vm.editTab($index)">Edit</a>
+                      </li>
+                      <li>
+                        <a href="" ng-click="vm.deleteTab($index)">Delete</a>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
-
+              </div>              
             </div>
+          </uib-tab-heading>          
+          <div class="row m-t-5">
+            <ul class="actions manage-widget">
+              <li class="dropdown" uib-dropdown>
+                <a href="" uib-dropdown-toggle class="btn btn-primary" style="width: 140px;height: 29px;padding-top: 5px;">Manage widgets</a>
 
+                <ul class="dropdown-menu" style="left: -135px;">
+                  <li ng-repeat="item in vm.permittedWidgets[0]">
+                    <a href="" ng-click="vm.manageWidget($parent.$index, 0, item.type)">
+                      <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$index, 0, item.type, true)"></i>
+                      <span style="width: 19px;display: inline-block;" ng-if="!vm.checkWidget($parent.$index, 0, item.type, true)"></span>
+                      {{ item.templateOptions.title }}
+                    </a>
+                  </li>
+                  <li>
+                    <hr>
+                  </li>
+                  <li ng-repeat="item in vm.permittedWidgets[1]">
+                    <a href="" ng-click="vm.manageWidget($parent.$index, 1, item.type)">
+                      <i class="zmdi zmdi-check m-r-10" ng-if="vm.checkWidget($parent.$index, 1, item.type, true)"></i>
+                      <span style="width: 19px;display: inline-block;" ng-if="!vm.checkWidget($parent.$index, 1, item.type, true)"></span>
+                      {{ item.templateOptions.title }}
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
 
-            <div class="mini-charts">
-                <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        <div class="bs-item z-depth-1">
-                            <div class="row" style="padding: 16px 0;">
-                                <div class="col-xs-4">
-                                    <div class="box-title">New Matters</div>
-                                    <div class="box-title-detail c-cyan">24</div>
-                                </div>
-                                <div class="col-xs-8" style="text-align: left;">
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            2000-2001 Hoo Wei Mee
-                                            <div class="c-cyan f-10">
-                                                Added 15min ago
-                                            </div>
-                                        </li>
-                                        <li>
-                                            2000-2002 Hoo Wei Mee
-                                            <div class="c-cyan f-10">
-                                                Added 25min ago
-                                            </div>
-                                        </li>
-                                        <li>
-                                            2000-2003 Hoo Wei Mee
-                                            <div class="c-cyan f-10">
-                                                Added 45min ago
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4">
-                        <div class="bs-item z-depth-1">
-                            <div class="row" style="padding: 16px 0;">
-                                <div class="col-xs-4">
-                                    <div class="box-title">Court Today</div>
-                                    <div class="box-title-detail c-cyan">6</div>
-                                </div>
-                                <div class="col-xs-8" style="text-align: left;">
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                                                9:00 a.m.
-                                            </div>
-                                            Court
-                                        </li>
-                                        <li>
-                                            <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                                                3:00 p.m.
-                                            </div>
-                                            High Court
-                                        </li>
-                                        <li>
-                                            <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                                                4:45 p.m.
-                                            </div>
-                                            Court
-                                        </li>
-                                        <li>
-                                            <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                                                9:00 a.m.
-                                            </div>
-                                            Court
-                                        </li>
-                                        <li>
-                                            <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                                                3:00 p.m.
-                                            </div>
-                                            High Court
-                                        </li>
-                                        <li>
-                                            <div class="c-cyan f-12 m-r-10" style="display: inline;">
-                                                4:45 p.m.
-                                            </div>
-                                            Court
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4">
-                        <div class="bs-item z-depth-1">
-                            <div class="row" style="padding: 16px 0;">
-                                <div class="col-xs-4">
-                                    <div class="box-title">Due Tasks</div>
-                                    <div class="box-title-detail c-cyan">5</div>
-                                </div>
-                                <div class="col-xs-8" style="text-align: left;">
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            2000-2001 Hoo Wei Mee
-                                            <div class="c-cyan f-10">
-                                                Added 15min ago
-                                            </div>
-                                        </li>
-                                        <li>
-                                            2000-2002 Hoo Wei Mee
-                                            <div class="c-cyan f-10">
-                                                Added 25min ago
-                                            </div>
-                                        </li>
-                                        <li>
-                                            2000-2003 Hoo Wei Mee
-                                            <div class="c-cyan f-10">
-                                                Added 45min ago
-                                            </div>
-                                        </li>
-                                        <li>
-                                            2000-2003 Hoo Wei Mee
-                                            <div class="c-cyan f-10">
-                                                Added 45min ago
-                                            </div>
-                                        </li>
-                                        <li>
-                                            2000-2003 Hoo Wei Mee
-                                            <div class="c-cyan f-10">
-                                                Added 45min ago
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>
-
-                </div>
+            <div ng-repeat="section in tab.sections" class="col-sm-12 section">
+              <div class="row m-b-20">
+                <formly-form model="vm.model" fields="section.widgets">
+                </formly-form>
+              </div>
+              <div class="clearfix"></div>
             </div>
-
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <!-- Recent Items -->
-                    <div class="card" data-ng-controller="recentitemCtrl as rictrl">
-                        <div class="card-header">
-                            <h2>Collection <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
-                            <ul class="actions">
-                                <li class="dropdown" uib-dropdown>
-                                    <a href="" uib-dropdown-toggle>
-                                        <i class="zmdi zmdi-more-vert"></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li>
-                                            <a href="">Refresh</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Settings</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Other Settings</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="card-body m-t-0">
-                            <table class="table table-inner table-vmiddle">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th style="width: 60px">Price</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr data-ng-repeat="w in rictrl.riResult.list">
-                                    <td class="f-500 c-cyan">{{ w.id }}</td>
-                                    <td>{{ w.name }}</td>
-                                    <td class="f-500 c-cyan">{{ w.price }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <div class="col-sm-6">
-                    <!-- Calendar -->
-                    <div class="card" data-ng-controller="recentitemCtrl as rictrl">
-                        <div class="card-header">
-                            <h2>Collection <small>Phasellus condimentum ipsum id auctor imperdie</small></h2>
-                            <ul class="actions">
-                                <li class="dropdown" uib-dropdown>
-                                    <a href="" uib-dropdown-toggle>
-                                        <i class="zmdi zmdi-more-vert"></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li>
-                                            <a href="">Refresh</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Settings</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Other Settings</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="card-body m-t-0">
-                            <table class="table table-inner table-vmiddle">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th style="width: 60px">Price</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr data-ng-repeat="w in rictrl.riResult.list">
-                                    <td class="f-500 c-cyan">{{ w.id }}</td>
-                                    <td>{{ w.name }}</td>
-                                    <td class="f-500 c-cyan">{{ w.price }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>                    
-                </div>            
+          </div>
+        </uib-tab>
+        <uib-tab index="10">
+          <uib-tab-heading>
+            <div class="" ng-click="vm.newTab()">
+              <i class="zmdi zmdi-plus"></i>
+              <span>&nbsp;New</span>
             </div>
-
-            <div class="clearfix"></div>
-            <div class="dash-widgets">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div id="site-visits" class="dash-widget-item bgm-teal">
-                            <div class="dash-widget-header">
-                                <div class="p-20">
-                                    <div class="dash-widget-visits" data-sparkline-line></div>
-                                </div>
-
-                                <div class="dash-widget-title">For the past 30 days</div>
-
-                                <ul class="actions actions-alt">
-                                    <li class="dropdown" uib-dropdown>
-                                        <a href="" uib-dropdown-toggle>
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li>
-                                                <a href="">Refresh</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Manage Widgets</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Widgets Settings</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="p-20">
-
-                                <small>Page Views</small>
-                                <h3 class="m-0 f-400">47,896,536</h3>
-
-                                <br/>
-
-                                <small>Site Visitors</small>
-                                <h3 class="m-0 f-400">24,456,799</h3>
-
-                                <br/>
-
-                                <small>Total Clicks</small>
-                                <h3 class="m-0 f-400">13,965</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6">
-                        <div id="pie-charts" class="dash-widget-item">
-                            <div class="bgm-pink">
-                                <div class="dash-widget-header">
-                                    <div class="dash-widget-title">Email Statistics</div>
-                                </div>
-
-                                <div class="clearfix"></div>
-
-                                <div class="text-center p-20 m-t-25">
-                                    <div class="easy-pie main-pie" data-percent="75" data-easypie-chart>
-                                        <div class="percent">45</div>
-                                        <div class="pie-title">Total Emails Sent</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-t-20 p-b-20 text-center">
-                                <div class="easy-pie sub-pie-1" data-percent="56" data-easypie-chart>
-                                    <div class="percent">56</div>
-                                    <div class="pie-title">Bounce Rate</div>
-                                </div>
-                                <div class="easy-pie sub-pie-2" data-percent="84" data-easypie-chart>
-                                    <div class="percent">84</div>
-                                    <div class="pie-title">Total Opened</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="dash-widget-item bgm-lime">
-                            <div id="weather-widget" data-weather-widget></div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6">
-                        <div id="best-selling" class="dash-widget-item" data-ng-controller="bestsellingCtrl as wctrl">
-                            <div class="dash-widget-header">
-                                <div class="dash-widget-title">Best Sellings</div>
-                                <img src="img/widgets/alpha.jpg" alt="">
-                                <div class="main-item">
-                                    <small>Samsung Galaxy Alpha</small>
-                                    <h2>$799.99</h2>
-                                </div>
-                            </div>
-
-                            <div class="listview p-t-5">
-                                <a class="lv-item" href="" data-ng-repeat="w in wctrl.bsResult.list">
-                                    <div class="media">
-                                        <div class="pull-left">
-                                            <img class="lv-img-sm" data-ng-src="img/widgets/{{ w.img }}" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="lv-title">{{ w.name }}</div>
-                                            <small class="lv-small">{{ w.range }}</small>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <div class="clearfix"></div>
-
-                                <a class="lv-footer" href="">
-                                    View All
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-<!--         <aside id="sidebar" class="toggled" style="right: 0;">
-            <div id="calendar-widget" data-full-calendar></div>      
-            <div class="p-5 p-l-15">
-                <h5 class="text-uppercase f-400">Curabitur lobortis</h5>
-                <p class="text-muted">Nullam consectetur dolor nec ullamcorper finibus. Quisque a porta mauris, non venenatis mi. Pellentesque habitant morbi tristique</p>                  
-                <h5 class="text-uppercase f-400 c-red">Curabitur lobortis</h5>
-                <p class="text-muted">Nullam consectetur dolor nec ullamcorper finibus. Quisque a porta mauris, non venenatis mi. Pellentesque habitant morbi tristique</p>                  
-                <h5 class="text-uppercase f-400 c-green">Curabitur lobortis</h5>
-                <p class="text-muted">Nullam consectetur dolor nec ullamcorper finibus. Quisque a porta mauris, non venenatis mi. Pellentesque habitant morbi tristique</p>                  
-            </div>
-        </aside> -->
-
-        </section>
+          </uib-tab-heading>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+  </section>
 </section>
 
 <footer id="footer" data-ng-include="'template/footer.html'"></footer>
+
+
+<script type="text/ng-template" id="widget_t1.html">
+  <div ng-class="to.colSpan" ng-if="!to.hide">
+    <div class="bs-item z-depth-1">
+      <ul class="actions">
+        <li class="dropdown" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            <i class="zmdi zmdi-more-vert"></i>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+              <a href="" ng-click="to.hide=true; to.updateOverview();">Delete</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="row" style="padding: 16px 0;">
+        <div class="col-xs-4">
+          <div class="box-title">{{ to.title }}</div>
+          <div class="box-title-detail c-cyan">{{ data.mainValue.value }}</div>
+        </div>
+        <div class="col-xs-8" style="text-align: left;">
+          <ul style="list-style-type: none;">
+            <li ng-repeat="item in data.table.rows" style="cursor: pointer;" ui-sref="file-matters.edit({ fileNo: item.values[0] })" ng-if="to.ordering == 1">
+              <span>{{ item.values[0] }} {{ item.values[1] }}</span>
+              <div class="c-cyan f-10">
+                Added {{ item.updatedDate }}
+              </div>
+            </li>
+            <li ng-repeat="item in data.table.rows" ng-if="to.ordering == 2 || to.ordering == 20">
+              <div class="c-cyan f-14 m-r-10" style="display: inline; opacity: 0.85;">
+                {{ item.values[0] }}
+              </div>
+              {{ item.values[1] }}
+            </li>
+            <li ng-repeat="item in data.table.rows" ng-if="[3, 4, 18, 19].indexOf(to.ordering) > -1">
+              <div class="c-cyan f-15 m-r-10" style="opacity: 0.8;">
+                <i class="zmdi zmdi-caret-right"></i>&nbsp;
+                {{ item.values[0] }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="widget_t5.html">
+  <div ng-class="to.colSpan" ng-if="!to.hide">
+    <!-- Calendar -->
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ to.title }}</h2>
+        <ul class="actions">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="" ng-click="to.hide=true; to.updateOverview();">Delete</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-body m-t-0">
+        <div class="p-20">
+          <div id="recent-items-chart" class="flot-chart line-chart-{{ to.tab }}-{{ to.ordering }}" data-line-chart></div>
+        </div>
+        <table class="table table-inner table-vmiddle table-list">
+          <thead>
+            <tr>
+              <th ng-repeat="w in data.table.header.values">{{ w }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat="row in data.table.rows">
+              <td ng-repeat="w in row.values track by $index" ng-class="{ 'c-cyan': $index == 0 }">{{ w }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>          
+  </div>      
+</script>
+
+<script type="text/ng-template" id="widget_t6.html">
+  <div ng-class="to.colSpan" ng-if="!to.hide">
+    <!-- Calendar -->
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ to.title }}</h2>
+        <ul class="actions">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="" ng-click="to.hide=true; to.updateOverview();">Delete</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-body m-t-0">
+        <div id="pie-chart" class="flot-chart-pie pie-chart-{{ to.tab }}-{{ to.ordering }}"></div>
+        <div class="flc-pie hidden-xs"></div>
+
+        <table class="table table-inner table-vmiddle">
+          <thead>
+            <tr>
+              <th ng-repeat="w in data.table.header.values">{{ w }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat="row in data.table.rows">
+              <td ng-repeat="w in row.values track by $index" ng-class="{ 'c-cyan': $index == 0 }">{{ w }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>          
+  </div>      
+</script>
+
+
+<script type="text/ng-template" id="widget_t2.html">
+  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
+    <div id="best-selling" class="dash-widget-item" data-ng-controller="bestsellingCtrl as wctrl">
+      <div class="dash-widget-header">
+        <div class="dash-widget-title">Best Sellings</div>
+        <ul class="actions actions-alt">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="" ng-click="to.hide=true; to.updateOverview();">Delete</a>
+              </li>
+            </ul>
+          </li>
+        </ul>        
+        <img src="img/widgets/alpha.jpg" alt="">
+        <div class="main-item">
+          <small>Samsung Galaxy Alpha</small>
+          <h2>$799.99</h2>
+        </div>
+      </div>
+
+      <div class="listview p-t-5">
+        <a class="lv-item" href="" data-ng-repeat="w in wctrl.bsResult.list">
+          <div class="media">
+            <div class="pull-left">
+              <img class="lv-img-sm" data-ng-src="img/widgets/{{ w.img }}" alt="">
+            </div>
+            <div class="media-body">
+              <div class="lv-title">{{ w.name }}</div>
+              <small class="lv-small">{{ w.range }}</small>
+            </div>
+          </div>
+        </a>
+
+        <div class="clearfix"></div>
+
+        <a class="lv-footer" href="">
+          View All
+        </a>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="widget_t3.html">
+  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
+    <div id="site-visits" class="dash-widget-item bgm-teal">
+      <div class="dash-widget-header">
+        <div class="p-20">
+          <div class="dash-widget-visits" data-sparkline-line></div>
+        </div>
+
+        <div class="dash-widget-title">For the past 30 days</div>
+
+        <ul class="actions actions-alt">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="" ng-click="to.hide=true; to.updateOverview();">Delete</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="p-20">
+
+        <small>Page Views</small>
+        <h3 class="m-0 f-400">47,896,536</h3>
+
+        <br/>
+
+        <small>Site Visitors</small>
+        <h3 class="m-0 f-400">24,456,799</h3>
+
+        <br/>
+
+        <small>Total Clicks</small>
+        <h3 class="m-0 f-400">13,965</h3>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="widget_t4.html">
+  <div class="col-md-3 col-sm-6" ng-if="!to.hide">
+    <div id="pie-charts" class="dash-widget-item">
+      <div class="bgm-pink">
+        <div class="dash-widget-header">
+          <div class="dash-widget-title">Email Statistics</div>
+          <ul class="actions actions-alt">
+            <li class="dropdown" uib-dropdown>
+              <a href="" uib-dropdown-toggle>
+                <i class="zmdi zmdi-more-vert"></i>
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a href="" ng-click="to.hide=true; to.updateOverview();">Delete</a>
+                </li>
+              </ul>
+            </li>
+          </ul>          
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="text-center p-20 m-t-25">
+          <div class="easy-pie main-pie" data-percent="75" data-easypie-chart>
+            <div class="percent">45</div>
+            <div class="pie-title">Total Emails Sent</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-t-20 p-b-20 text-center">
+        <div class="easy-pie sub-pie-1" data-percent="56" data-easypie-chart>
+          <div class="percent">56</div>
+          <div class="pie-title">Bounce Rate</div>
+        </div>
+        <div class="easy-pie sub-pie-2" data-percent="84" data-easypie-chart>
+          <div class="percent">84</div>
+          <div class="pie-title">Total Opened</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>

@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('spaclitemListCtrl', function($filter, $uibModal, NgTableParams, spaclitemService, $state, Auth) {
         var self = this;
         self.dataReady = false;
@@ -63,7 +63,7 @@ materialAdmin
         };        
     })
 
-    .controller('SPAclitemDeleteModalCtrl', function ($scope, $modalInstance, spaclitem, spaclitemService, $state, on_list) {
+    .controller('SPAclitemDeleteModalCtrl', function ($scope, $uibModalInstance, spaclitem, spaclitemService, $state, on_list) {
         $scope.ok = function () {
             spaclitemService.delete(spaclitem).then(function(spaclitem) {
                 $state.reload();
@@ -73,11 +73,11 @@ materialAdmin
 
                 //$scope.formname.spaclitemInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.close();
+            $uibModalInstance.close();
             if (on_list)
                 $state.go('spaclitems.list');
         };

@@ -1,57 +1,92 @@
-<div class="container">
+<header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
 
-    <div class="block-header">
-        <h2>{{ pctrl.profile.name }} <small>{{ pctrl.profile.position }}</small></h2>
+<section id="main">
+  <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
 
-        <ul class="actions m-t-20 hidden-xs">
-            <li class="dropdown" uib-dropdown>
-                <a href="" uib-dropdown-toggle>
-                    <i class="zmdi zmdi-more-vert"></i>
-                </a>
+  <section id="content">
 
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a href="">Privacy Settings</a>
-                    </li>
-                    <li>
-                        <a href="">Account Settings</a>
-                    </li>
-                    <li>
-                        <a href="">Other Settings</a>
-                    </li>
-                </ul>
-            </li>
+    <div class="container" data-ng-controller="profileCtrl as pctrl">
+
+      <div class="block-header">
+        <ul class="actions m-t-20 hidden-xs" ng-if="false">
+          <li class="dropdown" uib-dropdown>
+            <a href="" uib-dropdown-toggle>
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <a href="">Privacy Settings</a>
+              </li>
+              <li>
+                <a href="">Account Settings</a>
+              </li>
+              <li>
+                <a href="">Other Settings</a>
+              </li>
+            </ul>
+          </li>
         </ul>
-    </div>
+      </div>
 
-    <div class="card" id="profile-main">
+      <div class="card" id="profile-main">
         <div class="pm-overview c-overflow">
-           
+          <div class="pmo-pic">
+            <div class="p-relative">
+              <a href="">
+                <img class="img-responsive" ng-src="{{ pctrl.userInfo.avatar_url || 'img/profile-pic-2.jpg' }}" alt="">
+              </a>
 
-            <div class="pmo-block pmo-contact hidden-xs">
-                <h2>Contact</h2>
+              <div class="dropdown pmop-message" uib-dropdown>
+                <button uib-dropdown-toggle class="btn bgm-white btn-float">
+                  <i class="zmdi zmdi-comment-text-alt"></i>
+                </button>
 
-                <ul>
-                    <li><i class="zmdi zmdi-phone"></i> {{ pctrl.profile.phone1 }}</li>
-                    <li><i class="zmdi zmdi-email"></i> {{ pctrl.profile.email }}</li>
-                    <li><i class="zmdi zmdi-facebook-box"></i> {{ pctrl.profile.ID }}</li>
-                    <li><i class="zmdi zmdi-twitter"></i> {{ pctrl.twitter }} (twitter.com/jason)</li>
-                    <li>
-                        <i class="zmdi zmdi-pin"></i>
-                        <address class="m-b-0">
-                            {{ pctrl.profile.address1 }}, <br/>
-                            {{ pctrl.profile.city }}, <br/>
-                            {{ pctrl.profile.country }}
-                        </address>
-                    </li>
-                </ul>
+                <div class="dropdown-menu stop-propagate">
+                  <textarea placeholder="Write something..."></textarea>
+
+                  <button class="btn bgm-green btn-float"><i class="zmdi zmdi-mail-send"></i></button>
+                </div>
+              </div>
+
+              <a href="" class="pmop-edit">
+                <i class="zmdi zmdi-camera"></i> <span class="hidden-xs">Update Profile Picture</span>
+              </a>
             </div>
+
+
+            <div class="pmo-stat">
+              <h2 class="m-0 c-white">1562</h2>
+              Total Connections
+            </div>
+          </div>
+
+          <div class="pmo-block pmo-contact hidden-xs">
+            <h2>Contact</h2>
+
+            <ul>
+              <li><i class="zmdi zmdi-phone"></i> {{ pctrl.userInfo.hpNumber }}</li>
+              <li><i class="zmdi zmdi-email"></i> {{ pctrl.userInfo.email }}</li>
+              <li><i class="zmdi zmdi-facebook-box"></i> {{ pctrl.skype }}</li>
+              <li><i class="zmdi zmdi-twitter"></i> {{ pctrl.twitter }} (twitter.com/malinda)</li>
+              <li>
+                <i class="zmdi zmdi-pin"></i>
+                <address class="m-b-0">
+                  {{ pctrl.addressSuite }}, <br/>
+                  {{ pctrl.addressCity }}, <br/>
+                  {{ pctrl.addressCountry }}
+                </address>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div class="pm-body clearfix">
-            <ul class="tab-nav tn-justified" data-ng-include="'template/profile-menu.html'"></ul>
-
-            <data ui-view></data>
+        <div class="pm-body p-b-30 clearfix">
+          <data ui-view></data>
         </div>
+      </div>
     </div>
-</div>
+  </section>
+</section>
+
+<footer id="footer" data-ng-include src="'template/footer.html'"></footer>

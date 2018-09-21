@@ -1,143 +1,201 @@
-materialAdmin
-    .controller('propertyListCtrl', function($filter, $sce, $uibModal, NgTableParams, propertyService, $state, Auth) {
-        var self = this;
-        self.dataReady = false;
-        self.openDelete = openDelete;
-        self.clickHandler = clickHandler;
-        self.userInfo = Auth.getUserInfo();
+denningOnline
+  .controller('propertyListCtrl', function (NgTableParams, propertyService, $state, Auth) {
+    var self = this;
+    self.userInfo = Auth.getUserInfo();
 
-        propertyService.getList().then(function(data) {
-            self.data = data;
-            self.dataReady = true;
-            initializeTable();
-        });        
-        
-        function clickHandler(item) {
-            $state.go('properties.edit', {'id': item.code});
-        }
+    self.tableFilter = new NgTableParams({
+      page: 1, 
+      count: 25
+    }, {
+      getData: function (params) {
+        return propertyService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    });
 
-        function initializeTable () {
-            //Filtering
-            self.tableFilter = new NgTableParams({
-                page: 1,            // show first page
-                count: 10,
-                sorting: {
-                    name: 'asc'     // initial sorting
-                }
-            }, {
-                total: self.data.length, // length of data
-                getData: function(params) {
-                    // use build-in angular filter
-                    var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-                    orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-                    params.total(orderedData.length); // set total for recalc pagination
-                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                }
-            })      
-        }
+    self.search = function () {
+      self.tableFilter.reload();
+    }
+  })
 
-        self.modalContent = 'Are you sure to delete the contract?';
+  .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, 
+                                           $state, Auth, $uibModal, contactService, refactorService,
+                                           uibDateParser, mukimService, $uibModalInstance, 
+                                           entityCode, isDialog, isNew) 
+  {
+    var self = this;
+    self.userInfo = Auth.getUserInfo();
     
-        //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, property) {
-            var modalInstance = $uibModal.open({
-                animation: animation,
-                templateUrl: 'myModalContent.html',
-                controller: 'propertyDeleteModalCtrl',
-                size: size,
-                backdrop: backdrop,
-                keyboard: keyboard,
-                resolve: {
-                    property: function () {
-                        return property;
-                    }, 
-                    on_list: function () {
-                        return true;
-                    }
-                }
-            
-            });
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog? entityCode: $stateParams.id;
+
+    self.refList = ['MukimType', 'LotType', 'TitleType', 'ParcelType', 'LandUse', 
+                    'RestrictionAgainst', 'TenureType', 'AreaType'];
+    self.types = {};
+    self.true = true;
+
+    if(self.entityCode) {
+      propertyService.getItem(self.entityCode).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+
+        // wrapper attrs for auto complete
+        if (self.entity.strMukim) {
+          self.strMukim_ = { 
+            mukim: self.entity.strMukim,
+            daerah: self.entity.strDaerah,
+            negeri: self.entity.strNegeri 
+          };          
         }
-        //Prevent Outside Click
-        function openDelete(event, property) {
-            event.stopPropagation();
-            modalInstances(true, '', 'static', true, property)
-        };        
+
+        if (self.entity.strApprovingAuthority) {
+          self.strApprovingAuthority_ = {
+            description: self.entity.strApprovingAuthority
+          }          
+        }
+      });
+    } else {
+      self.entity = {
+        strMukimType: 'Mukim'
+      };
+    }
+
+    self.queryContacts = function (searchText) {
+      return contactService.getCustomerList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryStaffs = function (searchText) {
+      return contactService.getStaffList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    self.queryMukims = function (searchText) {
+      return mukimService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    // get approving authorities
+    propertyService.getApprovingAuthorityList().then(function (data) {
+      self.aaList = data;
     })
 
-    .controller('propertyDeleteModalCtrl', function ($scope, $modalInstance, property, propertyService, $state) {
-        $scope.ok = function () {
-            propertyService.delete(property).then(function(property) {
-                $state.reload();
-            })
-            .catch(function(err){
-                //Handler
+    self.queryAAs = function (searchText) {
+      return self.aaList;
+    }
 
-                //$scope.formname.propertyInfo.$error.push({meessage:''});
-            });
-            $modalInstance.close();
-        };
+    self.aaChange = function (item) {
+      if (item) {
+        self.entity.strApprovingAuthority = item.description;
+      }
+    }
 
-        $scope.cancel = function () {
-            $modalInstance.close();
-            if (on_list)
-                $state.go('propertys.list');            
-        };
-    })
+    self.mukimChange = function (item) {
+      if (item) {
+        self.entity.strMukim = item.mukim;
+        self.entity.strDaerah = item.daerah;
+        self.entity.strNegeri = item.negeri;
+      }
+    }
 
-    .controller('propertyEditCtrl', function($filter, $stateParams, propertyService, $state, Auth, $uibModal) {
-        var self = this;
-        self.save = save;
-        self.cancel = cancel;
-        self.isDialog = false;
-        self.viewMode = false;  // for edit / create
-        self.userInfo = Auth.getUserInfo();
-        self.openDelete = openDelete;
-        self.can_edit = false;
+    $("#back-top").hide();
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        $('#back-top').fadeIn();
+        $('.btn-balances').fadeIn();
+      } else {
+        $('#back-top').fadeOut();
+        $('.btn-balances').fadeOut();
+      }
+    });
 
-        if($stateParams.id) {
-            propertyService.getItem($stateParams.id).then(function(item){
-                self.property = item;
-            });
-        } else {
-            self.property = {};
+    self.scrollUp = function () {
+      $('body,html').animate({
+          scrollTop : 0
+      }, 500);
+      return false;
+    };
+    
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strPropertyID'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      propertyService.save(entity).then(function (property) {
+        if (property) {
+          if (self.isDialog) {
+            $uibModalInstance.close(property);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('properties.edit', { 'id': property.code });
+            }
+            growlService.growl('Saved successfully!', 'success');
+          }          
         }
+      });
+    }
 
-        function save() {
-            propertyService.save(self.property).then(function(property) {
-                self.property = property;
-                $state.go('properties.list');
-            });
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('properties.list');
+      }
+    }
+    
+    angular.forEach(self.refList, function (value, key) {
+      propertyService.getTypeList(value).then(function (data) {
+        self.types[value] = data;
+      });
+    });
+
+    //Prevent Outside Click
+    self.openDelete = function (event, entity) {
+      event.stopPropagation();
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'deleteEntityModal.html',
+        controller: 'deleteEntityModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          entity: function () {
+            return entity;
+          }, 
+          on_list: function () {
+            return false;
+          },
+          entity_type: function () {
+            return 'property';
+          },
+          service: function () {
+            return propertyService;
+          },
+          return_state: function () {
+            return 'properties.list';
+          }
         }
-
-        function cancel() {
-            $state.go('properties.list');            
-        }
-
-        //Create Modal
-        function modalInstances1(animation, size, backdrop, keyboard, property) {
-            var modalInstance = $uibModal.open({
-                animation: animation,
-                templateUrl: 'myModalContent.html',
-                controller: 'propertyDeleteModalCtrl',
-                size: size,
-                backdrop: backdrop,
-                keyboard: keyboard,
-                resolve: {
-                    property: function () {
-                        return property;
-                    }, 
-                    on_list: function () {
-                        return false;
-                    }
-                }            
-            });
-        }
-
-        //Prevent Outside Click
-        function openDelete(event, property) {
-            event.stopPropagation();
-            modalInstances1(true, '', 'static', true, property)
-        };        
-
-    })
+      });
+    };
+  })

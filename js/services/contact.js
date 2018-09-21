@@ -1,73 +1,87 @@
-materialAdmin
-    // =========================================================================
-    // Contacts
-    // =========================================================================
-    
-    .service('contactService', ['$q', '$timeout', '$http', function($q, $timeout, $http) {
-        var service = {};
+denningOnline
+  // =========================================================================
+  // Contacts
+  // =========================================================================
+  
+  .service('contactService', function (http) {
+    var service = {};
 
-        service.contacts = null;
-        service.getList = getList;
-        service.getItem = getItem;
-        service.save = save;
-        service.delete = delete_;
-        service.headers = {
-                              "Content-Type": "application/json",
-                              "webuser-sessionid": "testdenningSkySea",
-                              "webuser-id": "online@denning.com.my"
-                           };
+    service.getList = function (page, pagesize, keyword) {
+      return http.GET('v1/party', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword 
+      }).then(function (resp) {
+        return resp;
+      });
+    }
 
-        function getList() {
-            return $http({
-                method: 'GET',
-                url: 'http://43.252.215.81/denningwcf/v1/party',
-                headers: service.headers
-            }).then(function(resp) {
-                service.contacts = resp.data;                
-                return resp.data;
-            });    
-        }
+    service.getStaffList = function (page, pagesize, keyword) {
+      return http.GET('v1/table/Staff', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    };
 
-        function getItem(code) {
-            return $http({
-                method: 'GET',
-                url: 'http://43.252.215.81/denningwcf/v1/app/contact/'+code,
-                headers: service.headers
-            }).then(function(resp) {
-                return resp.data;
-            });    
-        }
+    service.getCustomerList = function (page, pagesize, keyword) {
+      return http.GET('v1/table/Customer', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    };
 
-        function save(contact) {
-            var method = contact.code ? 'PUT': 'POST';
-            delete contact.relatedMatter;
+    service.getItem = function (code) {
+      return http.GET(`v1/table/Customer/${code}`).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-            return $http({
-                method: method,
-                url: 'http://43.252.215.81/denningwcf/v1/app/contact',
-                headers: service.headers,
-                data: contact
-            }).then(function(response) {
-                return response.data;
-            });
-        }
+    service.getIDTypeList = function () {
+      return http.GET('v1/table/IDType').then(function (resp) {
+        return resp.data;
+      });
+    }
 
-        function delete_(contact) {
-            var deferred = $q.defer();
+    service.getSalutationList = function () {
+      return http.GET('v1/Salutation').then(function (resp) {
+        return resp.data;
+      });
+    }
 
-            $timeout(function(){
-                var idx = service.contacts.map(function(c) { return c.code; }).indexOf(contact.code);
-                if(idx != -1) {
-                    service.contacts.splice(idx, 1);
-                    deferred.resolve(contact);
-                } else {
-                    deferred.reject(new Error('There is no such contact'));
-                }
-                // @@ send delete request to server to delete the item
-            }, 100);
+    service.upload = function (info, type) {
+      var url;
+      if (type == 'contact') {
+        url = 'v1/app/contactFolder';
+      } else {
+        url = 'v1/app/matter/fileFolder';
+      }
 
-            return deferred.promise;
-        }
-        return service;
-        
-    }])
+      return http.POST(url, info).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
+
+      return http[method]('v1/table/Customer', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
+
+    service.delete = function (entity) {
+      return http.DELETE('v1/table/Customer', { 
+        code: entity.code 
+      }).then(function (resp) {
+        return resp;
+      });
+    }
+
+    return service;
+  })

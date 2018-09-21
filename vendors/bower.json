@@ -15,13 +15,15 @@
   ],
   "dependencies": {
     "angular-animate": "^1.4.8",
-    "angular-bootstrap": "~0.14.3",
+    "angular-bootstrap": "~1.2.4",
     "angular-farbtastic": "*",
     "angular-loading-bar": "~0.8.0",
     "angular-nouislider": "~0.3.1",
     "angular-resource": "~1.4.8",
-    "angular-ui-router": "ui-router#~0.2.15",
+    "angular-ui-router": "ui-router#~0.4.2",
     "animate.css": "daneden/animate.css#~3.3.0",
+    "angular-base64-upload": "*",
+    "ngclipboard": "*",
     "autosize": "~3.0.6",
     "bootstrap-sweetalert": "~0.4.5",
     "bower": "*",
@@ -49,7 +51,8 @@
     "Waves": "waves#~0.7.4",
     "angular": "^1.6.5",
     "ng-table": "~1",
-    "angular-material": "^1.1.4"
+    "angular-material": "^1.1.4",
+    "fingerprintjs2": "~1.6.1"
   },
   "resolutions": {
     "angular": "1.6.5"

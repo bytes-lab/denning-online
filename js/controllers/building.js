@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('buildingListCtrl', function($filter, $sce, $uibModal, NgTableParams, buildingService) {
         var self = this;
         self.dataReady = false;
@@ -60,7 +60,7 @@ materialAdmin
         };        
     })
 
-    .controller('buildingDeleteModalCtrl', function ($scope, $modalInstance, building, buildingService, $state) {
+    .controller('buildingDeleteModalCtrl', function ($scope, $uibModalInstance, building, buildingService, $state) {
         $scope.ok = function () {
             buildingService.delete(building).then(function(building) {
                 $state.reload();
@@ -70,11 +70,11 @@ materialAdmin
 
                 //$scope.formname.buildingInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     })
 

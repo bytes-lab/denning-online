@@ -1,178 +1,429 @@
-materialAdmin
-    .controller('contactListCtrl', function($filter, $uibModal, NgTableParams, contactService, Auth, $state) {
-        var self = this;
-        self.dataReady = false;
-        self.openDelete = openDelete;
-        self.userInfo = Auth.getUserInfo();
-        self.clickHandler = clickHandler;
+denningOnline
+  .controller('contactListCtrl', function (NgTableParams, contactService, Auth, $state) {
+    var self = this;
+    self.userInfo = Auth.getUserInfo();
 
-        contactService.getList().then(function(data) {
-            self.data = data;
-            self.dataReady = true;
-            initializeTable();
-        });        
-        
-        function clickHandler(item) {
-            $state.go('contacts.edit', {'id': item.code});
-        }
-
-        function initializeTable () {
-            //Filtering
-            self.tableFilter = new NgTableParams({
-                page: 1,            // show first page
-                count: 10,
-                sorting: {
-                    name: 'asc'     // initial sorting
-                }
-            }, {
-                total: self.data.length, // length of data
-                getData: function(params) {
-                    // use built-in angular filter
-                    var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-                    orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-                    params.total(orderedData.length); // set total for recalc pagination
-                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                }
-            })      
-        }
-
-        //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, contact) {
-            var modalInstance = $uibModal.open({
-                animation: animation,
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                size: size,
-                backdrop: backdrop,
-                keyboard: keyboard,
-                resolve: {
-                    contact: function () {
-                        return contact;
-                    },
-                    on_list: function () {
-                        return true;
-                    }
-                }            
-            });
-        }
-
-        //Prevent Outside Click
-        function openDelete(event, contact) {
-            event.stopPropagation();
-            modalInstances(true, '', 'static', true, contact)
-        };        
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 25,
+    }, {
+      getData: function(params) {
+        return contactService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
     })
 
-    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, contact, on_list, contactService, $state) {
-        $scope.ok = function () {
-            contactService.delete(contact).then(function(contact) {
-                if (on_list)
-                    $state.reload();
-                else
-                    $state.go('contacts.list');
-            })
-            .catch(function(err){
-                //Handler
+    self.search = function () {
+      self.tableFilter.reload();
+    }
+  })
 
-                //$scope.formname.contactInfo.$error.push({meessage:''});
-            });
-            $modalInstance.close();
-        };
+  .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, growlService, 
+                                           contactService, $state, Auth, $scope, 
+                                           refactorService, occupationService, raceService, 
+                                           religionService, IRDBranchService, cityService,
+                                           uibDateParser, bankService, $uibModalInstance, 
+                                           entityCode, isDialog, isNew) 
+  {
+    var self = this;
+    self.userInfo = Auth.getUserInfo();
 
-        $scope.cancel = function () {
-            $modalInstance.close();
-            if (on_list)
-                $state.go('contacts.list');
-        };
-    })
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
 
-    .controller('contactEditCtrl', function($filter, $uibModal, $stateParams, contactService, $state, Auth) {
-        var self = this;
-        self.save = save;
-        self.cancel = cancel;
-        self.isDialog = false;
-        self.viewMode = false;  // for edit / create
-        self.userInfo = Auth.getUserInfo();
-        self.openDelete = openDelete;
-        self.can_edit = false;
+    self.IDTypes = [];
+    self.Salutations = [];
+    self.contactTypes = [
+      'Individual',
+      'Company', 
+      'Firm', 
+      'Legal Firm',
+      'Bank',
+      'Government',
+      'Others'
+    ];
 
-        if ($stateParams.id) {
-            contactService.getItem($stateParams.id)
-            .then(function(item){
-                self.contact = angular.copy(item);  // important
-            });
+    self.eduLevels = [
+      'Primary',
+      'Secondary',
+      'University'
+    ];
+
+    self.citizenships = ['Malaysia', 'India', 'New Zealand', 'Australia', 'Korea', 'Vietnam',
+      'Singapore', 'United Kingdom', 'United States of America', 'France', 'Germany', 'PR China',
+      'Thailand', 'Japan', 'Indonesia', 'Bangladesh'];
+
+    self.queryList = function (labels, q) {
+      return labels.filter(function(item) {
+        return item.search(new RegExp(q, "i")) > -1;
+      });
+    };
+
+    $("#back-top").hide();
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        $('#back-top').fadeIn();
+        $('.btn-balances').fadeIn();
+      } else {
+        $('#back-top').fadeOut();
+        $('.btn-balances').fadeOut();
+      }
+    });
+
+    self.scrollUp = function () {
+      $('body,html').animate({
+          scrollTop : 0
+      }, 500);
+      return false;
+    };
+
+    // $("#phoneHome").intlTelInput({
+    //   utilsScript: "vendors/intl-tel-input/js/utils.js?14",
+    //   preferredCountries: ['my'],
+    //   separateDialCode: true
+    // });
+
+    self.relatedMatter = function () {
+      if ($uibModalInstance) {
+        $uibModalInstance.close();
+      }
+      $state.go('contacts.matters', {id: self.entity.code});
+    }
+
+    self.openFolder = function () {
+      if ($uibModalInstance) {
+        $uibModalInstance.close();
+      }
+      $state.go('folders.list', {id: self.entity.code, type: 'contact'});
+    }
+
+    contactService.getSalutationList().then (function (data) {
+      self.Salutations = data;
+    });
+
+    contactService.getIDTypeList().then (function (data) {
+      self.IDTypes = data;
+    });
+
+    self.sameOfficeAddr = function (flag) {
+      if (flag) {
+        self.entity.strRegOff = self.entity.strAddressLine1 + 
+                                self.entity.strAddressLine2 + 
+                                self.entity.strAddressLine3 +
+                                self.entity.strPostCode.trim() + ' ' +
+                                self.entity.strCity.trim() + ', ' +
+                                self.entity.strState;
+      }
+    }
+
+    self.queryContacts = function (searchText) {
+      return contactService.getCustomerList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryBanks = function (searchText) {
+      return bankService.getTableList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryStaffs = function (searchText) {
+      return contactService.getStaffList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    self.queryOccupation = function (searchText) {
+      return occupationService.getList(1, 10, searchText).then(function (resp) {
+        return resp;
+      });
+    }
+
+    self.workPlaceChange = function (item) {
+      if (item) {
+        self.entity.strPlaceofWork = item.city;
+      }
+    }
+
+    self.birthPlaceChange = function (item) {
+      if (item) {
+        self.entity.strPlaceBirth = item.city;
+      }
+    }
+
+    self.postcodeChange = function (item) {
+      if (item) {
+        self.entity.strPostCode = item.postcode;
+        self.entity.strCity = item.city;
+        self.entity.strState = item.state;
+        self.entity.strCountry = item.country;
+      }
+    }
+
+    self.IDTypeChange = function (item) {
+      if (item) {
+        self.myIC = false;
+        if (item.code == '1' || item.code == '2') {
+          self.myIC = true;
+        }        
+      }
+    }
+
+    self.titleChange = function (item) {
+      if (item) {
+        self.entity.strTitle = item.description;
+      }
+    }
+
+    self.irdBranchChange = function (item) {
+      if (item) {
+        self.entity.clsIrdBranch = {
+          code: item.code,
+          strName: item.description
+        }
+      }
+    }
+
+    self.queryPostcodes = function (searchText) {
+      return cityService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    self.queryRace = function (searchText) {
+      return raceService.getList(1, 10, searchText).then(function (resp) {
+        return resp;
+      });
+    }
+
+    self.queryIRDBranch = function (searchText) {
+      return IRDBranchService.getList(1, 10, searchText).then(function (resp) {
+        return resp;
+      });
+    }
+
+    self.queryReligion = function (searchText) {
+      return religionService.getList(1, 10, searchText).then(function (resp) {
+        return resp;
+      });
+    }
+
+    self.queryFields = function (field, searchText) {
+      return self[field].filter(function (c) {
+        return (c.strDescription || c.description).search(new RegExp(searchText, "i")) > -1;
+      });
+    }
+
+    self.parseBirth = function () {
+      if (self.entity.strIDNo) {
+        var sdate = self.entity.strIDNo.split('-')[0];
+        var pdate = uibDateParser.parse(sdate, 'yyMMdd', new Date());
+        if (!pdate) {
+          alert('Your ID No is not valid. Please provide again.');
         } else {
-            self.contact = {};
+          // check over current year
+          if (pdate.getFullYear() > (new Date()).getFullYear()) {
+            pdate = uibDateParser.parse('19'+sdate, 'yyyyMMdd', new Date());
+          }
+          self.entity.dtDateBirth = pdate;
+        }
+      }
+    }
+
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strIDNo', 'strIDNoOld', 
+                        'strName', 'strEmailAddress', 'strWebSite', 'dtDateBirth', 'dtDateDeceased', 
+                        'strTaxFileNo'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
+    if (self.entityCode) {
+      self.title = 'Edit Contact';
+
+      contactService.getItem(self.entityCode).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+
+        self.IDTypeChange(self.entity.clsIDType);
+
+        // wrapper attrs for auto complete
+        if (self.entity.strTitle) {
+          self.strTitle_ = { 
+            description: self.entity.strTitle 
+          };
         }
 
-        function save() {
-            contactService.save(self.contact).then(function(contact) {
-                self.contact = contact;
-                $state.go('contacts.list');
-            })
-            .catch(function(err){
-                //Handler
-            });
+        if (self.entity.strPlaceofWork) {
+          self.strPlaceofWork_ = { 
+            city: self.entity.strPlaceofWork
+          };          
         }
 
-        function cancel() {
-            $state.go('contacts.list');            
+        if (self.entity.strPlaceBirth) {
+          self.strPlaceBirth_ = { 
+            city: self.entity.strPlaceBirth
+          };
         }
 
-        //Create Modal
-        function modalInstances1(animation, size, backdrop, keyboard, contact) {
-            var modalInstance = $uibModal.open({
-                animation: animation,
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                size: size,
-                backdrop: backdrop,
-                keyboard: keyboard,
-                resolve: {
-                    contact: function () {
-                        return contact;
-                    }, 
-                    on_list: function () {
-                        return false;
-                    }
-                }            
-            });
+        if (self.entity.clsIrdBranch.code) {
+          self.clsIrdBranch_ = { 
+            code: self.entity.clsIrdBranch.code, 
+            description: self.entity.clsIrdBranch.strName 
+          };
         }
 
-        //Prevent Outside Click
-        function openDelete(event, contact) {
-            event.stopPropagation();
-            modalInstances1(true, '', 'static', true, contact)
-        };        
-    })
+        if (self.entity.strPostCode) {
+          self.strPostCode_ = {
+            postcode: self.entity.strPostCode,
+            city: self.entity.strCity,
+            state: self.entity.strState,
+            country: self.entity.strCountry
+          };
+        }
+      });
+    } else {
+      self.title = 'New Contact';
 
-    .controller('contactCreateModalCtrl', function ($modalInstance, party, viewMode, contactService, $scope, Auth) {
-        var self = this;
-        self.save = save;
-        self.cancel = cancel;
-        self.isDialog = true;
-        self.viewMode = viewMode;
-        self.userInfo = Auth.getUserInfo();
+      self.entity = {
+        strCitizenship: 'Malaysia',
+        clsIDType: {
+          code: 2,
+          strDescription: 'New IC'
+        }
+      };
 
-        if (viewMode) {
-            contactService.getItem(party.party.code)
-            .then(function(item){
-                self.contact = item;
-            });                                    
+      self.IDTypeChange(self.entity.clsIDType);
+    }
+
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      contactService.save(entity).then(function (contact) {
+        if (contact) {  // ignore when errors
+          if (self.isDialog) {
+            $uibModalInstance.close(contact);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('contacts.edit', { 'id': contact.code });
+            }
+            growlService.growl('Saved successfully!', 'success');
+          }
+        }
+      });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('contacts.list');
+      }
+    }
+    
+    self.upload = function() {
+      self.uploaded = 0;
+      angular.element('.contact-upload').click();
+    };
+
+    self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
+      var lastModifiedDate = file.lastModifiedDate;
+      if (typeof file.lastModified === "number") {
+        lastModifiedDate = new Date(file.lastModified);
+      }
+
+      var info = {
+        "fileNo1": self.entity.code,
+        "documents":[
+          {
+            "FileName": fileObj.filename,
+            "MimeType": fileObj.filetype,
+            "dateCreate": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "dateModify": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
+            "fileLength": fileObj.filesize,
+            "base64": fileObj.base64
+          }
+        ]
+      };
+
+      contactService.upload(info, 'contact').then(function(res) {
+        self.uploaded = self.uploaded + 1;
+        if (fileList.length == self.uploaded) {
+          growlService('The file(s) uploaded successfully.', 'success');
+        }
+      })
+      .catch(function (err) {
+      });
+    };
+
+    //Prevent Outside Click
+    self.openDelete = function (event, entity) {
+      event.stopPropagation();
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'deleteEntityModal.html',
+        controller: 'deleteEntityModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          entity: function () {
+            return entity;
+          }, 
+          on_list: function () {
+            return false;
+          },
+          entity_type: function () {
+            return 'contact';
+          },
+          service: function () {
+            return contactService;
+          },
+          return_state: function () {
+            return 'contacts.list';
+          }
+        }
+      });
+    };
+  })
+
+  // for general delete
+  .controller('deleteEntityModalCtrl', function ($scope, $uibModalInstance, $state, entity, 
+                                                 entity_type, service, return_state, on_list) 
+  {
+    $scope.entity_type = entity_type;
+
+    $scope.ok = function () {
+      service.delete(entity).then(function () {
+        if (on_list) {
+          $state.reload();
         } else {
-            self.contact = {};
+          $state.go(return_state);
         }
+      }).catch(function(err){
+        //$scope.formname.contactInfo.$error.push({meessage:''});
+      });
+      $uibModalInstance.close();
+    };
 
-        function save() {
-            contactService.save(self.contact).then(function(contact) {
-                $modalInstance.close(contact);
-            })
-            .catch(function(err){
-                //Handler
-            });
-        };
-
-        function cancel() {
-            $modalInstance.close();
-        };
-    })
+    $scope.cancel = function () {
+      $uibModalInstance.close();
+      if (on_list) {
+        $state.go(return_state);
+      }
+    };
+  })

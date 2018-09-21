@@ -6,8 +6,8 @@
   ],
   "description": "Click effect inspired by Google's Material Design",
   "main": [
-    "dist/waves.min.js",
-    "dist/waves.min.css"
+    "dist/waves.js",
+    "dist/waves.css"
   ],
   "keywords": [
     "click",
@@ -21,12 +21,12 @@
     "test",
     "tests"
   ],
-  "version": "0.7.5",
-  "_release": "0.7.5",
+  "version": "0.7.6",
+  "_release": "0.7.6",
   "_resolution": {
     "type": "version",
-    "tag": "v0.7.5",
-    "commit": "5ce37da75c9e1c41b0344afd4a8dd6eea92424e7"
+    "tag": "v0.7.6",
+    "commit": "1985b7e18327f86f1bb640efe3a2ab4b4fea4078"
   },
   "_source": "https://github.com/fians/Waves.git",
   "_target": "~0.7.4",

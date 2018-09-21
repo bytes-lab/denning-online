@@ -1,94 +1,73 @@
-materialAdmin
-    // =========================================================================
-    // Court Diaries
-    // =========================================================================
-    
-    .service('courtdiaryService', ['$q', '$timeout', '$http', function($q, $timeout, $http) {
-        var service = {};
+denningOnline
+  // =========================================================================
+  // Court Diaries
+  // =========================================================================
+  
+  .service('courtdiaryService', function(http) {
+    var service = {};
 
-        service.courtdiarys = null;
-        service.getList = getList;
-        service.getItem = getItem;
-        service.save = save;
-        service.delete = delete_;
+    service.getList = function (page, pagesize, keyword) {
+      return http.GET('v1/table/courtdiary', {
+        page: page,
+        pagesize: pagesize,
+        search:keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    }
 
-        function getList() {
-            if (service.courtdiarys) {
-                var deferred = $q.defer();
-                deferred.resolve(service.courtdiarys);
-                return deferred.promise;
-            } else {
-                return $http.get('data/contacts.json')
-                .then(function(resp){
-                    service.courtdiarys = resp.data;                
-                    return resp.data;
-                })                
-            }
-        }
+    service.getHearingTypeList = function (page, pagesize, keyword) {
+      return http.GET('v1/courtDiary/hearingType', {
+        page: page,
+        pagesize: pagesize,
+        search:keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    }
 
-        function getItem(code) {
-            if(service.courtdiarys) {
-                var deferred = $q.defer();
-                var item = service.courtdiarys.filter(function(c) {
-                    return c.code == code;
-                });
+    service.getCoramList = function (page, pagesize, keyword) {
+      return http.GET('v1/courtDiary/coram', {
+        page: page,
+        pagesize: pagesize,
+        search:keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    }
 
-                if (item.length == 1)
-                    deferred.resolve(item[0]);
-                else
-                    deferred.reject(new Error('No Item with the code'));
+    service.getCalendar = function (start, end, filter, page, pagesize, keyword) {
+      return http.GET("v1/DenningCalendar", {
+        dateStart: start,
+        dateEnd: end,
+        filterBy: filter,
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    }
 
-                return deferred.promise;
-            } else {
-                return getList().then(function(data) {
-                    var item = service.courtdiarys.filter(function(c) {
-                        return c.code == code;
-                    });
+    service.getItem = function (code) {
+      return http.GET(`v1/table/courtdiary/${code}`).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-                    if (item.length == 1)
-                        return item[0];
-                    else
-                        throw new Error('No such item');
-                });
-            }
-        }
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
 
-        function save(courtdiary) {
-            var deferred = $q.defer();
+      return http[method]('v1/table/courtdiary', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
 
-            $timeout(function(){
-                var idx = service.courtdiarys.map(function(c) { return c.code; }).indexOf(courtdiary.code);
-                if(idx != -1) {
-                    service.courtdiarys[idx] = courtdiary;
-                } else {
-                    // should be done on server side
-                    courtdiary.code = Math.floor(Math.random() * 1000 + 1);
-                    service.courtdiarys.push(courtdiary);
-                }
+    service.delete = function (entity) {
+      return http.DELETE('v1/table/courtdiary', { code: entity.code }).then(function (resp) {
+        return resp;
+      });
+    }
 
-                // @@ send post request to server to save the item
-                deferred.resolve(courtdiary);
-            }, 100);
-
-            return deferred.promise;
-        }
-
-        function delete_(courtdiary) {
-            var deferred = $q.defer();
-
-            $timeout(function(){
-                var idx = service.courtdiarys.map(function(c) { return c.code; }).indexOf(courtdiary.code);
-                if(idx != -1) {
-                    service.courtdiarys.splice(idx, 1);
-                    deferred.resolve(courtdiary);
-                } else {
-                    deferred.reject(new Error('There is no such courtdiary'));
-                }
-                // @@ send delete request to server to delete the item
-            }, 100);
-
-            return deferred.promise;
-        }
-        return service;
-        
-    }])
+    return service;
+  })

@@ -1,0 +1,102 @@
+<header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+  <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+  <section id="content">
+    <div class="container">
+      <ul class="tab-nav o-visible m-b-25">
+        <li class="btn-wave" data-ui-sref-active="active">
+          <a data-ui-sref="billing.quotations-new"><i class="zmdi zmdi-plus"></i> Quotation</a>
+        </li>
+        <li class="btn-wave" data-ui-sref-active="active">
+          <a data-ui-sref="billing.invoices-new"><i class="zmdi zmdi-plus"></i> Invoice</a>
+        </li>
+        <li class="btn-wave" data-ui-sref-active="active">
+          <a data-ui-sref="billing.receipts-new"><i class="zmdi zmdi-plus"></i> Receipt</a>
+        </li>
+        <li class="btn-wave" data-ui-sref-active="active">
+          <a data-ui-sref="billing.presetbills-new"><i class="zmdi zmdi-plus"></i> Payment Requests</a>
+        </li>
+        <li class="dropdown" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            Adjustments
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> Credit Note</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> Debit Note</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> General Journal ( GJ )</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            Listings
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a ui-sref="billing.items-list">Bill items</a>
+            </li>
+            <li>
+              <a ui-sref="billing.presetbills-list">Preset Bills</a>
+            </li>
+            <li>
+              <a ui-sref="billing.quotations-list">Quotations</a>
+            </li>
+            <li>
+              <a ui-sref="billing.invoices-list">Invoices</a>
+            </li>
+            <li>
+              <a ui-sref="billing.receipts-list">Payment Requests</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Fees Transfer</a>
+            </li>
+            <li>
+              <a ui-sref="billing.receipts-list">Transactions</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown" uib-dropdown>
+          <a href="" uib-dropdown-toggle>
+            <i class="zmdi zmdi-more"></i>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a ui-sref="billing.items-list">Inter Bank Accounts Transfer ( IBT )</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Bank Recon</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Trial Balance</a>
+            </li>
+            <li>
+              <a ui-sref="billing.items-list">Settings</a>
+            </li>
+            <li>
+              <a class="c-gray" ui-sref="billing.items-list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bank Accounts Listing</a>
+            </li>
+            <li>
+              <a class="c-gray" ui-sref="billing.items-list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opening Balance</a>
+            </li>
+            <li>
+              <a class="c-gray" ui-sref="billing.items-list">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accounting Period Lock</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <data ui-view></data>
+  </section>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>

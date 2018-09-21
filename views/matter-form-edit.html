@@ -1,0 +1,91 @@
+<div ng-class="vm.isDialog ? '' : 'container'">
+  <p id="back-top" style="display: none;">
+    <a ng-click="vm.scrollUp()"><span class="glyphicon glyphicon-chevron-up"></span> TOP</a>
+  </p>
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-11 col-sm-12">
+          <h2 class="f-20 f-500 c-purple" style="display: inline;">Edit Matter Form</h2>
+          <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="matter-forms.list">Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.matterForm)" ng-if="vm.userInfo.priority.matterform.delete && !vm.create_new && !vm.viewMode">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.matterform.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.matterform.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.matterform.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-forms.new" ng-if="vm.userInfo.priority.matterform.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body card-padding">
+      <div class="row">
+        <div class="col-md-7 p-l-25 m-b-10">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Form Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.matterForm.strDisplayName">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-3 m-l-25" style="border: 2px solid #eee;">
+          <h4 class="p-b-10 p-t-10">Available Tabs</h4>
+          <dl class="dl-horizontal" ng-repeat="item in vm.tabList">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-disabled="!vm.can_edit" ng-model="vm.matterform[item]" ng-click="vm.addTab(item)">
+                <i class="input-helper"></i>
+                {{ item }}
+              </label>
+            </div>
+          </dl>
+        </div>
+        <div class="col-md-3 m-l-25 p-l-0 p-t-10" style="border: 2px solid #eee;">
+          <h4 class="p-b-5 p-l-15">Selected Tabs</h4>
+          <dl class="dl-horizontal" ng-repeat="item in vm.matterform.selected">
+            <div class="checkbox">
+              <label class="p-l-15">
+                <span class="p-b-5">{{ $index+1 }}.</span>
+                <span>{{ item }}</span>
+              </label>
+              <div class="pull-right">
+                <button class="btn btn-default btn-sm waves-effect" ng-disabled="!vm.can_edit"><i class="zmdi zmdi-chevron-up" ng-click="vm.changeOrder($index-1, $index);"></i></button>
+                <button class="btn btn-default btn-sm waves-effect" ng-click="vm.changeOrder($index, $index+1);" ng-disabled="!vm.can_edit"><i class="zmdi zmdi-chevron-down"></i></button>
+              </div>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <input ng-if="!vm.create_new" type="file" class="hidden matter form-upload" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
+            <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="matter-forms.list">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.matterform)" ng-if="vm.userInfo.priority.matterform.delete && !vm.create_new && !vm.viewMode">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.matterform.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.matterform.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.matterform.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-forms.new" ng-if="vm.userInfo.priority.matterform.create && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Delete a matter form</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete the matter form?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+

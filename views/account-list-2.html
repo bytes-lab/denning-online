@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-10 col-lg-9">
+          <div class="col-md-10">
+            <span class="d-header">LEDGERS</span>
+            <ul class="actions matter-action m-l-20" data-ng-include src="'matter-action.html'"></ul>
+
+            <div class="clearfix"></div>
+            <span class="c-purple f-500 f-18">{{ vm.fileNo }} ( {{ vm.fileName }} )</span>
+            <a ui-sref="notes.new({fileNo: vm.fileNo, fileName: vm.fileName})" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="p-t-10 p-l-30 m-l-15 ledgers-category">
+        <label class="checkbox checkbox-inline m-r-20">
+          <input type="checkbox" ng-model="vm.select_all" 
+            ng-click="vm.toggleAll()">
+          <i class="input-helper"></i>
+          All
+        </label>
+        <label class="checkbox checkbox-inline m-r-20" ng-repeat="category in vm.all_categories">
+          <div>
+            <input type="checkbox" name="categories[]" 
+              ng-checked="vm.categories.indexOf(category.key) > -1"
+              ng-click="vm.toggleSelection(category.key)">
+            <i class="input-helper"></i>
+            {{ category.val }}
+          </div>
+          <div class="f-500 c-purple">
+            {{ vm.summary[$index].currentBalance }}
+          </div>
+        </label>
+      </div>
+
+      <div class="table-responsive p-15 table-div" ng-if="vm.dataReady" > 
+        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list" show-filter="true">
+          <tr ng-repeat="w in $data">
+            <td data-title="'Date'" filter="{ 'date': 'text' }" sortable="'date'">
+              {{ w.date|ddate }}
+            </td>
+            <td data-title="'Transaction No'" filter="{ 'documentNo': 'text' }" sortable="'documentNo'">
+              {{ w.documentNo }}
+            </td>
+            <td data-title="'Bill No'" filter="{ 'taxInvoice': 'text' }" sortable="'taxInvoice'">
+              {{ w.taxInvoice }}
+            </td>
+            <td data-title="'Received / Paid'" filter="{ 'recdPaid': 'text' }" sortable="'recdPaid'">
+              {{ w.recdPaid }}
+            </td>
+            <td data-title="'Description'" filter="{ 'description': 'text' }" sortable="'description'">
+              {{ w.description }}
+            </td>
+            <td data-title="'Dr'" filter="{ 'amountCR': 'text' }" sortable="'amountCR'" class="text-right">
+              {{ w.amountCR }}
+            </td>
+            <td data-title="'Cr'" filter="{ 'amountDR': 'text' }" sortable="'amountDR'" class="text-right">
+              {{ w.amountDR }}
+            </td>
+            <td data-title="'Balance'" filter="{ 'displayAmount': 'text' }" sortable="'displayAmount'" class="text-right">
+              {{ w.runningBalance }}
+            </td>
+            <td data-title="'Mode'" filter="{ 'paymentMode': 'text' }" sortable="'paymentMode'">
+              {{ w.paymentMode }}
+            </td>
+            <td data-title="'Bank a/c'" filter="{ 'bankAcc': 'text' }" sortable="'bankAcc'">
+              {{ w.bankAcc }}
+            </td>
+            <td data-title="'Issued by'" filter="{ 'issuedBy': 'text' }" sortable="'issuedBy'">
+              {{ w.issuedBy }}
+            </td>
+            <td data-title="'Updated by'" filter="{ 'updatedBy': 'text' }" sortable="'updatedBy'">
+              {{ w.updatedBy }}
+            </td>
+          </tr>
+          <tr ng-if="$data.length==0">
+            <td colspan="12">No record</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

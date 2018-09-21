@@ -1,94 +1,43 @@
-materialAdmin
-    // =========================================================================
-    // Billing Items
-    // =========================================================================
-    
-    .service('presetbillService', ['$q', '$timeout', '$http', function($q, $timeout, $http) {
-        var service = {};
+denningOnline
+  // =========================================================================
+  // Preset Bills
+  // =========================================================================
+  
+  .service('presetbillService', function(http) {
+    var service = {};
 
-        service.presetbills = null;
-        service.getList = getList;
-        service.getItem = getItem;
-        service.save = save;
-        service.delete = delete_;
+    service.getList = function (page, pagesize) {
+      return http.GET('v1/PresetBill', {
+        page: page,
+        pagesize: pagesize})
+      .then(function (resp) {
+        return resp.data;
+      });
+    }
 
-        function getList() {
-            if (service.presetbills) {
-                var deferred = $q.defer();
-                deferred.resolve(service.presetbills);
-                return deferred.promise;
-            } else {
-                return $http.get('data/presetbills.json')
-                .then(function(resp){
-                    service.presetbills = resp.data;                
-                    return resp.data;
-                })                
-            }
-        }
+    service.getTableList = function (page, pagesize, keyword) {
+      return http.GET('v1/table/PresetBill', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-        function getItem(code) {
-            if(service.presetbills) {
-                var deferred = $q.defer();
-                var item = service.presetbills.filter(function(c) {
-                    return c.code == code;
-                });
+    service.getItem = function (code) {
+      return http.GET(`v1/table/PresetBill/${code}`).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-                if (item.length == 1)
-                    deferred.resolve(item[0]);
-                else
-                    deferred.reject(new Error('No Item with the code'));
+    service.save = function (entity, isUpdate) {
+      var method = isUpdate ? 'PUT': 'POST';
 
-                return deferred.promise;
-            } else {
-                return getList().then(function(data) {
-                    var item = service.presetbills.filter(function(c) {
-                        return c.code == code;
-                    });
+      return http[method]('v1/table/PresetBill', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
 
-                    if (item.length == 1)
-                        return item[0];
-                    else
-                        throw new Error('No such item');
-                });
-            }
-        }
-
-        function save(presetbill) {
-            var deferred = $q.defer();
-
-            $timeout(function(){
-                var idx = service.presetbills.map(function(c) { return c.code; }).indexOf(presetbill.code);
-                if(idx != -1) {
-                    service.presetbills[idx] = presetbill;
-                } else {
-                    // should be done on server side
-                    presetbill.code = Math.floor(Math.random() * 1000 + 1);
-                    service.presetbills.push(presetbill);
-                }
-
-                // @@ send post request to server to save the item
-                deferred.resolve(presetbill);
-            }, 100);
-
-            return deferred.promise;
-        }
-
-        function delete_(presetbill) {
-            var deferred = $q.defer();
-
-            $timeout(function(){
-                var idx = service.presetbills.map(function(c) { return c.code; }).indexOf(presetbill.code);
-                if(idx != -1) {
-                    service.presetbills.splice(idx, 1);
-                    deferred.resolve(presetbill);
-                } else {
-                    deferred.reject(new Error('There is no such presetbill'));
-                }
-                // @@ send delete request to server to delete the item
-            }, 100);
-
-            return deferred.promise;
-        }
-        return service;
-        
-    }])
+    return service;
+  })

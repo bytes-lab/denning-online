@@ -1,12 +1,117 @@
-<header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include src="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+<header id="header" data-current-skin="blue" data-ng-include src="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
 
 <section id="main">
-    <aside id="sidebar" data-ng-include src="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
-
-    <section id="content" class="page-view" data-ui-view></section>
-
+  <aside id="sidebar" data-ng-include src="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+  <section id="content" class="page-view" data-ui-view></section>
 </section>
 
 <footer id="footer" data-ng-include src="'template/footer.html'"></footer>
 
+<script type="text/ng-template" id="deleteEntityModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Delete a {{ entity_type }}</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete the {{ entity_type }}?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
 
+<script type="text/ng-template" id="preview-doc.html">
+  <div class="modal-header">
+    <span class="modal-title f-16 f-500 c-black m-r-10">{{ filename }}</span>
+    <a class="btn btn-default btn-sm m-l-25 bgm-gray" title="Download" ng-click="download()">
+      <i class="zmdi zmdi-download"></i>
+    </a>
+  </div>
+  <div style="height: calc(100vh - 135px);">
+    <iframe ng-src="{{ url }}" style="width: 100%; height: 100%; border: 1px solid #aaa;"></iframe>
+  </div>
+</script>
+
+<script type="text/ng-template" id="contact-modal.html">
+  <div class="modal-header contact-modal-header">
+    <span class="c-purple f-500 f-20">{{ vm.title }}</span>
+    <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+    <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+    <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+    <a class="pop-out" ui-sref="contacts.edit({id: vm.entity.code})" target="_blank" ng-if="!vm.isNew"></a>
+    <div style="display: inline;" ng-if="!vm.isNew">
+      <md-button class="btn-sm md-raised md-warn m-l-20" ng-click="vm.relatedMatter()">Matters</md-button>
+      <md-button class="btn-sm md-raised md-warn" ng-click="vm.openFolder()">Folder</md-button>
+      <md-button class="btn-sm md-raised md-warn" ng-click="vm.upload()">Upload</md-button>
+    </div>
+  </div>
+  <div class="contact-modal-content c-overflow">
+    <div data-ng-include src="'views/contact-edit.html'"></div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="matter-action.html">
+  <li class="dropdown" uib-dropdown>
+    <a href="" uib-dropdown-toggle>
+      <i class="zmdi zmdi-more"></i>
+    </a>
+
+    <ul class="dropdown-menu">
+      <li>
+        <a ui-sref="accounts.list({ fileNo: vm.fileNo, fileName: vm.fileName })">ACCOUNTS</a>
+      </li>
+      <li>
+        <a ui-sref="courtdiary({ keyword: vm.fileNo })">CALENDAR</a>
+      </li>
+      <li>
+        <a href="">CHECKLIST</a>
+      </li>
+      <li>
+        <a ui-sref="folders.list({ id: vm.fileNo, type: 'matter' })">MATTER FOLDER</a>
+      </li>
+      <li>
+        <a ui-sref="notes.list({ fileNo: vm.fileNo, fileName: vm.fileName })">NOTES</a>
+      </li>
+      <li>
+        <a ui-sref="payment-records.list({ fileNo: vm.fileNo })">PAYMENTS</a>
+      </li>
+      <li>
+        <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'summary' })">SUMMARY</a>
+      </li>
+      <li>
+        <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'template' })">TEMPLATES</a>
+      </li>
+      <li>
+        <a ng-click="vm.upload()" ng-if="vm.upload">UPLOAD</a>
+      </li>
+    </ul>
+  </li>
+</script>
+
+<script type="text/ng-template" id="contact-action.html">
+  <li class="dropdown" uib-dropdown>
+    <a href="" uib-dropdown-toggle>
+      <i class="zmdi zmdi-more"></i>
+    </a>
+
+    <ul class="dropdown-menu">
+      <li>
+        <a ui-sref="contacts.matters({id: vm.code})">Related Matters</a>
+      </li>
+    </ul>
+  </li>  
+</script>
+
+<script type="text/ng-template" id="property-action.html">
+  <li class="dropdown" uib-dropdown>
+    <a href="" uib-dropdown-toggle>
+      <i class="zmdi zmdi-more"></i>
+    </a>
+
+    <ul class="dropdown-menu">
+      <li>
+        <a ui-sref="properties.matters({id: vm.code})">Related Matters</a>
+      </li>
+    </ul>
+  </li>  
+</script>

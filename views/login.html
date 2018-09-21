@@ -1,145 +1,170 @@
 <!-- Login -->
 <div class="login-content">
-    <div class="lc-block" id="l-login" data-ng-class="{ 'toggled': lctrl.login === 1 }" data-ng-if="lctrl.login === 1">
-        <div ng-if="lctrl.errorMessage != ''" style="color: red">  
-            {{lctrl.errorMessage}}
-        </div>
-
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-            <div class="fg-line">
-                <input type="email" class="form-control" placeholder="Email"  ng-model="lctrl.user.email"> 
-            </div>
-        </div>
-
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
-            <div class="fg-line">
-                <input type="password" class="form-control" placeholder="Password" ng-model="lctrl.user.password" ng-keypress="lctrl.searchKeyPressed($event)">
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="">
-                <i class="input-helper"></i>
-                Keep me signed in
-            </label>
-        </div>
-
-        <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.doLogin(lctrl.user)"><i class="zmdi zmdi-arrow-forward"></i></a>
-
-        <ul class="login-navigation">
-            <li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.login = 0; lctrl.register = 1">Register</li>
-            <li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.login = 0; lctrl.forgot = 1">Forgot Password?</li>
-        </ul>
+  <div class="lc-block" id="l-login" data-ng-class="{ 'toggled': lctrl.login === 1 }" data-ng-if="lctrl.login === 1">
+    <div class="c-red m-b-10">{{ lctrl.errorMessage }}</div>
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+      <div class="fg-line">
+        <input type="email" class="form-control" placeholder="Email"  ng-model="lctrl.user.email"> 
+      </div>
     </div>
 
-    <!-- Register -->
-    <div class="lc-block" id="l-register" data-ng-class="{ 'toggled': lctrl.register === 1 }" data-ng-if="lctrl.register === 1">
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Username">   
-            </div>
-        </div>
-
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Email">
-            </div>
-        </div>
-
-        <div class="input-group m-b-25">
-            <span class="input-group-addon"><i class="zmdi zmdi-smartphone-iphone"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Mobile" ng-model="lctrl.user.phone">
-            </div>
-        </div>
-
-        <div class="input-group m-b-10 p-t-10" style="margin-left:8px;">
-            <div class="toggle-switch" data-ts-color="cyan">
-                <label for="ts3" class="ts-label">Are you a lawyer?</label>
-                <input id="ts3" type="checkbox" hidden="hidden">
-                <label for="ts3" class="ts-helper m-l-25"></label>
-            </div>
-        </div>
-
-        <div class="form-group" style="margin-left:44px;">
-            <div class="fg-line">
-                <div class="select">
-                    <select class="form-control">
-                        <option ng-repeat="item in lctrl.legalFirms" ng-value="item.code">{{ item.name }}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group m-b-20" ng-hide="true">
-            <span class="input-group-addon"><i class="zmdi zmdi-pin"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Firm Address">
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="checkbox" style="margin-left: 15px;">
-            <label>
-                <input type="checkbox" value="">
-                <i class="input-helper"></i>
-                Accept the license agreement
-            </label>
-        </div>
-
-        <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.register = 0; lctrl.verification = 1"><i class="zmdi zmdi-arrow-forward"></i></a>
-
-        <ul class="login-navigation">
-            <li data-block="#l-login" class="bgm-green" data-ng-click="lctrl.register = 0; lctrl.login = 1">Login</li>
-            <li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.register = 0; lctrl.forgot = 1">Forgot Password?</li>
-        </ul>
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+      <div class="fg-line">
+        <input type="password" class="form-control" placeholder="Password" ng-model="lctrl.user.password" ng-keypress="lctrl.searchKeyPressed($event)">
+      </div>
     </div>
 
-    <!-- Verification Phone -->
-    <div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.verification === 1 }" data-ng-if="lctrl.verification === 1">
-        <p class="text-left">Please enter phone number and click "Request Code". Enter the code on SMS and proceed.</p>
+    <div class="clearfix"></div>
 
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-smartphone-iphone"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Phone" ng-model="lctrl.user.phone">
-            </div>
-        </div>
-        <button class="btn bgm-cyan">Request Code</button>
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="TAC">
-            </div>
-        </div>
-        <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.verification = 0; lctrl.login = 1"><i class="zmdi zmdi-arrow-forward"></i></a>
-
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="">
+        <i class="input-helper"></i>
+        Keep me signed in
+      </label>
     </div>
 
-    <!-- Forgot Password -->
-    <div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.forgot === 1 }" data-ng-if="lctrl.forgot === 1">
-        <p class="text-left">Please provide your email address. You can get a verification code shortly.</p>
+    <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.doLogin(lctrl.user)"><i class="zmdi zmdi-arrow-forward"></i></a>
 
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Email Address">
-            </div>
-        </div>
+    <ul class="login-navigation">
+      <li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.login = 0; lctrl.register = 1">Register</li>
+      <li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.login = 0; lctrl.forgot = 1">Forgot Password?</li>
+    </ul>
+  </div>
 
-        <a href="" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
-
-        <ul class="login-navigation">
-            <li data-block="#l-login" class="bgm-green" data-ng-click="lctrl.forgot = 0; lctrl.login = 1">Login</li>
-            <li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.forgot = 0; lctrl.register = 1">Register</li>
-        </ul>
+  <!-- Register -->
+  <div class="lc-block" id="l-register" data-ng-class="{ 'toggled': lctrl.register === 1 }" data-ng-if="lctrl.register === 1">
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+      <div class="fg-line">
+        <input type="text" class="form-control" placeholder="Username">   
+      </div>
     </div>
+
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+      <div class="fg-line">
+        <input type="text" class="form-control" placeholder="Email">
+      </div>
+    </div>
+
+    <div class="input-group m-b-25">
+      <span class="input-group-addon"><i class="zmdi zmdi-smartphone-iphone"></i></span>
+      <div class="fg-line">
+        <input type="text" class="form-control" placeholder="Mobile" ng-model="lctrl.user.phone">
+      </div>
+    </div>
+
+    <div class="input-group m-b-10 p-t-10" style="margin-left:8px;">
+      <div class="toggle-switch" data-ts-color="cyan">
+        <label for="ts3" class="ts-label">Are you a lawyer?</label>
+        <input id="ts3" type="checkbox" hidden="hidden">
+        <label for="ts3" class="ts-helper m-l-25"></label>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-left:44px;">
+      <div class="fg-line">
+        <div class="select">
+          <select class="form-control">
+            <option ng-repeat="item in lctrl.legalFirms" ng-value="item.code">{{ item.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-group m-b-20" ng-hide="true">
+      <span class="input-group-addon"><i class="zmdi zmdi-pin"></i></span>
+      <div class="fg-line">
+        <input type="text" class="form-control" placeholder="Firm Address">
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="checkbox" style="margin-left: 15px;">
+      <label>
+        <input type="checkbox" value="">
+        <i class="input-helper"></i>
+        Accept the license agreement
+      </label>
+    </div>
+
+    <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.register = 0; lctrl.verification = 1"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+    <ul class="login-navigation">
+      <li data-block="#l-login" class="bgm-green" data-ng-click="lctrl.register = 0; lctrl.login = 1">Login</li>
+      <li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.register = 0; lctrl.forgot = 1">Forgot Password?</li>
+    </ul>
+  </div>
+
+  <!-- Verification Phone -->
+  <div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.verification === 1 }" data-ng-if="lctrl.verification === 1">
+    <p class="text-left">You are trying to login from unknown device. Please type TAC from your email for your security.</p>
+    <div ng-if="lctrl.errorMessage != ''" style="color: red">  
+      {{lctrl.errorMessage}}
+    </div>
+
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
+      <div class="fg-line">
+        <input type="number" ng-model="lctrl.user.tac" class="form-control" placeholder="TAC" ng-keypress="lctrl.enterTAC($event)">
+      </div>
+    </div>
+    <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.checkTAC(lctrl.user)"><i class="zmdi zmdi-arrow-forward"></i></a>
+    <ul class="login-navigation">
+      <li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.verification = 0; lctrl.login = 1; lctrl.errorMessage='';">Login</li>
+    </ul>
+  </div>
+
+  <!-- Reset Password -->
+  <div class="lc-block" id="l-reset-password" data-ng-class="{ 'toggled': lctrl.resetPassword_ === 1 }" data-ng-if="lctrl.resetPassword_ === 1">
+    <div class="c-red m-b-10">{{ lctrl.errorMessage }}</div>
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+      <div class="fg-line">
+        <input type="password" class="form-control" placeholder="Old Password" ng-model="lctrl.passwords.old">
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+      <div class="fg-line">
+        <input type="password" class="form-control" placeholder="New Password" ng-model="lctrl.passwords.new">
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+      <div class="fg-line">
+        <input type="password" class="form-control" placeholder="Confirm Passsword" ng-model="lctrl.passwords.new_">
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.resetPassword()"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+  </div>
+  <!-- Forgot Password -->
+  <div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.forgot === 1 }" data-ng-if="lctrl.forgot === 1">
+    <p class="text-left">Please provide your email address. You can get a verification code shortly.</p>
+
+    <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+      <div class="fg-line">
+        <input type="text" class="form-control" placeholder="Email Address">
+      </div>
+    </div>
+
+    <a href="" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+    <ul class="login-navigation">
+      <li data-block="#l-login" class="bgm-green" data-ng-click="lctrl.forgot = 0; lctrl.login = 1">Login</li>
+      <li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.forgot = 0; lctrl.register = 1">Register</li>
+    </ul>
+  </div>
 </div>

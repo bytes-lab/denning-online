@@ -1,4 +1,4 @@
-var materialAdmin = angular.module('materialAdmin', [
+var denningOnline = angular.module('denningOnline', [
     'ngAnimate',
     'ngResource',
     'ui.router',
@@ -9,6 +9,9 @@ var materialAdmin = angular.module('materialAdmin', [
     'ngTable',
     'ngMaterial',
     'formly', 
-    'formlyBootstrap'
+    'formlyBootstrap',
+    'naif.base64',
+    'ngclipboard',
+    'ngClipboard'
 ])
  

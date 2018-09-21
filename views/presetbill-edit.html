@@ -1,99 +1,244 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
 
-    <div class="card">
-        <div class="card-header">
-            <h2 ng-if="!vm.viewMode">Preset Bill Edit</h2>
-            <h2 ng-if="vm.viewMode">Preset Bill Detail</h2>
+  <div class="card">
+    <div class="card-header" ng-if="!vm.isDialog">
+      <div class="row">
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="billing.presetbills-new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
         </div>
-                
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <h4>Preset Bill Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">                    
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Item Code</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.presetbill.code" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Description</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <textarea class="form-control" rows="3" ng-model="vm.presetbill.description" placeholder=""></textarea>
-                            </div>
-                        </dd>
-                    </dl>                                     
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <div class="select">
-                                    <select class="form-control" ng-model="vm.presetbill.state" ng-options="v for v in vm.states">
-                                    </select>                                                                
-                                </div>
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Category</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <div class="select">
-                                    <select class="form-control" ng-model="vm.presetbill.category" ng-options="v for v in vm.categories">
-                                    </select>                                
-                                </div>
-                            </div>
-                        </dd>
-                    </dl>                                       
-                </div>                
-            </div>
- 
-            <div class="clearfix"></div>
-            <div class="btn-group btn-group-lg btn-group-category">
-                <button type="button" class="btn btn-info"><div>All</div><small>$342.22</small></button>
-                <button type="button" class="btn btn-info"><div>Fee</div><small>$342.22</small></button>
-                <button type="button" class="btn btn-info"><div>Disbursement</div><small>$342.22</small></button>
-                <button type="button" class="btn btn-info"><div>GST</div><small>$342.22</small></button>
-            </div>
-
-            <h4 class="m-t-25" ng-click="vm.showRemark=!vm.showRemark">Remark&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRemark"></i><i class="zmdi zmdi-minus" ng-if="vm.showRemark"></i></h4>
-            <div class="row" ng-show="vm.showRemark">
-                <div class="col-md-10 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Remark</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <textarea class="form-control" rows="5" placeholder=""></textarea>
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>   
-            <div class="clearfix"></div>
-       
-            <div class="row">     
-                <div class="col-md-10" ng-if="!vm.viewMode">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
-                    </div>        
-                </div>
-                <div class="col-md-10" ng-if="vm.viewMode">
-                    <div class="m-t-30">
-                        <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
-                    </div>        
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-         
+
+    <div class="card-body card-padding">
+      <h4>Preset Bill Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Item Code</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.code">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Description</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strDescription">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <div class="select">
+                  <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strState">
+                    <option ng-repeat="v in vm.states">{{ v.strDescription }}</option>
+                  </select>
+                </div>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Category</dt>
+            <dd>
+              <div class="fg-line">
+                <div class="select">
+                  <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strCategory" ng-options="v for v in vm.categories">
+                  </select>
+                </div>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+ 
+      <h4 class="m-t-25">Bill Items</h4>
+      <div class="row">
+        <div class="col-md-8 p-l-30 m-t-15">
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>${{ vm.typeSum.All | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>${{ vm.typeSum.Fees | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>${{ vm.typeSum.Disb | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">GST ( <small>${{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
+            <i class="zmdi zmdi-plus"></i>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="table-responsive table-div p-15"> 
+            <table ng-table="vm.tableFilter" class="no-pager table-striped table table-vmiddle table-list">
+              <tr ng-repeat="w in $data">
+                <td data-title="'No'">{{ $index+1 }}</td>
+                <td data-title="'Item Code'">
+                  {{ w.strItemCode }}
+                </td>
+                <td data-title="'Description'">
+                  {{ w.strDescription }}
+                </td>
+                <td data-title="'Formula'" class="p-0 text-center">
+                  <div class="checkbox m-5">
+                    <label>
+                      <input type="checkbox" ng-checked="w.boolIsFormula=='1'" readonly>
+                      <i class="input-helper"></i>
+                    </label>
+                  </div>
+                </td>
+                <td data-title="'Unit'" class="text-right">
+                  {{ w.decUnit }}
+                </td>
+                <td data-title="'Unit Price'" class="text-right">
+                  {{ w.decUnitPrice | number:2 }}
+                </td>
+                <td data-title="'Charges'" class="text-right">
+                  {{ w.decUnitCost }}
+                </td>
+                <td data-title="'Tax Code'">
+                  {{ w.strTaxCode }}
+                </td>
+                <td data-title="'GST (%)'">
+                  {{ w.decTaxRate * 100 | number:2 }}
+                </td>
+                <td data-title="''" class="p-5">
+                  <button class="btn btn-default btn-sm" ng-disabled="!vm.can_edit" title="Move Up" ng-click="vm.move($index-1, $index)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-chevron-up"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Move Down" ng-click="vm.move($index, $index+1)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-chevron-down"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Insert After" ng-click="vm.insert($index)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-plus"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Remove" ng-click="vm.remove(w.strItemCode)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-close"></i>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <h4 class="m-t-25">Remark</h4>
+      <div class="row">
+        <div class="col-md-10 p-l-25">
+          <dl class="dl-horizontal">
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control" ng-readonly="!vm.can_edit" rows="5" ng-model="vm.entity.strRemarks"></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="billing.presetbills-new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<script type="text/ng-template" id="billItemModal.html">
+  <div class="modal-header contact-modal-header">
+    <span class="c-purple f-500 f-20">Choose Bill Items</span>
+  </div>
+  <div class="modal-content">
+    <div class="row">
+      <div class="col-sm-6 col-md-4 p-l-30 m-t-15">
+        <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL</div>
+        <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE</div>
+        <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB</div>
+        <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">SST</div>
+      </div>
+      <div class="col-sm-6 col-md-4 m-t-15 p-r-20">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon search-icon"><i class="zmdi zmdi-search"></i></span>
+          <div class="fg-line">
+            <input type="text" class="form-control" placeholder="Search" ng-model="vm.keyword" ng-change="vm.search()">
+          </div>
+          <span class="input-group-addon search-clear" ng-show="vm.keyword" ng-click="vm.keyword='';vm.search();"><i class="zmdi zmdi-close"></i></span>
+        </div>
+      </div>
+    </div>
 
+    <div class="table-responsive table-div p-15"> 
+      <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
+        <tr ng-repeat="w in $data" ng-dblclick="vm._addItems([w]);">
+          <td data-title="''"><input type="checkbox" ng-model="vm.items[w.strItemCode]" /></td>
+          <td data-title="'Item Code'">
+            {{ w.strItemCode }}
+          </td>
+          <td data-title="'State'">
+            {{ w.strState }}
+          </td>
+          <td data-title="'Category'">
+            {{ w.strCategory }}
+          </td>
+          <td data-title="'Description'">
+            {{ w.strDescription }}
+          </td>
+          <td data-title="'Supply Tax'">
+            {{ w.strTaxCode }}
+          </td>
+          <td data-title="'S.Rate'">
+            {{ w.decTaxRate * 100 }}
+          </td>
+          <td data-title="'P.Rate'">
+            {{ w.decPricePerUnit }}
+          </td>
+          <td data-title="'Type'">
+            {{ w.strType }}
+          </td>
+          <td data-title="'Formula'" class="p-0 text-center">
+            <div class="checkbox m-5">
+              <label>
+                <input type="checkbox" ng-checked="w.boolFormula=='1'" ng-readonly="true">
+                <i class="input-helper"></i>
+              </label>
+            </div>
+          </td>
+          <td data-title="'Price'" class="text-right">
+            {{ w.decPricePerUnit | number:2 }}
+          </td>
+          <td data-title="'Unit'" class="text-right">
+            {{ w.decDefaultUnit }}
+          </td>
+          <td data-title="'Inherit from'">
+            {{ w.strInherit }}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="row p-b-20">
+      <div class="col-md-11" ng-if="!vm.viewMode">
+        <div class="m-t-10">
+          <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.addItems()">Add Items</a>
+          <!-- <a class="btn btn-info btn-sm pull-right" type="submit" ng-click="vm.createItem()">Create New Item</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</script>

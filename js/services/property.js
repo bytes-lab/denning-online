@@ -1,72 +1,58 @@
-materialAdmin
-    // =========================================================================
-    // Properties
-    // =========================================================================
-    
-    .service('propertyService', function($q, $timeout, $http) {
-        var service = {};
+denningOnline
+  .service('propertyService', function (http) {
+    var service = {};
 
-        service.properties = null;
-        service.getList = getList;
-        service.getItem = getItem;
-        service.save = save;
-        service.delete = delete_;
-        service.headers = {
-                    "Content-Type": "application/json",
-                    "webuser-sessionid": "testdenningSkySea",
-                    "webuser-id": "online@denning.com.my"
-                };
+    service.getList = function (page, pagesize, keyword) {
+      return http.GET('v1/property', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    }
 
-        function getList() {
-            return $http({
-                method: 'GET',
-                url: 'http://43.252.215.81/denningwcf/v1/property?search=ho',
-                headers: service.headers
-            }).then(function(resp) {
-                service.properties = resp.data;
-                return resp.data;
-            });    
-        }
+    service.getTableList = function (page, pagesize, keyword) {
+      return http.GET('v1/table/property', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    };
 
-        function getItem(code) {
-            return $http({
-                method: 'GET',
-                url: 'http://43.252.215.81/denningwcf/v1/app/property/'+code,
-                headers: service.headers
-            }).then(function(resp) {
-                return resp.data;
-            });    
-        }
+    service.getItem = function (code) {
+      return http.GET(`v1/table/property/${code}`).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-        function save(property) {
-            var method = property.code ? 'PUT': 'POST';
-            delete property.relatedMatter;
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
 
-            return $http({
-                method: method,
-                url: 'http://43.252.215.81/denningwcf/v1/property',
-                headers: service.headers,
-                data: property
-            }).then(function(response) {
-                return response.data;
-            });
-        }
+      return http[method]('v1/table/Property', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
 
-        function delete_(property) {
-            var deferred = $q.defer();
+    service.delete = function (entity) {
+      return http.DELETE('v1/table/property', { code: entity.code }).then(function (resp) {
+        return resp;
+      });
+    }
 
-            $timeout(function(){
-                var idx = service.properties.map(function(c) { return c.code; }).indexOf(property.code);
-                if(idx != -1) {
-                    service.properties.splice(idx, 1);
-                    deferred.resolve(property);
-                } else {
-                    deferred.reject(new Error('There is no such property'));
-                }
-                // @@ send delete request to server to delete the item
-            }, 100);
+    service.getTypeList = function (type) {
+      return http.GET(`v1/Property/${type}`).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-            return deferred.promise;
-        }
-        return service;        
-    })
+    service.getApprovingAuthorityList = function () {
+      return http.GET('v1/generalSelection/frmProperty/ApprovingAuthority').then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    return service;
+  })

@@ -1,94 +1,30 @@
-materialAdmin
-    // =========================================================================
-    // Billing Items
-    // =========================================================================
-    
-    .service('quotationService', ['$q', '$timeout', '$http', function($q, $timeout, $http) {
-        var service = {};
+denningOnline
+  .service('quotationService', function(http) {
+    var service = {};
 
-        service.quotations = null;
-        service.getList = getList;
-        service.getItem = getItem;
-        service.save = save;
-        service.delete = delete_;
+    service.getList = function (page, pagesize, keyword) {
+      return http.GET('v1/Quotation', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword 
+      }).then(function (resp) {
+        return resp;
+      });
+    }
 
-        function getList() {
-            if (service.quotations) {
-                var deferred = $q.defer();
-                deferred.resolve(service.quotations);
-                return deferred.promise;
-            } else {
-                return $http.get('data/quotations.json')
-                .then(function(resp){
-                    service.quotations = resp.data;                
-                    return resp.data;
-                })                
-            }
-        }
+    service.getItem = function (code) {
+      return http.GET(`v1/table/quotation/${code}`).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-        function getItem(code) {
-            if(service.quotations) {
-                var deferred = $q.defer();
-                var item = service.quotations.filter(function(c) {
-                    return c.code == code;
-                });
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
 
-                if (item.length == 1)
-                    deferred.resolve(item[0]);
-                else
-                    deferred.reject(new Error('No Item with the code'));
+      return http[method]('v1/table/quotation', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
 
-                return deferred.promise;
-            } else {
-                return getList().then(function(data) {
-                    var item = service.quotations.filter(function(c) {
-                        return c.code == code;
-                    });
-
-                    if (item.length == 1)
-                        return item[0];
-                    else
-                        throw new Error('No such item');
-                });
-            }
-        }
-
-        function save(quotation) {
-            var deferred = $q.defer();
-
-            $timeout(function(){
-                var idx = service.quotations.map(function(c) { return c.code; }).indexOf(quotation.code);
-                if(idx != -1) {
-                    service.quotations[idx] = quotation;
-                } else {
-                    // should be done on server side
-                    quotation.code = Math.floor(Math.random() * 1000 + 1);
-                    service.quotations.push(quotation);
-                }
-
-                // @@ send post request to server to save the item
-                deferred.resolve(quotation);
-            }, 100);
-
-            return deferred.promise;
-        }
-
-        function delete_(quotation) {
-            var deferred = $q.defer();
-
-            $timeout(function(){
-                var idx = service.quotations.map(function(c) { return c.code; }).indexOf(quotation.code);
-                if(idx != -1) {
-                    service.quotations.splice(idx, 1);
-                    deferred.resolve(quotation);
-                } else {
-                    deferred.reject(new Error('There is no such quotation'));
-                }
-                // @@ send delete request to server to delete the item
-            }, 100);
-
-            return deferred.promise;
-        }
-        return service;
-        
-    }])
+    return service;
+  })

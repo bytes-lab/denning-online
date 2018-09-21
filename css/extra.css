@@ -1,0 +1,342 @@
+.table-div {
+    white-space:nowrap; 
+    overflow: auto;
+}
+
+.table-list {
+    display:block;
+    overflow-x:scroll;
+    cursor: pointer;
+    -ms-overflow-style: scrollbar;
+}
+
+.table-list tr th:last-child {
+    width: 50%;
+}
+
+.ng-table-fixed-column-60 {
+    width: 60%; 
+}
+
+.ng-table-fixed-column-50 {
+    width: 50%; 
+}
+
+.ng-table-fixed-column-40 {
+    width: 40%; 
+}
+
+.ng-table-fixed-column-35 {
+    width: 35%; 
+}
+
+.ng-table-fixed-column-30 {
+    width: 30%; 
+}
+
+.ng-table-fixed-column-25 {
+    width: 25%; 
+}
+
+.ng-table-fixed-column-20 {
+    width: 20%; 
+}
+
+.input-group-addon.search-clear {
+    min-width: 28px;
+    padding: 10px 0;
+    color: #999;	
+}
+
+.input-group-addon.search-icon {
+    padding-right: 5px;
+    padding-top: 6px;
+    font-size: 20px;
+}
+
+.ng-table-group-header {
+    display: none;
+}
+
+.no-pager .ng-table-pager {
+    display: none;
+}
+
+#back-top a {
+    width: 45px;
+    display: block;
+    text-align: center;
+    background: rgba(245,245,245,0.5);
+    padding: 5px;
+    font: 12px/100% Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #666;
+    border: 1px solid #666;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
+    bottom: 10px;
+    position: fixed;
+    right: 2px;
+    border-radius: 7px;
+}
+
+#back-top span {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 18px;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
+}
+
+#back-top {
+    position: fixed;
+    bottom: 30px;
+    margin-left: -150px;
+    z-index: 99;
+    display: block;
+}
+
+#back-top a:hover, #back-top a:focus {
+    background: #39A8E0;
+    color: #fff;
+    border-color: #39A8E0;
+}
+
+.half-width {
+    width: 49.5% !important;
+    display: inline !important;
+}
+
+.md-virtual-repeat-container.md-autocomplete-suggestions-container {
+    z-index: 2000;
+}
+
+md-autocomplete input:not(.md-input) {
+    line-height: 20px;
+    padding-left: 10px;
+    font-size: 13px;
+}
+
+.md-whiteframe-1dp, .md-whiteframe-z1 {
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.12), 0px 1px 0px 0px rgba(0, 0, 0, 0.24), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
+}
+
+.btn-header {
+    display: inline-block;
+    margin-top: -7px;
+    margin-left: 30px;
+}
+
+.bgm-green-0 {
+    background-color: #0E6251;
+}
+
+.bgm-green-1 {
+    background-color: #A3E4D7;
+}
+
+.bgm-green-2 {
+    background-color: #76D7C4;
+}
+
+.bgm-green-3 {
+    background-color: #1ABC9C;
+}
+
+.bgm-green-4 {
+    background-color: #17A589;
+}
+
+.bgm-green-5 {
+    background-color: #148F77;
+}
+
+.bgm-green-6 {
+    background-color: #117864;
+}
+
+.bgm-green-7 {
+    background-color: #48C9B0;
+}
+
+.bgm-orange-0 {
+    background-color: #F0C700;
+}
+
+tr.selected {
+    background-color: #d7d7d7;
+}
+
+.table.folder td {
+    border: none;
+    padding: 3px;
+}
+
+.table.folder input[type="checkbox"] {
+    margin-left: 18px;
+}
+
+.matter-action {
+    position: static !important;
+    display: inline-block;
+}
+
+.matter-action i {
+    color: rgb(255,67,24) !important;
+}
+
+.d-header {
+    color: rgb(255,67,24) !important;
+    line-height: 45px;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+}
+
+.manage-widget {
+    position: absolute !important;
+    top: 180px;
+    right: 35px;
+}
+
+.summary {
+    background: white;
+}
+
+.summary .attr-label-1 {
+    background: white;
+}
+
+.summary h4 {
+    color: #006400;
+}
+
+.summary dt {
+    color: #808080;
+}
+
+.logo-summary-report {
+    display: none;
+}
+
+.a4536efwe.md-autocomplete-suggestions li {
+    height: auto;
+}
+
+.a4536efwe.md-autocomplete-suggestions li .desc {
+    white-space: normal;
+    line-height: 25px;
+    color: #777;
+}
+
+.b4325.active {
+    background: #ccc;
+}
+
+.md-datepicker-calendar-pane.md-pane-open {
+    z-index: 9999;
+}
+
+.table tr {
+    cursor: pointer;
+}
+
+.contact-modal-content {
+    height: calc(100vh - 135px);
+    border: 15px solid #ccc;
+}
+
+.summary-preview-content {
+    height: calc(100vh - 135px);
+    overflow-y: scroll;
+    border: 18px solid #ccc;
+    padding-top: 40px;
+    padding-bottom: 20px;    
+}
+
+.summary-preview-content .hidden-print {
+    display: none;
+}
+
+.summary-preview-content h4 {
+    color: #006400;
+}
+
+.summary-preview-content .logo-summary-report {
+    display: inline;
+    width: 72px;
+    position: absolute;
+    top: 20px;
+    right: 10px;    
+}
+
+.login-modal .modal-dialog {
+    width: 500px; 
+}
+
+.contact-modal-header .md-warn {
+    min-height: 0;
+    margin: -8px 3px 0 0;
+}
+
+.pop-out {
+    background-image: url(../img/v-sprite12.svg)!important;
+    background-position: 8px -1552px;
+    height: 40px;
+    width: 40px;
+    margin-top: -3px;
+    position: absolute;
+    background-color: rgba(0,0,0,0.75);
+    right: 15px;
+    top: 93px;
+    z-index: 5;
+}
+
+.ledgers-category label {
+    margin-left: 0 !important;
+    min-width: 50px;
+}
+
+@media (min-width: 1600px) {
+    .lg-6 {
+        width: 50%;
+    }
+}
+
+.file-actions .dropdown-menu {
+    min-width: 0;
+}
+
+.group {
+    background: #fafafa !important;
+}
+
+.attr-label {
+    background: #fafafa !important;
+}
+
+md-autocomplete.md-default-theme[disabled]:not([md-floating-label]), md-autocomplete[disabled]:not([md-floating-label]) {
+    background: #fafafa !important;
+}
+
+.item-type {
+    border: 1px solid #ccc;
+    padding: 5px 16px;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 3px;
+    color: #333;
+    cursor: pointer;
+}
+
+.item-type.active {
+    background: #00bcd4;
+    color: white;
+}
+
+.ng-table.no-pager + div .ng-table-pager {
+    display: none!important;
+}

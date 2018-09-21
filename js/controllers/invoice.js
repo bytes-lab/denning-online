@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('invoiceListCtrl', function($filter, $uibModal, NgTableParams, invoiceService) {
         var self = this;
         self.dataReady = false;
@@ -53,7 +53,7 @@ materialAdmin
         };        
     })
 
-    .controller('InvoiceDeleteModalCtrl', function ($scope, $modalInstance, invoice, invoiceService, $state) {
+    .controller('InvoiceDeleteModalCtrl', function ($scope, $uibModalInstance, invoice, invoiceService, $state) {
         $scope.ok = function () {
             invoiceService.delete(invoice).then(function(invoice) {
                 $state.reload();
@@ -63,11 +63,11 @@ materialAdmin
 
                 //$scope.formname.invoiceInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.close();
+            $uibModalInstance.close();
             $state.go('invoices.list');
         };
     })

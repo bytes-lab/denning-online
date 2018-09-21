@@ -1,138 +1,216 @@
-materialAdmin
-    .controller('presetbillListCtrl', function($filter, $uibModal, NgTableParams, presetbillService) {
-        var self = this;
-        self.dataReady = false;
-        self.openDelete = openDelete;
+denningOnline
+  .controller('presetbillListCtrl', function($filter, $uibModal, NgTableParams, $state, 
+                                             presetbillService) 
+  {
+    var self = this;
 
-        presetbillService.getList().then(function(data) {
-            self.data = data;
-            self.dataReady = true;
-            initializeTable();
-        });        
-        
-        function initializeTable () {
-            //Filtering
-            self.tableFilter = new NgTableParams({
-                page: 1,            // show first page
-                count: 10,
-                sorting: {
-                    name: 'asc'     // initial sorting
-                }
-            }, {
-                total: self.data.length, // length of data
-                getData: function(params) {
-                    // use build-in angular filter
-                    var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-                    orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
-                    params.total(orderedData.length); // set total for recalc pagination
-                    return orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                }
-            })      
+    presetbillService.getList(1, 500).then(function(data) {
+      self.data = data;
+      initializeTable();
+    });
+
+    function initializeTable () {
+      self.tableFilter = new NgTableParams({
+        page: 1,
+        count: 25,
+        sorting: {
+          name: 'asc' 
         }
+      }, {
+        dataset: self.data
+      })
+    }
+  })
 
-        //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, presetbill) {
-            var modalInstance = $uibModal.open({
-                animation: animation,
-                templateUrl: 'myModalContent.html',
-                controller: 'PresetbillDeleteModalCtrl',
-                size: size,
-                backdrop: backdrop,
-                keyboard: keyboard,
-                resolve: {
-                    presetbill: function () {
-                        return presetbill;
-                    }
-                }            
-            });
-        }
+  .controller('presetbillEditCtrl', function($filter, $stateParams, presetbillService, 
+                                             $state, billingitemService, refactorService,
+                                             NgTableParams, $uibModal, $uibModalInstance, 
+                                             entityCode, isDialog, isNew, Auth, growlService) 
+  {
+    var self = this;
+    self.userInfo = Auth.getUserInfo();
 
-        //Prevent Outside Click
-        function openDelete(presetbill) {
-            modalInstances(true, '', 'static', true, presetbill)
-        };        
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
+
+    billingitemService.getStateList().then(function (resp) {
+      self.states = resp.data;
     })
 
-    .controller('PresetbillDeleteModalCtrl', function ($scope, $modalInstance, presetbill, presetbillService, $state) {
-        $scope.ok = function () {
-            presetbillService.delete(presetbill).then(function(presetbill) {
-                $state.reload();
-            })
-            .catch(function(err){
-                //Handler
+    self.itemType = 'All';
 
-                //$scope.formname.presetbillInfo.$error.push({meessage:''});
-            });
-            $modalInstance.close();
-        };
+    self.categories = [
+      'Conveyancing',
+      'Agreement',
+      'Litigation',
+      'Will',
+      'Estate Admin',
+      'Tenancy',
+      'Discharge of Charge',
+      'Divorce',
+      'Corporate Secretarial',
+      'General',
+      'Common'
+    ];
 
-        $scope.cancel = function () {
-            $modalInstance.close();
-            $state.go('presetbills.list');
-        };
-    })
-
-    .controller('presetbillEditCtrl', function($filter, $stateParams, presetbillService, $state) {
-        var self = this;
-        self.save = save;
-        self.cancel = cancel;
-        self.isDialog = false;
-        self.viewMode = false;  // for edit / create
-        self.states = [
-            'Common',
-            'Johor',
-            'Kedah',
-            'Kelantan',
-            'Kuala Lumpur',
-            'Malacca',
-            'Negeri Sembilan',
-            'Pahang',
-            'Perak',
-            'Perlis',
-            'Penang',
-            'Sabah',
-            'Sarawk',
-            'Selangor',
-            'Terengganu'
-        ];
-
-        self.categories = [
-            'Conveyancing',
-            'Agreement',
-            'Litigation',
-            'Will',
-            'Estate Admin',
-            'Tenancy',
-            'Discharge of Charge',
-            'Divorce',
-            'Corporate Secretarial',
-            'General',
-            'Common'
-        ];
-        if ($stateParams.id) {
-            presetbillService.getItem($stateParams.id)
-            .then(function(item){
-                self.presetbill = angular.copy(item);  // important
-            });
-        } else {
-            self.presetbill = {
-                code: 'P' + Math.floor(Math.random() * 1000 + 1),
-                state: 'Common',
-                category: 'Conveyancing',
-            };
+    self.insert = function (idx) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'billItemModal.html',
+        controller: 'billItemModalCtrl as vm',
+        size: 'lg',
+        keyboard: true,
+        resolve: {
+          state: function () {
+            return self.entity.strState;
+          },
+          category: function () {
+            return self.entity.strCategory;
+          },
+          excludes: function () {
+            var arr = [];
+            for (ii in self.entity.listBilledItems) {
+              var item = self.entity.listBilledItems[ii];
+              arr.push(item.strItemCode);
+            }
+            return arr;
+          }
         }
-
-        function save() {
-            presetbillService.save(self.presetbill).then(function(presetbill) {
-                self.presetbill = presetbill;
-                $state.go('presetbills.list');
-            })
-            .catch(function(err){
-                //Handler
-            });
+      }).result.then(function (res) {
+        if (res && res.length > 0) {
+          for (ii in res) {
+            if (idx != -1) {
+              self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
+            } else {
+              self.entity.listBilledItems.push(res[ii]);
+            }
+          }
+          refreshItems();
         }
+      }, function (res) {});
+    }
 
-        function cancel() {
-            $state.go('presetbills.list');            
+    self.move = function (x, y) {
+      if (x < 0) {
+        return;
+      } else if (y == self.entity.listBilledItems.length) {
+        return;
+      }
+
+      var b = self.entity.listBilledItems[y];
+      self.entity.listBilledItems[y] = self.entity.listBilledItems[x];
+      self.entity.listBilledItems[x] = b;
+      self.tableFilter.reload();
+    };
+
+    self.remove = function (code) {
+      for (ii in self.entity.listBilledItems) {
+        var item = self.entity.listBilledItems[ii];
+        if (item.strItemCode == code) {
+          self.entity.listBilledItems.splice(ii, 1);
+          break;
         }
-    })
+      }
+      refreshItems();
+    }
+
+    function initializeTable () {
+      self.tableFilter = new NgTableParams({
+        page: 1,
+        count: 25,
+        sorting: {
+          name: 'asc' 
+        }
+      }, {
+        counts: [],
+        getData: function (params) {
+          return self.entity.listBilledItems.filter(function (item) {
+            return self.itemType == 'All' || item.strBillItemType == self.itemType;
+          })
+        } 
+      });
+      
+      refreshItems();
+    }
+
+    function refreshItems () {
+      self.typeSum = {
+        All: 0.0,
+        Fees: 0.0,
+        Disb: 0.0,
+        DisbWithTax: 0.0
+      };
+
+      for (ii in self.entity.listBilledItems) {
+        var item = self.entity.listBilledItems[ii];
+        self.typeSum[item.strBillItemType] += parseFloat(item.decUnitCost);
+        self.typeSum['All'] += parseFloat(item.decUnitCost);
+      }
+
+      self.tableFilter.reload();
+    }
+
+    self.filterItem = function (type) {
+      self.itemType = type;
+      self.tableFilter.reload();
+    }
+
+    if (self.entityCode) {
+      self.title = 'Preset Bill Edit';
+      presetbillService.getItem(self.entityCode).then(function (item){
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+        initializeTable();
+      });
+    } else {
+      self.title = 'New Preset Bill';
+      self.entity = {
+        strState: 'Common',
+        strCategory: 'Conveyancing',
+        listBilledItems: []
+      };
+
+      initializeTable();
+    }
+
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
+      
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      presetbillService.save(entity, self.entity_).then(function (item) {
+        if (item) {  // ignore when errors
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('billing.presetbills-edit', { 'id': item.code });
+            }
+            growlService.growl('Saved successfully!', 'success');          
+          }
+        }
+      });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('billing.presetbills-list');
+      }
+    }
+  })

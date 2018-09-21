@@ -1,94 +1,39 @@
-materialAdmin
-    // =========================================================================
-    // Billing Items
-    // =========================================================================
-    
-    .service('billingitemService', ['$q', '$timeout', '$http', function($q, $timeout, $http) {
-        var service = {};
+denningOnline
+  .service('billingitemService', function(http) {
+    var service = {};
 
-        service.billingitems = null;
-        service.getList = getList;
-        service.getItem = getItem;
-        service.save = save;
-        service.delete = delete_;
+    service.getList = function (type, page, pagesize, keyword, state, category) {
+      return http.GET(`v1/table/billitem/${type}`, {
+        page: page,
+        pagesize: pagesize,
+        search: keyword,
+        state: state,
+        category: category
+      }).then(function (resp) {
+        return resp;
+      });
+    }
 
-        function getList() {
-            if (service.billingitems) {
-                var deferred = $q.defer();
-                deferred.resolve(service.billingitems);
-                return deferred.promise;
-            } else {
-                return $http.get('data/billingitems.json')
-                .then(function(resp){
-                    service.billingitems = resp.data;                
-                    return resp.data;
-                })                
-            }
-        }
+    service.getStateList = function () {
+      return http.GET('v1/table/cboState').then(function (resp) {
+        return resp;
+      });
+    }
 
-        function getItem(code) {
-            if(service.billingitems) {
-                var deferred = $q.defer();
-                var item = service.billingitems.filter(function(c) {
-                    return c.code == code;
-                });
+    service.getItem = function (code) {
+      return http.GET(`v1/table/BillItem/${code}`).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-                if (item.length == 1)
-                    deferred.resolve(item[0]);
-                else
-                    deferred.reject(new Error('No Item with the code'));
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
 
-                return deferred.promise;
-            } else {
-                return getList().then(function(data) {
-                    var item = service.billingitems.filter(function(c) {
-                        return c.code == code;
-                    });
+      return http[method]('v1/table/BillItem', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
 
-                    if (item.length == 1)
-                        return item[0];
-                    else
-                        throw new Error('No such item');
-                });
-            }
-        }
-
-        function save(billingitem) {
-            var deferred = $q.defer();
-
-            $timeout(function(){
-                var idx = service.billingitems.map(function(c) { return c.code; }).indexOf(billingitem.code);
-                if(idx != -1) {
-                    service.billingitems[idx] = billingitem;
-                } else {
-                    // should be done on server side
-                    billingitem.code = Math.floor(Math.random() * 1000 + 1);
-                    service.billingitems.push(billingitem);
-                }
-
-                // @@ send post request to server to save the item
-                deferred.resolve(billingitem);
-            }, 100);
-
-            return deferred.promise;
-        }
-
-        function delete_(billingitem) {
-            var deferred = $q.defer();
-
-            $timeout(function(){
-                var idx = service.billingitems.map(function(c) { return c.code; }).indexOf(billingitem.code);
-                if(idx != -1) {
-                    service.billingitems.splice(idx, 1);
-                    deferred.resolve(billingitem);
-                } else {
-                    deferred.reject(new Error('There is no such billingitem'));
-                }
-                // @@ send delete request to server to delete the item
-            }, 100);
-
-            return deferred.promise;
-        }
-        return service;
-        
-    }])
+    return service;
+  })
+  

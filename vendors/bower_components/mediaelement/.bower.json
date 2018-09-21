@@ -29,7 +29,7 @@
     "tag": "2.16.4",
     "commit": "f033cabc9aa37938ecc1026e58b07a192a2b1fa8"
   },
-  "_source": "git://github.com/johndyer/mediaelement.git",
+  "_source": "https://github.com/johndyer/mediaelement.git",
   "_target": "~2.16.4",
   "_originalSource": "johndyer/mediaelement"
 }

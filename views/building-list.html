@@ -1,63 +1,53 @@
 <div class="container">
+  <div class="block-header">
+    <h2>home / buildings</h2>
+  </div>
 
-    <div class="block-header">
-        <h2>home/building</h2>
-
-        <ul class="actions m-t-20 hidden-xs">
-            <li class="dropdown" uib-dropdown>
-                <a href="" uib-dropdown-toggle>
-                    <i class="zmdi zmdi-more-vert"></i>
-                </a>
-
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a ui-sref="buildings.new">Add a new Building</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="card">
-        <div class="card-header">
-            <h2>Building List</h2>
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <span class="f-20 f-500 c-purple">Building List</span>
+          <a ui-sref="buildings.new" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
         </div>
-                
-        <div class="card-body">
-            <div class="table-responsive" ng-if="vm.dataReady" > 
-                <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
-                    <tr ng-repeat="w in $data">
-                        <td data-title="'Code'" filter="{ 'code': 'text' }" sortable="'code'">
-                            {{ w.code }}
-                        </td>
-                        <td data-title="'Building / Cultivation Type'" filter="{ 'bc_type': 'text' }" sortable="'id_type'">
-                            {{ w.bc_type }}
-                        </td>
-                        <td data-title="'Type'" filter="{ 'type': 'text' }" sortable="'type'">
-                            {{ w.type }}
-                        </td>
-                        <td data-title="'Actions'">
-                            <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="buildings.edit({id:w.code})"><i class="zmdi zmdi-edit"></i></a>
-                            <a class="btn btn-warning" ng-click="vm.openDelete(w)"><i class="zmdi zmdi-delete"></i></a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+      </div>
     </div>
+        
+    <div class="card-body">
+      <div class="table-responsive" ng-if="vm.dataReady" > 
+        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+          <tr ng-repeat="w in $data">
+            <td data-title="'Code'" filter="{ 'code': 'text' }" sortable="'code'">
+              {{ w.code }}
+            </td>
+            <td data-title="'Building / Cultivation Type'" filter="{ 'bc_type': 'text' }" sortable="'id_type'">
+              {{ w.bc_type }}
+            </td>
+            <td data-title="'Type'" filter="{ 'type': 'text' }" sortable="'type'">
+              {{ w.type }}
+            </td>
+            <td data-title="'Actions'">
+              <a class="btn btn-primary" ng-if="!w.$edit"  ui-sref="buildings.edit({id:w.code})"><i class="zmdi zmdi-edit"></i></a>
+              <a class="btn btn-warning" ng-click="vm.openDelete(w)"><i class="zmdi zmdi-delete"></i></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
-        <h4 class="modal-title">Delete a building</h4>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure to delete the building?</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-link" ng-click="ok()">OK</button>
-        <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete a building</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete the building?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
 </script>
 
 

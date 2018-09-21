@@ -1,4 +1,4 @@
-materialAdmin
+denningOnline
     .controller('bankAttorneyListCtrl', function($filter, $sce, $uibModal, NgTableParams, bankAttorneyService) {
         var self = this;
         self.dataReady = false;
@@ -59,7 +59,7 @@ materialAdmin
         };        
     })
 
-    .controller('bankAttorneyDeleteModalCtrl', function ($scope, $modalInstance, bankAttorney, bankAttorneyService, $state) {
+    .controller('bankAttorneyDeleteModalCtrl', function ($scope, $uibModalInstance, bankAttorney, bankAttorneyService, $state) {
         $scope.ok = function () {
             bankAttorneyService.delete(bankAttorney).then(function(bankAttorney) {
                 $state.reload();
@@ -69,11 +69,11 @@ materialAdmin
 
                 //$scope.formname.bankAttorneyInfo.$error.push({meessage:''});
             });
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     })
 

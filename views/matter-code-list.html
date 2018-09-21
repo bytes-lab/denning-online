@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="block-header">
+    <h2>home / matter codes</h2>
+  </div>  
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-12">
+          <span class="f-20 f-500 c-purple">Matter Code List</span>
+          <a ui-sref="matter-codes.new" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="col-sm-4 p-l-25">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon search-icon"><i class="zmdi zmdi-search"></i></span>
+          <div class="fg-line">
+            <input type="text" class="form-control" placeholder="Search" ng-model="vm.keyword" ng-change="vm.search()">
+          </div>
+          <span class="input-group-addon search-clear" ng-show="vm.keyword" ng-click="vm.keyword='';vm.search();"><i class="zmdi zmdi-close"></i></span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="table-responsive table-div p-15"> 
+        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list" show-filter="true">
+          <tr ng-repeat="w in $data" ng-click="vm.clickHandler(w)">
+            <td data-title="'Code'" sortable="'code'">
+              {{ w.code }}
+            </td>
+            <td data-title="'Description'" sortable="'strDescription'">
+              {{ w.strDescription }}
+            </td>
+            <td data-title="'Category'" sortable="'strCategory'">
+              {{ w.strCategory }}
+            </td>
+            <td data-title="'Party Group Label 1'" sortable="'strGroupC1'">
+              {{ w.strGroupC1 }}
+            </td>
+            <td data-title="'Party Group Label 2'" sortable="'strGroupC2'">
+              {{ w.strGroupC2 }}
+            </td>
+            <td data-title="'Lawyer Group Label 1'" sortable="'strGroupL1'">
+              {{ w.strGroupL1 }}
+            </td>
+            <td data-title="'Lawyer Group Label 2'" sortable="'strGroupL2'">
+              {{ w.strGroupL2 }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

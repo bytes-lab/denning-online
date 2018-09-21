@@ -1,0 +1,2352 @@
+<div class="container">
+  <div class="card">
+  <div class="card-body card-padding">
+    <div class="col-md-10 m-b-15 no-padding">
+      <span class="c-purple title f-22">{{ vm.title }}</span>
+      <div class="pull-right m-r-30 m-t-5">
+        <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid" ng-if="vm.userInfo.priority.filematter.update && vm.model.tmp.can_edit" style="margin-top: 2px;" ng-click="vm.save()">Save</button>
+        <a class="btn bgm-cyan btn-sm m-l-5" type="submit" ng-click="vm.model.tmp.can_edit=true;" ng-if="vm.userInfo.priority.filematter.update && !vm.model.tmp.can_edit" style="padding-bottom: 7px;margin-top: 2px;"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+        <button type="button" class="btn btn-default m-l-5" ng-click="vm.reset()">Reset</button>
+        <button type="button" class="btn btn-default m-l-5 m-r-20" ui-sref="file-matters.list">Cancel</button>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="preview">
+    <section>
+      <div class="pull-left">
+        <md-button class="btn-sm md-raised md-warn" style="min-height: 0;" ui-sref="folders.list({id: vm.model.strFileNo1, type: 'matter'})">Folder</md-button>
+        <ul class="actions matter-action m-l-5 m-r-15" data-ng-include src="'matter-action.html'"></ul>
+        <input type="file" class="hidden" ng-class="'matter-upload'" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
+      </div>
+    </section>
+
+    <form name="vm.form" novalidate>
+      <uib-tabset active="vm.idxTab">
+        <uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.label}}">
+          <div class="group col-lg-10 no-padding">
+            <formly-form model="vm.model" fields="tab.groups">
+            </formly-form>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+      <div class="clearfix"></div>
+      <div class="col-md-10">
+        <div class="pull-left">
+          <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.prevTab()"><i class="zmdi zmdi-arrow-back"></i> Back</button>
+          <button class="btn btn-default btn-icon-text m-l-5 waves-effect" ng-click="vm.scrollUp()"><i class="zmdi zmdi-long-arrow-up"></i> Up</button>
+          <button class="btn btn-default btn-icon-text m-l-5 m-r-15 waves-effect" ng-click="vm.nextTab()"><i class="zmdi zmdi-arrow-forward"></i> Forward</button>
+        </div>
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid" ng-if="vm.userInfo.priority.filematter.update && vm.model.tmp.can_edit" style="margin-top: 2px;" ng-click="vm.save()">Save</button>
+          <a class="btn bgm-cyan btn-sm m-l-5" type="submit" ng-click="vm.model.tmp.can_edit=true;" ng-if="vm.userInfo.priority.filematter.update && !vm.model.tmp.can_edit" style="padding-bottom: 7px;margin-top: 2px;"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <button type="button" class="btn btn-default m-l-5" ng-click="vm.reset()">Reset</button>
+          <button type="button" class="btn btn-default m-l-5 m-r-20" ui-sref="file-matters.list">Cancel</button>
+        </div>
+      </div>
+    </form>
+    </div>
+    <h2 ng-if="false">Form Data</h2>
+    <pre ng-if="false">{{ vm.model | json }}</pre>
+  </div>
+  </div>
+</div>  
+<!-- BANK GROUP -->
+<script type="text/ng-template" id="bank1.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>  
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label"> Bank Branch</label>
+
+        <md-autocomplete
+          ng-disabled="!model.tmp.can_edit"
+          md-selected-item="model.clsBank1"
+          md-search-text="searchText"
+          md-items="item in queryBanks(searchText)"
+          md-item-text="item.strName ? item.strName: ' '"
+          md-min-length="0"
+          md-autoselect="false"
+          class="default-input"
+          style="width:72%">
+        <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="i">{{item.strName}}</span>
+        </md-item-template>
+        </md-autocomplete>
+
+        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="bankDialog(model.clsBank1, false)">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
+        </a>
+        <a class="btn btn-primary short-btn" ng-click="viewBankBranch(model.clsBank1)">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of bank"></span>
+        </a>
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Bank Name</label>
+      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank1'].clsBankCode.strName" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">PA Name</label>
+      <input type="text" class="form-control" readonly="true" ng-model="model.strBank1PANo" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Chargee Ref.</label>
+      <input type="text" class="form-control" readonly="" ng-model="model.strBank1Ref" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Existing Charge Presentation No.</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn1" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Redemption Date</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate15" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Redemption Sum</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM10" style="width:45%;">
+      </div>
+    </div>    
+  </div>  
+</script>
+
+<script type="text/ng-template" id="bank2.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+        <label class="form-control attr-label"> Bank Branch</label>
+
+        <md-autocomplete
+          ng-disabled="!model.tmp.can_edit"
+          md-selected-item="model['clsBank2']"
+          md-search-text="searchText"
+          md-items="item in queryBanks(searchText)"
+          md-item-text="item.strName ? item.strName: ' '"
+          md-min-length="0"
+          md-autoselect="false"
+          class="default-input"
+          style="width:72%">
+        <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="i">{{item.strName}}</span>
+        </md-item-template>
+        </md-autocomplete>
+
+        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="bankDialog(model.clsBank2, false)">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank branch and choose it"></span>
+        </a>
+        <a class="btn btn-primary short-btn" ng-click="viewBankBranch(model.clsBank2)">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of bank branch"></span>
+        </a>
+      </div>
+    </div>
+    <div class="form-group col-md-12 m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Bank</label>
+      <input type="text" class="form-control" readonly="true" ng-model="model.clsBank2.clsBankCode.strName" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12 m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Address</label>
+      <input type="text" class="form-control" readonly="true" ng-model="model['clsBank2'].clsBankCode.strRegAdd" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12 m-l-15">
+      <div style="display: flex;">
+        <label class="form-control attr-label">CAC / LDC</label>
+        <input type="text" class="form-control" readonly="" ng-model="model['clsBank2'].clsCACCode.strName" style="width:45%;">
+        <a class="btn btn-primary short-btn" ng-click="bankCACDialog(model['clsBank2'].clsCACCode, true)">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the bank CAC"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="form-group col-md-12 m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">PA Name</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strBank2PANo" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12 m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Bank Ref</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strBank2Ref" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12 m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Bank Instruction Date</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate9" style="width:45%;">
+      </div>
+    </div>    
+    <div class="form-group col-md-12 m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Letter of Offer Date</label>
+      <input type="text" class="form-control" readonly="" ng-value="model.dtDate8 | ddate" style="width:45%;">
+      </div>
+    </div>    
+  </div>  
+</script>
+
+<!-- CONTACT GROUP -->
+<script type="text/ng-template" id="contact.html">
+  <div class="m-b-15 group-label group-label-wrapper">
+    <span class="">{{ to.label }}</span>
+    <button ng-disabled="!model.tmp.can_edit" ng-if="to.party" class="btn btn-default btn-em-add" ng-click="addParty(to.c_start, to.c_end)" title="Add a new party to group">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="form-group m-l-15" ng-repeat="n in range(to.c_start, to.c_end)" ng-if="to.party && (model['clsC'+n].code || model.tmp['clsC'+n])">
+    <div style="display: flex;">
+      <label class="form-control attr-label short-label">{{ $index+1 }}</label>
+
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model['clsC'+n]"
+        md-search-text="searchText"
+        md-items="item in queryContacts(searchText)"
+        md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:72%">
+      <md-item-template>
+        <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.strName}}</span>
+        <span md-highlight-text="searchText" md-highlight-flags="i">{{item.strIDNo}}</span>
+      </md-item-template>
+      </md-autocomplete>
+
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog('clsC'+n, false)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new party and choose it"></span>
+      </a>
+      <a class="btn btn-primary short-btn" ng-click="contactDialog('clsC'+n, true)">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+      </a>
+      <input class="form-control" ng-model="model['strShareC'+n]" ng-if="to.share" style="width: 15%;" placeholder="Share" />
+      <a class="btn btn-danger short-btn" ng-click="removeParty(n, to.c_start, to.c_end)">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span>
+      </a>
+    </div>
+  </div>
+  <div ng-if="to.solicitor">
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Firm</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model[to.field]"
+        md-search-text="q_lf"
+        md-items="item in queryLFs(q_lf)"
+        md-item-text="item.strName ? item.strName: ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%">
+        <md-item-template>
+        <span md-highlight-text="q_lf" class="col-1" md-highlight-flags="i">{{item.strName}}</span>
+        </md-item-template>
+      </md-autocomplete>
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="legalfirmDialog(model[to.field], false)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new legal firm and choose it"></span>
+      </a>
+      <a class="btn btn-primary short-btn" ng-click="viewLegalFirm(model[to.field])" title="See detail of solicitor">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+      </a>
+      <div class="checkbox" style="margin: 6px 0 6px 18px;">
+        <label>
+          <input type="checkbox" ng-disabled="!model.tmp.can_edit" ng-model="represent_this" ng-click="representChange()">
+          <i class="input-helper"></i>
+          Representing this party
+        </label>
+      </div>
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Tel / Fax / Email</label>
+        <label class="form-control p-t-5" style="width:45%;">
+          {{ model[to.field].strName ? model[to.field].strPhone1+' / '+model[to.field].strEmailAddress : '' }}
+        </label>
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Location</label>
+      <input type="text" class="form-control" readonly="true" ng-model="model[to.field].strCity" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Staff in Charge</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_staff']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group m-l-15">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Solicitor Ref.</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model['strLawyer'+to.idx+'Ref']" style="width:45%;">
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- PROPERTY GROUP -->
+<script type="text/ng-template" id="property.html">
+  <div class="m-b-15 group-label group-label-wrapper">
+    <span class="">{{ to.label }}</span>
+    <button ng-disabled="!model.tmp.can_edit" class="btn btn-default btn-em-add" ng-click="addProperty(1, 5)" title="Add a new property to group">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="form-group col-md-12" ng-repeat="n in range(1, 5)" ng-if="to.property && (model['clsP'+n].code || model.tmp['clsP'+n])">
+    <div style="display: flex;">
+      <label class="form-control attr-label short-label">{{ n }}</label>
+
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model['clsP'+n]"
+        md-search-text="qspp"
+        md-items="item in queryProperties(qspp)"
+        md-selected-item-change="propertyChange(item, n)"
+        md-item-text="item.strAddress ? item.strAddress : ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:72%">
+      <md-item-template>
+        <span md-highlight-text="qspp" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+        <span md-highlight-text="qspp" md-highlight-flags="i">{{item.strAddress}}</span>
+      </md-item-template>
+      </md-autocomplete>
+
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="propertyDialog('clsP'+n, false)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new property and choose it"></span>
+      </a>
+      <a class="btn btn-primary short-btn" ng-click="propertyDialog('clsP'+n, true)">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of property"></span>
+      </a>
+      <input class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model['strShare'+n]" ng-if="to.share" style="width: 15%;" placeholder="Share" />
+      <a class="btn btn-danger short-btn" ng-click="removeProperty(n, 1, 5)">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this property from group"></span>
+      </a>
+    </div>
+  </div>
+  <div class="col-sm-offset-1 col-sm-9 m-t-20 m-b-20">
+    <dl class="dl-horizontal m-b-10">
+      <dt>Title</dt>
+      <dd>{{ property.strAddress }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Area</dt>
+      <dd>{{ property.strArea }} {{ property.strAreaDescription }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Tenure</dt>
+      <dd>{{ property.strLandTenure }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Expiry Date</dt>
+      <dd>{{ property.dtLeaseExpDate|ddate }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Restriction</dt>
+      <dd>{{ property.strRestrictionAgainst }} <span ng-if="property.strApprovingAuthority">( {{ property.strApprovingAuthority }} )</span></dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Use</dt>
+      <dd>{{ property.strPropertyUse }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Type</dt>
+      <dd>{{ property.strPropertyType }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Postal Add</dt>
+      <dd>{{ property.strPropertyAdr }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Project</dt>
+      <dd>{{ property.strProjectName }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Developer</dt>
+      <dd>{{ property.clsDeveloper.strName }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Proprietor</dt>
+      <dd>{{ property.clsProprietor.strName }}</dd>
+    </dl>
+  </div>
+</script>
+
+<!-- FILE INFORMATION -->
+<script type="text/ng-template" id="info.html">  
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group col-md-12" ng-if="to.party">
+    <div style="display: flex;">
+      <label class="form-control attr-label">Primary Client</label>
+
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.clsPrimaryClient"
+        md-search-text="qspc"
+        md-items="item in queryContacts(qspc)"
+        md-item-text="item.strName+' ( '+item.strIDNo+' )'"
+        md-min-length="0"
+        md-autoselect="false"
+        placeholder="Enter existing contact name or ID"
+        class="default-input"
+        style="width:72%">
+      <md-item-template>
+        <span md-highlight-text="qspc" class="col-1" md-highlight-flags="i">{{item.strName}}</span>
+        <span md-highlight-text="qspc" md-highlight-flags="i">{{item.strIDNo}}</span>
+      </md-item-template>
+      </md-autocomplete>
+
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog('clsPrimaryClient', false)">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" title="New Contact"></span>
+      </a>
+      <a class="btn btn-primary short-btn" target="_new" ng-click="contactDialog('clsPrimaryClient', true)">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="View Details"></span>
+      </a>
+      <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control" ng-model="model.clsPrimaryClient.share" ng-if="to.share" style="width: 15%;" placeholder="Share" />
+    </div>
+  </div>
+  <div ng-if="to.solicitor">
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">References</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+      <label class="form-control attr-label">Ref 1 (Automatic)</label>
+      <input type="text" class="form-control" readonly="" ng-model="model.strFileNo1" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+      <label class="form-control attr-label">Ref 2 (Manual)</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strFileNo2" style="width:45%;" placeholder="Enter existing Ref (if any)">
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Matter Type</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Matter Code</label>
+    <md-autocomplete
+      ng-disabled="!model.tmp.can_edit"
+      md-selected-item="model.clsMatterCode"
+      md-search-text="qmc"
+      md-items="item in queryCodes(qmc)"
+      md-selected-item-change="matterCodeChange(item)"
+      md-item-text="item.strDescription+' ( '+item.code+' )'"
+      md-min-length="0"
+      md-autoselect="false"
+      class="default-input"
+      style="width:45%">
+    <md-item-template>
+      <span md-highlight-text="qmc" class="col-360" md-highlight-flags="i">{{item.strDescription}}</span>
+      <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
+    </md-item-template>
+    </md-autocomplete>
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Category</label>
+    <input type="text" class="form-control" readonly="" ng-model="model.clsMatterCode.strCategory" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Department</label>
+    <input type="text" class="form-control" readonly="" ng-model="model.clsMatterCode.strDept" style="width:45%;">
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Checklist</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+      <label class="form-control attr-label">Checklist</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.clsPresetChecklist"
+        md-search-text="qpscl"
+        md-items="item in queryChecklist(qpscl)"
+        md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%;">
+      <md-item-template>
+        <span md-highlight-text="qpscl" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+        <span md-highlight-text="qpscl" md-highlight-flags="i">{{item.strDescription}}</span>
+      </md-item-template>
+      </md-autocomplete>
+      <a class="btn btn-primary short-btn" target="_new" ng-click="viewChecklist(model.clsPrimaryClient)">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+      </a>      
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Billing Code</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+      <label class="form-control attr-label">Preset Billing Code</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.clsPresetBill"
+        md-search-text="qpsb1"
+        md-items="item in queryBills(qpsb1)"
+        md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%;">
+      <md-item-template>
+        <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+        <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
+      </md-item-template>
+      </md-autocomplete>
+      <a class="btn btn-primary short-btn" target="_new" ng-click="viewBillingCode(model.clsPrimaryClient)">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
+      </a>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Status</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Open Date</label>
+    <input type="text" class="form-control" readonly="" ng-value="model.dtDateOpenFile | ddate" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Turnaround</label>
+    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.intTurnaround" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Status</label>
+    <input type="text" class="form-control" readonly="" ng-value="model.clsFileStatus.strDescription" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Close Date</label>
+    <input type="text" class="form-control" readonly="" ng-value="model.dtDateCloseFile | ddate" style="width:45%;">
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Staff in Charge</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+      <label class="form-control attr-label">Partner in charge</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.clsPartnerInCharge"
+        md-search-text="qspic"
+        md-items="item in queryStaffs(qspic)"
+        md-item-text="item.strInitials ? item.strInitials: ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%;">
+      <md-item-template>
+        <span md-highlight-text="qspic" class="col-1" md-highlight-flags="i">
+          ( {{item.strInitials}} ) {{item.strName}}
+        </span>
+      </md-item-template>
+      </md-autocomplete>
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">L.A in charge</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.clsLAInCharge"
+        md-search-text="qslic"
+        md-items="item in queryStaffs(qslic)"
+        md-item-text="item.strInitials ? item.strInitials: ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%;">
+      <md-item-template>
+        <span md-highlight-text="qslic" class="col-1" md-highlight-flags="i">
+          ( {{item.strInitials}} ) {{item.strName}}
+        </span>
+      </md-item-template>
+      </md-autocomplete>
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Clerk in charge</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.clsClerkInCharge"
+        md-search-text="qscic"
+        md-items="item in queryStaffs(qscic)"
+        md-item-text="item.strInitials ? item.strInitials: ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%;">
+      <md-item-template>
+        <span md-highlight-text="qscic" class="col-1" md-highlight-flags="i">
+          ( {{item.strInitials}} ) {{item.strName}}
+        </span>
+      </md-item-template>
+      </md-autocomplete>
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Team</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.team"
+        md-search-text="qsctc"
+        md-items="item in queryStaffs(qsctc)"
+        md-item-text="item.strInitials ? item.strInitials: ' '"
+        md-min-length="0"
+        md-autoselect="false"
+        class="default-input"
+        style="width:45%;">
+      <md-item-template>
+        <span md-highlight-text="qscic" class="col-1" md-highlight-flags="i">
+          ( {{item.strInitials}} ) {{item.strName}}
+        </span>
+      </md-item-template>
+      </md-autocomplete>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Location</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Pocket Location</label>
+    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strPocketFile" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Physical File Location</label>
+    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strFileLoc" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Archive</label>
+    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Related Matter</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+      <label class="form-control attr-label">Related Matter</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="rmatter"
+        md-search-text="qstl"
+        md-items="item in queryMatters(qstl)"
+        md-item-text="item.key"
+        md-min-length="0"
+        md-selected-item-change="matterChange(item)"
+        class="default-input" style="width:45%;">
+        <md-item-template>
+          <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
+        </md-item-template>
+      </md-autocomplete>
+      <a class="btn btn-primary short-btn" target="_new" ui-sref="file-matters.edit({ fileNo: rmatter.key })" ng-if="rmatter.key.trim()">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the matter"></span>
+      </a>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Remarks</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Remarks</label>
+    <textarea class="form-control p-l-10" rows="8" ng-readonly="!model.tmp.can_edit" ng-model="model.strRemarks" placeholder="type here...." style="width:45%;"></textarea>
+    </div>
+  </div>  
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Office Use</h4>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Entered by</label>
+    <div class="col-sm-8">
+      <label>{{ model.clsEnteredBy.strInitials }}</label>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Updated by</label>
+    <div class="col-sm-8">
+      <label>{{ model.clsUpdatedBy.strInitials }}</label>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Date</label>
+    <div class="col-sm-8">
+      <label>{{ model.dtDateEntered | ddate }}</label>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Date</label>
+    <div class="col-sm-8">
+      <label>{{ model.dtDateUpdated | ddate }}</label>
+    </div>
+  </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="case.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Court</label>
+    <input type="text" class="form-control" ng-model="model.strF2" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Place</label>
+    <input type="text" class="form-control" ng-model="model[options.key+'_place']" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Court No.</label>
+    <input type="text" class="form-control" ng-model="model[options.key+'_court_no']" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Case Type</label>
+    <input type="text" class="form-control" ng-model="model.strF3" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Case No.</label>
+    <input type="text" class="form-control" ng-model="model.strF4" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Party Type</label>
+    <input type="text" class="form-control" ng-model="model.strF5" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">SAR</label>
+    <input type="text" class="form-control" ng-model="model.strF6" style="width:45%;">
+    </div>
+  </div>  
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Judge</label>
+    <input type="text" class="form-control" ng-model="model.strF7" style="width:45%;">
+    </div>
+  </div>  
+  </div>
+</script>
+
+<script type="text/ng-template" id="price.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Purchase Price [A]</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm1" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:30%;" ng-change="calcForm(model)">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Earnest Deposit [B]</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm17" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" ng-keyup="calcForm(model)" style="width:30%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Balance Deposit [C]</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm18" ng-readonly="true" ng-model="model.decRM18" ng-change="calcForm(model)" style="width:30%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Total Deposit [D] = B + C</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="true" ng-model="model.decRM2" style="width:30%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Balance Purchase Price [ A - D ]</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="true" ng-model="model.decRM19" style="width:30%;">
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Extra Price</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Extra 1 [X]</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm3" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM3" ng-change="calcForm(model)" style="width:30%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Extra 2 [Y]</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm20" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM20" ng-change="calcForm(model)" style="width:30%;">
+    </div>
+  </div>  
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Extra 3 [Z]</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm21" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM21" ng-change="calcForm(model)" style="width:30%;">
+    </div>
+  </div>  
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Total [ A + X + Y + Z ]</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="true" ng-model="model.decRM22" style="width:30%;">
+    </div>
+  </div>  
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">SST / GST</h4>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">GST</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decPriceGst" style="width:30%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">GST Price Value</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM36" style="width:30%;">
+    </div>
+  </div>  
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label-210">Purchase Price</label>
+    <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:30%;">
+    </div>
+  </div>  
+  </div>
+</script>
+
+<script type="text/ng-template" id="offer.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Special Damages</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">General Damages</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM18" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Insurance Settlement Offer</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">First Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Second Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM19" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Third Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM36" style="width:45%;">
+      </div>
+    </div>   
+  </div>
+</script>
+
+<script type="text/ng-template" id="vehicle.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Vehicle No</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Owner</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM18" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Defendant Vehicle Detail</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">First Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Second Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM19" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Third Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM36" style="width:45%;">
+      </div>
+    </div>   
+  </div>
+</script>
+
+<script type="text/ng-template" id="tenancy.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Quit Rent</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Council Assessment</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Mangement Fee</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM18" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Notes</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">First Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Second Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM19" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Third Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM36" style="width:45%;">
+      </div>
+    </div>   
+  </div>
+</script>
+
+<script type="text/ng-template" id="estate-agent.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Negociator</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Real Estate Company</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM18" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Insurance Settlement Offer</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">First Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Second Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM19" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Third Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM36" style="width:45%;">
+      </div>
+    </div>   
+  </div>
+</script>
+
+<script type="text/ng-template" id="report.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Police Report</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">JPJ Report</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Remarks</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM18" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">First Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Second Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM19" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Third Offer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model[options.key+'_solicitor_ref']" style="width:45%;">
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="premises-rent.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Address</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF1" style="width:70%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+        <label class="form-control attr-label">Type</label>
+        <md-autocomplete
+          ng-disabled="!model.tmp.can_edit"
+          md-selected-item="model.strF10"
+          md-search-text="qp1"
+          md-items="item in queryList(qp1)"
+          md-item-text="item"
+          md-min-length="0"
+          md-autoselect="false"
+          class="default-input"
+          style="width:45%;">
+        <md-item-template>
+          <span md-highlight-text="qp1" class="col-1" md-highlight-flags="i">{{ item }}</span>
+        </md-item-template>
+        </md-autocomplete>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Area</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF11" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Title</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.clsP1.strAddress" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Purpose / Use</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Purpose / Use</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF12" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Rental Information</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Monthly Rental</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Deposits</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Rental</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Electricity</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM5" style="width:45%;">
+      </div>
+    </div>   
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Water</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM4" style="width:45%;">
+      </div>
+    </div>   
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Utilities</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM3" style="width:45%;">
+      </div>
+    </div>   
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Renovation</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM11" style="width:45%;">
+      </div>
+    </div>   
+    <hr>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Total Deposits</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM36" style="width:45%;">
+      </div>
+    </div>   
+  </div>
+</script>
+
+<script type="text/ng-template" id="term.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Initial Term</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF5" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Commencement Date</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Expiry Date</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate3" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Optional Term</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Optional Term</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Rate of Increment</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Rent for Option Term</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM12" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Commencement Date</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Expiry Date</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate5" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Termination</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">By Landlord</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF13" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">By Tenant</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF14" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Payment in lieu of Notice</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM13" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Party Paying Legal Fee & Stamp Duty</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Party Paying Legal Fee</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF2" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Party Paying Stamp Duty</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF15" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Date of Tenancy Agreement</h4>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of Tenancy Agreement</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate1" style="width:45%;">
+      </div>
+    </div>   
+  </div>
+</script>
+
+<script type="text/ng-template" id="loan.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Type of Loan</label>
+    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div style="display: flex;">
+    <label class="form-control attr-label">Type of Finacing</label>
+    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Loan Amount</h4>  
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Term Loan Amount</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.decRM4" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Repayment Period (TL)</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.strF1" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">OD Loan Amount</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.decRM5" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Interest Rate (TL)</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.strF2" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;MRTA</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.decRM6" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="form-group1 col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Monthly Installment (TL)</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.decRM7" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="form-group1 col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Legal Fee</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.decRM23" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Interest Rate (OD)</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.strF8" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>     
+  <div class="form-group1 col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;Other</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-model="model.decRM24" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div> 
+  <div class="clearfix"></div>
+  <div class="form-group col-md-6 m-t-10">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Total Loan</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM25" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Klamnic Loan</h4>  
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Selling Price</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM9" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>      
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Purchase Price</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM8" class="form-control input-sm text-right" id="inputEmail3">
+      </div>
+    </div>
+  </div>      
+  </div>
+</script>
+
+<script type="text/ng-template" id="arrear.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">From</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate6" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">To</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate7" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">No. of Months</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF16" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Total Amount</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM16" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Outstanding Utilities</h4>  
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Electricty Bill</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM6" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Water Bill</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM7" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Management Fee</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM8" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Sewerage Charges</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM9" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Refuse Collection</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM10" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Parking Fee</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM14" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Lisencing Fee</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM15" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Total Deposits</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF400" style="width:45%;">
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="chain.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Original Developer</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Original Purchaser</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Proprietor 1</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Proprietor 2</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Proprietor 3</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Proprietor 4</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Price</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">SPA Date</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">First Assignee Bank</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of Facility Agreement</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of DOA (Loan) </label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of R&R</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Chain of Ownership - Second and Subsequent Purchases</h4>  
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Electricty Bill</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Water Bill</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Management Fee</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Sewerage Charges</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="beneficiary.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">1. </label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">2. </label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Spouse(s)</h4>  
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">1. </label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">2. </label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">Issues (Children)</h4>  
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">1. </label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">2. </label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="other.html">
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Tier 1</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Tier 2</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">More Information</h4>  
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date 1</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date 2</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">$ 1</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">$ 2</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="summary.html">
+  <div class="row summary" id="summary">
+    <div class="col-md-8 col-md-offset-1">
+      <h2 class="c-purple p-b-15 title" style="font-size: 25px;">SUMMARY</h2>
+      <h5 class="f-16">{{ model.strFileNo1 }} ( {{ model.clsPrimaryClient.strName }} )</h5>
+      <img src="img/app-icon.png" class="logo-summary-report">
+    </div>
+    <div class="col-md-2 hidden-print">
+      <button class="btn btn-primary m-t-25" ng-click="preview()">Preview</button>
+    </div>
+    <div class="col-md-5 first col-md-offset-1">
+      <h4 class="m-t-25 m-b-20">Matter Information</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Matter Description</dt>
+        <dd>{{ model.clsMatterCode.strDescription }} ( {{ model.clsMatterCode.code }} )</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Partner</dt>
+        <dd>{{ model.clsPartnerInCharge.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>LA</dt>
+        <dd>{{ model.clsLAInCharge.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Clerk</dt>
+        <dd>{{ model.clsClerkInCharge.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Loc / Poc / Arc</dt>
+        <dd>{{ model.strFileLoc }} / {{ model.strPocketFile }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Status</dt>
+        <dd>{{ model.clsFileStatus.strDescription }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Open ( Closed )</dt>
+        <dd>{{ model.dtDateOpenFile|ddate }} ( {{ model.dtDateCloseFile|ddate }} )</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Other Ref</dt>
+        <dd>{{ model.strFileNo2 }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC1.strName">{{ model.clsMatterCode.strGroupC1 }}</h4>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC1.strName">
+        <dt>{{ model.clsC1.strIDNo }}</dt>
+        <dd>{{ model.clsC1.strName }} <span ng-if="model.strShareC1">( {{ model.strShareC1 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC2.strName">
+        <dt>{{ model.clsC2.strIDNo }}</dt>
+        <dd>{{ model.clsC2.strName }} <span ng-if="model.strShareC2">( {{ model.strShareC2 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC3.strName">
+        <dt>{{ model.clsC3.strIDNo }}</dt>
+        <dd>{{ model.clsC3.strName }} <span ng-if="model.strShareC3">( {{ model.strShareC3 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC4.strName">
+        <dt>{{ model.clsC4.strIDNo }}</dt>
+        <dd>{{ model.clsC4.strName }} <span ng-if="model.strShareC4">( {{ model.strShareC4 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC5.strName">
+        <dt>{{ model.clsC5.strIDNo }}</dt>
+        <dd>{{ model.clsC5.strName }} <span ng-if="model.strShareC5">( {{ model.strShareC5 }} )</span></dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC6.strName">{{ model.clsMatterCode.strGroupC2 }}</h4>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC6.strName">
+        <dt>{{ model.clsC6.strIDNo }}</dt>
+        <dd>{{ model.clsC6.strName }} <span ng-if="model.strShareC6">( {{ model.strShareC6 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC7.strName">
+        <dt>{{ model.clsC7.strIDNo }}</dt>
+        <dd>{{ model.clsC7.strName }} <span ng-if="model.strShareC7">( {{ model.strShareC7 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC8.strName">
+        <dt>{{ model.clsC8.strIDNo }}</dt>
+        <dd>{{ model.clsC8.strName }} <span ng-if="model.strShareC8">( {{ model.strShareC8 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC9.strName">
+        <dt>{{ model.clsC9.strIDNo }}</dt>
+        <dd>{{ model.clsC9.strName }} <span ng-if="model.strShareC9">( {{ model.strShareC9 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC10.strName">
+        <dt>{{ model.clsC10.strIDNo }}</dt>
+        <dd>{{ model.clsC10.strName }} <span ng-if="model.strShareC10">( {{ model.strShareC10 }} )</span></dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC11.strName">{{ model.clsMatterCode.strGroupC3 }}</h4>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC11.strName">
+        <dt>{{ model.clsC11.strIDNo }}</dt>
+        <dd>{{ model.clsC11.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC12.strName">
+        <dt>{{ model.clsC12.strIDNo }}</dt>
+        <dd>{{ model.clsC12.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC13.strName">
+        <dt>{{ model.clsC13.strIDNo }}</dt>
+        <dd>{{ model.clsC13.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC14.strName">
+        <dt>{{ model.clsC14.strIDNo }}</dt>
+        <dd>{{ model.clsC14.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC15.strName">
+        <dt>{{ model.clsC15.strIDNo }}</dt>
+        <dd>{{ model.clsC15.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC16.strName">{{ model.clsMatterCode.strGroupC4 }}</h4>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC16.strName">
+        <dt>{{ model.clsC16.strIDNo }}</dt>
+        <dd>{{ model.clsC16.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC17.strName">
+        <dt>{{ model.clsC17.strIDNo }}</dt>
+        <dd>{{ model.clsC17.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC18.strName">
+        <dt>{{ model.clsC18.strIDNo }}</dt>
+        <dd>{{ model.clsC18.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC19.strName">
+        <dt>{{ model.clsC19.strIDNo }}</dt>
+        <dd>{{ model.clsC19.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC20.strName">
+        <dt>{{ model.clsC20.strIDNo }}</dt>
+        <dd>{{ model.clsC20.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC21.strName">{{ model.clsMatterCode.strGroupC5 }}</h4>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC21.strName">
+        <dt>{{ model.clsC21.strIDNo }}</dt>
+        <dd>{{ model.clsC21.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC22.strName">
+        <dt>{{ model.clsC22.strIDNo }}</dt>
+        <dd>{{ model.clsC2.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC23.strName">
+        <dt>{{ model.clsC23.strIDNo }}</dt>
+        <dd>{{ model.clsC23.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC24.strName">
+        <dt>{{ model.clsC24.strIDNo }}</dt>
+        <dd>{{ model.clsC24.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC25.strName">
+        <dt>{{ model.clsC25.strIDNo }}</dt>
+        <dd>{{ model.clsC25.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20" ng-if="model.clsC26.strName">{{ model.clsMatterCode.strGroupC6 }}</h4>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC26.strName">
+        <dt>{{ model.clsC26.strIDNo }}</dt>
+        <dd>{{ model.clsC26.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC27.strName">
+        <dt>{{ model.clsC27.strIDNo }}</dt>
+        <dd>{{ model.clsC27.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC28.strName">
+        <dt>{{ model.clsC28.strIDNo }}</dt>
+        <dd>{{ model.clsC28.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC29.strName">
+        <dt>{{ model.clsC29.strIDNo }}</dt>
+        <dd>{{ model.clsC29.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10" ng-if="model.clsC30.strName">
+        <dt>{{ model.clsC30.strIDNo }}</dt>
+        <dd>{{ model.clsC30.strName }}</dd>
+      </dl>
+
+      <div ng-if="model.clsLawyer1.strName">
+        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer1') }}</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Firm</dt>
+          <dd>{{ model.clsLawyer1.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Location</dt>
+          <dd>{{ model.clsLawyer1.strCity }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tel / Fax</dt>
+          <dd>{{ model.clsLawyer1.strPhone1 }} / {{ model.clsLawyer1.strFax }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Email</dt>
+          <dd>{{ model.clsLawyer1.strEmailAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Ref</dt>
+          <dd>{{ model.strLawyer1Ref }}</dd>
+        </dl>
+      </div>
+
+      <div ng-if="model.clsLawyer2.strName">
+        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer2') }}</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Firm</dt>
+          <dd>{{ model.clsLawyer2.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Location</dt>
+          <dd>{{ model.clsLawyer2.strCity }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tel / Fax</dt>
+          <dd>{{ model.clsLawyer2.strPhone1 }} / {{ model.clsLawyer2.strFax }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Email</dt>
+          <dd>{{ model.clsLawyer2.strEmailAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Ref</dt>
+          <dd>{{ model.strLawyer2Ref }}</dd>
+        </dl>
+      </div>
+
+      <div ng-if="model.clsLawyer3.strName">
+        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer3') }}</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Firm</dt>
+          <dd>{{ model.clsLawyer3.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Location</dt>
+          <dd>{{ model.clsLawyer3.strCity }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tel / Fax</dt>
+          <dd>{{ model.clsLawyer3.strPhone1 }} / {{ model.clsLawyer3.strFax }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Email</dt>
+          <dd>{{ model.clsLawyer3.strEmailAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Ref</dt>
+          <dd>{{ model.strLawyer3Ref }}</dd>
+        </dl>
+      </div>
+
+      <div ng-if="model.clsLawyer4.strName">
+        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer4') }}</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Firm</dt>
+          <dd>{{ model.clsLawyer4.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Location</dt>
+          <dd>{{ model.clsLawyer4.strCity }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tel / Fax</dt>
+          <dd>{{ model.clsLawyer4.strPhone1 }} / {{ model.clsLawyer4.strFax }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Email</dt>
+          <dd>{{ model.clsLawyer4.strEmailAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Ref</dt>
+          <dd>{{ model.strLawyer4Ref }}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="col-md-5 second">
+      <div ng-if="model.strF2">
+        <h4 class="m-t-25 m-b-20">Case Name</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Full Case Name</dt>
+          <dd>{{ model.strF211 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Court</dt>
+          <dd>{{ model.strF2 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Case No</dt>
+          <dd>{{ model.strF4 }}</dd>
+        </dl>
+      </div>
+
+      <h4 class="m-t-25 m-b-20">{{ getLabel('clsP1') }}</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Title</dt>
+        <dd>{{ property.strAddress }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Area</dt>
+        <dd>{{ property.strArea }} {{ property.strAreaDescription }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Tenure</dt>
+        <dd>{{ property.strLandTenure }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Expiry Date</dt>
+        <dd>{{ property.dtLeaseExpDate|ddate }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Restriction</dt>
+        <dd>{{ property.strRestrictionAgainst }} <span ng-if="property.strApprovingAuthority">( {{ property.strApprovingAuthority }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Use</dt>
+        <dd>{{ property.strPropertyUse }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Type</dt>
+        <dd>{{ property.strPropertyType }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Postal Add</dt>
+        <dd>{{ property.strPropertyAdr }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Project</dt>
+        <dd>{{ property.strProjectName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Developer</dt>
+        <dd>{{ property.clsDeveloper.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Proprietor</dt>
+        <dd>{{ property.clsProprietor.strName }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Price</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Purchase Price</dt>
+        <dd>{{ model.decRM1 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Earnest Deposit</dt>
+        <dd>{{ model.decRM17 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Balance Deposit</dt>
+        <dd>{{ model.decRM18 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Deposit</dt>
+        <dd>{{ model.decRM2 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Balance PP</dt>
+        <dd>{{ model.decRM19 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Loan</dt>
+        <dd>{{ model.strName1 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Diff Sum</dt>
+        <dd>{{ model.strName1 }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">Loan</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Loan Type</dt>
+        <dd>{{ model.strF3 }} <span ng-if="model.strF4"> ( {{ model.strF4 }} )</span></dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Term Loan</dt>
+        <dd>{{ model.decRM4 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>OD Loan</dt>
+        <dd>{{ model.decRM5 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>+ MRTA</dt>
+        <dd>{{ model.decRM6 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>+ Legal Fee</dt>
+        <dd>{{ model.decRM23 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>+ Other</dt>
+        <dd>{{ model.decRM24 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-25">
+        <dt>Total Loan</dt>
+        <dd>{{ model.decRM25 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Bank Purchase Price</dt>
+        <dd>{{ model.decRM8 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Bank Selling Price</dt>
+        <dd>{{ model.decRM9 }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">{{ getLabel('clsBank1') }} </h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Bank</dt>
+        <dd>{{ model.clsBank1.clsBankCode.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Branch</dt>
+        <dd>{{ model.clsBank1.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Ref</dt>
+        <dd>{{ model.strBank1Ref }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Redemption Amt</dt>
+        <dd>{{ model.decRM10 }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Redemption Date</dt>
+        <dd>{{ model.dtDate15|ddate }}</dd>
+      </dl>
+
+      <h4 class="m-t-25 m-b-20">{{ getLabel('clsBank2') }}</h4>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Bank</dt>
+        <dd>{{ model.clsBank2.clsBankCode.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Branch</dt>
+        <dd>{{ model.clsBank2.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Ref</dt>
+        <dd>{{ model.strBank2Ref }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>LO Date</dt>
+        <dd>{{ model.dtDate8|ddate }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Instruction Date</dt>
+        <dd>{{ model.dtDate9|ddate }}</dd>
+      </dl>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="rpgt.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">File No. 1</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Primary Client</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Last Day to File CKHT</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Property Title</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">A. Deposal Information</h4>  
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of SPA</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date Of MOT</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of Deposal</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Deposal Price</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Adjustified Value</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Net Deposal Price</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Retention (%)</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">B. Acquisition Information</h4>  
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of SPA</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date Of MOT</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date 5A Notice</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of Transmission</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of Acquisition</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Acquisition Price</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Adjustified Value</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Nett Acquisition Price</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h4 class="m-b-15 group-label">C. Date of CKHT</h4>  
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Date of Filing</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Notice Of Assessment</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Payment</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div style="display: flex;">
+      <label class="form-control attr-label">Clearance</label>
+      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- GENERATE DOCUMENT GROUP -->
+<script type="text/ng-template" id="gen-doc.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group">
+  <div style="display: flex; margin-bottom: 20px;">
+    <label class="form-control attr-label-v1">Category</label>
+    <select class="form-control" ng-model="docInfo.category" ng-change="updateType()" style="width:40%;">
+      <option ng-repeat="item in categories" ng-value="item">{{ item }}</option>
+    </select>
+    <label class="form-control attr-label-v1">Type</label>
+    <select class="form-control" ng-model="docInfo.type" ng-change="updateTemplates()" style="width:65%;">
+      <option ng-repeat="item in types" ng-value="item.strTypeCode">
+        {{ item.strTypeCode }}&nbsp;&nbsp;&nbsp;{{ item.strTypeName }}
+      </option>
+    </select>
+    <label class="form-control attr-label-v1">Source</label>
+    <select class="form-control" ng-model="docInfo.source" ng-change="updateTemplates()" style="width:40%; margin-right: 20px;">
+      <option ng-repeat="item in sources" ng-value="item">{{ item }}</option>
+    </select>
+  </div>
+  <div class="table-responsive"> 
+    <table ng-table="tableFilter" class="table table-vmiddle" show-filter="true">
+    <tr ng-repeat="w in $data" style="cursor: pointer;" ng-click="chooseTemplate(w)" ng-class="{ selected: tpl.code == w.code }">
+      <td data-title="'Code'" sortable="'code'">
+        {{ w.code }}
+      </td>
+      <td data-title="'Created At'" sortable="'dtCreatedDate'">
+        {{ w.dtCreatedDate|ddate }}
+      </td>
+      <td data-title="'Description'" sortable="'strDescription'">
+        {{ w.strDescription }}
+      </td>
+      <td data-title="'Version'" sortable="'intVersionID'">
+        {{ w.intVersionID }}
+      </td>
+      <td data-title="'Lang'" sortable="'strLangauge'">
+        {{ w.strLangauge }}
+      </td>
+      <td data-title="'Source'" sortable="'strSource'">
+        {{ w.strSource }}
+      </td>
+    </tr>
+    </table>
+  </div>
+  <div class="button-group">
+    <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Upload</a>
+    <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Customize</a>
+    <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="generate()">Generate</a>
+  </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="preview-summary.html">
+  <div class="modal-header">
+    <span class="modal-title f-16 f-500 c-black m-r-10">Preview Summary Report</span>
+    <a class="btn btn-default btn-sm m-l-25 bgm-gray" title="Print" ng-click="print()">
+      <i class="zmdi zmdi-print"></i>
+    </a>
+    <a class="btn btn-default btn-sm m-l-10 bgm-gray" ng-click="">
+      Save to Folder
+    </a>
+  </div>
+  <div class="summary-preview-content" ng-bind-html="content">
+  </div>
+</script>

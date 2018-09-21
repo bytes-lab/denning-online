@@ -1,4 +1,4 @@
-<ul class="dropdown-menu" ng-keydown="keydown($event)">
+<ul class="uib-datepicker-popup dropdown-menu" dropdown-nested ng-if="isOpen" style="display: block" ng-style="{top: position.top+'px', left: position.left+'px'}" ng-keydown="keydown($event)" ng-click="$event.stopPropagation()">
 	<li ng-transclude></li>
 	<li ng-if="showButtonBar" class="dp-actions clearfix">
         <button type="button" class="btn btn-link" ng-click="select('today')">{{ getText('current') }}</button>

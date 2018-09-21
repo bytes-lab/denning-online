@@ -1384,6 +1384,11 @@
   padding-top: 5px;
 }
 
+.overview-tabs .actions > li > a, .actions > a {
+  width: 20px;
+  height: 20px;
+}
+
 .actions > li > a > i,
 .actions > a > i {
   color: #adadad;
@@ -2352,7 +2357,7 @@
 }
 
 [data-current-skin="blue"] {
-  background-color: #2196f3;
+  background-color: #000040;
 }
 
 [data-current-skin="blue"] .ss-icon {

@@ -1,125 +1,52 @@
-<div class="sidebar-inner c-overflow">    
-    <div class="profile-menu">
-        <a href="" toggle-submenu>
-            <div class="profile-pic">
-            </div>
+<div class="sidebar-inner c-overflow">  
+  <div class="profile-menu">
+    <a href="" toggle-submenu>
+      <div class="profile-pic">
+      </div>
 
-            <div class="profile-info">
-                {{ app.userInfo.name }}
+      <div class="profile-info">
+        {{ app.userInfo.name }}
 
-                <i class="zmdi zmdi-caret-down"></i>
-            </div>
-        </a>
+        <i class="zmdi zmdi-caret-down"></i>
+      </div>
+    </a>
 
-        <ul class="main-menu">
-            <li>
-                <a data-ui-sref="pages.profile.profile-about" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-account"></i> View Profile</a>
-            </li>
-            <li>
-                <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
-            </li>
-            <li>
-                <a href=""><i class="zmdi zmdi-pin-help"></i> Help</a>
-            </li>
-            <li>
-                <a ng-click="mactrl.logout()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
-            </li>
-        </ul>
-    </div>
-
-    <ul class="main-menu">        
-        <li data-ui-sref-active="active">
-            <a data-ui-sref="overview" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-view-dashboard"></i> Overview</a>
-        </li>
-        <li data-ui-sref-active="active" ng-if="app.userInfo.priority.matter.list">
-            <a data-ui-sref="matterforms.edit" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-file-text"></i> Matter</a>
-        </li>
-        <li data-ui-sref-active="active" ng-if="app.userInfo.priority.contact.list">
-            <a data-ui-sref="contacts.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-folder-person"></i> Contact</a>
-        </li>
-        <li data-ui-sref-active="active" ng-if="app.userInfo.priority.property.list">
-            <a data-ui-sref="properties.list" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-layers"></i> Property</a>
-        </li>
-
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('widgets') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-money"></i> Billing</a>
-
-            <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="billingitems.list" data-ng-click="mactrl.sidebarStat($event)">Bill Items</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="presetbills.list" data-ng-click="mactrl.sidebarStat($event)">Preset Bills</a></li>
-                <!-- <li><hr/></li> -->
-                <li ng-if="app.userInfo.priority.quotation.list"><a data-ui-sref-active="active" data-ui-sref="quotations.list" data-ng-click="mactrl.sidebarStat($event)">Quotation</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="invoices.list" data-ng-click="mactrl.sidebarStat($event)">Tax Invoice</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="receipts.list" data-ng-click="mactrl.sidebarStat($event)">Receipt</a></li>                
-            </ul>
-        </li>
-        
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('tables') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-calendar-check"></i> Calendar</a>
-
-            <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="tables.data-table" data-ng-click="mactrl.sidebarStat($event)">Overview</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="courtdiary" data-ng-click="mactrl.sidebarStat($event)">Court Diary</a></li>
-            </ul>
-        </li>
-
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('tables') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-pin-account"></i> Clients Account</a>
-
-            <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="tables.tables" data-ng-click="mactrl.sidebarStat($event)">Tables</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="tables.data-table" data-ng-click="mactrl.sidebarStat($event)">Data Tables</a></li>
-            </ul>
-        </li>
-        
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('form') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-money-box"></i> Office Account</a>
-
-            <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="form.basic-form-elements" data-ng-click="mactrl.sidebarStat($event)">Basic Form Elements</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="form.form-components" data-ng-click="mactrl.sidebarStat($event)">Form Components</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="form.form-examples" data-ng-click="mactrl.sidebarStat($event)">Form Examples</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="form.form-validations" data-ng-click="mactrl.sidebarStat($event)">Form Validation</a></li>
-            </ul>
-        </li>
-
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('user-interface') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-swap-alt"></i>Tracking</a>
-            <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="spaclitems.list" data-ng-click="mactrl.sidebarStat($event)">Coveyancing Checklist Item</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="spapresetcls.list" data-ng-click="mactrl.sidebarStat($event)">Coveyancing Preset Checklist</a></li>                
-                <li><a data-ui-sref-active="active" data-ui-sref="spa-checklist-calendar" data-ng-click="mactrl.sidebarStat($event)">Coveyancing Checklist Calendar</a></li>                
-                <li><a data-ui-sref-active="active" data-ui-sref="litigationclitems.list" data-ng-click="mactrl.sidebarStat($event)">Litigation Checklist Item</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="litigationpresetcls.list" data-ng-click="mactrl.sidebarStat($event)">Litigation Preset Checklist</a></li>                
-                <li><a data-ui-sref-active="active" data-ui-sref="litigation-checklist-calendar" data-ng-click="mactrl.sidebarStat($event)">Litigation Checklist Calendar</a></li>                                
-            </ul>
-        </li>
-        <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('charts') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-view-list"></i>Listing</a>
-            <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="banks.list" data-ng-click="mactrl.sidebarStat($event)">Bank</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="bank-CACs.list" data-ng-click="mactrl.sidebarStat($event)">Bank CAC</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="bank-attorneys.list" data-ng-click="mactrl.sidebarStat($event)">Bank Attorney</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="buildings.list" data-ng-click="mactrl.sidebarStat($event)">Building</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="cities.list" data-ng-click="mactrl.sidebarStat($event)">City</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="courts.list" data-ng-click="mactrl.sidebarStat($event)">Court</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="IRD-branches.list" data-ng-click="mactrl.sidebarStat($event)">IRD Branch</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="judges.list" data-ng-click="mactrl.sidebarStat($event)">Judge</a></li>
-<!--                 <li><a data-ui-sref-active="active" data-ui-sref="staffs.list" data-ng-click="mactrl.sidebarStat($event)">Staff</a></li> -->
-                <li><a data-ui-sref-active="active" data-ui-sref="land-offices.list" data-ng-click="mactrl.sidebarStat($event)">Land Office</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="land-PTGs.list" data-ng-click="mactrl.sidebarStat($event)">Land PTG</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="legal-firms.list" data-ng-click="mactrl.sidebarStat($event)">Legal Firm</a></li>
-<!--                 <li><a data-ui-sref-active="active" data-ui-sref="projects.list" data-ng-click="mactrl.sidebarStat($event)">Project</a></li> -->
-                <li><a data-ui-sref-active="active" data-ui-sref="mukims.list" data-ng-click="mactrl.sidebarStat($event)">Mukim</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="occupations.list" data-ng-click="mactrl.sidebarStat($event)">Occupation</a></li>
-<!--                 <li><a data-ui-sref-active="active" data-ui-sref="loan-types.list" data-ng-click="mactrl.sidebarStat($event)">Loan Type</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="CKHTs.list" data-ng-click="mactrl.sidebarStat($event)">CKHT</a></li> -->
-            </ul>
-        </li>
-
-        <li data-ui-sref-active="active">
-            <a data-ui-sref="calendar" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-share"></i> Shared</a>
-        </li>
-
+    <ul class="main-menu">
+      <li>
+        <a data-ui-sref="profile.about" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-account"></i> View Profile</a>
+      </li>
+      <li>
+        <a href=""><i class="zmdi zmdi-pin-help"></i> Help</a>
+      </li>
+      <li>
+        <a ng-click="mactrl.logout()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+      </li>
     </ul>
+  </div>
+
+  <ul class="main-menu">
+    <li data-ui-sref-active="active" ng-class="app.getCls(mitem)"  ng-repeat="mitem in app.menu">
+      <a data-ui-sref="{{ mitem.url || 'empty' }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!mitem.submenus">
+        <i class="zmdi {{ mitem.icon }}"></i> {{ mitem.title }}
+      </a>
+      <a href="" toggle-submenu ng-if="mitem.submenus">
+        <i class="zmdi {{ mitem.icon }}"></i> {{ mitem.title }}
+      </a>
+      <ul>
+        <li ng-repeat="sitem in mitem.submenus">
+          <a data-ui-sref-active="active" data-ui-sref="{{ sitem.url || 'empty' }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!sitem.submenus">
+            {{ sitem.title }}
+          </a>
+          <a href="" toggle-submenu ng-if="sitem.submenus">{{ sitem.title }}</a>
+          <ul ng-if="sitem.submenus">
+            <li ng-repeat="citem in sitem.submenus">
+              <a data-ui-sref="{{ citem.url || 'empty' }}" data-ng-click="mactrl.sidebarStat($event)" ng-if="!citem.submenus">
+                 {{ citem.title }}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>
