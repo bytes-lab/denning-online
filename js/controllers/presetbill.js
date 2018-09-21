@@ -69,7 +69,7 @@ denningOnline
           for (ii in res) {
             self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
           }
-          self.tableFilter.reload();
+          refreshItems();
         }
       }, function (res) {});
     }
@@ -89,7 +89,7 @@ denningOnline
 
     self.remove = function (idx) {
       self.entity.listBilledItems.splice(idx, 1);
-      self.tableFilter.reload();
+      refreshItems();
     }
 
     function initializeTable () {
@@ -105,7 +105,26 @@ denningOnline
             return self.itemType == 'All' || item.strBillItemType == self.itemType;
           })
         } 
-      })
+      });
+      
+      refreshItems();
+    }
+
+    function refreshItems () {
+      self.typeSum = {
+        All: 0.0,
+        Fees: 0.0,
+        Disb: 0.0,
+        DisbWithTax: 0.0
+      };
+
+      for (ii in self.entity.listBilledItems) {
+        var item = self.entity.listBilledItems[ii];
+        self.typeSum[item.strBillItemType] += parseFloat(item.decUnitCost);
+        self.typeSum['All'] += parseFloat(item.decUnitCost);
+      }
+
+      self.tableFilter.reload();
     }
 
     self.filterItem = function (type) {
@@ -127,6 +146,8 @@ denningOnline
         strState: 'Common',
         strCategory: 'Conveyancing',
       };
+
+      refreshItems();
     }
 
     self.save = function () {
