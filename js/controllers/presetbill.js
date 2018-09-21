@@ -95,8 +95,14 @@ denningOnline
       self.tableFilter.reload();
     };
 
-    self.remove = function (idx) {
-      self.entity.listBilledItems.splice(idx, 1);
+    self.remove = function (code) {
+      for (ii in self.entity.listBilledItems) {
+        var item = self.entity.listBilledItems[ii];
+        if (item.strItemCode == code) {
+          self.entity.listBilledItems.splice(ii, 1);
+          break;
+        }
+      }
       refreshItems();
     }
 
@@ -108,6 +114,7 @@ denningOnline
           name: 'asc' 
         }
       }, {
+        counts: [],
         getData: function (params) {
           return self.entity.listBilledItems.filter(function (item) {
             return self.itemType == 'All' || item.strBillItemType == self.itemType;

@@ -323,7 +323,7 @@ md-autocomplete.md-default-theme[disabled]:not([md-floating-label]), md-autocomp
 }
 
 .item-type {
-    background: #eee;
+    border: 1px solid #ccc;
     padding: 5px 16px;
     display: inline-block;
     font-size: 15px;
@@ -335,4 +335,8 @@ md-autocomplete.md-default-theme[disabled]:not([md-floating-label]), md-autocomp
 .item-type.active {
     background: #00bcd4;
     color: white;
+}
+
+.ng-table.no-pager + div .ng-table-pager {
+    display: none!important;
 }
