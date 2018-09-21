@@ -69,9 +69,27 @@ denningOnline
           for (ii in res) {
             self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
           }
-          self.tableFilter.reload();          
+          self.tableFilter.reload();
         }
       }, function (res) {});
+    }
+
+    self.move = function (x, y) {
+      if (x < 0) {
+        return;
+      } else if (y == self.entity.listBilledItems.length) {
+        return;
+      }
+
+      var b = self.entity.listBilledItems[y];
+      self.entity.listBilledItems[y] = self.entity.listBilledItems[x];
+      self.entity.listBilledItems[x] = b;
+      self.tableFilter.reload();
+    };
+
+    self.remove = function (idx) {
+      self.entity.listBilledItems.splice(idx, 1);
+      self.tableFilter.reload();
     }
 
     function initializeTable () {

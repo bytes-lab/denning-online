@@ -96,16 +96,16 @@
                   {{ w.decTaxRate * 100 | number:2 }}
                 </td>
                 <td data-title="''" class="p-5">
-                  <button class="btn btn-default btn-sm" title="Move Up" ng-click="vm.move(w, -1)" style="padding: 4px 9px;">
+                  <button class="btn btn-default btn-sm" title="Move Up" ng-click="vm.move($index-1, $index)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-chevron-up"></i>
                   </button>
-                  <button class="btn btn-default btn-sm m-l-5" title="Move Down" ng-click="vm.move(w, 1)" style="padding: 4px 9px;">
+                  <button class="btn btn-default btn-sm m-l-5" title="Move Down" ng-click="vm.move($index, $index+1)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-chevron-down"></i>
                   </button>
                   <button class="btn btn-default btn-sm m-l-5" title="Insert After" ng-click="vm.insert($index)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-plus"></i>
                   </button>
-                  <button class="btn btn-default btn-sm m-l-5" title="Remove" ng-click="vm.remove(file)" style="padding: 4px 9px;">
+                  <button class="btn btn-default btn-sm m-l-5" title="Remove" ng-click="vm.remove($index)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-close"></i>
                   </button>
                 </td>
