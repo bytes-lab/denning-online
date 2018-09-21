@@ -167,7 +167,6 @@ denningOnline
     } else {
       self.title = 'New Preset Bill';
       self.entity = {
-        code: 'P' + Math.floor(Math.random() * 1000 + 1),
         strState: 'Common',
         strCategory: 'Conveyancing',
         listBilledItems: []
@@ -175,7 +174,6 @@ denningOnline
 
       initializeTable();
     }
-
 
     self.copy = function () {
       self.isNew = true;
@@ -192,7 +190,7 @@ denningOnline
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
-      presetbillService.save(entity).then(function (item) {
+      presetbillService.save(entity, self.entity_).then(function (item) {
         if (item) {  // ignore when errors
           if (self.isDialog) {
             $uibModalInstance.close(item);

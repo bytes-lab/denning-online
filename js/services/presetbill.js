@@ -31,8 +31,8 @@ denningOnline
       });
     }
 
-    service.save = function (entity) {
-      var method = entity.code ? 'PUT': 'POST';
+    service.save = function (entity, isUpdate) {
+      var method = isUpdate ? 'PUT': 'POST';
 
       return http[method]('v1/table/PresetBill', entity).then(function (resp) {
         return resp ? resp.data : null;
