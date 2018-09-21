@@ -1,19 +1,29 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
 
   <div class="card">
-    <div class="card-header">
-      <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+    <div class="card-header" ng-if="!vm.isDialog">
+      <div class="row">
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="billing.presetbills-new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        </div>
+      </div>
     </div>
-        
+
     <div class="card-body card-padding">
-      <h4>PRESET BILL INFORMATION</h4>
+      <h4>Preset Bill Information</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Item Code</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.code">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.code">
               </div>
             </dd>
           </dl>
@@ -21,7 +31,7 @@
             <dt class="p-t-10">Description</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strDescription">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strDescription">
               </div>
             </dd>
           </dl>
@@ -32,7 +42,7 @@
             <dd>
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="vm.entity.strState">
+                  <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strState">
                     <option ng-repeat="v in vm.states">{{ v.strDescription }}</option>
                   </select>
                 </div>
@@ -44,7 +54,7 @@
             <dd>
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="vm.entity.strCategory" ng-options="v for v in vm.categories">
+                  <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strCategory" ng-options="v for v in vm.categories">
                   </select>
                 </div>
               </div>
@@ -53,13 +63,16 @@
         </div>
       </div>
  
-      <h4 class="m-t-25">BILL ITEMS</h4>
+      <h4 class="m-t-25">Bill Items</h4>
       <div class="row">
         <div class="col-md-8 p-l-30 m-t-15">
           <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>${{ vm.typeSum.All | number:2 }}</small> )</div>
           <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>${{ vm.typeSum.Fees | number:2 }}</small> )</div>
           <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>${{ vm.typeSum.Disb | number:2 }}</small> )</div>
           <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">GST ( <small>${{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
+            <i class="zmdi zmdi-plus"></i>
+          </div>
         </div>
         <div class="col-md-8">
           <div class="table-responsive table-div p-15"> 
@@ -96,16 +109,16 @@
                   {{ w.decTaxRate * 100 | number:2 }}
                 </td>
                 <td data-title="''" class="p-5">
-                  <button class="btn btn-default btn-sm" title="Move Up" ng-click="vm.move($index-1, $index)" style="padding: 4px 9px;">
+                  <button class="btn btn-default btn-sm" ng-disabled="!vm.can_edit" title="Move Up" ng-click="vm.move($index-1, $index)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-chevron-up"></i>
                   </button>
-                  <button class="btn btn-default btn-sm m-l-5" title="Move Down" ng-click="vm.move($index, $index+1)" style="padding: 4px 9px;">
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Move Down" ng-click="vm.move($index, $index+1)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-chevron-down"></i>
                   </button>
-                  <button class="btn btn-default btn-sm m-l-5" title="Insert After" ng-click="vm.insert($index)" style="padding: 4px 9px;">
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Insert After" ng-click="vm.insert($index)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-plus"></i>
                   </button>
-                  <button class="btn btn-default btn-sm m-l-5" title="Remove" ng-click="vm.remove(w.strItemCode)" style="padding: 4px 9px;">
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Remove" ng-click="vm.remove(w.strItemCode)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-close"></i>
                   </button>
                 </td>
@@ -114,13 +127,13 @@
           </div>
         </div>
       </div>
-      <h4 class="m-t-25">REMARK</h4>
+      <h4 class="m-t-25">Remark</h4>
       <div class="row">
         <div class="col-md-10 p-l-25">
           <dl class="dl-horizontal">
             <dd>
               <div class="fg-line">
-                <textarea class="form-control" rows="5" ng-model="vm.entity.strRemarks"></textarea>
+                <textarea class="form-control" ng-readonly="!vm.can_edit" rows="5" ng-model="vm.entity.strRemarks"></textarea>
               </div>
             </dd>
           </dl>
@@ -130,11 +143,15 @@
       <h4 class="m-t-25 m-b-15">Office Use</h4>
       <div class="row" data-ng-include src="'office-use.html'"></div>
 
-      <div class="row">
-        <div class="col-md-10" ng-if="!vm.viewMode">
-          <div class="m-t-30">
-            <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.presetbills-list" >Cancel</a>
-            <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="billing.presetbills-new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>

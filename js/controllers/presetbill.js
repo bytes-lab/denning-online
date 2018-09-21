@@ -24,10 +24,16 @@ denningOnline
 
   .controller('presetbillEditCtrl', function($filter, $stateParams, presetbillService, 
                                              $state, billingitemService, refactorService,
-                                             NgTableParams, $uibModal) 
+                                             NgTableParams, $uibModal, $uibModalInstance, 
+                                             entityCode, isDialog, isNew, Auth, growlService) 
   {
     var self = this;
-    self.isDialog = false;
+    self.userInfo = Auth.getUserInfo();
+
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
 
     billingitemService.getStateList().then(function (resp) {
       self.states = resp.data;
@@ -75,7 +81,11 @@ denningOnline
       }).result.then(function (res) {
         if (res && res.length > 0) {
           for (ii in res) {
-            self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
+            if (idx != -1) {
+              self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
+            } else {
+              self.entity.listBilledItems.push(res[ii]);
+            }
           }
           refreshItems();
         }
@@ -139,9 +149,7 @@ denningOnline
         self.typeSum['All'] += parseFloat(item.decUnitCost);
       }
 
-      if (self.tableFilter) {
-        self.tableFilter.reload();
-      }
+      self.tableFilter.reload();
     }
 
     self.filterItem = function (type) {
@@ -149,28 +157,62 @@ denningOnline
       self.tableFilter.reload();
     }
 
-    if ($stateParams.id) {
-      self.title = 'PRESET BILL EDIT';
-      presetbillService.getItem($stateParams.id).then(function (item){
+    if (self.entityCode) {
+      self.title = 'Preset Bill Edit';
+      presetbillService.getItem(self.entityCode).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         initializeTable();
       });
     } else {
-      self.title = 'NEW PRESET BILL';
+      self.title = 'New Preset Bill';
       self.entity = {
         code: 'P' + Math.floor(Math.random() * 1000 + 1),
         strState: 'Common',
         strCategory: 'Conveyancing',
+        listBilledItems: []
       };
 
-      refreshItems();
+      initializeTable();
+    }
+
+
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
+      
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
     }
 
     self.save = function () {
-      presetbillService.save(self.entity).then(function (presetbill) {
-        self.entity = presetbill;
-        $state.go('billing.presetbills-list');
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      presetbillService.save(entity).then(function (item) {
+        if (item) {  // ignore when errors
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('billing.presetbills-edit', { 'id': item.code });
+            }
+            growlService.growl('Saved successfully!', 'success');          
+          }
+        }
       });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('billing.presetbills-list');
+      }
     }
   })

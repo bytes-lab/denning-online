@@ -60,16 +60,28 @@ denningOnline
     })
 
     if (self.entityCode) {
-      self.title = 'EDIT BILL ITEM';
+      self.title = 'Edit Bill Item';
       billingitemService.getItem(self.entityCode).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
       });
     } else {
-      self.title = 'NEW BILL ITEM';
+      self.title = 'New Bill Item';
       self.entity = { };
     }
 
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
+      
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);

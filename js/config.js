@@ -467,16 +467,43 @@ denningOnline
         },        
         url: '/presetbill/edit/:id',
         controller: 'presetbillEditCtrl as vm',
-        templateUrl: 'views/presetbill-edit.html'
+        templateUrl: 'views/presetbill-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('billing.presetbills-new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },        
         url: '/presetbill/new',
         controller: 'presetbillEditCtrl as vm',
-        templateUrl: 'views/presetbill-edit.html'
+        templateUrl: 'views/presetbill-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
             
       .state ('billing.items-list', {
@@ -528,7 +555,7 @@ denningOnline
             return false;
           },
           isNew: function () {
-            return false;
+            return true;
           }
         }
       })

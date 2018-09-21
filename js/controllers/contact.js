@@ -263,7 +263,7 @@ denningOnline
         if (self.entity.strTitle) {
           self.strTitle_ = { 
             description: self.entity.strTitle 
-          };          
+          };
         }
 
         if (self.entity.strPlaceofWork) {
@@ -275,14 +275,14 @@ denningOnline
         if (self.entity.strPlaceBirth) {
           self.strPlaceBirth_ = { 
             city: self.entity.strPlaceBirth
-          };          
+          };
         }
 
         if (self.entity.clsIrdBranch.code) {
           self.clsIrdBranch_ = { 
             code: self.entity.clsIrdBranch.code, 
             description: self.entity.clsIrdBranch.strName 
-          };          
+          };
         }
 
         if (self.entity.strPostCode) {
@@ -291,7 +291,7 @@ denningOnline
             city: self.entity.strCity,
             state: self.entity.strState,
             country: self.entity.strCountry
-          };          
+          };
         }
       });
     } else {
@@ -320,7 +320,7 @@ denningOnline
             } else {
               $state.go('contacts.edit', { 'id': contact.code });
             }
-            growlService.growl('Saved successfully!', 'success');          
+            growlService.growl('Saved successfully!', 'success');
           }
         }
       });
