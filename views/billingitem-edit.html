@@ -1,10 +1,16 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
 
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" ng-if="!vm.isDialog">
       <div class="row">
-        <div class="col-md-10">
-          <span class="d-header">{{ vm.title }}</span>
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="billing.items-new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
         </div>
       </div>
     </div>
@@ -17,24 +23,24 @@
         <div class="col-md-6 p-l-25">
           <div class="m-t-20 m-b-20">
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="F" ng-model="vm.entity.strType">
+              <input type="radio" value="F" ng-disabled="!vm.can_edit" ng-model="vm.entity.strType">
               <i class="input-helper"></i>
               Professional Fee 
             </label>
 
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="D" ng-model="vm.entity.strType">
+              <input type="radio" value="D" ng-disabled="!vm.can_edit" ng-model="vm.entity.strType">
               <i class="input-helper"></i>
               Disbursement
             </label>
 
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="P" ng-model="vm.entity.strType">
+              <input type="radio" value="P" ng-disabled="!vm.can_edit" ng-model="vm.entity.strType">
               <i class="input-helper"></i>
               Disb. with GST
             </label>
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="G" ng-model="vm.entity.strType">
+              <input type="radio" value="G" ng-disabled="!vm.can_edit" ng-model="vm.entity.strType">
               <i class="input-helper"></i>
               Service Tax
             </label>
@@ -43,7 +49,7 @@
             <dt class="p-t-10">Item Code</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strItemCode">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strItemCode">
               </div>
             </dd>
           </dl>
@@ -51,7 +57,7 @@
             <dt class="p-t-10">Description</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strDescription">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strDescription">
               </div>
             </dd>
           </dl>
@@ -60,6 +66,7 @@
             <dd>
               <div class="fg-line">
                 <md-autocomplete
+                  ng-disabled="!vm.can_edit"
                   md-selected-item="vm.entity.inherit"
                   md-search-text="searchText"
                   md-items="item in vm.queryBillItems(searchText)"
@@ -80,7 +87,7 @@
             <dd>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" ng-model="vm.entity.boolFormula">
+                  <input type="checkbox" ng-disabled="!vm.can_edit" ng-model="vm.entity.boolFormula">
                   <i class="input-helper"></i>
                 </label>
               </div>
@@ -91,7 +98,7 @@
             <dd>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" ng-model="vm.entity.boolIsPrimary">
+                  <input type="checkbox" ng-disabled="!vm.can_edit" ng-model="vm.entity.boolIsPrimary">
                   <i class="input-helper"></i>
                 </label>
               </div>
@@ -104,7 +111,7 @@
             <dd>
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="vm.entity.strState">
+                  <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strState">
                     <option ng-repeat="v in vm.states">{{ v.strDescription }}</option>
                   </select>
                 </div>
@@ -116,7 +123,7 @@
             <dd>
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="vm.entity.strCategory" ng-options="v for v in vm.categories">
+                  <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strCategory" ng-options="v for v in vm.categories">
                   </select>
                 </div>
               </div>
@@ -126,7 +133,7 @@
             <dt class="p-t-10">Priority</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.intRank" type="text" class="form-control">
+                <input ng-model="vm.entity.intRank" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -140,7 +147,7 @@
             <dt class="p-t-10">Supply Tax Code</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strSupplyTaxCode" type="text" class="form-control">
+                <input ng-model="vm.entity.strSupplyTaxCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -148,7 +155,7 @@
             <dt class="p-t-10">Default Price (RM)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.invoice.price">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.invoice.price">
               </div>
             </dd>
           </dl>
@@ -156,14 +163,14 @@
             <dt class="p-t-10">Default Unit</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decDefaultUnit">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.decDefaultUnit">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.entity.not_applicable">
+                <input type="checkbox" ng-disabled="!vm.can_edit" ng-model="vm.entity.not_applicable">
                 <i class="input-helper"></i>
                 Not Applicable
               </label>
@@ -176,7 +183,7 @@
             <dt class="p-t-10">Purchase Tax Code</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.strPurchaseTaxCode">
+                <input type='text' ng-readonly="!vm.can_edit" ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.strPurchaseTaxCode">
               </div>
             </dd>
           </dl>
@@ -184,7 +191,7 @@
             <dt class="p-t-10">Default Cost (RM)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.voucher.price">
+                <input type='text' ng-readonly="!vm.can_edit" ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.voucher.price">
               </div>
             </dd>
           </dl>
@@ -192,7 +199,7 @@
             <dt class="p-t-10">Default Unit</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.decPricePerUnit">
+                <input type='text' ng-readonly="!vm.can_edit" ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.decPricePerUnit">
               </div>
             </dd>
           </dl>
@@ -205,7 +212,7 @@
           <dl class="dl-horizontal">
             <dd>
               <div class="fg-line">
-                <textarea class="form-control" rows="5" ng-model="vm.entity.strRemarks"></textarea>
+                <textarea class="form-control" ng-readonly="!vm.can_edit" rows="5" ng-model="vm.entity.strRemarks"></textarea>
               </div>
             </dd>
           </dl>
@@ -215,12 +222,15 @@
       <h4 class="m-t-25 m-b-15">Office Use</h4>
       <div class="row" data-ng-include src="'office-use.html'"></div>
 
-      <div class="row">
-        <div class="col-md-10">
-          <div class="m-t-30">
-            <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.items-list">Cancel</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right m-l-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="billing.items-new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>

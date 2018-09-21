@@ -494,16 +494,43 @@ denningOnline
         },        
         url: '/item/edit/:id',
         controller: 'billingitemEditCtrl as vm',
-        templateUrl: 'views/billingitem-edit.html'
+        templateUrl: 'views/billingitem-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('billing.items-new', {
         data: {
           access: '@',
-          can_edit: true
         },        
         url: '/item/new',
         controller: 'billingitemEditCtrl as vm',
-        templateUrl: 'views/billingitem-edit.html'
+        templateUrl: 'views/billingitem-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
 
       //------------------------------

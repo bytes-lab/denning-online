@@ -4,7 +4,7 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md-10">
-          <span class="d-header">{{ vm.title }}</span>
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
           <a class="btn btn-link btn-sm pull-right m-t-10" ui-sref="billing.quotations-list">Cancel</a>
           <a class="btn btn-primary btn-sm pull-right m-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
           <a class="btn bgm-cyan btn-sm pull-right m-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>

@@ -139,7 +139,9 @@ denningOnline
         self.typeSum['All'] += parseFloat(item.decUnitCost);
       }
 
-      self.tableFilter.reload();
+      if (self.tableFilter) {
+        self.tableFilter.reload();
+      }
     }
 
     self.filterItem = function (type) {

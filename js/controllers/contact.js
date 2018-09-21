@@ -34,7 +34,7 @@ denningOnline
     self.isDialog = isDialog;
     self.can_edit = isNew;
     self.isNew = isNew;
-    self.entityCode = isDialog? entityCode: $stateParams.id;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
 
     self.IDTypes = [];
     self.Salutations = [];
@@ -251,6 +251,8 @@ denningOnline
     }
 
     if (self.entityCode) {
+      self.title = 'Edit Contact';
+
       contactService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
@@ -293,7 +295,8 @@ denningOnline
         }
       });
     } else {
-      // default values
+      self.title = 'New Contact';
+
       self.entity = {
         strCitizenship: 'Malaysia',
         clsIDType: {
@@ -318,7 +321,7 @@ denningOnline
               $state.go('contacts.edit', { 'id': contact.code });
             }
             growlService.growl('Saved successfully!', 'success');          
-          }          
+          }
         }
       });
     }

@@ -26,10 +26,16 @@ denningOnline
   .controller('billingitemEditCtrl', function($stateParams, billingitemService, $state,
                                               refactorService, fileMatterService, Auth, 
                                               matterCodeService, presetbillService,
-                                              uibDateParser) 
+                                              uibDateParser, $uibModalInstance, growlService,
+                                              entityCode, isDialog, isNew) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
+
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode: $stateParams.id;
 
     self.isDialog = false;
     self.can_edit = $state.$current.data.can_edit;
@@ -53,15 +59,42 @@ denningOnline
       self.states = resp.data;
     })
 
-    if ($stateParams.id) {
+    if (self.entityCode) {
       self.title = 'EDIT BILL ITEM';
-      billingitemService.getItem($stateParams.id).then(function(item){
+      billingitemService.getItem(self.entityCode).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
       });
     } else {
       self.title = 'NEW BILL ITEM';
       self.entity = { };
+    }
+
+
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      billingitemService.save(entity).then(function (item) {
+        if (item) {  // ignore when errors
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('billing.items-edit', { 'id': item.strItemCode });
+            }
+            growlService.growl('Saved successfully!', 'success');          
+          }
+        }
+      });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('billing.items-list');
+      }
     }
   })
 
