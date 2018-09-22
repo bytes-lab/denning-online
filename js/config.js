@@ -1108,16 +1108,43 @@ denningOnline
         },        
         url: '/edit/:id',
         controller: 'legalFirmEditCtrl as vm',
-        templateUrl: 'views/legal-firm-edit.html'
+        templateUrl: 'views/legal-firm-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('legal-firms.new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },        
         url: '/new',
         controller: 'legalFirmEditCtrl as vm',
-        templateUrl: 'views/legal-firm-edit.html'
+        templateUrl: 'views/legal-firm-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })        
 
 

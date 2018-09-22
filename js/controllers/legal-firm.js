@@ -1,13 +1,6 @@
 denningOnline
   .controller('legalFirmListCtrl', function(NgTableParams, legalFirmService, $state) {
     var self = this;
-    self.search = search;
-    self.keyword = '';
-    self.clickHandler = clickHandler;
-
-    function clickHandler(item) {
-      $state.go('legal-firms.edit', {'id': item.code});
-    }
 
     self.tableFilter = new NgTableParams({
       page: 1,
@@ -17,65 +10,78 @@ denningOnline
       }
     }, {
       getData: function(params) {
-        return legalFirmService.getList(params.page(), params.count(), self.keyword).then(function(data) {
+        return legalFirmService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
         });
       }
     })
   
-    function search() {
+    self.search = function () {
       self.tableFilter.reload();
     }
   })
 
-  .controller('legalFirmEditCtrl', function($stateParams, legalFirmService, $state, Auth) {
+  .controller('legalFirmEditCtrl', function($stateParams, legalFirmService, $state, Auth, 
+                                            $uibModalInstance, entityCode, isDialog, isNew,
+                                            refactorService, growlService) 
+  {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-    self.cancel = cancel;
-    self.create_new = $state.$current.data.can_edit;
-    self.can_edit = $state.$current.data.can_edit;
-    self.viewMode = false;
 
-    if ($stateParams.id) {
-      legalFirmService.getItem($stateParams.id).then(function(item){
-        self.legalFirm = item;
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
+
+    if (self.entityCode) {
+      self.title = 'Edit Legal Firm';
+      legalFirmService.getItem(self.entityCode).then(function (item){
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
       });
     } else {
-      self.legalFirm = {};
+      self.title = 'New Legal Firm';
+      self.entity = { };
     }
 
-    function cancel() {
-      $state.go('legal-firms.list');
-    }  
-  })
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
 
-  .controller('lfCreateModalCtrl', function ($uibModalInstance, lf, viewMode, legalFirmService, $scope, Auth) {
-    var self = this;
-    self.save = save;
-    self.cancel = cancel;
-    self.isDialog = true;
-    self.viewMode = viewMode;
-    self.userInfo = Auth.getUserInfo();
-
-    if (viewMode) {
-      legalFirmService.getItem(lf.code).then(function(item){
-        self.legalFirm = item;
-      });
-    } else {
-      self.legalFirm = {};
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
+      
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
     }
 
-    function save() {
-      legalFirmService.save(self.legalFirm).then(function(legalFirm) {
-        $uibModalInstance.close(legalFirm);
-      })
-      .catch(function(err){
-        //Handler
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      billingitemService.save(entity).then(function (item) {
+        if (item) {
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('legal-firms.edit', { 'id': item.code });
+            }
+            growlService.growl('Saved successfully!', 'success');          
+          }
+        }
       });
-    };
+    }
 
-    function cancel() {
-      $uibModalInstance.close();
-    };
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('legal-firms.list');
+      }
+    }
   })

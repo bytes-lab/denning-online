@@ -1,25 +1,21 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" ng-if="!vm.isDialog">
       <div class="row">
-      <div class="col-md-10 col-sm-11">
-        <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Legal Firm</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.legalfirm)" ng-if="vm.userInfo.priority.legalfirm.delete && !vm.create_new && !vm.viewMode">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.legalfirm.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.legalfirm.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-      </div>  
+        <div class="col-md-10 col-sm-11">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+        </div>  
       </div>
     </div>
     <div class="card-body card-padding">
       <div class="clearfix"></div>
       <div class="row">
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -27,7 +23,7 @@
             <dt class="p-t-10">Initials</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.strInitials" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strInitials" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -35,7 +31,7 @@
             <dt class="p-t-10">Title</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strTitle">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strTitle">
               </div>
             </dd>
           </dl>
@@ -43,7 +39,7 @@
             <dt class="p-t-10">Lawyer Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.strLawyerName" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strLawyerName" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -51,7 +47,7 @@
             <dt class="p-t-10">Email</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strEmailAddress">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strEmailAddress">
               </div>
             </dd>
           </dl>
@@ -59,7 +55,7 @@
             <dt class="p-t-10">Phone Office 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strPhone1">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhone1">
               </div>
             </dd>
           </dl>
@@ -67,7 +63,7 @@
             <dt class="p-t-10">Phone Office 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strPhone2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhone2">
               </div>
             </dd>
           </dl>
@@ -75,7 +71,7 @@
             <dt class="p-t-10">Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strPhoneFax">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhoneFax">
               </div>
             </dd>
           </dl>
@@ -83,7 +79,7 @@
             <dt class="p-t-10">Mobile</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strPhoneMobile">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhoneMobile">
               </div>
             </dd>
           </dl>
@@ -91,17 +87,17 @@
             <dt class="p-t-10">Remarks</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strRemarks">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strRemarks">
               </div>
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strState">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strState">
               </div>
             </dd>
           </dl>
@@ -109,7 +105,7 @@
             <dt class="p-t-10">Postcode</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -117,7 +113,7 @@
             <dt class="p-t-10">City</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strCity">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strCity">
               </div>
             </dd>
           </dl>              
@@ -125,7 +121,7 @@
             <dt class="p-t-10">Address (Line 1)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.legalFirm.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -133,7 +129,7 @@
             <dt class="p-t-10">Address (Line 2)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strAddressLine2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine2">
               </div>
             </dd>
           </dl>
@@ -141,7 +137,7 @@
             <dt class="p-t-10">Address (Line 3)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strAddressLine3">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine3">
               </div>
             </dd>
           </dl>
@@ -149,7 +145,7 @@
             <dt class="p-t-10">Status</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strStatus">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strStatus">
               </div>
             </dd>
           </dl>
@@ -157,7 +153,7 @@
             <dt class="p-t-10">Website</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strWebsite">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strWebsite">
               </div>
             </dd>
           </dl>
@@ -165,7 +161,7 @@
             <dt class="p-t-10">Note 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strNote1">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote1">
               </div>
             </dd>
           </dl>
@@ -173,21 +169,23 @@
             <dt class="p-t-10">Note 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.legalFirm.strNote2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote2">
               </div>
             </dd>
           </dl>
         </div>
       </div>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
       <div class="clearfix"></div>
-      
-      <div class="row">
-        <div class="col-md-10 col-sm-11 no-padding">
-          <div class="m-t-30">
-            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.legalfirm.delete && !vm.create_new && !vm.viewMode">Delete</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.legalfirm.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.legalfirm.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="legal-firms.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>
