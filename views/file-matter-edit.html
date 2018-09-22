@@ -257,10 +257,10 @@
         <span md-highlight-text="q_lf" class="col-1" md-highlight-flags="i">{{item.strName}}</span>
         </md-item-template>
       </md-autocomplete>
-      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="legalfirmDialog(model[to.field], false)">
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="solicitorDialog(to.field, false)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new legal firm and choose it"></span>
       </a>
-      <a class="btn btn-primary short-btn" ng-click="viewLegalFirm(model[to.field])" title="See detail of solicitor">
+      <a class="btn btn-primary short-btn" ng-click="solicitorDialog(to.field, true)" title="See detail of solicitor">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
       </a>
       <div class="checkbox" style="margin: 6px 0 6px 18px;">

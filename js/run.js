@@ -80,14 +80,14 @@ denningOnline
     });
 
     function contactDialog (model, key, viewMode) {
-      if (viewMode && !model[key].code) {
+      if (viewMode && (!model[key] || !model[key].code)) {
         alert('Please select a party.');
         return false;
       }
 
       var modalInstance = $uibModal.open({
         animation: true,
-        templateUrl: 'contact-modal.html',
+        templateUrl: 'entity-modal.html',
         controller: 'contactEditCtrl',
         controllerAs: 'vm',
         size: 'lg',
@@ -109,6 +109,44 @@ denningOnline
             strCitizenship: contact.strCitizenship,
             strIDNo: contact.strIDNo,
             strName: contact.strName
+          };
+        }
+      })
+    }
+
+    function solicitorDialog (model, key, viewMode) {
+      if (viewMode && (!model[key] || !model[key].code)) {
+        alert('Please select a lawyer.');
+        return false;
+      }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'legalFirmEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: !viewMode,
+          entityCode: function () {
+            return viewMode ? model[key].code : null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (!viewMode && entity) {
+          model[key] = {
+            code: entity.code,
+            strCity: entity.strCity,
+            strEmailAddress: entity.strEmailAddress,
+            strPhone1: entity.strPhone1,
+            strPhone2: entity.strPhone2,
+            strPhoneMobile: entity.strPhoneMobile,
+            strName: entity.strName
           };
         }
       })
@@ -176,14 +214,6 @@ denningOnline
           $scope.model['clsC'+last] = {};
         }
 
-        $scope.viewLegalFirm = function(party) {
-          if (party && party.code) {
-            $scope.legalfirmDialog(party, true);
-          } else {
-            alert('Please select a solicitor.')
-          }
-        }
-
         $scope.queryContacts = function(searchText) {
           return getContacts(1, 10, searchText);
         }
@@ -196,28 +226,8 @@ denningOnline
           contactDialog($scope.model, key, viewMode);
         }
 
-        //Create legal firm Modal
-        $scope.legalfirmDialog = function(lf, viewMode) {
-          var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'views/legal-firm-edit.html',
-            controller: 'lfCreateModalCtrl',
-            controllerAs: 'vm',
-            size: 'lg',
-            backdrop: 'static',
-            keyboard: true,
-            resolve: {
-              viewMode: viewMode,
-              lf: lf
-            }      
-          });
-
-          modalInstance.result.then(function(lf_){
-            if (lf_) {  // should be integrated with service
-              lf.party = lf_;
-              $scope.legalFirms.push(lf_);
-            }
-          })
+        $scope.solicitorDialog = function(key, viewMode) {
+          solicitorDialog($scope.model, key, viewMode);
         }
       }
     });

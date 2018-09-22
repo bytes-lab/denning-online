@@ -30,6 +30,7 @@ denningOnline
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
+    self._type = 'contact';
 
     self.isDialog = isDialog;
     self.can_edit = isNew;
@@ -257,6 +258,7 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
 
+        self.popoutUrl = $state.href('contacts.edit', { id: self.entity.code });
         self.IDTypeChange(self.entity.clsIDType);
 
         // wrapper attrs for auto complete
@@ -304,7 +306,8 @@ denningOnline
           strDescription: 'New IC'
         }
       };
-
+      
+      self.popoutUrl = $state.href('contacts.new');
       self.IDTypeChange(self.entity.clsIDType);
     }
 

@@ -29,6 +29,7 @@ denningOnline
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
+    self._type = 'legal-firm';
 
     self.isDialog = isDialog;
     self.can_edit = isNew;
@@ -40,10 +41,12 @@ denningOnline
       legalFirmService.getItem(self.entityCode).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+        self.popoutUrl = $state.href('legal-firms.edit', { id: self.entity.code });
       });
     } else {
       self.title = 'New Legal Firm';
       self.entity = { };
+      self.popoutUrl = $state.href('legal-firms.new');
     }
 
     self.copy = function () {
@@ -61,7 +64,7 @@ denningOnline
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
-      billingitemService.save(entity).then(function (item) {
+      legalFirmService.save(entity).then(function (item) {
         if (item) {
           if (self.isDialog) {
             $uibModalInstance.close(item);

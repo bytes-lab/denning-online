@@ -32,21 +32,21 @@
   </div>
 </script>
 
-<script type="text/ng-template" id="contact-modal.html">
+<script type="text/ng-template" id="entity-modal.html">
   <div class="modal-header contact-modal-header">
     <span class="c-purple f-500 f-20">{{ vm.title }}</span>
     <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
     <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
     <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-    <a class="pop-out" ui-sref="contacts.edit({id: vm.entity.code})" target="_blank" ng-if="!vm.isNew"></a>
-    <div style="display: inline;" ng-if="!vm.isNew">
+    <a class="pop-out" ng-href="{{ vm.popoutUrl }}" target="_blank" title="Pop Out"></a>
+    <div style="display: inline;" ng-if="!vm.isNew && vm.openFolder">
       <md-button class="btn-sm md-raised md-warn m-l-20" ng-click="vm.relatedMatter()">Matters</md-button>
       <md-button class="btn-sm md-raised md-warn" ng-click="vm.openFolder()">Folder</md-button>
       <md-button class="btn-sm md-raised md-warn" ng-click="vm.upload()">Upload</md-button>
     </div>
   </div>
   <div class="contact-modal-content c-overflow">
-    <div data-ng-include src="'views/contact-edit.html'"></div>
+    <div data-ng-include src="'views/'+vm._type+'-edit.html'"></div>
   </div>
 </script>
 

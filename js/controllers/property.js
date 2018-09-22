@@ -168,6 +168,13 @@ denningOnline
       });
     });
 
+    self.openFolder = function () {
+      if ($uibModalInstance) {
+        $uibModalInstance.close();
+      }
+      $state.go('folders.list', {id: self.entity.code, type: 'property'});
+    }
+
     //Prevent Outside Click
     self.openDelete = function (event, entity) {
       event.stopPropagation();
