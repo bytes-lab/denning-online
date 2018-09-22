@@ -34,6 +34,12 @@ denningOnline
       });
     }
 
+    service.getFileStatusList = function () {
+      return http.GET('v1/table/FileStatus').then(function (resp) {
+        return resp;
+      });
+    }
+
     service.getSalutationList = function () {
       return http.GET('v1/Salutation').then(function (resp) {
         return resp.data;

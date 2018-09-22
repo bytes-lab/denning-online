@@ -337,6 +337,10 @@ denningOnline
           }          
         }
 
+        fileMatterService.getFileStatusList().then(function (resp) {
+          $scope.fileStatus = resp.data;
+        });
+
         $scope.queryMatters = function (search) {
           return fileMatterService.getList(1, 5, search).then(function (resp) {
             return resp.data
@@ -404,6 +408,34 @@ denningOnline
       name: 'price',
       templateUrl: 'price.html',
       controller: function ($scope, $timeout, refactorService) {
+        // default values for calculating total
+        if ($scope.model.decRM1 == "") {
+          $scope.model.decRM1 = 0;
+        }
+        if ($scope.model.decRM17 == "") {
+          $scope.model.decRM17 = 0;
+        }
+        if ($scope.model.decRM18 == "") {
+          $scope.model.decRM18 = 0;
+        }
+        if ($scope.model.decRM3 == "") {
+          $scope.model.decRM3 = 0;
+        }
+        if ($scope.model.decRM20 == "") {
+          $scope.model.decRM20 = 0;
+        }
+        if ($scope.model.decRM21 == "") {
+          $scope.model.decRM21 = 0;
+        }
+        if ($scope.model.decRM2 == "") {
+          $scope.model.decRM2 = 0;
+        }
+        if ($scope.model.decRM19 == "") {
+          $scope.model.decRM19 = 0;
+        }
+        if ($scope.model.decRM22 == "") {
+          $scope.model.decRM22 = 0;
+        }
 
         $scope.calcForm = function (model) {
           $timeout(function () {
