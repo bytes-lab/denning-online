@@ -1142,7 +1142,7 @@ denningOnline
             return false;
           },
           isNew: function () {
-            return false;
+            return true;
           }
         }
       })        
