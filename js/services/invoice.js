@@ -1,22 +1,30 @@
 denningOnline
-  .service('invoiceService', function (http) {
+  .service('invoiceService', function(http) {
     var service = {};
 
     service.getList = function (page, pagesize, keyword) {
-      return http.GET('/v1/TaxInvoiceX/all', {
+      return http.GET('v1/table/bill', {
         page: page,
         pagesize: pagesize,
-        search: keyword
+        search: keyword 
       }).then(function (resp) {
         return resp;
       });
     }
 
     service.getItem = function (code) {
-      return http.GET('/v1/app/bank/branch/'+code).then(function (resp) {
+      return http.GET(`v1/table/bill/${code}`).then(function (resp) {
         return resp.data;
       });
     }
 
-    return service;    
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
+
+      return http[method]('v1/table/bill', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
+
+    return service;
   })
