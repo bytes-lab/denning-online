@@ -45,7 +45,6 @@ denningOnline
       if (matter && matter.JsonDesc) {
         self.entity.fileNo = matter.key;
         var matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
-        console.log(matterInfo);
         var clsPrimaryClient = matterInfo.primaryClient;
 
         self.entity.matter = matterInfo.matter;
@@ -56,6 +55,15 @@ denningOnline
         }
         self.entity.issueToName = clsPrimaryClient.name;
         self.entity.strClientName = clsPrimaryClient.name;
+      }
+    }
+
+    self.presetBillChange = function (item) {
+      if (item && self.entity.strBillName != item.code) {
+        presetbillService.getItem(item.code).then(function (item) {
+          self.entity.listBilledItems = item.listBilledItems;
+          refreshItems();
+        });
       }
     }
 
@@ -77,7 +85,6 @@ denningOnline
       }
     }
 
-
     self.insert = function (idx) {
       var modalInstance = $uibModal.open({
         animation: true,
@@ -90,7 +97,7 @@ denningOnline
             return self.entity.strState;
           },
           category: function () {
-            return self.entity.strCategory;
+            return null;
           },
           excludes: function () {
             var arr = [];
@@ -204,6 +211,7 @@ denningOnline
     } else {
       self.title = 'New Quotation';
       self.entity = {
+        strState: 'Common',
         dtCreateDate: uibDateParser.parse(new Date()),
         listBilledItems: []
       };
