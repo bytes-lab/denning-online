@@ -22,7 +22,7 @@ denningOnline
   })
 
   .controller('quotationEditCtrl', function($stateParams, quotationService, $state, Auth,
-                                            refactorService, fileMatterService, 
+                                            refactorService, fileMatterService, growlService,
                                             matterCodeService, presetbillService,
                                             uibDateParser, $uibModal, NgTableParams) 
   {
@@ -216,5 +216,19 @@ denningOnline
         listBilledItems: []
       };
       initializeTable();
+    }
+
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      quotationService.save(entity, self.entity_).then(function (item) {
+        if (item) {  // ignore when errors
+          if (self.entity_) {
+            $state.reload();
+          } else {
+            $state.go('billing.quotations-edit', { 'id': item.code });
+          }
+          growlService.growl('Saved successfully!', 'success');          
+        }
+      });
     }
   })

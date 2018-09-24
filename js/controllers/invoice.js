@@ -22,9 +22,9 @@ denningOnline
   })
 
   .controller('invoiceEditCtrl', function($stateParams, invoiceService, $state, Auth,
-                                            refactorService, fileMatterService, 
-                                            matterCodeService, presetbillService,
-                                            uibDateParser, $uibModal, NgTableParams) 
+                                          refactorService, fileMatterService, growlService,
+                                          matterCodeService, presetbillService,
+                                          uibDateParser, $uibModal, NgTableParams) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -196,7 +196,7 @@ denningOnline
     }
 
     if ($stateParams.id) {
-      self.title = 'Edit Quotation';
+      self.title = 'Edit Invoice';
       invoiceService.getItem($stateParams.id).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
@@ -209,12 +209,26 @@ denningOnline
         }
       });
     } else {
-      self.title = 'New Quotation';
+      self.title = 'New Invoice';
       self.entity = {
         strState: 'Common',
         dtCreateDate: uibDateParser.parse(new Date()),
         listBilledItems: []
       };
       initializeTable();
+    }
+
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      invoiceService.save(entity, self.entity_).then(function (item) {
+        if (item) {  // ignore when errors
+          if (self.entity_) {
+            $state.reload();
+          } else {
+            $state.go('billing.invoices-edit', { 'id': item.code });
+          }
+          growlService.growl('Saved successfully!', 'success');          
+        }
+      });
     }
   })
