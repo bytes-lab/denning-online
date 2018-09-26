@@ -12,13 +12,56 @@
     </div>
 
     <div class="card-body card-padding">
-      <h4 class="m-b-15">Details</h4>
+      <h4 class="m-b-15">Receipt Details</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal m-b-20">
+            <dt>Account Type</dt>
+          </dl>
+          <div class="clearfix"></div>
+          <dl class="dl-horizontal m-b-20 m-t-20">
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Client
+            </label>
+
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Disbursment
+            </label>
+
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="21-MOB" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Office Advance
+            </label>
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="22-MOB" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Fixed Deposit
+            </label>
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="23-MOB" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Other
+            </label>
+          </dl>
           <dl class="dl-horizontal m-b-10">
-            <dt>Quotation No.</dt>
+            <dt>Receipt No. (System)</dt>
             <dd>
-              <label class="p-l-10">{{ vm.entity.code }}</label>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Receipt No. (Manuel)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -40,50 +83,18 @@
               </md-autocomplete>
             </dd>
           </dl>
-          <dl class="dl-horizontal m-b-10">
-            <dt>File Name</dt>
-            <dd>
-              <label class="p-l-10">{{ vm.entity.clsFileNo.clsPrimaryClient.strName }}</label>
-            </dd>
-          </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Quotation To</dt>
+            <dt class="p-t-10">Received From</dt>
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.entity.strClientName" type="text" class="form-control">
               </div>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Matter Code</dt>
-            <dd>
-              <md-autocomplete
-                ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsMatterCode"
-                md-search-text="qmc"
-                md-items="item in vm.queryCodes(qmc)"
-                md-selected-item-change="vm.matterCodeChange(item)"
-                md-item-text="item.code"
-                md-min-length="0"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="qmc" class="col-360" md-highlight-flags="i">{{item.strDescription}}</span>
-                <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
-              </md-item-template>
-              </md-autocomplete>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Quotation Matter</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strBillingMatter">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Quotation Date</dt>
+            <dt class="p-t-10">Transaction Date</dt>
             <dd>
               <div class="fg-line">
                 <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtCreateDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
@@ -91,17 +102,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Reference No</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.marital_status">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Preset Billing Code</dt>
+            <dt class="p-t-10">Bill No</dt>
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
@@ -121,47 +122,15 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Property</dt>
+            <dt class="p-t-10">Amount</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strPropertyAddress">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strState">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Property Count</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.IRD_branch">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Adjudicated Value</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decAdjPrice">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Purchase Price</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decPrice">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Loan Amount</dt>
+            <dt class="p-t-10">Transaction Description</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' class="form-control" ng-model="vm.entity.decLoan">
@@ -171,23 +140,26 @@
         </div>
       </div>
 
-      <h4 class="m-t-25">Quotation Analysis</h4>
+      <h4 class="m-t-25">For Disbursement Tax Invoice</h4>
       <div class="row">
         <div class="col-md-11 p-l-20 m-b-10">
           <div class="col-md-offset-2 col-md-2 p-l-25">
-            <label>Gross</label>
+            <label>Billed</label>
           </div>
           <div class="col-md-2 p-l-20">
-            <label>SST / GST</label>
+            <label>Past Payment</label>
           </div>
           <div class="col-md-2 p-l-20">
-            <label>Total</label>
+            <label>This Payment</label>
+          </div>
+          <div class="col-md-2 p-l-20">
+            <label>Balance</label>
           </div>
         </div>
         <div class="col-md-11 p-l-25">
           <div class="col-md-12 no-padding m-b-10">
             <div class="col-md-2">
-              <label class="f-700">Professional Fees</label>
+              <label class="f-700">Fees</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Fees | number:2 }}</label>
@@ -198,10 +170,13 @@
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees | number:2 }}</label>
             </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees | number:2 }}</label>
+            </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
             <div class="col-md-2">
-              <label class="f-700">Disb. with SST / GST</label>
+              <label class="f-700">GST: Fees</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.DisbWithTax | number:2 }}</label>
@@ -212,6 +187,43 @@
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax | number:2 }}</label>
             </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax | number:2 }}</label>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2">
+              <label class="f-700">Disb. w. GST</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2">
+              <label class="f-700">GST: Disb. w. GST</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
             <div class="col-md-2">
@@ -220,7 +232,12 @@
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
             </div>
@@ -236,74 +253,88 @@
               <label class="form-control">{{ vm.typeSST.Fees + vm.typeSST.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees + vm.typeSST.DisbWithTax | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees + vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax + vm.typeSum.Disb | number:2 }}</label>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.boolDeceased">
+                <i class="input-helper"></i>
+                Finalize & Post to Office Account
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.boolDecease2d">
+                <i class="input-helper"></i>
+                Deemed Settled
+              </label>
             </div>
           </div>
         </div>
       </div>
 
-      <h4 class="m-t-25 p-l-25" ng-click="vm.showItems=!vm.showItems">Bill Items&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showItems"></i><i class="zmdi zmdi-minus" ng-if="vm.showItems"></i></h4>
-      <div class="row p-l-20" ng-show="vm.showItems">
-        <div class="col-md-10 p-l-30 m-t-15">
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>${{ vm.typeSum.All | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>${{ vm.typeSum.Fees | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>${{ vm.typeSum.Disb | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">GST ( <small>${{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
-          <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-show="vm.can_edit" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
-            <i class="zmdi zmdi-plus"></i>
-          </div>
+      <h4 class="m-t-25">Mode of Payment</h4>
+      <div class="row">
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Mode</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Issuer Bank</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
         </div>
-        <div class="col-md-10">
-          <div class="table-responsive table-div p-15"> 
-            <table ng-table="vm.tableFilter" class="no-pager table-striped table table-vmiddle table-list">
-              <tr ng-repeat="w in $data">
-                <td data-title="'No'">{{ $index+1 }}</td>
-                <td data-title="'Item Code'">
-                  {{ w.strItemCode }}
-                </td>
-                <td data-title="'Description'">
-                  {{ w.strDescription }}
-                </td>
-                <td data-title="'Formula'" class="p-0 text-center">
-                  <div class="checkbox m-5">
-                    <label>
-                      <input type="checkbox" ng-checked="w.boolIsFormula=='1'" readonly>
-                      <i class="input-helper"></i>
-                    </label>
-                  </div>
-                </td>
-                <td data-title="'Unit'" class="text-right">
-                  {{ w.decUnit }}
-                </td>
-                <td data-title="'Unit Price'" class="text-right">
-                  {{ w.decUnitPrice | number:2 }}
-                </td>
-                <td data-title="'Charges'" class="text-right">
-                  {{ w.decUnitCost }}
-                </td>
-                <td data-title="'Tax Code'">
-                  {{ w.strTaxCode }}
-                </td>
-                <td data-title="'GST (%)'">
-                  {{ w.decTaxRate * 100 | number:2 }}
-                </td>
-                <td data-title="''" class="p-5">
-                  <button class="btn btn-default btn-sm" ng-disabled="!vm.can_edit" title="Move Up" ng-click="vm.move($index-1, $index)" style="padding: 4px 9px;">
-                    <i class="zmdi zmdi-chevron-up"></i>
-                  </button>
-                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Move Down" ng-click="vm.move($index, $index+1)" style="padding: 4px 9px;">
-                    <i class="zmdi zmdi-chevron-down"></i>
-                  </button>
-                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Insert After" ng-click="vm.insert($index)" style="padding: 4px 9px;">
-                    <i class="zmdi zmdi-plus"></i>
-                  </button>
-                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Remove" ng-click="vm.remove(w.strItemCode)" style="padding: 4px 9px;">
-                    <i class="zmdi zmdi-close"></i>
-                  </button>
-                </td>
-              </tr>
-            </table>
-          </div>
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank Branch</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Cheque No. / Ref. No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Cheque Amount</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Portion</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
         </div>
       </div>
 

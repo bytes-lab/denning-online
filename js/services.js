@@ -32,38 +32,6 @@ denningOnline
     }
   }])
 
-  
-  // =========================================================================
-  // Todo List Widget Data
-  // =========================================================================
-
-  .service('todoService', ['$resource', function($resource){
-    this.getTodo = function(todo) {
-      var todoList = $resource("data/todo.json");
-      
-      return todoList.get({
-        todo: todo
-      });
-    }
-  }])
-
-  // =========================================================================
-  // Recent Posts Widget Data
-  // =========================================================================
-  
-  .service('recentpostService', ['$resource', function($resource){
-    this.getRecentpost = function(img, user, text) {
-      var recentpostList = $resource("data/messages-notifications.json");
-      
-      return recentpostList.get ({
-        img: img,
-        user: user,
-        text: text
-      })
-    }
-  }])
-  
-
   // =========================================================================
   // Malihu Scroll - Custom Scroll bars
   // =========================================================================
