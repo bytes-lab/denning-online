@@ -113,7 +113,7 @@ denningOnline
 
     self.preview = function (file) {
       var openFiles = ['.jpg', '.png', '.jpeg'];
-      folderService.getLink(file.URL.replace('/matter/', '/getOneTimeLink/'))
+      folderService.getLink(file.URL.replace('/document/', '/getOneTimeLink/'))
       .then(function (data) {
         var modalInstance = $uibModal.open({
           animation: true,
@@ -390,7 +390,7 @@ denningOnline
 
     $scope.getLink = function () {
       $scope.glink = true;
-      url = file.URL.replace('/matter/', '/getOneTimeLink/');
+      url = file.URL.replace('/document/', '/getOneTimeLink/');
       if ($scope.set_expiration) {
         url += `?exp=${$scope.data.expireDate.toISOString().split('T')[0]}`;
       }
@@ -433,7 +433,7 @@ denningOnline
       $scope.glink = true;
       var links = [];
       angular.forEach(files, function(value, key) {
-        links.push(folderService.getLink(value.URL.replace('/matter/', '/getOneTimeLink/')));
+        links.push(folderService.getLink(value.URL.replace('/document/', '/getOneTimeLink/')));
       })
 
       Promise.all(links).then(function (data) {
@@ -469,7 +469,8 @@ denningOnline
     $scope.choosen_ = angular.copy(choosen);
     $scope.folders = folders;
     $scope.actionType = actionType;
-
+    $scope.folderType = 'matter';
+    
     $scope.search = function (query) {
       return searchService.keyword(query).then(function (data) {
         return data;
@@ -494,6 +495,7 @@ denningOnline
     }
 
     $scope.categoryChange = function (item) {
+      $scope.folderType = 'matter';
       $scope.data.searchRes = [];
       if (["0", "2", "self"].indexOf($scope.searchCategory) > -1) {
         $scope.hasFolder = true;
@@ -521,6 +523,8 @@ denningOnline
         $scope.data.folderName = '';
 
         if (item.Title.indexOf('File No') == 0 || item.Title.indexOf('Matter') == 0) {
+          $scope.folderType = 'matter';
+
           folderService.getList(item.key, 'matter').then(function (data) {
             angular.forEach(data.folders, function(folder, key) {
               $scope.folders.push(folder);
@@ -530,6 +534,10 @@ denningOnline
           if ($scope.folders.length > 0) {
             $scope.data.folderName = $scope.folders[0].name;
           }
+        } else if (item.Title.indexOf('Contact') == 0) {
+          $scope.folderType = 'contact';
+        } else if (item.Title.indexOf('Property') == 0) {
+          $scope.folderType = 'property';
         }
       }
     }
@@ -546,7 +554,8 @@ denningOnline
 
         param = {
           "sourceFileURL" : file.URL,
-          "newFileNo" : $scope.data.choosen.key,
+          "newCode" : $scope.data.choosen.key,
+          "folderType": $scope.folderType,
           "newSubFolder" : $scope.data.folderName,
           "newName" : file.name+file.ext
         };
@@ -595,7 +604,7 @@ denningOnline
       }
 
       data = {
-        targetFileNo : matter,
+        newCode : matter,
         newName : $scope.type == "Folder" ? $scope.fileName : $scope.fileName+file.ext
       }
 
@@ -630,7 +639,7 @@ denningOnline
       }
 
       data = {
-        targetFileNo : matter,
+        newCode : matter,
         newName : $scope.fileName
       }
 

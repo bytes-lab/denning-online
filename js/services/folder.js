@@ -34,19 +34,19 @@ denningOnline
     }
 
     service.createSubFolder = function (data) {
-      return http.POST('v1/document/subFolder', data).then(function (resp) {
+      return http.POST('v1/document/matter/subFolder', data).then(function (resp) {
         return resp;
       });
     }
 
     service.moveDocument = function (data) {
-      return http.PUT('v1/document/move', data).then(function (resp) {
+      return http.PUT('v1/document/matter/move', data).then(function (resp) {
         return resp;
       });
     }
 
     service.copyDocument = function (data) {
-      return http.PUT('v1/document/copy', data).then(function (resp) {
+      return http.PUT('v1/document/matter/copy', data).then(function (resp) {
         return resp;
       });
     }
