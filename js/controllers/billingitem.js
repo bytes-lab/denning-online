@@ -85,6 +85,11 @@ denningOnline
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
+      // delete entity.code;
+      // if (self.entity_.strItemCode) {
+      //   entity.strItemCode = self.entity_.strItemCode;
+      // }
+      
       billingitemService.save(entity).then(function (item) {
         if (item) {  // ignore when errors
           if (self.isDialog) {

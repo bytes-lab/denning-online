@@ -154,7 +154,7 @@
             <dt class="p-t-10">Default Price (RM)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.invoice.price">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.decPricePerUnit">
               </div>
             </dd>
           </dl>
@@ -190,7 +190,7 @@
             <dt class="p-t-10">Default Cost (RM)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.voucher.price">
+                <input type='text' ng-readonly="!vm.can_edit" ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.decDefaultInputCost">
               </div>
             </dd>
           </dl>
@@ -198,7 +198,7 @@
             <dt class="p-t-10">Default Unit</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.decPricePerUnit">
+                <input type='text' ng-readonly="!vm.can_edit" ng-disabled="vm.entity.strType == 'F'" class="form-control" ng-model="vm.entity.decDefaultInputUnit">
               </div>
             </dd>
           </dl>
