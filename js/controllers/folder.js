@@ -153,45 +153,9 @@ denningOnline
       })
     }
 
-    self.upload = function() {
-      self.uploaded = 0;
-      angular.element('.file-upload').click();
-    };
-
     self.refresh = function () {
       $state.reload();
     }
-    
-    self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      var lastModifiedDate = file.lastModifiedDate;
-      if (typeof file.lastModified === "number") {
-        lastModifiedDate = new Date(file.lastModified);
-      }
-
-      var info = {
-        "fileNo1": $stateParams.id,
-        "documents":[
-          {
-            "FileName": fileObj.filename,
-            "MimeType": fileObj.filetype,
-            "dateCreate": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
-            "dateModify": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
-            "fileLength": fileObj.filesize,
-            "base64": fileObj.base64
-          }
-        ]
-      };
-
-      contactService.upload(info, 'matter', fileOjects).then(function(res) {
-        self.uploaded = self.uploaded + 1;
-        if (fileList.length == self.uploaded) {
-          growlService.growl('The file(s) uploaded successfully.', 'success');
-          $state.reload();
-        }
-      })
-      .catch(function(err){
-      });
-    };
 
     getSelectedFiles = function () {
       var files = [],

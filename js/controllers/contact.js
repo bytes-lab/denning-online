@@ -336,41 +336,6 @@ denningOnline
         $state.go('contacts.list');
       }
     }
-    
-    self.upload = function() {
-      self.uploaded = 0;
-      angular.element('.contact-upload').click();
-    };
-
-    self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      var lastModifiedDate = file.lastModifiedDate;
-      if (typeof file.lastModified === "number") {
-        lastModifiedDate = new Date(file.lastModified);
-      }
-
-      var info = {
-        "fileNo1": self.entity.code,
-        "documents":[
-          {
-            "FileName": fileObj.filename,
-            "MimeType": fileObj.filetype,
-            "dateCreate": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
-            "dateModify": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
-            "fileLength": fileObj.filesize,
-            "base64": fileObj.base64
-          }
-        ]
-      };
-
-      contactService.upload(info, 'contact').then(function(res) {
-        self.uploaded = self.uploaded + 1;
-        if (fileList.length == self.uploaded) {
-          growlService('The file(s) uploaded successfully.', 'success');
-        }
-      })
-      .catch(function (err) {
-      });
-    };
 
     //Prevent Outside Click
     self.openDelete = function (event, entity) {

@@ -19,8 +19,7 @@
           <button class="btn btn-default pull-right m-r-5 f-15" title="Delete files" ng-click="vm.deleteFiles()"><i class="zmdi zmdi-delete"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Refresh" ng-click="vm.refresh()"><i class="zmdi zmdi-refresh-alt"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Create a folder" ng-click="vm.createFolder()"><i class="zmdi zmdi-collection-plus"></i></button>
-          <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="vm.upload()"><i class="zmdi zmdi-upload"></i></button>
-          <input type="file" class="file-upload hidden" multiple ng-model="file" base-sixty-four-input onload="vm.onLoad">
+          <button class="btn btn-default pull-right m-r-5 f-15" title="Upload files" ng-click="mactrl.upload(vm.code, vm.type, true)"><i class="zmdi zmdi-upload"></i></button>
         </div>
       </div>
     </div>

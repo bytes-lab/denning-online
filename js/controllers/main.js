@@ -146,19 +146,22 @@ denningOnline
       $state.go('payment-records.list', {fileNo: item.key});
     };
 
-    self.upload = function(item, type) {
-      var prefix = '.'+type+'-upload-';
+    self.upload = function(code, type, reload) {
       self.uploadType = type;
-      self.item = item;
+      self.reload = reload;
+      self.key = code;
       self.uploaded = 0;
-      angular.element(prefix+item.key).click();
+      angular.element('.file-upload').click();
     };
 
     self.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      var lastModifiedDate = typeof file.lastModified === "number" ? new Date(file.lastModified) : file.lastModifiedDate;
+      var lastModifiedDate = file.lastModifiedDate;
+      if (typeof file.lastModified === "number") {
+        lastModified = new Date(file.lastModified);
+      }
 
       var info = {
-        "fileNo1": self.item.key,
+        "fileNo1": self.key,
         "documents":[
           {
             "FileName": fileObj.filename,
@@ -171,13 +174,15 @@ denningOnline
         ]
       };
 
-      contactService.upload(info, self.uploadType).then(function(res) {
+      contactService.upload(info, self.uploadType).then(function (res) {
         self.uploaded = self.uploaded + 1;
         if (fileList.length == self.uploaded) {
-          alert('The file(s) uploaded successfully.');
+          growlService.growl('The file(s) uploaded successfully.', 'success');
+          
+          if (self.reload) {
+            $state.reload();
+          }
         }
-      })
-      .catch(function(err){
       });
     };
 

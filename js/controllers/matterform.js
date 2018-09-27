@@ -519,42 +519,6 @@ denningOnline
       }
     };
 
-    vm.upload = function () {
-      vm.uploadType = 'matter';
-      vm.uploaded = 0;
-      angular.element('.matter-upload').click();
-    };
-
-    vm.onLoad = function (e, reader, file, fileList, fileOjects, fileObj) {
-      var lastModifiedDate = file.lastModifiedDate;
-      if (typeof file.lastModified === "number") {
-        lastModified = new Date(file.lastModified);
-      }
-
-      var info = {
-        "fileNo1": vm.model.strFileNo1,
-        "documents":[
-          {
-            "FileName": fileObj.filename,
-            "MimeType": fileObj.filetype,
-            "dateCreate": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
-            "dateModify": lastModifiedDate.toISOString().replace('T', ' ').split('.')[0],
-            "fileLength": fileObj.filesize,
-            "base64": fileObj.base64
-          }
-        ]
-      };
-
-      contactService.upload(info, vm.uploadType).then(function(res) {
-        vm.uploaded = vm.uploaded + 1;
-        if (fileList.length == vm.uploaded) {
-          growlService.growl('The file(s) uploaded successfully.', 'success');
-        }
-      })
-      .catch(function(err) {
-      });
-    };
-    
     vm.save = function () {
       delete vm.model.tmp;
       model = refactorService.getDiff(vm.model_, vm.model);
