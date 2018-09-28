@@ -479,6 +479,38 @@ denningOnline
         templateUrl: 'views/voucher-edit.html'
       })
 
+
+      //------------------------------
+      // FEE TRANSFERS
+      //------------------------------
+
+      .state ('billing.fee-transfers-list', {
+        data: {
+          access: '@'
+        },
+        url: '/fee-transfers',
+        controller: 'feeTransListCtrl as vm',
+        templateUrl: 'views/fee-transfer-list.html'
+      })
+
+      .state ('billing.fee-transfers-edit', {
+        data: {
+          access: '@'
+        },
+        url: '/fee-transfer/edit/:id',
+        controller: 'feeTransEditCtrl as vm',
+        templateUrl: 'views/fee-transfer-edit.html'
+      })
+      .state ('billing.fee-transfers-new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },
+        url: '/fee-transfer/new',
+        controller: 'feeTransEditCtrl as vm',
+        templateUrl: 'views/fee-transfer-edit.html'
+      })
+
       //------------------------------
       // PRESET BILLS
       //------------------------------
