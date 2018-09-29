@@ -586,7 +586,7 @@ denningOnline
                 printWindow.document.write(content);
                 printWindow.document.write('</body></html>');
                 printWindow.print();
-                // printWindow.close();
+                printWindow.close();
               }
 
             },

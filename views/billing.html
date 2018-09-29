@@ -25,13 +25,16 @@
 
           <ul class="dropdown-menu">
             <li>
-              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> Credit Note</a>
+              <a ui-sref="billing.credit-notes-new"><i class="zmdi zmdi-plus"></i> Credit Note</a>
             </li>
             <li>
-              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> Debit Note</a>
+              <a ui-sref="billing.debit-notes-new"><i class="zmdi zmdi-plus"></i> Debit Note</a>
             </li>
             <li>
-              <a ui-sref="billing.items-list"><i class="zmdi zmdi-plus"></i> General Journal ( GJ )</a>
+              <a ui-sref="billing.general-journals-new"><i class="zmdi zmdi-plus"></i> General Journal ( GJ )</a>
+            </li>
+            <li>
+              <a ui-sref="billing.IAT-new"><i class="zmdi zmdi-plus"></i> Inter Bank Accounts Transfer ( IAT )</a>
             </li>
           </ul>
         </li>
@@ -57,13 +60,16 @@
               <a ui-sref="billing.receipts-list">Receipts</a>
             </li>
             <li>
+              <a ui-sref="billing.receipts-list">Vouchers</a>
+            </li>
+            <li>
               <a ui-sref="billing.vouchers-list">Payment Requests</a>
             </li>
             <li>
               <a ui-sref="billing.fee-transfers-list">Fees Transfer</a>
             </li>
             <li>
-              <a ui-sref="billing.receipts-list">Transactions</a>
+              <a ui-sref="billing.transactions-list">Transactions</a>
             </li>
           </ul>
         </li>
@@ -73,9 +79,6 @@
           </a>
 
           <ul class="dropdown-menu">
-            <li>
-              <a ui-sref="billing.items-list">Inter Bank Accounts Transfer ( IBT )</a>
-            </li>
             <li>
               <a ui-sref="billing.items-list">Bank Recon</a>
             </li>

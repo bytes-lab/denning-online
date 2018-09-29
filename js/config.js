@@ -481,6 +481,110 @@ denningOnline
 
 
       //------------------------------
+      // GENERAL-JOURNALS
+      //------------------------------
+
+      .state ('billing.general-journals-edit', {
+        data: {
+          access: '@'
+        },
+        url: '/general-journal/edit/:id',
+        controller: 'generalJournalEditCtrl as vm',
+        templateUrl: 'views/general-journal-edit.html'
+      })
+      .state ('billing.general-journals-new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },
+        url: '/general-journal/new',
+        controller: 'generalJournalEditCtrl as vm',
+        templateUrl: 'views/general-journal-edit.html'
+      })
+
+
+      //------------------------------
+      // CREDIT-NOTES
+      //------------------------------
+
+      .state ('billing.credit-notes-edit', {
+        data: {
+          access: '@'
+        },
+        url: '/credit-note/edit/:id',
+        controller: 'creditNoteEditCtrl as vm',
+        templateUrl: 'views/credit-note-edit.html'
+      })
+      .state ('billing.credit-notes-new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },
+        url: '/credit-note/new',
+        controller: 'creditNoteEditCtrl as vm',
+        templateUrl: 'views/credit-note-edit.html'
+      })
+
+
+      //------------------------------
+      // DEBIT-NOTES
+      //------------------------------
+
+      .state ('billing.debit-notes-edit', {
+        data: {
+          access: '@'
+        },
+        url: '/debit-note/edit/:id',
+        controller: 'debitNoteEditCtrl as vm',
+        templateUrl: 'views/credit-note-edit.html'
+      })
+      .state ('billing.debit-notes-new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },
+        url: '/debit-note/new',
+        controller: 'debitNoteEditCtrl as vm',
+        templateUrl: 'views/credit-note-edit.html'
+      })
+
+
+      //------------------------------
+      // IAT
+      //------------------------------
+
+      .state ('billing.IAT-edit', {
+        data: {
+          access: '@'
+        },
+        url: '/IAT/edit/:id',
+        controller: 'IATEditCtrl as vm',
+        templateUrl: 'views/credit-note-edit.html'
+      })
+      .state ('billing.IAT-new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },
+        url: '/IAT/new',
+        controller: 'IATEditCtrl as vm',
+        templateUrl: 'views/credit-note-edit.html'
+      })
+
+      //------------------------------
+      // TRANSACTIONS
+      //------------------------------
+
+      .state ('billing.transactions-list', {
+        data: {
+          access: '@'
+        },
+        url: '/transactions',
+        controller: 'transactionListCtrl as vm',
+        templateUrl: 'views/transaction-list.html'
+      })
+
+      //------------------------------
       // FEE TRANSFERS
       //------------------------------
 

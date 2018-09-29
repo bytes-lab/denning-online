@@ -23,14 +23,14 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">File No.</dt>
+            <dt class="p-t-10">Matter No.</dt>
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
                 md-selected-item="vm.entity.clsFileNo"
                 md-search-text="qstl"
                 md-items="item in vm.queryMatters(qstl)"
-                md-item-text="item.strFileNo1"
+                md-item-text="item.key"
                 md-min-length="0"
                 md-selected-item-change="vm.matterChange(item)"
                 placeholder="Enter matter No (if any)"
@@ -42,7 +42,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal m-b-10">
-            <dt>File Name</dt>
+            <dt>Client</dt>
             <dd>
               <label class="p-l-10">{{ vm.entity.clsFileNo.clsPrimaryClient.strName }}</label>
             </dd>
@@ -64,19 +64,20 @@
                 md-search-text="qmc"
                 md-items="item in vm.queryCodes(qmc)"
                 md-selected-item-change="vm.matterCodeChange(item)"
-                md-item-text="item.code"
+                md-item-text="'[ '+item.code+' ]  '+item.strDescription"
                 md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
-                <span md-highlight-text="qmc" class="col-360" md-highlight-flags="i">{{item.strDescription}}</span>
-                <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
+                <span md-highlight-text="qmc" md-highlight-flags="i">
+                  [ {{item.code}} ]  {{item.strDescription}}
+                </span>
               </md-item-template>
               </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Quotation Matter</dt>
+            <dt class="p-t-10">Quotation Subject</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' class="form-control" ng-model="vm.entity.strBillingMatter">
@@ -99,8 +100,6 @@
               </div>
             </dd>
           </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Preset Billing Code</dt>
             <dd>
@@ -121,6 +120,8 @@
               </md-autocomplete>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Property</dt>
             <dd>
@@ -163,6 +164,22 @@
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Loan Amount</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Monthly Rent</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Period</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' class="form-control" ng-model="vm.entity.decLoan">
@@ -246,9 +263,9 @@
       <h4 class="m-t-25 p-l-25" ng-click="vm.showItems=!vm.showItems">Bill Items&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showItems"></i><i class="zmdi zmdi-minus" ng-if="vm.showItems"></i></h4>
       <div class="row p-l-20" ng-show="vm.showItems">
         <div class="col-md-10 p-l-30 m-t-15">
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>${{ vm.typeSum.All | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>${{ vm.typeSum.Fees | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>${{ vm.typeSum.Disb | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>{{ vm.typeSum.All | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>{{ vm.typeSum.Fees | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>{{ vm.typeSum.Disb | number:2 }}</small> )</div>
           <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">GST ( <small>${{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
           <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-show="vm.can_edit" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
             <i class="zmdi zmdi-plus"></i>
@@ -273,11 +290,11 @@
                     </label>
                   </div>
                 </td>
-                <td data-title="'Unit'" class="text-right">
-                  {{ w.decUnit }}
-                </td>
                 <td data-title="'Unit Price'" class="text-right">
                   {{ w.decUnitPrice | number:2 }}
+                </td>
+                <td data-title="'Unit'" class="text-right">
+                  {{ w.decUnit }}
                 </td>
                 <td data-title="'Charges'" class="text-right">
                   {{ w.decUnitCost }}

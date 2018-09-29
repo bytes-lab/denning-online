@@ -1,5 +1,5 @@
 denningOnline
-  .controller('quotationListCtrl', function(NgTableParams, quotationService, Auth, $state) {
+  .controller('transactionListCtrl', function(NgTableParams, generalJournalService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -8,7 +8,7 @@ denningOnline
       count: 25,
     }, {
       getData: function(params) {
-        return quotationService.getList(params.page(), params.count(), self.keyword)
+        return generalJournalService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
@@ -21,10 +21,11 @@ denningOnline
     }
   })
 
-  .controller('quotationEditCtrl', function($stateParams, quotationService, $state, Auth,
-                                            refactorService, fileMatterService, growlService,
-                                            matterCodeService, presetbillService,
-                                            uibDateParser, $uibModal, NgTableParams) 
+
+  .controller('generalJournalEditCtrl', function($stateParams, generalJournalService, $state, Auth,
+                                          refactorService, fileMatterService, growlService,
+                                          matterCodeService, presetbillService,
+                                          uibDateParser, $uibModal, NgTableParams) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -67,22 +68,10 @@ denningOnline
       }
     }
 
-    self.queryCodes = function(searchText) {
-      return matterCodeService.getList(1, 10, searchText).then(function (data) {
-        return data.data;
-      });
-    }
-
     self.queryBills = function (keyword) {
       return presetbillService.getTableList(1, 10, keyword).then(function (resp) {
         return resp;
       });
-    }
-
-    self.matterCodeChange = function (item) {
-      if (item && item.strDescription) {
-        self.entity.strBillingMatter = item.strDescription;
-      }
     }
 
     self.insert = function (idx) {
@@ -196,10 +185,11 @@ denningOnline
     }
 
     if ($stateParams.id) {
-      self.title = 'Edit Quotation';
-      quotationService.getItem($stateParams.id).then(function (item){
+      self.title = 'Edit General Journal';
+      generalJournalService.getItem($stateParams.id).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+        self.entity.listBilledItems = [];
         initializeTable();
 
         if (self.entity.strBillName) {
@@ -209,7 +199,7 @@ denningOnline
         }
       });
     } else {
-      self.title = 'New Quotation';
+      self.title = 'New General Journal';
       self.entity = {
         strState: 'Common',
         dtCreateDate: uibDateParser.parse(new Date()),
@@ -220,12 +210,12 @@ denningOnline
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
-      quotationService.save(entity, self.entity_).then(function (item) {
+      generalJournalService.save(entity, self.entity_).then(function (item) {
         if (item) {  // ignore when errors
           if (self.entity_) {
             $state.reload();
           } else {
-            $state.go('billing.quotations-edit', { 'id': item.code });
+            $state.go('billing.vouchers-edit', { 'id': item.code });
           }
           growlService.growl('Saved successfully!', 'success');          
         }
