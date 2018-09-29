@@ -30,7 +30,7 @@
                 md-selected-item="vm.entity.clsFileNo"
                 md-search-text="qstl"
                 md-items="item in vm.queryMatters(qstl)"
-                md-item-text="item.key"
+                md-item-text="item.key ? item.key : item.strFileNo1"
                 md-min-length="0"
                 md-selected-item-change="vm.matterChange(item)"
                 placeholder="Enter matter No (if any)"
@@ -114,8 +114,9 @@
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
-                <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
+                <span md-highlight-text="qpsb1" md-highlight-flags="i">
+                  [ {{item.code}} ]  {{item.strDescription}}
+                </span>
               </md-item-template>
               </md-autocomplete>
             </dd>
@@ -245,14 +246,20 @@
           </div>
           <div class="col-md-12 no-padding m-b-10">
             <div class="col-md-2">
+              <label class="f-700">SST / GST</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees + vm.typeSST.DisbWithTax | number:2 }}</label>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2">
               <label class="f-700">Total</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Fees+vm.typeSum.Disb + vm.typeSum.DisbWithTax | number:2 }}</label>
             </div>
-            <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees + vm.typeSST.DisbWithTax | number:2 }}</label>
-            </div>
+            <div class="col-md-2"></div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees + vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax + vm.typeSum.Disb | number:2 }}</label>
             </div>
@@ -265,8 +272,9 @@
         <div class="col-md-10 p-l-30 m-t-15">
           <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>{{ vm.typeSum.All | number:2 }}</small> )</div>
           <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>{{ vm.typeSum.Fees | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb.w' }" ng-click="vm.filterItem('Disb.w')">DISB. with SST / GST ( <small>{{ vm.typeSum.Disb | number:2 }}</small> )</div>
           <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>{{ vm.typeSum.Disb | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">GST ( <small>${{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">SST / GST ( <small>{{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
           <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-show="vm.can_edit" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
             <i class="zmdi zmdi-plus"></i>
           </div>
@@ -302,7 +310,7 @@
                 <td data-title="'Tax Code'">
                   {{ w.strTaxCode }}
                 </td>
-                <td data-title="'GST (%)'">
+                <td data-title="'SST/GST (%)'">
                   {{ w.decTaxRate * 100 | number:2 }}
                 </td>
                 <td data-title="''" class="p-5">

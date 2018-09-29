@@ -1,5 +1,7 @@
 denningOnline
-  .controller('fileMatterListCtrl', function(NgTableParams, fileMatterService, Auth, $state) {
+  .controller('fileMatterListCtrl', function(NgTableParams, fileMatterService, Auth, 
+                                             $state) 
+  {
     var self = this;
     self.keyword = '';
     self.userInfo = Auth.getUserInfo();
@@ -94,9 +96,10 @@ denningOnline
     }
   })
 
-  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, matterCodeService, 
-                                             Auth, presetbillService, matterFormService, $state,
-                                             refactorService, growlService) 
+  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, Auth, 
+                                             presetbillService, matterFormService, $state,
+                                             matterCodeService, refactorService, 
+                                             growlService) 
   {
     var self = this;
     self.isDialog = false;
