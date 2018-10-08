@@ -1,5 +1,7 @@
 #/bower_components/*
-#/vendors/bower_components/*
+/vendors/bower_components/*
 chat/
 ViewerJS/
 nohup.out
+node_modules/
+dist/
