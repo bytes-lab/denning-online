@@ -267,9 +267,15 @@ denningOnline
     };
 
     self.queryList = function (labels, q) {
-      return labels.filter(function(item) {
+      var arr = labels.filter(function(item) {
         return item.search(new RegExp(q, "i")) > -1;
       });
+      
+      if (arr && arr.length == 0) {
+        return [q]        ;
+      } else {
+        return arr;
+      }
     };
 
     self.queryForms = function (searchText) {
