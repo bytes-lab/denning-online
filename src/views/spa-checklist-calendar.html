@@ -1,0 +1,177 @@
+<header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+    <section id="content" style="padding-right: 268px;">
+
+        <div class="container">
+            <div class="block-header">
+                <h2>SPA CHECKLIST CALENDAR</h2>
+
+                <ul class="actions">
+                    <li>
+                        <a href="">
+                            <i class="zmdi zmdi-trending-up"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="zmdi zmdi-check-all"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown" uib-dropdown>
+                        <a href="" uib-dropdown-toggle>
+                            <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href="">Refresh</a>
+                            </li>
+                            <li>
+                                <a href="">Manage Widgets</a>
+                            </li>
+                            <li>
+                                <a href="">Widgets Settings</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="card">
+                <div class="card-header">                
+                    <div class="row">
+                    <h2 class="col-sm-1">Filter By</h2>
+                    <div class="form-group1">
+                        <label for="inputEmail3" class="col-sm-1 control-label text-right f-15 p-t-5">Partner</label>
+                        <div class="col-sm-2">
+                            <div class="fg-line">
+                                <div class="select">
+                                    <select class="form-control">
+                                        <option>Select a partner</option>
+                                        <option>Admin</option>
+                                        <option>Partner</option>
+                                        <option>Jason</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group1">
+                        <label for="inputEmail3" class="col-sm-1 control-label text-right f-15 p-t-5">L.A</label>
+                        <div class="col-sm-2">
+                            <div class="fg-line">
+                                <div class="select">
+                                    <select class="form-control">
+                                        <option>Select an L.A</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+                                        <option>Option 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group1">
+                        <label for="inputEmail3" class="col-sm-1 control-label text-right f-15 p-t-5">Clerk</label>
+                        <div class="col-sm-2">
+                            <div class="fg-line">
+                                <div class="select">
+                                    <select class="form-control">
+                                        <option>Select a clerk</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+                                        <option>Option 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                        
+                <div class="card-body">
+                    <div class="table-responsive" ng-if="vm.dataReady" > 
+                        <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+                            <tr ng-repeat="w in $data" ng-click="vm.clickHandler(w)">
+                                <td data-title="'Start Date'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
+                                    {{ w.IDNo }}
+                                </td>
+                                <td data-title="'Due Date'" filter="{ 'name': 'text' }" sortable="'name'">
+                                    {{ w.name }}
+                                </td>
+                                <td data-title="'Matter No.'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                                    {{ w.phoneHome }}
+                                </td>
+                                <td data-title="'File Name'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                                    {{ w.phoneHome }}
+                                </td>
+                                <td data-title="'Task Code'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                                    {{ w.phoneHome }}
+                                </td>
+                                <td data-title="'Task Name'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                                    {{ w.phoneHome }}
+                                </td>
+                                <td data-title="'Clerk'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                                    {{ w.phoneHome }}
+                                </td>
+                                <td data-title="'LA'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                                    {{ w.phoneHome }}
+                                </td>
+                                <td data-title="'Partner'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                                    {{ w.phoneHome }}
+                                </td>
+                                <td data-title="'Status'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
+                                    {{ w.phoneHome }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aside id="sidebar" class="toggled" style="right: 0;">
+            <div id="calendar-widget" data-full-calendar></div>      
+            <div class="p-5 p-l-15">
+                <div class="checkbox m-b-15">
+                    <label>
+                        <input type="checkbox" value="">
+                        <i class="input-helper"></i>
+                        Pending Task
+                    </label>
+                </div>
+                <div class="checkbox m-b-15">
+                    <label>
+                        <input type="checkbox" value="">
+                        <i class="input-helper"></i>
+                        Future Task
+                    </label>
+                </div>
+                <div class="checkbox m-b-15">
+                    <label>
+                        <input type="checkbox" value="">
+                        <i class="input-helper"></i>
+                        Overdue Task
+                    </label>
+                </div>
+                <div class="checkbox m-b-15">
+                    <label>
+                        <input type="checkbox" value="">
+                        <i class="input-helper"></i>
+                        Done Task
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        </section>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>

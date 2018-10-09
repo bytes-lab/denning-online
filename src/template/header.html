@@ -1,0 +1,148 @@
+<input type="file" class="hidden file-upload" multiple ng-model="file" base-sixty-four-input onload="mactrl.onLoad">
+
+<ul class="header-inner clearfix">
+  <li id="menu-trigger" data-target="mainmenu" data-toggle-sidebar data-model-left="mactrl.sidebarToggle.left" data-ng-class="{ 'open': mactrl.sidebarToggle.left === true }">
+    <div class="line-wrap">
+      <div class="line top"></div>
+      <div class="line center"></div>
+      <div class="line bottom"></div>  
+    </div>
+  </li>
+
+  <li class="logo hidden-xs hidden-sm">
+    <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)">
+      <i class="zmdi zmdi-home f-18 m-r-5"></i>
+      Denning Online
+    </a>
+  </li>
+  <li class="logo hidden-md hidden-lg">
+    <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)">
+      <i class="zmdi zmdi-home f-18 m-r-5"></i>
+      Denning
+    </a>
+  </li>
+  <li>
+    <div class="search">
+      <md-autocomplete
+        ng-disabled="false"
+        md-selected-item="mactrl.selectedItem"
+        md-search-text-change="mactrl.searchTextChange(mactrl.searchText)"
+        md-search-text="mactrl.searchText"
+        md-selected-item-change="mactrl.selectedItemChange(item)"
+        md-items="item in mactrl.querySearch(mactrl.searchText)"
+        md-item-text="item.keyword"
+        md-min-length="1"
+        md-autoselect="false"
+        ng-keypress="mactrl.searchKeyPressed($event)"
+        placeholder="Search for matters, contacts, properties ...">
+        <md-item-template>
+          <span md-highlight-text="mactrl.searchText" md-highlight-flags="^i">{{ item.keyword }}</span>
+        </md-item-template>
+        <md-not-found>
+          No results matching "{{ mactrl.searchText }}" were found.
+        </md-not-found>
+      </md-autocomplete>
+    </div>
+  </li>
+  <li class="pull-right">
+    <ul class="top-menu">      
+      <li class="search-filter dropdown" uib-dropdown>
+        <a href="" uib-dropdown-toggle>
+          <i class="tm-icon zmdi zmdi-filter-list"></i>
+        </a>
+
+        <ul class="dropdown-menu">
+          <li ng-repeat="item in mactrl.getSearchCategories()">
+            <a ng-click="mactrl.searchFilterChange(item.ID)" style="cursor: pointer;">
+              <i class="zmdi zmdi-check m-r-5" ng-if="item.ID == mactrl.searchCategory"></i> 
+              <span style="width: 14px; display: inline-block;" ng-if="item.ID != mactrl.searchCategory"></span>
+              {{ item.Category }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown" uib-dropdown>
+        <a uib-dropdown-toggle href="">
+          <i class="tm-icon zmdi zmdi-notifications"></i>
+          <i class="tmn-counts">9</i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
+          <div class="listview" id="notifications">
+            <div class="lv-header">
+              Notification
+
+              <ul class="actions">
+                <li>
+                  <a href="" data-ng-click="hctrl.clearNotification($event)">
+                    <i class="zmdi zmdi-check-all"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="lv-body">
+              <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
+                <div class="media">
+                  <div class="pull-left">
+                    <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
+                  </div>
+                  <div class="media-body">
+                    <div class="lv-title">{{ w.user }}</div>
+                    <small class="lv-small">{{ w.text }}</small>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <a class="lv-footer" href="">View Previous</a>
+          </div>
+
+        </div>
+      </li>
+      <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.task" data-ng-class="{ 'open': mactrl.sidebarToggle.task === true }">
+        <a href=""><i class="tm-icon zmdi zmdi-view-list-alt"></i></a>
+      </li>
+       
+      <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
+        <a href=""><i class="tm-icon zmdi zmdi-comment-alt-text"></i></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<!-- Top Search Content -->
+<div id="top-search-wrap">
+  <div class="tsw-inner">
+    <i id="top-search-close" class="zmdi zmdi-arrow-left" data-ng-click="hctrl.closeSearch()"></i>
+    <input type="text">
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="loginModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ lctrl.dialogTitle }}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="p-b-20 p-r-25 p-t-10 p-l-5">
+      <div class="c-red m-b-10 text-center">{{ lctrl.errorMessage }}</div>
+      <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+        <div class="fg-line">
+          <input type="email" class="form-control" placeholder="Email" ng-readonly="lctrl.dialogTitle" ng-model="lctrl.user.email"> 
+        </div>
+      </div>
+
+      <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+        <div class="fg-line">
+          <input type="password" class="form-control" placeholder="Password" ng-model="lctrl.user.password" ng-keypress="lctrl.searchKeyPressed($event)">
+        </div>
+      </div>
+      <a href="" class="btn btn-login btn-danger btn-float" ng-click="lctrl.doLogin(lctrl.user)" style="top: 40px;right: -25px;">
+        <i class="zmdi zmdi-arrow-forward"></i>
+      </a>
+    </div>
+  </div>
+</script>

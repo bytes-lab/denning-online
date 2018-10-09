@@ -1,0 +1,420 @@
+<div ng-class="vm.isDialog ? '' : 'container'">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-10">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right" ui-sref="billing.invoices-list">Cancel</a>
+          <a class="btn btn-primary btn-sm pull-right m-r-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-r-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body card-padding">
+      <h4 class="m-b-15">Details</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal m-b-20">
+            <dt>Invoice Type</dt>
+            <dd>
+              <label class="radio radio-inline m-r-25">
+                <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+                <i class="input-helper"></i>
+                Interim Legal 
+              </label>
+
+              <label class="radio radio-inline m-r-25">
+                <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+                <i class="input-helper"></i>
+                Final Legal
+              </label>
+
+              <label class="radio radio-inline m-r-25">
+                <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+                <i class="input-helper"></i>
+                Tax
+              </label>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.boolChkPosted">
+                <i class="input-helper"></i>
+                Finalize & Post to Office Account
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.boolChkRoundUp">
+                <i class="input-helper"></i>
+                Round Up Professional Primary Fee
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Invoice No.</dt>
+            <dd>
+              <label class="p-l-10">{{ vm.entity.code }}</label>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Matter No.</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsFileNo"
+                md-search-text="qstl"
+                md-items="item in vm.queryMatters(qstl)"
+                md-item-text="item.strFileNo1"
+                md-min-length="0"
+                md-selected-item-change="vm.matterChange(item)"
+                placeholder="Enter matter No (if any)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qstl" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>File Name</dt>
+            <dd>
+              <label class="p-l-10">{{ vm.entity.clsFileNo.clsPrimaryClient.strName }}</label>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Invoice To</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Matter Code</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsMatterCode"
+                md-search-text="qmc"
+                md-items="item in vm.queryCodes(qmc)"
+                md-selected-item-change="vm.matterCodeChange(item)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qmc" class="col-360" md-highlight-flags="i">{{item.strDescription}}</span>
+                <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Invoice Matter</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.strBillingMatter">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Invoice Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtCreateDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Reference No</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.marital_status">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Preset Billing Code</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.presetCode"
+                md-search-text="qpsb1"
+                md-items="item in vm.queryBills(qpsb1)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.presetBillChange(item)"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Property</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.strPropertyAddress">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.strState">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Property Count</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.IRD_branch">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Adjudicated Value</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decAdjPrice">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Purchase Price</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decPrice">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Loan Amount</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25">Invoice Analysis</h4>
+      <div class="row">
+        <div class="col-md-11 p-l-20 m-b-10">
+          <div class="col-md-offset-2 col-md-2 p-l-25">
+            <label>Gross</label>
+          </div>
+          <div class="col-md-2 p-l-20">
+            <label>SST / GST</label>
+          </div>
+          <div class="col-md-2 p-l-20">
+            <label>Debit Note</label>
+          </div>
+          <div class="col-md-2 p-l-20">
+            <label>Credit Note</label>
+          </div>
+          <div class="col-md-2 p-l-20">
+            <label>Total</label>
+          </div>
+        </div>
+        <div class="col-md-11 p-l-25">
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2">
+              <label class="f-700">Professional Fees</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees | number:2 }}</label>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2">
+              <label class="f-700">Disb. with SST / GST</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.DisbWithTax | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.DisbWithTax | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax | number:2 }}</label>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2">
+              <label class="f-700">Disbursements</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding m-b-10">
+            <div class="col-md-2">
+              <label class="f-700">Total</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Fees+vm.typeSum.Disb + vm.typeSum.DisbWithTax | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees + vm.typeSST.DisbWithTax | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+            </div>
+            <div class="col-md-2">
+              <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees + vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax + vm.typeSum.Disb | number:2 }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 p-l-25" ng-click="vm.showItems=!vm.showItems">Bill Items&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showItems"></i><i class="zmdi zmdi-minus" ng-if="vm.showItems"></i></h4>
+      <div class="row p-l-20" ng-show="vm.showItems">
+        <div class="col-md-10 p-l-30 m-t-15">
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>${{ vm.typeSum.All | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>${{ vm.typeSum.Fees | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>${{ vm.typeSum.Disb | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">GST ( <small>${{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-show="vm.can_edit" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
+            <i class="zmdi zmdi-plus"></i>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <div class="table-responsive table-div p-15"> 
+            <table ng-table="vm.tableFilter" class="no-pager table-striped table table-vmiddle table-list">
+              <tr ng-repeat="w in $data">
+                <td data-title="'No'">{{ $index+1 }}</td>
+                <td data-title="'Item Code'">
+                  {{ w.strItemCode }}
+                </td>
+                <td data-title="'Description'">
+                  {{ w.strDescription }}
+                </td>
+                <td data-title="'Formula'" class="p-0 text-center">
+                  <div class="checkbox m-5">
+                    <label>
+                      <input type="checkbox" ng-checked="w.boolIsFormula=='1'" readonly>
+                      <i class="input-helper"></i>
+                    </label>
+                  </div>
+                </td>
+                <td data-title="'Unit'" class="text-right">
+                  {{ w.decUnit }}
+                </td>
+                <td data-title="'Unit Price'" class="text-right">
+                  {{ w.decUnitPrice | number:2 }}
+                </td>
+                <td data-title="'Charges'" class="text-right">
+                  {{ w.decUnitCost }}
+                </td>
+                <td data-title="'Tax Code'">
+                  {{ w.strTaxCode }}
+                </td>
+                <td data-title="'GST (%)'">
+                  {{ w.decTaxRate * 100 | number:2 }}
+                </td>
+                <td data-title="''" class="p-5">
+                  <button class="btn btn-default btn-sm" ng-disabled="!vm.can_edit" title="Move Up" ng-click="vm.move($index-1, $index)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-chevron-up"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Move Down" ng-click="vm.move($index, $index+1)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-chevron-down"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Insert After" ng-click="vm.insert($index)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-plus"></i>
+                  </button>
+                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Remove" ng-click="vm.remove(w.strItemCode)" style="padding: 4px 9px;">
+                    <i class="zmdi zmdi-close"></i>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+      <h4 class="m-t-25">Remark</h4>
+      <div class="row">
+        <div class="col-md-10 p-l-25">
+          <dl class="dl-horizontal">
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control" rows="4" ng-model="vm.entity.strRemarks"></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25">Add Memo ( Litigation Bill )</h4>
+      <div class="row">
+        <div class="col-md-10 p-l-25">
+          <dl class="dl-horizontal">
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control" rows="4" ng-model="vm.entity.strLitigationMemo"></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row">
+        <div class="col-md-10">
+          <div class="m-t-30">
+            <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.invoices-list">Cancel</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

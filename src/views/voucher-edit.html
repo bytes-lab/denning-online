@@ -1,0 +1,287 @@
+<div ng-class="vm.isDialog ? '' : 'container'">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-10">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right" ui-sref="billing.vouchers-list">Cancel</a>
+          <a class="btn btn-primary btn-sm pull-right m-r-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-r-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body card-padding">
+      <h4 class="m-b-15">Voucher Details</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal m-b-20">
+            <dt>Account Type</dt>
+          </dl>
+          <div class="clearfix"></div>
+          <dl class="dl-horizontal m-b-20 m-t-20">
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Client
+            </label>
+
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Disbursment
+            </label>
+
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="21-MOB" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Office Advance
+            </label>
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="22-MOB" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Fixed Deposit
+            </label>
+            <label class="radio radio-inline m-r-25">
+              <input type="radio" value="23-MOB" ng-model="vm.clsAttendedStatus">
+              <i class="input-helper"></i>
+              Other
+            </label>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Voucher No. (System)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Voucher No. (Manuel)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Matter No.</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsFileNo"
+                md-search-text="qstl"
+                md-items="item in vm.queryMatters(qstl)"
+                md-item-text="item.strFileNo1"
+                md-min-length="0"
+                md-selected-item-change="vm.matterChange(item)"
+                placeholder="Enter matter No (if any)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qstl" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Pay To</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Transaction Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtCreateDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bill No</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.presetCode"
+                md-search-text="qpsb1"
+                md-items="item in vm.queryBills(qpsb1)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.presetBillChange(item)"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
+                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Total Voucher Amount</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Transaction Description</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25">File Information</h4>
+      <div class="row">
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Customer Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Available Balance</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Purchase Price</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Loan Amount</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">File Matter</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Property</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25">Mode of Payment</h4>
+      <div class="row">
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Mode</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Issuer Bank</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank Branch</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Cheque No. / Ref. No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-4 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Cheque Amount</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Portion</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+      <h4 class="m-t-25">Remark</h4>
+      <div class="row">
+        <div class="col-md-10 p-l-25">
+          <dl class="dl-horizontal">
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control" rows="5"></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row">
+        <div class="col-md-10">
+          <div class="m-t-30">
+            <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.vouchers-list">Cancel</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

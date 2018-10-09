@@ -1,0 +1,310 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="display: flex;">
+      <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
+        <h2 class="f-20 f-500 c-purple" style="display: inline;">Court Diary Edit</h2>
+        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.courtdiary.delete && !vm.create_new">Delete</a>
+        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
+        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+        <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="courtdiaries.new" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+      </div>
+      <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
+        <h2 style="display: inline;">Court Diary Detail</h2>
+        <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
+      </div>
+    </div>
+
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+      <h4>Court Diary Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Matter No</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.rmatter"
+                md-search-text="qstl"
+                md-items="item in vm.queryMatters(qstl)"
+                md-item-text="item.key"
+                md-min-length="0"
+                md-selected-item-change="vm.matterChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Previous Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'ctopened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtPreviousDate" is-open="ctopened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Hearing Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'ctopened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtEventDate" is-open="ctopened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Court Type</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.clsCourtPlace.strTypeE" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Place</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.clsCourtPlace.strPlace">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Hearing Type</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strHearingType"
+                md-search-text="qsht"
+                md-items="item in vm.queryHearingType(qsht)"
+                md-item-text="item.description"
+                md-min-length="0"
+                md-selected-item-change="vm.hearingTypeChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qsht" class="col-1" md-highlight-flags="i">{{ item.description }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Enclosure</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strEnclosure" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Case No</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.courtInfo.CaseNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Case Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.courtInfo.CaseName">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-10 m-b-20" style="margin-left: 190px;">
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+            <i class="input-helper"></i>
+            Attended 
+          </label>
+
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+            <i class="input-helper"></i>
+            MOB
+          </label>
+
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" value="3-Postponed" ng-model="vm.clsAttendedStatus">
+            <i class="input-helper"></i>
+            Postponed
+          </label>
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" value="4-Absent" ng-model="vm.clsAttendedStatus">
+            <i class="input-helper"></i>
+            Absent
+          </label>
+          <label class="radio radio-inline m-r-25">
+            <input type="radio" value="0-None" ng-model="vm.clsAttendedStatus">
+            <i class="input-helper"></i>
+            None
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Counsel Assigned</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strCounselAssigned"
+                md-search-text="qsca"
+                md-items="item in vm.queryStaff(qsca)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.caChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strInitials }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Counsel Attended</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strCounselAttended"
+                md-search-text="qscd"
+                md-items="item in vm.queryStaff(qscd)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.cdChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qscd" class="col-1" md-highlight-flags="i">{{ item.strInitials }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+ 
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Coram</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.intCoram"
+                md-search-text="qsic"
+                md-items="item in vm.queryCoram(qsic)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.coramChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qsic" class="col-1" md-highlight-flags="i">{{ item.name }}</span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Opponent's Counsel</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strOpponentCounsel">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Court Decision</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCourtDecision">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Action Required</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strActionRequired" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Action To be Completed By</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.phoneHome">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remarks</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strRemarks">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Next Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'ctopenednd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="ctopenednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">No Next Event</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.phoneFax">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Next Date To Be Given</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'ctopeneded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtActionEndDate" is-open="ctopeneded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.courtdiary.delete && !vm.create_new">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="courtdiaries.new" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          </div>
+        </div>
+        <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">
+          <div class="m-t-30">
+            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Delete a court diary</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete the court diary?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
