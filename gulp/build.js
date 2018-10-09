@@ -3,16 +3,16 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
-var es = require('event-stream');
-var wiredep = require('wiredep');
-var _ = require('lodash');
+// var es = require('event-stream');
+// var wiredep = require('wiredep');
+// var _ = require('lodash');
 var $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 var template = require('gulp-es6-template-strings')
 
 gulp.task('clean', function (done) {
-    return$.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
+    return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
 });
 
 gulp.task('build-partials-templates', function () {
