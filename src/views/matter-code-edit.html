@@ -152,12 +152,15 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Track Subsale CD</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.trackSubsaleCD">
+            <dt>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="vm.entity.boolChkSubsaleCD">
+                  <i class="input-helper"></i>
+                  Track Subsale CD
+                </label>
               </div>
-            </dd>
+            </dt>
           </dl>
         </div>
       </div>
