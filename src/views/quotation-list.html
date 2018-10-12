@@ -22,48 +22,39 @@
       <div class="clearfix"></div>
       <div class="table-responsive table-div p-15">
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
-          <tr ng-repeat="w in $data" ui-sref="billing.quotations-edit({'id': w.documentNo})">
+          <tr ng-repeat="w in $data" ui-sref="billing.quotations-edit({'id': w.code})">
             <td data-title="'Date'">
-              {{ w.issueDate|ddate }}
+              {{ w.dtCreateDate|ddate }}
             </td>
             <td data-title="'Matter No.'">
-              {{ w.fileNo }}
+              {{ w.strFileNo }}
+            </td>
+            <td data-title="'Billing Matter'">
+              {{ w.strBillingMatter }}
             </td>
             <td data-title="'Quotation'">
-              {{ w.documentNo }}
+              {{ w.code }}
             </td>
             <td data-title="'Quotation To'">
-              {{ w.issueToName }}
-            </td>
-            <td data-title="'Matter Code'">
-              {{ w.matter.code }}
+              {{ w.strClientName }}
             </td>
             <td data-title="'Fees'" class="text-right">
-              {{ w.spaAdj | number:2 }}
+              {{ w.decFee }}
             </td>
             <td data-title="'Disb (GST)'" class="text-right">
-              {{ w.fileNo1 }}
+              {{ w.decDisbWithTax }}
             </td>
             <td data-title="'Disb'" class="text-right">
-              {{ w.documentNo1 }}
+              {{ w.decDisb }}
             </td>
-            <td data-title="'GST'" class="text-right">
-              {{ w.fileNo1 }}
+            <td data-title="'Tax of Disb'" class="text-right">
+              {{ w.decTaxofDisbWithTax }}
             </td>
-            <td data-title="'Total'" class="text-right">
-              {{ w.amount }}
-            </td>
-            <td data-title="'Price'" class="text-right">
-              {{ w.spaPrice | number:2 }}
-            </td>
-            <td data-title="'Loan'" class="text-right">
-              {{ w.spaLoan | number:2 }}
-            </td>
-            <td data-title="'Aging'">
-              {{ w.aging }}
+            <td data-title="'Tax of Fee'" class="text-right">
+              {{ w.decTaxofFee }}
             </td>
             <td data-title="'Tax Invoice'">
-              {{ w.taxInvoice }}
+              {{ w.strBillName }}
             </td>
           </tr>
         </table>

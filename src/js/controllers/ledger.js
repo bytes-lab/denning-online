@@ -20,10 +20,10 @@ denningOnline
     })
 
     self.quotationTable = new NgTableParams({
-      page: 1,      
+      page: 1,
       count: 5,
       sorting: {
-        name: 'asc' 
+        name: 'asc'
       }
     }, {
       counts: [],
@@ -36,7 +36,7 @@ denningOnline
     });
 
     self.invoiceTable = new NgTableParams({
-      page: 1,      
+      page: 1,
       count: 5,
       sorting: {
         name: 'asc' 
@@ -49,7 +49,7 @@ denningOnline
           return data.data;
         });
       }
-    });     
+    });
   })
 
   .controller('accountList2Ctrl', function($stateParams, NgTableParams, ledgerService, $state, $q) {
@@ -122,7 +122,7 @@ denningOnline
 
         self.dataReady = true;
         initializeTable();
-      });    
+      });
     };
     
     self.set_category();
@@ -130,7 +130,7 @@ denningOnline
     function initializeTable () {
       //Filtering
       self.tableFilter = new NgTableParams({
-        page: 1,      
+        page: 1,
         count: 25,
         sorting: {
           name: 'asc' 
@@ -138,8 +138,8 @@ denningOnline
       }, {
         counts: [],
         dataset: self.data
-      })    
-    }  
+      })
+    }
   })
 
   .controller('landPTGEditCtrl', function($stateParams, ledgerService, $state) {
@@ -152,6 +152,6 @@ denningOnline
     });
 
     function cancel() {
-      $state.go('land-PTGs.list');      
+      $state.go('land-PTGs.list');
     }
   })
