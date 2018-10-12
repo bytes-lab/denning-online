@@ -35,7 +35,7 @@
           <dl class="dl-horizontal" ng-repeat="item in vm.tabList">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-disabled="!vm.can_edit" ng-model="vm.matterform[item]" ng-click="vm.addTab(item)">
+                <input type="checkbox" ng-disabled="!vm.can_edit" ng-model="vm.matterform[item]" ng-change="vm.addTab(item)">
                 <i class="input-helper"></i>
                 {{ item }}
               </label>

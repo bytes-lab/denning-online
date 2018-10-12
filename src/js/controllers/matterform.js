@@ -581,7 +581,7 @@ denningOnline
     } else {
       self.matterForm = {};
     }
-    
+
     self.addTab = function (tab) {
       if (self.matterform[tab]) {
         self.matterform.selected.push(tab);
