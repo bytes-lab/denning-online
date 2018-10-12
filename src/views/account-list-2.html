@@ -55,10 +55,10 @@
               {{ w.description }}
             </td>
             <td data-title="'Dr'" filter="{ 'amountCR': 'text' }" sortable="'amountCR'" class="text-right">
-              {{ w.amountCR }}
+              {{ w.amountCR|number:2 }}
             </td>
             <td data-title="'Cr'" filter="{ 'amountDR': 'text' }" sortable="'amountDR'" class="text-right">
-              {{ w.amountDR }}
+              {{ w.amountDR|number:2 }}
             </td>
             <td data-title="'Balance'" filter="{ 'displayAmount': 'text' }" sortable="'displayAmount'" class="text-right">
               {{ w.runningBalance }}
