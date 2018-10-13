@@ -340,3 +340,14 @@ md-autocomplete.md-default-theme[disabled]:not([md-floating-label]), md-autocomp
 .ng-table.no-pager + div .ng-table-pager {
     display: none!important;
 }
+
+td.cell-edit {
+    padding: 6px 10px !important;
+}
+
+.cell-edit input {
+    border: 1px solid #ddd;
+    height: 27px;
+    padding-right: 3px;
+    text-align: right;
+}
