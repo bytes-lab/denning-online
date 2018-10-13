@@ -175,15 +175,15 @@
             <dt class="p-t-10">Monthly Rent</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.decRentMonthly">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Period</dt>
+            <dt class="p-t-10">Rented Period (yr)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.decRentYearly">
               </div>
             </dd>
           </dl>
@@ -209,13 +209,13 @@
               <label class="f-700">Professional Fees</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Fees + vm.sst.Fees | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -223,13 +223,13 @@
               <label class="f-700">Disb. with SST / GST</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.DisbWithTax + vm.sst.DisbWithTax | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -237,11 +237,11 @@
               <label class="f-700">Disbursements</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Disb | number:2 }}</label>
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Disb | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -249,13 +249,13 @@
               <label class="f-700">Total</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Fees+vm.typeSum.Disb + vm.typeSum.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Fees+vm.gross.Disb + vm.gross.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees + vm.typeSST.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control f-700">{{ vm.typeSum.Fees + vm.typeSST.Fees + vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax + vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control f-700">{{ vm.gross.Fees + vm.sst.Fees + vm.gross.DisbWithTax + vm.sst.DisbWithTax + vm.gross.Disb | number:2 }}</label>
             </div>
           </div>
         </div>
@@ -264,11 +264,11 @@
       <h4 class="m-t-25 p-l-25" ng-click="vm.showItems=!vm.showItems">Bill Items&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showItems"></i><i class="zmdi zmdi-minus" ng-if="vm.showItems"></i></h4>
       <div class="row p-l-20" ng-show="vm.showItems">
         <div class="col-md-10 p-l-30 m-t-15">
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>{{ vm.typeSum.All | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>{{ vm.typeSum.Fees | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb.w' }" ng-click="vm.filterItem('Disb.w')">DISB. with SST / GST ( <small>{{ vm.typeSum.Disb | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>{{ vm.typeSum.Disb | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">SST / GST ( <small>{{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All', '')">ALL ( <small>{{ vm.gross.All | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees', '')">FEE ( <small>{{ vm.gross.Fees | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax', '')">DISB. with SST / GST ( <small>{{ vm.gross.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb', '')">DISB ( <small>{{ vm.gross.Disb | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='SST' }" ng-click="vm.filterItem('SST', 'Serv')">SST / GST ( <small>{{ vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</small> )</div>
           <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-show="vm.can_edit" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
             <i class="zmdi zmdi-plus"></i>
           </div>
@@ -324,7 +324,7 @@
                     <i class="zmdi zmdi-plus"></i>
                   </button>
                   <div class="dropdown file-actions" uib-dropdown style="display: inline;">
-                    <button class="btn btn-default btn-sm m-l-5" uib-dropdown-toggle style="padding: 4px 9px;" title="More">
+                    <button class="btn btn-default btn-sm m-l-5" uib-dropdown-toggle style="padding: 4px 8px;" title="More">
                       <i class="zmdi zmdi-more"></i>
                     </button>
 
@@ -340,7 +340,6 @@
                       </li>
                     </ul>
                   </div>
-
                 </td>
               </tr>
             </table>

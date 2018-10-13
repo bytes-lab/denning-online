@@ -34,6 +34,7 @@ denningOnline
     self.isNew = $state.$current.data.can_edit;
 
     self.itemType = 'All';
+    self.taxType = 'NoTax';
 
     self.queryMatters = function (search) {
       return fileMatterService.getList(1, 5, search).then(function (resp) {
@@ -157,7 +158,9 @@ denningOnline
         counts: [],
         getData: function (params) {
           return self.entity.listBilledItems.filter(function (item) {
-            return self.itemType == 'All' || item.strBillItemType == self.itemType;
+            return self.itemType == 'All' || 
+                   item.strBillItemType == self.itemType || 
+                   item.strTaxCode == self.taxType;
           })
         } 
       });
@@ -165,15 +168,19 @@ denningOnline
       refreshItems();
     }
 
+    function parseFFloat(strVal) {
+      return parseFloat(strVal.replace(',', ''));
+    }
+
     function refreshItems () {
-      self.typeSum = {
+      self.gross = {
         All: 0.0,
         Fees: 0.0,
         Disb: 0.0,
         DisbWithTax: 0.0
       };
 
-      self.typeSST = {
+      self.sst = {
         Fees: 0.0,
         Disb: 0.0,
         DisbWithTax: 0.0
@@ -181,17 +188,18 @@ denningOnline
 
       for (ii in self.entity.listBilledItems) {
         var item = self.entity.listBilledItems[ii];
-        self.typeSum[item.strBillItemType] += parseFloat(item.decUnitCost);
-        self.typeSST[item.strBillItemType] += parseFloat(item.decUnitCost) * 
-                                              parseFloat(item.decTaxRate);
-        self.typeSum['All'] += parseFloat(item.decUnitCost);
+        self.gross[item.strBillItemType] += parseFFloat(item.decUnitCost);
+        self.sst[item.strBillItemType] += parseFFloat(item.decUnitCost) * 
+                                              parseFFloat(item.decTaxRate);
+        self.gross['All'] += parseFFloat(item.decUnitCost);
       }
 
       self.tableFilter.reload();
     }
 
-    self.filterItem = function (type) {
+    self.filterItem = function (type, tax) {
       self.itemType = type;
+      self.taxType = tax;
       self.tableFilter.reload();
     }
 
@@ -205,7 +213,7 @@ denningOnline
         if (self.entity.strBillName) {
           self.presetCode = {
             code: self.entity.strBillName
-          }          
+          }
         }
       });
     } else {

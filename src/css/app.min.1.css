@@ -14133,7 +14133,7 @@ html:not(.ie9) .select.fg-line:before {
 }
 
 .fg-line .form-control:disabled {
-  color: #9d9d9d;
+  color: rgba(0,0,0,0.87);
   background: transparent;
 }
 
