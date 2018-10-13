@@ -53,7 +53,11 @@ denningOnline
           formlyConfig.setType({
             name: data[ii].type,
             templateUrl: 'widget_t' + data[ii].templateOptions.subCategory + '.html',
-            controller: function ($scope, overviewService) {
+            controller: function ($scope, $sce, overviewService) {
+              $scope.safeHtml = function (str) {
+                return $sce.trustAsHtml(str);
+              }
+
               overviewService.getWidget($scope.to.api).then(function (resp) {
                 $scope.data = resp;
 

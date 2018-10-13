@@ -64,24 +64,11 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Preset Checklist</dt>
+            <dt class="p-t-10">Industry</dt>
             <dd>
               <div class="fg-line">
-<!--                 <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.entity.strPresetCodeG1"
-                  md-search-text="searchText"
-                  md-items="item in queryFields(searchText)"
-                  md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
-                  md-min-length="1"
-                  md-autoselect="false"
-                  class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
-                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
-                </md-item-template>
-                </md-autocomplete>
- -->              </div>
+                <input ng-model="vm.entity.strIndustry" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -124,6 +111,27 @@
           </dl>
         </div>
         <div class="col-md-5 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Preset Checklist</dt>
+            <dd>
+              <div class="fg-line">
+<!--                 <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.entity.strPresetCodeG1"
+                  md-search-text="searchText"
+                  md-items="item in queryFields(searchText)"
+                  md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
+                  md-min-length="1"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
+                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
+                </md-item-template>
+                </md-autocomplete>
+ -->              </div>
+            </dd>
+          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Form</dt>
             <dd>
