@@ -63,7 +63,7 @@ denningOnline
       if (item && self.entity.strBillName != item.code) {
         presetbillService.getItem(item.code).then(function (item) {
           self.entity.listBilledItems = item.listBilledItems;
-          refreshItems();
+          self.refreshItems();
         });
       }
     }
@@ -118,7 +118,7 @@ denningOnline
               self.entity.listBilledItems.push(res[ii]);
             }
           }
-          refreshItems();
+          self.refreshItems();
         }
       }, function (res) {});
     }
@@ -144,7 +144,7 @@ denningOnline
           break;
         }
       }
-      refreshItems();
+      self.refreshItems();
     }
 
     function initializeTable () {
@@ -165,14 +165,14 @@ denningOnline
         } 
       });
       
-      refreshItems();
+      self.refreshItems();
     }
 
     function parseFFloat(strVal) {
-      return parseFloat(strVal.replace(',', ''));
+      return parseFloat(strVal.replace(',', '').replace('(', '').replace(')', ''));
     }
 
-    function refreshItems () {
+    self.refreshItems = function () {
       self.gross = {
         All: 0.0,
         Fees: 0.0,
@@ -188,10 +188,13 @@ denningOnline
 
       for (ii in self.entity.listBilledItems) {
         var item = self.entity.listBilledItems[ii];
-        self.gross[item.strBillItemType] += parseFFloat(item.decUnitCost);
-        self.sst[item.strBillItemType] += parseFFloat(item.decUnitCost) * 
-                                              parseFFloat(item.decTaxRate);
-        self.gross['All'] += parseFFloat(item.decUnitCost);
+        item.decUnitCost = parseFFloat(item.decUnitPrice) * parseFFloat(item.decUnit);
+        item.decUnitTax = parseFFloat(item.decTaxRate) * item.decUnitCost;
+        item.decTotal = item.decUnitCost + item.decUnitTax;
+
+        self.gross[item.strBillItemType] += item.decUnitCost;
+        self.sst[item.strBillItemType] += item.decUnitTax;
+        self.gross['All'] += item.decUnitCost;
       }
 
       self.tableFilter.reload();
@@ -229,7 +232,7 @@ denningOnline
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       quotationService.save(entity, self.entity_).then(function (item) {
-        if (item) {  // ignore when errors
+        if (item) {
           if (self.entity_) {
             $state.reload();
           } else {
