@@ -80,12 +80,13 @@
                 md-search-text="qpsb1"
                 md-items="item in vm.queryBills(qpsb1)"
                 md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
-                md-min-length="1"
+                md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
-                <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.description}}</span>
+                <span md-highlight-text="qpsb1" md-highlight-flags="i">
+                  [ {{item.code}} ] {{item.description}}
+                </span>
               </md-item-template>
               </md-autocomplete>
             </dd>
@@ -99,12 +100,13 @@
                 md-search-text="qpsb2"
                 md-items="item in vm.queryBills(qpsb2)"
                 md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
-                md-min-length="1"
+                md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
-                <span md-highlight-text="qpsb2" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-                <span md-highlight-text="qpsb2" md-highlight-flags="i">{{item.description}}</span>
+                <span md-highlight-text="qpsb2" md-highlight-flags="i">
+                  [ {{item.code}} ] {{item.description}}
+                </span>
               </md-item-template>
               </md-autocomplete>
             </dd>
@@ -121,7 +123,7 @@
                   md-search-text="searchText"
                   md-items="item in queryFields(searchText)"
                   md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
-                  md-min-length="1"
+                  md-min-length="0"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
@@ -141,7 +143,7 @@
                 md-search-text="qsmf"
                 md-items="item in vm.queryForms(qsmf)"
                 md-item-text="item.strDisplayName ? item.strDisplayName+' ( '+item.code+' )': ' '"
-                md-min-length="1"
+                md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
@@ -212,7 +214,7 @@
                   md-search-text="qp0"
                   md-items="item in vm.queryList(vm.partyLabels, qp0)"
                   md-item-text="item"
-                  md-min-length="1"
+                  md-min-length="0"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
