@@ -1,5 +1,5 @@
 denningOnline
-  .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, 
+  .controller('accountListCtrl', function($stateParams, NgTableParams, ledgerService, refactorService,
                                           quotationService, invoiceService, $state) 
   {
     var self = this;
@@ -28,9 +28,20 @@ denningOnline
     }, {
       counts: [],
       getData: function(params) {
-        return quotationService.getList(params.page(), params.count(), $stateParams.fileNo).then(function(data) {
+        return quotationService.getList(params.page(), params.count(), $stateParams.fileNo)
+        .then(function (data) {
           params.total(data.headers('x-total-count'));
-          return data.data;
+          return data.data.map(function (item) {
+            var item_ = angular.copy(item);
+            item_.tax = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
+                        refactorService.convertFloat(item.decTaxofFee);
+            item_.total = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
+                          refactorService.convertFloat(item.decTaxofFee) +
+                          refactorService.convertFloat(item.decDisb) +
+                          refactorService.convertFloat(item.decDisbWithTax) +
+                          refactorService.convertFloat(item.decFee);
+            return item_;
+          });
         });
       }
     });
@@ -46,7 +57,17 @@ denningOnline
       getData: function(params) {
         return invoiceService.getList(params.page(), params.count(), $stateParams.fileNo).then(function(data) {
           params.total(data.headers('x-total-count'));
-          return data.data;
+          return data.data.map(function (item) {
+            var item_ = angular.copy(item);
+            item_.tax = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
+                        refactorService.convertFloat(item.decTaxofFee);
+            item_.total = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
+                          refactorService.convertFloat(item.decTaxofFee) +
+                          refactorService.convertFloat(item.decDisb) +
+                          refactorService.convertFloat(item.decDisbWithTax) +
+                          refactorService.convertFloat(item.decFee);
+            return item_;
+          });
         });
       }
     });

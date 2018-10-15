@@ -78,17 +78,17 @@
                       <td data-title="'Fees'" class="text-right">
                         {{ w.decFee }}
                       </td>
-                      <td data-title="'Disb (GST)'" class="text-right">
+                      <td data-title="'Disb (T)'" class="text-right">
                         {{ w.decDisbWithTax }}
                       </td>
                       <td data-title="'Disb'" class="text-right">
                         {{ w.decDisb }}
                       </td>
-                      <td data-title="'Tax of Disb'" class="text-right">
-                        {{ w.decTaxofDisbWithTax }}
+                      <td data-title="'Tax'" class="text-right">
+                        {{ w.tax|number:2 }}
                       </td>
-                      <td data-title="'Tax of Fee'" class="text-right">
-                        {{ w.decTaxofFee }}
+                      <td data-title="'Total'" class="text-right">
+                        {{ w.total|number:2 }}
                       </td>
                     </tr>
                     <tr ng-if="$data.length==0">
@@ -121,17 +121,17 @@
                       <td data-title="'Fees'" class="wp-20 text-right">
                         {{ w.decFee }}
                       </td>
-                      <td data-title="'Disb(GST)'" class="wp-20 text-right">
+                      <td data-title="'Disb(T)'" class="wp-20 text-right">
                         {{ w.decDisbWithTax }}
                       </td>
                       <td data-title="'Disb'" class="text-right">
                         {{ w.decDisb }}
                       </td>
-                      <td data-title="'Tax of Disb'" class="text-right">
-                        {{ w.decTaxofDisbWithTax }}
+                      <td data-title="'Tax'" class="text-right">
+                        {{ w.tax|number:2 }}
                       </td>
-                      <td data-title="'Tax of Fee'" class="text-right">
-                        {{ w.decTaxofFee }}
+                      <td data-title="'Total'" class="text-right">
+                        {{ w.total|number:2 }}
                       </td>
                     </tr>
                     <tr ng-if="$data.length==0">
@@ -172,7 +172,10 @@
                       </td>
                       <td data-title="'Date Paid'" class="text-right">
                         {{ w.balance }}
-                      </td>                    
+                      </td>
+                      <td data-title="'Voucher No'" class="text-right">
+                        {{ w.strVoucherNo }}
+                      </td>
                     </tr>
                     <tr ng-if="$data.length==0">
                       <td colspan="12">No record</td>
