@@ -418,50 +418,49 @@ denningOnline
       name: 'price',
       templateUrl: 'price.html',
       controller: function ($scope, $timeout, refactorService) {
-        // default values for calculating total
-        if ($scope.model.decRM1 == "") {
-          $scope.model.decRM1 = 0;
-        }
-        if ($scope.model.decRM17 == "") {
-          $scope.model.decRM17 = 0;
-        }
-        if ($scope.model.decRM18 == "") {
-          $scope.model.decRM18 = 0;
-        }
-        if ($scope.model.decRM3 == "") {
-          $scope.model.decRM3 = 0;
-        }
-        if ($scope.model.decRM20 == "") {
-          $scope.model.decRM20 = 0;
-        }
-        if ($scope.model.decRM21 == "") {
-          $scope.model.decRM21 = 0;
-        }
-        if ($scope.model.decRM2 == "") {
-          $scope.model.decRM2 = 0;
-        }
-        if ($scope.model.decRM19 == "") {
-          $scope.model.decRM19 = 0;
-        }
-        if ($scope.model.decRM22 == "") {
-          $scope.model.decRM22 = 0;
-        }
+        // // default values for calculating total
+        // if (!$scope.model.decRM1) {
+        //   $scope.model.decRM1 = 0.00;
+        // }
+        // if ($scope.model.decRM17 == "") {
+        //   $scope.model.decRM17 = 0;
+        // }
+        // if ($scope.model.decRM18 == "") {
+        //   $scope.model.decRM18 = 0;
+        // }
+        // if (!$scope.model.decRM3) {
+        //   $scope.model.decRM3 = 0.00;
+        // }
+        // if ($scope.model.decRM20 == "") {
+        //   $scope.model.decRM20 = 0;
+        // }
+        // if ($scope.model.decRM21 == "") {
+        //   $scope.model.decRM21 = 0;
+        // }
+        // if ($scope.model.decRM2 == "") {
+        //   $scope.model.decRM2 = 0;
+        // }
+        // if ($scope.model.decRM19 == "") {
+        //   $scope.model.decRM19 = 0;
+        // }
+        // if ($scope.model.decRM22 == "") {
+        //   $scope.model.decRM22 = 0;
+        // }
 
         $scope.calcForm = function (model) {
-          $timeout(function () {
+          // $timeout(function () {
             var v1 = refactorService.convertFloat(angular.element('.rm1').val()),
                 v3 = refactorService.convertFloat(angular.element('.rm3').val()),
                 v17 = refactorService.convertFloat(angular.element('.rm17').val()),
                 v20 = refactorService.convertFloat(angular.element('.rm20').val()),
                 v21 = refactorService.convertFloat(angular.element('.rm21').val());
 
-            model.decRM18 = refactorService.formatFloat(v1*0.1-v17);
-            v18 = refactorService.convertFloat(model.decRM18);
-            model.decRM2 = refactorService.formatFloat(v17+v18);
-            v2 = refactorService.convertFloat(model.decRM2);
-            model.decRM19 = refactorService.formatFloat(v1-v2);
-            model.decRM22 = refactorService.formatFloat(v1+v3+v20+v21);
-          }, 200);
+            console.log(v1, model.decRM1);
+            model.decRM18 = v1 * 0.1 - v17;
+            model.decRM2 = v1 * 0.1;
+            model.decRM19 = v1 - model.decRM2;
+            model.decRM22 = v1 + v3 + v20 + v21;
+          // }, 200);
         }
       }
     });  

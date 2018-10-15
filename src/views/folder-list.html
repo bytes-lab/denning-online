@@ -49,16 +49,16 @@
             </tr>
             <tr ng-hide="group.$hideRows" ng-if="file.name" ng-repeat="file in group.data" ng-repeat-end>
               <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" /></td>
-              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="ng-table-fixed-column-60">
+              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="wp-60">
                 <i class="zmdi zmdi-collection-pdf" ng-if="file.ext=='.pdf'"></i>
                 <i class="zmdi zmdi-collection-image" ng-if="file.ext=='.jpg' || file.ext=='.png' || file.ext=='.jpeg'"></i>
                 <i class="zmdi zmdi-collection-text" ng-if="file.ext!='.pdf' && file.ext!='.jpg' && file.ext!='.png' && file.ext!='.jpeg'"></i>&nbsp;
                 <a href="" ng-click="vm.preview(file);" class="c-black">{{file.name}}</a>
               </td>
-              <td sortable="'ext'" data-title="'Ext'" class="ng-table-fixed-column-15">
+              <td sortable="'ext'" data-title="'Ext'" class="wp-15">
                 {{file.ext}}
               </td>
-              <td sortable="'date'" data-title="'Date'" class="ng-table-fixed-column-25">
+              <td sortable="'date'" data-title="'Date'" class="wp-25">
                 {{file.date|ddate}}
               </td>
               <td data-title="'Action'" class="f-16">

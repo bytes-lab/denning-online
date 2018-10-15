@@ -146,9 +146,12 @@ denningOnline
 
     if ($stateParams.id) {
       self.title = "Payment Record Edit";
+      self.entity = {
+      };
     } else {
       self.title = "New Payment Record";
       self.entity = {
+        strFileNo1: self.fileNo,
         dtDatePaid: uibDateParser.parse(new Date())
       }
     }
@@ -157,22 +160,10 @@ denningOnline
       self.paymentMethodList = data;
     })
 
-    self.queryMatters = function (search) {
-      return fileMatterService.getList(1, 10, search).then(function (resp) {
-        return resp.data
-      })
-    }
-
     self.queryPaymentMethodType = function (search) {
       return self.paymentMethodList.filter(function (item) {
         return item.strDescription.search(new RegExp(search, "i")) > -1;
       });
-    }
-
-    self.matterChange = function (item) {
-      if (item) {
-        self.entity.strFileNo1 = item.key;
-      }
     }
 
     self.save = function () {

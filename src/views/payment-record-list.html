@@ -17,18 +17,18 @@
       <div class="row">
       <div class="col-md-8 lg-6">
         <div class="table-responsive table-div p-15 f-14"> 
-          <table ng-table="vm.tableFilter" class="table table-vmiddle table-list">
+          <table ng-table="vm.tableFilter" class="table no-pager table-vmiddle">
             <tr class="ng-table-group" ng-repeat-start="group in $groups" ng-if="group.value!=' '">
               <td colspan="3"><a href=""><strong>&nbsp;</strong></a></td>
             </tr>
             <tr ng-repeat="file in group.data" ng-repeat-end ui-sref="payment-records.edit({ fileNo: vm.fileNo, fileName: vm.fileName, id:file.code })">
-              <td data-title="'Date Paid'" class="ng-table-fixed-column-40" ng-class="{'f-700': group.value == '  '}">
+              <td data-title="'Date Paid'" class="wp-40" ng-class="{'f-700': group.value == '  '}">
                 {{ file.strDescription }}
               </td>
-              <td data-title="'Paid to'" class="ng-table-fixed-column-50">
+              <td data-title="'Paid to'" class="wp-50">
                 {{file.strPaidTo}}
               </td>
-              <td data-title="'Amount'" class="ng-table-fixed-column-30 text-right" ng-class="{'f-700': group.value == '  '}">
+              <td data-title="'Amount'" class="wp-30 text-right" ng-class="{'f-700': group.value == '  '}">
                 {{file.strValue}}
               </td>
             </tr>

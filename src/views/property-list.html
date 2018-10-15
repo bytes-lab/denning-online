@@ -27,13 +27,13 @@
       <div class="table-responsive table-div p-15">
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
           <tr ng-repeat="w in $data" ui-sref="properties.edit({'id': w.code})">
-            <td data-title="'Full title'" sortable="'fullTitle'" class="ng-table-fixed-column-35">
+            <td data-title="'Full title'" sortable="'fullTitle'" class="wp-35">
               {{ w.fullTitle }}
             </td>
-            <td data-title="'Address'" sortable="'address'" class="ng-table-fixed-column-35">
+            <td data-title="'Address'" sortable="'address'" class="wp-35">
               {{ w.address }}
             </td>
-            <td data-title="'Land Use'" sortable="'landUse'" class="ng-table-fixed-column-20">
+            <td data-title="'Land Use'" sortable="'landUse'" class="wp-20">
               {{ w.landUse }}
             </td>
             <td data-title="'Parcel'" sortable="'parcelNo'">

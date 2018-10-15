@@ -112,16 +112,16 @@
                       <td data-title="'Date'">
                         {{ w.dtCreateDate|ddate }}
                       </td>
-                      <td data-title="'No'" class="ng-table-fixed-column-20">
+                      <td data-title="'No'" class="wp-20">
                         {{ w.code }}
                       </td>
-                      <td data-title="'To'" class="ng-table-fixed-column-20">
+                      <td data-title="'To'" class="wp-20">
                         {{ w.strBillTo }}
                       </td>
-                      <td data-title="'Fees'" class="ng-table-fixed-column-20 text-right">
+                      <td data-title="'Fees'" class="wp-20 text-right">
                         {{ w.decFee }}
                       </td>
-                      <td data-title="'Disb(GST)'" class="ng-table-fixed-column-20 text-right">
+                      <td data-title="'Disb(GST)'" class="wp-20 text-right">
                         {{ w.decDisbWithTax }}
                       </td>
                       <td data-title="'Disb'" class="text-right">
@@ -146,7 +146,7 @@
             <div class="pmb-block">
               <div class="pmbb-header">
                   <h2 class="c-purple f-500" style="display: inline-block;">Payment Requests</h2>
-                  <button class="btn btn-default bgm-purple f-15" title="Upload files" ng-click="vm.upload()" style="margin-left: 45px;"><i class="zmdi zmdi-plus"></i></button>
+                  <button class="btn btn-default bgm-purple f-15" title="Add new payment request" style="margin-left: 45px;"><i class="zmdi zmdi-plus"></i></button>
               </div>
               <div class="pmbb-body">
                 <div class="table-responsive table-div no-pager"> 
@@ -155,16 +155,16 @@
                       <td data-title="'Date'">
                         {{ w.invoiceDate|ddate }}
                       </td>
-                      <td data-title="'No'" class="ng-table-fixed-column-20">
+                      <td data-title="'No'" class="wp-20">
                         {{ w.invoiceNo }}
                       </td>
-                      <td data-title="'To'" class="ng-table-fixed-column-20">
+                      <td data-title="'To'" class="wp-20">
                         {{ w.issueToName }}
                       </td>
-                      <td data-title="'Reason'" class="ng-table-fixed-column-20">
+                      <td data-title="'Reason'" class="wp-20">
                         {{ w.issueToName }}
                       </td>
-                      <td data-title="'Amount'" class="ng-table-fixed-column-20 text-right">
+                      <td data-title="'Amount'" class="wp-20 text-right">
                         {{ w.amount }}
                       </td>
                       <td data-title="'Status'" class="text-right">

@@ -23,24 +23,6 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Matter No.</dt>
-            <dd>
-              <md-autocomplete
-                ng-disabled="!vm.can_edit"
-                md-selected-item="vm.rmatter"
-                md-search-text="qstl"
-                md-items="item in vm.queryMatters(qstl)"
-                md-item-text="item.key"
-                md-min-length="0"
-                md-selected-item-change="vm.matterChange(item)"
-                class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
-                </md-item-template>
-              </md-autocomplete>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
             <dt class="p-t-10">Paid To</dt>
             <dd>
               <div class="fg-line">
@@ -77,8 +59,8 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Amount</dt>
             <dd>
-              <div class="fg-line">
-                <input type="text" class="form-control" value="{{ vm.entity.dtDate | date : 'dd-MM-yyyy' }}" ng-readonly="!vm.can_edit" ng-required="true" />
+              <div class="fg-line wp-30">
+                <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="!vm.can_edit" ng-model="vm.entity.decAmount">
               </div>
             </dd>
           </dl>
