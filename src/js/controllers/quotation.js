@@ -45,6 +45,7 @@ denningOnline
 
     self.itemType = 'All';
     self.taxType = 'NoTax';
+    self.quoteToList = [];
 
     self.queryMatters = function (search) {
       return fileMatterService.getList(1, 5, search).then(function (resp) {
@@ -58,14 +59,29 @@ denningOnline
         var matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
         var clsPrimaryClient = matterInfo.primaryClient;
 
-        self.entity.matter = matterInfo.matter;
-        self.matterDescription = self.entity.matter.description;
+        self.entity.clsMatterCode = {
+          'code': matterInfo.matter.code,
+          'strDescription': matterInfo.matter.description,
+        };
+
+        self.matterDescription = matterInfo.matter.description;
         if (matterInfo.propertyGroup[0]) {
           self.entity.strPropertyAddress = matterInfo.propertyGroup[0].fullTitle;
-          self.entity.strState = matterInfo.propertyGroup[0]
         }
         self.entity.issueToName = clsPrimaryClient.name;
         self.entity.strClientName = clsPrimaryClient.name;
+
+        // get quotation to info
+        self.quoteToList = [];
+        for (var idx in matterInfo.partyGroup) {
+          var pg = matterInfo.partyGroup[idx];
+          if (pg.party.length > 0) {
+            self.quoteToList.push({ name: pg.PartyName, group: true });
+            for (var sidx in pg.party) {
+              self.quoteToList.push({ name: pg.party[sidx].name, group: false });
+            }
+          }
+        }
       }
     }
 
