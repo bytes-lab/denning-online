@@ -21,7 +21,6 @@ denningOnline
     }
   })
 
-
   .controller('receiptEditCtrl', function($stateParams, receiptService, $state, Auth,
                                           refactorService, fileMatterService, growlService,
                                           matterCodeService, presetbillService,
@@ -217,7 +216,7 @@ denningOnline
           } else {
             $state.go('billing.receipts-edit', { 'id': item.code });
           }
-          growlService.growl('Saved successfully!', 'success');          
+          growlService.growl('Saved successfully!', 'success');
         }
       });
     }

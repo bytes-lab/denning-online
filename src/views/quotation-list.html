@@ -41,19 +41,19 @@
             <td data-title="'Fees'" class="text-right">
               {{ w.decFee }}
             </td>
-            <td data-title="'Disb (GST)'" class="text-right">
+            <td data-title="'Disb (T)'" class="text-right">
               {{ w.decDisbWithTax }}
             </td>
             <td data-title="'Disb'" class="text-right">
               {{ w.decDisb }}
             </td>
-            <td data-title="'Tax of Disb'" class="text-right">
-              {{ w.decTaxofDisbWithTax }}
+            <td data-title="'Tax'" class="text-right">
+              {{ w.tax|number:2 }}
             </td>
-            <td data-title="'Tax of Fee'" class="text-right">
-              {{ w.decTaxofFee }}
+            <td data-title="'Total'" class="text-right">
+              {{ w.total|number:2 }}
             </td>
-            <td data-title="'Tax Invoice'">
+            <td data-title="'Converted'">
               {{ w.strBillName }}
             </td>
           </tr>

@@ -1,5 +1,5 @@
 denningOnline
-  .controller('quotationListCtrl', function(NgTableParams, quotationService, Auth, $state) {
+  .controller('quotationListCtrl', function(NgTableParams, quotationService, Auth, $state, refactorService) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -11,7 +11,17 @@ denningOnline
         return quotationService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {
           params.total(data.headers('x-total-count'));
-          return data.data;
+          return data.data.map(function (item) {
+            var item_ = angular.copy(item);
+            item_.tax = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
+                        refactorService.convertFloat(item.decTaxofFee);
+            item_.total = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
+                          refactorService.convertFloat(item.decTaxofFee) +
+                          refactorService.convertFloat(item.decDisb) +
+                          refactorService.convertFloat(item.decDisbWithTax) +
+                          refactorService.convertFloat(item.decFee);
+            return item_;
+          });
         });
       }
     })
