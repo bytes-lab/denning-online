@@ -238,6 +238,11 @@ denningOnline
       };
     }
 
+    self.logout = function () {
+      $uibModalInstance.close();
+      $rootScope.logout();
+    }
+
     self.doLogin = function (userData) {
       return Auth.login(userData.email, userData.password)
         .then(function (res) {
