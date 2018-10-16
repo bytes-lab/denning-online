@@ -2,13 +2,13 @@ denningOnline
   .controller('receiptListCtrl', function(NgTableParams, receiptService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-
+    self.accountType_ = 'disb';
     self.tableFilter = new NgTableParams({
       page: 1,
       count: 25,
     }, {
       getData: function(params) {
-        return receiptService.getList(params.page(), params.count(), self.keyword)
+        return receiptService.getList(params.page(), params.count(), self.keyword, self.accountType_)
         .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;

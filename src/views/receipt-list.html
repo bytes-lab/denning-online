@@ -23,14 +23,14 @@
         <div class="form-group pull-right">
           <div class="fg-line">
             <div class="select">
-              <select class="form-control" style="width: 175px;">
-                <option value="today,2999-01-01,0All">Disbursement</option>
-                <option value="1900-01-01,2999-01-01,0All">Client</option>
-                <option value="1900-01-01,yesterday,0All">FD Control</option>
-                <option value="1900-01-01,yesterday,4unattend">Office Advanced</option>
-                <option value="1900-01-01,yesterday,4unattend">Client + FD</option>
-                <option value="today,today,0All">Disb + Office Advanced</option>
-                <option value="1900-01-01,yesterday,5nodate">Other</option>
+              <select class="form-control" ng-model="vm.accountType_" ng-change="vm.search()" style="width: 175px;">
+                <option value="disb">Disbursement</option>
+                <option value="client">Client</option>
+                <option value="fd">FD Control</option>
+                <option value="advance">Office Advanced</option>
+                <option value="client, fd">Client + FD</option>
+                <option value="disb, advance">Disb + Office Advanced</option>
+                <option value="other">Other</option>
               </select>
             </div>
           </div>
