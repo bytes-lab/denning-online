@@ -28,6 +28,12 @@ denningOnline
       });
     }
 
+    service.getItemApp = function (code) {
+      return http.GET('v1/app/matter/'+code).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     service.getIDTypeList = function () {
       return http.GET('v1/IDType').then(function (resp) {
         return resp.data;

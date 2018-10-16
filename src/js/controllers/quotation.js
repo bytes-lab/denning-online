@@ -239,9 +239,28 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
         initializeTable();
 
+        fileMatterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
+          for (var idx in matterInfo.partyGroup) {
+            var pg = matterInfo.partyGroup[idx];
+            if (pg.party.length > 0) {
+              self.quoteToList.push({ name: pg.PartyName, group: true });
+              for (var sidx in pg.party) {
+                self.quoteToList.push({ name: pg.party[sidx].name, group: false });
+              }
+            }
+          }
+        });
+
         if (self.entity.strBillName) {
           self.presetCode = {
             code: self.entity.strBillName
+          }
+        }
+
+        if (self.entity.strBillTo2) {
+          self.strBillTo2 = {
+            name: self.entity.strBillTo2,
+            group: false
           }
         }
       });
@@ -253,6 +272,12 @@ denningOnline
         listBilledItems: []
       };
       initializeTable();
+    }
+
+    self.quoteToChange = function (item) {
+      if (item) {
+        self.entity.strBillTo2 = item.name;
+      }
     }
 
     self.save = function () {
