@@ -87,6 +87,24 @@ denningOnline
       });
     }
 
+    service.getCategories = function () {
+      return http.GET('v1/table/cboMatterCategory').then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    service.getDepartments = function () {
+      return http.GET('v1/table/ListDepartment').then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    service.getIndustries = function () {
+      return http.GET('v1/generalSelection/frmMatter/cboIndustry').then(function (resp) {
+        return resp.data;
+      });
+    }
+
     service.getItem = function (code) {
       return http.GET('v1/table/MatterCode/'+code).then(function (resp) {
         return resp.data;

@@ -168,6 +168,18 @@ denningOnline
       self.presetBills = data;
     });
 
+    matterCodeService.getCategories().then(function(data) {
+      self.categories = data;
+    });
+
+    matterCodeService.getDepartments().then(function(data) {
+      self.departments = data;
+    });
+
+    matterCodeService.getIndustries().then(function(data) {
+      self.industries = data;
+    });
+
     self.scrollUp = function () {
       $('body,html').animate({
           scrollTop : 0
@@ -177,12 +189,24 @@ denningOnline
 
     if ($stateParams.id) {
       matterCodeService.getItem($stateParams.id).then(function (item){
-        self.entity = item;
+        self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         
         angular.forEach(JSON.parse(item.jsonFieldLabels || "{}"), function(value, key) {
           self.mattercode[value.Field] = value;
         })
+
+        if (self.entity.strCategory) {
+          self.strCategory = { strCategory: self.entity.strCategory };
+        }
+
+        if (self.entity.strDept) {
+          self.strDept = { strDescription: self.entity.strDept };
+        }
+
+        if (self.entity.strIndustry) {
+          self.strIndustry = { description: self.entity.strIndustry };
+        }
 
         // self.mattercode.staff1 = {'Label': 'Partner'};
         // self.mattercode.staff2 = {'Label': 'L.A.'};
@@ -191,6 +215,24 @@ denningOnline
       });
     } else {
       self.entity = {};
+    }
+
+    self.categoryChange = function (item) {
+      if (item) {
+        self.entity.strCategory = item.strCategory;
+      }
+    }
+
+    self.deptChange = function (item) {
+      if (item) {
+        self.entity.strDept = item.strDescription;
+      }
+    }
+
+    self.industryChange = function (item) {
+      if (item) {
+        self.entity.strIndustry = item.description;
+      }
     }
 
     self.range = function(min, max, step) {
@@ -272,7 +314,7 @@ denningOnline
       });
       
       if (arr && arr.length == 0) {
-        return [q]        ;
+        return [q];
       } else {
         return arr;
       }

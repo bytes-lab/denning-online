@@ -50,25 +50,55 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Category</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCategory" camel-case>
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strCategory"
+                md-items="item in vm.categories"
+                md-item-text="item.strCategory"
+                md-min-length="0"
+                md-selected-item-change="vm.categoryChange(item)"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span>{{item.strCategory}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Department</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strDept" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strDept"
+                md-items="item in vm.departments"
+                md-item-text="item.strDescription"
+                md-min-length="0"
+                md-selected-item-change="vm.deptChange(item)"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span>{{item.strDescription}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Industry</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strIndustry" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strIndustry"
+                md-items="item in vm.industries"
+                md-item-text="item.description"
+                md-min-length="0"
+                md-selected-item-change="vm.industryChange(item)"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span>{{item.description}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -165,7 +195,7 @@
             <dt>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" ng-model="vm.entity.boolChkSubsaleCD">
+                  <input type="checkbox" ng-model="vm.entity.boolChkSubsaleCD" ng-disabled="!vm.can_edit">
                   <i class="input-helper"></i>
                   Track Subsale CD
                 </label>
@@ -392,7 +422,7 @@
                 </md-autocomplete>
               </div>
             </dd>
-          </dl>          
+          </dl>
         </div>
         <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
