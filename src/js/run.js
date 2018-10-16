@@ -1,6 +1,6 @@
 denningOnline
-  .run(function ($rootScope, Auth, $state){
-  	$rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
+  .run(function ($rootScope, Auth, $state) {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
       $rootScope.toState = toState;
       $rootScope.toStateParams = toStateParams;
 
@@ -344,7 +344,7 @@ denningOnline
         if ($scope.model.strRelatedFile) {
           $scope.rmatter = {
             key: $scope.model.strRelatedFile
-          }          
+          }
         }
 
         fileMatterService.getFileStatusList().then(function (resp) {
@@ -418,63 +418,33 @@ denningOnline
       name: 'price',
       templateUrl: 'price.html',
       controller: function ($scope, $timeout, refactorService) {
-        // // default values for calculating total
-        // if (!$scope.model.decRM1) {
-        //   $scope.model.decRM1 = 0.00;
-        // }
-        // if ($scope.model.decRM17 == "") {
-        //   $scope.model.decRM17 = 0;
-        // }
-        // if ($scope.model.decRM18 == "") {
-        //   $scope.model.decRM18 = 0;
-        // }
-        // if (!$scope.model.decRM3) {
-        //   $scope.model.decRM3 = 0.00;
-        // }
-        // if ($scope.model.decRM20 == "") {
-        //   $scope.model.decRM20 = 0;
-        // }
-        // if ($scope.model.decRM21 == "") {
-        //   $scope.model.decRM21 = 0;
-        // }
-        // if ($scope.model.decRM2 == "") {
-        //   $scope.model.decRM2 = 0;
-        // }
-        // if ($scope.model.decRM19 == "") {
-        //   $scope.model.decRM19 = 0;
-        // }
-        // if ($scope.model.decRM22 == "") {
-        //   $scope.model.decRM22 = 0;
-        // }
-
         $scope.calcForm = function (model) {
-          // $timeout(function () {
+          $timeout(function () {
             var v1 = refactorService.convertFloat(angular.element('.rm1').val()),
                 v3 = refactorService.convertFloat(angular.element('.rm3').val()),
                 v17 = refactorService.convertFloat(angular.element('.rm17').val()),
                 v20 = refactorService.convertFloat(angular.element('.rm20').val()),
                 v21 = refactorService.convertFloat(angular.element('.rm21').val());
 
-            console.log(v1, model.decRM1);
             model.decRM18 = v1 * 0.1 - v17;
             model.decRM2 = v1 * 0.1;
             model.decRM19 = v1 - model.decRM2;
             model.decRM22 = v1 + v3 + v20 + v21;
-          // }, 200);
+          }, 200);
         }
       }
-    });  
+    });
 
     // loan attribute
     formlyConfig.setType({
       name: 'loan',
       templateUrl: 'loan.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'premises-rent',
       templateUrl: 'premises-rent.html',
-      controller: function ($scope) {
+      controller: function ($scope, $timeout, refactorService) {
         $scope.types = ['Dwelling House', 'Apartment', 'Condominium', 'Shop', 'Office', 
                         'Factory', 'Workshop', 'Land'];
         $scope.queryList = function (q) {
@@ -482,13 +452,24 @@ denningOnline
             return item.search(new RegExp(q, "i")) > -1;
           });
         };
+
+        $scope.calcForm = function (model) {
+          $timeout(function () {
+            var v2 = refactorService.convertFloat(angular.element('.rm2').val()),
+                v3 = refactorService.convertFloat(angular.element('.rm3').val()),
+                v4 = refactorService.convertFloat(angular.element('.rm4').val()),
+                v5 = refactorService.convertFloat(angular.element('.rm5').val()),
+                v11 = refactorService.convertFloat(angular.element('.rm11').val());
+            model.decRM36 = v2 + v3 + v4 + v5 + v11;
+          }, 200);
+        }
       }
-    });  
+    });
 
     formlyConfig.setType({
       name: 'term',
       templateUrl: 'term.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'summary',
@@ -615,52 +596,52 @@ denningOnline
           }
         }
       }
-    });  
+    });
 
     formlyConfig.setType({
       name: 'rpgt',
       templateUrl: 'rpgt.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'arrear',
       templateUrl: 'arrear.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'chain',
       templateUrl: 'chain.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'beneficiary',
       templateUrl: 'beneficiary.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'other',
       templateUrl: 'other.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'report',
       templateUrl: 'report.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'tenancy',
       templateUrl: 'tenancy.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'vehicle',
       templateUrl: 'vehicle.html'
-    });  
+    });
 
     formlyConfig.setType({
       name: 'estate-agent',
       templateUrl: 'estate-agent.html'
-    });  
+    });
 
     // bank group
     function bankCtrl ($scope, $uibModal) {

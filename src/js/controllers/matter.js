@@ -273,7 +273,7 @@ denningOnline
           } else {
             $state.go('matter-codes.edit', { 'id': entity.code });
           }
-          growlService.growl('Saved successfully!', 'success');          
+          growlService.growl('Saved successfully!', 'success');
         }
       });
     }
@@ -305,14 +305,14 @@ denningOnline
             return 'matter-codes.list';
           }
         }
-      });      
+      });
     };
 
     self.queryList = function (labels, q) {
       var arr = labels.filter(function(item) {
         return item.search(new RegExp(q, "i")) > -1;
       });
-      
+
       if (arr && arr.length == 0) {
         return [q];
       } else {
@@ -321,7 +321,7 @@ denningOnline
     };
 
     self.queryForms = function (searchText) {
-      return matterFormService.getList(1, 10, searchText).then(function (data) { 
+      return matterFormService.getList(1, 10, searchText).then(function (data) {
         return data; 
       });
     };

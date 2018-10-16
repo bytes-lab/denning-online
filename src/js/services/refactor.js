@@ -59,7 +59,7 @@ denningOnline
 
     service.convertFloat = function(strVal) {
       var val = strVal.replace(/[^0-9\.]/g, '');
-      return parseFloat(val);
+      return val == "" ? 0 : parseFloat(val);
     }
 
     service.formatFloat = function(fVal) {

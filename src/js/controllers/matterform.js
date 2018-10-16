@@ -1,5 +1,5 @@
 denningOnline
-  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, 
+  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, matterCodeService,
                                              $state, matterFormService, Auth, refactorService, 
                                              growlService, contactService, uibDateParser) 
   {
@@ -448,6 +448,12 @@ denningOnline
     function buildTabs (clsMatterCode) {
       buildTabDict(clsMatterCode);
 
+      if (clsMatterCode) {
+        matterCodeService.getItem(clsMatterCode.code).then(function (matterCode) {
+          vm.model.intTurnaround = matterCode.intTurnaroundTime;
+        });
+      }
+
       vm.tabs = [];
       vm.tabs.push(vm.tabDict['Matter']); // first tab
 
@@ -507,7 +513,11 @@ denningOnline
       vm.idxTab = 0;
       vm.model = { 
         tmp: editControl,
-        dtDateOpenFile: uibDateParser.parse(new Date())
+        dtDateOpenFile: uibDateParser.parse(new Date()),
+        clsFileStatus: {
+          code: "1",
+          strDescription: "Active"
+        }
       };
       vm.title = 'New Matter';
 
