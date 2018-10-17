@@ -343,7 +343,7 @@ denningOnline
 
         if ($scope.model.strRelatedFile) {
           $scope.rmatter = {
-            key: $scope.model.strRelatedFile
+            Title: ': ' + $scope.model.strRelatedFile
           }
         }
 

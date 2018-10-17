@@ -696,7 +696,7 @@
         md-selected-item="rmatter"
         md-search-text="qstl"
         md-items="item in queryMatters(qstl)"
-        md-item-text="item.Title"
+        md-item-text="item.Title.split(': ')[1]"
         md-min-length="0"
         md-selected-item-change="matterChange(item)"
         class="default-input wp-45">
