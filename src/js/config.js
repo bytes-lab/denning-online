@@ -727,7 +727,7 @@ denningOnline
         },
         url: '/:fileNo/:fileName',
         controller: 'accountListCtrl as vm',
-        templateUrl: 'views/account-list-1.html'
+        templateUrl: 'views/account-list.html'
       })
 
       .state ('accounts.list2', {
@@ -736,7 +736,7 @@ denningOnline
         },
         url: '/:fileNo/:fileName/:category',
         controller: 'accountList2Ctrl as vm',
-        templateUrl: 'views/account-list-2.html'
+        templateUrl: 'views/ledger-list.html'
       })
 
       //------------------------------
