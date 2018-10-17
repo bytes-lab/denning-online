@@ -484,7 +484,7 @@ denningOnline
 
         searchService.search(item.keyword, $scope.searchCategory, 1, 0).then(function (data) {
           $scope.data.searchRes = data;
-          if ($scope.searchCategory == '1') {
+          if ($scope.searchCategory == '1' && data.length > 0) {
             $scope.data.choosen = data[0];
           }
         });
