@@ -579,8 +579,8 @@
   </div>
   <div class="form-group col-md-12">
     <div class="d-flex">
-    <label class="form-control attr-label">Close Date</label>
-    <input type="text" class="form-control wp-45" readonly="" ng-value="model.dtDateCloseFile | ddate">
+      <label class="form-control attr-label">Close Date</label>
+      <input ng-click="open($event, 'dtclose_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDateCloseFile" is-open="dtclose_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
     </div>
   </div>
 
@@ -1223,96 +1223,96 @@
   <div class="form-group">
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Initial Term</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF5" style="width:45%;">
+        <label class="form-control attr-label">Initial Term</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF5">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Commencement Date</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate2" style="width:45%;">
+        <label class="form-control attr-label">Commencement Date</label>
+        <input ng-click="open($event, 'dtDate2_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDate2" is-open="dtDate2_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Expiry Date</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate3" style="width:45%;">
+        <label class="form-control attr-label">Expiry Date</label>
+        <input ng-click="open($event, 'dtDate3_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDate3" is-open="dtDate3_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">Optional Term</h4>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Optional Term</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+        <label class="form-control attr-label">Optional Term</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Rate of Increment</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Rate of Increment</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Rent for Option Term</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM12" style="width:45%;">
+        <label class="form-control attr-label">Rent for Option Term</label>
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control rm1 wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM12">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Commencement Date</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate4" style="width:45%;">
+        <label class="form-control attr-label">Commencement Date</label>
+        <input ng-click="open($event, 'dtDate4_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDate4" is-open="dtDate4_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Expiry Date</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate5" style="width:45%;">
+        <label class="form-control attr-label">Expiry Date</label>
+        <input ng-click="open($event, 'dtDate5_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDate5" is-open="dtDate5_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">Termination</h4>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">By Landlord</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF13" style="width:45%;">
+        <label class="form-control attr-label">By Landlord</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF13">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">By Tenant</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF14" style="width:45%;">
+        <label class="form-control attr-label">By Tenant</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF14">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Payment in lieu of Notice</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM13" style="width:45%;">
+        <label class="form-control attr-label">Payment in lieu of Notice</label>
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control rm1 wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM13">
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">Party Paying Legal Fee & Stamp Duty</h4>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Party Paying Legal Fee</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF2" style="width:45%;">
+        <label class="form-control attr-label">Party Paying Legal Fee</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF2">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Party Paying Stamp Duty</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF15" style="width:45%;">
+        <label class="form-control attr-label">Party Paying Stamp Duty</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF15">
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">Date of Tenancy Agreement</h4>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Date of Tenancy Agreement</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate1" style="width:45%;">
+        <label class="form-control attr-label">Date of Tenancy Agreement</label>
+        <input ng-click="open($event, 'dtDate1_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDate1" is-open="dtDate1_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
       </div>
-    </div>   
+    </div>
   </div>
 </script>
 
@@ -1321,14 +1321,14 @@
   <div class="form-group">
   <div class="form-group col-md-12">
     <div class="d-flex">
-    <label class="form-control attr-label">Type of Loan</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+      <label class="form-control attr-label">Type of Loan</label>
+      <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3">
     </div>
   </div>
   <div class="form-group col-md-12">
     <div class="d-flex">
-    <label class="form-control attr-label">Type of Finacing</label>
-    <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      <label class="form-control attr-label">Type of Finacing</label>
+      <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
     </div>
   </div>
   <div class="clearfix"></div>

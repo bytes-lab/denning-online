@@ -351,6 +351,12 @@ denningOnline
           $scope.fileStatus = resp.data;
         });
 
+        $scope.open = function($event, opened) {
+          $event.preventDefault();
+          $event.stopPropagation();
+          $scope[opened] = true;
+        };
+
         $scope.queryMatters = function (search) {
           return fileMatterService.getList(1, 5, search).then(function (resp) {
             return resp.data
@@ -467,7 +473,14 @@ denningOnline
 
     formlyConfig.setType({
       name: 'term',
-      templateUrl: 'term.html'
+      templateUrl: 'term.html',
+      controller: function ($scope) {
+        $scope.open = function($event, opened) {
+          $event.preventDefault();
+          $event.stopPropagation();
+          $scope[opened] = true;
+        };
+      }
     });
 
     formlyConfig.setType({
