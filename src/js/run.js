@@ -435,7 +435,6 @@ denningOnline
       }
     });
 
-    // loan attribute
     formlyConfig.setType({
       name: 'loan',
       templateUrl: 'loan.html'

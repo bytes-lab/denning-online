@@ -131,7 +131,7 @@ denningOnline
 
   .controller('paymentRecordEditCtrl', function($stateParams, paymentRecordService, Auth,
                                                 $state, growlService, fileMatterService, $scope,
-                                                uibDateParser, $filter) 
+                                                uibDateParser, $filter, refactorService) 
   {
     var self = this;
     self.isDialog = false;
@@ -146,13 +146,25 @@ denningOnline
 
     if ($stateParams.id) {
       self.title = "Payment Record Edit";
-      self.entity = {
-      };
+      paymentRecordService.getItem($stateParams.id).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+
+        if (self.entity.strMode) {
+          self.strMode = { strDescription: self.entity.strMode };
+        }
+      });
     } else {
       self.title = "New Payment Record";
       self.entity = {
         strFileNo1: self.fileNo,
         dtDatePaid: uibDateParser.parse(new Date())
+      }
+    }
+
+    self.paymentMethodChange = function (item) {
+      if (item) {
+        self.entity.strMode = item.strDescription;
       }
     }
 
@@ -167,7 +179,19 @@ denningOnline
     }
 
     self.save = function () {
-      growlService.growl('Saved successfully!', 'success');
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      paymentRecordService.save(entity).then(function (entity) {
+        if (entity) {  // ignore when errors
+          if (self.entity_) {
+            $state.reload();
+          } else {
+            $state.go('payment-records.edit', { id: entity.code, 
+                                                fileNo: $stateParams.fileNo, 
+                                                fileName: $stateParams.fileName });
+          }
+          growlService.growl('Saved successfully!', 'success');
+        }
+      });
     }
 
     self.cancel = function () {

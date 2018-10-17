@@ -26,7 +26,7 @@
             <dt class="p-t-10">Paid To</dt>
             <dd>
               <div class="fg-line">
-                <input type="text" class="form-control" value="{{ vm.entity.dtDate | date : 'dd-MM-yyyy' }}" ng-readonly="!vm.can_edit" ng-required="true" />
+                <input type="text" class="form-control" ng-model="vm.entity.strPaidTo" ng-readonly="!vm.can_edit" ng-required="true" />
               </div>
             </dd>
           </dl>
@@ -35,7 +35,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.strPaymentMethod"
+                md-selected-item="vm.strMode"
                 md-search-text="qspm"
                 md-items="item in vm.queryPaymentMethodType(qspm)"
                 md-item-text="item.strDescription"
@@ -52,15 +52,15 @@
             <dt class="p-t-10">Cheque No. / Ref. No.</dt>
             <dd>
               <div class="fg-line">
-                <input type="text" class="form-control" value="{{ vm.entity.dtDate | date : 'dd-MM-yyyy' }}" ng-readonly="!vm.can_edit" ng-required="true" />
+                <input type="text" class="form-control" ng-model="vm.entity.strChequeNo" ng-readonly="!vm.can_edit" ng-required="true" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Amount</dt>
             <dd>
-              <div class="fg-line wp-30">
-                <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="!vm.can_edit" ng-model="vm.entity.decAmount">
+              <div class="fg-line">
+                <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.decAmount">
               </div>
             </dd>
           </dl>

@@ -69,7 +69,7 @@ denningOnline
 
     service.convertDouble = function (model) {
       for (var ii in model) {
-        if (ii.startsWith('decRM')) {
+        if (ii.startsWith('dec')) {
           model[ii] = service.convertFloat(model[ii]);
         }
       }
@@ -105,7 +105,9 @@ denningOnline
     service.preConvert = function (model, convert) {
       var res = service.convertBool(model, convert);
       res = service.convertDate(res, convert);
-      res = service.convertDouble(res);
+      if (!convert) {
+        res = service.convertDouble(res);
+      }
       return res;
     }
 

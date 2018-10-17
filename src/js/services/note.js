@@ -52,6 +52,28 @@ denningOnline
       });
     }
 
+    service.getItem = function (code) {
+      return http.GET('v1/table/PaymentRecord/'+code).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
+
+      return http[method]('v1/table/PaymentRecord', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
+
+    service.delete = function (entity) {
+      return http.DELETE('v1/table/PaymentRecord', { 
+        code: entity.code 
+      }).then(function (resp) {
+        return resp;
+      });
+    }
+
     service.getPaymentMethodList = function () {
       return http.GET('v1/Table/cboPaymentMode').then(function (resp) {
         return resp.data;
