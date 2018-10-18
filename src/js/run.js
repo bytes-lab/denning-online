@@ -363,6 +363,12 @@ denningOnline
           })
         }
 
+        $scope.queryBranch = function (search) {
+          return fileMatterService.getProgramOwnerList(1, 5, search).then(function (resp) {
+            return resp.data
+          })
+        }
+
         $scope.matterChange = function (matter) {
           if (matter) {
             $scope.model.strRelatedFile = matter.key;
@@ -487,6 +493,7 @@ denningOnline
       name: 'summary',
       templateUrl: 'summary.html',
       controller: function ($scope, $uibModal, propertyService) {
+
         $scope.preview = function () {
           var modalInstance = $uibModal.open({
             animation: true,
@@ -587,10 +594,12 @@ denningOnline
           }).result.then(function () {}, function (res) {});
         }
 
+        var propertyType = { "1": "Landed", "2": "Strata" };
         // property detail
         if ($scope.model.clsP1 && $scope.model.clsP1.code) {
           propertyService.getItem($scope.model.clsP1.code).then(function (item) {
             $scope.property = item;
+            $scope.property.strPropertyType = propertyType[$scope.property.strPropertyType];
           });
         }
 

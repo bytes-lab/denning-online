@@ -208,6 +208,12 @@ denningOnline
           self.strIndustry = { description: self.entity.strIndustry };
         }
 
+        if (self.entity.clsPresetBill.code) {
+          self.clsPresetBill = {
+            code: self.entity.clsPresetBill.code,
+            description: self.entity.clsPresetBill.strDescription
+          }
+        }
         // self.mattercode.staff1 = {'Label': 'Partner'};
         // self.mattercode.staff2 = {'Label': 'L.A.'};
         // self.mattercode.staff3 = {'Label': 'Clerk in charge'};
@@ -325,6 +331,15 @@ denningOnline
         return data; 
       });
     };
+
+    self.preBillChange = function (item) {
+      if (item) {
+        self.entity.clsPresetBill = {
+          code: item.code,
+          strDescription: item.description
+        }
+      }
+    }
 
     self.queryBills = function (searchText) {
       return self.presetBills.filter(function(c) {

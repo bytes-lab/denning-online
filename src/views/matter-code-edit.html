@@ -106,11 +106,12 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsPresetBill.code"
+                md-selected-item="vm.clsPresetBill"
                 md-search-text="qpsb1"
                 md-items="item in vm.queryBills(qpsb1)"
                 md-item-text="item.code ? item.description+' ( '+item.code+' )': ' '"
                 md-min-length="0"
+                md-selected-item-change="vm.preBillChange(item)"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>

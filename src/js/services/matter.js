@@ -22,6 +22,16 @@ denningOnline
       });
     }
 
+    service.getProgramOwnerList = function (page, pagesize, keyword) {
+      return http.GET('v1/table/ProgramOwner', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    }
+
     service.getItem = function (code) {
       return http.GET('v1/table/File/'+code).then(function (resp) {
         return resp.data;
