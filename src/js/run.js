@@ -157,20 +157,24 @@ denningOnline
       name: 'contact',
       templateUrl: 'contact.html',
       controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
-        $scope.represent_this = $scope.model['strLawyer'+$scope.to.idx+'Ref'] && 
-                                $scope.model['strLawyer'+$scope.to.idx+'Ref'].indexOf('tmho') > -1;
         $scope.userInfo = Auth.getUserInfo();
+        $scope.represent_this = $scope.userInfo.catDenning.length > 0 && $scope.model[$scope.to.field] &&
+                                $scope.model[$scope.to.field].code == $scope.userInfo.catDenning[0].LawFirm.code;
         
         $scope.representChange = function() {
           $scope.represent_this = !$scope.represent_this;
-          // if ($scope.represent_this && $scope.userInfo.catPersonal.length > 0) {
-            // $scope.model['strLawyer'+$scope.to.idx+'Ref'] = 
-            // $scope.userInfo.catPersonal[0].LawFirm.name;
-          if ($scope.represent_this) {
-            // 6000-2862/0/tmho/Siti/501
-            $scope.model['strLawyer'+$scope.to.idx+'Ref'] = $scope.model.strFileNo1 + "/0/tmho";
+          if ($scope.represent_this && $scope.userInfo.catDenning.length > 0) {
+            $scope.model[$scope.to.field] = {
+              code: $scope.userInfo.catDenning[0].LawFirm.code,
+              strCity: $scope.userInfo.catDenning[0].LawFirm.address.city,
+              strEmailAddress: $scope.userInfo.catDenning[0].LawFirm.emailAddress,
+              strName: $scope.userInfo.catDenning[0].LawFirm.name,
+              strPhone1: $scope.userInfo.catDenning[0].LawFirm.phoneHome,
+              strPhone2: $scope.userInfo.catDenning[0].LawFirm.phoneFax,
+              strPhoneMobile: $scope.userInfo.catDenning[0].LawFirm.phoneMobile,
+            }
           } else {
-            $scope.model['strLawyer'+$scope.to.idx+'Ref'] = '';
+            $scope.model[$scope.to.field] = { };
           }
         }
 

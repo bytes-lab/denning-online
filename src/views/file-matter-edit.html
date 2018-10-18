@@ -262,8 +262,7 @@
       <div class="checkbox" style="margin: 6px 0 6px 18px;">
         <label>
           <input type="checkbox" ng-disabled="!model.tmp.can_edit" ng-model="represent_this" ng-click="representChange()">
-          <i class="input-helper"></i>
-          Representing this party
+          <i class="input-helper"></i>Representing this party
         </label>
       </div>
       </div>
@@ -272,7 +271,7 @@
       <div class="d-flex">
         <label class="form-control attr-label">Tel / Fax / Email</label>
         <label class="form-control p-t-5 wp-45">
-          {{ model[to.field].strName ? model[to.field].strPhone1+' / '+model[to.field].strEmailAddress : '' }}
+          <span ng-if="model[to.field].strName">{{ model[to.field].strPhone1 }} / {{ model[to.field].strPhone2 }} / {{ model[to.field].strEmailAddress }}</span>
         </label>
       </div>
     </div>
@@ -1454,76 +1453,76 @@
   <div class="form-group">
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">From</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate6" style="width:45%;">
+        <label class="form-control attr-label">From</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate6">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">To</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate7" style="width:45%;">
+        <label class="form-control attr-label">To</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate7">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">No. of Months</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF16" style="width:45%;">
+        <label class="form-control attr-label">No. of Months</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF16">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Total Amount</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM16" style="width:45%;">
+        <label class="form-control attr-label">Total Amount</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM16">
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">Outstanding Utilities</h4>  
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Electricty Bill</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM6" style="width:45%;">
+        <label class="form-control attr-label">Electricty Bill</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM6">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Water Bill</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM7" style="width:45%;">
+        <label class="form-control attr-label">Water Bill</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM7">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Management Fee</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM8" style="width:45%;">
+        <label class="form-control attr-label">Management Fee</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM8">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Sewerage Charges</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM9" style="width:45%;">
+        <label class="form-control attr-label">Sewerage Charges</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM9">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Refuse Collection</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM10" style="width:45%;">
+        <label class="form-control attr-label">Refuse Collection</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM10">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Parking Fee</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM14" style="width:45%;">
+        <label class="form-control attr-label">Parking Fee</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM14">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Lisencing Fee</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM15" style="width:45%;">
+        <label class="form-control attr-label">Lisencing Fee</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM15">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Total Deposits</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF400" style="width:45%;">
+        <label class="form-control attr-label">Total Deposits</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF400">
       </div>
     </div>
   </div>
@@ -1533,100 +1532,100 @@
   <div class="form-group">
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Original Developer</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Original Developer</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Original Purchaser</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+        <label class="form-control attr-label">Original Purchaser</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Proprietor 1</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Proprietor 1</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Proprietor 2</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Proprietor 2</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Proprietor 3</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Proprietor 3</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Proprietor 4</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Proprietor 4</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Price</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Price</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">SPA Date</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">SPA Date</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">First Assignee Bank</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">First Assignee Bank</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Date of Facility Agreement</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Date of Facility Agreement</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Date of DOA (Loan) </label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Date of DOA (Loan) </label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Date of R&R</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Date of R&R</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">Chain of Ownership - Second and Subsequent Purchases</h4>  
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Electricty Bill</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Electricty Bill</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Water Bill</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Water Bill</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Management Fee</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Management Fee</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
       <label class="form-control attr-label">Sewerage Charges</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+      <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
   </div>
@@ -1636,42 +1635,42 @@
   <div class="form-group">
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">1. </label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">1. </label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">2. </label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+        <label class="form-control attr-label">2. </label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3">
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">Spouse(s)</h4>  
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">1. </label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">1. </label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">2. </label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">2. </label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">Issues (Children)</h4>  
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">1. </label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">1. </label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">2. </label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">2. </label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
   </div>
@@ -1681,40 +1680,40 @@
   <div class="form-group">
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Tier 1</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Tier 1</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Tier 2</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3" style="width:45%;">
+        <label class="form-control attr-label">Tier 2</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3">
       </div>
     </div>
     <div class="clearfix"></div>
     <h4 class="m-b-15 group-label">More Information</h4>  
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Date 1</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Date 1</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">Date 2</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">Date 2</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">$ 1</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">$ 1</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-      <label class="form-control attr-label">$ 2</label>
-      <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4" style="width:45%;">
+        <label class="form-control attr-label">$ 2</label>
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF4">
       </div>
     </div>
   </div>
