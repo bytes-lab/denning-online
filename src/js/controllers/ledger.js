@@ -73,7 +73,7 @@ denningOnline
     });
   })
 
-  .controller('accountList2Ctrl', function($stateParams, NgTableParams, ledgerService, $state, $q) {
+  .controller('ledgerListCtrl', function($stateParams, NgTableParams, ledgerService, $state, $q) {
     var self = this;
     self.fileNo = $stateParams.fileNo;
     self.fileName = $stateParams.fileName;

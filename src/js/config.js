@@ -323,7 +323,7 @@ denningOnline
           access: '@',
           can_edit: true
         },
-        url: '/quotation/new',
+        url: '/quotation/new/:fileNo/:billNo',
         controller: 'quotationEditCtrl as vm',
         templateUrl: 'views/quotation-edit.html'
       })
@@ -354,7 +354,7 @@ denningOnline
           access: '@',
           can_edit: true
         },
-        url: '/invoice/new',
+        url: '/invoice/new/:fileNo/:billNo',
         controller: 'invoiceEditCtrl as vm',
         templateUrl: 'views/invoice-edit.html'
       })
@@ -735,7 +735,7 @@ denningOnline
           access: '@'
         },
         url: '/:fileNo/:fileName/:category',
-        controller: 'accountList2Ctrl as vm',
+        controller: 'ledgerListCtrl as vm',
         templateUrl: 'views/ledger-list.html'
       })
 

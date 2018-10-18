@@ -269,8 +269,19 @@ denningOnline
       self.entity = {
         strState: 'Common',
         dtCreateDate: uibDateParser.parse(new Date()),
+        clsFileNo: {
+          strFileNo1: $stateParams.fileNo
+        },
+        strBillName: $stateParams.billNo,
         listBilledItems: []
       };
+
+      if (self.entity.strBillName) {
+        self.presetCode = {
+          code: self.entity.strBillName
+        }
+      }
+
       initializeTable();
     }
 
