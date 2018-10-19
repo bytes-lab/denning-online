@@ -27,10 +27,10 @@
                 <option value="disb">Disbursement</option>
                 <option value="client">Client</option>
                 <option value="fdeposit">FD Control</option>
-                <option value="advance">Office Advanced</option>
+                <option value="advance">Office Advances</option>
                 <option value="client;fdeposit">Client + FD</option>
                 <option value="client, disb, fd">Client + Disb + FD</option>
-                <option value="disb, advance">Disb + Office Advanced</option>
+                <option value="disb, advance">Disb + Office Advances</option>
                 <option value="other">Other</option>
               </select>
             </div>
@@ -41,13 +41,16 @@
       <div class="table-responsive table-div p-15">
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
           <tr ng-repeat="w in $data" ui-sref="billing.receipts-edit({'id': w.documentNo})">
-            <td data-title="'Matter No.'">
-              {{ w.fileNo }}
+            <td data-title="'Date'">
+              {{ w.date|ddate }}
             </td>
             <td data-title="'Receipt'">
               {{ w.documentNo }}
             </td>
-            <td data-title="'Receive From'">
+            <td data-title="'Matter No.'">
+              {{ w.fileNo }}
+            </td>
+            <td data-title="'Received From'">
               {{ w.receivedFromName }}
             </td>
             <td data-title="'Invoice No'">

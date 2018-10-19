@@ -160,7 +160,6 @@ denningOnline
         $scope.userInfo = Auth.getUserInfo();
         $scope.represent_this = $scope.userInfo.catDenning.length > 0 && $scope.model[$scope.to.field] &&
                                 $scope.model[$scope.to.field].code == $scope.userInfo.catDenning[0].LawFirm.code;
-        
         $scope.representChange = function() {
           $scope.represent_this = !$scope.represent_this;
           if ($scope.represent_this && $scope.userInfo.catDenning.length > 0) {
