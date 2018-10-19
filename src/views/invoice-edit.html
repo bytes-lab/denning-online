@@ -69,9 +69,9 @@
                 md-selected-item="vm.entity.clsFileNo"
                 md-search-text="qstl"
                 md-items="item in vm.queryMatters(qstl)"
-                md-item-text="item.strFileNo1"
+                md-item-text="item.key ? item.key : item.strFileNo1"
                 md-min-length="0"
-                md-selected-item-change="vm.matterChange(item)"
+                md-selected-item-change="vm.matterChange(item, true)"
                 placeholder="Enter matter No (if any)"
                 class="default-input">
                 <md-item-template>
@@ -81,17 +81,29 @@
             </dd>
           </dl>
           <dl class="dl-horizontal m-b-10">
-            <dt>File Name</dt>
+            <dt>Client</dt>
             <dd>
-              <label class="p-l-10">{{ vm.entity.clsFileNo.clsPrimaryClient.strName }}</label>
+              <label class="p-l-10">{{ vm.entity.strClientID }}</label>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Invoice To</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strBillTo"
+                md-search-text="qp6"
+                md-items="item in vm.invoiceToList"
+                md-selected-item-change="vm.quoteToChange(item)"
+                md-item-text="item.name"
+                md-min-length="0"
+                md-no-cache="true"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qp6" class="col-1" ng-class="{ 'p-l-10': !item.group, 'f-700': item.group }" md-highlight-flags="i">{{ item.name }}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -103,19 +115,20 @@
                 md-search-text="qmc"
                 md-items="item in vm.queryCodes(qmc)"
                 md-selected-item-change="vm.matterCodeChange(item)"
-                md-item-text="item.code"
+                md-item-text="'[ '+item.code+' ]  '+item.strDescription"
                 md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
-                <span md-highlight-text="qmc" class="col-360" md-highlight-flags="i">{{item.strDescription}}</span>
-                <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
+                <span md-highlight-text="qmc" md-highlight-flags="i">
+                  [ {{item.code}} ]  {{item.strDescription}}
+                </span>
               </md-item-template>
               </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Invoice Matter</dt>
+            <dt class="p-t-10">Invoice Subject</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' class="form-control" ng-model="vm.entity.strBillingMatter">
@@ -154,8 +167,9 @@
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
-                <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
+                <span md-highlight-text="qpsb1" md-highlight-flags="i">
+                  [ {{item.code}} ]  {{item.strDescription}}
+                </span>
               </md-item-template>
               </md-autocomplete>
             </dd>
@@ -236,19 +250,19 @@
               <label class="f-700">Professional Fees</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Fees + vm.sst.Fees | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -256,19 +270,19 @@
               <label class="f-700">Disb. with SST / GST</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.DisbWithTax + vm.sst.DisbWithTax | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -276,17 +290,17 @@
               <label class="f-700">Disbursements</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Disb | number:2 }}</label>
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Disb | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -294,19 +308,19 @@
               <label class="f-700">Total</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Fees+vm.typeSum.Disb + vm.typeSum.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Fees+vm.gross.Disb + vm.gross.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees + vm.typeSST.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Fees + vm.typeSST.Fees + vm.typeSum.DisbWithTax + vm.typeSST.DisbWithTax + vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Fees + vm.sst.Fees + vm.gross.DisbWithTax + vm.sst.DisbWithTax + vm.gross.Disb | number:2 }}</label>
             </div>
           </div>
         </div>
@@ -315,17 +329,18 @@
       <h4 class="m-t-25 p-l-25" ng-click="vm.showItems=!vm.showItems">Bill Items&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showItems"></i><i class="zmdi zmdi-minus" ng-if="vm.showItems"></i></h4>
       <div class="row p-l-20" ng-show="vm.showItems">
         <div class="col-md-10 p-l-30 m-t-15">
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All')">ALL ( <small>${{ vm.typeSum.All | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees')">FEE ( <small>${{ vm.typeSum.Fees | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb')">DISB ( <small>${{ vm.typeSum.Disb | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax')">GST ( <small>${{ vm.typeSum.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All', '')">ALL ( <small>{{ vm.gross.All + vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees', '')">FEE ( <small>{{ vm.gross.Fees | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax', '')">DISB. with SST / GST ( <small>{{ vm.gross.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb', '')">DISB ( <small>{{ vm.gross.Disb | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='SST' }" ng-click="vm.filterItem('SST', 'Serv')">SST / GST ( <small>{{ vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</small> )</div>
           <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-show="vm.can_edit" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
             <i class="zmdi zmdi-plus"></i>
           </div>
         </div>
-        <div class="col-md-10">
-          <div class="table-responsive table-div p-15"> 
-            <table ng-table="vm.tableFilter" class="no-pager table-striped table table-vmiddle table-list">
+        <div class="col-md-12" style="overflow-x: scroll; padding-bottom: 100px;">
+          <div class="table-responsive table-div p-15" style="overflow: visible;"> 
+            <table ng-table="vm.tableFilter" class="no-pager table-striped table table-vmiddle table-list" style="overflow: visible;">
               <tr ng-repeat="w in $data">
                 <td data-title="'No'">{{ $index+1 }}</td>
                 <td data-title="'Item Code'">
@@ -342,20 +357,26 @@
                     </label>
                   </div>
                 </td>
-                <td data-title="'Unit'" class="text-right">
-                  {{ w.decUnit }}
+                <td data-title="'Unit Price'" class="cell-edit">
+                  <input type="form-control" ng-model="w.decUnitPrice" ng-readonly="!vm.can_edit" ng-change="vm.refreshItems()" style="width: 80px;">
                 </td>
-                <td data-title="'Unit Price'" class="text-right">
-                  {{ w.decUnitPrice | number:2 }}
+                <td data-title="'Unit'" class="cell-edit">
+                  <input type="form-control" ng-model="w.decUnit" ng-readonly="!vm.can_edit" ng-change="vm.refreshItems()" style="width: 50px;">
                 </td>
                 <td data-title="'Charges'" class="text-right">
-                  {{ w.decUnitCost }}
+                  {{ w.decUnitCost|number:2 }}
                 </td>
                 <td data-title="'Tax Code'">
                   {{ w.strTaxCode }}
                 </td>
-                <td data-title="'GST (%)'">
+                <td data-title="'SST/GST (%)'">
                   {{ w.decTaxRate * 100 | number:2 }}
+                </td>
+                <td data-title="'Tax'" class="text-right">
+                  {{ w.decUnitTax | number:2 }}
+                </td>
+                <td data-title="'Total'" class="text-right">
+                  {{ w.decTotal | number:2 }}
                 </td>
                 <td data-title="''" class="p-5">
                   <button class="btn btn-default btn-sm" ng-disabled="!vm.can_edit" title="Move Up" ng-click="vm.move($index-1, $index)" style="padding: 4px 9px;">
@@ -367,9 +388,23 @@
                   <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Insert After" ng-click="vm.insert($index)" style="padding: 4px 9px;">
                     <i class="zmdi zmdi-plus"></i>
                   </button>
-                  <button class="btn btn-default btn-sm m-l-5" ng-disabled="!vm.can_edit" title="Remove" ng-click="vm.remove(w.strItemCode)" style="padding: 4px 9px;">
-                    <i class="zmdi zmdi-close"></i>
-                  </button>
+                  <div class="dropdown file-actions" uib-dropdown style="display: inline;">
+                    <button class="btn btn-default btn-sm m-l-5" uib-dropdown-toggle style="padding: 4px 8px;" title="More">
+                      <i class="zmdi zmdi-more"></i>
+                    </button>
+
+                    <ul class="dropdown-menu pull-right">
+                      <li>
+                        <a ng-click="vm.copyLink(file)">% Discount</a>
+                      </li>
+                      <li>
+                        <a ng-click="vm.shareFile(file)">Imp Sum Discount</a>
+                      </li>
+                      <li>
+                        <a ng-click="vm.remove(w.strItemCode)">Remove</a>
+                      </li>
+                    </ul>
+                  </div>
                 </td>
               </tr>
             </table>

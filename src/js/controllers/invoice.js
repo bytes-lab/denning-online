@@ -44,6 +44,8 @@ denningOnline
     self.isNew = $state.$current.data.can_edit;
 
     self.itemType = 'All';
+    self.taxType = 'NoTax';
+    self.invoiceToList = [];
 
     self.queryMatters = function (search) {
       return fileMatterService.getList(1, 5, search).then(function (resp) {
@@ -51,20 +53,45 @@ denningOnline
       })
     }
 
-    self.matterChange = function (matter) {
-      if (matter && matter.JsonDesc) {
-        self.entity.fileNo = matter.key;
-        var matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+    self.matterChange = function (matter, json) {
+      if (matter) {
+        var matterInfo = matter;
+        if (json) {
+          if (!matter.JsonDesc) return;
+          matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+        }
+
+        self.entity.fileNo = matterInfo.systemNo;
         var clsPrimaryClient = matterInfo.primaryClient;
 
-        self.entity.matter = matterInfo.matter;
-        self.matterDescription = self.entity.matter.description;
+        self.entity.clsMatterCode = {
+          'code': matterInfo.matter.code,
+          'strDescription': matterInfo.matter.description,
+        };
+
+        self.matterDescription = matterInfo.matter.description;
         if (matterInfo.propertyGroup[0]) {
           self.entity.strPropertyAddress = matterInfo.propertyGroup[0].fullTitle;
-          self.entity.strState = matterInfo.propertyGroup[0]
         }
         self.entity.issueToName = clsPrimaryClient.name;
-        self.entity.strClientName = clsPrimaryClient.name;
+        self.entity.strClientID = clsPrimaryClient.code;
+
+        // get quotation to info
+        self.invoiceToList = [];
+        for (var idx in matterInfo.partyGroup) {
+          var pg = matterInfo.partyGroup[idx];
+          if (pg.party.length > 0) {
+            self.invoiceToList.push({ name: pg.PartyName, group: true });
+            for (var sidx in pg.party) {
+              self.invoiceToList.push({ name: pg.party[sidx].name, group: false });
+            }
+          }
+        }
+      } else {
+        self.entity.strClientID = '';
+        self.entity.issueToName = '';
+        self.invoiceToList = [];
+        self.strBillTo = null;
       }
     }
 
@@ -72,7 +99,7 @@ denningOnline
       if (item && self.entity.strBillName != item.code) {
         presetbillService.getItem(item.code).then(function (item) {
           self.entity.listBilledItems = item.listBilledItems;
-          refreshItems();
+          self.refreshItems();
         });
       }
     }
@@ -91,7 +118,7 @@ denningOnline
 
     self.matterCodeChange = function (item) {
       if (item && item.strDescription) {
-        self.matterDescription = item.strDescription;
+        self.entity.strBillingMatter = item.strDescription;
       }
     }
 
@@ -127,7 +154,7 @@ denningOnline
               self.entity.listBilledItems.push(res[ii]);
             }
           }
-          refreshItems();
+          self.refreshItems();
         }
       }, function (res) {});
     }
@@ -153,7 +180,7 @@ denningOnline
           break;
         }
       }
-      refreshItems();
+      self.refreshItems();
     }
 
     function initializeTable () {
@@ -167,23 +194,29 @@ denningOnline
         counts: [],
         getData: function (params) {
           return self.entity.listBilledItems.filter(function (item) {
-            return self.itemType == 'All' || item.strBillItemType == self.itemType;
+            return self.itemType == 'All' || 
+                   item.strBillItemType == self.itemType || 
+                   item.strTaxCode == self.taxType;
           })
         } 
       });
       
-      refreshItems();
+      self.refreshItems();
     }
 
-    function refreshItems () {
-      self.typeSum = {
+    function parseFFloat(strVal) {
+      return parseFloat(strVal.replace(',', '').replace('(', '').replace(')', ''));
+    }
+
+    self.refreshItems = function () {
+      self.gross = {
         All: 0.0,
         Fees: 0.0,
         Disb: 0.0,
         DisbWithTax: 0.0
       };
 
-      self.typeSST = {
+      self.sst = {
         Fees: 0.0,
         Disb: 0.0,
         DisbWithTax: 0.0
@@ -191,17 +224,21 @@ denningOnline
 
       for (ii in self.entity.listBilledItems) {
         var item = self.entity.listBilledItems[ii];
-        self.typeSum[item.strBillItemType] += parseFloat(item.decUnitCost);
-        self.typeSST[item.strBillItemType] += parseFloat(item.decUnitCost) * 
-                                              parseFloat(item.decTaxRate);
-        self.typeSum['All'] += parseFloat(item.decUnitCost);
+        item.decUnitCost = parseFFloat(item.decUnitPrice) * parseFFloat(item.decUnit);
+        item.decUnitTax = parseFFloat(item.decTaxRate) * item.decUnitCost;
+        item.decTotal = item.decUnitCost + item.decUnitTax;
+
+        self.gross[item.strBillItemType] += item.decUnitCost;
+        self.sst[item.strBillItemType] += item.decUnitTax;
+        self.gross['All'] += item.decUnitCost;
       }
 
       self.tableFilter.reload();
     }
 
-    self.filterItem = function (type) {
+    self.filterItem = function (type, tax) {
       self.itemType = type;
+      self.taxType = tax;
       self.tableFilter.reload();
     }
 
@@ -212,10 +249,29 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
         initializeTable();
 
+        fileMatterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
+          for (var idx in matterInfo.partyGroup) {
+            var pg = matterInfo.partyGroup[idx];
+            if (pg.party.length > 0) {
+              self.invoiceToList.push({ name: pg.PartyName, group: true });
+              for (var sidx in pg.party) {
+                self.invoiceToList.push({ name: pg.party[sidx].name, group: false });
+              }
+            }
+          }
+        });
+
         if (self.entity.strBillName) {
           self.presetCode = {
             code: self.entity.strBillName
-          }          
+          }
+        }
+
+        if (self.entity.strBillTo) {
+          self.strBillTo = {
+            name: self.entity.strBillTo,
+            group: false
+          }
         }
       });
     } else {
@@ -225,13 +281,37 @@ denningOnline
         dtCreateDate: uibDateParser.parse(new Date()),
         listBilledItems: []
       };
+
+      if ($stateParams.fileNo) {
+        self.entity.clsFileNo = {
+          strFileNo1: $stateParams.fileNo
+        };
+
+        fileMatterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
+          self.matterChange(matterInfo, false);
+        });
+      }
+
+      if ($stateParams.billNo) {
+        self.presetCode = {
+          code: $stateParams.billNo
+        };
+        self.presetBillChange(self.presetCode);
+      }
+
       initializeTable();
+    }
+
+    self.quoteToChange = function (item) {
+      if (item) {
+        self.entity.strBillTo = item.name;
+      }
     }
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       invoiceService.save(entity, self.entity_).then(function (item) {
-        if (item) {  // ignore when errors
+        if (item) {
           if (self.entity_) {
             $state.reload();
           } else {

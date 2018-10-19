@@ -32,7 +32,7 @@
                 md-items="item in vm.queryMatters(qstl)"
                 md-item-text="item.key ? item.key : item.strFileNo1"
                 md-min-length="0"
-                md-selected-item-change="vm.matterChange(item)"
+                md-selected-item-change="vm.matterChange(item, true)"
                 placeholder="Enter matter No (if any)"
                 class="default-input">
                 <md-item-template>
@@ -117,7 +117,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.presetCode"
+                md-selected-item="vm.entity.clsPresetBill"
                 md-search-text="qpsb1"
                 md-items="item in vm.queryBills(qpsb1)"
                 md-item-text="item.code"

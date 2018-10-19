@@ -53,10 +53,15 @@ denningOnline
       })
     }
 
-    self.matterChange = function (matter) {
-      if (matter && matter.JsonDesc) {
-        self.entity.fileNo = matter.key;
-        var matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+    self.matterChange = function (matter, json) {
+      if (matter) {
+        var matterInfo = matter;
+        if (json) {
+          if (!matter.JsonDesc) return;
+          matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
+        }
+
+        self.entity.fileNo = matterInfo.systemNo;
         var clsPrimaryClient = matterInfo.primaryClient;
 
         self.entity.clsMatterCode = {
@@ -82,11 +87,16 @@ denningOnline
             }
           }
         }
+      } else {
+        self.entity.strClientName = '';
+        self.entity.issueToName = '';
+        self.quoteToList = [];
+        self.strBillTo2 = null;
       }
     }
 
     self.presetBillChange = function (item) {
-      if (item && self.entity.strBillName != item.code) {
+      if (item) {
         presetbillService.getItem(item.code).then(function (item) {
           self.entity.listBilledItems = item.listBilledItems;
           self.refreshItems();
@@ -251,12 +261,10 @@ denningOnline
           }
         });
 
-        if (self.entity.strBillName) {
-          self.presetCode = {
-            code: self.entity.strBillName
-          }
+        if(!self.entity.clsPresetBill.code) {
+          self.entity.clsPresetBill = null;
         }
-
+        
         if (self.entity.strBillTo2) {
           self.strBillTo2 = {
             name: self.entity.strBillTo2,
@@ -269,17 +277,24 @@ denningOnline
       self.entity = {
         strState: 'Common',
         dtCreateDate: uibDateParser.parse(new Date()),
-        clsFileNo: {
-          strFileNo1: $stateParams.fileNo
-        },
-        strBillName: $stateParams.billNo,
         listBilledItems: []
       };
 
-      if (self.entity.strBillName) {
-        self.presetCode = {
-          code: self.entity.strBillName
-        }
+      if ($stateParams.fileNo) {
+        self.entity.clsFileNo = {
+          strFileNo1: $stateParams.fileNo
+        };
+
+        fileMatterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
+          self.matterChange(matterInfo, false);
+        });
+      }
+
+      if ($stateParams.billNo) {
+        self.entity.clsPresetBill = {
+          code: $stateParams.billNo
+        };
+        self.presetBillChange(self.entity.clsPresetBill);
       }
 
       initializeTable();
