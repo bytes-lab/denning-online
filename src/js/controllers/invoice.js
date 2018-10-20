@@ -96,7 +96,7 @@ denningOnline
     }
 
     self.presetBillChange = function (item) {
-      if (item && self.entity.strBillName != item.code) {
+      if (item && self.entity.clsPresetBill.code != item.code) {
         presetbillService.getItem(item.code).then(function (item) {
           self.entity.listBilledItems = item.listBilledItems;
           self.refreshItems();
@@ -261,10 +261,8 @@ denningOnline
           }
         });
 
-        if (self.entity.strBillName) {
-          self.presetCode = {
-            code: self.entity.strBillName
-          }
+        if(!self.entity.clsPresetBill.code) {
+          self.entity.clsPresetBill = null;
         }
 
         if (self.entity.strBillTo) {
@@ -293,10 +291,10 @@ denningOnline
       }
 
       if ($stateParams.billNo) {
-        self.presetCode = {
+        self.entity.clsPresetBill = {
           code: $stateParams.billNo
         };
-        self.presetBillChange(self.presetCode);
+        self.presetBillChange(self.entity.clsPresetBill);
       }
 
       initializeTable();
@@ -317,7 +315,7 @@ denningOnline
           } else {
             $state.go('billing.invoices-edit', { 'id': item.code });
           }
-          growlService.growl('Saved successfully!', 'success');          
+          growlService.growl('Saved successfully!', 'success');
         }
       });
     }

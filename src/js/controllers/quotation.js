@@ -96,7 +96,7 @@ denningOnline
     }
 
     self.presetBillChange = function (item) {
-      if (item) {
+      if (item && self.entity.clsPresetBill.code != item.code) {
         presetbillService.getItem(item.code).then(function (item) {
           self.entity.listBilledItems = item.listBilledItems;
           self.refreshItems();

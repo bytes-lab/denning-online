@@ -230,7 +230,7 @@
       <a class="btn btn-primary short-btn" ng-click="contactDialog('clsC'+n, true)">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
       </a>
-      <input class="form-control wp-15" ng-model="model['strShareC'+n]" ng-if="to.share" placeholder="Share" />
+      <input class="form-control wp-15" ng-readonly="!model.tmp.can_edit" ng-model="model['strShareC'+n]" ng-if="to.share" placeholder="Share" />
       <a class="btn btn-danger short-btn" ng-click="removeParty(n, to.c_start, to.c_end)">
         <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span>
       </a>

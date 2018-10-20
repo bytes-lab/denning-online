@@ -21,29 +21,29 @@
           <div class="clearfix"></div>
           <dl class="dl-horizontal m-b-20 m-t-20">
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="1-Attended" ng-model="vm.entity.accountType.ID">
               <i class="input-helper"></i>
               Client
             </label>
 
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="2" ng-model="vm.entity.accountType.ID">
               <i class="input-helper"></i>
               Disbursment
             </label>
 
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="21-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="21-MOB" ng-model="vm.entity.accountType.ID">
               <i class="input-helper"></i>
               Office Advance
             </label>
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="22-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="22-MOB" ng-model="vm.entity.accountType.ID">
               <i class="input-helper"></i>
               Fixed Deposit
             </label>
             <label class="radio radio-inline m-r-25">
-              <input type="radio" value="23-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="23-MOB" ng-model="vm.entity.accountType.ID">
               <i class="input-helper"></i>
               Other
             </label>
@@ -52,7 +52,7 @@
             <dt>Receipt No. (System)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+                <input ng-model="vm.entity.documentNo" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -69,7 +69,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsFileNo"
+                md-selected-item="vm.entity.fileNo"
                 md-search-text="qstl"
                 md-items="item in vm.queryMatters(qstl)"
                 md-item-text="item.strFileNo1"
@@ -87,7 +87,7 @@
             <dt class="p-t-10">Received From</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+                <input ng-model="vm.entity.receivedFromName" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -97,7 +97,7 @@
             <dt class="p-t-10">Transaction Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtCreateDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'td_opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.TransactionDate" is-open="td_opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -106,7 +106,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.presetCode"
+                md-selected-item="vm.invoiceNo"
                 md-search-text="qpsb1"
                 md-items="item in vm.queryBills(qpsb1)"
                 md-item-text="item.code"
@@ -125,7 +125,7 @@
             <dt class="p-t-10">Amount</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.amount">
               </div>
             </dd>
           </dl>
@@ -133,7 +133,7 @@
             <dt class="p-t-10">Transaction Description</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.description">
               </div>
             </dd>
           </dl>
@@ -287,7 +287,7 @@
             <dt class="p-t-10">Mode</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.payment.mode">
               </div>
             </dd>
           </dl>
@@ -295,7 +295,7 @@
             <dt class="p-t-10">Issuer Bank</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.payment.issuerBank">
               </div>
             </dd>
           </dl>
@@ -305,7 +305,7 @@
             <dt class="p-t-10">Bank Branch</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.payment.bankBranch">
               </div>
             </dd>
           </dl>
@@ -313,7 +313,7 @@
             <dt class="p-t-10">Cheque No. / Ref. No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.payment.referenceNo">
               </div>
             </dd>
           </dl>
@@ -323,7 +323,7 @@
             <dt class="p-t-10">Cheque Amount</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.payment.totalAmount">
               </div>
             </dd>
           </dl>
@@ -345,7 +345,7 @@
           <dl class="dl-horizontal">
             <dd>
               <div class="fg-line">
-                <textarea class="form-control" rows="5"></textarea>
+                <textarea class="form-control" rows="5" ng-model="vm.entity.remarks"></textarea>
               </div>
             </dd>
           </dl>
