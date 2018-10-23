@@ -38,7 +38,7 @@ denningOnline
 
     if (self.entityCode) {
       self.title = 'Edit Legal Firm';
-      legalFirmService.getItem(self.entityCode).then(function (item){
+      legalFirmService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         self.popoutUrl = $state.href('legal-firms.edit', { id: self.entity.code });

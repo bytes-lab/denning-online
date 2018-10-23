@@ -1,16 +1,16 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" ng-if="!vm.isDialog">
       <div class="row">
-      <div class="col-md-11 col-sm-12">
-        <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Bank Branch</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
-      </div>
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="bank-branches.new" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        </div>
       </div>
     </div>
     <div class="card-body card-padding">
@@ -20,7 +20,7 @@
             <dt class="p-t-10">Master Bank Code</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.bankBranch.clsBankCode"
+                md-selected-item="vm.entity.clsBankCode"
                 md-search-text="searchText"
                 md-items="item in vm.queryBanks(searchText)"
                 md-item-text="item.code ? item.code: ' '"
@@ -37,7 +37,7 @@
             <dt class="p-t-10">Master Bank Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.bankBranch.clsBankCode.strName" type="text" class="form-control">
+                <input ng-model="vm.entity.clsBankCode.strName" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -45,7 +45,7 @@
             <dt class="p-t-10">Branch Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strName">
+                <input type='text' class="form-control" ng-model="vm.entity.strName">
               </div>
             </dd>
           </dl>
@@ -53,7 +53,7 @@
             <dt class="p-t-10">Address Line 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strAddressLine1">
+                <input type='text' class="form-control" ng-model="vm.entity.strAddressLine1">
               </div>
             </dd>
           </dl>
@@ -61,7 +61,7 @@
             <dt class="p-t-10">Address Line 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strAddressLine2">
+                <input type='text' class="form-control" ng-model="vm.entity.strAddressLine2">
               </div>
             </dd>
           </dl>
@@ -69,7 +69,7 @@
             <dt class="p-t-10">Address Line 3</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strAddressLine3">
+                <input type='text' class="form-control" ng-model="vm.entity.strAddressLine3">
               </div>
             </dd>
           </dl>
@@ -77,7 +77,7 @@
             <dt class="p-t-10">Postcode</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strPostCode">
+                <input type='text' class="form-control" ng-model="vm.entity.strPostCode">
               </div>
             </dd>
           </dl>
@@ -85,7 +85,7 @@
             <dt class="p-t-10">Town</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strCity">
+                <input type='text' class="form-control" ng-model="vm.entity.strCity">
               </div>
             </dd>
           </dl>
@@ -93,7 +93,7 @@
             <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strState">
+                <input type='text' class="form-control" ng-model="vm.entity.strState">
               </div>
             </dd>
           </dl>
@@ -103,7 +103,7 @@
             <dt class="p-t-10">Country</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.bankBranch.strCountry" type="text" class="form-control">
+                <input ng-model="vm.entity.strCountry" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -111,7 +111,7 @@
             <dt class="p-t-10">Phone 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strPhone1">
+                <input type='text' class="form-control" ng-model="vm.entity.strPhone1">
               </div>
             </dd>
           </dl>              
@@ -119,7 +119,7 @@
             <dt class="p-t-10">Phone 2</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.bankBranch.strPhone2" type="text" class="form-control">
+                <input ng-model="vm.entity.strPhone2" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -127,7 +127,7 @@
             <dt class="p-t-10">Phone 3</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strPhone3">
+                <input type='text' class="form-control" ng-model="vm.entity.strPhone3">
               </div>
             </dd>
           </dl>
@@ -135,7 +135,7 @@
             <dt class="p-t-10">Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strPhoneFax">
+                <input type='text' class="form-control" ng-model="vm.entity.strPhoneFax">
               </div>
             </dd>
           </dl>
@@ -143,7 +143,7 @@
             <dt class="p-t-10">Email Address</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strEmailAddress">
+                <input type='text' class="form-control" ng-model="vm.entity.strEmailAddress">
               </div>
             </dd>
           </dl>
@@ -151,7 +151,7 @@
             <dt class="p-t-10">Bank Attorney</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.address.line3">
+                <input type='text' class="form-control" ng-model="vm.entity.address.line3">
               </div>
             </dd>
           </dl>
@@ -159,7 +159,7 @@
             <dt class="p-t-10">Bank Attorney IC No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.address.line3">
+                <input type='text' class="form-control" ng-model="vm.entity.address.line3">
               </div>
             </dd>
           </dl>
@@ -167,7 +167,7 @@
             <dt class="p-t-10">Bank Manager</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strManager">
+                <input type='text' class="form-control" ng-model="vm.entity.strManager">
               </div>
             </dd>
           </dl>
@@ -180,7 +180,7 @@
             <dt class="p-t-10">Mailing List</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.bankBranch.strMailList" type="text" class="form-control">
+                <input ng-model="vm.entity.strMailList" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -188,7 +188,7 @@
             <dt class="p-t-10">Bank Type (Sarawak)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.bankBranch.strNativeBank" type="text" class="form-control">
+                <input ng-model="vm.entity.strNativeBank" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -198,7 +198,7 @@
             <dt class="p-t-10">Note 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strNote1">
+                <input type='text' class="form-control" ng-model="vm.entity.strNote1">
               </div>
             </dd>
           </dl>
@@ -206,7 +206,7 @@
             <dt class="p-t-10">Note 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strNote2">
+                <input type='text' class="form-control" ng-model="vm.entity.strNote2">
               </div>
             </dd>
           </dl>
@@ -214,7 +214,7 @@
             <dt class="p-t-10">Note 3</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.strNote3">
+                <input type='text' class="form-control" ng-model="vm.entity.strNote3">
               </div>
             </dd>
           </dl>
@@ -228,7 +228,7 @@
             <dt class="p-t-10">CAC Code</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.bankBranch.clsCACCode"
+                md-selected-item="vm.entity.clsCACCode"
                 md-search-text="qsca"
                 md-items="item in vm.queryBankCACs(qsca)"
                 md-item-text="item.strName ? item.strName: ' '"
@@ -245,7 +245,7 @@
             <dt class="p-t-10">CAC Tel</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.clsCACCode.strPhone1">
+                <input type='text' class="form-control" ng-model="vm.entity.clsCACCode.strPhone1">
               </div>
             </dd>
           </dl>
@@ -253,22 +253,38 @@
             <dt class="p-t-10">CAC Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bankBranch.clsCACCode.strPhoneFax">
+                <input type='text' class="form-control" ng-model="vm.entity.clsCACCode.strPhoneFax">
               </div>
             </dd>
           </dl>
         </div>
       </div>
-      
+      <div class="clearfix"></div>
+      <h4 class="m-t-25">REMARK</h4>
       <div class="row">
+        <div class="col-md-10 p-l-25">
+          <dl class="dl-horizontal">
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control" ng-readonly="!vm.can_edit" rows="5" ng-model="vm.entity.strRemarks"></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row" ng-if="!vm.isDialog">
         <div class="col-md-11 col-sm-12 no-padding">
           <div class="m-t-30 p-l-15">
             <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.isNew">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="bank-branches.new" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>

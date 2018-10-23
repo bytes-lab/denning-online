@@ -667,35 +667,56 @@ denningOnline
       templateUrl: 'estate-agent.html'
     });
 
+
+    function bankDialog (model, key, viewMode) {
+      if (viewMode && (!model[key] || !model[key].code)) {
+        alert('Please select a bank branch.');
+        return false;
+      }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'bankBranchEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: !viewMode,
+          entityCode: function () {
+            return viewMode ? model[key].code : null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (!viewMode && entity) {
+          model[key] = {
+            clsBankCode: entity.clsBankCode,
+            clsCACCode: entity.clsCACCode,
+            code: entity.code,
+            strEmailAddress: entity.strEmailAddress,
+            strName: entity.strName,
+            strPhone1: entity.strPhone1,
+            strPhone2: entity.strPhone2,
+            strPhone3: entity.strPhone3,
+            strPhoneFax: entity.strPhoneFax
+          };
+        }
+      })
+    }
+
     // bank group
     function bankCtrl ($scope, $uibModal) {
       $scope.queryBanks = function(searchText) {
         return getBankBranches(1, 10, searchText)
       };
 
-      $scope.viewBankBranch = function(branch) {
-        if (branch) {
-          $scope.bankDialog(branch, true);
-        } else {
-          alert('Please select a branch.')
-        }
-      };
-
-      $scope.bankDialog = function(party, viewMode) {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: 'views/bank-branch-edit.html',
-          controller: 'bankBranchCreateModalCtrl',
-          controllerAs: 'vm',
-          size: 'lg',
-          backdrop: 'static',
-          keyboard: true,
-          resolve: {
-            viewMode: viewMode,
-            party: party
-          }      
-        });
-      };
+      $scope.bankDialog = function(key, viewMode) {
+        bankDialog($scope.model, key, viewMode);
+      }
 
       $scope.bankCACDialog = function(party, viewMode) {
         var modalInstance = $uibModal.open({

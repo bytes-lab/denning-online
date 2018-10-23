@@ -1076,16 +1076,43 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'bankBranchEditCtrl as vm',
-        templateUrl: 'views/bank-branch-edit.html'
+        templateUrl: 'views/bank-branch-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('bank-branches.new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },
         url: '/new',
         controller: 'bankBranchEditCtrl as vm',
-        templateUrl: 'views/bank-branch-edit.html'
+        templateUrl: 'views/bank-branch-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 

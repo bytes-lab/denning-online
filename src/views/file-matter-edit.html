@@ -71,10 +71,10 @@
         </md-item-template>
         </md-autocomplete>
 
-        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="bankDialog(model.clsBank1, false)">
+        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="bankDialog('clsBank1', false)">
           <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
         </a>
-        <a class="btn btn-primary short-btn" ng-click="viewBankBranch(model.clsBank1)">
+        <a class="btn btn-primary short-btn" ng-click="bankDialog('clsBank1', true)">
           <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of bank"></span>
         </a>
       </div>
@@ -128,7 +128,7 @@
 
         <md-autocomplete
           ng-disabled="!model.tmp.can_edit"
-          md-selected-item="model['clsBank2']"
+          md-selected-item="model.clsBank2"
           md-search-text="searchText"
           md-items="item in queryBanks(searchText)"
           md-item-text="item.strName ? item.strName: ' '"
@@ -140,10 +140,10 @@
         </md-item-template>
         </md-autocomplete>
 
-        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="bankDialog(model.clsBank2, false)">
+        <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="bankDialog('clsBank2', false)">
           <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank branch and choose it"></span>
         </a>
-        <a class="btn btn-primary short-btn" ng-click="viewBankBranch(model.clsBank2)">
+        <a class="btn btn-primary short-btn" ng-click="bankDialog('clsBank2', true)">
           <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of bank branch"></span>
         </a>
       </div>

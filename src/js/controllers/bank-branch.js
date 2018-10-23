@@ -23,7 +23,7 @@ denningOnline
           return data.data;
         });
       }
-    })    
+    });
 
     function search() {
       self.tableFilter.reload();
@@ -31,15 +31,18 @@ denningOnline
   })
 
   .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state, Auth, 
-                                             bankService, bankCACService) 
+                                             bankService, bankCACService, $uibModalInstance, 
+                                             entityCode, isDialog, isNew,
+                                             refactorService, growlService) 
   {
     var self = this;
-    self.isDialog = false;
-    self.viewMode = false;  // for edit / create
-    self.cancel = cancel;
     self.userInfo = Auth.getUserInfo();
-    self.create_new = $state.$current.data.can_edit;
-    self.can_edit = $state.$current.data.can_edit;
+    self._type = 'bank-branch';
+
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
 
     self.queryBanks = function(searchText) {
       return bankService.getTableList(1, 10, searchText).then(function(resp) {
@@ -53,57 +56,55 @@ denningOnline
       });
     };
 
-    bankBranchService.getItem($stateParams.id).then(function(item) {
-      self.bankBranch = item;
-    });
-
-    function cancel() {
-      $state.go('bank-branches.list');
-    }
-  })
-
-  .controller('bankBranchCreateModalCtrl', function ($uibModalInstance, party, viewMode, 
-                                                     bankBranchService, Auth, bankService, 
-                                                     bankCACService) 
-  {
-    var self = this;
-    self.save = save;
-    self.cancel = cancel;
-    self.isDialog = true;
-    self.viewMode = viewMode;
-    self.userInfo = Auth.getUserInfo();
-    self.create_new = !viewMode;
-    self.can_edit = !viewMode;
-
-    self.queryBanks = function(searchText) {
-      return bankService.getTableList(1, 10, searchText).then(function(resp) {
-        return resp.data;
-      });
-    };
-
-    self.queryBankCACs = function(searchText) {
-      return bankCACService.getTableList(1, 10, searchText).then(function(resp) {
-        return resp.data;
-      });
-    };
-
-    if (viewMode) {
-      bankBranchService.getItem(party.code).then(function(item) {
-        self.bankBranch = item;
+    if (self.entityCode) {
+      self.title = 'Edit Bank Branch';
+      bankBranchService.getItem(self.entityCode).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+        self.popoutUrl = $state.href('bank-branches.edit', { id: self.entity.code });
       });
     } else {
-      self.bankBranch = {};
+      self.title = 'New Bank Branch';
+      self.entity = { };
+      self.popoutUrl = $state.href('bank-branches.new');
     }
 
-    function save() {
-      bankBranchService.save(self.contact).then(function(contact) {
-        $uibModalInstance.close(contact);
-      })
-      .catch(function(err){
-      });
-    };
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
 
-    function cancel() {
-      $uibModalInstance.close();
-    };
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
+      
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      bankBranchService.save(entity).then(function (item) {
+        if (item) {
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('bank-branches.edit', { 'id': item.code });
+            }
+            growlService.growl('Saved successfully!', 'success');          
+          }
+        }
+      });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('bank-branches.list');
+      }
+    }
   })
