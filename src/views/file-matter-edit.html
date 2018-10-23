@@ -389,7 +389,7 @@
   <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group col-md-12" ng-if="to.party">
     <div class="d-flex">
-      <label class="form-control attr-label">Primary Client</label>
+      <label class="form-control attr-label">{{ to.label }}</label>`
 
       <md-autocomplete
         ng-disabled="!model.tmp.can_edit"
@@ -528,10 +528,6 @@
         </span>
       </md-item-template>
       </md-autocomplete>
-<!--       <a class="btn btn-primary short-btn" target="_new" ng-click="viewBillingCode(model.clsPrimaryClient)">
-        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
-      </a>
- -->      
       <button class="btn btn-primary short-btn m-l-10 bgm-lightgreen" ui-sref="billing.quotations-new({ fileNo: model.strFileNo1, billNo: model.clsPresetBill.code })" ng-disabled="!model.clsPresetBill.code">
         Quotation
       </button>
@@ -558,10 +554,6 @@
         </span>
       </md-item-template>
       </md-autocomplete>
-<!--       <a class="btn btn-primary short-btn" target="_new" ng-click="viewBillingCode(model.clsPrimaryClient)">
-        <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
-      </a>
- -->      
       <button class="btn btn-primary short-btn m-l-10 bgm-lightgreen" ui-sref="billing.quotations-new({ fileNo: model.strFileNo1, billNo: model.clsPresetBill2.code })" ng-disabled="!model.clsPresetBill2.code">
         Quotation
       </button>
@@ -615,7 +607,7 @@
   <h4 class="m-b-15 group-label">Staff in Charge</h4>
   <div class="form-group col-md-12">
     <div class="d-flex">
-      <label class="form-control attr-label">Partner in charge</label>
+      <label class="form-control attr-label">{{ to.partner }}</label>
       <md-autocomplete
         ng-disabled="!model.tmp.can_edit"
         md-selected-item="model.clsPartnerInCharge"
@@ -635,7 +627,7 @@
   </div>
   <div class="form-group col-md-12">
     <div class="d-flex">
-    <label class="form-control attr-label">L.A in charge</label>
+    <label class="form-control attr-label">{{ to.la }}</label>
       <md-autocomplete
         ng-disabled="!model.tmp.can_edit"
         md-selected-item="model.clsLAInCharge"
@@ -655,7 +647,7 @@
   </div>
   <div class="form-group col-md-12">
     <div class="d-flex">
-    <label class="form-control attr-label">Clerk in charge</label>
+    <label class="form-control attr-label">{{ to.clerk }}</label>
       <md-autocomplete
         ng-disabled="!model.tmp.can_edit"
         md-selected-item="model.clsClerkInCharge"
@@ -675,7 +667,7 @@
   </div>
   <div class="form-group col-md-12">
     <div class="d-flex">
-    <label class="form-control attr-label">Team</label>
+    <label class="form-control attr-label">{{ to.team }}</label>
       <md-autocomplete
         ng-disabled="!model.tmp.can_edit"
         md-selected-item="model.team"

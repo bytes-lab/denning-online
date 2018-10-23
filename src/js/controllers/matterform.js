@@ -47,6 +47,10 @@ denningOnline
               "type": "info",
               "templateOptions": {
                 "label": "Primary Client",
+                "partner": clsMatterCode ? getLabel(matter_code, 'PartnerInCharge') : '',
+                "la": clsMatterCode ? getLabel(matter_code, 'LAInCharge') : '',
+                "clerk": clsMatterCode ? getLabel(matter_code, 'ClerkInCharge') : '',
+                "team": clsMatterCode ? getLabel(matter_code, 'StaffInCharge4') : '',
                 "share": false,
                 "solicitor": true,
                 "party": true

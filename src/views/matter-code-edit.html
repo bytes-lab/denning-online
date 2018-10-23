@@ -6,7 +6,7 @@
     <div class="card-header">
       <div class="row">
       <div class="col-md-11 col-sm-12" ng-if="!vm.viewMode">
-        <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Matter Code</h2>
+        <span class="c-purple f-500 f-20">{{ vm.title }}</span>
         <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="matter-codes.list">Cancel</a>
         <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.mattercode.update && vm.can_edit">Save</a>
@@ -210,22 +210,78 @@
       <div class="row">
         <div class="clearfix"></div>
         <div class="col-md-5 p-l-25">
-          <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 2)">
-            <dt class="p-t-10">Staff label {{ n }}</dt>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Staff label 1</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.mattercode['staff'+n].Label" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.mattercode['PartnerInCharge'].Label"
+                md-search-text="qs1"
+                md-items="item in vm.queryList(vm.staffLevel1, qs1)"
+                md-item-text="item"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qs1" class="col-1" md-highlight-flags="i">{{ item }}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Staff label 2</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.mattercode['LAInCharge'].Label"
+                md-search-text="qs2"
+                md-items="item in vm.queryList(vm.staffLevel2, qs2)"
+                md-item-text="item"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qs2" class="col-1" md-highlight-flags="i">{{ item }}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>
         <div class="col-md-5 p-l-25">
-          <dl class="dl-horizontal" ng-repeat="n in vm.range(3, 4)">
-            <dt class="p-t-10">Staff label {{ n }}</dt>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Staff label 3</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.mattercode['staff'+n].Label" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.mattercode['ClerkInCharge'].Label"
+                md-search-text="qs3"
+                md-items="item in vm.queryList(vm.staffLevel3, qs3)"
+                md-item-text="item"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qs3" class="col-1" md-highlight-flags="i">{{ item }}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Staff label 4</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.mattercode['StaffInCharge4'].Label"
+                md-search-text="qs4"
+                md-items="item in vm.queryList(vm.staffLevel4, qs4)"
+                md-item-text="item"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qs4" class="col-1" md-highlight-flags="i">{{ item }}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>

@@ -151,6 +151,48 @@ denningOnline
       'Developer HDA Bank'
     ];
 
+    self.staffLevel1 = [
+      'Senior Partner', 
+      'Maganing Partner', 
+      'Partner', 
+      'Directors', 
+      'Senior Management', 
+      'Level 1 staff', 
+      'Supervisor', 
+      'Manager', 
+      'President'
+    ];
+
+    self.staffLevel2 = [
+      'Partner', 
+      'Director', 
+      'Senior Management', 
+      'Level 2 staff', 
+      'Supervisor', 
+      'Manager', 
+      'Legal Assistant', 
+      'Associate',
+      'Senior clerk'
+    ];
+
+    self.staffLevel3 = [
+      'Legal Assistant', 
+      'Supervisor', 
+      'Senior clerk', 
+      'Legal clerk', 
+      'Clerk', 
+      'Supporting staff', 
+      'Level 3 staff'
+    ];
+
+    self.staffLevel4 = [
+      'Team',
+      'Group',
+      'Practice Group',
+      'Committee',
+      'Sub-committee'
+    ];
+
     self.mattercode = {};   //  temp variable for json fields
 
     $("#back-top").hide();
@@ -188,6 +230,7 @@ denningOnline
     };
 
     if ($stateParams.id) {
+      self.title = 'Edit Matter Code';
       matterCodeService.getItem($stateParams.id).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
@@ -214,13 +257,16 @@ denningOnline
             description: self.entity.clsPresetBill.strDescription
           }
         }
-        // self.mattercode.staff1 = {'Label': 'Partner'};
-        // self.mattercode.staff2 = {'Label': 'L.A.'};
-        // self.mattercode.staff3 = {'Label': 'Clerk in charge'};
-        // self.mattercode.staff4 = {'Label': 'Team'};
       });
     } else {
+      self.title = 'New Matter Code';
       self.entity = {};
+      self.mattercode = {
+        PartnerInCharge: { Field: 'PartnerInCharge', Label: 'Partner' },
+        LAInCharge: { Field: 'LAInCharge', Label: 'Legal Assistant' },
+        ClerkInCharge: { Field: 'ClerkInCharge', Label: 'Legal clerk' },
+        StaffInCharge4: { Field: 'StaffInCharge4', Label: 'Team' }
+      }
     }
 
     self.categoryChange = function (item) {
