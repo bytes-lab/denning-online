@@ -159,10 +159,12 @@ denningOnline
 
         res.push({
           "boolIsDelete": "0",
+          "code": item.code,
+          "intItemID": item.code,
           "boolIsFormula": item.boolFormula,
           "boolIsPrimaryFee": item.boolIsPrimary,
           "decTaxRate": item.decTaxRate,
-          "decUnit": item.decDefaultUnit,
+          "decUnit": item.decDefaultUnit.replace(',', '').replace('(', '').replace(')', ''),
           "decUnitCost": parseFloat(item.decPricePerUnit) * parseFloat(item.decDefaultUnit),
           "decUnitPrice": item.decPricePerUnit,
           "intRank": item.intRank,
