@@ -19,24 +19,15 @@ denningOnline
 
       self.dataReady = true;
       initializeTable();
-    });    
+    });
 
-    self.clickHandler = function (item) {
-      $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': item.code, 'fileName': $stateParams.fileName});
-    }
-    
     function initializeTable () {
-      //Filtering
       self.tableFilter = new NgTableParams({
-        page: 1,      
-        count: 25,
-        sorting: {
-          name: 'asc' 
-        }
+        count: 25
       }, {
         dataset: self.data
-      })    
-    }  
+      })
+    }
   })
 
   .controller('noteEditCtrl', function($stateParams, growlService, noteService, $state, Auth, 
@@ -52,7 +43,7 @@ denningOnline
     if ($stateParams.id) {
       noteService.getItem($stateParams.id)
       .then(function(item){
-        self.note = angular.copy(item);  // important
+        self.note = angular.copy(item);
         self.note.dtDate = item.dtDate.split(' ')[0];
         self.title = 'Note Edit';
       });
@@ -72,7 +63,7 @@ denningOnline
           } else {
             $state.go('notes.edit', {'fileNo': $stateParams.fileNo, 'id': note.code, 'fileName': $stateParams.fileName});
           }
-          growlService.growl('Saved successfully!', 'success');          
+          growlService.growl('Saved successfully!', 'success');
         }
       });
     }
@@ -86,7 +77,6 @@ denningOnline
                                                 $state) 
   {
     var self = this;
-    self.dataReady = false;
     self.fileNo = $stateParams.fileNo;
 
     paymentRecordService.getList($stateParams.fileNo).then(function (data) {
@@ -94,39 +84,43 @@ denningOnline
       self.fileName = data.strFilename;
       self.data = [];
 
+      function compare(a,b) {
+        if (a.dtDatePaid < b.dtDatePaid)
+          return -1;
+        if (a.dtDatePaid > b.dtDatePaid)
+          return 1;
+        return 0;
+      }
+
       angular.forEach(data.section1, function(value, key) {
-        value['folder'] = ' ';
-        value['strDescription'] = moment(value['dtDatePaid'].split(' ')[0]).format('DD/MM/YYYY');
+        value['section'] = ' ';
+        value['dtDatePaid'] = moment(value['dtDatePaid'].split(' ')[0]);
+        value['strDescription'] = value['dtDatePaid'].format('DD/MM/YYYY');
         value['strValue'] = value['decAmount'];
         self.data.push(value);
       })
 
+      self.data = self.data.sort(compare);
       angular.forEach(data.section2, function(value, key) {
-        value['folder'] = '   ';
+        value['section'] = '   ';
         self.data.push(value);
       })
 
       angular.forEach(data.section3, function(value, key) {
-        value['folder'] = '  ';
+        value['section'] = '  ';
         self.data.push(value);
       })
 
       initializeTable();
-    });    
+    });
 
     function initializeTable () {
-      //Filtering
       self.tableFilter = new NgTableParams({
-        page: 1,      
-        sorting: {
-          name: 'asc' 
-        },
-        group: "folder"
+        group: "section"
       }, {
-        dataset: self.data,
-        counts: []
-      })    
-    }  
+        dataset: self.data
+      });
+    }
   })
 
   .controller('paymentRecordEditCtrl', function($stateParams, paymentRecordService, Auth,
@@ -135,7 +129,7 @@ denningOnline
   {
     var self = this;
     self.isDialog = false;
-    self.viewMode = false;  // for edit / create
+    self.viewMode = false;
     self.userInfo = Auth.getUserInfo();
     self.can_edit = $state.$current.data.can_edit;
     self.create_new = $state.$current.data.can_edit;
