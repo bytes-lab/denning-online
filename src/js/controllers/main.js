@@ -124,7 +124,7 @@ denningOnline
 
     self.searchTextChange = function (text) {
       self.searchCategory = 0;
-      self.currentText = { value: text, display: text };
+      self.currentText = { keyword: text, display: text };
       if (text.trim() == '') {
         self.searchRes = [];
       }
@@ -138,7 +138,7 @@ denningOnline
       searchService.search(item.keyword, self.searchCategory).then(function (data) {
         self.searchRes = data;
         if ($state.current.name != 'search')
-          $state.go('search');        
+          $state.go('search');
       });
     }
 
