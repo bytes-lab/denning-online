@@ -43,9 +43,9 @@
                   </button>
                   <button class="btn btn-default btn-sm waves-circle m-l-5" title="Delete" ng-click="vm.deleteFolder(group.value)">
                     <i class="zmdi zmdi-delete"></i>
-                  </button>                  
+                  </button>
                 </div>
-              </td>              
+              </td>
             </tr>
             <tr ng-hide="group.$hideRows" ng-if="file.name" ng-repeat="file in group.data" ng-repeat-end>
               <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" /></td>
@@ -59,7 +59,7 @@
                 {{file.ext}}
               </td>
               <td sortable="'date'" data-title="'Date'" class="wp-25">
-                {{file.date|ddate}}
+                {{file.date|ddate}} {{file.date.split(' ')[1]}}
               </td>
               <td data-title="'Action'" class="f-16">
                 <button class="btn btn-default btn-sm waves-circle" title="Rename" ng-click="vm.renameDoc(file)">
@@ -94,6 +94,21 @@
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="fileDeleteModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">Are you sure to delete folling file(s)?</h4>
+  </div>
+  <div class="modal-body">
+    <ul class="f-15 c-blue m-b-20 p-l-20">
+      <li ng-repeat="file in files track by $index">{{ file.name }}{{ file.ext }}</li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-link" ng-click="ok()">OK</button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
 
 <script type="text/ng-template" id="folderModal.html">
   <div class="modal-header">

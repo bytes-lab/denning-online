@@ -22,9 +22,6 @@ denningOnline
     self.quotationTable = new NgTableParams({
       page: 1,
       count: 5,
-      sorting: {
-        name: 'asc'
-      }
     }, {
       counts: [],
       getData: function(params) {
@@ -49,9 +46,6 @@ denningOnline
     self.invoiceTable = new NgTableParams({
       page: 1,
       count: 5,
-      sorting: {
-        name: 'asc' 
-      }
     }, {
       counts: [],
       getData: function(params) {
@@ -83,8 +77,8 @@ denningOnline
     self.all_categories = [
       {'key': 'client', 'val': 'Client'}, 
       {'key': 'disb', 'val': 'Disbursement'}, 
+      {'key': 'advance', 'val': 'Advances'}, 
       {'key': 'fd', 'val': 'FD Control'}, 
-      {'key': 'advance', 'val': 'Advanced'}, 
       {'key': 'other', 'val': 'Other'},
       {'key': 'recv', 'val': 'Receivables'},
     ];

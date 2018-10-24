@@ -108,6 +108,12 @@
     </div>
 
     <div class="input-group m-b-20">
+      <span class="input-group-addon"><i class="zmdi zmdi-local-phone"></i></span>
+      <div class="fg-line">
+        <input type="text" ng-model="lctrl.user.phone" class="form-control" placeholder="Phone">
+      </div>
+    </div>
+    <div class="input-group m-b-20">
       <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
       <div class="fg-line">
         <input type="number" ng-model="lctrl.user.tac" class="form-control" placeholder="TAC" ng-keypress="lctrl.enterTAC($event)">

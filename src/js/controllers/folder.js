@@ -317,17 +317,19 @@ denningOnline
         return false;
       }
 
-      if (confirm("Are you sure to delete this file?")) {
-        var deletes = [];
-        angular.forEach(files, function(value, key) {
-          deletes.push(folderService.deleteDocument(value.URL));
-        })
-
-        Promise.all(deletes).then(function (data) {
-          growlService.growl('Files deleted successfully!', 'success');
-          $state.reload();
-        })
-      }
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'fileDeleteModal.html',
+        controller: 'deleteModalCtrl',
+        size: '',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          files: function () {
+            return files;
+          }
+        }
+      });
     }
 
     self.deleteFiles = function () {
@@ -647,6 +649,29 @@ denningOnline
       }
 
       folderService.createSubFolder(data).then(function () {
+        $uibModalInstance.close();
+        $state.reload();
+      })
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.close();
+    };
+  })
+
+  .controller('deleteModalCtrl', function($scope, $uibModalInstance, growlService, folderService, 
+                                          files, $state) 
+  {
+    $scope.files = files;
+    
+    $scope.ok = function () {
+      var deletes = [];
+      angular.forEach(files, function(value, key) {
+        deletes.push(folderService.deleteDocument(value.URL));
+      })
+
+      Promise.all(deletes).then(function (data) {
+        growlService.growl('Files deleted successfully!', 'success');
         $uibModalInstance.close();
         $state.reload();
       })
