@@ -47,13 +47,13 @@
                 </div>
               </td>
             </tr>
-            <tr ng-hide="group.$hideRows" ng-if="file.name" ng-repeat="file in group.data" ng-repeat-end>
-              <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" /></td>
+            <tr ng-hide="group.$hideRows" ng-if="file.name" ng-repeat="file in group.data" ng-repeat-end ng-click="vm.preview(file);">
+              <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" ng-click="$event.stopPropagation();"></td>
               <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="wp-60">
                 <i class="zmdi zmdi-collection-pdf" ng-if="file.ext=='.pdf'"></i>
                 <i class="zmdi zmdi-collection-image" ng-if="file.ext=='.jpg' || file.ext=='.png' || file.ext=='.jpeg'"></i>
                 <i class="zmdi zmdi-collection-text" ng-if="file.ext!='.pdf' && file.ext!='.jpg' && file.ext!='.png' && file.ext!='.jpeg'"></i>&nbsp;
-                <a href="" ng-click="vm.preview(file);" class="c-black">{{file.name}}</a>
+                {{file.name}}
               </td>
               <td sortable="'ext'" data-title="'Ext'" class="wp-15">
                 {{file.ext}}
@@ -62,26 +62,26 @@
                 {{file.date|ddate}} {{file.date.split(' ')[1]}}
               </td>
               <td data-title="'Action'" class="f-16">
-                <button class="btn btn-default btn-sm waves-circle" title="Rename" ng-click="vm.renameDoc(file)">
+                <button class="btn btn-default btn-sm waves-circle" title="Rename" ng-click="vm.renameDoc(file); $event.stopPropagation();">
                   <i class="zmdi zmdi-edit"></i>
                 </button>
-                <button class="btn btn-default btn-sm waves-circle m-l-5" title="Download" ng-click="vm.download(file)">
+                <button class="btn btn-default btn-sm waves-circle m-l-5" title="Download" ng-click="vm.download(file); $event.stopPropagation();">
                   <i class="zmdi zmdi-download"></i>
                 </button>
                 <div class="dropdown file-actions" uib-dropdown style="display: inline;">
-                  <button class="btn btn-default btn-sm waves-circle m-l-5" uib-dropdown-toggle>
+                  <button class="btn btn-default btn-sm waves-circle m-l-5" ng-click="$event.stopPropagation();" uib-dropdown-toggle>
                     <i class="zmdi zmdi-more"></i>
                   </button>
 
                   <ul class="dropdown-menu pull-right">
                     <li>
-                      <a ng-click="vm.copyLink(file)"><i class="zmdi zmdi-collection-text"></i> Copy link</a>
+                      <a ng-click="vm.copyLink(file); $event.stopPropagation();"><i class="zmdi zmdi-collection-text"></i> Copy link</a>
                     </li>
                     <li>
-                      <a ng-click="vm.shareFile(file)"><i class="zmdi zmdi-share"></i> Share</a>
+                      <a ng-click="vm.shareFile(file); $event.stopPropagation();"><i class="zmdi zmdi-share"></i> Share</a>
                     </li>
                     <li>
-                      <a ng-click="vm.deleteFile(file)"><i class="zmdi zmdi-delete"></i> Delete</a>
+                      <a ng-click="vm.deleteFile(file); $event.stopPropagation();"><i class="zmdi zmdi-delete"></i> Delete</a>
                     </li>
                   </ul>
                 </div>

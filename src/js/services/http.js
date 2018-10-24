@@ -33,7 +33,11 @@ denningOnline
           });
         }
       } else {
-        alert('Error: '+err.statusText);
+        if (err.statusText == "") {
+          alert("The API is not available at the moment.\n\nPlease try again a few minutes later.");
+        } else {
+          alert('Error: ' + err.statusText);
+        }
       }
     }
 
