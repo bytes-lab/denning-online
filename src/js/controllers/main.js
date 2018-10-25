@@ -249,6 +249,7 @@ denningOnline
           self.errorMessage = '';
           if (res.statusCode == 250) {
             self.verification = 1;
+            self.hpNumber = res.hpNumber;
             self.login = 0;
           } else if (res.statusCode == 280) {
             self.resetPassword_ = 1;

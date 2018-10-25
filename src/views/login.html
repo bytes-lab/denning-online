@@ -108,17 +108,11 @@
 
   <!-- Verification Phone -->
   <div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.verification === 1 }" data-ng-if="lctrl.verification === 1">
-    <p class="text-left">You are trying to login from unknown device. Please type TAC from your email for your security.</p>
+    <p class="text-left">You are trying to login from unknown device. Please input TAC you got from +601x xxxx 399.</p>
     <div ng-if="lctrl.errorMessage != ''" style="color: red">  
       {{lctrl.errorMessage}}
     </div>
 
-    <div class="input-group m-b-20">
-      <span class="input-group-addon"><i class="zmdi zmdi-local-phone"></i></span>
-      <div class="fg-line">
-        <input type="text" ng-model="lctrl.user.phone" class="form-control" placeholder="Phone">
-      </div>
-    </div>
     <div class="input-group m-b-20">
       <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
       <div class="fg-line">
