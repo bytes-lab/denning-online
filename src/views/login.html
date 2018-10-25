@@ -108,9 +108,9 @@
 
   <!-- Verification Phone -->
   <div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.verification === 1 }" data-ng-if="lctrl.verification === 1">
-    <p class="text-left">You are trying to login from unknown device. <br>Please input TAC you got from +601x xxxx 399.</p>
+    <p class="text-center" style="line-height: 24px;">You are trying to login from unknown device. &nbsp;&nbsp;&nbsp;Please input the confirmation code you got from {{ lctrl.hpNumber }}.</p>
     <div ng-if="lctrl.errorMessage != ''" style="color: red">  
-      {{lctrl.errorMessage}}
+      {{ lctrl.errorMessage }}
     </div>
 
     <div class="input-group m-b-20">

@@ -249,7 +249,7 @@ denningOnline
           self.errorMessage = '';
           if (res.statusCode == 250) {
             self.verification = 1;
-            self.hpNumber = res.hpNumber;
+            self.hpNumber = res.hpNumber.substr(0, 2) + 'xx xxxx ' + res.hpNumber.substr(-4);
             self.login = 0;
           } else if (res.statusCode == 280) {
             self.resetPassword_ = 1;

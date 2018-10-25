@@ -83,7 +83,6 @@
 
 <footer id="footer" data-ng-include="'template/footer.html'"></footer>
 
-
 <script type="text/ng-template" id="widget_t1.html">
   <div ng-class="to.colSpan" ng-if="!to.hide">
     <div class="bs-item z-depth-1">
@@ -101,12 +100,26 @@
         </li>
       </ul>
       <div class="row" style="padding: 16px 0;">
-        <div class="col-xs-4">
+        <div class="col-xs-3">
           <div class="box-title">{{ to.title }}</div>
           <div class="box-title-detail c-cyan">{{ data.mainValue.value }}</div>
         </div>
-        <div class="col-xs-8" style="text-align: left;">
-          <ul style="list-style-type: none;">
+        <div class="col-xs-9 text-left">
+          <div class="table-responsive p-r-20" style="margin: -4px 0 0 -10px;">
+            <table ng-if="[20, 19].indexOf(to.ordering) > -1" class="table table-striped">
+              <tr>
+                <th class="p-5 p-l-15" ng-repeat="item in data.table.header.values">{{ item }}</th>
+              </tr>
+              <tr ng-repeat="item in data.table.rows">
+                <td class="p-5 p-l-15" ng-repeat="sitem in item.values track by $index">
+                  <span ng-if="sitem != 'true' && sitem != 'false'">{{ sitem }}</span>
+                  <span class="text-success f-12" ng-if="sitem == 'true'"><i class="zmdi zmdi-circle zmdi-hc-fw"></i></span>
+                  <span class="text-danger f-12" ng-if="sitem == 'false'"><i class="zmdi zmdi-circle zmdi-hc-fw"></i></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <ul style="list-style-type: none;" ng-if="[20, 19].indexOf(to.ordering) == -1">
             <li ng-repeat="item in data.table.rows" style="cursor: pointer;" ui-sref="file-matters.edit({ fileNo: item.values[0] })" ng-if="to.ordering == 1">
               <span>{{ item.values[0] }} {{ item.values[1] }}</span>
               <div class="c-cyan f-10">
