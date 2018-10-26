@@ -12,6 +12,12 @@ denningOnline
       });
     }
 
+    service.getNote = function (code, type) {
+      return http.GET('v1/table/bill'+type+'Note?search='+code).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     service.getItem = function (code) {
       return http.GET('v1/table/bill/'+code).then(function (resp) {
         return resp.data;

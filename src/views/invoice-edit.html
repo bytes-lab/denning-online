@@ -256,13 +256,13 @@
               <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.debit.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.credit.Fees | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.gross.Fees + vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Fees + vm.sst.Fees + vm.debit.Fees + vm.credit.Fees | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -276,13 +276,13 @@
               <label class="form-control">{{ vm.sst.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.debit.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.credit.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.gross.DisbWithTax + vm.sst.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.DisbWithTax + vm.sst.DisbWithTax + vm.debit.DisbWithTax + vm.credit.DisbWithTax | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -294,13 +294,13 @@
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.debit.Disb | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.credit.Disb | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.gross.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.gross.Disb + vm.debit.Disb + vm.credit.Disb | number:2 }}</label>
             </div>
           </div>
           <div class="col-md-12 no-padding m-b-10">
@@ -314,13 +314,13 @@
               <label class="form-control">{{ vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.debit.Fees + vm.debit.Disb + vm.debit.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.sst.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.credit.Fees + vm.credit.Disb + vm.credit.DisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.gross.Fees + vm.sst.Fees + vm.gross.DisbWithTax + vm.sst.DisbWithTax + vm.gross.Disb | number:2 }}</label>
+              <label class="form-control f-14 f-700">{{ vm.gross.Fees + vm.sst.Fees + vm.gross.DisbWithTax + vm.sst.DisbWithTax + vm.gross.Disb + vm.debit.Fees + vm.debit.Disb + vm.debit.DisbWithTax + vm.credit.Fees + vm.credit.Disb + vm.credit.DisbWithTax | number:2 }}</label>
             </div>
           </div>
         </div>

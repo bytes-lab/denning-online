@@ -253,9 +253,21 @@ denningOnline
       self.tableFilter.reload();
     }
 
+    self.credit = {
+      Fees: 0.00,
+      DisbWithTax: 0.00,
+      Disb: 0.00
+    };
+
+    self.debit = {
+      Fees: 0.00,
+      DisbWithTax: 0.00,
+      Disb: 0.00
+    };
+
     if ($stateParams.id) {
       self.title = 'Edit Invoice';
-      invoiceService.getItem($stateParams.id).then(function (item){
+      invoiceService.getItem($stateParams.id).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         initializeTable();
@@ -281,6 +293,26 @@ denningOnline
             name: self.entity.strBillTo,
             group: false
           }
+        }
+      });
+
+      invoiceService.getNote($stateParams.id, 'Credit').then(function (item) {
+        if (item.length > 0) {
+          self.credit = {
+            Fees: parseFFloat(item[0].decFee)+parseFFloat(item[0].decFeeGST),
+            DisbWithTax: parseFFloat(item[0].decDisbTax)+parseFFloat(item[0].decDisbTaxGST),
+            Disb: parseFFloat(item[0].decDisbOnly)
+          };
+        }
+      });
+
+      invoiceService.getNote($stateParams.id, 'Debit').then(function (item) {
+        if (item.length > 0) {
+          self.debit = {
+            Fees: parseFFloat(item[0].decFee)+parseFFloat(item[0].decFeeGST),
+            DisbWithTax: parseFFloat(item[0].decDisbTax)+parseFFloat(item[0].decDisbTaxGST),
+            Disb: parseFFloat(item[0].decDisbOnly)
+          };
         }
       });
     } else {
