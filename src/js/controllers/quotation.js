@@ -222,15 +222,26 @@ denningOnline
         DisbWithTax: 0.0
       };
 
+      var G0001 = null;
       for (ii in self.entity.listBilledItems) {
         var item = self.entity.listBilledItems[ii];
-        item.decUnitCost = parseFFloat(item.decUnitPrice) * parseFFloat(item.decUnit);
-        item.decUnitTax = parseFFloat(item.decTaxRate) * item.decUnitCost;
-        item.decTotal = item.decUnitCost + item.decUnitTax;
+        if (item.strItemCode != 'G0001') {
+          item.decUnitCost = parseFFloat(item.decUnitPrice) * parseFFloat(item.decUnit);
+          item.decUnitTax = parseFFloat(item.decTaxRate) * item.decUnitCost;
+          item.decTotal = item.decUnitCost + item.decUnitTax;
 
-        self.gross[item.strBillItemType] += item.decUnitCost;
-        self.sst[item.strBillItemType] += item.decUnitTax;
-        self.gross['All'] += item.decUnitCost;
+          self.gross[item.strBillItemType] += item.decUnitCost;
+          self.sst[item.strBillItemType] += item.decUnitTax;
+          self.gross['All'] += item.decUnitCost;          
+        } else {
+          G0001 = item;
+        }
+      }
+
+      if (G0001) {
+        G0001.decUnitPrice = self.sst.Fees + self.sst.DisbWithTax;
+        G0001.decUnitCost = self.sst.Fees + self.sst.DisbWithTax;
+        G0001.decTotal = item.decUnitCost + item.decUnitTax;
       }
 
       self.tableFilter.reload();
@@ -249,17 +260,25 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
         initializeTable();
 
-        fileMatterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
-          for (var idx in matterInfo.partyGroup) {
-            var pg = matterInfo.partyGroup[idx];
-            if (pg.party.length > 0) {
-              self.quoteToList.push({ name: pg.PartyName, group: true });
-              for (var sidx in pg.party) {
-                self.quoteToList.push({ name: pg.party[sidx].name, group: false });
+        if (self.entity.clsFileNo && self.entity.clsFileNo.strFileNo1) {
+          fileMatterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
+            for (var idx in matterInfo.partyGroup) {
+              var pg = matterInfo.partyGroup[idx];
+              if (pg.party.length > 0) {
+                self.quoteToList.push({ name: pg.PartyName, group: true });
+                for (var sidx in pg.party) {
+                  self.quoteToList.push({ name: pg.party[sidx].name, group: false });
+                }
               }
             }
-          }
-        });
+          });          
+        } else {
+          self.entity.clsFileNo = null;
+        }
+
+        if (!self.entity.clsMatterCode || !self.entity.clsMatterCode.code) {
+          self.entity.clsMatterCode = null;
+        }
 
         if(!self.entity.clsPresetBill.code) {
           self.entity.clsPresetBill = null;
@@ -308,6 +327,11 @@ denningOnline
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
+      for (ii in entity.listBilledItems) {
+        var item = entity.listBilledItems[ii];
+        entity.listBilledItems[ii] = refactorService.convertDouble(item);
+      }
+
       quotationService.save(entity, self.entity_).then(function (item) {
         if (item) {
           if (self.entity_) {

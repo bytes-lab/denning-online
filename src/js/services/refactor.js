@@ -58,8 +58,12 @@ denningOnline
     }
 
     service.convertFloat = function(strVal) {
-      var val = strVal.replace(/[^0-9\.]/g, '');
-      return val == "" ? 0 : parseFloat(val);
+      if (typeof strVal == 'string') {
+        var val = strVal.replace(/[^0-9\.]/g, '');
+        return val == "" ? 0 : parseFloat(val);
+      } else {
+        return strVal;
+      }
     }
 
     service.formatFloat = function(fVal) {
@@ -69,7 +73,7 @@ denningOnline
 
     service.convertDouble = function (model) {
       for (var ii in model) {
-        if (ii.startsWith('dec')) {
+        if (ii.startsWith('dec') || ii.startsWith('int')) {
           model[ii] = service.convertFloat(model[ii]);
         }
       }

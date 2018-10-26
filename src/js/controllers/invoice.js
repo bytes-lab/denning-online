@@ -222,15 +222,26 @@ denningOnline
         DisbWithTax: 0.0
       };
 
+      var G0001 = null;
       for (ii in self.entity.listBilledItems) {
         var item = self.entity.listBilledItems[ii];
-        item.decUnitCost = parseFFloat(item.decUnitPrice) * parseFFloat(item.decUnit);
-        item.decUnitTax = parseFFloat(item.decTaxRate) * item.decUnitCost;
-        item.decTotal = item.decUnitCost + item.decUnitTax;
+        if (item.strItemCode != 'G0001') {
+          item.decUnitCost = parseFFloat(item.decUnitPrice) * parseFFloat(item.decUnit);
+          item.decUnitTax = parseFFloat(item.decTaxRate) * item.decUnitCost;
+          item.decTotal = item.decUnitCost + item.decUnitTax;
 
-        self.gross[item.strBillItemType] += item.decUnitCost;
-        self.sst[item.strBillItemType] += item.decUnitTax;
-        self.gross['All'] += item.decUnitCost;
+          self.gross[item.strBillItemType] += item.decUnitCost;
+          self.sst[item.strBillItemType] += item.decUnitTax;
+          self.gross['All'] += item.decUnitCost;          
+        } else {
+          G0001 = item;
+        }
+      }
+
+      if (G0001) {
+        G0001.decUnitPrice = self.sst.Fees + self.sst.DisbWithTax;
+        G0001.decUnitCost = self.sst.Fees + self.sst.DisbWithTax;
+        G0001.decTotal = item.decUnitCost + item.decUnitTax;
       }
 
       self.tableFilter.reload();
@@ -308,7 +319,12 @@ denningOnline
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
-      invoiceService.save(entity, self.entity_).then(function (item) {
+      for (ii in entity.listBilledItems) {
+        var item = entity.listBilledItems[ii];
+        entity.listBilledItems[ii] = refactorService.convertDouble(item);
+      }
+
+      invoiceService.save(entity).then(function (item) {
         if (item) {
           if (self.entity_) {
             $state.reload();

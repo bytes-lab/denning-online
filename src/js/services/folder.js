@@ -3,14 +3,7 @@ denningOnline
     var service = {};
     
     service.getList = function (code, type) {
-      var url = 'v1/app/';
-      if (type == 'contact') {
-        url = url + 'contactFolder/'+code;
-      } else if (type == 'matter') {
-        url = url + 'matter/'+code+'/fileFolder';
-      }
-
-      return http.GET(url).then(function (resp) {
+      return http.GET('v1/document/'+type+'/dir/'+code).then(function (resp) {
         return resp.data;
       });
     }
