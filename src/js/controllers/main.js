@@ -244,63 +244,59 @@ denningOnline
     }
 
     self.doLogin = function (userData) {
-      return Auth.login(userData.email, userData.password)
-        .then(function (res) {
-          self.errorMessage = '';
-          if (res.statusCode == 250) {
-            self.verification = 1;
-            self.hpNumber = res.hpNumber.substr(0, 2) + 'xx xxxx ' + res.hpNumber.substr(-4);
-            self.login = 0;
-          } else if (res.statusCode == 280) {
-            self.resetPassword_ = 1;
-            self.login = 0;
-          } else {
-            Auth.staffLogin(userData.password).then(function (res) {
-              if (self.dialogTitle) {
-                $uibModalInstance.close();
-                http.openSessionDialog = false;
-                
-                if (method == 'GET') {
-                  $state.reload();
-                }
-              } else {
-                $scope.startPing();
+      return Auth.login(userData.email, userData.password).then(function (res) {
+        self.errorMessage = '';
+        if (res.statusCode == 250) {
+          self.verification = 1;
+          self.hpNumber = res.hpNumber.substr(0, 2) + 'xx xxxx ' + res.hpNumber.substr(-4);
+          self.login = 0;
+        } else if (res.statusCode == 280) {
+          self.resetPassword_ = 1;
+          self.login = 0;
+        } else {
+          Auth.staffLogin(userData.password).then(function (res) {
+            if (self.dialogTitle) {
+              $uibModalInstance.close();
+              http.openSessionDialog = false;
+              
+              if (method == 'GET') {
+                $state.reload();
+              }
+            } else {
+              $scope.startPing();
 
-                $state.go('home');
-              }
-            })
-            .catch(function (err) {
-              self.errorMessage = err.statusText;
-              if (!err.statusText) {
-                self.errorMessage = 'Cannot call staff login API. Please check the API status.';
-              }
-            })
-          }
-        }).catch(function (err) {
-          self.errorMessage = err.statusText;
-          if (!err.statusText) {
-            self.errorMessage = 'Cannot call login API. Please check the API status.';
-          }
-        });
+              $state.go('home');
+            }
+          })
+          .catch(function (err) {
+            self.errorMessage = err.statusText;
+            if (!err.statusText) {
+              self.errorMessage = 'Cannot call staff login API. Please check the API status.';
+            }
+          })
+        }
+      }).catch(function (err) {
+        self.errorMessage = err.statusText;
+        if (!err.statusText) {
+          self.errorMessage = 'Cannot call login API. Please check the API status.';
+        }
+      });
     }
 
     self.checkTAC = function(userData) {
-      return Auth.tac(userData.email, userData.tac)
-        .then(function (res) {
-          Auth.staffLogin(userData.password)
-          .then(function (res) {
-            $state.go('home');
-          })
-          .catch(function (err) {
-            if (!err.statusText) {
-              self.errorMessage = 'Cannot call TAC API. Please check the API status.';
-            }
-          })
+      return Auth.tac(userData.email, userData.tac).then(function (res) {
+        Auth.staffLogin(userData.password).then(function (res) {
+          $state.go('home');
         })
         .catch(function (err) {
-          console.log(err);
-          self.errorMessage = "TAC is not correct.";
+          if (!err.statusText) {
+            self.errorMessage = 'Cannot call TAC API. Please check the API status.';
+          }
         })
+      }).catch(function (err) {
+        console.log(err);
+        self.errorMessage = "TAC is not correct.";
+      })
     }
 
     self.resetPassword = function () {

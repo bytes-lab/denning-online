@@ -222,6 +222,8 @@
               </div>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Action Required</dt>
             <dd>
@@ -230,21 +232,11 @@
               </div>
             </dd>
           </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Action To be Completed By</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.phoneHome">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Remarks</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strRemarks">
               </div>
             </dd>
           </dl>
@@ -274,6 +266,19 @@
           </dl>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-8 p-l-25">
+          <dt class="p-t-10">Remark</dt>
+          <dl class="dl-horizontal">
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control" rows="3" ng-model="vm.entity.strRemarks"></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
       <div class="clearfix"></div>
       <div class="row">
         <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">

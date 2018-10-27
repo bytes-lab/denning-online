@@ -6,7 +6,8 @@
           <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
           <a class="btn btn-link btn-sm pull-right" ui-sref="billing.receipts-list">Cancel</a>
           <a class="btn btn-primary btn-sm pull-right m-r-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-          <a class="btn bgm-cyan btn-sm pull-right m-r-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <button class="btn bgm-cyan btn-sm pull-right m-r-10" type="submit" ng-disabled="vm.entity.clsAccessPrivilege.canEdit=='No'" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</button>
+          <div class="f-13 text-warning">{{ vm.entity.clsAccessPrivilege.restrictedMessage[0] }}</div>
         </div>
       </div>
     </div>
@@ -360,7 +361,7 @@
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.receipts-list">Cancel</a>
             <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right m-l-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <button class="btn bgm-cyan btn-sm pull-right m-l-10" type="submit" ng-disabled="vm.entity.clsAccessPrivilege.canEdit=='No'" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</button>
           </div>
         </div>
       </div>

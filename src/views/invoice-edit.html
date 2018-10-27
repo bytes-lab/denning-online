@@ -6,7 +6,8 @@
           <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
           <a class="btn btn-link btn-sm pull-right" ui-sref="billing.invoices-list">Cancel</a>
           <a class="btn btn-primary btn-sm pull-right m-r-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-          <a class="btn bgm-cyan btn-sm pull-right m-r-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <button class="btn bgm-cyan btn-sm pull-right m-r-10" type="submit" ng-disabled="vm.entity.clsAccessPrivilege.canEdit=='No'" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</button>
+          <div class="f-13 text-warning">{{ vm.entity.clsAccessPrivilege.restrictedMessage[0] }}</div>
         </div>
       </div>
     </div>
@@ -232,7 +233,7 @@
             <label>Gross</label>
           </div>
           <div class="col-md-2 p-l-20">
-            <label>SST / GST</label>
+            <label>{{ vm.userInfo.TaxName }}</label>
           </div>
           <div class="col-md-2 p-l-20">
             <label>Debit Note</label>
@@ -267,7 +268,7 @@
           </div>
           <div class="col-md-12 no-padding m-b-10">
             <div class="col-md-2">
-              <label class="f-700">Disb. with SST / GST</label>
+              <label class="f-700">Disb. with {{ vm.userInfo.TaxName }}</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.gross.DisbWithTax | number:2 }}</label>
@@ -331,9 +332,9 @@
         <div class="col-md-10 p-l-30 m-t-15">
           <div class="item-type" ng-class="{ 'active': vm.itemType=='All' }" ng-click="vm.filterItem('All', '')">ALL ( <small>{{ vm.gross.All + vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</small> )</div>
           <div class="item-type" ng-class="{ 'active': vm.itemType=='Fees' }" ng-click="vm.filterItem('Fees', '')">FEE ( <small>{{ vm.gross.Fees | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax', '')">DISB. with SST / GST ( <small>{{ vm.gross.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='DisbWithTax' }" ng-click="vm.filterItem('DisbWithTax', '')">DISB. with {{ vm.userInfo.TaxName }} ( <small>{{ vm.gross.DisbWithTax | number:2 }}</small> )</div>
           <div class="item-type" ng-class="{ 'active': vm.itemType=='Disb' }" ng-click="vm.filterItem('Disb', '')">DISB ( <small>{{ vm.gross.Disb | number:2 }}</small> )</div>
-          <div class="item-type" ng-class="{ 'active': vm.itemType=='SST' }" ng-click="vm.filterItem('SST', 'Serv')">SST / GST ( <small>{{ vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</small> )</div>
+          <div class="item-type" ng-class="{ 'active': vm.itemType=='SST' }" ng-click="vm.filterItem('SST', 'Serv')">{{ vm.userInfo.TaxName }} ( <small>{{ vm.sst.Fees + vm.sst.DisbWithTax | number:2 }}</small> )</div>
           <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-5" ng-show="vm.can_edit" ng-click="vm.insert(-1);" style="padding: 2px 7px;" title="Add Item">
             <i class="zmdi zmdi-plus"></i>
           </div>
@@ -371,7 +372,7 @@
                 <td data-title="'Tax Code'">
                   {{ w.strTaxCode }}
                 </td>
-                <td data-title="'SST/GST (%)'">
+                <td data-title="vm.userInfo.TaxName+' (%)'">
                   {{ w.decTaxRate * 100 | number:2 }}
                 </td>
                 <td data-title="'Tax'" class="text-right">
@@ -448,7 +449,7 @@
           <div class="m-t-30">
             <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="billing.invoices-list">Cancel</a>
             <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right m-l-10" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <button class="btn bgm-cyan btn-sm pull-right m-l-10" type="submit" ng-disabled="vm.entity.clsAccessPrivilege.canEdit=='No'" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</button>
           </div>
         </div>
       </div>

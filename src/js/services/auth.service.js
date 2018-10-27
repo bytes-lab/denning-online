@@ -216,6 +216,8 @@ denningOnline
       }).then(function (info) {
         if (info.statusCode == 200) {
           service.userInfo.priority = service.demoPriority;
+          service.userInfo.TaxName = info.companyProfile.TaxName;
+          service.userInfo.currency = info.companyProfile.currencySymbol;
           service.setUserInfo(service.userInfo);
         }
         return info;
