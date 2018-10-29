@@ -10,7 +10,7 @@ denningOnline
       }
     }, {
       getData: function(params) {
-        return projectService.getList(params.page(), params.count(), self.keyword)
+        return projectService.getHousingList(params.page(), params.count(), self.keyword)
         .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
@@ -18,8 +18,13 @@ denningOnline
       }
     })
   
-    self.search = function () {
-      self.tableFilter.reload();
+    self.search = function (event, clear) {
+      if(event.which == 13 || clear) { 
+        if (clear) {
+          self.keyword='';
+        }
+        self.tableFilter.reload();
+      }
     }
   })
 

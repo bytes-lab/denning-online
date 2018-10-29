@@ -98,13 +98,13 @@ denningOnline
     self.states    = [];
     self.searchRes = [];
     self.selectedItem = '';
-    self.currentText = '';    
+    self.currentText = '';
 
     self.newState = function (state) {
     }
 
     self.searchKeyPressed = function (events, item) {
-      if(event.which == 13){        
+      if(event.which == 13) {
         // hide list for not keyword
         $('#search_filter').focus();
         self.selectedItemChange(self.selectedItem || self.currentText);
