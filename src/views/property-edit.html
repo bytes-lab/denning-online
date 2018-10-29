@@ -173,7 +173,7 @@
             <dt class="p-t-10">Lease Expiry Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'popened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtLeaseExpDate" is-open="popened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'pe_opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtLeaseExpDate" is-open="pe_opened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -181,7 +181,7 @@
             <dt class="p-t-10">Title Registration Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'popened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtTitleRegistrationDate" is-open="popened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'pe_opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtTitleRegistrationDate" is-open="pe_opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -470,9 +470,21 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Project Code (optional)</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.clsProject.code" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
+              <md-autocomplete
+                md-selected-item="vm.entity.clsProject"
+                md-search-text="qspj"
+                md-items="item in vm.queryProjects(qspj)"
+                md-item-text="item.code"
+                md-min-length="0"
+                md-selected-item-change="vm.projectChange(item)"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qspj" class="col-1" md-highlight-flags="i">
+                  [{{item.code}}] {{item.strProjectName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -491,7 +503,7 @@
                 md-search-text="searchText"
                 md-items="item in vm.queryContacts(searchText)"
                 md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
-                md-min-length="1"
+                md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
@@ -510,7 +522,7 @@
                 md-search-text="qspp"
                 md-items="item in vm.queryContacts(qspp)"
                 md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
-                md-min-length="1"
+                md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>

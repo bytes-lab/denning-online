@@ -16,15 +16,20 @@ denningOnline
       }
     });
 
-    self.search = function () {
-      self.tableFilter.reload();
+    self.search = function (event, clear) {
+      if(event.which == 13 || clear) { 
+        if (clear) {
+          self.keyword='';
+        }
+        self.tableFilter.reload();
+      }
     }
   })
 
   .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, 
                                            $state, Auth, $uibModal, contactService, refactorService,
-                                           uibDateParser, mukimService, $uibModalInstance, 
-                                           entityCode, isDialog, isNew) 
+                                           uibDateParser, mukimService, $uibModalInstance,
+                                           entityCode, isDialog, projectService, isNew) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -50,13 +55,17 @@ denningOnline
             mukim: self.entity.strMukim,
             daerah: self.entity.strDaerah,
             negeri: self.entity.strNegeri 
-          };          
+          };
         }
 
         if (self.entity.strApprovingAuthority) {
           self.strApprovingAuthority_ = {
             description: self.entity.strApprovingAuthority
-          }          
+          };
+        }
+
+        if (!self.entity.clsProject.code) {
+          self.entity.clsProject = null;
         }
       });
     } else {
@@ -64,6 +73,12 @@ denningOnline
         strMukimType: 'Mukim'
       };
     }
+
+    self.queryProjects = function (searchText) {
+      return projectService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
 
     self.queryContacts = function (searchText) {
       return contactService.getCustomerList(1, 10, searchText).then(function (resp) {
@@ -103,6 +118,17 @@ denningOnline
         self.entity.strMukim = item.mukim;
         self.entity.strDaerah = item.daerah;
         self.entity.strNegeri = item.negeri;
+      }
+    }
+
+    self.projectChange = function (item) {
+      if (item) {
+        projectService.getItem(item.code).then(function (project) {
+          self.entity.clsDeveloper = project.clsDeveloper;
+          self.entity.clsProprietor = project.clsProprietor;
+          self.entity.intBlockMasterTitle = project.strMasterTitle;
+          self.entity.strProjectName = project.strProjectName;
+        });
       }
     }
 
