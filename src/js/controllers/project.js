@@ -10,7 +10,7 @@ denningOnline
       }
     }, {
       getData: function(params) {
-        return projectService.getHousingList(params.page(), params.count(), self.keyword)
+        return projectService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;

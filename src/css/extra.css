@@ -367,3 +367,7 @@ td.cell-edit {
 .d-flex {
     display: flex;
 }
+
+.d-inline {
+    display: inline;
+}

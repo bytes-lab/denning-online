@@ -28,12 +28,12 @@ denningOnline
 
   .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, 
                                            $state, Auth, $uibModal, contactService, refactorService,
-                                           uibDateParser, mukimService, $uibModalInstance,
-                                           entityCode, isDialog, projectService, isNew) 
+                                           uibDateParser, mukimService, buildingTypeService,
+                                           $uibModalInstance, entityCode, isDialog, projectService, isNew) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-    
+
     self.isDialog = isDialog;
     self.can_edit = isNew;
     self.isNew = isNew;
@@ -67,6 +67,12 @@ denningOnline
         if (!self.entity.clsProject.code) {
           self.entity.clsProject = null;
         }
+
+        if (self.entity.strBuildingCultivationType) {
+          self.strBuildingCultivationType = {
+            code: self.entity.strBuildingCultivationType
+          };
+        }
       });
     } else {
       self.entity = {
@@ -92,6 +98,12 @@ denningOnline
       });
     }
 
+    self.queryBCs = function (searchText) {
+      return buildingTypeService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     self.queryMukims = function (searchText) {
       return mukimService.getList(1, 10, searchText).then(function (resp) {
         return resp.data;
@@ -110,6 +122,12 @@ denningOnline
     self.aaChange = function (item) {
       if (item) {
         self.entity.strApprovingAuthority = item.description;
+      }
+    }
+
+    self.bcChange = function (item) {
+      if (item) {
+        self.entity.strBuildingCultivationType = item.code;
       }
     }
 

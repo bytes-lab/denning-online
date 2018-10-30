@@ -151,12 +151,12 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Area</dt>
             <dd>
-              <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strArea" style="width: 64%; display: inline;">
-              <select class="form-control" ng-model="vm.entity.strAreaDescription" ng-disabled="!vm.can_edit" style="width: 34%; display: inline;">
+              <input type='text' ng-readonly="!vm.can_edit" class="form-control d-inline m-r-10" ng-model="vm.entity.strArea" style="width: calc(64% - 11px);">
+              <select class="form-control d-inline" ng-model="vm.entity.strAreaDescription" ng-disabled="!vm.can_edit" style="width: 34%;">
                 <option value="">Select Unit</option>
                 <option ng-repeat="item in vm.types.AreaType" ng-value="item">
                   {{ item }}
-                </option>                
+                </option>
               </select>
             </dd>
           </dl>
@@ -270,7 +270,21 @@
             <dt class="p-t-10">Building / Cultivation Type</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.culType">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strBuildingCultivationType"
+                  md-search-text="qsbc"
+                  md-items="item in vm.queryBCs(qsbc)"
+                  md-selected-item-change="vm.bcChange(item)"
+                  md-item-text="item.code"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="qsbc" class="col-1" md-highlight-flags="i">
+                      [{{ item.code }}] {{ item.strDescription }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>
               </div>
             </dd>
           </dl>
@@ -349,7 +363,6 @@
               <div class="fg-line">
                 <input ng-model="vm.entity.strUnitAccessoryParcelNo" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
-
             </dd>
           </dl>
           <dl class="dl-horizontal">
