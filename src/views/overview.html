@@ -29,9 +29,9 @@
                     </ul>
                   </li>
                 </ul>
-              </div>              
+              </div>
             </div>
-          </uib-tab-heading>          
+          </uib-tab-heading>
           <div class="row m-t-5">
             <ul class="actions manage-widget">
               <li class="dropdown" uib-dropdown>
@@ -112,9 +112,9 @@
               </tr>
               <tr ng-repeat="item in data.table.rows">
                 <td class="p-5 p-l-15" ng-repeat="sitem in item.values track by $index">
-                  <span ng-if="sitem != 'true' && sitem != 'false'">{{ sitem }}</span>
-                  <span class="text-success f-12" ng-if="sitem == 'true'"><i class="zmdi zmdi-circle zmdi-hc-fw"></i></span>
-                  <span class="text-danger f-12" ng-if="sitem == 'false'"><i class="zmdi zmdi-circle zmdi-hc-fw"></i></span>
+                  <span ng-if="sitem.toLowerCase() != 'true' && sitem.toLowerCase() != 'false'">{{ sitem }}</span>
+                  <span class="text-success f-12" ng-if="sitem.toLowerCase() == 'true'"><i class="zmdi zmdi-circle zmdi-hc-fw"></i></span>
+                  <span class="text-danger f-12" ng-if="sitem.toLowerCase() == 'false'"><i class="zmdi zmdi-circle zmdi-hc-fw"></i></span>
                 </td>
               </tr>
             </table>
@@ -183,8 +183,8 @@
           </tbody>
         </table>
       </div>
-    </div>          
-  </div>      
+    </div>
+  </div>
 </script>
 
 <script type="text/ng-template" id="widget_t6.html">
@@ -225,8 +225,8 @@
           </tbody>
         </table>
       </div>
-    </div>          
-  </div>      
+    </div>
+  </div>
 </script>
 
 
@@ -340,7 +340,7 @@
                 </li>
               </ul>
             </li>
-          </ul>          
+          </ul>
         </div>
 
         <div class="clearfix"></div>

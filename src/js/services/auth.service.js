@@ -208,7 +208,7 @@ denningOnline
 
       return $http({
         method: 'POST',
-        url: baseUrl + '/v1/app/staffLogin',
+        url: baseUrl + '/v1/web/staffLogin',
         headers: service.headers,
         data: data
       }).then(function (response) {

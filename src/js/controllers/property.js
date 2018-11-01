@@ -45,6 +45,7 @@ denningOnline
     self.true = true;
 
     if(self.entityCode) {
+      self.title = 'Edit Property';
       propertyService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
@@ -75,6 +76,7 @@ denningOnline
         }
       });
     } else {
+      self.title = 'New Property';
       self.entity = {
         strMukimType: 'Mukim'
       };

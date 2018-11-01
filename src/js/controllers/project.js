@@ -28,28 +28,33 @@ denningOnline
     }
   })
 
-  .controller('projectEditCtrl', function($filter, $stateParams, projectService, $state) {
+  .controller('projectEditCtrl', function($filter, $stateParams, refactorService, projectService, $state,
+                                          growlService, Auth) 
+  {
     var self = this;
-    self.save = save;
+    self.userInfo = Auth.getUserInfo();
+    self.isNew = $state.$current.data.can_edit;
+    self.can_edit = $state.$current.data.can_edit;
 
     if($stateParams.id) {
-      projectService.getItem($stateParams.id)
-      .then(function(item){
-        self.contact = item;
+      self.title = 'Edit Project';
+      projectService.getItem($stateParams.id).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
       });
     } else {
-      self.contact = {};
+      self.title = 'New Project';
     }
 
-    function save() {
-      projectService.save(self.contact).then(function(contact) {
-        self.contact = contact;
-        $state.go('contacts.list');
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.contactInfo.$error.push({meessage:''});
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      projectService.save(entity).then(function (Project) {
+        if (self.entity_) {
+          $state.reload();
+        } else {
+          $state.go('projects.edit', { 'id': Project.code });
+        }
+        growlService.growl('Saved successfully!', 'success');
       });
     }
   })

@@ -6,7 +6,7 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md-11 col-sm-12">
-          <h2 class="f-20 f-500 c-purple" style="display: inline;">Edit Property</h2>
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
           <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
           <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.property.delete && !vm.isNew && !vm.isDialog">Delete</a>
           <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.property.update && vm.can_edit">Save</a>

@@ -1486,7 +1486,8 @@ denningOnline
       })
       .state ('projects.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },
         url: '/new',
         controller: 'projectEditCtrl as vm',

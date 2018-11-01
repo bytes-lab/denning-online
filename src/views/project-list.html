@@ -26,23 +26,29 @@
       <div class="table-responsive table-div p-15">
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
           <tr ng-repeat="w in $data" ui-sref="projects.edit({'id': w.code})">
-            <td data-title="'Name'">
+            <td data-title="'Code'">
+              {{ w.code }}
+            </td>
+            <td data-title="'Project Name'">
               {{ w.strProjectName }}
             </td>
-            <td data-title="'Proprietor'">
-              {{ w.clsProprietor.strName }}
+            <td data-title="'Phase'">
+              {{ w.strPhase }}
+            </td>
+            <td data-title="'Location'">
+              {{ w.strLocation }}
             </td>
             <td data-title="'Developer'">
               {{ w.clsDeveloper.strName }}
             </td>
-            <td data-title="'License'">
+            <td data-title="'Proprietor'">
+              {{ w.clsProprietor.strName }}
+            </td>
+            <td data-title="'License No.'">
               {{ w.strProjectLicense }}
             </td>
-            <td data-title="'Phase'">
-              {{ w.phase }}
-            </td>
-            <td data-title="'Master Title'">
-              {{ w.masterTitle }}
+            <td data-title="'Exp. Date'">
+              {{ w.dtValidityLicenseEnd|ddate }}
             </td>
           </tr>
         </table>
