@@ -6,15 +6,34 @@ denningOnline
   .service('templateService', function(http) {
     var service = {};
 
-    service.getCategories = function () {
-      return http.GET('v1/table/cbotemplatecategory/only').then(function (resp) {
+    service.getIndustries = function () {
+      return http.GET('v1/table/cboTemplateCategory/industryDropDown').then(function (resp) {
         return resp.data;
       });
     }
 
-    service.getTypes = function (category) {
-      return http.GET('v1/table/cbotemplatecategory', {
-        filter: category
+    service.getCategories = function (filter) {
+      return http.GET('v1/table/cboTemplateCategory/categoryDropDown', {
+        industry: filter.industry
+      }).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    service.getTypes = function (filter) {
+      return http.GET('v1/table/cboTemplateCategory/typeDropDown', {
+        industry: filter.industry,
+        category: filter.category
+      }).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    service.getSubTypes = function (filter) {
+      return http.GET('v1/table/cboTemplateCategory/subTypeDropDown', {
+        industry: filter.industry,
+        category: filter.category,
+        type: filter.group
       }).then(function (resp) {
         return resp.data;
       });
@@ -34,6 +53,19 @@ denningOnline
       });
     }
 
+    // service.getTemplates = function (filter, page, pagesize, keyword) {
+    //   var url = 'v1/table/cboTemplateCategory/'+filter.industry+'/'+filter.category+'/'+filter.group+'/'+filter.subGroup;
+    //   return http.GET(url, {
+    //     fileno: filter.fileno,
+    //     Online: filter.source.toLowerCase(),
+    //     page: page,
+    //     pagesize: pagesize,
+    //     search: keyword
+    //   }).then(function (resp) {
+    //     return resp;
+    //   });
+    // }
+
     service.generateDoc = function (entity) {
       return http.POST('v1/GenerateDocumentnPreview', JSON.parse(entity.generateBody))
       .then(function (resp) {
@@ -41,6 +73,6 @@ denningOnline
       })
     }
 
-    return service;    
+    return service;
   })
 

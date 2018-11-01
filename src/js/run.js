@@ -753,7 +753,7 @@ denningOnline
       name: 'gen-doc',
       templateUrl: 'gen-doc.html',
       controller: function($scope, $filter, NgTableParams, templateService, $uibModal) {
-        $scope.sources = ['All', 'Online', 'User'];        
+        $scope.sources = ['All', 'Online', 'User'];
         $scope.docInfo = {
           fileno: $scope.model.strFileNo1,
           source: 'All'
@@ -803,19 +803,35 @@ denningOnline
           })
         };
 
-        $scope.updateType = function() {
-          templateService.getTypes($scope.docInfo.category).then(function (data) {
-            $scope.types = data;
-            $scope.docInfo.type = data[0].strTypeCode;
-            $scope.updateTemplates();
+        templateService.getIndustries().then(function(data) {
+          $scope.industries = data;
+          $scope.docInfo.industry = data[0];
+          $scope.updateCategory();
+        });
+
+        $scope.updateCategory = function() {
+          templateService.getCategories($scope.docInfo).then(function(data) {
+            $scope.categories = data;
+            $scope.docInfo.category = data[0];
+            $scope.updateType();
           });
         }
 
-        templateService.getCategories().then(function(data) {
-          $scope.categories = data;
-          $scope.docInfo.category = data[0];
-          $scope.updateType();
-        });
+        $scope.updateType = function() {
+          templateService.getTypes($scope.docInfo).then(function (data) {
+            $scope.types = data;
+            $scope.docInfo.group = data[0];
+            $scope.updateSubType();
+          });
+        }
+
+        $scope.updateSubType = function() {
+          templateService.getSubTypes($scope.docInfo).then(function(data) {
+            $scope.subTypes = data;
+            $scope.docInfo.subGroup = data[0];
+            $scope.updateTemplates();
+          });
+        }
       }
     });
   })

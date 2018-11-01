@@ -2330,24 +2330,40 @@
 <script type="text/ng-template" id="gen-doc.html">
   <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group">
-  <div style="display: flex; margin-bottom: 20px;">
+  <div class="d-flex m-b-20">
+    <label class="form-control attr-label-v1">Industry</label>
+    <select class="form-control wp-20" ng-model="docInfo.industry" ng-change="updateCategory()">
+      <option ng-repeat="item in industries" ng-value="item">{{ item }}</option>
+    </select>
     <label class="form-control attr-label-v1">Category</label>
-    <select class="form-control" ng-model="docInfo.category" ng-change="updateType()" style="width:40%;">
+    <select class="form-control wp-30" ng-model="docInfo.category" ng-change="updateType()">
       <option ng-repeat="item in categories" ng-value="item">{{ item }}</option>
     </select>
-    <label class="form-control attr-label-v1">Type</label>
-    <select class="form-control" ng-model="docInfo.type" ng-change="updateTemplates()" style="width:65%;">
-      <option ng-repeat="item in types" ng-value="item.strTypeCode">
-        {{ item.strTypeCode }}&nbsp;&nbsp;&nbsp;{{ item.strTypeName }}
-      </option>
+    <label class="form-control attr-label-v1">Group</label>
+    <select class="form-control wp-30" ng-model="docInfo.group" ng-change="updateSubType()">
+      <option ng-repeat="item in types" ng-value="item">{{ item }}</option>
+    </select>
+    <label class="form-control attr-label-v1 wp-15">Sub-Group</label>
+    <select class="form-control wp-25" ng-model="docInfo.subGroup" ng-change="updateTemplates()">
+      <option ng-repeat="item in subTypes" ng-value="item">{{ item }}</option>
     </select>
     <label class="form-control attr-label-v1">Source</label>
-    <select class="form-control" ng-model="docInfo.source" ng-change="updateTemplates()" style="width:40%; margin-right: 20px;">
+    <select class="form-control wp-20 m-r-20" ng-model="docInfo.source" ng-change="updateTemplates()">
       <option ng-repeat="item in sources" ng-value="item">{{ item }}</option>
     </select>
   </div>
+  <div class="col-sm-6 p-l-20">
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon search-icon p-l-0"><i class="zmdi zmdi-search"></i></span>
+      <div class="fg-line m-t-5">
+        <input type="text" class="form-control" placeholder="Search" ng-model="keyword" ng-change="search()">
+      </div>
+      <span class="input-group-addon search-clear" ng-show="keyword" ng-click="keyword='';search();"><i class="zmdi zmdi-close"></i></span>
+    </div>
+  </div>
+  <div class="clearfix"></div>
   <div class="table-responsive"> 
-    <table ng-table="tableFilter" class="table table-vmiddle" show-filter="true">
+    <table ng-table="tableFilter" class="table table-vmiddle">
     <tr ng-repeat="w in $data" style="cursor: pointer;" ng-click="chooseTemplate(w)" ng-class="{ selected: tpl.code == w.code }">
       <td data-title="'Code'" sortable="'code'">
         {{ w.code }}
