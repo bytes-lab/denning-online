@@ -803,6 +803,15 @@ denningOnline
           })
         };
 
+        $scope.search = function (event, clear) {
+          if(event.which == 13 || clear) { 
+            if (clear) {
+              $scope.keyword = '';
+            }
+            $scope.tableFilter.reload();
+          }
+        }
+
         templateService.getIndustries().then(function(data) {
           $scope.industries = data;
           $scope.docInfo.industry = data[0];

@@ -28,8 +28,8 @@ denningOnline
     }
   })
 
-  .controller('projectEditCtrl', function($filter, $stateParams, refactorService, projectService, $state,
-                                          growlService, Auth) 
+  .controller('projectEditCtrl', function($filter, $stateParams, refactorService, projectService, $state, $scope,
+                                          growlService, Auth, contactService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -46,6 +46,31 @@ denningOnline
       self.title = 'New Project';
     }
 
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
+
+    self.queryContacts = function (searchText) {
+      return contactService.getCustomerList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
+
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strProjectName'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       projectService.save(entity).then(function (Project) {
@@ -56,5 +81,9 @@ denningOnline
         }
         growlService.growl('Saved successfully!', 'success');
       });
+    }
+
+    self.cancel = function () {
+      $state.go('projects.list');
     }
   })

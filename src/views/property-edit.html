@@ -512,6 +512,7 @@
             <dt class="p-t-10">Developer</dt>
             <dd>
               <md-autocomplete
+                ng-disabled="!vm.can_edit"
                 md-selected-item="vm.entity.clsDeveloper"
                 md-search-text="searchText"
                 md-items="item in vm.queryContacts(searchText)"
@@ -531,6 +532,7 @@
             <dt class="p-t-10">Proprietor</dt>
             <dd>
               <md-autocomplete
+                ng-disabled="!vm.can_edit"
                 md-selected-item="vm.entity.clsProprietor"
                 md-search-text="qspp"
                 md-items="item in vm.queryContacts(qspp)"

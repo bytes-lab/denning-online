@@ -9,35 +9,25 @@
           <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
           <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
           <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-          <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="bank-branches.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="projects.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
         </div>
       </div>
     </div>
     <div class="card-body card-padding">
+      <h4 class="m-t-25 m-b-20">Project Information</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Project Name</dt>
             <dd>
-              <md-autocomplete
-                md-selected-item="vm.entity.clsBankCode"
-                md-search-text="searchText"
-                md-items="item in vm.queryBanks(searchText)"
-                md-item-text="item.code ? item.code: ' '"
-                md-min-length="1"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
-              </md-item-template>
-              </md-autocomplete>
+              <input ng-model="vm.entity.strProjectName" ng-readonly="!vm.can_edit" type="text" class="form-control">
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Phase</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.clsBankCode.strName" type="text" class="form-control">
+                <input ng-model="vm.entity.strPhase" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -45,7 +35,7 @@
             <dt class="p-t-10">Location</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strName">
+                <input type='text' class="form-control" ng-model="vm.entity.strLocation" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
@@ -53,7 +43,7 @@
             <dt class="p-t-10">Developer License No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strAddressLine1">
+                <input type='text' class="form-control" ng-model="vm.entity.strProjectLicense" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
@@ -61,54 +51,78 @@
             <dt class="p-t-10">License Commencement Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strAddressLine2">
+                <input ng-click="open($event, 'project_dtValidityLicenseBegin')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtValidityLicenseBegin" is-open="project_dtValidityLicenseBegin" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Address Line 3</dt>
+            <dt class="p-t-10">License Expiry Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strAddressLine3">
+                <input ng-click="open($event, 'project_dtValidityLicenseEnd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtValidityLicenseEnd" is-open="project_dtValidityLicenseEnd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
+            <dt class="p-t-10">Adv & Sales Permit No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strPostCode">
+                <input type='text' class="form-control" ng-model="vm.entity.strAdvSalesPermitNo" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Town</dt>
+            <dt class="p-t-10">Permit Commencement Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strCity">
+                <input ng-click="open($event, 'project_dtPermitDateBegin')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtPermitDateBegin" is-open="project_dtPermitDateBegin" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
+            <dt class="p-t-10">Permit Expiry Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strState">
+                <input ng-click="open($event, 'project_dtPermitDateEnd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtPermitDateEnd" is-open="project_dtPermitDateEnd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Builing Plan Approval Ref.</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strBuildingPlanApproval" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Approving Local Authority</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strApprovingAuthority" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Expected Completion Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'project_dtCompletionDate')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtCompletionDate" is-open="project_dtCompletionDate" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
         </div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
+            <dt class="p-t-10">Encumbrances</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strCountry" type="text" class="form-control">
+                <input ng-model="vm.entity.intEncumbrances" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone 1</dt>
+            <dt class="p-t-10">Bank</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' class="form-control" ng-model="vm.entity.strPhone1">
@@ -116,89 +130,26 @@
             </dd>
           </dl>              
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone 2</dt>
+            <dt class="p-t-10">Land Tenure</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strPhone2" type="text" class="form-control">
+                <input ng-model="vm.entity.strLandTenure" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone 3</dt>
+            <dt class="p-t-10">Lease Expiry Date</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strPhone3">
+                <input ng-click="open($event, 'project_dtLeaseExpDate')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtLeaseExpDate" is-open="project_dtLeaseExpDate" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strPhoneFax">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Email Address</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strEmailAddress">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank Attorney</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.address.line3">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank Attorney IC No</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.address.line3">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank Manager</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strManager">
-              </div>
-            </dd>
-          </dl>
-        </div>
-      </div>
-      <h4 class="m-t-25 m-b-20">Other Information</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Mailing List</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strMailList" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank Type (Sarawak)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strNativeBank" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Note 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strNote1">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote1">
               </div>
             </dd>
           </dl>
@@ -206,55 +157,74 @@
             <dt class="p-t-10">Note 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strNote2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote2">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Note 3</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strNote3">
-              </div>
-            </dd>
-          </dl>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-      <h4 class="m-t-25 m-b-20">Credit Administration Centre (CAC)</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">CAC Code</dt>
+            <dt class="p-t-10">Developer</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.entity.clsCACCode"
-                md-search-text="qsca"
-                md-items="item in vm.queryBankCACs(qsca)"
-                md-item-text="item.strName ? item.strName: ' '"
-                md-min-length="1"
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsDeveloper"
+                md-search-text="qsdl"
+                md-items="item in vm.queryContacts(qsdl)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
+                md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
-                <span md-highlight-text="qsca" md-highlight-flags="i">{{item.strName}}</span>
+                <span md-highlight-text="qsdl" class="col-1" md-highlight-flags="i">
+                  ({{item.strIDNo}}) {{item.strName}}
+                </span>
               </md-item-template>
               </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">CAC Tel</dt>
+            <dt class="p-t-10">Proprietor</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsProprietor"
+                md-search-text="qspp"
+                md-items="item in vm.queryContacts(qspp)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qspp" class="col-1" md-highlight-flags="i">
+                  ({{item.strIDNo}}) {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">HDA Account No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.clsCACCode.strPhone1">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strHtaAcc">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">CAC Fax</dt>
+            <dt class="p-t-10">Bank Branch</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.clsCACCode.strPhoneFax">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsBankCode"
+                md-search-text="searchText"
+                md-items="item in vm.queryBanks(searchText)"
+                md-item-text="item.code ? item.code: ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>
@@ -284,7 +254,7 @@
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
             <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="bank-branches.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="projects.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>
