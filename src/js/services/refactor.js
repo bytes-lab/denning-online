@@ -80,6 +80,15 @@ denningOnline
       return model;
     }
 
+    service.convertString = function (model) {
+      for (var ii in model) {
+        if (ii.startsWith('str') && model[ii] == undefined) {
+          model[ii] = '';
+        }
+      }
+      return model;
+    }
+
     service.convertBool = function (model, toBool) {
       for (var ii in model) {
         if (ii.startsWith('bool')) {
@@ -111,6 +120,7 @@ denningOnline
       res = service.convertDate(res, convert);
       if (!convert) {
         res = service.convertDouble(res);
+        res = service.convertString(res);
       }
       return res;
     }

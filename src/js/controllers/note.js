@@ -159,6 +159,8 @@ denningOnline
     self.paymentMethodChange = function (item) {
       if (item) {
         self.entity.strMode = item.strDescription;
+      } else {
+        self.entity.strMode = '';
       }
     }
 
@@ -175,7 +177,7 @@ denningOnline
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       paymentRecordService.save(entity).then(function (entity) {
-        if (entity) {  // ignore when errors
+        if (entity) {
           if (self.entity_) {
             $state.reload();
           } else {
