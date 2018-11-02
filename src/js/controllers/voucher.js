@@ -16,11 +16,15 @@ denningOnline
       }
     })
 
-    self.search = function () {
-      self.tableFilter.reload();
+    self.search = function (event, clear) {
+      if(event.which == 13 || clear) { 
+        if (clear) {
+          self.keyword='';
+        }
+        self.tableFilter.reload();
+      }
     }
   })
-
 
   .controller('voucherEditCtrl', function($stateParams, voucherService, $state, Auth,
                                           refactorService, fileMatterService, growlService,
