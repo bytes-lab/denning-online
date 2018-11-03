@@ -35,11 +35,15 @@
                 md-min-length="0"
                 md-selected-item-change="vm.matterChange(item, true)"
                 placeholder="Enter matter No (if any)"
-                class="default-input">
+                class="default-input pull-left"
+                style="width: calc(100% - 30px);">
                 <md-item-template>
                   <span md-highlight-text="qstl" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
                 </md-item-template>
               </md-autocomplete>
+              <button class="btn btn-primary short-btn" ng-disabled="!vm.entity.clsFileNo.strFileNo1 && !vm.entity.clsFileNo.key" ng-click="vm.openMatter();">
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="View Details"></span>
+              </button>
             </dd>
           </dl>
           <dl class="dl-horizontal m-b-10">

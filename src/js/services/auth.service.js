@@ -218,6 +218,7 @@ denningOnline
           service.userInfo.priority = service.demoPriority;
           service.userInfo.TaxName = info.companyProfile.TaxName;
           service.userInfo.currency = info.companyProfile.currencySymbol;
+          service.userInfo.localTime = info.localTime;
           service.setUserInfo(service.userInfo);
         }
         return info;

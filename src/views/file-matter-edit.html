@@ -410,7 +410,7 @@
       <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="contactDialog('clsPrimaryClient', false)">
         <span class="glyphicon glyphicon-plus" aria-hidden="true" title="New Contact"></span>
       </a>
-      <a class="btn btn-primary short-btn" target="_new" ng-click="contactDialog('clsPrimaryClient', true)">
+      <a class="btn btn-primary short-btn" ng-click="contactDialog('clsPrimaryClient', true)">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="View Details"></span>
       </a>
       <input id="{{::id}}_share_{{$index}}" name="{{::id}}_share_{{$index}}" class="form-control wp-15" ng-model="model.clsPrimaryClient.share" ng-if="to.share" placeholder="Share" />

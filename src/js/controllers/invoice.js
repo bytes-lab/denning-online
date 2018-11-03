@@ -53,6 +53,11 @@ denningOnline
       })
     }
 
+    self.openMatter = function () {
+      var url = $state.href('file-matters.edit', { fileNo: self.entity.clsFileNo.strFileNo1 || self.entity.clsFileNo.key });
+      window.open(url,'_blank');
+    }
+
     self.matterChange = function (matter, json) {
       if (matter) {
         var matterInfo = matter;

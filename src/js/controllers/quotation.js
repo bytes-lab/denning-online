@@ -31,7 +31,7 @@ denningOnline
     }
   })
 
-  .controller('quotationEditCtrl', function($stateParams, quotationService, $state, Auth,
+  .controller('quotationEditCtrl', function($stateParams, quotationService, $state, Auth, $scope,
                                             refactorService, fileMatterService, growlService,
                                             matterCodeService, presetbillService,
                                             uibDateParser, $uibModal, NgTableParams) 
@@ -51,6 +51,18 @@ denningOnline
       return fileMatterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
+    }
+
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
+
+    self.openMatter = function () {
+      var url = $state.href('file-matters.edit', { fileNo: self.entity.clsFileNo.strFileNo1 || self.entity.clsFileNo.key });
+      window.open(url,'_blank');
     }
 
     self.matterChange = function (matter, json) {

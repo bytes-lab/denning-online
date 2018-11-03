@@ -21,7 +21,7 @@ denningOnline
     }
   })
 
-  .controller('receiptEditCtrl', function($stateParams, receiptService, $state, Auth,
+  .controller('receiptEditCtrl', function($stateParams, receiptService, $state, Auth, $scope,
                                           refactorService, fileMatterService, growlService,
                                           matterCodeService, presetbillService,
                                           uibDateParser, $uibModal, NgTableParams) 
@@ -40,6 +40,13 @@ denningOnline
         return resp.data
       })
     }
+
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
 
     self.matterChange = function (matter) {
       if (matter && matter.JsonDesc) {
@@ -201,7 +208,7 @@ denningOnline
       self.title = 'New Receipt';
       self.entity = {
         strState: 'Common',
-        dtCreateDate: uibDateParser.parse(new Date()),
+        TransactionDate: uibDateParser.parse(new Date()),
         listBilledItems: []
       };
       initializeTable();
