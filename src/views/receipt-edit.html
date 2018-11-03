@@ -88,10 +88,10 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.fileNo"
+                md-selected-item="vm.fileNo"
                 md-search-text="qstl"
                 md-items="item in vm.queryMatters(qstl)"
-                md-item-text="item.strFileNo1"
+                md-item-text="item.key"
                 md-min-length="0"
                 md-selected-item-change="vm.matterChange(item)"
                 placeholder="Enter matter No (if any)"
@@ -109,15 +109,15 @@
                 ng-disabled="!vm.can_edit"
                 md-selected-item="vm.invoiceNo"
                 md-search-text="qpsb1"
-                md-items="item in vm.queryBills(qpsb1)"
+                md-items="item in vm.queryInvoices(qpsb1)"
                 md-item-text="item.code"
                 md-min-length="0"
-                md-selected-item-change="vm.presetBillChange(item)"
+                md-selected-item-change="vm.invoiceChange(item)"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
                 <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
+                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strBillTo}}</span>
               </md-item-template>
               </md-autocomplete>
             </dd>
@@ -163,7 +163,7 @@
               <label class="f-700">Fees</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Fees | number:2 }}</label>
+              <label class="form-control">{{ vm.entity.billPortion.decFee | number:2 }}</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSST.Fees | number:2 }}</label>
@@ -180,7 +180,7 @@
               <label class="f-700">GST: Fees</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.DisbWithTax | number:2 }}</label>
+              <label class="form-control">{{ vm.entity.billPortion.decTaxofFee | number:2 }}</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSST.DisbWithTax | number:2 }}</label>
@@ -197,7 +197,7 @@
               <label class="f-700">Disb. w. GST</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.entity.billPortion.decDisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
@@ -214,7 +214,7 @@
               <label class="f-700">GST: Disb. w. GST</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.entity.billPortion.decTaxofDisbWithTax | number:2 }}</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
@@ -231,7 +231,7 @@
               <label class="f-700">Disbursements</label>
             </div>
             <div class="col-md-2">
-              <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>
+              <label class="form-control">{{ vm.entity.billPortion.decDisb | number:2 }}</label>
             </div>
             <div class="col-md-2">
               <label class="form-control">{{ vm.typeSum.Disb | number:2 }}</label>

@@ -23,7 +23,7 @@ denningOnline
 
   .controller('receiptEditCtrl', function($stateParams, receiptService, $state, Auth, $scope,
                                           refactorService, fileMatterService, growlService,
-                                          matterCodeService, presetbillService,
+                                          matterCodeService, presetbillService, invoiceService,
                                           uibDateParser, $uibModal, NgTableParams) 
   {
     var self = this;
@@ -53,141 +53,33 @@ denningOnline
         self.entity.fileNo = matter.key;
         var matterInfo = JSON.parse(matter.JsonDesc.replace(/[\u0000-\u0019]+/g,""));
         var clsPrimaryClient = matterInfo.primaryClient;
-
-        self.entity.matter = matterInfo.matter;
-        self.matterDescription = self.entity.matter.description;
-        if (matterInfo.propertyGroup[0]) {
-          self.entity.strPropertyAddress = matterInfo.propertyGroup[0].fullTitle;
-          self.entity.strState = matterInfo.propertyGroup[0]
-        }
-        self.entity.issueToName = clsPrimaryClient.name;
-        self.entity.strClientName = clsPrimaryClient.name;
+        self.entity.receivedFromName = clsPrimaryClient.name;
       }
+
+      //   self.entity.matter = matterInfo.matter;
+      //   self.matterDescription = self.entity.matter.description;
+      //   if (matterInfo.propertyGroup[0]) {
+      //     self.entity.strPropertyAddress = matterInfo.propertyGroup[0].fullTitle;
+      //     self.entity.strState = matterInfo.propertyGroup[0]
+      //   }
+      //   self.entity.issueToName = clsPrimaryClient.name;
+      //   self.entity.strClientName = clsPrimaryClient.name;
+      // }
     }
 
-    self.presetBillChange = function (item) {
+    self.invoiceChange = function (item) {
       if (item && self.entity.strBillName != item.code) {
-        presetbillService.getItem(item.code).then(function (item) {
-          self.entity.listBilledItems = item.listBilledItems;
-          refreshItems();
-        });
+        // presetbillService.getItem(item.code).then(function (item) {
+        //   self.entity.listBilledItems = item.listBilledItems;
+        //   refreshItems();
+        // });
       }
     }
 
-    self.queryBills = function (keyword) {
-      return presetbillService.getTableList(1, 10, keyword).then(function (resp) {
-        return resp;
+    self.queryInvoices = function (keyword) {
+      return invoiceService.getList(1, 10, self.entity.fileNo).then(function (resp) {
+        return resp.data;
       });
-    }
-
-    self.insert = function (idx) {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'billItemModal.html',
-        controller: 'billItemModalCtrl as vm',
-        size: 'lg',
-        keyboard: true,
-        resolve: {
-          state: function () {
-            return self.entity.strState;
-          },
-          category: function () {
-            return null;
-          },
-          excludes: function () {
-            var arr = [];
-            for (ii in self.entity.listBilledItems) {
-              var item = self.entity.listBilledItems[ii];
-              arr.push(item.strItemCode);
-            }
-            return arr;
-          }
-        }
-      }).result.then(function (res) {
-        if (res && res.length > 0) {
-          for (ii in res) {
-            if (idx != -1) {
-              self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
-            } else {
-              self.entity.listBilledItems.push(res[ii]);
-            }
-          }
-          refreshItems();
-        }
-      }, function (res) {});
-    }
-
-    self.move = function (x, y) {
-      if (x < 0) {
-        return;
-      } else if (y == self.entity.listBilledItems.length) {
-        return;
-      }
-
-      var b = self.entity.listBilledItems[y];
-      self.entity.listBilledItems[y] = self.entity.listBilledItems[x];
-      self.entity.listBilledItems[x] = b;
-      self.tableFilter.reload();
-    };
-
-    self.remove = function (code) {
-      for (ii in self.entity.listBilledItems) {
-        var item = self.entity.listBilledItems[ii];
-        if (item.strItemCode == code) {
-          self.entity.listBilledItems.splice(ii, 1);
-          break;
-        }
-      }
-      refreshItems();
-    }
-
-    function initializeTable () {
-      self.tableFilter = new NgTableParams({
-        page: 1,
-        count: 25,
-        sorting: {
-          name: 'asc' 
-        }
-      }, {
-        counts: [],
-        getData: function (params) {
-          return self.entity.listBilledItems.filter(function (item) {
-            return self.itemType == 'All' || item.strBillItemType == self.itemType;
-          })
-        } 
-      });
-      
-      refreshItems();
-    }
-
-    function refreshItems () {
-      self.typeSum = {
-        All: 0.0,
-        Fees: 0.0,
-        Disb: 0.0,
-        DisbWithTax: 0.0
-      };
-
-      self.typeSST = {
-        Fees: 0.0,
-        Disb: 0.0,
-        DisbWithTax: 0.0
-      };
-
-      for (ii in self.entity.listBilledItems) {
-        var item = self.entity.listBilledItems[ii];
-        self.typeSum[item.strBillItemType] += parseFloat(item.decUnitCost);
-        self.typeSST[item.strBillItemType] += parseFloat(item.decUnitCost) * 
-                                              parseFloat(item.decTaxRate);
-        self.typeSum['All'] += parseFloat(item.decUnitCost);
-      }
-
-      self.tableFilter.reload();
-    }
-
-    self.filterItem = function (type) {
-      self.itemType = type;
-      self.tableFilter.reload();
     }
 
     if ($stateParams.id) {
@@ -196,13 +88,21 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         self.entity.listBilledItems = [];
-        initializeTable();
 
         if (self.entity.strBillName) {
           self.presetCode = {
             code: self.entity.strBillName
-          }          
+          }
         }
+
+        if (self.entity.invoiceNo) {
+          self.invoiceNo = {
+            code: self.entity.invoiceNo
+          }
+        }
+
+        self.fileNo = { key: self.entity.fileNo };
+        self.entity.TransactionDate = uibDateParser.parse(self.entity.TransactionDate, 'yyyy-MM-dd HH:mm:ss');
       });
     } else {
       self.title = 'New Receipt';
@@ -211,7 +111,6 @@ denningOnline
         TransactionDate: uibDateParser.parse(new Date()),
         listBilledItems: []
       };
-      initializeTable();
     }
 
     self.save = function () {
