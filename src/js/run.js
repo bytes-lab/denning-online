@@ -829,7 +829,7 @@ denningOnline
         $scope.updateType = function() {
           templateService.getTypes($scope.docInfo).then(function (data) {
             $scope.types = data;
-            $scope.docInfo.group = data[0];
+            $scope.docInfo.type = data[0];
             $scope.updateSubType();
           });
         }
@@ -837,7 +837,7 @@ denningOnline
         $scope.updateSubType = function() {
           templateService.getSubTypes($scope.docInfo).then(function(data) {
             $scope.subTypes = data;
-            $scope.docInfo.subGroup = data[0];
+            $scope.docInfo.subType = data[0];
             $scope.updateTemplates();
           });
         }

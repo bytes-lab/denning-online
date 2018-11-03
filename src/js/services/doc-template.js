@@ -33,7 +33,7 @@ denningOnline
       return http.GET('v1/table/cboTemplateCategory/subTypeDropDown', {
         industry: filter.industry,
         category: filter.category,
-        type: filter.group
+        type: filter.type
       }).then(function (resp) {
         return resp.data;
       });
@@ -44,7 +44,7 @@ denningOnline
         fileno: docInfo.fileno,
         Online: docInfo.source.toLowerCase(),
         category: docInfo.category,
-        type: docInfo.type,
+        type: docInfo.subType,
         page: page,
         pagesize: pagesize,
         search: keyword

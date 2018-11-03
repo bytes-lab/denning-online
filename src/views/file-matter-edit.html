@@ -2339,12 +2339,12 @@
     <select class="form-control wp-30" ng-model="docInfo.category" ng-change="updateType()">
       <option ng-repeat="item in categories" ng-value="item">{{ item }}</option>
     </select>
-    <label class="form-control attr-label-v1">Group</label>
-    <select class="form-control wp-30" ng-model="docInfo.group" ng-change="updateSubType()">
+    <label class="form-control attr-label-v1">Type</label>
+    <select class="form-control wp-30" ng-model="docInfo.type" ng-change="updateSubType()">
       <option ng-repeat="item in types" ng-value="item">{{ item }}</option>
     </select>
-    <label class="form-control attr-label-v1 wp-15">Sub-Group</label>
-    <select class="form-control wp-25" ng-model="docInfo.subGroup" ng-change="updateTemplates()">
+    <label class="form-control attr-label-v1 wp-15">Sub-Type</label>
+    <select class="form-control wp-25" ng-model="docInfo.subType" ng-change="updateTemplates()">
       <option ng-repeat="item in subTypes" ng-value="item">{{ item }}</option>
     </select>
     <label class="form-control attr-label-v1">Source</label>
