@@ -129,8 +129,18 @@ denningOnline
     }
 
     self.matterCodeChange = function (item) {
-      if (item && item.strDescription) {
-        self.entity.strBillingMatter = item.strDescription;
+      if (item) {
+        if (item.strDescription) {
+          self.entity.strBillingMatter = item.strDescription;
+        }
+        
+        matterCodeService.getItem(item.code).then(function (matterCode) {
+          if (matterCode.clsPresetBill.code) {
+            self.entity.clsPresetBill = {};
+            self.presetBillChange(matterCode.clsPresetBill);
+            self.entity.clsPresetBill = matterCode.clsPresetBill;
+          }
+        });
       }
     }
 
