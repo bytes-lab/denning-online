@@ -391,7 +391,38 @@ denningOnline
       })
 
       //------------------------------
-      // VOUCHERS - PAYMENT REQUESTS
+      // PAYMENT REQUESTS
+      //------------------------------
+
+      .state ('billing.payment-requests-list', {
+        data: {
+          access: '@'
+        },
+        url: '/payment-requests',
+        controller: 'paymentRequestListCtrl as vm',
+        templateUrl: 'views/payment-request-list.html'
+      })
+
+      .state ('billing.payment-requests-edit', {
+        data: {
+          access: '@'
+        },
+        url: '/payment-request/edit/:id',
+        controller: 'paymentRequestEditCtrl as vm',
+        templateUrl: 'views/payment-request-edit.html'
+      })
+      .state ('billing.payment-requests-new', {
+        data: {
+          access: '@',
+          can_edit: true
+        },
+        url: '/payment-request/new',
+        controller: 'paymentRequestEditCtrl as vm',
+        templateUrl: 'views/payment-request-edit.html'
+      })
+
+      //------------------------------
+      // VOUCHERS
       //------------------------------
 
       .state ('billing.vouchers-list', {
