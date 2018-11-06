@@ -842,6 +842,7 @@ denningOnline
 
         $scope.updateCategory = function() {
           templateService.getCategories($scope.docInfo).then(function(data) {
+            alert(data);
             $scope.categories = data;
             $scope.docInfo.category = data[0];
             $scope.updateType();
