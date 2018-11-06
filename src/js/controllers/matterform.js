@@ -1,5 +1,5 @@
 denningOnline
-  .controller('fileMatterEditCtrl', function($scope, $stateParams, fileMatterService, matterCodeService,
+  .controller('matterEditCtrl', function($scope, $stateParams, fileMatterService, matterCodeService,
                                              $state, matterFormService, Auth, refactorService, 
                                              growlService, contactService, uibDateParser) 
   {

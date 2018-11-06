@@ -1,14 +1,10 @@
 denningOnline
-  .controller('fileMatterListCtrl', function(NgTableParams, fileMatterService, Auth, 
+  .controller('matterListCtrl', function(NgTableParams, fileMatterService, Auth, 
                                              $state) 
   {
     var self = this;
     self.keyword = '';
     self.userInfo = Auth.getUserInfo();
-
-    self.clickHandler = function (item) {
-      $state.go('file-matters.edit', {'fileNo': item.systemNo});
-    }
 
     self.tableFilter = new NgTableParams({
       page: 1,            // show first page
@@ -32,8 +28,13 @@ denningOnline
       }
     })    
 
-    self.search = function () {
-      self.tableFilter.reload();
+    self.search = function (event, clear) {
+      if(event.which == 13 || clear) { 
+        if (clear) {
+          self.keyword='';
+        }
+        self.tableFilter.reload();
+      }
     }
   })
 

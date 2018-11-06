@@ -6,10 +6,21 @@ denningOnline
 
     self.userInfo = Auth.getUserInfo();
     self.keyword = $stateParams.keyword;
-    self.option = 'today,today,0All';
+    self.option = '1900-01-01,2999-01-01,0All';
     self.filter = '0All';
-    self.firstDay = moment(new Date()).format('YYYY-MM-DD');
-    self.lastDay = moment(new Date()).format('YYYY-MM-DD');
+
+    self.parseDate = function (strDate) {
+      if (strDate == "today") {
+        return moment(new Date()).format('YYYY-MM-DD');
+      } else if (strDate == "yesterday") {
+        return moment(new Date()).add(-1, 'days').format('YYYY-MM-DD');
+      } else {
+        return strDate;
+      }
+    }
+    
+    self.firstDay = self.parseDate('1900-01-01');
+    self.lastDay = self.parseDate('2999-01-01');
 
     self.tableFilter = new NgTableParams({
       page: 1,
@@ -25,24 +36,19 @@ denningOnline
       }
     });
 
-    self.search = function () {
-      self.tableFilter.reload();
-    }
-
-    function parseDate(strDate) {
-      if (strDate == "today") {
-        return moment(new Date()).format('YYYY-MM-DD');
-      } else if (strDate == "yesterday") {
-        return moment(new Date()).add(-1, 'days').format('YYYY-MM-DD');
-      } else {
-        return strDate;
+    self.search = function (event, clear) {
+      if(event.which == 13 || clear) { 
+        if (clear) {
+          self.keyword='';
+        }
+        self.tableFilter.reload();
       }
     }
 
     self.changeFilter = function () {
       var option = self.option.split(',');
-      self.firstDay = parseDate(option[0]);
-      self.lastDay = parseDate(option[1]);
+      self.firstDay = self.parseDate(option[0]);
+      self.lastDay = self.parseDate(option[1]);
       self.filter = option[2];
       self.tableFilter.reload();
     }

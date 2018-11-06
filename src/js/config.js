@@ -82,7 +82,7 @@ denningOnline
         data: {
           access: '@'
         },
-        url: '/file-matters',
+        url: '/matters',
         templateUrl: 'views/common.html'
       })
 
@@ -91,8 +91,8 @@ denningOnline
           access: '@'
         },
         url: '/',
-        controller: 'fileMatterListCtrl as vm',
-        templateUrl: 'views/file-matter-list.html'
+        controller: 'matterListCtrl as vm',
+        templateUrl: 'views/matter-list.html'
       })
 
       .state ('file-matters.edit', {
@@ -100,8 +100,8 @@ denningOnline
           access: '@'
         },
         url: '/edit/:fileNo/:tab',
-        controller: 'fileMatterEditCtrl as vm',
-        templateUrl: 'views/file-matter-edit.html'
+        controller: 'matterEditCtrl as vm',
+        templateUrl: 'views/matter-edit.html'
       })
 
       .state ('file-matters.new', {
@@ -110,8 +110,8 @@ denningOnline
           can_edit: true
         },
         url: '/new',
-        controller: 'fileMatterEditCtrl as vm',
-        templateUrl: 'views/file-matter-edit.html'
+        controller: 'matterEditCtrl as vm',
+        templateUrl: 'views/matter-edit.html'
       })
 
       //------------------------------
@@ -282,7 +282,7 @@ denningOnline
         },
         url: '/:id/matters',
         controller: 'relatedMatterCtrl as vm',
-        templateUrl: 'views/file-matter-list.html',
+        templateUrl: 'views/matter-list.html',
       })
 
       //------------------------------
@@ -881,7 +881,7 @@ denningOnline
         },
         url: '/:id/matters',
         controller: 'relatedMatterCtrl as vm',
-        templateUrl: 'views/file-matter-list.html',
+        templateUrl: 'views/matter-list.html',
       })
 
       //------------------------------

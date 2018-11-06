@@ -793,8 +793,7 @@ denningOnline
             }
           }, {
             getData: function(params) {
-              return templateService.getTemplates($scope.docInfo, params.page(), params.count(), 
-                                                  $scope.keyword)
+              return templateService.getTemplates($scope.docInfo, params.page(), params.count(), $scope.keyword)
               .then(function (data) {
                 params.total(data.headers('x-total-count'));
                 return data.data;
