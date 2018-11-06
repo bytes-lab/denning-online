@@ -124,7 +124,7 @@ denningOnline
   })
 
   .controller('paymentRecordEditCtrl', function($stateParams, paymentRecordService, Auth,
-                                                $state, growlService, fileMatterService, $scope,
+                                                $state, growlService, matterService, $scope,
                                                 uibDateParser, $filter, refactorService) 
   {
     var self = this;

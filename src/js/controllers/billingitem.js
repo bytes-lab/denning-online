@@ -24,7 +24,7 @@ denningOnline
   })
 
   .controller('billingitemEditCtrl', function($stateParams, billingitemService, $state,
-                                              refactorService, fileMatterService, Auth, 
+                                              refactorService, matterService, Auth, 
                                               matterCodeService, presetbillService,
                                               uibDateParser, $uibModalInstance, growlService,
                                               entityCode, isDialog, isNew) 

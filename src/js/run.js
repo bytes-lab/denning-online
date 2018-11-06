@@ -340,7 +340,7 @@ denningOnline
       name: 'info',
       templateUrl: 'info.html',
       controller: function ($scope, legalFirmService, matterCodeService, Auth, $uibModal, 
-                            fileMatterService) 
+                            matterService) 
       {
         $scope.userInfo = Auth.getUserInfo();
 
@@ -350,7 +350,7 @@ denningOnline
           }
         }
 
-        fileMatterService.getFileStatusList().then(function (resp) {
+        matterService.getFileStatusList().then(function (resp) {
           $scope.fileStatus = resp.data;
         });
 
@@ -361,13 +361,13 @@ denningOnline
         };
 
         $scope.queryMatters = function (search) {
-          return fileMatterService.getList(1, 5, search).then(function (resp) {
+          return matterService.getList(1, 5, search).then(function (resp) {
             return resp.data
           })
         }
 
         $scope.queryBranch = function (search) {
-          return fileMatterService.getProgramOwnerList(1, 5, search).then(function (resp) {
+          return matterService.getProgramOwnerList(1, 5, search).then(function (resp) {
             return resp.data
           })
         }
@@ -425,7 +425,25 @@ denningOnline
     // case attribute
     formlyConfig.setType({
       name: 'case',
-      templateUrl: 'case.html'
+      templateUrl: 'case.html',
+      controller: function ($scope, caseService) {
+        if ($scope.model.strF3) {
+          $scope.caseType = { code: $scope.model.strF3 };
+        }
+
+        $scope.queryCaseTypes = function (searchText) {
+          return caseService.getList(1, 10, searchText).then(function (resp) {
+            return resp.data;
+          })
+        }
+
+        $scope.caseTypeChange = function (item) {
+          $scope.model.strF3 = null;
+          if (item) {
+            $scope.model.strF3 = item.code;
+          }
+        }
+      }
     });
 
     // price attribute

@@ -62,7 +62,7 @@ denningOnline
 
   .controller('courtdiaryEditCtrl', function($state, $uibModal, $stateParams, refactorService, 
                                              Auth, $scope, growlService, courtdiaryService, 
-                                             fileMatterService, contactService) 
+                                             matterService, contactService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -114,7 +114,7 @@ denningOnline
     }
 
     self.queryMatters = function (search) {
-      return fileMatterService.getList(1, 5, search).then(function (resp) {
+      return matterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
     }

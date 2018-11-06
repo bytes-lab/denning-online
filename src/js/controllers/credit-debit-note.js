@@ -1,6 +1,6 @@
 denningOnline
   .controller('creditNoteEditCtrl', function($stateParams, voucherService, $state, Auth,
-                                          refactorService, fileMatterService, growlService,
+                                          refactorService, matterService, growlService,
                                           matterCodeService, presetbillService,
                                           uibDateParser, $uibModal, NgTableParams) 
   {
@@ -14,7 +14,7 @@ denningOnline
     self.itemType = 'All';
 
     self.queryMatters = function (search) {
-      return fileMatterService.getList(1, 5, search).then(function (resp) {
+      return matterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
     }
@@ -201,7 +201,7 @@ denningOnline
   })
 
   .controller('debitNoteEditCtrl', function($stateParams, voucherService, $state, Auth,
-                                          refactorService, fileMatterService, growlService,
+                                          refactorService, matterService, growlService,
                                           matterCodeService, presetbillService,
                                           uibDateParser, $uibModal, NgTableParams) 
   {
@@ -215,7 +215,7 @@ denningOnline
     self.itemType = 'All';
 
     self.queryMatters = function (search) {
-      return fileMatterService.getList(1, 5, search).then(function (resp) {
+      return matterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
     }
@@ -402,7 +402,7 @@ denningOnline
   })
 
   .controller('IATEditCtrl', function($stateParams, voucherService, $state, Auth,
-                                          refactorService, fileMatterService, growlService,
+                                          refactorService, matterService, growlService,
                                           matterCodeService, presetbillService,
                                           uibDateParser, $uibModal, NgTableParams) 
   {
@@ -416,7 +416,7 @@ denningOnline
     self.itemType = 'All';
 
     self.queryMatters = function (search) {
-      return fileMatterService.getList(1, 5, search).then(function (resp) {
+      return matterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
     }

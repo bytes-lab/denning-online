@@ -22,7 +22,7 @@ denningOnline
   })
 
   .controller('receiptEditCtrl', function($stateParams, receiptService, $state, Auth, $scope,
-                                          refactorService, fileMatterService, growlService,
+                                          refactorService, matterService, growlService,
                                           matterCodeService, presetbillService, invoiceService,
                                           uibDateParser, $uibModal, NgTableParams) 
   {
@@ -36,7 +36,7 @@ denningOnline
     self.itemType = 'All';
 
     self.queryMatters = function (search) {
-      return fileMatterService.getList(1, 5, search).then(function (resp) {
+      return matterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
     }

@@ -1,5 +1,5 @@
 denningOnline
-  .controller('matterEditCtrl', function($scope, $stateParams, fileMatterService, matterCodeService,
+  .controller('matterEditCtrl', function($scope, $stateParams, matterService, matterCodeService,
                                              $state, matterFormService, Auth, refactorService, 
                                              growlService, contactService, uibDateParser) 
   {
@@ -492,7 +492,7 @@ denningOnline
     };
 
     if ($stateParams.fileNo) {
-      fileMatterService.getItem($stateParams.fileNo).then(function (item) {
+      matterService.getItem($stateParams.fileNo).then(function (item) {
         vm.fileNo = $stateParams.fileNo;
         vm.fileName = item.clsPrimaryClient.strName;
         
@@ -542,7 +542,7 @@ denningOnline
         model.strFileNo1 = vm.model_.strFileNo1;
       }
 
-      fileMatterService.save(model).then(function (data) {
+      matterService.save(model).then(function (data) {
         vm.model.tmp = editControl;
      
         if (data) { // create success or update

@@ -1,9 +1,9 @@
 denningOnline
   // =========================================================================
-  // File Matter, Matter Code, Matter Form
+  // Matter, Matter Code, Matter Form
   // =========================================================================
   
-  .service('fileMatterService', function (http) {
+  .service('matterService', function (http) {
     var service = {};
 
     service.getList = function (page, pagesize, keyword) {

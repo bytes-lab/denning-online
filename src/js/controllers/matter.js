@@ -1,5 +1,5 @@
 denningOnline
-  .controller('matterListCtrl', function(NgTableParams, fileMatterService, Auth, 
+  .controller('matterListCtrl', function(NgTableParams, matterService, Auth, 
                                              $state) 
   {
     var self = this;
@@ -14,7 +14,7 @@ denningOnline
       }
     }, {
       getData: function(params) {
-        return fileMatterService.getList(params.page(), params.count(), self.keyword)
+        return matterService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {
           var data_ = [];
           params.total(data.headers('x-total-count'));
@@ -39,13 +39,13 @@ denningOnline
   })
 
   .controller('relatedMatterCtrl', function($filter, $stateParams, NgTableParams, 
-                                            fileMatterService, $state) 
+                                            matterService, $state) 
   {
     var type = $state.$current.data.type;
     var self = this;
     self.filter = true;
 
-    fileMatterService.getRelatedMatters(type, $stateParams.id).then(function (data) {
+    matterService.getRelatedMatters(type, $stateParams.id).then(function (data) {
       self.data = [];
       angular.forEach(data, function(value, key) {
         var item = JSON.parse(value.JsonDesc.replace(/[\u0000-\u0019]+/g,""));

@@ -37,7 +37,7 @@ denningOnline
   })
 
   .controller('invoiceEditCtrl', function($stateParams, invoiceService, $state, Auth,
-                                          refactorService, fileMatterService, growlService,
+                                          refactorService, matterService, growlService,
                                           matterCodeService, presetbillService,
                                           uibDateParser, $uibModal, NgTableParams) 
   {
@@ -53,7 +53,7 @@ denningOnline
     self.invoiceToList = [];
 
     self.queryMatters = function (search) {
-      return fileMatterService.getList(1, 5, search).then(function (resp) {
+      return matterService.getList(1, 5, search).then(function (resp) {
         return resp.data
       })
     }
@@ -282,7 +282,7 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
         initializeTable();
 
-        fileMatterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
+        matterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
           for (var idx in matterInfo.partyGroup) {
             var pg = matterInfo.partyGroup[idx];
             if (pg.party.length > 0) {
@@ -338,7 +338,7 @@ denningOnline
           strFileNo1: $stateParams.fileNo
         };
 
-        fileMatterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
+        matterService.getItemApp(self.entity.clsFileNo.strFileNo1).then(function (matterInfo) {
           self.matterChange(matterInfo, false);
         });
       }

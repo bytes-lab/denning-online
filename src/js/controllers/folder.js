@@ -683,7 +683,7 @@ denningOnline
   })
 
   .controller('shareModalCtrl', function ($scope, $uibModalInstance, growlService, folderService, 
-                                          matter, file, fileMatterService) 
+                                          matter, file, matterService) 
   {
     $scope.data = {
       fileNo: matter,
@@ -701,7 +701,7 @@ denningOnline
       return input;
     } 
 
-    fileMatterService.getItem(matter).then(function (item) {
+    matterService.getItem(matter).then(function (item) {
       $scope.data.matter = item;
       for (var i = 1; i <= 6; i++) {
         $scope.data.contacts.push({
