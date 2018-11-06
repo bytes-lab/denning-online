@@ -772,11 +772,14 @@ denningOnline
       templateUrl: 'gen-doc.html',
       controller: function($scope, NgTableParams, templateService, $uibModal) {
         $scope.sources = ['All', 'Online', 'User'];
-        $scope.industries = ['Legal'];
+        $scope.data = {
+          industries: []
+        };
+
         $scope.docInfo = {
           fileno: $scope.model.strFileNo1,
           source: 'All',
-          industry: 'Legal'
+          // industry: 'Legal'
         };
 
         $scope.chooseTemplate = function (tpl) {
@@ -832,8 +835,8 @@ denningOnline
         }
 
         templateService.getIndustries().then(function(data) {
-          // $scope.industries = data;
-          // $scope.docInfo.industry = data[0];
+          $scope.data.industries = data;
+          $scope.docInfo.industry = data[0];
           $scope.updateCategory();
         });
 
