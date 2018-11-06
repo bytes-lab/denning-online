@@ -772,93 +772,93 @@ denningOnline
       templateUrl: 'gen-doc.html',
       controller: function($scope, NgTableParams, templateService, $uibModal) {
         $scope.sources = ['All', 'Online', 'User'];
+        $scope.industries = [];
         $scope.docInfo = {
           fileno: $scope.model.strFileNo1,
-          source: 'All',
-          industry: 'Industry'
+          source: 'All'
         };
 
-        // $scope.chooseTemplate = function (tpl) {
-        //   $scope.tpl = tpl;
-        // };
+        $scope.chooseTemplate = function (tpl) {
+          $scope.tpl = tpl;
+        };
 
-        // $scope.generate = function () {
-        //   if (!$scope.tpl) {
-        //     alert("Please choose a template.");
-        //     return false;
-        //   }
+        $scope.generate = function () {
+          if (!$scope.tpl) {
+            alert("Please choose a template.");
+            return false;
+          }
 
-        //   templateService.generateDoc($scope.tpl).then(function (data) {
-        //     var modalInstance = $uibModal.open({
-        //       animation: true,
-        //       templateUrl: 'preview-doc.html',
-        //       controller: function ($scope, $sce) {
-        //         var url = 'https://docs.google.com/gview?url=https://denningchat.com.my/'+
-        //                   'denningwcf/'+data+'&embedded=true';
-        //         $scope.url = $sce.trustAsResourceUrl(url);
-        //       },
-        //       size: 'lg',
-        //       keyboard: true
-        //     });
-        //   })
-        // }
+          templateService.generateDoc($scope.tpl).then(function (data) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'preview-doc.html',
+              controller: function ($scope, $sce) {
+                var url = 'https://docs.google.com/gview?url=https://denningchat.com.my/'+
+                          'denningwcf/'+data+'&embedded=true';
+                $scope.url = $sce.trustAsResourceUrl(url);
+              },
+              size: 'lg',
+              keyboard: true
+            });
+          })
+        }
 
-        // $scope.updateTemplates = function() {
-        //   $scope.tableFilter = new NgTableParams({
-        //     page: 1,
-        //     count: 15,
-        //     sorting: {
-        //       name: 'asc'
-        //     }
-        //   }, {
-        //     getData: function(params) {
-        //       return templateService.getTemplates($scope.docInfo, params.page(), params.count(), $scope.keyword)
-        //       .then(function (data) {
-        //         params.total(data.headers('x-total-count'));
-        //         return data.data;
-        //       });
-        //     }
-        //   })
-        // };
+        $scope.updateTemplates = function() {
+          $scope.tableFilter = new NgTableParams({
+            page: 1,
+            count: 15,
+            sorting: {
+              name: 'asc'
+            }
+          }, {
+            getData: function(params) {
+              return templateService.getTemplates($scope.docInfo, params.page(), params.count(), $scope.keyword)
+              .then(function (data) {
+                params.total(data.headers('x-total-count'));
+                return data.data;
+              });
+            }
+          })
+        };
 
-        // $scope.search = function (event, clear) {
-        //   if(event.which == 13 || clear) { 
-        //     if (clear) {
-        //       $scope.keyword = '';
-        //     }
-        //     $scope.tableFilter.reload();
-        //   }
-        // }
+        $scope.search = function (event, clear) {
+          if(event.which == 13 || clear) { 
+            if (clear) {
+              $scope.keyword = '';
+            }
+            $scope.tableFilter.reload();
+          }
+        }
 
         templateService.getIndustries().then(function(data) {
           $scope.industries = data;
           $scope.docInfo.industry = data[0];
-          // $scope.updateCategory();
+          $scope.updateCategory();
         });
 
-        // $scope.updateCategory = function() {
-        //   templateService.getCategories($scope.docInfo).then(function(data) {
-        //     $scope.categories = data;
-        //     $scope.docInfo.category = data[0];
-        //     $scope.updateType();
-        //   });
-        // }
+        $scope.updateCategory = function() {
+          templateService.getCategories($scope.docInfo).then(function(data) {
+            $scope.categories = data;
+            $scope.docInfo.category = data[0];
+            $scope.updateType();
+          });
+        }
 
-        // $scope.updateType = function() {
-        //   templateService.getTypes($scope.docInfo).then(function (data) {
-        //     $scope.types = data;
-        //     $scope.docInfo.type = data[0];
-        //     $scope.updateSubType();
-        //   });
-        // }
+        $scope.updateType = function() {
+          templateService.getTypes($scope.docInfo).then(function (data) {
+            $scope.types = data;
+            $scope.docInfo.type = data[0];
+            $scope.updateSubType();
+          });
+        }
 
-        // $scope.updateSubType = function() {
-        //   templateService.getSubTypes($scope.docInfo).then(function(data) {
-        //     $scope.subTypes = data;
-        //     $scope.docInfo.subType = data[0];
-        //     $scope.updateTemplates();
-        //   });
-        // }
+        $scope.updateSubType = function() {
+          templateService.getSubTypes($scope.docInfo).then(function(data) {
+            $scope.subTypes = data;
+            $scope.docInfo.subType = data[0];
+            $scope.updateTemplates();
+          });
+        }
       }
     });
   })
