@@ -770,11 +770,12 @@ denningOnline
     formlyConfig.setType({
       name: 'gen-doc',
       templateUrl: 'gen-doc.html',
-      controller: function($scope, $filter, NgTableParams, templateService, $uibModal) {
+      controller: function($scope, NgTableParams, templateService, $uibModal) {
         $scope.sources = ['All', 'Online', 'User'];
         $scope.docInfo = {
           fileno: $scope.model.strFileNo1,
-          source: 'All'
+          source: 'All',
+          industry: 'Industry'
         };
 
         // $scope.chooseTemplate = function (tpl) {
