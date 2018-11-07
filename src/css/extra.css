@@ -54,6 +54,10 @@
     width: 15% !important; 
 }
 
+.wp-10 {
+    width: 10% !important; 
+}
+
 .input-group-addon.search-clear {
     min-width: 28px;
     padding: 10px 0;

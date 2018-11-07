@@ -30,7 +30,7 @@
         <div class="table-responsive table-div p-15 f-14"> 
           <table ng-table="vm.tableFilter" class="table folder table-striped table-vmiddle table-list" style="overflow: visible;">
             <tr class="ng-table-group" ng-repeat-start="group in $groups">
-              <td colspan="4">
+              <td colspan="5">
                 <a href="" ng-click="group.$hideRows = !group.$hideRows">
                   <i class="zmdi zmdi-folder"></i>&nbsp;
                   <strong>{{ group.value.toUpperCase() }}</strong>
@@ -49,17 +49,20 @@
             </tr>
             <tr ng-hide="group.$hideRows" ng-if="file.name" ng-repeat="file in group.data" ng-repeat-end ng-click="vm.preview(file);">
               <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" ng-click="$event.stopPropagation();"></td>
-              <td sortable="'name'" filter="{ 'name': 'text' }" data-title="'Name'" class="wp-60">
+              <td filter="{ 'name': 'text' }" data-title="'Name'" class="wp-50">
                 <i class="zmdi zmdi-collection-pdf" ng-if="file.ext=='.pdf'"></i>
                 <i class="zmdi zmdi-collection-image" ng-if="file.ext=='.jpg' || file.ext=='.png' || file.ext=='.jpeg'"></i>
                 <i class="zmdi zmdi-collection-text" ng-if="file.ext!='.pdf' && file.ext!='.jpg' && file.ext!='.png' && file.ext!='.jpeg'"></i>&nbsp;
                 {{file.name}}
               </td>
-              <td sortable="'ext'" data-title="'Ext'" class="wp-15">
+              <td data-title="'Ext'" class="wp-10">
                 {{file.ext}}
               </td>
-              <td sortable="'date'" data-title="'Date'" class="wp-25">
+              <td data-title="'Date'" class="wp-15">
                 {{file.date|ddate}} {{file.date.split(' ')[1]}}
+              </td>
+              <td data-title="'Size'" class="wp-10">
+                {{file.size|number}} k
               </td>
               <td data-title="'Action'" class="f-16">
                 <button class="btn btn-default btn-sm waves-circle" title="Rename" ng-click="vm.renameDoc(file); $event.stopPropagation();">
