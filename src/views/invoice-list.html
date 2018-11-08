@@ -22,7 +22,7 @@
       <div class="col-sm-7">
         <div class="checkbox pull-right">
           <label>
-            <input type="checkbox" ng-model="vm.entity.boolDeceased">
+            <input type="checkbox" ng-model="vm.outstanding" ng-change="vm.tableFilter.reload();">
             <i class="input-helper"></i>
             Outstanding
           </label>
@@ -69,7 +69,7 @@
               {{ w.decOutstanding }}
             </td>
             <td data-title="'Aging'">
-              {{ w.intAging }}
+              {{ w.strAgingDate }}
             </td>
           </tr>
         </table>

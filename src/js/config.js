@@ -552,7 +552,7 @@ denningOnline
         data: {
           access: '@'
         },
-        url: '/transactions',
+        url: '/transactions/:type',
         controller: 'transactionListCtrl as vm',
         templateUrl: 'views/transaction-list.html'
       })

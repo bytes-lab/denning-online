@@ -19,7 +19,7 @@ denningOnline
     self.search = function (event, clear) {
       if(event.which == 13 || clear) { 
         if (clear) {
-          self.keyword='';
+          self.keyword = '';
         }
         self.tableFilter.reload();
       }

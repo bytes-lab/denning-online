@@ -1,14 +1,15 @@
 denningOnline
-  .controller('transactionListCtrl', function(NgTableParams, generalJournalService, Auth, $state) {
+  .controller('transactionListCtrl', function(NgTableParams, $stateParams, generalJournalService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
+    self.type = $stateParams.type;
 
     self.tableFilter = new NgTableParams({
       page: 1,
       count: 25,
     }, {
       getData: function(params) {
-        return generalJournalService.getList(params.page(), params.count(), self.keyword)
+        return generalJournalService.getList(self.type, params.page(), params.count(), self.keyword)
         .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
@@ -16,11 +17,15 @@ denningOnline
       }
     })
 
-    self.search = function () {
-      self.tableFilter.reload();
+    self.search = function (event, clear) {
+      if(event.which == 13 || clear) { 
+        if (clear) {
+          self.keyword = '';
+        }
+        self.tableFilter.reload();
+      }
     }
   })
-
 
   .controller('generalJournalEditCtrl', function($stateParams, generalJournalService, $state, Auth,
                                           refactorService, matterService, growlService,

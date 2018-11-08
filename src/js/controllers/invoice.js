@@ -8,7 +8,8 @@ denningOnline
       count: 25,
     }, {
       getData: function(params) {
-        return invoiceService.getList(params.page(), params.count(), self.keyword)
+        var type = self.outstanding ? 'outstanding': 'all';
+        return invoiceService.getOutstandingList(type, params.page(), params.count(), self.keyword)
         .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data.map(function (item) {
@@ -27,9 +28,10 @@ denningOnline
     })
 
     self.search = function (event, clear) {
+      console.log(self.outstanding);
       if(event.which == 13 || clear) { 
         if (clear) {
-          self.keyword='';
+          self.keyword = '';
         }
         self.tableFilter.reload();
       }

@@ -2,8 +2,8 @@ denningOnline
   .service('generalJournalService', function(http) {
     var service = {};
 
-    service.getList = function (page, pagesize, keyword) {
-      return http.GET('v1/ClientVoucher', {
+    service.getList = function (type, page, pagesize, keyword) {
+      return http.GET('v1/table/transactionsListing/all/'+type, {
         page: page,
         pagesize: pagesize,
         search: keyword 
