@@ -457,7 +457,7 @@ denningOnline
       // GENERAL-JOURNALS
       //------------------------------
 
-      .state ('billing.general-journals-edit', {
+      .state ('billing.GJ-edit', {
         data: {
           access: '@'
         },
@@ -465,7 +465,7 @@ denningOnline
         controller: 'generalJournalEditCtrl as vm',
         templateUrl: 'views/general-journal-edit.html'
       })
-      .state ('billing.general-journals-new', {
+      .state ('billing.GJ-new', {
         data: {
           access: '@',
           can_edit: true
@@ -480,7 +480,7 @@ denningOnline
       // CREDIT-NOTES
       //------------------------------
 
-      .state ('billing.credit-notes-edit', {
+      .state ('billing.CN-edit', {
         data: {
           access: '@'
         },
@@ -488,7 +488,7 @@ denningOnline
         controller: 'creditNoteEditCtrl as vm',
         templateUrl: 'views/credit-note-edit.html'
       })
-      .state ('billing.credit-notes-new', {
+      .state ('billing.CN-new', {
         data: {
           access: '@',
           can_edit: true
@@ -503,22 +503,22 @@ denningOnline
       // DEBIT-NOTES
       //------------------------------
 
-      .state ('billing.debit-notes-edit', {
+      .state ('billing.DN-edit', {
         data: {
           access: '@'
         },
         url: '/debit-note/edit/:id',
         controller: 'debitNoteEditCtrl as vm',
-        templateUrl: 'views/credit-note-edit.html'
+        templateUrl: 'views/debit-note-edit.html'
       })
-      .state ('billing.debit-notes-new', {
+      .state ('billing.DN-new', {
         data: {
           access: '@',
           can_edit: true
         },
         url: '/debit-note/new',
         controller: 'debitNoteEditCtrl as vm',
-        templateUrl: 'views/credit-note-edit.html'
+        templateUrl: 'views/debit-note-edit.html'
       })
 
 
@@ -532,7 +532,7 @@ denningOnline
         },
         url: '/IAT/edit/:id',
         controller: 'IATEditCtrl as vm',
-        templateUrl: 'views/credit-note-edit.html'
+        templateUrl: 'views/IAT-edit.html'
       })
       .state ('billing.IAT-new', {
         data: {
@@ -541,7 +541,7 @@ denningOnline
         },
         url: '/IAT/new',
         controller: 'IATEditCtrl as vm',
-        templateUrl: 'views/credit-note-edit.html'
+        templateUrl: 'views/IAT-edit.html'
       })
 
       //------------------------------

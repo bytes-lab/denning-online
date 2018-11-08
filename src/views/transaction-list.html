@@ -23,7 +23,7 @@
       <div class="clearfix"></div>
       <div class="table-responsive table-div p-15">
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle table-list">
-          <tr ng-repeat="w in $data" ui-sref="billing.vouchers-edit({'id': w.documentNo})">
+          <tr ng-repeat="w in $data" ng-click="vm.goDetail(w.strTransactionDoc);">
             <td data-title="'Code'">
               {{ w.code }}
             </td>
@@ -39,7 +39,7 @@
             <td data-title="'Description'">
               {{ w.strTransactionDescription }}
             </td>
-            <td data-title="'Doc'">
+            <td data-title="'Transaction Doc'">
               {{ w.strTransactionDoc }}
             </td>
             <td data-title="'Deposit'">
