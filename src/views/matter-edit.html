@@ -2347,7 +2347,7 @@
   <div class="d-flex m-b-20">
     <label class="form-control attr-label-v1">Industry</label>
     <select class="form-control wp-20" ng-model="docInfo.industry" ng-change="updateCategory()">
-      <option ng-repeat="item in data.industries track by $index" ng-value="item">{{ item }}</option>
+      <option ng-repeat="item in industries track by $index" ng-value="item">{{ item }}</option>
     </select>
     <label class="form-control attr-label-v1">Category</label>
     <select class="form-control wp-30" ng-model="docInfo.category" ng-change="updateType()">
