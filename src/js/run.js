@@ -426,9 +426,17 @@ denningOnline
     formlyConfig.setType({
       name: 'case',
       templateUrl: 'case.html',
-      controller: function ($scope, caseService) {
+      controller: function ($scope, caseService, judgeService) {
         if ($scope.model.strF3) {
           $scope.caseType = { code: $scope.model.strF3 };
+        }
+
+        if ($scope.model.strF6) {
+          $scope.sar = { code: $scope.model.strF6 };
+        }
+
+        if ($scope.model.strF7) {
+          $scope.judge = { code: $scope.model.strF7 };
         }
 
         $scope.queryCaseTypes = function (searchText) {
@@ -437,10 +445,36 @@ denningOnline
           })
         }
 
+        $scope.queryJudges = function (searchText) {
+          return judgeService.getList(1, 10, searchText).then(function (resp) {
+            return resp.data;
+          })
+        }
+
+        $scope.querySAR = function (searchText) {
+          return judgeService.getSARList(1, 10, searchText).then(function (resp) {
+            return resp.data;
+          })
+        }
+
         $scope.caseTypeChange = function (item) {
           $scope.model.strF3 = null;
           if (item) {
             $scope.model.strF3 = item.code;
+          }
+        }
+
+        $scope.sarChange = function (item) {
+          $scope.model.strF6 = null;
+          if (item) {
+            $scope.model.strF6 = item.code;
+          }
+        }
+
+        $scope.judgeChange = function (item) {
+          $scope.model.strF7 = null;
+          if (item) {
+            $scope.model.strF7 = item.code;
           }
         }
       }
