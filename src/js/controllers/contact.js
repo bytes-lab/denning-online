@@ -123,7 +123,8 @@ denningOnline
                                 self.entity.strAddressLine3 +
                                 self.entity.strPostCode.trim() + ' ' +
                                 self.entity.strCity.trim() + ', ' +
-                                self.entity.strState;
+                                self.entity.strState.trim() + ', ' +
+                                self.entity.strCountry;
       }
     }
 

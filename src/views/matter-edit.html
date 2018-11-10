@@ -835,7 +835,7 @@
 </script>
 
 <script type="text/ng-template" id="price.html">
-  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <h4 class="m-b-15 group-label">{{ to.label }} <span class="pull-right m-r-30 f-13">( Currency: {{ model.strPurchasePriceSymbol }} )</span></h4>
   <div class="form-group">
     <div class="form-group col-md-12">
       <div class="d-flex">
@@ -1365,7 +1365,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="m-b-15 group-label">Loan Amount</h4>  
+  <h4 class="m-b-15 group-label">Loan Amount <span class="pull-right m-r-30 f-13">( Currency: {{ model.strLoanPriceSymbol }} )</span></h4>  
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Term Loan Amount</label>
     <div class="col-sm-8">
@@ -1449,7 +1449,7 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <h4 class="m-b-15 group-label">Klamnic Loan</h4>  
+  <h4 class="m-b-15 group-label">Islanic Loan</h4>  
   <div class="form-group col-md-6">
     <label for="inputEmail3" class="col-sm-4 attr-label-1">Selling Price</label>
     <div class="col-sm-8">

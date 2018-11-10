@@ -48,25 +48,25 @@
               {{ w.strBillingMatter }}
             </td>
             <td data-title="'Fees'" class="text-right">
-              {{ w.decFee | number:2 }}
+              {{ w.decFee_Billed }}
             </td>
             <td data-title="'Disb (T)'" class="text-right">
-              {{ w.decDisbWithTax }}
+              {{ w.decDisbWithTax_Billed }}
             </td>
             <td data-title="'Disb'" class="text-right">
-              {{ w.decDisb }}
+              {{ w.decDisbOnly_Billed }}
             </td>
             <td data-title="'Tax'" class="text-right">
               {{ w.tax|number:2 }}
             </td>
             <td data-title="'Total'" class="text-right">
-              {{ w.total|number:2 }}
+              {{ w.decBilledAmount }}
             </td>
             <td data-title="'Paid'" class="text-right">
-              {{ w.decPaid }}
+              {{ w.decPaid|number:2 }}
             </td>
             <td data-title="'Outstanding'" class="text-right">
-              {{ w.decOutstanding }}
+              {{ w.decOSAmount }}
             </td>
             <td data-title="'Aging'">
               {{ w.strAgingDate }}

@@ -1324,7 +1324,8 @@ denningOnline
       })
       .state ('judges.new', {
         data: {
-          access: '@'
+          access: '@',
+          can_edit: true
         },
         url: '/new',
         controller: 'judgeEditCtrl as vm',

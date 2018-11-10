@@ -252,7 +252,7 @@
             <dt class="p-t-10">Town</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCity">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCity" camel-case>
               </div>
             </dd>
           </dl>
@@ -260,7 +260,7 @@
             <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strState">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strState" camel-case>
               </div>
             </dd>
           </dl>
@@ -268,7 +268,7 @@
             <dt class="p-t-10">Country</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strCountry" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strCountry" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
               </div>
             </dd>
           </dl>
@@ -333,124 +333,6 @@
         </div>
       </div>
       <div class="clearfix"></div>
-
-      <h4 class="m-t-25 p-t-5">Tax Information</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Tax Reference No.</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">IRD Branch</dt>
-            <dd>
-              <div class="fg-line">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.clsIrdBranch_"
-                  md-search-text="qsird"
-                  md-items="item in vm.queryIRDBranch(qsird)"
-                  md-item-text="item.description ? item.description : ' '"
-                  md-selected-item-change="vm.irdBranchChange(item)"
-                  md-min-length="0"
-                  class="default-input">
-                  <md-item-template>
-                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
-                      {{ item.description }}
-                    </span>
-                  </md-item-template>
-                </md-autocomplete>  
-              </div>
-            </dd>
-          </dl>
-        </div>
-      </div>
-
-      <h4 class="m-t-25 p-t-5">GST Information</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="vm.entity.boolIsGSTRegistered">
-                <i class="input-helper"></i>
-                GST Registered
-              </label>
-            </div>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">GST Reg. No.</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strGSTNo">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">RMCD Approval No.</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strGSTRMCDNo">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="vm.entity.boolGSTStatusVerified">
-                <i class="input-helper"></i>
-                GST Status Verified
-              </label>
-            </div>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Last GST Status Verified Date</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.dtGSTStatusVerifiedDate">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank</dt>
-            <dd>
-              <div class="fg-line">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.entity.clsBank"
-                  md-search-text="qsbk"
-                  md-items="item in vm.queryBanks(qsbk)"
-                  md-item-text="item.strName ? item.strName: ' '"
-                  md-min-length="0"
-                  md-autoselect="false"
-                  class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="qsbk" class="col-1" md-highlight-flags="i">
-                    {{item.strName}}
-                  </span>
-                </md-item-template>
-                </md-autocomplete>
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Account No.</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSupplierAccNo">
-              </div>
-            </dd>
-          </dl>
-        </div>        
-      </div>
       <h4 class="m-t-25" ng-click="vm.showCompany=!vm.showCompany">Company Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCompany"></i><i class="zmdi zmdi-minus" ng-if="vm.showCompany"></i></h4>
       <div class="row" ng-show="vm.showCompany">
         <div class="col-md-6 p-l-25">
@@ -464,7 +346,7 @@
             </div>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Office Address</dt>
+            <dt class="p-t-10">Registered Address</dt>
             <dd>
               <div class="fg-line">
                 <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="4" ng-model="vm.entity.strRegOff"></textarea>
@@ -535,6 +417,129 @@
                 </span>
               </md-item-template>
               </md-autocomplete>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 p-t-5">Tax Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Tax Reference No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">IRD Branch</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.clsIrdBranch_"
+                  md-search-text="qsird"
+                  md-items="item in vm.queryIRDBranch(qsird)"
+                  md-item-text="item.description ? item.description : ' '"
+                  md-selected-item-change="vm.irdBranchChange(item)"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+                      {{ item.description }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>  
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 p-t-5">GST / SST/ VAT Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.boolIsGSTRegistered">
+                <i class="input-helper"></i>
+                Registered
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Reg. No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strGSTNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">RMCD Approval No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strGSTRMCDNo">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.boolGSTStatusVerified">
+                <i class="input-helper"></i>
+                GST Status Verified
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Last GST Status Verified Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.dtGSTStatusVerifiedDate">
+              </div>
+            </dd>
+          </dl>
+        </div>        
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showBank=!vm.showBank">Bank Account Details&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showBank"></i><i class="zmdi zmdi-minus" ng-if="vm.showBank"></i></h4>
+      <div class="row" ng-show="vm.showBank">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.entity.clsBank"
+                  md-search-text="qsbk"
+                  md-items="item in vm.queryBanks(qsbk)"
+                  md-item-text="item.strName ? item.strName: ' '"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qsbk" class="col-1" md-highlight-flags="i">
+                    {{item.strName}}
+                  </span>
+                </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Account No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSupplierAccNo">
+              </div>
             </dd>
           </dl>
         </div>

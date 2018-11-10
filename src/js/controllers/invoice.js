@@ -14,13 +14,13 @@ denningOnline
           params.total(data.headers('x-total-count'));
           return data.data.map(function (item) {
             var item_ = angular.copy(item);
-            item_.tax = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
-                        refactorService.convertFloat(item.decTaxofFee);
-            item_.total = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
-                          refactorService.convertFloat(item.decTaxofFee) +
-                          refactorService.convertFloat(item.decDisb) +
-                          refactorService.convertFloat(item.decDisbWithTax) +
-                          refactorService.convertFloat(item.decFee);
+            item_.tax = refactorService.convertFloat(item.decTaxofFee_Billed) + 
+                        refactorService.convertFloat(item.decTaxofDisbWithTax_Billed);
+            item_.decPaid = refactorService.convertFloat(item.decDisbOnly_Received) + 
+                          refactorService.convertFloat(item.decDisbWithTax_Received) +
+                          refactorService.convertFloat(item.decFee_Received) +
+                          refactorService.convertFloat(item.decTaxofDisbWithTax_Received) +
+                          refactorService.convertFloat(item.decTaxofFee_Received);
             return item_;
           });
         });
@@ -28,7 +28,6 @@ denningOnline
     })
 
     self.search = function (event, clear) {
-      console.log(self.outstanding);
       if(event.which == 13 || clear) { 
         if (clear) {
           self.keyword = '';
@@ -53,7 +52,8 @@ denningOnline
     self.itemType = 'All';
     self.taxType = 'NoTax';
     self.invoiceToList = [];
-
+    self.showItems = true;
+    
     self.queryMatters = function (search) {
       return matterService.getList(1, 5, search).then(function (resp) {
         return resp.data

@@ -521,7 +521,9 @@ denningOnline
         clsFileStatus: {
           code: "1",
           strDescription: "Active"
-        }
+        },
+        strPurchasePriceSymbol: vm.userInfo.currency,
+        strLoanPriceSymbol: vm.userInfo.currency
       };
       vm.title = 'New Matter';
 

@@ -51,7 +51,8 @@ denningOnline
     self.itemType = 'All';
     self.taxType = 'NoTax';
     self.quoteToList = [];
-
+    self.showItems = true;
+    
     self.queryMatters = function (search) {
       return matterService.getList(1, 5, search).then(function (resp) {
         return resp.data
