@@ -519,20 +519,32 @@ denningOnline
       name: 'price',
       templateUrl: 'price.html',
       controller: function ($scope, $timeout, refactorService) {        
+        $scope.calcDeposit = function (fixed_deposit) {
+          if (fixed_deposit) {
+            $scope.model.decRM18 = (refactorService.convertFloat($scope.model.decRM1) * 0.1 - refactorService.convertFloat($scope.model.decRM17)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+          } else {
+            $scope.model.decRM18 = '';
+          }
+
+          $scope.calcForm($scope.model);
+        };
+
         $scope.calcForm = function (model) {
           $timeout(function () {
             var v1 = refactorService.convertFloat(angular.element('.rm1').val()),
                 v3 = refactorService.convertFloat(angular.element('.rm3').val()),
                 v17 = refactorService.convertFloat(angular.element('.rm17').val()),
+                v18 = refactorService.convertFloat(angular.element('.rm18').val()),
                 v20 = refactorService.convertFloat(angular.element('.rm20').val()),
                 v21 = refactorService.convertFloat(angular.element('.rm21').val());
 
-            model.decRM18 = v1 * 0.1 - v17;
-            model.decRM2 = v1 * 0.1;
+            model.decRM2 = v17 + v18;
             model.decRM19 = v1 - model.decRM2;
             model.decRM22 = v1 + v3 + v20 + v21;
           }, 200);
-        }
+        };
+
+        $scope.calcForm($scope.model);
       }
     });
 
