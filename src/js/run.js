@@ -487,6 +487,7 @@ denningOnline
           if (item) {
             $scope.model.strF1 = item.code;
             $scope.model.strF2 = item.strTypeE;
+            $scope.model.strF8 = item.strPlace + ',' + item.strState;
           }
         }
 

@@ -808,13 +808,13 @@
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Place</label>
-        <label class="form-control wp-45">{{ court.strPlace }}, {{ court.strState }}</label>
+        <input type="text" class="form-control wp-45" ng-model="model.strF8" ng-readonly="!model.tmp.can_edit">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Court No.</label>
-        <input type="text" class="form-control wp-45" ng-model="model.strF1">
+        <input type="text" class="form-control wp-45" ng-model="model.strF1" ng-readonly="!model.tmp.can_edit">
       </div>
     </div>
     <div class="form-group col-md-12">
