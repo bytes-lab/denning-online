@@ -94,6 +94,13 @@ denningOnline
     //   separateDialCode: true
     // });
 
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
+
     self.relatedMatter = function () {
       if ($uibModalInstance) {
         $uibModalInstance.close();
