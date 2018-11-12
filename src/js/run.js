@@ -518,7 +518,7 @@ denningOnline
     formlyConfig.setType({
       name: 'price',
       templateUrl: 'price.html',
-      controller: function ($scope, $timeout, refactorService) {
+      controller: function ($scope, $timeout, refactorService) {        
         $scope.calcForm = function (model) {
           $timeout(function () {
             var v1 = refactorService.convertFloat(angular.element('.rm1').val()),
@@ -539,7 +539,11 @@ denningOnline
     formlyConfig.setType({
       name: 'loan',
       templateUrl: 'loan.html',
-      controller: function ($scope, $timeout, refactorService) {        
+      controller: function ($scope, $timeout, refactorService) {
+        $scope.loanTypes = ['Term Loan', 'Housing Loan', 'Overdraft', 'Trade finacing', 'Foreign Currency Loan',
+                            'Guarantee', 'Others'];
+        $scope.finacingTypes = ['Conventional', 'Islamic', 'Others'];
+
         $scope.calcForm = function (model) {
           $timeout(function () {
             var v4 = refactorService.convertFloat(angular.element('.rm4').val()),
