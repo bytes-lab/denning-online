@@ -158,6 +158,8 @@ denningOnline
       templateUrl: 'contact.html',
       controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
         $scope.userInfo = Auth.getUserInfo();
+
+        $scope.shareList = ['1/1', '1/2', '1/3', '1/4', '1/5', '1/10'];
         $scope.represent_this = $scope.userInfo.catDenning.length > 0 && $scope.model[$scope.to.field] &&
                                 $scope.model[$scope.to.field].code == $scope.userInfo.catDenning[0].LawFirm.code;
         $scope.representChange = function() {
@@ -216,6 +218,18 @@ denningOnline
           $scope.model.tmp['clsC'+last] = false;
           $scope.model['clsC'+last] = {};
         }
+
+        $scope.queryShares = function (q) {
+          var arr = $scope.shareList.filter(function (item) {
+            return item.search(new RegExp(q, "i")) > -1;
+          });
+
+          if (arr && arr.length == 0) {
+            return [q];
+          } else {
+            return arr;
+          }
+        };
 
         $scope.queryContacts = function(searchText) {
           return getContacts(1, 10, searchText);
@@ -427,20 +441,30 @@ denningOnline
       name: 'case',
       templateUrl: 'case.html',
       controller: function ($scope, caseService, judgeService) {
+        if ($scope.model.strF2) {
+          $scope.court = { strTypeE: $scope.model.strF2 };
+        }
+
         if ($scope.model.strF3) {
-          $scope.caseType = { code: $scope.model.strF3 };
+          $scope.caseType = { strEnglish: $scope.model.strF3 };
         }
 
         if ($scope.model.strF6) {
-          $scope.sar = { code: $scope.model.strF6 };
+          $scope.sar = { strName: $scope.model.strF6 };
         }
 
         if ($scope.model.strF7) {
-          $scope.judge = { code: $scope.model.strF7 };
+          $scope.judge = { strName: $scope.model.strF7 };
         }
 
         $scope.queryCaseTypes = function (searchText) {
           return caseService.getList(1, 10, searchText).then(function (resp) {
+            return resp.data;
+          })
+        }
+
+        $scope.queryCourts = function (searchText) {
+          return caseService.getCourtList(1, 10, searchText).then(function (resp) {
             return resp.data;
           })
         }
@@ -457,24 +481,33 @@ denningOnline
           })
         }
 
+        $scope.courtChange = function (item) {
+          $scope.model.strF1 = null;
+          $scope.model.strF2 = null;
+          if (item) {
+            $scope.model.strF1 = item.code;
+            $scope.model.strF2 = item.strTypeE;
+          }
+        }
+
         $scope.caseTypeChange = function (item) {
           $scope.model.strF3 = null;
           if (item) {
-            $scope.model.strF3 = item.code;
+            $scope.model.strF3 = item.strEnglish;
           }
         }
 
         $scope.sarChange = function (item) {
           $scope.model.strF6 = null;
           if (item) {
-            $scope.model.strF6 = item.code;
+            $scope.model.strF6 = item.strName;
           }
         }
 
         $scope.judgeChange = function (item) {
           $scope.model.strF7 = null;
           if (item) {
-            $scope.model.strF7 = item.code;
+            $scope.model.strF7 = item.strName;
           }
         }
       }

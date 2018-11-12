@@ -15,7 +15,7 @@
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
               </div>
             </dd>
           </dl>
@@ -36,7 +36,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Lawyer Name</dt>
+            <dt class="p-t-10">Description</dt>
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.entity.strLawyerName" ng-readonly="!vm.can_edit" type="text" class="form-control">
@@ -91,37 +91,21 @@
               </div>
             </dd>
           </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Branch Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strBranch">
+              </div>
+            </dd>
+          </dl>
         </div>
         <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">City</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strCity">
-              </div>
-            </dd>
-          </dl>              
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strState">
-              </div>
-            </dd>
-          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Address (Line 1)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
               </div>
             </dd>
           </dl>
@@ -129,7 +113,7 @@
             <dt class="p-t-10">Address (Line 2)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine2" camel-case>
               </div>
             </dd>
           </dl>
@@ -137,16 +121,72 @@
             <dt class="p-t-10">Address (Line 3)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine3">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine3" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strPostCode_"
+                  md-search-text="qsct"
+                  md-items="item in vm.queryPostcodes(qsct)"
+                  md-selected-item-change="vm.postcodeChange(item)"
+                  md-item-text="item.postcode"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="qsct" class="col-1" md-highlight-flags="i">
+                      {{ item.postcode }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Town</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCity" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strState" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strCountry" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Status</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strStatus">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.strStatus"
+                md-search-text="qsfs"
+                md-items="item in vm.fileStatus"
+                md-item-text="item"
+                md-min-length="0"
+                md-autoselect="true"
+                class="default-input">
+              <md-item-template>
+                <span class="col-1" md-highlight-flags="i">{{item}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -197,5 +237,5 @@
         </div>
       </div>
     </div>
-  </div>     
+  </div>
 </div>

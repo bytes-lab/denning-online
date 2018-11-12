@@ -23,7 +23,7 @@ denningOnline
     }
   })
 
-  .controller('legalFirmEditCtrl', function($stateParams, legalFirmService, $state, Auth, 
+  .controller('legalFirmEditCtrl', function($stateParams, legalFirmService, $state, Auth, cityService,
                                             $uibModalInstance, entityCode, isDialog, isNew,
                                             refactorService, growlService) 
   {
@@ -36,6 +36,8 @@ denningOnline
     self.isNew = isNew;
     self.entityCode = isDialog ? entityCode : $stateParams.id;
 
+    self.fileStatus = ['Active', 'Closed', 'Unknown'];
+
     if (self.entityCode) {
       self.title = 'Edit Legal Firm';
       legalFirmService.getItem(self.entityCode).then(function (item) {
@@ -45,8 +47,27 @@ denningOnline
       });
     } else {
       self.title = 'New Legal Firm';
-      self.entity = { };
+      self.entity = {
+        strTitle: 'Messr.',
+        strStatus: 'Active'
+      };
+
       self.popoutUrl = $state.href('legal-firms.new');
+    }
+
+    self.queryPostcodes = function (searchText) {
+      return cityService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    self.postcodeChange = function (item) {
+      if (item) {
+        self.entity.strPostCode = item.postcode;
+        self.entity.strCity = item.city;
+        self.entity.strState = item.state;
+        self.entity.strCountry = item.country;
+      }
     }
 
     self.copy = function () {

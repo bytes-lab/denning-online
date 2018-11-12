@@ -230,7 +230,23 @@
       <a class="btn btn-primary short-btn" ng-click="contactDialog('clsC'+n, true)">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of party"></span>
       </a>
-      <input class="form-control wp-15" ng-readonly="!model.tmp.can_edit" ng-model="model['strShareC'+n]" ng-if="to.share" placeholder="Share" />
+
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model['strShareC'+n]"
+        md-search-text="qssh"
+        md-items="item in queryShares(qssh)"
+        md-item-text="item"
+        md-min-length="0"
+        md-autoselect="false"
+        ng-if="to.share" 
+        placeholder="Share"
+        class="default-input wp-15">
+      <md-item-template>
+        <span md-highlight-text="qssh" class="col-1" md-highlight-flags="i">{{ item }}</span>
+      </md-item-template>
+      </md-autocomplete>
+
       <a class="btn btn-danger short-btn" ng-click="removeParty(n, to.c_start, to.c_end)">
         <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this party from group"></span>
       </a>
@@ -772,19 +788,33 @@
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Court</label>
-        <input type="text" class="form-control wp-45" ng-model="model.strF2">
+        <md-autocomplete
+          ng-disabled="!model.tmp.can_edit"
+          md-selected-item="court"
+          md-search-text="qscr"
+          md-items="item in queryCourts(qscr)"
+          md-item-text="item.strTypeE"
+          md-min-length="0"
+          md-selected-item-change="courtChange(item)"
+          class="default-input wp-45">
+          <md-item-template>
+            <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+              [{{ item.code }}] {{ item.strTypeE }}
+            </span>
+          </md-item-template>
+        </md-autocomplete>
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Place</label>
-        <input type="text" class="form-control wp-45" ng-model="model[options.key+'_place']">
+        <label class="form-control wp-45">{{ court.strPlace }}, {{ court.strState }}</label>
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Court No.</label>
-        <input type="text" class="form-control wp-45" ng-model="model[options.key+'_court_no']">
+        <input type="text" class="form-control wp-45" ng-model="model.strF1">
       </div>
     </div>
     <div class="form-group col-md-12">
@@ -795,7 +825,7 @@
           md-selected-item="caseType"
           md-search-text="qsct"
           md-items="item in queryCaseTypes(qsct)"
-          md-item-text="item.code"
+          md-item-text="item.strEnglish"
           md-min-length="0"
           md-selected-item-change="caseTypeChange(item)"
           class="default-input wp-45">
@@ -827,7 +857,7 @@
           md-selected-item="sar"
           md-search-text="qssar"
           md-items="item in querySAR(qssar)"
-          md-item-text="item.code"
+          md-item-text="item.strName"
           md-min-length="0"
           md-selected-item-change="sarChange(item)"
           class="default-input wp-45">
@@ -847,7 +877,7 @@
           md-selected-item="judge"
           md-search-text="qsjd"
           md-items="item in queryJudges(qsjd)"
-          md-item-text="item.code"
+          md-item-text="item.strName"
           md-min-length="0"
           md-selected-item-change="judgeChange(item)"
           class="default-input wp-45">
