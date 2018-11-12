@@ -219,6 +219,7 @@ denningOnline
           service.userInfo.TaxName = info.companyProfile.TaxName;
           service.userInfo.currency = info.companyProfile.currencySymbol;
           service.userInfo.localTime = info.localTime;
+          service.userInfo.logo = info.companyProfile.companyLogo;
           service.setUserInfo(service.userInfo);
         }
         return info;

@@ -29,6 +29,10 @@ denningOnline
     // For Mainmenu Active Class
     this.$state = $state;  
     
+    this.getLogo = function () {
+      return Auth.getUserInfo().logo;
+    }
+    
     //Close sidebar on click
     this.sidebarStat = function(event) {
       if (!angular.element(event.target).parent().hasClass('active')) {
