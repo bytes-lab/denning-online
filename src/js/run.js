@@ -537,7 +537,22 @@ denningOnline
 
     formlyConfig.setType({
       name: 'loan',
-      templateUrl: 'loan.html'
+      templateUrl: 'loan.html',
+      controller: function ($scope, $timeout, refactorService) {        
+        $scope.calcForm = function (model) {
+          $timeout(function () {
+            var v4 = refactorService.convertFloat(angular.element('.rm4').val()),
+                v5 = refactorService.convertFloat(angular.element('.rm5').val()),
+                v6 = refactorService.convertFloat(angular.element('.rm6').val()),
+                v23 = refactorService.convertFloat(angular.element('.rm23').val()),
+                v24 = refactorService.convertFloat(angular.element('.rm24').val());
+
+            model.decRM25 = v4 + v5 + v6 + v23 + v24;
+          }, 200);
+        };
+
+        $scope.calcForm($scope.model);
+      }
     });
 
     formlyConfig.setType({
