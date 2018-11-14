@@ -1,31 +1,26 @@
 denningOnline
-  .controller('courtListCtrl', function(NgTableParams, courtService, $state) {
+  .controller('courtListCtrl', function(NgTableParams, courtService, $state, Auth) {
     var self = this;
-    self.dataReady = false;
-    self.clickHandler = clickHandler;
+    self.userInfo = Auth.getUserInfo();
 
-    courtService.getList(1, 500).then(function(data) {
-      self.data = data;
-      self.dataReady = true;
-      initializeTable();
-    });    
+    self.tableFilter = new NgTableParams({}, {
+      getData: function(params) {
+        return courtService.getList(params.page(), params.count(), self.keyword, null)
+        .then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    })
 
-    function clickHandler(item) {
-      $state.go('courts.edit', {'id': item.code});
-    }
-    
-    function initializeTable () {
-      //Filtering
-      self.tableFilter = new NgTableParams({
-        page: 1,                                // show first page
-        count: 25,
-        sorting: {
-          name: 'asc'                           // initial sorting
+    self.search = function (event, clear) {
+      if(event.which == 13 || clear) { 
+        if (clear) {
+          self.keyword='';
         }
-      }, {
-        dataset: self.data
-      })
-    } 
+        self.tableFilter.reload();
+      }
+    }
   })
 
   .controller('courtEditCtrl', function($stateParams, courtService, $state) {

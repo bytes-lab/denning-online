@@ -12,7 +12,7 @@ denningOnline
         pagesize: pagesize,
         search: keyword 
       }).then(function (resp) {
-        return resp.data;
+        return resp;
       });
     }
 

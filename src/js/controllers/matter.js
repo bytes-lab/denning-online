@@ -6,13 +6,7 @@ denningOnline
     self.keyword = '';
     self.userInfo = Auth.getUserInfo();
 
-    self.tableFilter = new NgTableParams({
-      page: 1,            // show first page
-      count: 15,
-      sorting: {
-        name: 'asc'       // initial sorting
-      }
-    }, {
+    self.tableFilter = new NgTableParams({}, {
       getData: function(params) {
         return matterService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {
@@ -79,10 +73,7 @@ denningOnline
       $state.go('matter-codes.edit', {'id': item.code});
     }
 
-    self.tableFilter = new NgTableParams({
-      page: 1,
-      count: 25,
-    }, {
+    self.tableFilter = new NgTableParams({}, {
       getData: function(params) {
         return matterCodeService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {
@@ -102,10 +93,9 @@ denningOnline
     }
   })
 
-  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, Auth, 
+  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, Auth, spaChecklistService,
                                              presetbillService, matterFormService, $state,
-                                             matterCodeService, refactorService, 
-                                             growlService) 
+                                             matterCodeService, refactorService, growlService) 
   {
     var self = this;
     self.isDialog = false;
@@ -381,6 +371,12 @@ denningOnline
     self.queryForms = function (searchText) {
       return matterFormService.getList(1, 10, searchText).then(function (data) {
         return data; 
+      });
+    };
+
+    self.queryChecklist = function (searchText) {
+      return spaChecklistService.getTableList(1, 10, searchText).then(function (resp) {
+        return resp.data;
       });
     };
 

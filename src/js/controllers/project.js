@@ -2,13 +2,7 @@ denningOnline
   .controller('projectListCtrl', function(NgTableParams, projectService, $state) {
     var self = this;
 
-    self.tableFilter = new NgTableParams({
-      page: 1,
-      count: 25,
-      sorting: {
-        name: 'asc'
-      }
-    }, {
+    self.tableFilter = new NgTableParams({}, {
       getData: function(params) {
         return projectService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {

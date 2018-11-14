@@ -49,7 +49,7 @@ denningOnline
 
     function getPresetChecklist(page, pagesize, keyword) {
       return spaChecklistService.getTableList(page, pagesize, keyword).then(function (resp) {
-        return resp;
+        return resp.data;
       });
     }
 
@@ -440,7 +440,7 @@ denningOnline
     formlyConfig.setType({
       name: 'case',
       templateUrl: 'case.html',
-      controller: function ($scope, caseService, judgeService) {
+      controller: function ($scope, caseService, judgeService, courtService) {
         if ($scope.model.strF2) {
           $scope.court = { strTypeE: $scope.model.strF2 };
         }
@@ -457,6 +457,10 @@ denningOnline
           $scope.judge = { strName: $scope.model.strF7 };
         }
 
+        if ($scope.model.strF8) {
+          $scope.courtPlace = { strPlace: $scope.model.strF8 };
+        }
+
         $scope.queryCaseTypes = function (searchText) {
           return caseService.getList(1, 10, searchText).then(function (resp) {
             return resp.data;
@@ -464,7 +468,13 @@ denningOnline
         }
 
         $scope.queryCourts = function (searchText) {
-          return caseService.getCourtList(1, 10, searchText).then(function (resp) {
+          return courtService.getTypeList(1, 10, searchText).then(function (resp) {
+            return resp.data;
+          })
+        }
+
+        $scope.queryCourtPlaces = function (searchText) {
+          return courtService.getList(1, 10, searchText, $scope.model.strF2).then(function (resp) {
             return resp.data;
           })
         }
@@ -482,12 +492,17 @@ denningOnline
         }
 
         $scope.courtChange = function (item) {
-          $scope.model.strF1 = null;
-          $scope.model.strF2 = null;
+          if (item) {
+            $scope.model.strF2 = item.strTypeE;
+          } else {
+            $scope.model.strF2 = null;
+          }
+        }
+
+        $scope.courtPlaceChange = function (item) {
           if (item) {
             $scope.model.strF1 = item.code;
-            $scope.model.strF2 = item.strTypeE;
-            $scope.model.strF8 = item.strPlace + ',' + item.strState;
+            $scope.model.strF8 = item.strPlace + ' ' + item.strState;
           }
         }
 

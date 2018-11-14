@@ -1,34 +1,41 @@
 denningOnline
-  // =========================================================================
-  // Courts
-  // =========================================================================
-  
-  .service('courtService', function($http, Auth){
+  .service('courtService', function (http) {
     var service = {};
-    service.courts = null;
-    service.getList = getList;
-    service.getItem = getItem;
-    service.headers = Auth.isAuthenticated();
 
-    function getList(page, pagesize) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/courtDiary/court?page='+page+'&pagesize='+pagesize,
-        headers: service.headers
-      }).then(function(resp) {
-        service.courts = resp.data;
-        return resp.data;
-      });  
+    service.getList = function (page, pagesize, keyword, type) {
+      return http.GET('v1/table/court', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword,
+        type: type
+      }).then(function (resp) {
+        return resp;
+      });
     }
 
-    function getItem(code) {
-      return $http({
-        method: 'GET',
-        url: 'https://43.252.215.81/denningwcf/v1/courtDiary/court/'+code,
-        headers: service.headers
-      }).then(function(resp) {
-        return resp.data;
-      });  
+    service.getTypeList = function (page, pagesize, keyword) {
+      return http.GET('v1/table/courttype', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
+      });
     }
+
+    service.getItem = function (code) {
+      return http.GET('v1/table/court/'+code).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
+
+      return http[method]('v1/table/court', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
+
     return service;
   })

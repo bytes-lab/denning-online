@@ -1,5 +1,5 @@
 <div class="container">
-  <p id="back-top" style="display: none;">
+  <p id="back-top" class="d-none">
     <a ng-click="vm.scrollUp()"><span class="glyphicon glyphicon-chevron-up"></span> TOP</a>  
   </p>
   <div class="card">
@@ -15,7 +15,7 @@
         <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-codes.new" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
       </div>
       <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
-        <h2 class="c-purple f-500 f-20" style="display: inline;">Matter Code Detail</h2>
+        <span class="c-purple f-500 f-20">Matter Code Detail</span>
         <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
       </div>
       </div>
@@ -147,22 +147,21 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Preset Checklist</dt>
             <dd>
-              <div class="fg-line">
-<!--                 <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.entity.strPresetCodeG1"
-                  md-search-text="searchText"
-                  md-items="item in queryFields(searchText)"
-                  md-item-text="item.name ? item.name+' ( '+item.IDNo+' )': ' '"
-                  md-min-length="0"
-                  md-autoselect="false"
-                  class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.name}}</span>
-                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.IDNo}}</span>
-                </md-item-template>
-                </md-autocomplete>
- -->              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsPresetChecklist"
+                md-search-text="qpcl"
+                md-items="item in vm.queryChecklist(qpcl)"
+                md-item-text="item.code ? item.strDescription+' ( '+item.code+' )': ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qpcl" md-highlight-flags="i">
+                  [ {{item.code}} ] {{item.strDescription}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -220,7 +219,7 @@
                 md-items="item in vm.queryList(vm.staffLevel1, qs1)"
                 md-item-text="item"
                 md-min-length="0"
-                md-autoselect="false"
+                md-autoselect="true"
                 class="default-input">
               <md-item-template>
                 <span md-highlight-text="qs1" class="col-1" md-highlight-flags="i">{{ item }}</span>
@@ -238,7 +237,7 @@
                 md-items="item in vm.queryList(vm.staffLevel2, qs2)"
                 md-item-text="item"
                 md-min-length="0"
-                md-autoselect="false"
+                md-autoselect="true"
                 class="default-input">
               <md-item-template>
                 <span md-highlight-text="qs2" class="col-1" md-highlight-flags="i">{{ item }}</span>

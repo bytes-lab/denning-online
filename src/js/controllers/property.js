@@ -3,10 +3,7 @@ denningOnline
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
-    self.tableFilter = new NgTableParams({
-      page: 1, 
-      count: 25
-    }, {
+    self.tableFilter = new NgTableParams({}, {
       getData: function (params) {
         return propertyService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {
