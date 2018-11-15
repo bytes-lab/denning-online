@@ -51,7 +51,7 @@
                 <span>{{ item }}</span>
               </label>
               <div class="pull-right">
-                <button class="btn btn-default btn-sm waves-effect" ng-disabled="!vm.can_edit"><i class="zmdi zmdi-chevron-up" ng-click="vm.changeOrder($index-1, $index);"></i></button>
+                <button class="btn btn-default btn-sm waves-effect" ng-disabled="!vm.can_edit" ng-click="vm.changeOrder($index-1, $index);"><i class="zmdi zmdi-chevron-up"></i></button>
                 <button class="btn btn-default btn-sm waves-effect" ng-click="vm.changeOrder($index, $index+1);" ng-disabled="!vm.can_edit"><i class="zmdi zmdi-chevron-down"></i></button>
               </div>
             </div>

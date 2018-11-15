@@ -109,6 +109,7 @@ denningOnline
       'Vendor', 
       'Purchaser', 
       'Borrower', 
+      'Chargor',
       'Guarantor', 
       'Plaintiff', 
       'Defendant', 
