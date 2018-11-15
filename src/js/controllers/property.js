@@ -23,7 +23,7 @@ denningOnline
     }
   })
 
-  .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, 
+  .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, bankBranchService,
                                            $state, Auth, $uibModal, contactService, refactorService,
                                            uibDateParser, mukimService, buildingTypeService,
                                            $uibModalInstance, entityCode, isDialog, projectService, isNew) 
@@ -66,6 +66,14 @@ denningOnline
           self.entity.clsProject = null;
         }
 
+        if (!self.entity.clsRegisteredOwner.code) {
+          self.entity.clsRegisteredOwner = null;
+        }
+
+        if (!self.entity.clsChargee.code) {
+          self.entity.clsChargee = null;
+        }
+
         if (self.entity.strBuildingCultivationType) {
           self.strBuildingCultivationType = {
             code: self.entity.strBuildingCultivationType
@@ -79,8 +87,21 @@ denningOnline
       };
     }
 
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
+
     self.queryProjects = function (searchText) {
       return projectService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryBanks = function (searchText) {
+      return bankBranchService.getTableList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     };

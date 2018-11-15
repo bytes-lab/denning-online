@@ -156,7 +156,7 @@ denningOnline
     formlyConfig.setType({
       name: 'contact',
       templateUrl: 'contact.html',
-      controller: function ($scope, legalFirmService, contactService, Auth, $uibModal) {
+      controller: function ($scope, Auth) {
         $scope.userInfo = Auth.getUserInfo();
 
         $scope.shareList = ['1/1', '1/2', '1/3', '1/4', '1/5', '1/10'];
@@ -253,7 +253,7 @@ denningOnline
     formlyConfig.setType({
       name: 'property',
       templateUrl: 'property.html',
-      controller: function ($scope, propertyService, $uibModal) {        
+      controller: function ($scope, propertyService, $uibModal) {
         function initProperty(item) {
           if (item && item.code) {
             propertyService.getItem(item.code).then(function (item) {
@@ -714,7 +714,7 @@ denningOnline
                     position: absolute; \
                     top: 2px; \
                     right: 10px; \
-                  }             \
+                  } \
                 </style>");
                 printWindow.document.write('</head><body class="summary">');
                 printWindow.document.write(content);
@@ -862,7 +862,7 @@ denningOnline
           resolve: {
             viewMode: viewMode,
             party: party
-          }      
+          }
         });
       };
     }

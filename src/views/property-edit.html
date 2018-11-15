@@ -308,7 +308,7 @@
             <dt class="p-t-10">Assessment Rate (Half Year)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.assessRate">
+                <input type="text" ng-readonly="!vm.can_edit" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="vm.entity.assessRate">
               </div>
             </dd>
           </dl>
@@ -316,7 +316,7 @@
             <dt class="p-t-10">Annual Quit Rent (1 Year)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.decAnnualQuit">
+                <input type="text" ng-readonly="!vm.can_edit" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="vm.entity.decAnnualQuit">
               </div>
             </dd>
           </dl>
@@ -583,17 +583,41 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Registered Owner</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.intRegisteredOwner">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsRegisteredOwner"
+                md-search-text="qsro"
+                md-items="item in vm.queryContacts(qsro)"
+                md-item-text="item.strName"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsro" class="col-1" md-highlight-flags="i">
+                  {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Master Chargee</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strChargee">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsChargee"
+                md-search-text="qscg"
+                md-items="item in vm.queryBanks(qscg)"
+                md-item-text="item.strName"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qscg" class="col-1" md-highlight-flags="i">
+                  {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>

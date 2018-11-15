@@ -2475,7 +2475,7 @@
   </div>
   <div class="col-sm-6 p-l-20">
     <div class="input-group input-group-lg">
-      <span class="input-group-addon search-icon p-l-0"><i class="zmdi zmdi-search"></i></span>
+      <span class="input-group-addon search-icon p-l-0" ng-click="tableFilter.reload();"><i class="zmdi zmdi-search"></i></span>
       <div class="fg-line m-t-5">
         <input type="text" class="form-control" placeholder="Search" ng-model="keyword" ng-keypress="search($event, false);">
       </div>
