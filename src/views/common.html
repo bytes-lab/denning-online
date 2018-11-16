@@ -58,6 +58,12 @@
 
     <ul class="dropdown-menu">
       <li>
+        <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'summary' })">SUMMARY</a>
+      </li>
+      <li>
+        <a ng-click="mactrl.upload(vm.fileNo, 'matter')" style="cursor: pointer;">UPLOAD</a>
+      </li>
+      <li>
         <a ui-sref="accounts.list({ fileNo: vm.fileNo, fileName: vm.fileName })">ACCOUNTS</a>
       </li>
       <li>
@@ -79,13 +85,7 @@
         <a ui-sref="payment-records.list({ fileNo: vm.fileNo })">PAYMENTS</a>
       </li>
       <li>
-        <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'summary' })">SUMMARY</a>
-      </li>
-      <li>
         <a ui-sref="file-matters.edit({ fileNo: vm.fileNo, tab: 'template' })">TEMPLATES</a>
-      </li>
-      <li>
-        <a ng-click="mactrl.upload(vm.fileNo, 'matter')" style="cursor: pointer;">UPLOAD</a>
       </li>
     </ul>
   </li>

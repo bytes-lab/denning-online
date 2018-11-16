@@ -1,6 +1,5 @@
 denningOnline
-  .controller('matterListCtrl', function(NgTableParams, matterService, Auth, $state) 
-  {
+  .controller('matterListCtrl', function(NgTableParams, matterService, Auth, $state) {
     var self = this;
     self.keyword = '';
     self.userInfo = Auth.getUserInfo();
@@ -65,334 +64,576 @@ denningOnline
     }
   })
 
-  .controller('matterCodeListCtrl', function(NgTableParams, matterCodeService, $state) {
-    var self = this;
-
-    self.clickHandler = function (item) {
-      $state.go('matter-codes.edit', {'id': item.code});
-    }
-
-    self.tableFilter = new NgTableParams({}, {
-      getData: function(params) {
-        return matterCodeService.getList(params.page(), params.count(), self.keyword)
-        .then(function (data) {
-          params.total(data.headers('x-total-count'));
-          return data.data;
-        });
-      }
-    })
-
-    self.search = function (event, clear) {
-      if(event.which == 13 || clear) { 
-        if (clear) {
-          self.keyword='';
-        }
-        self.tableFilter.reload();
-      }
-    }
-  })
-
-  .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, Auth, spaChecklistService,
-                                             presetbillService, matterFormService, $state,
-                                             matterCodeService, refactorService, growlService) 
+  .controller('matterEditCtrl', function($scope, $stateParams, matterService, matterCodeService, $window,
+                                             $state, matterFormService, Auth, refactorService, 
+                                             growlService, contactService, uibDateParser) 
   {
-    var self = this;
-    self.isDialog = false;
-    self.viewMode = false;  // for edit / create
-    self.userInfo = Auth.getUserInfo();
-    self.can_edit = $state.$current.data.can_edit;
-    self.create_new = $state.$current.data.can_edit;
+    var vm = this;
+    vm.userInfo = Auth.getUserInfo();
 
-    self.partyLabels = [
-      'Client', 
-      'Vendor', 
-      'Purchaser', 
-      'Borrower', 
-      'Chargor',
-      'Guarantor', 
-      'Plaintiff', 
-      'Defendant', 
-      'Assignor', 
-      'Assignee',
-      'Financing Bank', 
-      'Chargee / Assignee Bank', 
-      'Landlord', 
-      'Tenant', 
-      'Lessor', 
-      'Lessee', 
-      'First Party', 
-      'Second Party', 
-      'Third Party', 
-      'Fourth Party',
-      'Fifth Party', 
-      'Sixth Party'
-    ];
-
-    self.lawyerLabels = [
-      'Vendor Solicitors', 
-      'Purchaser Solicitors', 
-      'Bank Solicitors', 
-      'Charger Solicitors', 
-      'Plaintiff Solicitors', 
-      'Defendant Solicitors', 
-      'Third Party Solicitors', 
-      'Appellant Solicitors', 
-      'Respondent Solicitors'
-    ];
-
-    self.bankLabels = [
-      'Chargee Bank', 
-      'Financing Bank', 
-      'Stakeholder Bank', 
-      'Developer HDA Bank'
-    ];
-
-    self.staffLevel1 = [
-      'Senior Partner', 
-      'Maganing Partner', 
-      'Partner', 
-      'Directors', 
-      'Senior Management', 
-      'Level 1 staff', 
-      'Supervisor', 
-      'Manager', 
-      'President'
-    ];
-
-    self.staffLevel2 = [
-      'Partner', 
-      'Director', 
-      'Senior Management', 
-      'Level 2 staff', 
-      'Supervisor', 
-      'Manager', 
-      'Legal Assistant', 
-      'Associate',
-      'Senior clerk'
-    ];
-
-    self.staffLevel3 = [
-      'Legal Assistant', 
-      'Supervisor', 
-      'Senior clerk', 
-      'Legal clerk', 
-      'Clerk', 
-      'Supporting staff', 
-      'Level 3 staff'
-    ];
-
-    self.staffLevel4 = [
-      'Team',
-      'Group',
-      'Practice Group',
-      'Committee',
-      'Sub-committee'
-    ];
-
-    self.mattercode = {};   //  temp variable for json fields
-
-    $("#back-top").hide();
-    $(window).scroll(function() {
-      if ($(this).scrollTop() > 100) {
-        $('#back-top').fadeIn();
-        $('.btn-balances').fadeIn();
-      } else {
-        $('#back-top').fadeOut();
-        $('.btn-balances').fadeOut();
+    vm.prevTab = function () {
+      if (vm.idxTab > 0) {
+        vm.idxTab--;
       }
-    });
+    };
 
-    presetbillService.getList(1, 500).then(function(data) {
-      self.presetBills = data;
-    });
+    vm.nextTab = function () {
+      if (vm.idxTab < 20) {
+        vm.idxTab++;
+      }
+    };
 
-    matterCodeService.getCategories().then(function(data) {
-      self.categories = data;
-    });
-
-    matterCodeService.getDepartments().then(function(data) {
-      self.departments = data;
-    });
-
-    matterCodeService.getIndustries().then(function(data) {
-      self.industries = data;
-    });
-
-    self.scrollUp = function () {
+    vm.scrollUp = function () {
       $('body,html').animate({
           scrollTop : 0
       }, 500);
       return false;
     };
 
-    if ($stateParams.id) {
-      self.title = 'Edit Matter Code';
-      matterCodeService.getItem($stateParams.id).then(function (item){
-        self.entity = refactorService.preConvert(item, true);
-        self.entity_ = angular.copy(self.entity);
-        
-        angular.forEach(JSON.parse(item.jsonFieldLabels || "{}"), function(value, key) {
-          self.mattercode[value.Field] = value;
-        })
-
-        if (self.entity.strCategory) {
-          self.strCategory = { strCategory: self.entity.strCategory };
+    function getLabel (arr, key) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].Field == key) {
+          return arr[i].Label;
         }
+      }
+    }
 
-        if (self.entity.strDept) {
-          self.strDept = { strDescription: self.entity.strDept };
+    vm.back = function () {
+      $window.history.back();
+    }
+
+    vm.forward = function () {
+      $window.history.forward();
+    }
+
+    function buildTabDict (clsMatterCode) {
+      var matter_code = [];
+      if (clsMatterCode && clsMatterCode.jsonFieldLabels) {
+        matter_code = JSON.parse(clsMatterCode.jsonFieldLabels);
+      }
+
+      vm.tabDict = {
+        "Matter": {
+          "label": "Info",
+          "groups": [
+            {
+              "type": "info",
+              "templateOptions": {
+                "label": "Primary Client",
+                "partner": clsMatterCode ? getLabel(matter_code, 'PartnerInCharge') : '',
+                "la": clsMatterCode ? getLabel(matter_code, 'LAInCharge') : '',
+                "clerk": clsMatterCode ? getLabel(matter_code, 'ClerkInCharge') : '',
+                "team": clsMatterCode ? getLabel(matter_code, 'StaffInCharge4') : '',
+                "share": false,
+                "solicitor": true,
+                "party": true
+              }
+            }
+          ]
+        },
+        "Summary": {
+          "groups": [
+            {
+              "type": "summary",
+              "templateOptions": { }
+            }
+          ]          
+        },
+        "Parties-S": {
+          "groups": [
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC1 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC2 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC3 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC4 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC5 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupL1 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupL2 : '',
+                "share": true,
+                "solicitor": true,
+                "party": true
+              }
+            }
+          ]
+        },
+        "Parties": {
+          "groups": [
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC1 : '',
+                "share": true,
+                "solicitor": false,
+                "party": true,
+                "c_start": 1,
+                "c_end": 5
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC2 : '',
+                "share": true,
+                "solicitor": false,
+                "party": true,
+                "c_start": 6,
+                "c_end": 10
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC3 : '',
+                "share": false,
+                "solicitor": false,
+                "party": true,
+                "c_start": 11,
+                "c_end": 15
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC4 : '',
+                "share": false,
+                "solicitor": false,
+                "party": true,
+                "c_start": 16,
+                "c_end": 20
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC5 : '',
+                "share": false,
+                "solicitor": false,
+                "party": true,
+                "c_start": 21,
+                "c_end": 25
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupC6 : '',
+                "share": false,
+                "solicitor": false,
+                "party": true,
+                "c_start": 26,
+                "c_end": 26
+              }
+            }
+          ]
+        },
+        "Solicitors": {
+          "groups": [
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupL1 : '',
+                "share": true,
+                "solicitor": true,
+                "party": false,
+                "field": "clsLawyer1",
+                "idx": 1
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupL2 : '',
+                "share": false,
+                "solicitor": true,
+                "party": false,
+                "field": "clsLawyer2",
+                "idx": 2
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupL3 : '',
+                "share": true,
+                "solicitor": true,
+                "party": false,
+                "field": "clsLawyer3",
+                "idx": 3
+              }
+            },
+            {
+              "type": "contact",
+              "templateOptions": {
+                "label": clsMatterCode ? clsMatterCode.strGroupL4 : '',
+                "share": true,
+                "solicitor": true,
+                "party": false,
+                "field": "clsLawyer4",
+                "idx": 4
+              }
+            }
+          ]
+        },
+        "Case": {
+          "groups": [
+            {
+              "type": "case",
+              "templateOptions": {
+                "label": "Case Information",                
+              }
+            }
+          ]
+        },
+        "Price": {
+          "groups": [
+            {
+              "type": "price",
+              "templateOptions": {
+                "label": "Price",
+              }
+            }
+          ]
+        },        
+        "Loan": {
+          "groups": [
+            {
+              "type": "loan",
+              "templateOptions": {
+                "label": "Loan Type",
+              }
+            }
+          ]
+        }, 
+        "Property": {
+          "groups": [
+            {
+              "type": "property",
+              "templateOptions": {
+                "label": "Property Information",
+                "share": true,
+                "solicitor": true,
+                "property": true
+              }
+            }
+          ]
+        },
+        "Bank": {
+          "groups": [
+            {
+              "type": "bank1",
+              "templateOptions": {
+                "label": clsMatterCode ? getLabel(matter_code, 'Bank1') : '',
+              }
+            },
+            {
+              "type": "bank2",
+              "templateOptions": {
+                "label": clsMatterCode ? getLabel(matter_code, 'Bank2') : '',
+              }
+            }
+          ]
+        },
+        "$": {
+        },
+        "Date": {
+        },
+        "Text": {
+        },
+        "Template": {
+          "groups": [
+            {
+              "type": "gen-doc",
+              "templateOptions": {
+                "label": "Template",
+              }
+            }
+          ]
+        },
+        "Premises & Rent": {
+          "groups": [
+            {
+              "type": "premises-rent",
+              "templateOptions": {
+                "label": "Premises Details",
+              }
+            }
+          ]
+        },
+        "Term": {
+          "groups": [
+            {
+              "type": "term",
+              "templateOptions": {
+                "label": "Term",
+              }
+            }
+          ]
+        },
+        "Tenancy": {
+          "groups": [
+            {
+              "type": "tenancy",
+              "templateOptions": {
+                "label": "Party Paying Council Rates & Outgoings",
+              }
+            }
+          ]
+        },
+        "Vehicles": {
+          "groups": [
+            {
+              "type": "vehicle",
+              "templateOptions": {
+                "label": "Claimant's Vehicle Detail",
+              }
+            }
+          ]
+        },
+        "Others": {
+          "groups": [
+            {
+              "type": "other",
+              "templateOptions": {
+                "label": "Loan Tier"
+              }
+            }
+          ]
+        },
+        "Estate Agent": {
+          "groups": [
+            {
+              "type": "estate-agent",
+              "templateOptions": {
+                "label": "Estate Agent"
+              }
+            }
+          ]
+        },
+        "Reports": {
+          "groups": [
+            {
+              "type": "report",
+              "templateOptions": {
+                "label": "Reports"
+              }
+            }
+          ]
+        },
+        "Arrears": {
+          "groups": [
+            {
+              "type": "arrear",
+              "templateOptions": {
+                "label": "Rent in Arrears / Distress",
+              }
+            }
+          ]
+        },
+        "Beneficiary": {
+          "groups": [
+            {
+              "type": "beneficiary",
+              "templateOptions": {
+                "label": "Parent(s)"
+              }
+            }
+          ]
+        },
+        "Chain": {
+          "groups": [
+            {
+              "type": "chain",
+              "templateOptions": {
+                "label": "Principle SPA Details"
+              }
+            }
+          ]
+        },
+        "RPGT": {
+          "groups": [
+            {
+              "type": "rpgt",
+              "templateOptions": {
+                "label": "CKHT Information"
+              }
+            }
+          ]
+        },
+        "Offers": {
+          "groups": [
+            {
+              "type": "offer",
+              "templateOptions": {
+                "label": "Claim Details"
+              }
+            }
+          ]
         }
+      };
+    }
 
-        if (self.entity.strIndustry) {
-          self.strIndustry = { description: self.entity.strIndustry };
-        }
+    function buildTabs (clsMatterCode) {
+      buildTabDict(clsMatterCode);
 
-        if (self.entity.clsPresetBill.code) {
-          self.clsPresetBill = {
-            code: self.entity.clsPresetBill.code,
-            description: self.entity.clsPresetBill.strDescription
+      if (clsMatterCode) {
+        matterCodeService.getItem(clsMatterCode.code).then(function (matterCode) {
+          vm.model.intTurnaround = matterCode.intTurnaroundTime;
+        });
+      }
+
+      vm.tabs = [];
+      vm.tabs.push(vm.tabDict['Matter']); // first tab
+
+      if (clsMatterCode) {
+        matterFormService.getItem(clsMatterCode.clsFormName.code).then(function (item) {
+          jsonTabs = JSON.parse(item.jsonTabs);
+          idxTab = 0;
+          for (idx in jsonTabs) {
+            value = jsonTabs[idx];
+            if (value.TabName != 'Matter') {
+              var item = vm.tabDict[value.TabName];
+              item['label'] = value.Title
+              vm.tabs.push(item);
+            }
+
+            if (value.TabName.toLowerCase() == $stateParams.tab) {
+              idxTab = parseInt(idx);
+              if ($stateParams.tab.toLowerCase() == 'summary') {
+                idxTab = 1;
+              }
+            }
           }
+          vm.idxTab = idxTab;
+        });
+      }
+    }
+
+    var editControl = {   // very important
+      create_new: $state.$current.data.can_edit,
+      can_edit: $state.$current.data.can_edit,
+      matterCodeChange: buildTabs
+    };
+
+    if ($stateParams.fileNo) {
+      matterService.getItem($stateParams.fileNo).then(function (item) {
+        vm.fileNo = $stateParams.fileNo;
+        vm.fileName = item.clsPrimaryClient.strName;
+        
+        if (item) {
+          vm.idxTab = 5;  // any none zero value
+          vm.model = item;
+          vm.model_ = angular.copy(vm.model);
+          vm.model.tmp = editControl;
+          vm.model.tmp.oldMatterCode = item.clsMatterCode;          
+          vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + 
+                     vm.model.clsPrimaryClient.strName + ' )';
+        } else {  // is it possible?
+          vm.idxTab = 0;
+          vm.model = { 
+            tmp: editControl
+          };
+          vm.title = 'New Matter';
         }
+        buildTabs(vm.model.clsMatterCode);
       });
     } else {
-      self.title = 'New Matter Code';
-      self.entity = {};
-      self.mattercode = {
-        PartnerInCharge: { Field: 'PartnerInCharge', Label: 'Partner' },
-        LAInCharge: { Field: 'LAInCharge', Label: 'Legal Assistant' },
-        ClerkInCharge: { Field: 'ClerkInCharge', Label: 'Legal clerk' },
-        StaffInCharge4: { Field: 'StaffInCharge4', Label: 'Team' }
-      }
+      vm.idxTab = 0;
+      vm.model = { 
+        tmp: editControl,
+        dtDateOpenFile: uibDateParser.parse(new Date()),
+        clsFileStatus: {
+          code: "1",
+          strDescription: "Active"
+        },
+        strPurchasePriceSymbol: vm.userInfo.currency,
+        strLoanPriceSymbol: vm.userInfo.currency
+      };
+      vm.title = 'New Matter';
+
+      buildTabs(vm.model.clsMatterCode);
     }
 
-    self.categoryChange = function (item) {
-      if (item) {
-        self.entity.strCategory = item.strCategory;
+    vm.options = {
+      formState: {
+        awesomeIsForced: false
       }
-    }
-
-    self.deptChange = function (item) {
-      if (item) {
-        self.entity.strDept = item.strDescription;
-      }
-    }
-
-    self.industryChange = function (item) {
-      if (item) {
-        self.entity.strIndustry = item.description;
-      }
-    }
-
-    self.range = function(min, max, step) {
-        step = step || 1;
-        var input = [];
-        for (var i = min; i <= max; i += step) {
-            input.push(i);
-        }
-        return input;
     };
 
-    self.copy = function () {
-      self.create_new = true;
-      self.can_edit = true;
-      self.entity_ = null;
+    vm.save = function () {
+      delete vm.model.tmp;
+      model = refactorService.getDiff(vm.model_, vm.model);
 
-      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
-      for (ii in deleteList) {
-        key = deleteList[ii];
-        delete self.entity[key];
+      if (vm.model_) {
+        model.strFileNo1 = vm.model_.strFileNo1;
       }
-    }
 
-    self.save = function () {
-      var selected = [];
-      angular.forEach(self.mattercode, function(value, key) {
-        value.Field = key;
-        selected.push(value);
-      })
-
-      self.entity.jsonFieldLabels = JSON.stringify(selected);
-
-      entity = refactorService.getDiff(self.entity_, self.entity);
-      matterCodeService.save(entity).then(function (entity) {
-        if (entity) {
-          if (self.entity_) {
-            $state.reload();
+      matterService.save(model).then(function (data) {
+        vm.model.tmp = editControl;
+     
+        if (data) { // create success or update
+          if (vm.model_) {
+            // vm.model = data;
+            vm.model.tmp.oldMatterCode = data.clsMatterCode;
+            // $state.reload();
           } else {
-            $state.go('matter-codes.edit', { 'id': entity.code });
+            $state.go('file-matters.edit', { 'fileNo': data.strFileNo1 });
           }
-          growlService.growl('Saved successfully!', 'success');
+          growlService.growl('Saved successfully!', 'success');          
         }
-      });
+      })
     }
 
-    self.openDelete = function (event, entity) {
-      event.stopPropagation();
-
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'deleteEntityModal.html',
-        controller: 'deleteEntityModalCtrl',
-        size: '',
-        backdrop: 'static',
-        keyboard: true,
-        resolve: {
-          entity: function () {
-            return entity;
-          }, 
-          on_list: function () {
-            return false;
-          },
-          entity_type: function () {
-            return 'matter code';
-          },
-          service: function () {
-            return matterCodeService;
-          },
-          return_state: function () {
-            return 'matter-codes.list';
-          }
-        }
-      });
-    };
-
-    self.queryList = function (labels, q) {
-      var arr = labels.filter(function(item) {
-        return item.search(new RegExp(q, "i")) > -1;
-      });
-
-      if (arr && arr.length == 0) {
-        return [q];
-      } else {
-        return arr;
-      }
-    };
-
-    self.queryForms = function (searchText) {
-      return matterFormService.getList(1, 10, searchText).then(function (data) {
-        return data; 
-      });
-    };
-
-    self.queryChecklist = function (searchText) {
-      return spaChecklistService.getTableList(1, 10, searchText).then(function (resp) {
-        return resp.data;
-      });
-    };
-
-    self.preBillChange = function (item) {
-      if (item) {
-        self.entity.clsPresetBill = {
-          code: item.code,
-          strDescription: item.description
-        }
-      }
-    }
-
-    self.queryBills = function (searchText) {
-      return self.presetBills.filter(function(c) {
-        return c.code.search(new RegExp(searchText, "i")) > -1 || 
-               c.description.search(new RegExp(searchText, "i")) > -1;
-      });
+    vm.reset = function () {
+      $state.reload();
     }
   })
