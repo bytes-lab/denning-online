@@ -489,6 +489,10 @@
         <span md-highlight-text="qmc" md-highlight-flags="i">{{item.code}}</span>
       </md-item-template>
       </md-autocomplete>
+
+      <a class="btn btn-primary short-btn bgm-lightgreen" ng-if="model.clsMatterCode && model.clsMatterCode.code" ng-click="matterCodeDialog('clsMatterCode', true)" title="Create a duplicated code">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </a>
     </div>
   </div>
   <div class="form-group col-md-12">

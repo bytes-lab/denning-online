@@ -433,6 +433,31 @@ denningOnline
         $scope.contactDialog = function(key, viewMode) {
           contactDialog($scope.model, key, viewMode);
         }
+
+        $scope.matterCodeDialog = function(key, viewMode) {
+          var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'entity-modal.html',
+            controller: 'matterCodeEditCtrl',
+            controllerAs: 'vm',
+            size: 'lg',
+            backdrop: 'static',
+            keyboard: true,
+            resolve: {
+              isNew: !viewMode,
+              entityCode: function () {
+                return viewMode ? $scope.model[key].code : null;
+              },
+              isDialog: true
+            }
+          });
+
+          modalInstance.result.then(function (entity) {
+            if (entity) {
+              $scope.model[key] = entity;
+            }
+          })
+        }
       }
     });
 

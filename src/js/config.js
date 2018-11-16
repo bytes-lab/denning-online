@@ -180,16 +180,43 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'matterCodeEditCtrl as vm',
-        templateUrl: 'views/matter-code-edit.html'
+        templateUrl: 'views/matter-code-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('matter-codes.new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },
         url: '/new',
         controller: 'matterCodeEditCtrl as vm',
-        templateUrl: 'views/matter-code-edit.html'
+        templateUrl: 'views/matter-code-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
       //------------------------------

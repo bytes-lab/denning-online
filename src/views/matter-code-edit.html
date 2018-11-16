@@ -1,23 +1,19 @@
-<div class="container">
-  <p id="back-top" class="d-none">
+<div ng-class="vm.isDialog ? '' : 'container'">
+  <p id="back-top" class="d-none" ng-if="!vm.isDialog">
     <a ng-click="vm.scrollUp()"><span class="glyphicon glyphicon-chevron-up"></span> TOP</a>  
   </p>
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" ng-if="!vm.isDialog">
       <div class="row">
-      <div class="col-md-11 col-sm-12" ng-if="!vm.viewMode">
-        <span class="c-purple f-500 f-20">{{ vm.title }}</span>
-        <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="matter-codes.list">Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.mattercode.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.mattercode.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-codes.new" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
-      </div>
-      <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
-        <span class="c-purple f-500 f-20">Matter Code Detail</span>
-        <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
-      </div>
+        <div class="col-md-11 col-sm-12">
+          <span class="c-purple f-500 f-20">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel();">Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.mattercode.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.mattercode.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.mattercode.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-codes.new" ng-if="vm.userInfo.priority.mattercode.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        </div>
       </div>
     </div>
 
@@ -25,7 +21,7 @@
       <div class="clearfix"></div>
       <h4 class="m-t-10">Matter Information</h4>
       <div class="row">
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Matter Code</dt>
             <dd>
@@ -35,7 +31,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-10 p-l-25">
+        <div class="col-md-8 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Description</dt>
             <dd>
@@ -46,7 +42,7 @@
           </dl>
         </div>
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Category</dt>
             <dd>
@@ -143,7 +139,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Preset Checklist</dt>
             <dd>
@@ -208,7 +204,7 @@
       <h4 class="m-t-25">Staff Labels</h4>
       <div class="row">
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Staff label 1</dt>
             <dd>
@@ -246,7 +242,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Staff label 3</dt>
             <dd>
@@ -289,7 +285,7 @@
       <h4 class="m-t-25">Party Labels</h4>
       <div class="row">
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">0. Party Group C0</dt>
             <dd>
@@ -371,7 +367,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">4. Party Group C16-C20</dt>
             <dd>
@@ -438,7 +434,7 @@
       <h4 class="m-t-25" ng-click="vm.showlawyer=!vm.showlawyer">Lawyer Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showlawyer"></i><i class="zmdi zmdi-minus" ng-if="vm.showlawyer"></i></h4>
       <div class="row" ng-show="vm.showlawyer">
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">1. Lawyer Group C1-C5</dt>
             <dd>
@@ -480,7 +476,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">3. Lawyer Group C11-C15</dt>
             <dd>
@@ -524,10 +520,10 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showBank=!vm.showBank">Bank Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showBank"></i><i class="zmdi zmdi-minus" ng-if="vm.showBank"></i></h4>
-      <div class="row" ng-show="vm.showBank">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showBank=!vm.showBank">Bank Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showBank"></i><i class="zmdi zmdi-minus" ng-if="vm.showBank"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showBank">
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Bank 1</dt>
             <dd>
@@ -549,7 +545,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Bank 2</dt>
             <dd>
@@ -573,10 +569,10 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showProperty=!vm.showProperty">Property Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showProperty"></i><i class="zmdi zmdi-minus" ng-if="vm.showProperty"></i></h4>
-      <div class="row" ng-show="vm.showProperty">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showProperty=!vm.showProperty">Property Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showProperty"></i><i class="zmdi zmdi-minus" ng-if="vm.showProperty"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showProperty">
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 3)">
             <dt class="p-t-10">Property {{ n }}</dt>
             <dd>
@@ -586,7 +582,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(4, 5)">
             <dt class="p-t-10">Property {{ n }}</dt>
             <dd>
@@ -598,10 +594,10 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showPeriod=!vm.showPeriod">Period Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showPeriod"></i><i class="zmdi zmdi-minus" ng-if="vm.showPeriod"></i></h4>
-      <div class="row" ng-show="vm.showPeriod">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showPeriod=!vm.showPeriod">Period Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showPeriod"></i><i class="zmdi zmdi-minus" ng-if="vm.showPeriod"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showPeriod">
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 3)">
             <dt class="p-t-10">Period {{ n }}</dt>
             <dd>
@@ -611,7 +607,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(4, 6)">
             <dt class="p-t-10">Period {{ n }}</dt>
             <dd>
@@ -623,8 +619,8 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showDate=!vm.showDate">Date Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showDate"></i><i class="zmdi zmdi-minus" ng-if="vm.showDate"></i></h4>
-      <div class="row" ng-show="vm.showDate">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showDate=!vm.showDate">Date Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showDate"></i><i class="zmdi zmdi-minus" ng-if="vm.showDate"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showDate">
         <div class="clearfix"></div>
         <div class="col-md-4 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 17)">
@@ -658,8 +654,8 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showCurrency=!vm.showCurrency">Currency Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCurrency"></i><i class="zmdi zmdi-minus" ng-if="vm.showCurrency"></i></h4>
-      <div class="row" ng-show="vm.showCurrency">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showCurrency=!vm.showCurrency">Currency Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCurrency"></i><i class="zmdi zmdi-minus" ng-if="vm.showCurrency"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showCurrency">
         <div class="clearfix"></div>
         <div class="col-md-4 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 15)">
@@ -693,8 +689,8 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showText=!vm.showText">Text Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showText"></i><i class="zmdi zmdi-minus" ng-if="vm.showText"></i></h4>
-      <div class="row" ng-show="vm.showText">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showText=!vm.showText">Text Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showText"></i><i class="zmdi zmdi-minus" ng-if="vm.showText"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showText">
         <div class="clearfix"></div>
         <div class="col-md-4 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 14)">
@@ -728,10 +724,10 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showCheckbox=!vm.showCheckbox">Checkbox Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCheckbox"></i><i class="zmdi zmdi-minus" ng-if="vm.showCheckbox"></i></h4>
-      <div class="row" ng-show="vm.showCheckbox">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showCheckbox=!vm.showCheckbox">Checkbox Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCheckbox"></i><i class="zmdi zmdi-minus" ng-if="vm.showCheckbox"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showCheckbox">
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 4)">
             <dt class="p-t-10">Checkbox {{ n }}</dt>
             <dd>
@@ -741,7 +737,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(5, 8)">
             <dt class="p-t-10">Checkbox {{ n }}</dt>
             <dd>
@@ -753,10 +749,10 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showRadio=!vm.showRadio">Radio Button Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRadio"></i><i class="zmdi zmdi-minus" ng-if="vm.showRadio"></i></h4>
-      <div class="row" ng-show="vm.showRadio">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showRadio=!vm.showRadio">Radio Button Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showRadio"></i><i class="zmdi zmdi-minus" ng-if="vm.showRadio"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showRadio">
         <div class="clearfix"></div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 4)">
             <dt class="p-t-10">Radio Button {{ n }}</dt>
             <dd>
@@ -766,7 +762,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(5, 8)">
             <dt class="p-t-10">Radio Button {{ n }}</dt>
             <dd>
@@ -778,8 +774,8 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25" ng-click="vm.showPn=!vm.showPn">PN Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showPn"></i><i class="zmdi zmdi-minus" ng-if="vm.showPn"></i></h4>
-      <div class="row" ng-show="vm.showPn">
+      <h4 class="m-t-25" ng-if="!vm.isDialog" ng-click="vm.showPn=!vm.showPn">PN Labels&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showPn"></i><i class="zmdi zmdi-minus" ng-if="vm.showPn"></i></h4>
+      <div class="row" ng-if="!vm.isDialog" ng-show="vm.showPn">
         <div class="clearfix"></div>
         <div class="col-md-4 p-l-25">
           <dl class="dl-horizontal" ng-repeat="n in vm.range(1, 5)">
@@ -816,20 +812,15 @@
       <h4 class="m-t-25 m-b-15">Office Use</h4>
       <div class="row" data-ng-include src="'office-use.html'"></div>
 
-      <div class="row">
-        <div class="col-md-11 col-sm-12 no-padding" ng-if="!vm.viewMode">
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
           <div class="m-t-30 p-l-15">
-            <a class="btn btn-link btn-sm pull-right m-l-5" data-ui-sref="matter-codes.list">Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.create_new">Delete</a>
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel();">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.mattercode.delete && !vm.isNew">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.mattercode.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.mattercode.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-codes.new" ng-if="vm.userInfo.priority.mattercode.update && !vm.create_new"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
-          </div>
-        </div>
-        <div class="col-md-10 col-sm-11" ng-if="vm.viewMode">
-          <div class="m-t-30">
-            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.mattercode.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="matter-codes.new" ng-if="vm.userInfo.priority.mattercode.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>

@@ -28,14 +28,17 @@ denningOnline
 
   .controller('matterCodeEditCtrl', function($filter, $uibModal, $stateParams, Auth, spaChecklistService,
                                              presetbillService, matterFormService, $state,
-                                             matterCodeService, refactorService, growlService) 
+                                             matterCodeService, refactorService, growlService, 
+                                             $uibModalInstance, entityCode, isDialog, isNew) 
   {
     var self = this;
-    self.isDialog = false;
-    self.viewMode = false;
     self.userInfo = Auth.getUserInfo();
-    self.can_edit = $state.$current.data.can_edit;
-    self.create_new = $state.$current.data.can_edit;
+    self._type = 'matter-code';
+
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
 
     self.partyLabels = [
       'Client', 
@@ -159,11 +162,12 @@ denningOnline
       return false;
     };
 
-    if ($stateParams.id) {
+    if (self.entityCode) {
       self.title = 'Edit Matter Code';
-      matterCodeService.getItem($stateParams.id).then(function (item){
+      matterCodeService.getItem(self.entityCode).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+        self.popoutUrl = $state.href('matter-codes.edit', { id: self.entity.code });
         
         angular.forEach(JSON.parse(item.jsonFieldLabels || "{}"), function(value, key) {
           self.mattercode[value.Field] = value;
@@ -187,6 +191,10 @@ denningOnline
             description: self.entity.clsPresetBill.strDescription
           }
         }
+
+        if (self.isDialog) {
+          self.copy();
+        }
       });
     } else {
       self.title = 'New Matter Code';
@@ -197,6 +205,7 @@ denningOnline
         ClerkInCharge: { Field: 'ClerkInCharge', Label: 'Legal clerk' },
         StaffInCharge4: { Field: 'StaffInCharge4', Label: 'Team' }
       }
+      self.popoutUrl = $state.href('matter-codes.new');
     }
 
     self.categoryChange = function (item) {
@@ -231,7 +240,7 @@ denningOnline
       self.can_edit = true;
       self.entity_ = null;
 
-      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'clsEnteredBy', 'clsUpdatedBy'];
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'clsEnteredBy', 'clsUpdatedBy', 'strDescription'];
       for (ii in deleteList) {
         key = deleteList[ii];
         delete self.entity[key];
@@ -250,14 +259,26 @@ denningOnline
       entity = refactorService.getDiff(self.entity_, self.entity);
       matterCodeService.save(entity).then(function (entity) {
         if (entity) {
-          if (self.entity_) {
-            $state.reload();
+          if (self.isDialog) {
+            $uibModalInstance.close(entity);
           } else {
-            $state.go('matter-codes.edit', { 'id': entity.code });
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('matter-codes.edit', { 'id': entity.code });
+            }
+            growlService.growl('Saved successfully!', 'success');
           }
-          growlService.growl('Saved successfully!', 'success');
         }
       });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('matter-codes.list');
+      }
     }
 
     self.openDelete = function (event, entity) {
