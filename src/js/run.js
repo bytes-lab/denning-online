@@ -254,6 +254,7 @@ denningOnline
       name: 'property',
       templateUrl: 'property.html',
       controller: function ($scope, propertyService, $uibModal) {
+        $scope.propertyTypes = { "1": "Landed", "2": "Strata" };
         function initProperty(item) {
           if (item && item.code) {
             propertyService.getItem(item.code).then(function (item) {
@@ -308,7 +309,6 @@ denningOnline
           return getProperties(1, 10, searchText);
         }
 
-        //Create Property Modal
         $scope.propertyDialog = function(key, viewMode) {
           if (viewMode && !$scope.model[key].code) {
             alert('Please select a property.');
