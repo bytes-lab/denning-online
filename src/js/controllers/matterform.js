@@ -1,5 +1,5 @@
 denningOnline
-  .controller('matterEditCtrl', function($scope, $stateParams, matterService, matterCodeService,
+  .controller('matterEditCtrl', function($scope, $stateParams, matterService, matterCodeService, $window,
                                              $state, matterFormService, Auth, refactorService, 
                                              growlService, contactService, uibDateParser) 
   {
@@ -31,6 +31,14 @@ denningOnline
           return arr[i].Label;
         }
       }
+    }
+
+    vm.back = function () {
+      $window.history.back();
+    }
+
+    vm.forward = function () {
+      $window.history.forward();
     }
 
     function buildTabDict (clsMatterCode) {

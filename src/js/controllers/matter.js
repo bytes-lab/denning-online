@@ -1,6 +1,5 @@
 denningOnline
-  .controller('matterListCtrl', function(NgTableParams, matterService, Auth, 
-                                             $state) 
+  .controller('matterListCtrl', function(NgTableParams, matterService, Auth, $state) 
   {
     var self = this;
     self.keyword = '';
