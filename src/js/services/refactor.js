@@ -25,6 +25,7 @@ denningOnline
             return false;
           }
         } else {
+          return JSON.stringify(fieldOriginal) === JSON.stringify(fieldNew);
           // compare number of fields first
           if (Object.keys(fieldOriginal).length != Object.keys(fieldNew).length) {
             return false;
