@@ -571,14 +571,16 @@ denningOnline
         
         if (item) {
           vm.idxTab = 5;  // any none zero value
+
           vm.model = refactorService.preConvert(item, true);
           vm.model_ = angular.copy(vm.model);
           vm.model.tmp = editControl;
-          vm.model.tmp.oldMatterCode = item.clsMatterCode;          
+          vm.model.tmp.oldMatterCode = item.clsMatterCode;
+
           vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + 
                      vm.model.clsPrimaryClient.strName + ' )';
         }
-        
+
         buildTabs(vm.model.clsMatterCode);
       });
     } else {
@@ -612,16 +614,18 @@ denningOnline
         model.strFileNo1 = vm.model_.strFileNo1;
       }
 
-      matterService.save(model).then(function (data) {
+      matterService.save(model).then(function (item) {
         vm.model.tmp = editControl;
      
-        if (data) { // create success or update
+        if (item) { // create success or update
           if (vm.model_) {
-            // vm.model = data;
-            vm.model.tmp.oldMatterCode = data.clsMatterCode;
+            vm.model = refactorService.preConvert(item, true);
+            vm.model_ = angular.copy(vm.model);
+            vm.model.tmp = editControl;
+            vm.model.tmp.oldMatterCode = item.clsMatterCode;
             // $state.reload();
           } else {
-            $state.go('file-matters.edit', { 'fileNo': data.strFileNo1 });
+            $state.go('file-matters.edit', { 'fileNo': item.strFileNo1 });
           }
           growlService.growl('Saved successfully!', 'success');          
         }
