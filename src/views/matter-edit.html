@@ -349,7 +349,21 @@
       <a class="btn btn-primary short-btn" ng-click="propertyDialog('clsP'+n, true)">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of property"></span>
       </a>
-      <input class="form-control wp-15" ng-readonly="!model.tmp.can_edit" ng-model="model['strShare'+n]" ng-if="to.share" placeholder="Share" />
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model['strShare'+n]"
+        md-search-text="qssh"
+        md-items="item in queryShares(qssh)"
+        md-item-text="item"
+        md-min-length="0"
+        md-autoselect="false"
+        ng-if="to.share" 
+        placeholder="Share"
+        class="default-input wp-15">
+      <md-item-template>
+        <span md-highlight-text="qssh" class="col-1" md-highlight-flags="i">{{ item }}</span>
+      </md-item-template>
+      </md-autocomplete>
       <a class="btn btn-danger short-btn" ng-click="removeProperty(n, 1, 5)">
         <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Remove this property from group"></span>
       </a>

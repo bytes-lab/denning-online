@@ -152,6 +152,20 @@ denningOnline
       })
     }
 
+    function queryShares(q) {
+      var shareList = ['1/1', '1/2', '1/3', '1/4', '1/5', '1/10'];
+
+      var arr = shareList.filter(function (item) {
+        return item.search(new RegExp(q, "i")) > -1;
+      });
+
+      if (arr && arr.length == 0) {
+        return [q];
+      } else {
+        return arr;
+      }
+    }
+
     // contact attribute
     formlyConfig.setType({
       name: 'contact',
@@ -159,7 +173,6 @@ denningOnline
       controller: function ($scope, Auth) {
         $scope.userInfo = Auth.getUserInfo();
 
-        $scope.shareList = ['1/1', '1/2', '1/3', '1/4', '1/5', '1/10'];
         $scope.represent_this = $scope.userInfo.catDenning.length > 0 && $scope.model[$scope.to.field] &&
                                 $scope.model[$scope.to.field].code == $scope.userInfo.catDenning[0].LawFirm.code;
         $scope.representChange = function() {
@@ -220,15 +233,7 @@ denningOnline
         }
 
         $scope.queryShares = function (q) {
-          var arr = $scope.shareList.filter(function (item) {
-            return item.search(new RegExp(q, "i")) > -1;
-          });
-
-          if (arr && arr.length == 0) {
-            return [q];
-          } else {
-            return arr;
-          }
+          return queryShares(q);
         };
 
         $scope.queryContacts = function(searchText) {
@@ -264,6 +269,10 @@ denningOnline
             $scope.property = {};
           }          
         }
+
+        $scope.queryShares = function (q) {
+          return queryShares(q);
+        };
 
         initProperty($scope.model.clsP1);
 
