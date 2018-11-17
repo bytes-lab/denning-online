@@ -571,19 +571,14 @@ denningOnline
         
         if (item) {
           vm.idxTab = 5;  // any none zero value
-          vm.model = item;
+          vm.model = refactorService.preConvert(item, true);
           vm.model_ = angular.copy(vm.model);
           vm.model.tmp = editControl;
           vm.model.tmp.oldMatterCode = item.clsMatterCode;          
           vm.title = 'Matter : ' + vm.model.strFileNo1 + ' ( ' + 
                      vm.model.clsPrimaryClient.strName + ' )';
-        } else {  // is it possible?
-          vm.idxTab = 0;
-          vm.model = { 
-            tmp: editControl
-          };
-          vm.title = 'New Matter';
         }
+        
         buildTabs(vm.model.clsMatterCode);
       });
     } else {
