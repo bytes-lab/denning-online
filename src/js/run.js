@@ -632,7 +632,7 @@ denningOnline
             return item.search(new RegExp(q, "i")) > -1;
           });
         };
-
+        
         $scope.calcForm = function (model) {
           $timeout(function () {
             var v2 = refactorService.convertFloat(angular.element('.rm2').val()),

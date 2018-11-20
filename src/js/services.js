@@ -107,3 +107,9 @@ denningOnline
       }
     }
   })
+
+  .filter('dnumber', function(refactorService, $filter) {
+    return function(strNum, decp) {
+      return $filter('number')(refactorService.convertFloat(strNum), decp);
+    }
+  })
