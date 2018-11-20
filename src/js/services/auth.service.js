@@ -215,11 +215,12 @@ denningOnline
         return response.data;
       }).then(function (info) {
         if (info.statusCode == 200) {
+          var cp = info.companyProfile || {};
           service.userInfo.priority = service.demoPriority;
-          service.userInfo.TaxName = info.companyProfile.TaxName;
-          service.userInfo.currency = info.companyProfile.currencySymbol;
+          service.userInfo.TaxName = cp.TaxName;
+          service.userInfo.currency = cp.currencySymbol;
           service.userInfo.localTime = info.localTime;
-          service.userInfo.logo = info.companyProfile.companyLogo;
+          service.userInfo.logo = cp.companyLogo;
           service.setUserInfo(service.userInfo);
         }
         return info;
