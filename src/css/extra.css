@@ -375,3 +375,14 @@ td.cell-edit {
 .d-inline {
     display: inline;
 }
+
+.intl-tel-input {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.intl-tel-input input {
+    border: 0;
+    height: 30px;
+    width: 100%;
+}

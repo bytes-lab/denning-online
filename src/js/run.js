@@ -1003,6 +1003,7 @@ denningOnline
         }
 
         $scope.updateSubType = function() {
+          $scope.keyword = '';
           templateService.getSubTypes($scope.docInfo).then(function(data) {
             $scope.subTypes = data;
             $scope.docInfo.subType = data[0];

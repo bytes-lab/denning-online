@@ -285,25 +285,19 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Phone Home</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' id="phoneHome" ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPhone1">
-              </div>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhone1" ng-readonly="!vm.can_edit">
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Phone Mobile</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPhoneMobile">
-              </div>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhoneMobile" ng-readonly="!vm.can_edit">
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Phone Office</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strPhone3" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhone3" ng-readonly="!vm.can_edit">
             </dd>
           </dl>
           <dl class="dl-horizontal">

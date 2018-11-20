@@ -85,12 +85,6 @@ denningOnline
       return false;
     };
 
-    // $("#phoneHome").intlTelInput({
-    //   utilsScript: "vendors/intl-tel-input/js/utils.js?14",
-    //   preferredCountries: ['my'],
-    //   separateDialCode: true
-    // });
-
     $scope.open = function($event, opened) {
       $event.preventDefault();
       $event.stopPropagation();

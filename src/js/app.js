@@ -12,6 +12,7 @@ var denningOnline = angular.module('denningOnline', [
     'formlyBootstrap',
     'naif.base64',
     'ngclipboard',
-    'ngClipboard'
+    'ngClipboard',
+    'internationalPhoneNumber'
 ])
  
