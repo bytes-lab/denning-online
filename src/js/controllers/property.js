@@ -83,7 +83,8 @@ denningOnline
     } else {
       self.title = 'New Property';
       self.entity = {
-        strMukimType: 'Mukim'
+        strMukimType: 'Mukim',
+        strPropertyType: '1'
       };
     }
 

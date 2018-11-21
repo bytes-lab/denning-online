@@ -71,7 +71,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Title Type</dt>
             <dd>
               <div class="select">
@@ -80,7 +80,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Title No.</dt>
             <dd>
               <div class="fg-line">
@@ -88,7 +88,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Lot Type</dt>
             <dd>
               <div class="select">
@@ -97,7 +97,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Lot No.</dt>
             <dd>
               <div class="fg-line">
@@ -148,7 +148,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Area</dt>
             <dd>
               <input type='text' ng-readonly="!vm.can_edit" class="form-control d-inline m-r-10" ng-model="vm.entity.strArea" style="width: calc(64% - 11px);">
@@ -160,7 +160,7 @@
               </select>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Tenure</dt>
             <dd>
               <div class="select">
@@ -169,7 +169,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Lease Expiry Date</dt>
             <dd>
               <div class="fg-line">
@@ -251,14 +251,14 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Category of Land Use</dt>
             <dd>
                 <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strPropertyUse" ng-options="x for x in vm.types.LandUse">
                 </select>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Express Condition</dt>
             <dd>
               <div class="fg-line">
@@ -330,8 +330,8 @@
           </dl>
         </div>
       </div>
-      <h4 class="m-t-25">Strata Title Details</h4>
-      <div class="row">
+      <h4 class="m-t-25" ng-if="vm.entity.strPropertyType=='2' && vm.entity.boolTitleComeOut">Strata Title Details</h4>
+      <div class="row" ng-if="vm.entity.strPropertyType=='2' && vm.entity.boolTitleComeOut">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Parcel No.</dt>
@@ -425,7 +425,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.strPropertyType == '2'">
             <dt class="p-t-10">Storey No.</dt>
             <dd>
               <div class="fg-line">
@@ -433,7 +433,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.strPropertyType == '2'">
             <dt class="p-t-10">Building / Block No.</dt>
             <dd>
               <div class="fg-line">
@@ -441,7 +441,7 @@
               </div>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.strPropertyType == '2'">
             <dt class="p-t-10">Apt / Condo Name</dt>
             <dd>
               <div class="fg-line">
@@ -451,7 +451,7 @@
           </dl>
         </div>
         <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
+          <dl class="dl-horizontal" ng-if="vm.entity.strPropertyType == '2'">
             <dt class="p-t-10">Accessory Parcel No.</dt>
             <dd>
               <div class="fg-line">
@@ -709,7 +709,7 @@
             <dt class="p-t-10">Remark</dt>
             <dd>
               <div class="fg-line">
-                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strNote" placeholder="type here...."></textarea>
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strRemarks" placeholder="type here...."></textarea>
               </div>
             </dd>
           </dl>
