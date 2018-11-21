@@ -650,6 +650,8 @@ denningOnline
       name: 'term',
       templateUrl: 'term.html',
       controller: function ($scope) {
+        $scope.parties = ['', 'Tenant', 'Landlord', 'Tenant & Landlord Equally'];
+
         $scope.open = function($event, opened) {
           $event.preventDefault();
           $event.stopPropagation();

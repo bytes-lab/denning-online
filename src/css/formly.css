@@ -2,7 +2,7 @@
   border: 2px solid lightgrey; 
   padding: 20px;
   min-height: 100px; 
-  overflow: hidden;
+  overflow: visible;
 }
 
 .no-padding {
@@ -92,9 +92,8 @@ input.form-control, label.form-control, select.form-control {
   background: #f5f5f5;
   padding-bottom: 5px;
   min-height: 100px;
-  overflow: hidden;  
+  overflow: visible;  
   margin-bottom: 25px;
-  /*border: 1px solid;  */
 }
 
 .formly-field-group {
