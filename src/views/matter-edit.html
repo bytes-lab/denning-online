@@ -1360,7 +1360,10 @@
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Initial Term</label>
-        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF5">
+        <div class="select wp-45">
+          <select class="form-control" ng-disabled="!model.tmp.can_edit" ng-model="model.strF5" ng-options="x for x in terms">
+          </select>
+        </div>
       </div>
     </div>
     <div class="form-group col-md-12">
@@ -1380,7 +1383,10 @@
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Optional Term</label>
-        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF3">
+        <div class="select wp-45">
+          <select class="form-control" ng-disabled="!model.tmp.can_edit" ng-model="model.strF3" ng-options="x for x in terms">
+          </select>
+        </div>
       </div>
     </div>
     <div class="form-group col-md-12">
@@ -1412,13 +1418,19 @@
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">By Landlord</label>
-        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF13">
+        <div class="select wp-45">
+          <select class="form-control" ng-disabled="!model.tmp.can_edit" ng-model="model.strF13" ng-options="x for x in terms">
+          </select>
+        </div>
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">By Tenant</label>
-        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strF14">
+        <div class="select wp-45">
+          <select class="form-control" ng-disabled="!model.tmp.can_edit" ng-model="model.strF14" ng-options="x for x in terms">
+          </select>
+        </div>
       </div>
     </div>
     <div class="form-group col-md-12">

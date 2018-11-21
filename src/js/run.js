@@ -651,7 +651,9 @@ denningOnline
       templateUrl: 'term.html',
       controller: function ($scope) {
         $scope.parties = ['', 'Tenant', 'Landlord', 'Tenant & Landlord Equally'];
-
+        $scope.terms = ['', '1 year', '2 years', '3 years', '4 years', '5 years'];
+        $scope.periods = ['', 'Not Allowed', '1 month', '2 months', '3 months'];
+        
         $scope.open = function($event, opened) {
           $event.preventDefault();
           $event.stopPropagation();
