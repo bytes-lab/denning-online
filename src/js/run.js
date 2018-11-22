@@ -880,6 +880,13 @@ denningOnline
 
     // bank group
     function bankCtrl ($scope, $uibModal) {
+      $scope.open = function($event, opened) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope[opened] = true;
+      };
+
       $scope.queryBanks = function(searchText) {
         return getBankBranches(1, 10, searchText)
       };

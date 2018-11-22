@@ -66,8 +66,9 @@
           md-selected-item="model.clsBank1"
           md-search-text="searchText"
           md-items="item in queryBanks(searchText)"
-          md-item-text="item.strName ? item.strName: ' '"
+          md-item-text="item.strName"
           md-min-length="0"
+          placeholder="Enter Bank Short Name e.g) HSBC"
           md-autoselect="false"
           class="default-input wp-70">
         <md-item-template>
@@ -93,13 +94,13 @@
     <div class="form-group m-l-30">
       <div class="d-flex">
         <label class="form-control attr-label">PA Name</label>
-        <input type="text" class="form-control wp-45" readonly="true" ng-model="model.strBank1PANo">
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strBank1PANo">
       </div>
     </div>
     <div class="form-group m-l-30">
       <div class="d-flex">
         <label class="form-control attr-label">Chargee Ref.</label>
-        <input type="text" class="form-control wp-45" readonly="" ng-model="model.strBank1Ref">
+        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.strBank1Ref">
       </div>
     </div>
     <div class="form-group m-l-30">
@@ -111,13 +112,13 @@
     <div class="form-group m-l-30">
       <div class="d-flex">
         <label class="form-control attr-label">Redemption Date</label>
-        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate15">
+        <input ng-click="open($event, 'dt15_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDate15" is-open="dt15_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" close-text="Close" placeholder="Select Date" />
       </div>
     </div>
     <div class="form-group m-l-30">
       <div class="d-flex">
         <label class="form-control attr-label">Redemption Sum</label>
-        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM10">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM10">
       </div>
     </div>
   </div>
@@ -135,9 +136,10 @@
           md-selected-item="model.clsBank2"
           md-search-text="searchText"
           md-items="item in queryBanks(searchText)"
-          md-item-text="item.strName ? item.strName: ' '"
+          md-item-text="item.strName"
           md-min-length="0"
           md-autoselect="false"
+          placeholder="Enter Bank Short Name e.g) HSBC"
           class="default-input wp-70">
         <md-item-template>
           <span md-highlight-text="searchText" md-highlight-flags="i">{{item.strName}}</span>
@@ -168,7 +170,7 @@
       <div class="d-flex">
         <label class="form-control attr-label">CAC / LDC</label>
         <input type="text" class="form-control wp-45" readonly="" ng-model="model['clsBank2'].clsCACCode.strName">
-        <a class="btn btn-primary short-btn" ng-click="bankCACDialog(model['clsBank2'].clsCACCode, true)">
+        <a class="btn btn-primary short-btn" ng-click="bankCACDialog(model['clsBank2'].clsCACCode, true)" ng-if="model['clsBank2'].clsCACCode && model['clsBank2'].clsCACCode.code">
           <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the bank CAC"></span>
         </a>
       </div>
@@ -189,13 +191,13 @@
     <div class="form-group col-md-12 m-l-15">
       <div class="d-flex">
         <label class="form-control attr-label">Bank Instruction Date</label>
-        <input type="text" class="form-control wp-45" ng-readonly="!model.tmp.can_edit" ng-model="model.dtDate9">
+        <input ng-click="open($event, 'dt9_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDate9" is-open="dt9_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" close-text="Close" placeholder="Select Date" />
       </div>
     </div>
     <div class="form-group col-md-12 m-l-15">
       <div class="d-flex">
         <label class="form-control attr-label">Letter of Offer Date</label>
-        <input type="text" class="form-control wp-45" readonly="" ng-value="model.dtDate8 | ddate">
+        <input ng-click="open($event, 'dt8_opened')" type="text" class="form-control wp-45" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model.dtDate8" is-open="dt8_opened" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" close-text="Close" placeholder="Select Date" />
       </div>
     </div>
   </div>

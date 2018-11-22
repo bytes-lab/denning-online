@@ -558,6 +558,19 @@ denningOnline
       }
     }
 
+    function preProcessMatter(matter) {
+      var entity = refactorService.preConvert(matter, true);
+      if (entity.clsBank1 && !entity.clsBank1.strName) {
+        entity.clsBank1 = null;
+      }
+
+      if (entity.clsBank2 && !entity.clsBank2.strName) {
+        entity.clsBank2 = null;
+      }
+
+      return entity;
+    }
+
     var editControl = {   // very important
       create_new: $state.$current.data.can_edit,
       can_edit: $state.$current.data.can_edit,
@@ -572,7 +585,7 @@ denningOnline
         if (item) {
           vm.idxTab = 5;  // any none zero value
 
-          vm.model = refactorService.preConvert(item, true);
+          vm.model = preProcessMatter(item);
           vm.model_ = angular.copy(vm.model);
           vm.model.tmp = editControl;
           vm.model.tmp.oldMatterCode = item.clsMatterCode;
@@ -619,7 +632,7 @@ denningOnline
      
         if (item) { // create success or update
           if (vm.model_) {
-            vm.model = refactorService.preConvert(item, true);
+            vm.model = preProcessMatter(item);
             vm.model_ = angular.copy(vm.model);
             vm.model.tmp = editControl;
             vm.model.tmp.oldMatterCode = item.clsMatterCode;
