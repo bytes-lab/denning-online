@@ -567,7 +567,8 @@ denningOnline
     formlyConfig.setType({
       name: 'price',
       templateUrl: 'price.html',
-      controller: function ($scope, $timeout, refactorService) {        
+      controller: function ($scope, $timeout, refactorService, Auth) {
+        $scope.userInfo = Auth.getUserInfo();
         $scope.calcDeposit = function (fixed_deposit) {
           if (fixed_deposit) {
             $scope.model.decRM18 = (refactorService.convertFloat($scope.model.decRM1) * 0.1 - refactorService.convertFloat($scope.model.decRM17)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
