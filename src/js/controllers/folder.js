@@ -1,6 +1,6 @@
 denningOnline
   .controller('folderListCtrl', function(NgTableParams, $sce, $stateParams, $uibModal, 
-                                         contactService, $state, Auth, $scope, $element, 
+                                         $state, Auth, $scope, $element, 
                                          growlService, refactorService, folderService) 
   {
     var self = this;
@@ -22,7 +22,7 @@ denningOnline
       if (self.data.length > 0) {
         angular.forEach(self.data, function(item) {
           self.checkboxes.items[item.id] = value;
-        });        
+        });
       }
     });
     
@@ -50,8 +50,10 @@ denningOnline
     }, true);
 
     folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
-      self.fileNo = refactorService.parseFileNo(data.name).no;
-      self.fileName = refactorService.parseFileNo(data.name).name;
+      if (self.type == 'matter') {
+        self.fileNo = refactorService.parseFileNo(data.name).no;
+        self.fileName = refactorService.parseFileNo(data.name).name;        
+      }
 
       self.data = [];
       self.folders = [];
@@ -414,10 +416,10 @@ denningOnline
       $scope.showIcon = !$scope.showIcon;
       if ($scope.showIcon) {
         $scope.inputType = 'text';
-        $scope.btnIcon = 'zmdi-eye-off';        
+        $scope.btnIcon = 'zmdi-eye-off';
       } else {
         $scope.inputType = 'password';
-        $scope.btnIcon = 'zmdi-eye';        
+        $scope.btnIcon = 'zmdi-eye';
       }
     }
 

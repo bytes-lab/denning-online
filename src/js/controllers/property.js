@@ -214,7 +214,7 @@ denningOnline
               $state.go('properties.edit', { 'id': property.code });
             }
             growlService.growl('Saved successfully!', 'success');
-          }          
+          }
         }
       });
     }

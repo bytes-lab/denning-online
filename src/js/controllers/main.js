@@ -1,7 +1,7 @@
 denningOnline
 
   .controller('denningOnlineCtrl', function($state, $scope, growlService, Auth, http, $interval,
-                                            searchService, $rootScope, contactService)
+                                            searchService, $rootScope, folderService)
   {
     var self = this;
     self.searchCategory = 0;
@@ -178,7 +178,7 @@ denningOnline
         ]
       };
 
-      contactService.upload(info, self.uploadType).then(function (res) {
+      folderService.upload(info, self.uploadType).then(function (res) {
         self.uploaded = self.uploaded + 1;
         if (fileList.length == self.uploaded) {
           growlService.growl('The file(s) uploaded successfully.', 'success');

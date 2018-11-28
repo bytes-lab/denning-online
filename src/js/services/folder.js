@@ -8,6 +8,14 @@ denningOnline
       });
     }
 
+    service.upload = function (info, type) {
+      var url = 'v1/document/' + type + '/upload';
+
+      return http.POST(url, info).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     service.download = function (url) {
       return http.GET(url, {}, 'arraybuffer').then(function(resp) {
         return resp;

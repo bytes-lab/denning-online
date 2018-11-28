@@ -11,7 +11,7 @@
           <ul class="actions matter-action m-l-20" data-ng-include src="vm.type+'-action.html'"></ul>
 
           <div class="clearfix"></div>
-          <span class="c-purple f-500 f-18">{{ vm.fileNo }} ( {{ vm.fileName }} )</span>
+          <span class="c-purple f-500 f-18" ng-if="vm.type == 'matter'">{{ vm.fileNo }} ( {{ vm.fileName }} )</span>
 
           <button class="btn btn-default pull-right m-r-5 f-15" title="Attach files for email" ng-click="vm.attachFile()"><i class="zmdi zmdi-attachment-alt"></i></button>
           <button class="btn btn-default pull-right m-r-5 f-15" title="Copy files" ng-click="vm.moveFile('Copy')"><i class="zmdi zmdi-copy"></i></button>

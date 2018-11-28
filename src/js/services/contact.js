@@ -54,19 +54,6 @@ denningOnline
       });
     }
 
-    service.upload = function (info, type) {
-      var url;
-      if (type == 'contact') {
-        url = 'v1/app/contactFolder';
-      } else {
-        url = 'v1/app/matter/fileFolder';
-      }
-
-      return http.POST(url, info).then(function (resp) {
-        return resp.data;
-      });
-    }
-
     service.save = function (entity) {
       var method = entity.code ? 'PUT': 'POST';
 
