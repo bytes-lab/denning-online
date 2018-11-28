@@ -43,6 +43,12 @@ denningOnline
       legalFirmService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+        if (self.entity.strPostCode) {
+          self.strPostCode_ = { 
+            postcode: self.entity.strPostCode,
+            init: true 
+          };
+        }
         self.popoutUrl = $state.href('legal-firms.edit', { id: self.entity.code });
       });
     } else {
@@ -62,7 +68,7 @@ denningOnline
     }
 
     self.postcodeChange = function (item) {
-      if (item) {
+      if (item && !item.init) {
         self.entity.strPostCode = item.postcode;
         self.entity.strCity = item.city;
         self.entity.strState = item.state;
