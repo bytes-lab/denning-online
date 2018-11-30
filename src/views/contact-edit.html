@@ -512,11 +512,12 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.entity.clsBank"
+                  md-selected-item="vm.strBankAccountName"
                   md-search-text="qsbk"
                   md-items="item in vm.queryBanks(qsbk)"
-                  md-item-text="item.strName ? item.strName: ' '"
+                  md-item-text="item.strName"
                   md-min-length="0"
+                  md-selected-item-change="vm.bankChange(item)"
                   md-autoselect="false"
                   class="default-input">
                 <md-item-template>
@@ -532,7 +533,7 @@
             <dt class="p-t-10">Account No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSupplierAccNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strBankAccountNo">
               </div>
             </dd>
           </dl>

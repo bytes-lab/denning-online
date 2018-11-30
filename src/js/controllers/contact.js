@@ -156,6 +156,14 @@ denningOnline
       }
     }
 
+    self.bankChange = function (item) {
+      if (item) {
+        self.entity.strBankAccountName = item.strName;
+      } else {
+        self.entity.strBankAccountName = '';
+      }
+    }
+
     self.birthPlaceChange = function (item) {
       if (item) {
         self.entity.strPlaceBirth = item.city;
@@ -289,6 +297,12 @@ denningOnline
             code: self.entity.clsIrdBranch.code, 
             description: self.entity.clsIrdBranch.strName 
           };
+        }
+
+        if (self.entity.strBankAccountName) {
+          self.strBankAccountName = { 
+            strName: self.entity.strBankAccountName
+          }
         }
 
         if (self.entity.strPostCode) {
