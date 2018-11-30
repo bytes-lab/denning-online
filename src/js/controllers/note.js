@@ -23,7 +23,7 @@ denningOnline
 
     function initializeTable () {
       self.tableFilter = new NgTableParams({
-        count: 25
+        count: 10
       }, {
         dataset: self.data
       })

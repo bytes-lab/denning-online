@@ -3,19 +3,23 @@ denningOnline
                                              Auth, $state) 
   {
     var self = this;
+    self.filterType = '360';
 
-    matterFormService.getList(1, 500).then(function(data) {
-      self.data = data;
-      initializeTable();
-    });
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 10,
+    }, {
+      getData: function(params) {
+        return matterFormService.getList(params.page(), params.count(), self.keyword, self.filterType)
+        .then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    })
 
-    function initializeTable () {
-      self.tableFilter = new NgTableParams({
-        page: 1,
-        count: 25
-      }, {
-        dataset: self.data
-      })
+    self.search = function () {
+      self.tableFilter.reload();
     }
   })
 
@@ -40,8 +44,8 @@ denningOnline
 
     if($stateParams.code) {
       matterFormService.getItem($stateParams.code).then(function (item) {
-        self.matterForm = item;
-        self.matterForm_ = angular.copy(item);
+        self.entity = item;
+        self.entity_ = angular.copy(item);
 
         angular.forEach(JSON.parse(item.jsonTabs || "{}"), function (value, key) {
           self.matterform[value.TabName] = true;
@@ -49,7 +53,9 @@ denningOnline
         })
       });
     } else {
-      self.matterForm = {};
+      self.entity = {
+        strDesignFor: 'Online'
+      };
     }
 
     self.addTab = function (tab) {
@@ -75,19 +81,19 @@ denningOnline
     self.copy = function () {
       self.create_new = true;
       self.can_edit = true;
-      self.matterForm_ = null;
+      self.entity_ = null;
 
-      delete self.matterForm.code;
-      delete self.matterForm.strDisplayName;
-      delete self.matterForm.dtDateEntered;
-      delete self.matterForm.dtDateUpdated;
+      delete self.entity.code;
+      delete self.entity.strDisplayName;
+      delete self.entity.dtDateEntered;
+      delete self.entity.dtDateUpdated;
     }
 
     self.save = function () {
       var selected = [];
       var i = 0;
 
-      if (!self.matterForm.strDisplayName || !self.matterForm.strDisplayName.trim()) {
+      if (!self.entity.strDisplayName || !self.entity.strDisplayName.trim()) {
         alert('Please provide form name.');
         return false;
       }
@@ -105,14 +111,16 @@ denningOnline
         })
       })
 
-      self.matterForm.jsonTabs = JSON.stringify(selected);
-      entity = refactorService.getDiff(self.matterForm_, self.matterForm);
+      self.entity.jsonTabs = JSON.stringify(selected);
+      entity = refactorService.getDiff(self.entity_, self.entity);
 
       matterFormService.save(entity).then(function (matterform) {
-        if (matterform) {
+        if (self.entity_) {
+          $state.reload();
+        } else {
           $state.go('matter-forms.edit', {'code': matterform.code});
-          growlService.growl('Saved successfully!', 'success');          
         }
+        growlService.growl('Saved successfully!', 'success');
       });
     }
 

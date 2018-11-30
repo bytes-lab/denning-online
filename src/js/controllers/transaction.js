@@ -6,7 +6,7 @@ denningOnline
 
     self.tableFilter = new NgTableParams({
       page: 1,
-      count: 25,
+      count: 10,
     }, {
       getData: function(params) {
         return transactionService.getList(self.type, params.page(), params.count(), self.keyword)
@@ -147,7 +147,7 @@ denningOnline
     function initializeTable () {
       self.tableFilter = new NgTableParams({
         page: 1,
-        count: 25,
+        count: 10,
         sorting: {
           name: 'asc' 
         }
@@ -348,7 +348,7 @@ denningOnline
     function initializeTable () {
       self.tableFilter = new NgTableParams({
         page: 1,
-        count: 25,
+        count: 10,
         sorting: {
           name: 'asc' 
         }
@@ -549,7 +549,7 @@ denningOnline
     function initializeTable () {
       self.tableFilter = new NgTableParams({
         page: 1,
-        count: 25,
+        count: 10,
         sorting: {
           name: 'asc' 
         }
@@ -750,7 +750,7 @@ denningOnline
     function initializeTable () {
       self.tableFilter = new NgTableParams({
         page: 1,
-        count: 25,
+        count: 10,
         sorting: {
           name: 'asc' 
         }

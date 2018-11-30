@@ -18,7 +18,7 @@ denningOnline
       //Filtering
       self.tableFilter = new NgTableParams({
         page: 1,      // show first page
-        count: 25,
+        count: 10,
         sorting: {
           name: 'asc'   // initial sorting
         }

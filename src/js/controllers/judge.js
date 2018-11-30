@@ -5,7 +5,7 @@ denningOnline
 
     self.tableFilter = new NgTableParams({
       page: 1,
-      count: 25,
+      count: 10,
     }, {
       getData: function(params) {
         return judgeService.getList(params.page(), params.count(), self.keyword)

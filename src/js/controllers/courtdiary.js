@@ -24,7 +24,7 @@ denningOnline
 
     self.tableFilter = new NgTableParams({
       page: 1,
-      count: 25
+      count: 10
     }, {
       getData: function(params) {
         return courtdiaryService.getCalendar(self.firstDay, self.lastDay, self.filter, params.page(), 

@@ -324,8 +324,8 @@ denningOnline
     };
 
     self.queryForms = function (searchText) {
-      return matterFormService.getList(1, 10, searchText).then(function (data) {
-        return data; 
+      return matterFormService.getList(1, 10, searchText, '360').then(function (data) {
+        return data.data; 
       });
     };
 

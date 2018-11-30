@@ -5,7 +5,7 @@ denningOnline
 
     self.tableFilter = new NgTableParams({
       page: 1,
-      count: 25,
+      count: 10,
     }, {
       getData: function(params) {
         var type = self.outstanding ? 'outstanding': 'all';
@@ -198,7 +198,7 @@ denningOnline
     function initializeTable () {
       self.tableFilter = new NgTableParams({
         page: 1,
-        count: 25,
+        count: 10,
         sorting: {
           name: 'asc' 
         }

@@ -141,13 +141,14 @@ denningOnline
   .service('matterFormService', function (http) {
     var service = {};
 
-    service.getList = function (page, pagesize, keyword) {
+    service.getList = function (page, pagesize, keyword, filterType) {
       return http.GET('v1/table/MatterCodeEditForm', {
         page: page,
         pagesize: pagesize,
-        search: keyword
+        search: keyword,
+        filter: filterType
       }).then(function (resp) {
-        return resp.data;
+        return resp;
       });
     }
 
