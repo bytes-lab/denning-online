@@ -814,6 +814,21 @@ denningOnline
     });
 
     formlyConfig.setType({
+      name: 'date',
+      templateUrl: 'date.html',
+      controller: function($scope) {
+        $scope.opened = {};
+
+        $scope.open = function($event, field) {
+          $event.preventDefault();
+          $event.stopPropagation();
+
+          $scope.opened[field] = true;
+        };
+      }
+    });
+
+    formlyConfig.setType({
       name: 'other',
       templateUrl: 'other.html'
     });

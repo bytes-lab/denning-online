@@ -1872,6 +1872,21 @@
   </div>
 </script>
 
+<script type="text/ng-template" id="date.html">
+  <div class="row p-t-10 p-l-15 p-r-15">
+    <div class="col-md-4" ng-repeat="item in to.labels track by $index" ng-if="item">
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">{{ item }}</dt>
+        <dd>
+          <div class="fg-line">
+            <input ng-click="open($event, $index)" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model['dtDate'+($index+1)]" is-open="opened[$index]" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" close-text="Close" placeholder="Select Date" />
+          </div>
+        </dd>
+      </dl>
+    </div>    
+  </div>
+</script>
+
 <script type="text/ng-template" id="beneficiary.html">
   <div class="form-group">
     <div class="form-group col-md-12">

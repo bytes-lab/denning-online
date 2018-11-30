@@ -107,9 +107,14 @@ denningOnline
     }
 
     function buildTabDict (clsMatterCode) {
-      var matter_code = [];
+      var matter_code = [],
+          dateLabels = [];
       if (clsMatterCode && clsMatterCode.jsonFieldLabels) {
         matter_code = JSON.parse(clsMatterCode.jsonFieldLabels);
+
+        for (i = 1; i <= 50; i++) {
+          dateLabels.push(getLabel(matter_code, 'Date'+i));
+        }
       }
 
       vm.tabDict = {
@@ -386,6 +391,14 @@ denningOnline
         "$": {
         },
         "Date": {
+          "groups": [
+            {
+              "type": "date",
+              "templateOptions": {
+                "labels": dateLabels,
+              }
+            }
+          ]
         },
         "Text": {
         },
