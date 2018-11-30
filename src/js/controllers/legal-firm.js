@@ -4,10 +4,7 @@ denningOnline
 
     self.tableFilter = new NgTableParams({
       page: 1,
-      count: 25,
-      sorting: {
-        name: 'asc'
-      }
+      count: 10
     }, {
       getData: function(params) {
         return legalFirmService.getList(params.page(), params.count(), self.keyword)
