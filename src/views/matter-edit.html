@@ -1888,6 +1888,35 @@
   </div>
 </script>
 
+<script type="text/ng-template" id="text.html">
+  <div class="row p-t-10 p-l-15 p-r-15">
+    <div class="col-md-4" ng-repeat="item in to.flabels track by $index">
+      <dl class="dl-horizontal">
+        <dt class="p-t-10" ng-if="item">{{ item }}</dt>
+        <dt class="p-t-10" ng-if="!item">[ F {{ $index + 1 }} ]</dt>
+        <dd>
+          <div class="fg-line">
+            <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model['strF'+($index+1)]">
+          </div>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <div class="row p-t-10 p-l-15 p-r-15">
+    <div class="col-md-4" ng-repeat="item in to.nlabels track by $index">
+      <dl class="dl-horizontal">
+        <dt class="p-t-10" ng-if="item">{{ item }}</dt>
+        <dt class="p-t-10" ng-if="!item">[ Pn {{ $index + 1 }} ]</dt>
+        <dd>
+          <div class="fg-line">
+            <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model['strPn'+($index+1)]">
+          </div>
+        </dd>
+      </dl>
+    </div>
+  </div>
+</script>
+
 <script type="text/ng-template" id="currency.html">
   <div class="row p-t-10 p-l-15 p-r-15">
     <div class="col-md-4" ng-repeat="item in to.labels track by $index">
