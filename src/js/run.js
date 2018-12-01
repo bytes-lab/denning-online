@@ -814,6 +814,16 @@ denningOnline
     });
 
     formlyConfig.setType({
+      name: 'currency',
+      templateUrl: 'currency.html',
+      controller: function($scope, $filter, refactorService) {
+        for (i = 1; i <= 36; i++) {
+          $scope.model['decRM'+i] = $filter('number')(refactorService.convertFloat($scope.model['decRM'+i]), 2);
+        }
+      }
+    });
+
+    formlyConfig.setType({
       name: 'date',
       templateUrl: 'date.html',
       controller: function($scope) {

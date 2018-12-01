@@ -108,12 +108,17 @@ denningOnline
 
     function buildTabDict (clsMatterCode) {
       var matter_code = [],
-          dateLabels = [];
+          dateLabels = [],
+          currencyLabels = [];
       if (clsMatterCode && clsMatterCode.jsonFieldLabels) {
         matter_code = JSON.parse(clsMatterCode.jsonFieldLabels);
 
         for (i = 1; i <= 50; i++) {
           dateLabels.push(getLabel(matter_code, 'Date'+i));
+        }
+
+        for (i = 1; i <= 36; i++) {
+          currencyLabels.push(getLabel(matter_code, '$'+i));
         }
       }
 
@@ -389,6 +394,14 @@ denningOnline
           ]
         },
         "$": {
+          "groups": [
+            {
+              "type": "currency",
+              "templateOptions": {
+                "labels": currencyLabels,
+              }
+            }
+          ]
         },
         "Date": {
           "groups": [

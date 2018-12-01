@@ -1874,16 +1874,33 @@
 
 <script type="text/ng-template" id="date.html">
   <div class="row p-t-10 p-l-15 p-r-15">
-    <div class="col-md-4" ng-repeat="item in to.labels track by $index" ng-if="item">
+    <div class="col-md-4" ng-repeat="item in to.labels track by $index">
       <dl class="dl-horizontal">
-        <dt class="p-t-10">{{ item }}</dt>
+        <dt class="p-t-10" ng-if="item">{{ item }}</dt>
+        <dt class="p-t-10" ng-if="!item">[ Date {{ $index + 1 }} ]</dt>
         <dd>
           <div class="fg-line">
             <input ng-click="open($event, $index)" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" show-weeks="false" ng-model="model['dtDate'+($index+1)]" is-open="opened[$index]" min-date="'1900-1-1'" ng-disabled="!model.tmp.can_edit" close-text="Close" placeholder="Select Date" />
           </div>
         </dd>
       </dl>
-    </div>    
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="currency.html">
+  <div class="row p-t-10 p-l-15 p-r-15">
+    <div class="col-md-4" ng-repeat="item in to.labels track by $index">
+      <dl class="dl-horizontal">
+        <dt class="p-t-10" ng-if="item">{{ item }}</dt>
+        <dt class="p-t-10" ng-if="!item">[ Currency {{ $index + 1 }} ]</dt>
+        <dd>
+          <div class="fg-line">
+            <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model['decRM'+($index+1)]">
+          </div>
+        </dd>
+      </dl>
+    </div>
   </div>
 </script>
 
