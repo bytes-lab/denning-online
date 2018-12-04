@@ -201,6 +201,13 @@ denningOnline
       $state.go('courtdiary');
     }
 
+    $scope.open = function($event, opened) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope[opened] = true;
+    };
+
     //Prevent Outside Click
     self.openDelete = function (event, contact) {
       event.stopPropagation();

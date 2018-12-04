@@ -30,7 +30,7 @@ denningOnline
     }
   })
 
-  .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state, Auth, 
+  .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state, Auth, cityService,
                                              bankService, bankCACService, $uibModalInstance, 
                                              entityCode, isDialog, isNew,
                                              refactorService, growlService) 
@@ -62,11 +62,35 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         self.popoutUrl = $state.href('bank-branches.edit', { id: self.entity.code });
+
+        if (self.entity.strPostCode) {
+          self.strPostCode_ = {
+            postcode: self.entity.strPostCode,
+            city: self.entity.strCity,
+            state: self.entity.strState,
+            country: self.entity.strCountry
+          };
+        }
       });
     } else {
       self.title = 'New Bank Branch';
       self.entity = { };
       self.popoutUrl = $state.href('bank-branches.new');
+    }
+
+    self.queryPostcodes = function (searchText) {
+      return cityService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    self.postcodeChange = function (item) {
+      if (item) {
+        self.entity.strPostCode = item.postcode;
+        self.entity.strCity = item.city;
+        self.entity.strState = item.state;
+        self.entity.strCountry = item.country;
+      }
     }
 
     self.copy = function () {

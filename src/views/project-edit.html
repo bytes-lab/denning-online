@@ -128,7 +128,25 @@
                 <input type='text' class="form-control" ng-model="vm.entity.strPhone1">
               </div>
             </dd>
-          </dl>              
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank Branch</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsBankCode"
+                md-search-text="searchText"
+                md-items="item in vm.queryBanks(searchText)"
+                md-item-text="item.code ? item.code: ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Land Tenure</dt>
             <dd>
@@ -207,24 +225,6 @@
               <div class="fg-line">
                 <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strHtaAcc">
               </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank Branch</dt>
-            <dd>
-              <md-autocomplete
-                ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsBankCode"
-                md-search-text="searchText"
-                md-items="item in vm.queryBanks(searchText)"
-                md-item-text="item.code ? item.code: ' '"
-                md-min-length="0"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
-              </md-item-template>
-              </md-autocomplete>
             </dd>
           </dl>
         </div>

@@ -22,7 +22,7 @@ denningOnline
     }
   })
 
-  .controller('projectEditCtrl', function($filter, $stateParams, refactorService, projectService, $state, $scope,
+  .controller('projectEditCtrl', function($stateParams, refactorService, projectService, $state, $scope,
                                           growlService, Auth, contactService) 
   {
     var self = this;
