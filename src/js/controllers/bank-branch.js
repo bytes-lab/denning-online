@@ -32,8 +32,7 @@ denningOnline
 
   .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state, Auth, cityService,
                                              bankService, bankCACService, $uibModalInstance, 
-                                             entityCode, isDialog, isNew,
-                                             refactorService, growlService) 
+                                             entityCode, isDialog, isNew, refactorService, growlService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();

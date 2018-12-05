@@ -1,26 +1,18 @@
 denningOnline
   .controller('bankCACListCtrl', function(NgTableParams, bankCACService, $state) {
     var self = this;
-    self.dataReady = false;
-    self.clickHandler = clickHandler;
-
-    function clickHandler(item) {
-      $state.go('bank-CACs.edit', {'id': item.code});
-    }
 
     bankCACService.getTableList(1, 500).then(function(data) {
       self.data = data.data;
-      self.dataReady = true;
       initializeTable();
     });    
     
     function initializeTable () {
-      //Filtering
       self.tableFilter = new NgTableParams({
-        page: 1,      // show first page
+        page: 1,
         count: 10,
         sorting: {
-          name: 'asc'   // initial sorting
+          name: 'asc'
         }
       }, {
         dataset: self.data
@@ -28,41 +20,38 @@ denningOnline
     }   
   })
 
-  .controller('bankCACDeleteModalCtrl', function ($scope, $uibModalInstance, bank_CAC, bankCACService, $state) {
-    $scope.ok = function () {
-      bankCACService.delete(bank_CAC).then(function(bank_CAC) {
-        $state.reload();
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.bank_CACInfo.$error.push({meessage:''});
-      });
-      $uibModalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
-  })
-
-  .controller('bankCACEditCtrl', function($stateParams, bankCACService, $state, bankService, Auth) {
+  .controller('bankCACEditCtrl', function($stateParams, bankCACService, cityService, $state, bankService, Auth,
+                                          refactorService, $uibModalInstance, entityCode, isDialog, isNew, growlService) 
+  {
     var self = this;
-    self.save = save;
-    self.isDialog = false;
-    self.viewMode = false;  // for edit / create
-    self.cancel = cancel;
     self.userInfo = Auth.getUserInfo();
-    self.create_new = $state.$current.data.can_edit;
-    self.can_edit = $state.$current.data.can_edit;
+    self._type = 'bank-CAC';
 
-    if($stateParams.id) {
-      bankCACService.getItem($stateParams.id)
-      .then(function(item){
-        self.bank_CAC = item;
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
+
+    if (self.entityCode) {
+      self.title = 'Edit Bank CAC';
+      bankCACService.getItem(self.entityCode).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+        self.popoutUrl = $state.href('bank-CACs.edit', { id: self.entity.code });
+
+        if (self.entity.strPostCode) {
+          self.strPostCode_ = {
+            postcode: self.entity.strPostCode,
+            city: self.entity.strCity,
+            state: self.entity.strState,
+            country: self.entity.strCountry
+          };
+        }
       });
     } else {
-      self.bank_CAC = {};
+      self.title = 'New Bank CAC';
+      self.entity = { };
+      self.popoutUrl = $state.href('bank-CACs.new');
     }
 
     self.queryBanks = function(searchText) {
@@ -71,53 +60,57 @@ denningOnline
       });
     };
 
-    function cancel() {
-      $state.go('bank-CACs.list');
+    self.queryPostcodes = function (searchText) {
+      return cityService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
     }
 
-    function save() {
-      bankCACService.save(self.bank_CAC).then(function(bank_CAC) {
-        self.bank_CAC = bank_CAC;
+    self.postcodeChange = function (item) {
+      if (item) {
+        self.entity.strPostCode = item.postcode;
+        self.entity.strCity = item.city;
+        self.entity.strState = item.state;
+        self.entity.strCountry = item.country;
+      }
+    }
+
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
+      
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      bankCACService.save(entity).then(function (item) {
+        if (item) {
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('bank-CACs.edit', { 'id': item.code });
+            }
+            growlService.growl('Saved successfully!', 'success');          
+          }
+        }
+      });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
         $state.go('bank-CACs.list');
-      })
-      .catch(function(err){
-      });
+      }
     }
-  })
-
-  .controller('bankCACCreateModalCtrl', function ($uibModalInstance, party, viewMode, Auth, bankService, bankCACService) {
-    var self = this;
-    self.save = save;
-    self.cancel = cancel;
-    self.isDialog = true;
-    self.viewMode = viewMode;
-    self.userInfo = Auth.getUserInfo();
-    self.create_new = !viewMode;
-    self.can_edit = !viewMode;
-
-    self.queryBanks = function(searchText) {
-      return bankService.getTableList(1, 10, searchText).then(function(resp) {
-        return resp.data;
-      });
-    };
-
-    if (viewMode) {
-      bankCACService.getItem(party.code).then(function(item) {
-        self.bank_CAC = item;
-      });
-    } else {
-      self.bank_CAC = {};
-    }
-
-    function save() {
-      bankCACService.save(self.contact).then(function(contact) {
-        $uibModalInstance.close(contact);
-      })
-      .catch(function(err){
-      });
-    };
-
-    function cancel() {
-      $uibModalInstance.close();
-    };
   })

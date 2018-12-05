@@ -1201,16 +1201,43 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'bankCACEditCtrl as vm',
-        templateUrl: 'views/bank-CAC-edit.html'
+        templateUrl: 'views/bank-CAC-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('bank-CACs.new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },
         url: '/new',
         controller: 'bankCACEditCtrl as vm',
-        templateUrl: 'views/bank-CAC-edit.html'
+        templateUrl: 'views/bank-CAC-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 

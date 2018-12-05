@@ -1,16 +1,16 @@
 <div ng-class="vm.isDialog ? '' : 'container'">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" ng-if="!vm.isDialog">
       <div class="row">
-      <div class="col-md-11 col-sm-12">
-        <h2 class="c-purple f-500 f-20" style="display: inline;">Edit Bank Branch</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-        <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-        <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
-      </div>
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="bank-CACs.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        </div>
       </div>
     </div>
     <div class="card-body card-padding">
@@ -20,11 +20,12 @@
             <dt class="p-t-10">Master Bank Code</dt>
             <dd>
               <md-autocomplete
-                md-selected-item="vm.bank_CAC.clsBankCode"
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsBankCode"
                 md-search-text="searchText"
                 md-items="item in vm.queryBanks(searchText)"
                 md-item-text="item.code ? item.code: ' '"
-                md-min-length="1"
+                md-min-length="0"
                 md-autoselect="false"
                 class="default-input">
               <md-item-template>
@@ -37,7 +38,7 @@
             <dt class="p-t-10">Bank Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.bank_CAC.clsBankCode.strName" type="text" class="form-control">
+                <input ng-model="vm.entity.clsBankCode.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -45,105 +46,7 @@
             <dt class="p-t-10">CAC Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strName">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address Line 1</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strAddressLine1">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address Line 2</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strAddressLine2">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address Line 3</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strAddressLine3">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strPostCode">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Town</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strCity">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strState">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.bank_CAC.strCountry" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone 1 (Manager)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strPhone1">
-              </div>
-            </dd>
-          </dl>              
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone 2 (Credit Dept.)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.bank_CAC.strPhone2" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone 3</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strPhone3">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strPhoneFax">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Email Address</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strEmailAddress">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strName">
               </div>
             </dd>
           </dl>
@@ -151,7 +54,7 @@
             <dt class="p-t-10">Bank CAC Manager</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strManager">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strManager">
               </div>
             </dd>
           </dl>
@@ -159,7 +62,7 @@
             <dt class="p-t-10">Manager IC No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.address.line3">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.address.line3">
               </div>
             </dd>
           </dl>
@@ -167,7 +70,119 @@
             <dt class="p-t-10">Bank Officer</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.address.line3">
+                <input ng-model="vm.entity.strOfficer" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address Line 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case-tail-comma>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address Line 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strAddressLine2" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case-tail-comma>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address Line 3</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strAddressLine3" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case-tail-comma>
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strPostCode_"
+                  md-search-text="qsct"
+                  md-items="item in vm.queryPostcodes(qsct)"
+                  md-selected-item-change="vm.postcodeChange(item)"
+                  md-item-text="item.postcode"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="qsct" class="col-1" md-highlight-flags="i">
+                      {{ item.postcode }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Town</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCity" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strState" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strCountry" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone 1 (Manager)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type="text" international-phone-number ng-model="vm.entity.strPhone1" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone 2 (Credit Dept.)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type="text" international-phone-number ng-model="vm.entity.strPhone2" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone 3</dt>
+            <dd>
+              <div class="fg-line">
+                <input type="text" international-phone-number ng-model="vm.entity.strPhone3" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Fax</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhoneFax">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Email Address</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strEmailAddress">
               </div>
             </dd>
           </dl>
@@ -180,7 +195,7 @@
             <dt class="p-t-10">Mailing List</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.bank_CAC.strMailList" type="text" class="form-control">
+                <input ng-model="vm.entity.strMailList" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -190,7 +205,7 @@
             <dt class="p-t-10">Note 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strNote1">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote1">
               </div>
             </dd>
           </dl>
@@ -198,22 +213,24 @@
             <dt class="p-t-10">Note 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.bank_CAC.strNote2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote2">
               </div>
             </dd>
           </dl>
         </div>
       </div>
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
       
-      <div class="row">
+      <div class="row" ng-if="!vm.isDialog">
         <div class="col-md-11 col-sm-12 no-padding">
           <div class="m-t-30 p-l-15">
             <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.create_new && !vm.viewMode">Delete</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
             <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
             <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.new_()" ng-if="vm.userInfo.priority.contact.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="bank-CACs.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>

@@ -4,15 +4,15 @@
       <div class="row">
         <div class="col-md-12">
           <span class="f-20 f-500 c-purple">Bank CAC List</span>
-          <a ui-sref="bank-branches.new" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
+          <a ui-sref="bank-CACs.new" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
         </div>
       </div>
     </div>
         
     <div class="card-body">
-      <div class="table-responsive" ng-if="vm.dataReady" > 
+      <div class="table-responsive"> 
         <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
-          <tr ng-repeat="w in $data" ng-click="vm.clickHandler(w)">
+          <tr ng-repeat="w in $data"  ui-sref="bank-CACs.edit({'id': w.code})">
             <td data-title="'Master Bank Code'" filter="{ 'clsBankCode.code': 'text' }" sortable="'clsBankCode.code'">
               {{ w.clsBankCode.code }}
             </td>
@@ -31,18 +31,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/ng-template" id="myModalContent.html">
-  <div class="modal-header">
-    <h4 class="modal-title">Delete a bank CAC</h4>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure to delete the bank CAC?</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-link" ng-click="ok()">OK</button>
-    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-  </div>
-</script>
-
-
