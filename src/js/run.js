@@ -926,18 +926,21 @@ denningOnline
         bankDialog($scope.model, key, viewMode);
       }
 
-      $scope.bankCACDialog = function(party, viewMode) {
+      $scope.bankCACDialog = function() {
         var modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: 'views/bank-CAC-edit.html',
-          controller: 'bankCACCreateModalCtrl',
+          templateUrl: 'entity-modal.html',
+          controller: 'bankCACEditCtrl',
           controllerAs: 'vm',
           size: 'lg',
           backdrop: 'static',
           keyboard: true,
           resolve: {
-            viewMode: viewMode,
-            party: party
+            isNew: false,
+            entityCode: function () {
+              return $scope.model.clsBank2.clsCACCode.code;
+            },
+            isDialog: true
           }
         });
       };
