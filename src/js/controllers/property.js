@@ -30,6 +30,7 @@ denningOnline
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
+    self._type = 'property';
 
     self.isDialog = isDialog;
     self.can_edit = isNew;
@@ -46,6 +47,7 @@ denningOnline
       propertyService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+        self.popoutUrl = $state.href('properties.edit', { id: self.entity.code });
 
         // wrapper attrs for auto complete
         if (self.entity.strMukim) {
@@ -82,6 +84,8 @@ denningOnline
       });
     } else {
       self.title = 'New Property';
+      self.popoutUrl = $state.href('properties.new');
+
       self.entity = {
         strMukimType: 'Mukim',
         strPropertyType: '1'
@@ -169,6 +173,13 @@ denningOnline
           self.entity.strProjectName = project.strProjectName;
         });
       }
+    }
+
+    self.relatedMatter = function () {
+      if ($uibModalInstance) {
+        $uibModalInstance.close();
+      }
+      $state.go('properties.matters', {id: self.entity.code});
     }
 
     $("#back-top").hide();

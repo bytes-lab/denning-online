@@ -326,7 +326,7 @@ denningOnline
 
           var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'views/property-edit.html',
+            templateUrl: 'entity-modal.html',
             controller: 'propertyEditCtrl',
             controllerAs: 'vm',
             size: 'lg',

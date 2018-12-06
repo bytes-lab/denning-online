@@ -42,7 +42,7 @@
     <div style="display: inline;" ng-if="!vm.isNew && vm.openFolder">
       <md-button class="btn-sm md-raised md-warn m-l-20" ng-click="vm.relatedMatter()">Matters</md-button>
       <md-button class="btn-sm md-raised md-warn" ng-click="vm.openFolder()">Folder</md-button>
-      <md-button class="btn-sm md-raised md-warn" ng-click="vm.upload()">Upload</md-button>
+      <md-button class="btn-sm md-raised md-warn" ng-click="mactrl.upload(vm.entity.code, vm._type)">Upload</md-button>
     </div>
   </div>
   <div class="contact-modal-content c-overflow">
