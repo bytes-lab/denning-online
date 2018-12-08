@@ -1,32 +1,22 @@
 denningOnline
-  .controller('IRDBranchListCtrl', function(NgTableParams, IRDBranchService, $state, Auth) {
+  .controller('IRDBranchListCtrl', function(NgTableParams, IRDBranchService) {
     var self = this;
-    self.dataReady = false;
-    self.clickHandler = clickHandler;
-    self.userInfo = Auth.getUserInfo();
 
-    IRDBranchService.getList(1, 100).then(function(data) {
-      self.data = data;
-      self.dataReady = true;
-      initializeTable();
-    });    
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 10
+    }, {
+      getData: function(params) {
+        return IRDBranchService.getList(params.page(), params.count(), self.keyword).then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    });
 
-    function clickHandler(item) {
-      $state.go('IRD-branches.edit', {'id': item.code});
+    self.search = function () {
+      self.tableFilter.reload();
     }
-    
-    function initializeTable () {
-      //Filtering
-      self.tableFilter = new NgTableParams({
-        page: 1,
-        count: 10,
-        sorting: {
-          name: 'asc'
-        }
-      }, {
-        dataset: self.data
-      })    
-    } 
   })
 
   .controller('IRDBranchEditCtrl', function($stateParams, IRDBranchService, $state, Auth) {

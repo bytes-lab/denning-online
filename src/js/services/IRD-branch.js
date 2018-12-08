@@ -6,22 +6,39 @@ denningOnline
 .service('IRDBranchService', function(http){
   var service = {};
 
-  service.getList = function (page, pagesize, search) {
-    return http.GET('/v1/IRDBranch?page='+page+'&pagesize='+pagesize+'&search='+search).then(function(resp) {
-      return resp.data;
+  service.getList = function (page, pagesize, keyword) {
+    return http.GET('v1/IRDBranch', {
+      page: page,
+      pagesize: pagesize,
+      search: keyword 
+    }).then(function (resp) {
+      return resp;
     });
   }
 
-  service.getTableList = function (page, pagesize, search) {
-    return http.GET('/v1/table/IRDBranch?page='+page+'&pagesize='+pagesize+'&search='+search).then(function(resp) {
-      return resp.data;
+  service.getTableList = function (page, pagesize, keyword) {
+    return http.GET('v1/table/IRDBranch', {
+      page: page,
+      pagesize: pagesize,
+      search: keyword 
+    }).then(function (resp) {
+      return resp;
     });
   }
 
   service.getItem = function (code) {
-    return http.GET('/v1/table/IRDBranch/'+code).then(function(resp) {
+    return http.GET('v1/table/IRDBranch/'+code).then(function(resp) {
       return resp.data;
     });
   }
+
+  service.save = function (entity) {
+    var method = entity.code ? 'PUT': 'POST';
+
+    return http[method]('v1/table/IRDBranch', entity).then(function (resp) {
+      return resp ? resp.data : null;
+    });
+  }
+
   return service;
 })

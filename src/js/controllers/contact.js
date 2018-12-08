@@ -217,7 +217,7 @@ denningOnline
 
     self.queryIRDBranch = function (searchText) {
       return IRDBranchService.getList(1, 10, searchText).then(function (resp) {
-        return resp;
+        return resp.data;
       });
     }
 

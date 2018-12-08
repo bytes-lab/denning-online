@@ -1,20 +1,10 @@
 denningOnline
   .controller('bankBranchListCtrl', function(NgTableParams, bankBranchService, $state) {
     var self = this;
-    self.search = search;
-    self.keyword = '';
-    self.clickHandler = clickHandler;
-    
-    function clickHandler(item) {
-      $state.go('bank-branches.edit', {'id': item.code});
-    }
 
     self.tableFilter = new NgTableParams({
-      page: 1,                // show first page
-      count: 10,
-      sorting: {
-        name: 'asc'           // initial sorting
-      }
+      page: 1,
+      count: 10
     }, {
       getData: function(params) {
         return bankBranchService.getList(params.page(), params.count(), self.keyword)
@@ -25,7 +15,7 @@ denningOnline
       }
     });
 
-    function search() {
+    self.search = function () {
       self.tableFilter.reload();
     }
   })
