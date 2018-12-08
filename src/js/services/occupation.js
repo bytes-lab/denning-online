@@ -12,7 +12,7 @@ denningOnline
         pagesize: pagesize,
         search: keyword 
       }).then(function (resp) {
-        return resp.data;
+        return resp;
       });  
     };
 
@@ -21,6 +21,14 @@ denningOnline
         return resp.data;
       });
     };
+
+    service.save = function (entity) {
+      var method = entity.code ? 'PUT': 'POST';
+
+      return http[method]('v1/table/occupation', entity).then(function (resp) {
+        return resp ? resp.data : null;
+      });
+    }
 
     return service;
   })

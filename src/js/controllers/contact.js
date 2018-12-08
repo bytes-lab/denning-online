@@ -146,7 +146,7 @@ denningOnline
 
     self.queryOccupation = function (searchText) {
       return occupationService.getList(1, 10, searchText).then(function (resp) {
-        return resp;
+        return resp.data;
       });
     }
 

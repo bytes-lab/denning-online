@@ -1,5 +1,5 @@
 denningOnline
-  .controller('bankBranchListCtrl', function(NgTableParams, bankBranchService, $state) {
+  .controller('bankBranchListCtrl', function(NgTableParams, bankBranchService) {
     var self = this;
 
     self.tableFilter = new NgTableParams({

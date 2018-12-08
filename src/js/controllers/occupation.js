@@ -1,79 +1,22 @@
 denningOnline
-  .controller('occupationListCtrl', function($filter, $sce, $uibModal, NgTableParams, occupationService) {
+  .controller('occupationListCtrl', function(NgTableParams, occupationService) {
     var self = this;
-    self.dataReady = false;
 
-    occupationService.getList().then(function(data) {
-      self.data = data;
-      self.dataReady = true;
-      initializeTable();
-    });    
-    
-    function initializeTable () {
-      //Filtering
-      self.tableFilter = new NgTableParams({
-        page: 1,      // show first page
-        count: 10,
-        sorting: {
-          name: 'asc'   // initial sorting
-        }
-      }, {
-        total: self.data.length, // length of data
-        getData: function(params) {
-          // use build-in angular filter
-          var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-          orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 10
+    }, {
+      getData: function(params) {
+        return occupationService.getList(params.page(), params.count(), self.keyword).then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    });
 
-          this.title_eng = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-          this.title_mal = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-
-          params.total(orderedData.length); // set total for recalc pagination
-          return this.title_eng, this.title_mal;
-        }
-      })    
-    }
-
-    self.modalContent = 'Are you sure to delete the contract?';
-  
-    //Create Modal
-    function modalInstances(animation, size, backdrop, keyboard, occupation) {
-      var modalInstance = $uibModal.open({
-        animation: animation,
-        templateUrl: 'myModalContent.html',
-        controller: 'occupationDeleteModalCtrl',
-        size: size,
-        backdrop: backdrop,
-        keyboard: keyboard,
-        resolve: {
-          occupation: function () {
-            return occupation;
-          }
-        }
-      
-      });
-    }
-    //Prevent Outside Click
-    self.openDelete = function (occupation) {
-      modalInstances(true, '', 'static', true, occupation)
-    };    
-  })
-
-  .controller('occupationDeleteModalCtrl', function ($scope, $uibModalInstance, occupation, occupationService, $state) {
-    $scope.ok = function () {
-      occupationService.delete(occupation).then(function(occupation) {
-        $state.reload();
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.occupationInfo.$error.push({meessage:''});
-      });
-      $uibModalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
+    self.search = function () {
+      self.tableFilter.reload();
+    }   
   })
 
   .controller('occupationEditCtrl', function($filter, $stateParams, occupationService, $state) {
