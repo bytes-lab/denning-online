@@ -807,7 +807,7 @@ denningOnline
         if (self.entity.strBillName) {
           self.presetCode = {
             code: self.entity.strBillName
-          }          
+          }
         }
       });
     } else {
