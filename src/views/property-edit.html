@@ -148,6 +148,28 @@
               </div>
             </dd>
           </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strCountry"
+                  md-search-text="qsct"
+                  md-items="item in vm.queryCountries(qsct)"
+                  md-selected-item-change="vm.countryChange(item)"
+                  md-item-text="item.strDescription"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="qsct" class="col-1" md-highlight-flags="i">
+                      {{ item.strDescription }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
           <dl class="dl-horizontal" ng-if="vm.entity.boolTitleComeOut">
             <dt class="p-t-10">Area</dt>
             <dd>

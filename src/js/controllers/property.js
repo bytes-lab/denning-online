@@ -24,7 +24,7 @@ denningOnline
   })
 
   .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, bankBranchService,
-                                           $state, Auth, $uibModal, contactService, refactorService,
+                                           $state, Auth, $uibModal, contactService, refactorService, cityService,
                                            uibDateParser, mukimService, buildingTypeService,
                                            $uibModalInstance, entityCode, isDialog, projectService, isNew) 
   {
@@ -61,6 +61,12 @@ denningOnline
         if (self.entity.strApprovingAuthority) {
           self.strApprovingAuthority_ = {
             description: self.entity.strApprovingAuthority
+          };
+        }
+
+        if (self.entity.strCountry) {
+          self.strCountry = {
+            strDescription: self.entity.strCountry
           };
         }
 
@@ -135,6 +141,12 @@ denningOnline
       });
     }
 
+    self.queryCountries = function (searchText) {
+      return cityService.getCountryList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     // get approving authorities
     propertyService.getApprovingAuthorityList().then(function (data) {
       self.aaList = data;
@@ -161,6 +173,12 @@ denningOnline
         self.entity.strMukim = item.mukim;
         self.entity.strDaerah = item.daerah;
         self.entity.strNegeri = item.negeri;
+      }
+    }
+
+    self.countryChange = function (item) {
+      if (item) {
+        self.entity.strCountry = item.strDescription;
       }
     }
 
