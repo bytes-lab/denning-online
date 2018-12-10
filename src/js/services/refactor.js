@@ -14,7 +14,7 @@ denningOnline
       })
       return model;
     }
-    
+
     function compare(fieldOriginal, fieldNew) {
       if (typeof(fieldNew) == 'object' && fieldNew != null && fieldOriginal) {
         // compare date
@@ -89,6 +89,15 @@ denningOnline
       return model;
     }
 
+    service.convertCls = function (model) {
+      for (var ii in model) {
+        if (ii.startsWith('cls') && !model[ii].code) {
+          model[ii] = null;
+        }
+      }
+      return model;
+    }
+
     service.convertBool = function (model, toBool) {
       for (var ii in model) {
         if (ii.startsWith('bool')) {
@@ -121,6 +130,8 @@ denningOnline
       if (!convert) {
         res = service.convertDouble(res);
         res = service.convertString(res);
+      } else {
+        res = service.convertCls(res);
       }
       return res;
     }

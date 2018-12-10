@@ -184,7 +184,7 @@ denningOnline
         self.myIC = false;
         if (item.code == '1' || item.code == '2') {
           self.myIC = true;
-        }        
+        }
       }
     }
 
@@ -283,7 +283,7 @@ denningOnline
         if (self.entity.strPlaceofWork) {
           self.strPlaceofWork_ = { 
             city: self.entity.strPlaceofWork
-          };          
+          };
         }
 
         if (self.entity.strPlaceBirth) {
@@ -292,7 +292,7 @@ denningOnline
           };
         }
 
-        if (self.entity.clsIrdBranch.code) {
+        if (self.entity.clsIrdBranch) {
           self.clsIrdBranch_ = { 
             code: self.entity.clsIrdBranch.code, 
             description: self.entity.clsIrdBranch.strName 

@@ -70,18 +70,6 @@ denningOnline
           };
         }
 
-        if (!self.entity.clsProject.code) {
-          self.entity.clsProject = null;
-        }
-
-        if (!self.entity.clsRegisteredOwner.code) {
-          self.entity.clsRegisteredOwner = null;
-        }
-
-        if (!self.entity.clsChargee.code) {
-          self.entity.clsChargee = null;
-        }
-
         if (self.entity.strBuildingCultivationType) {
           self.strBuildingCultivationType = {
             code: self.entity.strBuildingCultivationType
