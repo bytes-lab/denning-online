@@ -19,7 +19,7 @@
             <dt class="p-t-10">IAT No. (Auto)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+                <input ng-model="vm.entity.strTransactionDoc" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -27,7 +27,7 @@
             <dt class="p-t-10">IAT No. (Manuel)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+                <input ng-model="vm.entity.strTransactionNoManual" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -35,7 +35,7 @@
             <dt class="p-t-10">Cheque No. / Ref. No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.strChqNo">
               </div>
             </dd>
           </dl>
@@ -43,7 +43,7 @@
             <dt class="p-t-10">Amount</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strClientName" type="text" class="form-control">
+                <input ng-model="vm.entity.decDepositAmount" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -53,27 +53,14 @@
             <dt class="p-t-10">Transaction Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtCreateDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'opened1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtTransactionDate" is-open="opened1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Transaction Description</dt>
             <dd>
-              <md-autocomplete
-                ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsFileNo"
-                md-search-text="qstl"
-                md-items="item in vm.queryMatters(qstl)"
-                md-item-text="item.strFileNo1"
-                md-min-length="0"
-                md-selected-item-change="vm.matterChange(item)"
-                placeholder="Enter matter No (if any)"
-                class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="qstl" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
-                </md-item-template>
-              </md-autocomplete>
+              <input ng-model="vm.entity.strTransactionDescription" type="text" class="form-control">
             </dd>
           </dl>
         </div>
@@ -113,9 +100,9 @@
             </label>
           </dl>
         </div>
-        <div class="col-md-6 p-l-25">
+        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank Account Crdited (Withdrawl)</dt>
+            <dt class="p-t-10">Bank Account Crdited</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' class="form-control" ng-model="vm.entity.decLoan">
@@ -131,7 +118,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-6 p-l-25">
+        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Available Balance</dt>
             <dd>
@@ -177,9 +164,9 @@
             </label>
           </dl>
         </div>
-        <div class="col-md-6 p-l-25">
+        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank Account Debited (Deposit)</dt>
+            <dt class="p-t-10">Bank Account Debited</dt>
             <dd>
               <div class="fg-line">
                 <input type='text' class="form-control" ng-model="vm.entity.decLoan">
@@ -195,7 +182,7 @@
             </dd>
           </dl>
         </div>
-        <div class="col-md-6 p-l-25">
+        <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Available Balance</dt>
             <dd>
@@ -214,7 +201,7 @@
           <dl class="dl-horizontal">
             <dd>
               <div class="fg-line">
-                <textarea class="form-control" rows="5"></textarea>
+                <textarea class="form-control" rows="2"></textarea>
               </div>
             </dd>
           </dl>
