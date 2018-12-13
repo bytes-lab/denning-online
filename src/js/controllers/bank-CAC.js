@@ -5,7 +5,7 @@ denningOnline
     bankCACService.getTableList(1, 500).then(function(data) {
       self.data = data.data;
       initializeTable();
-    });    
+    });
     
     function initializeTable () {
       self.tableFilter = new NgTableParams({
@@ -16,8 +16,8 @@ denningOnline
         }
       }, {
         dataset: self.data
-      })    
-    }   
+      })
+    }
   })
 
   .controller('bankCACEditCtrl', function($stateParams, bankCACService, cityService, $state, bankService, Auth,
