@@ -479,6 +479,35 @@ denningOnline
         templateUrl: 'views/voucher-edit.html'
       })
 
+      //------------------------------
+      // TRIAL BALANCE
+      //------------------------------
+
+      .state ('billing.trial-balances-list', {
+        data: {
+          access: '@'
+        },
+        url: '/trial-balances',
+        controller: 'trialBalanceListCtrl as vm',
+        templateUrl: 'views/trial-balance-list.html'
+      })
+
+      .state ('billing.trial-balances-edit', {
+        data: {
+          access: '@'
+        },
+        url: '/trial-balances/edit/:id',
+        controller: 'trialBalanceEditCtrl as vm',
+        templateUrl: 'views/trial-balance-edit.html'
+      })
+      .state ('billing.trial-balances-new', {
+        data: {
+          access: '@'
+        },
+        url: '/trial-balances/new',
+        controller: 'trialBalanceEditCtrl as vm',
+        templateUrl: 'views/trial-balance-edit.html'
+      })
 
       //------------------------------
       // GENERAL-JOURNALS
@@ -1105,7 +1134,6 @@ denningOnline
         controller: 'bankEditCtrl as vm',
         templateUrl: 'views/bank-edit.html'
       })
-
 
       //------------------------------
       // BANK BRANCHES
