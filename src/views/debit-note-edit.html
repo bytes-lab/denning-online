@@ -37,29 +37,29 @@
           <div class="clearfix"></div>
           <dl class="dl-horizontal m-b-20 m-t-20">
             <label class="radio radio-inline m-b-15 m-l-0 m-r-30">
-              <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="1" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Client
             </label>
 
             <label class="radio radio-inline m-b-15 m-l-0 m-r-25">
-              <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="2" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Disbursment
             </label>
 
             <label class="radio radio-inline m-b-15 m-l-0 m-r-25">
-              <input type="radio" value="21-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="3" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Office Advance
             </label>
             <label class="radio radio-inline m-b-15 m-l-0 m-r-25">
-              <input type="radio" value="22-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="4" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Fixed Deposit
             </label>
             <label class="radio radio-inline m-b-15 m-l-0 m-r-25">
-              <input type="radio" value="23-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="5" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Other
             </label>
@@ -112,28 +112,16 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">File Account Debited</dt>
             <dd>
-              <md-autocomplete
-                ng-disabled="!vm.can_edit"
-                md-selected-item="vm.strAccountID"
-                md-search-text="qpsb1"
-                md-items="item in vm.queryBills(qpsb1)"
-                md-item-text="item.code"
-                md-min-length="0"
-                md-selected-item-change="vm.presetBillChange(item)"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="qpsb1" class="col-1" md-highlight-flags="i">{{item.code}}</span>
-                <span md-highlight-text="qpsb1" md-highlight-flags="i">{{item.strDescription}}</span>
-              </md-item-template>
-              </md-autocomplete>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.strAccountID">
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Bank Account Credited</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.intAccBankID">
               </div>
             </dd>
           </dl>
