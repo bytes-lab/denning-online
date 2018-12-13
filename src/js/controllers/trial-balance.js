@@ -1,7 +1,10 @@
 denningOnline
-  .controller('trialBalanceListCtrl', function(NgTableParams, trialBalanceService) {
+  .controller('trialBalanceListCtrl', function(NgTableParams, trialBalanceService, $q) {
     var self = this;
-    self.all_categories = [
+    self.select_all = false;
+    self.categories = ['client'];
+
+    self.allCategories = [
       {'key': 'client', 'val': 'Client'}, 
       {'key': 'disb', 'val': 'Disbursement'}, 
       {'key': 'advance', 'val': 'Advances'}, 
@@ -12,7 +15,58 @@ denningOnline
       {'key': 'payable', 'val': 'Payable'},
     ];
 
-    self.category = 'all';
+    self.toggleAll = function () {
+      self.categories = [];
+      if (!self.select_all) {
+        for (ii in self.allCategories) {
+          self.categories.push(self.allCategories[ii].key);
+        }
+      }
+      // console.log(self.categories);
+      // self.set_category();
+    }
+
+    // self.toggleSelection = function (category) {
+    //   var idx = self.categories.indexOf(category);
+    //   if (idx > -1) {
+    //     self.categories.splice(idx, 1);
+    //     self.select_all = false;
+    //   } else {
+    //     self.categories.push(category);
+    //   }
+    //   // console.log(self.categories);
+    //   self.set_category();
+    // }
+
+    // self.set_category = function() {
+    //   self.dataReady = false;
+
+    //   var promises = self.categories.map(function(category) {
+    //     return ledgerService.getList($stateParams.fileNo, category);
+    //   })
+      
+    //   $q.all(promises).then(function(data) {
+    //     var allData = [];
+    //     data.map(function (datum) {
+    //       allData = allData.concat(datum)
+    //     });
+
+    //     self.dataReady = true;
+    //     initializeTable();
+    //   });
+    // };
+
+
+    // function initializeTable () {
+    //   self.tableFilter = new NgTableParams({
+    //     page: 1,
+    //     count: 10
+    //   }, {
+    //     dataset: self.data
+    //   })
+    // }
+
+    self.category = 'client';
     self.tableFilter = new NgTableParams({
       page: 1,
       count: 10
