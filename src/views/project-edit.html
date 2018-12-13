@@ -116,35 +116,29 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Encumbrances</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.intEncumbrances" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsEncumbrances"
+                md-search-text="qscg"
+                md-items="item in vm.queryBanks(qscg)"
+                md-item-text="item.strName"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qscg" class="col-1" md-highlight-flags="i">
+                  {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Bank</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strPhone1">
+                <input type='text' class="form-control" ng-readonly="true" ng-model="vm.entity.clsEncumbrances.clsCACCode.strName">
               </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Bank Branch</dt>
-            <dd>
-              <md-autocomplete
-                ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsBankCode"
-                md-search-text="searchText"
-                md-items="item in vm.queryBanks(searchText)"
-                md-item-text="item.code ? item.code: ' '"
-                md-min-length="0"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
-              </md-item-template>
-              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -225,6 +219,24 @@
               <div class="fg-line">
                 <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strHtaAcc">
               </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank Branch</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsHtaBank"
+                md-search-text="searchText"
+                md-items="item in vm.queryBanks(searchText)"
+                md-item-text="item.strName"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.strName}}</span>
+              </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>

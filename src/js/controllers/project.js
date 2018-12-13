@@ -23,7 +23,7 @@ denningOnline
   })
 
   .controller('projectEditCtrl', function($stateParams, refactorService, projectService, $state, $scope,
-                                          growlService, Auth, contactService) 
+                                          growlService, Auth, contactService, bankBranchService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -49,6 +49,12 @@ denningOnline
 
     self.queryContacts = function (searchText) {
       return contactService.getCustomerList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryBanks = function (searchText) {
+      return bankBranchService.getTableList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     };
