@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal m-b-10">
-            <dt class="p-t-10">Debit Note No. (System)</dt>
+            <dt class="p-t-10">Credit Note No. (System)</dt>
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.entity.strTransactionDoc" type="text" class="form-control">
@@ -24,7 +24,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal m-b-10">
-            <dt class="p-t-10">Debit Note No. (Manuel)</dt>
+            <dt class="p-t-10">Credit Note No. (Manuel)</dt>
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.entity.strTransactionNoManual" type="text" class="form-control">
@@ -110,7 +110,7 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">File Account Debited</dt>
+            <dt class="p-t-10">File Account Credited</dt>
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
