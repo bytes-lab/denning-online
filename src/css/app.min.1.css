@@ -10838,7 +10838,7 @@ h6 small,
 
 .profile-menu > a {
   display: block;
-  height: 124px;
+  height: 129px;
   margin-bottom: 5px;
   width: 100%;
   /*background: url(../img/330561-14102H1460179.jpg) no-repeat left top;*/
@@ -10862,7 +10862,7 @@ h6 small,
   padding: 7px 14px;
   color: #fff;
   font-weight: 700;
-  margin-top: 78px;
+  margin-top: 72px;
   position: relative;
 }
 
@@ -10881,7 +10881,7 @@ h6 small,
 
 .profile-menu .main-menu {
   display: none;
-  margin: 12px 0 0 0;
+  margin: 20px 0 0 0;
   border-bottom: 1px solid #E6E6E6;
 }
 
