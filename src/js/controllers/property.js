@@ -25,7 +25,7 @@ denningOnline
 
   .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, bankBranchService,
                                            $state, Auth, $uibModal, contactService, refactorService, cityService,
-                                           uibDateParser, mukimService, buildingTypeService,
+                                           uibDateParser, mukimService, buildingService,
                                            $uibModalInstance, entityCode, isDialog, projectService, isNew) 
   {
     var self = this;
@@ -118,7 +118,7 @@ denningOnline
     }
 
     self.queryBCs = function (searchText) {
-      return buildingTypeService.getList(1, 10, searchText).then(function (resp) {
+      return buildingService.getList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     }
