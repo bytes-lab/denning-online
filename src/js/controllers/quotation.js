@@ -141,7 +141,7 @@ denningOnline
         }
         
         matterCodeService.getItem(item.code).then(function (matterCode) {
-          if (matterCode.clsPresetBill.code) {
+          if (matterCode.clsPresetBill.code && self.can_edit) {
             self.entity.clsPresetBill = {};
             self.presetBillChange(matterCode.clsPresetBill);
             self.entity.clsPresetBill = matterCode.clsPresetBill;
