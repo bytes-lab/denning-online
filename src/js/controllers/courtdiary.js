@@ -61,7 +61,7 @@ denningOnline
   })
 
   .controller('courtdiaryEditCtrl', function($state, $uibModal, $stateParams, refactorService, 
-                                             Auth, $scope, growlService, courtdiaryService, 
+                                             Auth, $scope, growlService, courtdiaryService, judgeService,
                                              matterService, contactService) 
   {
     var self = this;
@@ -88,19 +88,13 @@ denningOnline
 
         if (self.entity.strCounselAssigned) {
           self.strCounselAssigned = {
-            code: self.entity.strCounselAssigned
+            strName: self.entity.strCounselAssigned
           }
         }
 
         if (self.entity.strCounselAttended) {
           self.strCounselAttended = {
-            code: self.entity.strCounselAttended
-          }
-        }
-
-        if (self.entity.intCoram) {
-          self.intCoram = {
-            code: self.entity.intCoram
+            strName: self.entity.strCounselAttended
           }
         }
 
@@ -138,7 +132,7 @@ denningOnline
     }
 
     self.queryCoram = function (search) {
-      return courtdiaryService.getCoramList(1, 10, search).then(function (resp) {
+      return judgeService.getList(1, 10, search).then(function (resp) {
         return resp.data;
       })
     }
@@ -151,19 +145,13 @@ denningOnline
 
     self.caChange = function (item) {
       if (item) {
-        self.entity.strCounselAssigned = item.strInitials
+        self.entity.strCounselAssigned = item.strName
       }
     }
 
     self.cdChange = function (item) {
       if (item) {
-        self.entity.strCounselAttended = item.strInitials
-      }
-    }
-
-    self.coramChange = function (item) {
-      if (item) {
-        self.entity.intCoram = item.code
+        self.entity.strCounselAttended = item.strName
       }
     }
 

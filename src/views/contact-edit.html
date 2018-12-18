@@ -165,7 +165,7 @@
             <dt class="">
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" ng-model="vm.entity.boolDeceased">
+                  <input type="checkbox" ng-model="vm.entity.boolDeceased" ng-disabled="!vm.can_edit">
                   <i class="input-helper"></i>
                   Deceased
                 </label>
@@ -180,7 +180,7 @@
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.entity.add_favourite">
+                <input type="checkbox" ng-model="vm.entity.add_favourite" ng-disabled="!vm.can_edit">
                 <i class="input-helper"></i>
                 Add to Favourites
               </label>
@@ -189,7 +189,7 @@
           <dl class="dl-horizontal" style="padding-top: 1px;">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.entity.InviteToDenning">
+                <input type="checkbox" ng-model="vm.entity.InviteToDenning" ng-disabled="!vm.can_edit">
                 <i class="input-helper"></i>
                 Invite To Denning
               </label>
@@ -460,7 +460,7 @@
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.entity.boolIsGSTRegistered">
+                <input type="checkbox" ng-model="vm.entity.boolIsGSTRegistered" ng-disabled="!vm.can_edit">
                 <i class="input-helper"></i>
                 Registered
               </label>
@@ -487,7 +487,7 @@
           <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="vm.entity.boolGSTStatusVerified">
+                <input type="checkbox" ng-model="vm.entity.boolGSTStatusVerified" ng-disabled="!vm.can_edit">
                 <i class="input-helper"></i>
                 GST Status Verified
               </label>

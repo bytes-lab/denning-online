@@ -26,16 +26,6 @@ denningOnline
       });
     }
 
-    service.getCoramList = function (page, pagesize, keyword) {
-      return http.GET('v1/courtDiary/coram', {
-        page: page,
-        pagesize: pagesize,
-        search:keyword
-      }).then(function (resp) {
-        return resp;
-      });
-    }
-
     service.getCalendar = function (start, end, filter, page, pagesize, keyword) {
       return http.GET("v1/DenningCalendar", {
         dateStart: start,

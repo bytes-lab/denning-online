@@ -159,12 +159,12 @@
                 md-selected-item="vm.strCounselAssigned"
                 md-search-text="qsca"
                 md-items="item in vm.queryStaff(qsca)"
-                md-item-text="item.code"
+                md-item-text="item.strName"
                 md-min-length="0"
                 md-selected-item-change="vm.caChange(item)"
                 class="default-input">
                 <md-item-template>
-                  <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strInitials }}</span>
+                  <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
                 </md-item-template>
               </md-autocomplete>
             </dd>
@@ -177,12 +177,12 @@
                 md-selected-item="vm.strCounselAttended"
                 md-search-text="qscd"
                 md-items="item in vm.queryStaff(qscd)"
-                md-item-text="item.code"
+                md-item-text="item.strName"
                 md-min-length="0"
                 md-selected-item-change="vm.cdChange(item)"
                 class="default-input">
                 <md-item-template>
-                  <span md-highlight-text="qscd" class="col-1" md-highlight-flags="i">{{ item.strInitials }}</span>
+                  <span md-highlight-text="qscd" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
                 </md-item-template>
               </md-autocomplete>
             </dd>
@@ -193,15 +193,14 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.intCoram"
+                md-selected-item="vm.entity.clsCoram"
                 md-search-text="qsic"
                 md-items="item in vm.queryCoram(qsic)"
-                md-item-text="item.code"
+                md-item-text="item.strName"
                 md-min-length="0"
-                md-selected-item-change="vm.coramChange(item)"
                 class="default-input">
                 <md-item-template>
-                  <span md-highlight-text="qsic" class="col-1" md-highlight-flags="i">{{ item.name }}</span>
+                  <span md-highlight-text="qsic" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
                 </md-item-template>
               </md-autocomplete>
             </dd>
@@ -236,7 +235,7 @@
             <dt class="p-t-10">Action To be Completed By</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.phoneHome">
+                <input ng-click="open($event, 'ctopeneded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtActionEndDate" is-open="ctopeneded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -249,20 +248,22 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">No Next Event</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.phoneFax">
-              </div>
-            </dd>
+            <div class="checkbox">
+              <label class="f-700">
+                <input type="checkbox" ng-model="vm.entity.boolChkNextDate1" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                No Next Event
+              </label>
+            </div>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Next Date To Be Given</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-click="open($event, 'ctopeneded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtActionEndDate" is-open="ctopeneded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
-              </div>
-            </dd>
+            <div class="checkbox">
+              <label class="f-700">
+                <input type="checkbox" ng-model="vm.entity.boolChkNextDate" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                Next Date To Be Given
+              </label>
+            </div>
           </dl>
         </div>
       </div>
