@@ -885,7 +885,7 @@
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label">Party Type</label>
+        <label class="form-control attr-label">Case Name</label>
         <input type="text" class="form-control wp-45" ng-model="model.strF5">
       </div>
     </div>
@@ -913,12 +913,11 @@
         <label class="form-control attr-label">Judge</label>
         <md-autocomplete
           ng-disabled="!model.tmp.can_edit"
-          md-selected-item="judge"
+          md-selected-item="model.clsJ2_F7"
           md-search-text="qsjd"
           md-items="item in queryJudges(qsjd)"
           md-item-text="item.strName"
           md-min-length="0"
-          md-selected-item-change="judgeChange(item)"
           class="default-input wp-45">
           <md-item-template>
             <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">

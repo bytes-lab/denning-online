@@ -483,10 +483,6 @@ denningOnline
           $scope.caseType = { strEnglish: $scope.model.strF3 };
         }
 
-        if ($scope.model.strF7) {
-          $scope.judge = { strName: $scope.model.strF7 };
-        }
-
         if ($scope.model.strF8) {
           $scope.courtPlace = { strPlace: $scope.model.strF8 };
         }
@@ -540,13 +536,6 @@ denningOnline
           $scope.model.strF3 = null;
           if (item) {
             $scope.model.strF3 = item.strEnglish;
-          }
-        }
-
-        $scope.judgeChange = function (item) {
-          $scope.model.strF7 = null;
-          if (item) {
-            $scope.model.strF7 = item.strName;
           }
         }
       }
