@@ -854,7 +854,7 @@
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Court No.</label>
-        <input type="text" class="form-control wp-45" ng-model="model.strF1" ng-readonly="!model.tmp.can_edit">
+        <input type="text" class="form-control wp-45" ng-model="model.strPn4" ng-readonly="!model.tmp.can_edit">
       </div>
     </div>
     <div class="form-group col-md-12">
@@ -894,12 +894,11 @@
         <label class="form-control attr-label">SAR</label>
         <md-autocomplete
           ng-disabled="!model.tmp.can_edit"
-          md-selected-item="sar"
+          md-selected-item="model.clsJ1_F6"
           md-search-text="qssar"
           md-items="item in querySAR(qssar)"
           md-item-text="item.strName"
           md-min-length="0"
-          md-selected-item-change="sarChange(item)"
           class="default-input wp-45">
           <md-item-template>
             <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
