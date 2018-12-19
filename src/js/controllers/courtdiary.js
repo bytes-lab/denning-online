@@ -119,6 +119,12 @@ denningOnline
       }
     }
 
+    self.checkNextDate = function () {
+      if (!self.entity.boolChkNextDate) {
+        self.entity.dtNextDate= '';
+      }
+    }
+
     self.queryHearingType = function (search) {
       return courtdiaryService.getHearingTypeList(1, 10, search).then(function (resp) {
         return resp.data;
