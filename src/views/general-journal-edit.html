@@ -32,14 +32,6 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Purpose of GJ</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strChqNo">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
             <dt class="p-t-10">Amount</dt>
             <dd>
               <div class="fg-line">
@@ -57,6 +49,14 @@
               </div>
             </dd>
           </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Purpose of GJ</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.strTransactionDescription">
+              </div>
+            </dd>
+          </dl>
         </div>
       </div>
 
@@ -66,29 +66,29 @@
           <dl class="dl-horizontal m-t-20">
             <label class="f-700 m-r-15">Account Type</label>
             <label class="radio radio-inline m-l-0 m-r-30">
-              <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="1" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Client
             </label>
 
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="2" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Disbursment
             </label>
 
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="21-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="3" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Office Advance
             </label>
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="22-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="4" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Fixed Deposit
             </label>
             <label class="radio radio-inline m-l-0">
-              <input type="radio" value="23-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="5" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Other
             </label>
@@ -96,10 +96,10 @@
         </div>
         <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Transfer Form</dt>
+            <dt class="p-t-10">Transfer From</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.listofSubEntry[0].clsClientSide.strFileNo1">
               </div>
             </dd>
           </dl>
@@ -107,7 +107,7 @@
             <dt class="p-t-10">Account No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.listofSubEntry[0].clsClientSide.strAccountID">
               </div>
             </dd>
           </dl>
@@ -117,7 +117,7 @@
             <dt class="p-t-10">File Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.listofSubEntry[0].clsClientSide.clsMatter.clsPrimaryClient.strName">
               </div>
             </dd>
           </dl>
@@ -138,29 +138,29 @@
           <dl class="dl-horizontal m-t-20">
             <label class="f-700 m-r-15">Account Type</label>
             <label class="radio radio-inline m-l-0 m-r-30">
-              <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="1" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Client
             </label>
 
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="2" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Disbursment
             </label>
 
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="21-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="3" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Office Advance
             </label>
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="22-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="4" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Fixed Deposit
             </label>
             <label class="radio radio-inline m-l-0">
-              <input type="radio" value="23-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="5" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Other
             </label>
@@ -171,7 +171,7 @@
             <dt class="p-t-10">Tax Invoice No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.clsBillNo.code">
               </div>
             </dd>
           </dl>
@@ -179,7 +179,7 @@
             <dt class="p-t-10">Transfer To</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.clsClientSide.strFileNo1">
               </div>
             </dd>
           </dl>
@@ -187,7 +187,7 @@
             <dt class="p-t-10">Account No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.clsClientSide.strAccountID">
               </div>
             </dd>
           </dl>
@@ -197,7 +197,7 @@
             <dt class="p-t-10">File Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.clsClientSide.clsMatter.clsPrimaryClient.strName">
               </div>
             </dd>
           </dl>

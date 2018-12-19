@@ -69,7 +69,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsFileNo"
+                md-selected-item="vm.entity.clsClientSide.clsMatter"
                 md-search-text="qstl"
                 md-items="item in vm.queryMatters(qstl)"
                 md-item-text="item.strFileNo1 || item.key"
@@ -113,7 +113,7 @@
             <dt class="p-t-10">File Account Credited</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strAccountID">
+                <input type='text' class="form-control" ng-model="vm.entity.clsClientSide.strAccountID">
               </div>
             </dd>
           </dl>
@@ -121,7 +121,7 @@
             <dt class="p-t-10">Bank Account Credited</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.intAccBankID">
+                <input type='text' class="form-control" ng-model="vm.entity.clsAccBankID.strBankAccName">
               </div>
             </dd>
           </dl>
@@ -143,7 +143,7 @@
             <dt class="p-t-10">Bank Account</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.intAccBankID">
+                <input type='text' class="form-control" ng-model="vm.entity.clsAccBankID.strBankAccName">
               </div>
             </dd>
           </dl>
@@ -161,7 +161,7 @@
             <dt class="p-t-10">Account No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.clsAccBankID.strBankAccNo">
               </div>
             </dd>
           </dl>

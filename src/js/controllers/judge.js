@@ -26,39 +26,68 @@ denningOnline
     }
   })
 
-  .controller('judgeEditCtrl', function($stateParams, judgeService, $state, Auth, $scope,
-                                        refactorService, growlService, uibDateParser, NgTableParams) 
+  .controller('judgeEditCtrl', function($stateParams, judgeService, $state, Auth,
+                                        refactorService, growlService, $uibModalInstance, 
+                                        entityCode, isDialog, isNew) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
+    self._type = 'judge';
 
-    self.isDialog = false;
-    self.can_edit = $state.$current.data.can_edit;
-    self.isNew = $state.$current.data.can_edit;
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
 
-    if ($stateParams.id) {
+
+    if (self.entityCode) {
       self.title = 'Edit Judge';
-      judgeService.getItem($stateParams.id).then(function (item) {
+      judgeService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+        self.popoutUrl = $state.href('judges.edit', { id: self.entity.code });
       });
     } else {
       self.title = 'New Judge';
       self.entity = {}
     }
 
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'name', 'dtDateEntered', 'dtDateUpdated'];
+      
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
-
-      judgeService.save(entity, self.entity_).then(function (item) {
+      judgeService.save(entity).then(function (item) {
         if (item) {
-          if (self.entity_) {
-            $state.reload();
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
           } else {
-            $state.go('billing.quotations-edit', { 'id': item.code });
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('judges.edit', { 'id': item.code });
+            }
+            growlService.growl('Saved successfully!', 'success');
           }
-          growlService.growl('Saved successfully!', 'success');          
         }
       });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('judges.list');
+      }
     }
   })

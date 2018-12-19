@@ -72,29 +72,29 @@
           <dl class="dl-horizontal m-t-20">
             <label class="f-700 m-r-15">Account Type</label>
             <label class="radio radio-inline m-l-0 m-r-30">
-              <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="1" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Client
             </label>
 
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="2" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Disbursment
             </label>
 
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="21-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="3" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Office Advance
             </label>
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="22-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="4" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Fixed Deposit
             </label>
             <label class="radio radio-inline m-l-0">
-              <input type="radio" value="23-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="5" ng-model="vm.entity.listofSubEntry[0].intBankID">
               <i class="input-helper"></i>
               Other
             </label>
@@ -105,7 +105,7 @@
             <dt class="p-t-10">Bank Account Crdited</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.listofSubEntry[0].clsAccBankID.strBankAccName">
               </div>
             </dd>
           </dl>
@@ -136,29 +136,29 @@
           <dl class="dl-horizontal m-t-20">
             <label class="f-700 m-r-15">Account Type</label>
             <label class="radio radio-inline m-l-0 m-r-30">
-              <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="1" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Client
             </label>
 
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="2" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Disbursment
             </label>
 
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="21-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="3" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Office Advance
             </label>
             <label class="radio radio-inline m-l-0 m-r-25">
-              <input type="radio" value="22-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="4" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Fixed Deposit
             </label>
             <label class="radio radio-inline m-l-0">
-              <input type="radio" value="23-MOB" ng-model="vm.clsAttendedStatus">
+              <input type="radio" value="5" ng-model="vm.entity.intBankID">
               <i class="input-helper"></i>
               Other
             </label>
@@ -169,7 +169,7 @@
             <dt class="p-t-10">Bank Account Debited</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decLoan">
+                <input type='text' class="form-control" ng-model="vm.entity.clsAccBankID.strBankAccName">
               </div>
             </dd>
           </dl>
