@@ -21,7 +21,7 @@
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strName" type="text" class="form-control">
+                <input ng-model="vm.entity.strName" type="text" class="form-control" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
@@ -29,7 +29,7 @@
             <dt class="p-t-10">Title 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strTitle1">
+                <input type='text' class="form-control" ng-model="vm.entity.strTitle1" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
@@ -37,16 +37,28 @@
             <dt class="p-t-10">Title 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.strTitle2">
+                <input type='text' class="form-control" ng-model="vm.entity.strTitle2" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Court Type</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strCourtType" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strCourtType"
+                md-search-text="qscr"
+                md-items="item in vm.queryCourts(qscr)"
+                md-item-text="item.strTypeE"
+                md-min-length="0"
+                md-selected-item-change="vm.courtChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+                    {{ item.strTypeE }}
+                  </span>
+                </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>

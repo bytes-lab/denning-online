@@ -26,7 +26,7 @@ denningOnline
     }
   })
 
-  .controller('sarEditCtrl', function($stateParams, sarService, $state, Auth,
+  .controller('sarEditCtrl', function($stateParams, sarService, $state, Auth, courtService,
                                         refactorService, growlService, $uibModalInstance, 
                                         entityCode, isDialog, isNew) 
   {
@@ -39,6 +39,19 @@ denningOnline
     self.isNew = isNew;
     self.entityCode = isDialog ? entityCode : $stateParams.id;
 
+    self.queryCourts = function (searchText) {
+      return courtService.getTypeList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      })
+    }
+
+    self.courtChange = function (item) {
+      if (item) {
+        self.entity.strCourtType = item.strTypeE;
+      } else {
+        self.entity.strCourtType = null;
+      }
+    }
 
     if (self.entityCode) {
       self.title = 'Edit SAR';
@@ -46,6 +59,10 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         self.popoutUrl = $state.href('sars.edit', { id: self.entity.code });
+
+        if (self.entity.strCourtType) {
+          self.strCourtType = { strTypeE: self.entity.strCourtType };
+        }
       });
     } else {
       self.title = 'New SAR';

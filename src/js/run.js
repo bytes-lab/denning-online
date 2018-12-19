@@ -506,6 +506,42 @@ denningOnline
       })
     }
 
+    function sarDialog (model, key, viewMode) {
+      if (viewMode && (!model[key] || !model[key].code)) {
+        alert('Please select a SAR.');
+        return false;
+      }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'sarEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: !viewMode,
+          entityCode: function () {
+            return viewMode ? model[key].code : null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (!viewMode && entity) {
+          model[key] = {
+            code: entity.code,
+            strName: entity.strName,
+            strPositionTitle: entity.strPositionTitle,
+            strTitle1: entity.strTitle1,
+            strtitle2: entity.strtitle2
+          };
+        }
+      })
+    }
+
     // case attribute
     formlyConfig.setType({
       name: 'case',
@@ -525,6 +561,10 @@ denningOnline
 
         $scope.judgeDialog = function(key, viewMode) {
           judgeDialog($scope.model, key, viewMode);
+        }
+
+        $scope.sarDialog = function(key, viewMode) {
+          sarDialog($scope.model, key, viewMode);
         }
 
         $scope.queryCaseTypes = function (searchText) {
