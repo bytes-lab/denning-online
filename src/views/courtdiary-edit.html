@@ -121,29 +121,29 @@
       <div class="row">
         <div class="col-md-10 m-b-20" style="margin-left: 190px;">
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus">
+            <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus" ng-disabled="!vm.can_edit">
             <i class="input-helper"></i>
             Attended 
           </label>
 
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus">
+            <input type="radio" value="2-MOB" ng-model="vm.clsAttendedStatus" ng-disabled="!vm.can_edit">
             <i class="input-helper"></i>
             MOB
           </label>
 
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="3-Postponed" ng-model="vm.clsAttendedStatus">
+            <input type="radio" value="3-Postponed" ng-model="vm.clsAttendedStatus" ng-disabled="!vm.can_edit">
             <i class="input-helper"></i>
             Postponed
           </label>
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="4-Absent" ng-model="vm.clsAttendedStatus">
+            <input type="radio" value="4-Absent" ng-model="vm.clsAttendedStatus" ng-disabled="!vm.can_edit">
             <i class="input-helper"></i>
             Absent
           </label>
           <label class="radio radio-inline m-r-25">
-            <input type="radio" value="0-None" ng-model="vm.clsAttendedStatus">
+            <input type="radio" value="0-None" ng-model="vm.clsAttendedStatus" ng-disabled="!vm.can_edit">
             <i class="input-helper"></i>
             None
           </label>
@@ -240,30 +240,20 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Next Date</dt>
+            <dt>
+              <div class="checkbox">
+                <label class="f-700">
+                  <input type="checkbox" ng-model="vm.entity.boolChkNextDate" ng-disabled="!vm.can_edit">
+                  <i class="input-helper"></i>
+                  Next Date
+                </label>
+              </div>
+            </dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'ctopenednd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="ctopenednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'ctopenednd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="ctopenednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit || !vm.entity.boolChkNextDate" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label class="f-700">
-                <input type="checkbox" ng-model="vm.entity.boolChkNextDate1" ng-disabled="!vm.can_edit">
-                <i class="input-helper"></i>
-                No Next Event
-              </label>
-            </div>
-          </dl>
-          <dl class="dl-horizontal">
-            <div class="checkbox">
-              <label class="f-700">
-                <input type="checkbox" ng-model="vm.entity.boolChkNextDate" ng-disabled="!vm.can_edit">
-                <i class="input-helper"></i>
-                Next Date To Be Given
-              </label>
-            </div>
           </dl>
         </div>
       </div>
