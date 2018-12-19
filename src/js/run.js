@@ -470,11 +470,47 @@ denningOnline
       }
     });
 
+    function judgeDialog (model, key, viewMode) {
+      if (viewMode && (!model[key] || !model[key].code)) {
+        alert('Please select a judge.');
+        return false;
+      }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'judgeEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: !viewMode,
+          entityCode: function () {
+            return viewMode ? model[key].code : null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (!viewMode && entity) {
+          model[key] = {
+            code: entity.code,
+            strName: entity.strName,
+            strPositionTitle: entity.strPositionTitle,
+            strTitle1: entity.strTitle1,
+            strtitle2: entity.strtitle2
+          };
+        }
+      })
+    }
+
     // case attribute
     formlyConfig.setType({
       name: 'case',
       templateUrl: 'case.html',
-      controller: function ($scope, caseService, judgeService, courtService) {
+      controller: function ($scope, caseService, judgeService, courtService, sarService) {
         if ($scope.model.strF2) {
           $scope.court = { strTypeE: $scope.model.strF2 };
         }
@@ -485,6 +521,10 @@ denningOnline
 
         if ($scope.model.strF8) {
           $scope.courtPlace = { strPlace: $scope.model.strF8 };
+        }
+
+        $scope.judgeDialog = function(key, viewMode) {
+          judgeDialog($scope.model, key, viewMode);
         }
 
         $scope.queryCaseTypes = function (searchText) {
@@ -512,7 +552,7 @@ denningOnline
         }
 
         $scope.querySAR = function (searchText) {
-          return judgeService.getSARList(1, 10, searchText).then(function (resp) {
+          return sarService.getList(1, 10, searchText).then(function (resp) {
             return resp.data;
           })
         }

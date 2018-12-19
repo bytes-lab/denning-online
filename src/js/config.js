@@ -588,7 +588,7 @@ denningOnline
         },
         url: '/IAT/edit/:id',
         controller: 'IATEditCtrl as vm',
-        templateUrl: 'views/IAT-edit.html'
+        templateUrl: 'views/iat-edit.html'
       })
       .state ('billing.IAT-new', {
         data: {
@@ -597,7 +597,7 @@ denningOnline
         },
         url: '/IAT/new',
         controller: 'IATEditCtrl as vm',
-        templateUrl: 'views/IAT-edit.html'
+        templateUrl: 'views/iat-edit.html'
       })
 
       //------------------------------
@@ -997,7 +997,7 @@ denningOnline
         },
         url: '/',
         controller: 'IRDBranchListCtrl as vm',
-        templateUrl: 'views/IRD-branch-list.html'
+        templateUrl: 'views/ird-branch-list.html'
       })
 
       .state ('IRD-branches.edit', {
@@ -1006,7 +1006,7 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'IRDBranchEditCtrl as vm',
-        templateUrl: 'views/IRD-branch-edit.html'
+        templateUrl: 'views/ird-branch-edit.html'
       })
       .state ('IRD-branches.new', {
         data: {
@@ -1015,7 +1015,7 @@ denningOnline
         },
         url: '/new',
         controller: 'IRDBranchEditCtrl as vm',
-        templateUrl: 'views/IRD-branch-edit.html'
+        templateUrl: 'views/ird-branch-edit.html'
       })
 
 
@@ -1220,7 +1220,7 @@ denningOnline
         },
         url: '/',
         controller: 'bankCACListCtrl as vm',
-        templateUrl: 'views/bank-CAC-list.html'
+        templateUrl: 'views/bank-cac-list.html'
       })
 
       .state ('bank-CACs.edit', {
@@ -1229,7 +1229,7 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'bankCACEditCtrl as vm',
-        templateUrl: 'views/bank-CAC-edit.html',
+        templateUrl: 'views/bank-cac-edit.html',
         resolve: {
           "$uibModalInstance": function () {
             return null;
@@ -1251,7 +1251,7 @@ denningOnline
         },
         url: '/new',
         controller: 'bankCACEditCtrl as vm',
-        templateUrl: 'views/bank-CAC-edit.html',
+        templateUrl: 'views/bank-cac-edit.html',
         resolve: {
           "$uibModalInstance": function () {
             return null;
@@ -1443,6 +1443,73 @@ denningOnline
 
 
       //------------------------------
+      // SARS
+      //------------------------------
+
+      .state ('sars', {
+        data: {
+          access: '@'
+        },
+        url: '/sars',
+        templateUrl: 'views/common.html'
+      })
+
+      .state ('sars.list', {
+        data: {
+          access: '@'
+        },
+        url: '/',
+        controller: 'sarListCtrl as vm',
+        templateUrl: 'views/sar-list.html'
+      })
+
+      .state ('sars.edit', {
+        data: {
+          access: '@'
+        },
+        url: '/edit/:id',
+        controller: 'sarEditCtrl as vm',
+        templateUrl: 'views/sar-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
+      })
+      .state ('sars.new', {
+        data: {
+          access: '@'
+        },
+        url: '/new',
+        controller: 'sarEditCtrl as vm',
+        templateUrl: 'views/sar-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
+      })
+
+
+      //------------------------------
       // COURTS
       //------------------------------
 
@@ -1537,7 +1604,7 @@ denningOnline
         },
         url: '/',
         controller: 'landPTGListCtrl as vm',
-        templateUrl: 'views/land-PTG-list.html'
+        templateUrl: 'views/land-ptg-list.html'
       })
       .state ('land-PTGs.edit', {
         data: {
@@ -1545,7 +1612,7 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'landPTGEditCtrl as vm',
-        templateUrl: 'views/land-PTG-edit.html'
+        templateUrl: 'views/land-ptg-edit.html'
       })
       .state ('land-PTGs.new', {
         data: {
@@ -1554,7 +1621,7 @@ denningOnline
         },
         url: '/new',
         controller: 'landPTGEditCtrl as vm',
-        templateUrl: 'views/land-PTG-edit.html'
+        templateUrl: 'views/land-ptg-edit.html'
       })
 
       //------------------------------
@@ -1732,7 +1799,7 @@ denningOnline
         },
         url: '/',
         controller: 'CKHTListCtrl as vm',
-        templateUrl: 'views/CKHT-list.html'
+        templateUrl: 'views/ckht-list.html'
       })
 
       .state ('CKHTs.edit', {
@@ -1741,7 +1808,7 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'CKHTEditCtrl as vm',
-        templateUrl: 'views/CKHT-edit.html'
+        templateUrl: 'views/ckht-edit.html'
       })
       .state ('CKHTs.new', {
         data: {
@@ -1749,7 +1816,7 @@ denningOnline
         },
         url: '/new',
         controller: 'CKHTEditCtrl as vm',
-        templateUrl: 'views/CKHT-edit.html'
+        templateUrl: 'views/ckht-edit.html'
       })
 
       //------------------------------

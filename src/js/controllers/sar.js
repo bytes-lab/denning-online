@@ -1,5 +1,5 @@
 denningOnline
-  .controller('judgeListCtrl', function (NgTableParams, judgeService, Auth, $state) {
+  .controller('sarListCtrl', function (NgTableParams, sarService, Auth, $state) {
     var self = this;
     self.userInfo = Auth.getUserInfo();
 
@@ -8,7 +8,7 @@ denningOnline
       count: 10,
     }, {
       getData: function(params) {
-        return judgeService.getList(params.page(), params.count(), self.keyword)
+        return sarService.getList(params.page(), params.count(), self.keyword)
         .then(function (data) {
           params.total(data.headers('x-total-count'));
           return data.data;
@@ -26,13 +26,13 @@ denningOnline
     }
   })
 
-  .controller('judgeEditCtrl', function($stateParams, judgeService, $state, Auth,
+  .controller('sarEditCtrl', function($stateParams, sarService, $state, Auth,
                                         refactorService, growlService, $uibModalInstance, 
                                         entityCode, isDialog, isNew) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-    self._type = 'judge';
+    self._type = 'sar';
 
     self.isDialog = isDialog;
     self.can_edit = isNew;
@@ -41,16 +41,16 @@ denningOnline
 
 
     if (self.entityCode) {
-      self.title = 'Edit Judge';
-      judgeService.getItem(self.entityCode).then(function (item) {
+      self.title = 'Edit SAR';
+      sarService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
-        self.popoutUrl = $state.href('judges.edit', { id: self.entity.code });
+        self.popoutUrl = $state.href('sars.edit', { id: self.entity.code });
       });
     } else {
-      self.title = 'New Judge';
+      self.title = 'New SAR';
       self.entity = {}
-      self.popoutUrl = $state.href('judges.new');
+      self.popoutUrl = $state.href('sars.new');
     }
 
     self.copy = function () {
@@ -68,7 +68,7 @@ denningOnline
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
-      judgeService.save(entity).then(function (item) {
+      sarService.save(entity).then(function (item) {
         if (item) {
           if (self.isDialog) {
             $uibModalInstance.close(item);
@@ -76,7 +76,7 @@ denningOnline
             if (self.entity_) {
               $state.reload();
             } else {
-              $state.go('judges.edit', { 'id': item.code });
+              $state.go('sars.edit', { 'id': item.code });
             }
             growlService.growl('Saved successfully!', 'success');
           }
@@ -88,7 +88,7 @@ denningOnline
       if (self.isDialog) {
         $uibModalInstance.close();
       } else {
-        $state.go('judges.list');
+        $state.go('sars.list');
       }
     }
   })
