@@ -16,16 +16,6 @@ denningOnline
       });
     }
 
-    service.getStaffList = function (page, pagesize, keyword) {
-      return http.GET('v1/table/Staff', {
-        page: page,
-        pagesize: pagesize,
-        search: keyword
-      }).then(function (resp) {
-        return resp;
-      });
-    };
-
     service.getCustomerList = function (page, pagesize, keyword) {
       return http.GET('v1/table/Customer', {
         page: page,

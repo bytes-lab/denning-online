@@ -24,7 +24,7 @@ denningOnline
   })
 
   .controller('contactEditCtrl', function ($filter, $uibModal, $stateParams, growlService, 
-                                           contactService, $state, Auth, $scope, 
+                                           contactService, $state, Auth, $scope, staffService,
                                            refactorService, occupationService, raceService, 
                                            religionService, IRDBranchService, cityService,
                                            uibDateParser, bankService, $uibModalInstance, 
@@ -139,7 +139,7 @@ denningOnline
     };
 
     self.queryStaffs = function (searchText) {
-      return contactService.getStaffList(1, 10, searchText).then(function (resp) {
+      return staffService.getList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     }

@@ -60,7 +60,7 @@ denningOnline
     }
   })
 
-  .controller('courtdiaryEditCtrl', function($state, $uibModal, $stateParams, refactorService, 
+  .controller('courtdiaryEditCtrl', function($state, $uibModal, $stateParams, refactorService, staffService,
                                              Auth, $scope, growlService, courtdiaryService, judgeService,
                                              matterService, contactService) 
   {
@@ -132,7 +132,7 @@ denningOnline
     }
 
     self.queryStaff = function (search) {
-      return contactService.getStaffList(1, 10, search).then(function (resp) {
+      return staffService.getList(1, 10, search).then(function (resp) {
         return resp.data;
       })
     }

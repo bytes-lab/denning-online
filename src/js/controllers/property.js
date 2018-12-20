@@ -25,7 +25,7 @@ denningOnline
 
   .controller('propertyEditCtrl', function($stateParams, growlService, $scope, propertyService, bankBranchService,
                                            $state, Auth, $uibModal, contactService, refactorService, cityService,
-                                           uibDateParser, mukimService, buildingService,
+                                           uibDateParser, mukimService, buildingService, staffService,
                                            $uibModalInstance, entityCode, isDialog, projectService, isNew) 
   {
     var self = this;
@@ -112,7 +112,7 @@ denningOnline
     };
 
     self.queryStaffs = function (searchText) {
-      return contactService.getStaffList(1, 10, searchText).then(function (resp) {
+      return staffService.getList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     }

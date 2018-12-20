@@ -21,7 +21,7 @@ denningOnline
   })
 
   .run(function($uibModal, formlyConfig, contactService, propertyService, legalFirmService, 
-                presetbillService, spaChecklistService, bankBranchService) 
+                presetbillService, spaChecklistService, bankBranchService, staffService) 
   {
     function getContacts(page, pagesize, keyword) {
       return contactService.getCustomerList(page, pagesize, keyword).then(function (resp) {
@@ -36,7 +36,7 @@ denningOnline
     }
 
     function getStaffs(page, pagesize, keyword) {
-      return contactService.getStaffList(1, 10, keyword).then(function (resp) {
+      return staffService.getList(1, 10, keyword).then(function (resp) {
         return resp.data;
       });
     }

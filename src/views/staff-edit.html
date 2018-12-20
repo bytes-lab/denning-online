@@ -1,364 +1,819 @@
-<div class="container">
-
-    <div class="card">
-        <div class="card-header">
-            <h2>Contact Edit <small>Type something in filter and press Enter or Filter button</small></h2>
+<div ng-class="vm.isDialog ? '' : 'container'">
+  <p id="back-top" style="display: none;">
+    <a ng-click="vm.scrollUp()"><span class="glyphicon glyphicon-chevron-up"></span> TOP</a>
+  </p>
+  <div class="card">
+    <div class="card-header" ng-if="!vm.isDialog">
+      <div class="row">
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="contacts.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
         </div>
-                
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <h4>Personal Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">ID Type</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.id_type" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">New IC</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.new_ic" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Old IC</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.old_ic" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Full Name</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.name" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Title</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.title" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Citizenship</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.citizenship" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Date of Birth</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.dob" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Marital Status</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.marital_status" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">No. of Children</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.num_children" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Occupation</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.occupation" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Tax Matter No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.tax_file_no" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">IRD Branch</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.IRD_branch" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Customer Type</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.customer_type" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Government Department</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.government_department" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>
-
-            <div class="clearfix"></div>
-
-            <h4 class="m-t-25">Contact Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 1)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.address1" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 2)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.address2" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Address (Line 3)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.address3" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Postcode</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Town</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.town" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.state" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Country</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.country" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone 1</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.phone1" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone 2</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.phone2" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Phone (Mobile)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.phone3" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Fax</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.fax" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Email</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.email" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Website</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.website" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-
-                </div>                
-            </div>            
-            <div class="clearfix"></div>
-
-            <h4 class="m-t-25" ng-click="vm.showGST=!vm.showGST">GST Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showGST"></i><i class="zmdi zmdi-minus" ng-if="vm.showGST"></i></h4>
-            <div class="row" ng-show="vm.showGST">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="vm.contact.GST_status_verified">
-                                <i class="input-helper"></i>
-                                GST Status Verified
-                            </label>
-                        </div>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="vm.contact.GST_registered">
-                                <i class="input-helper"></i>
-                                GST Registered
-                            </label>
-                        </div>
-                    </dl>                    
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Last GST Status Verified Date</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.last_GST_status_verified_date" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">GST Reg. No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.GST_reg_no" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">RMCD Approval No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.contact.RMCD_approval_no" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>   
-            <div class="clearfix"></div>
-
-            <h4 class="m-t-25" ng-click="vm.showCompany=!vm.showCompany">Company Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCompany"></i><i class="zmdi zmdi-minus" ng-if="vm.showCompany"></i></h4>
-            <div class="row" ng-show="vm.showCompany">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Office Address</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.office_address" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Director 1</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.director1" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Director 2</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.director2" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-             
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Secretray</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.secretary" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Contact Person</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.contact.contact_person" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    
-                </div>                
-            </div>          
-            <div class="row">     
-                <div class="col-md-10">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" data-ui-sref="contacts.list" data-ng-click="vm.editInfo = 0" >Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
-                    </div>        
-                </div>
-            </div>
+        <div class="clearfix"></div>
+        <div class="col-sm-12 col-md-10 p-l-10" ng-if="!vm.isNew">
+          <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()" data-ui-sref="contacts.matters({id: vm.entity.code})">Matters</md-button>
+          <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" data-ui-sref="folders.list({ id: vm.entity.code, type: 'contact' })">Folder</md-button>
+          <md-button class="btn-sm md-raised md-warn" style="min-height: 0;margin: 6px 3px;" ng-click="mactrl.upload(vm.entity.code, 'contact')">Upload</md-button>
         </div>
+      </div>
     </div>
-         
+
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+      <h4>Personal Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control f-500" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Title</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strTitle_"
+                  md-search-text="qstl"
+                  md-items="item in vm.queryFields('Salutations', qstl)"
+                  md-item-text="item.description"
+                  md-min-length="0"
+                  md-selected-item-change="vm.titleChange(item)"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.description }}</span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">ID Type</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.entity.clsIDType"
+                  md-search-text="q"
+                  md-items="item in vm.queryFields('IDTypes', q)"
+                  md-item-text="item.strDescription"
+                  md-selected-item-change="vm.IDTypeChange(item)"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.strDescription}}</span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">ID No</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' data-input-mask="{ mask: '000000-00-0000' }" ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" placeholder="000000-00-0000" ng-blur="vm.parseBirth()" ng-if="vm.myIC">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" ng-if="!vm.myIC">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Old IC</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNoOld">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal dp-blue">
+            <dt class="p-t-10">Date of Birth</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'copened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateBirth" is-open="copened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Citizenship</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.strCitizenship"
+                md-search-text="qlcz"
+                md-items="item in vm.queryList(vm.citizenships, qlcz)"
+                md-item-text="item"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qlcz" class="col-1" md-highlight-flags="i">{{ item }}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Occupation</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsOccupation"
+                md-search-text="qsop"
+                md-items="item in vm.queryOccupation(qsop)"
+                md-item-text="item.strEnglish ? item.strEnglish: ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsop" class="col-1" md-highlight-flags="i">
+                  {{ item.strEnglish }}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Contact Type</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.entity.strCustomerType"
+                  md-search-text="ql1"
+                  md-items="item in vm.queryList(vm.contactTypes, ql1)"
+                  md-item-text="item"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="ql1" class="col-1" md-highlight-flags="i">{{ item }}</span>
+                </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal dp-blue">
+            <dt class="">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="vm.entity.boolDeceased" ng-disabled="!vm.can_edit">
+                  <i class="input-helper"></i>
+                  Deceased
+                </label>
+              </div>
+            </dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'copened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateDeceased" is-open="copened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date of death" />
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.add_favourite" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                Add to Favourites
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal" style="padding-top: 1px;">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.InviteToDenning" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                Invite To Denning
+              </label>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+      <h4 class="m-t-25">Contact Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 1)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case-tail-comma>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 2)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAddressLine2" camel-case-tail-comma>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Address (Line 3)</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAddressLine3" camel-case-tail-comma>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strPostCode_"
+                  md-search-text="qsct"
+                  md-items="item in vm.queryPostcodes(qsct)"
+                  md-selected-item-change="vm.postcodeChange(item)"
+                  md-item-text="item.postcode"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="qsct" class="col-1" md-highlight-flags="i">
+                      {{ item.postcode }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Town</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCity" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strState" camel-case>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strCountry" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Contact Person</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strContactPerson">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Home</dt>
+            <dd>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhone1" ng-readonly="!vm.can_edit">
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Mobile</dt>
+            <dd>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhoneMobile" ng-readonly="!vm.can_edit">
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Phone Office</dt>
+            <dd>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhone3" ng-readonly="!vm.can_edit">
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Fax</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPhoneFax">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Email</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strEmailAddress">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Website</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strWebSite">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25" ng-click="vm.showCompany=!vm.showCompany">Company Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showCompany"></i><i class="zmdi zmdi-minus" ng-if="vm.showCompany"></i></h4>
+      <div class="row" ng-show="vm.showCompany">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="same_as_above" ng-disabled="!vm.can_edit" ng-change="vm.sameOfficeAddr(same_as_above)">
+                <i class="input-helper"></i>
+                Same as above
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Registered Address</dt>
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="4" ng-model="vm.entity.strRegOff" camel-case></textarea>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Secretary</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsSecretary"
+                md-search-text="qssc"
+                md-items="item in vm.queryContacts(qssc)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qssc" class="col-1" md-highlight-flags="i">
+                  ({{item.strIDNo}}) {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt>&nbsp;</dt>
+            <dd><div class="p-t-10">&nbsp;</div></dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Director 1</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsDirector1"
+                md-search-text="qsdl"
+                md-items="item in vm.queryContacts(qsdl)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsdl" class="col-1" md-highlight-flags="i">
+                  ({{item.strIDNo}}) {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Director 2</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsDirector2"
+                md-search-text="qsdl2"
+                md-items="item in vm.queryContacts(qsdl2)"
+                md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsdl2" class="col-1" md-highlight-flags="i">
+                  ({{item.strIDNo}}) {{item.strName}}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 p-t-5">Tax Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Tax Reference No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">IRD Branch</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.clsIrdBranch_"
+                  md-search-text="qsird"
+                  md-items="item in vm.queryIRDBranch(qsird)"
+                  md-item-text="item.description ? item.description : ' '"
+                  md-selected-item-change="vm.irdBranchChange(item)"
+                  md-min-length="0"
+                  class="default-input">
+                  <md-item-template>
+                    <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+                      {{ item.description }}
+                    </span>
+                  </md-item-template>
+                </md-autocomplete>  
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 p-t-5">GST / SST/ VAT Information</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.boolIsGSTRegistered" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                Registered
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Reg. No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strGSTNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">RMCD Approval No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strGSTRMCDNo">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.entity.boolGSTStatusVerified" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                GST Status Verified
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Last GST Status Verified Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.dtGSTStatusVerifiedDate">
+              </div>
+            </dd>
+          </dl>
+        </div>        
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showBank=!vm.showBank">Bank Account Details&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showBank"></i><i class="zmdi zmdi-minus" ng-if="vm.showBank"></i></h4>
+      <div class="row" ng-show="vm.showBank">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Bank</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strBankAccountName"
+                  md-search-text="qsbk"
+                  md-items="item in vm.queryBanks(qsbk)"
+                  md-item-text="item.strName"
+                  md-min-length="0"
+                  md-selected-item-change="vm.bankChange(item)"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qsbk" class="col-1" md-highlight-flags="i">
+                    {{item.strName}}
+                  </span>
+                </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Account No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strBankAccountNo">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showOptional=!vm.showOptional">Optional Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showOptional"></i><i class="zmdi zmdi-minus" ng-if="vm.showOptional"></i></h4>
+      <div class="row" ng-show="vm.showOptional">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Spouse Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSpouseName">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Spouse Occupation</dt>
+            <dd>
+              <md-autocomplete
+                md-selected-item="vm.entity.clsSpouseOccupation"
+                md-search-text="qssp"
+                md-items="item in vm.queryOccupation(qssp)"
+                md-item-text="item.strEnglish ? item.strEnglish: ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsop" class="col-1" md-highlight-flags="i">
+                  {{ item.strEnglish }}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Race</dt>
+            <dd>
+              <md-autocomplete
+                md-selected-item="vm.entity.clsRace"
+                md-search-text="qsrc"
+                md-items="item in vm.queryRace(qsrc)"
+                md-item-text="item.strEnglish ? item.strEnglish: ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsrc" class="col-1" md-highlight-flags="i">
+                  {{ item.strEnglish }}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Religion</dt>
+            <dd>
+              <md-autocomplete
+                md-selected-item="vm.entity.clsReligion"
+                md-search-text="qsrg"
+                md-items="item in vm.queryRace(qsrg)"
+                md-item-text="item.strEnglish ? item.strEnglish: ' '"
+                md-min-length="0"
+                md-autoselect="false"
+                class="default-input">
+              <md-item-template>
+                <span md-highlight-text="qsrg" class="col-1" md-highlight-flags="i">
+                  {{ item.strEnglish }}
+                </span>
+              </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Sex</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSex">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Monthly Income</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.decMonthlyIncome">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Place of Work</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strPlaceofWork_"
+                  md-search-text="qlpw"
+                  md-items="item in vm.queryPostcodes(qlpw)"
+                  md-selected-item-change="vm.workPlaceChange(item)"
+                  md-item-text="item.city"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qlpw" class="col-1" md-highlight-flags="i">{{ item.city }}</span>
+                </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Place of Birth</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strPlaceBirth_"
+                  md-search-text="qlpb"
+                  md-items="item in vm.queryPostcodes(qlpb)"
+                  md-selected-item-change="vm.birthPlaceChange(item)"
+                  md-item-text="item.city"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qlpb" class="col-1" md-highlight-flags="i">{{ item.city }}</span>
+                </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Education Level</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.entity.strEdu"
+                  md-search-text="qlel"
+                  md-items="item in vm.queryList(vm.eduLevels, qlel)"
+                  md-item-text="item"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qlel" class="col-1" md-highlight-flags="i">{{ item }}</span>
+                </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Institution</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showMore=!vm.showMore">More Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showMore"></i><i class="zmdi zmdi-minus" ng-if="vm.showMore"></i></h4>
+      <div class="row" ng-show="vm.showMore">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra1">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra2">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 3</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra3">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 4</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra4">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 5</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra5">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25" ng-click="vm.showExtra=!vm.showExtra">Extra Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showExtra"></i><i class="zmdi zmdi-minus" ng-if="vm.showExtra"></i></h4>
+      <div class="row" ng-show="vm.showExtra">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Correspondence Address</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCorrespondingAdd">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra Address 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra Address 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra Address 3</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.registeredOffice">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25">Remarks</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remark</dt>
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strRemarks" placeholder="type here...."></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <md-button ng-if="!vm.isNew" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.relatedMatter()">Matters</md-button>
+            <md-button ng-if="!vm.isNew" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="vm.openFolder()">Folder</md-button>
+            <md-button ng-if="!vm.isNew" class="btn-sm md-raised md-warn m-t-0" style="min-height: 0;margin: 6px 3px;" ng-click="mactrl.upload(vm.entity.code, 'contact')">Upload</md-button>
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="contacts.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-

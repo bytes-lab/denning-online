@@ -1085,7 +1085,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'staffEditCtrl as vm',
-        templateUrl: 'views/staff-edit.html'
+        templateUrl: 'views/staff-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('staffs.new', {
         data: {
@@ -1093,7 +1107,21 @@ denningOnline
         },
         url: '/new',
         controller: 'staffEditCtrl as vm',
-        templateUrl: 'views/staff-edit.html'
+        templateUrl: 'views/staff-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 
