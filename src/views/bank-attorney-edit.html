@@ -1,126 +1,161 @@
-<div class="container">
-
-    <div class="card">
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <h4>Bank Attorney Information</h4>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Name</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.name" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">IC</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.ic" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Master Bank</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.master_bank" placeholder="PBB">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Limit of Authority</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.bankAttorney.limit" type="text" class="form-control" placeholder="RM12,000">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">PA No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.pa_no" placeholder="203/453">
-                            </div>
-                        </dd>
-                    </dl>                   
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">High Court</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.high_court" placeholder="Kuala Lumpur">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">High Court Reg. Date</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.high_court_reg_date" placeholder="29/01/2003">
-                            </div>
-                        </dd>
-                    </dl>
-
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">
-                            <label class="radio radio-inline m-r-20">
-                                <input type="radio" name="office" value="option1">
-                                <i class="input-helper"></i>
-                                Land Office
-                            </label>                        
-                        </dt>
-                        <dd class="p-t-10">
-                            <label class="radio radio-inline m-r-20">
-                                <input type="radio" name="office" value="option2">
-                                <i class="input-helper"></i>
-                                PTG
-                            </label>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">District/State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.state" placeholder="Gombak">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Presentation No.</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.presentation_no" placeholder="PT 43/23425">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Date</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.bankAttorney.presentation_date" placeholder="23/12/2013">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>                
-            </div>
-       
-            <div class="row">     
-                <div class="col-md-10">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" data-ui-sref="bank-attorneys.list" data-ng-click="vm.editInfo = 0" >Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
-                    </div>        
-                </div>
-            </div>
+<div ng-class="vm.isDialog ? '' : 'container'">
+  <div class="card">
+    <div class="card-header" ng-if="!vm.isDialog">
+      <div class="row">
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update  && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="bank-attorneys.new" ng-if="vm.userInfo.priority.contact.update  && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
         </div>
+      </div>
     </div>
-         
+    <div class="card-body card-padding">
+      <h4 class="m-t-25">Bank Attorney Detail</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Name</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strAttorneyName" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">IC</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.strIC" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Limit of Authority</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-model="vm.entity.decLimitOfAuthority" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Master Bank</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.enti.clsBankCode"
+                md-search-text="qscr"
+                md-items="item in vm.queryCourts(qscr)"
+                md-item-text="item.strTypeE"
+                md-min-length="0"
+                md-selected-item-change="vm.courtChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+                    {{ item.strTypeE }}
+                  </span>
+                </md-item-template>
+              </md-autocomplete>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">PA No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPANo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">High Court</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strHighCourt">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">High Court Reg. Date</dt>
+            <dd>
+              <input ng-click="open($event, 'ctopeneded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtHighCourtRegDate" is-open="ctopeneded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">
+              <label class="radio radio-inline m-r-20">
+                <input type="radio" value="Land Office" ng-model="vm.entity.strLandOfficePTG" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                Land Office
+              </label>
+            </dt>
+            <dd class="p-t-10">
+              <label class="radio radio-inline m-r-20">
+                <input type="radio" value="PTG" ng-model="vm.entity.strLandOfficePTG" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                PTG
+              </label>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">District/State</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strDistrictState">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Presentation No.</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPresentationNo">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Date</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-click="open($event, 'ctopeneded1')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDate1" is-open="ctopeneded1" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <h4 class="m-t-25">REMARK</h4>
+      <div class="row">
+        <div class="col-md-10 p-l-25">
+          <dl class="dl-horizontal">
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control" ng-readonly="!vm.can_edit" rows="2" ng-model="vm.entity.strRemarks"></textarea>
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.contact.delete  && !vm.isNew">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update  && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ui-sref="bank-attorneys.new" ng-if="vm.userInfo.priority.contact.update  && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-

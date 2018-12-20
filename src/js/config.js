@@ -1324,7 +1324,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'bankAttorneyEditCtrl as vm',
-        templateUrl: 'views/bank-attorney-edit.html'
+        templateUrl: 'views/bank-attorney-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('bank-attorneys.new', {
         data: {
@@ -1332,7 +1346,21 @@ denningOnline
         },
         url: '/new',
         controller: 'bankAttorneyEditCtrl as vm',
-        templateUrl: 'views/bank-attorney-edit.html'
+        templateUrl: 'views/bank-attorney-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 
