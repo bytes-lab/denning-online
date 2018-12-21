@@ -394,3 +394,8 @@ td.cell-edit {
     height: 30px;
     width: 100%;
 }
+
+.intl-tel-input input::placeholder {
+  color: #CCC;
+  opacity: 1;
+}
