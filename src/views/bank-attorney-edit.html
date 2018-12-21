@@ -45,19 +45,16 @@
             <dt class="p-t-10">Master Bank</dt>
             <dd>
               <md-autocomplete
-                ng-disabled="!vm.can_edit"
-                md-selected-item="vm.enti.clsBankCode"
-                md-search-text="qscr"
-                md-items="item in vm.queryCourts(qscr)"
-                md-item-text="item.strTypeE"
+                md-selected-item="vm.entity.clsBankCode"
+                md-search-text="searchText"
+                md-items="item in vm.queryBanks(searchText)"
+                md-item-text="item.code ? item.code: ' '"
                 md-min-length="0"
-                md-selected-item-change="vm.courtChange(item)"
+                md-autoselect="false"
                 class="default-input">
-                <md-item-template>
-                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
-                    {{ item.strTypeE }}
-                  </span>
-                </md-item-template>
+              <md-item-template>
+                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
+              </md-item-template>
               </md-autocomplete>
             </dd>
           </dl>

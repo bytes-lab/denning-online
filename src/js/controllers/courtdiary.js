@@ -1,6 +1,5 @@
 denningOnline
-  .controller('courtdiaryListCtrl', function($stateParams, NgTableParams, 
-                                             courtdiaryService, $state, Auth) 
+  .controller('courtdiaryListCtrl', function($stateParams, NgTableParams, courtdiaryService, $state, Auth) 
   {
     var self = this;
 
@@ -140,6 +139,64 @@ denningOnline
     self.queryCoram = function (search) {
       return judgeService.getList(1, 10, search).then(function (resp) {
         return resp.data;
+      })
+    }
+
+    self.judgeDialog = function () {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'judgeEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: true,
+          entityCode: function () {
+            return null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (entity) {
+          self.entity.clsCoram = {
+            code: entity.code,
+            strName: entity.strName,
+            strPositionTitle: entity.strPositionTitle,
+            strTitle1: entity.strTitle1,
+            strtitle2: entity.strtitle2
+          };
+        }
+      })
+    }
+
+    self.staffDialog = function (field) {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'staffEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: true,
+          entityCode: function () {
+            return null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (entity) {
+          self.entity[field] = {
+            strName: entity.strName
+          };
+        }
       })
     }
 

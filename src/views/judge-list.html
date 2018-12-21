@@ -18,7 +18,7 @@
         <div class="input-group input-group-lg">
           <span class="input-group-addon search-icon"><i class="zmdi zmdi-search"></i></span>
           <div class="fg-line">
-            <input type="text" class="form-control" placeholder="Search" ng-model="vm.keyword" ng-change="vm.search($event, false)">
+            <input type="text" class="form-control" placeholder="Search" ng-model="vm.keyword" ng-keypress="vm.search($event, false)">
           </div>
           <span class="input-group-addon search-clear" ng-show="vm.keyword" ng-click="vm.search($event, true);">
             <i class="zmdi zmdi-close"></i>

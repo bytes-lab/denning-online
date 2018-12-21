@@ -26,7 +26,7 @@ denningOnline
     }
   })
 
-  .controller('staffEditCtrl', function($stateParams, staffService, $state, Auth, courtService,
+  .controller('staffEditCtrl', function($stateParams, staffService, $state, Auth, contactService,
                                         refactorService, growlService, $uibModalInstance, 
                                         entityCode, isDialog, isNew) 
   {
@@ -39,12 +39,7 @@ denningOnline
     self.isNew = isNew;
     self.entityCode = isDialog ? entityCode : $stateParams.id;
 
-    self.queryCourts = function (searchText) {
-      return courtService.getTypeList(1, 10, searchText).then(function (resp) {
-        return resp.data;
-      })
-    }
-
+    self.Salutations = [];
     self.courtChange = function (item) {
       if (item) {
         self.entity.strCourtType = item.strTypeE;
@@ -53,6 +48,16 @@ denningOnline
       }
     }
 
+    self.queryFields = function (field, searchText) {
+      return self[field].filter(function (c) {
+        return (c.strDescription || c.description).search(new RegExp(searchText, "i")) > -1;
+      });
+    }
+
+    contactService.getSalutationList().then (function (data) {
+      self.Salutations = data;
+    });
+
     if (self.entityCode) {
       self.title = 'Edit Staff';
       staffService.getItem(self.entityCode).then(function (item) {
@@ -60,8 +65,10 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
         self.popoutUrl = $state.href('staffs.edit', { id: self.entity.code });
 
-        if (self.entity.strCourtType) {
-          self.strCourtType = { strTypeE: self.entity.strCourtType };
+        if (self.entity.strTitle) {
+          self.strTitle_ = { 
+            description: self.entity.strTitle 
+          };
         }
       });
     } else {

@@ -20,7 +20,7 @@ denningOnline
     }
   })
 
-  .controller('bankAttorneyEditCtrl', function($stateParams, bankAttorneyService, $state, Auth, courtService,
+  .controller('bankAttorneyEditCtrl', function($stateParams, bankAttorneyService, $state, Auth, bankService,
                                         refactorService, growlService, $uibModalInstance, $scope,
                                         entityCode, isDialog, isNew) 
   {
@@ -33,19 +33,11 @@ denningOnline
     self.isNew = isNew;
     self.entityCode = isDialog ? entityCode : $stateParams.id;
 
-    self.queryCourts = function (searchText) {
-      return courtService.getTypeList(1, 10, searchText).then(function (resp) {
+    self.queryBanks = function(searchText) {
+      return bankService.getTableList(1, 10, searchText).then(function(resp) {
         return resp.data;
-      })
-    }
-
-    self.courtChange = function (item) {
-      if (item) {
-        self.entity.strCourtType = item.strTypeE;
-      } else {
-        self.entity.strCourtType = null;
-      }
-    }
+      });
+    };
 
     $scope.open = function($event, opened) {
       $event.preventDefault();
@@ -60,10 +52,6 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         self.popoutUrl = $state.href('bank-attorneys.edit', { id: self.entity.code });
-
-        if (self.entity.strCourtType) {
-          self.strCourtType = { strTypeE: self.entity.strCourtType };
-        }
       });
     } else {
       self.title = 'New Bank Attorney';
