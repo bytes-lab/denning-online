@@ -343,10 +343,12 @@ denningOnline
   // =========================================================================
   // Header
   // =========================================================================
-  .controller('headerCtrl', function($scope, $state, Auth, searchService) {
+  .controller('headerCtrl', function($scope, $state, Auth, searchService, $sce) {
     $scope.app.loadChat = true;
     $scope.app.userInfo = Auth.getUserInfo();
-    $scope.app.chat_url = '/chat/index.html?uid=';
+    url = '/chat/index.html?uid=';
+    // url = 'http://localhost:7000/?uid=';
+    $scope.app.chat_url = $sce.trustAsResourceUrl(url);
 
     $scope.app.getCls = function (mitem) {
       var cls = '';
@@ -369,7 +371,9 @@ denningOnline
     });
 
     if ($scope.app.userInfo != null) {
-      $scope.app.chat_url += $scope.app.userInfo.email;
+      url += $scope.app.userInfo.email; 
+      // url = 'http://localhost:7000/?uid=' + $scope.app.userInfo.email;
+      $scope.app.chat_url = $sce.trustAsResourceUrl(url);
     }
   })
 

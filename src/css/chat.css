@@ -124,10 +124,6 @@
     margin: 0 5px 10px 0;
 }
 
-iframe.border-line.chat_frame {
-    border: 1px solid #cbcbcb !important;
-}
-
 .icons-demo .card-body .zmdi, .card-body .socicon {
     font-size: 23px;
     vertical-align: middle;
@@ -163,13 +159,14 @@ iframe.border-line.chat_frame {
 }
 
 .chat_frame {
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
+    background: #fff;
     width: 360px;
     position: fixed;
     top: 68px;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 67px);
     right: 0;
     margin-left: auto;   
-    border: 1px solid #cbcbcb;
     z-index: 5;
 }
 
