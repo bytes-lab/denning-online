@@ -185,7 +185,7 @@ denningOnline
           self.strIndustry = { description: self.entity.strIndustry };
         }
 
-        if (self.entity.clsPresetBill.code) {
+        if (self.entity.clsPresetBill && self.entity.clsPresetBill.code) {
           self.clsPresetBill = {
             code: self.entity.clsPresetBill.code,
             description: self.entity.clsPresetBill.strDescription
@@ -311,12 +311,13 @@ denningOnline
       });
     };
 
-    self.queryList = function (labels, q) {
+    self.queryList = function (labels, q, obj, attr) {
       var arr = labels.filter(function(item) {
         return item.search(new RegExp(q, "i")) > -1;
       });
 
       if (arr && arr.length == 0) {
+        obj[attr] = q;
         return [q];
       } else {
         return arr;

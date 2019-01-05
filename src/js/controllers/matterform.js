@@ -3,7 +3,7 @@ denningOnline
                                              Auth, $state) 
   {
     var self = this;
-    self.filterType = '360';
+    self.filterType = 'Online';
 
     self.tableFilter = new NgTableParams({
       page: 1,
