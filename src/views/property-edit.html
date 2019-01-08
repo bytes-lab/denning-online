@@ -451,7 +451,7 @@
             <dt class="p-t-10">Storey No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.spaStoreyNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strUnitFloorNo">
               </div>
             </dd>
           </dl>
@@ -459,7 +459,7 @@
             <dt class="p-t-10">Building / Block No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSectionBlockNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strUnitBuildingBlock">
               </div>
             </dd>
           </dl>
@@ -477,7 +477,7 @@
             <dt class="p-t-10">Accessory Parcel No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAccessoryParcelNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strUnitAccessoryParcelNo">
               </div>
             </dd>
           </dl>
@@ -485,15 +485,22 @@
             <dt class="p-t-10">Building Type</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.spaBuildingType" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strBuildingModel" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Unit Area</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strUnitArea" ng-readonly="!vm.can_edit" type="text" class="form-control">
+              <div class="col-md-4 p-0">
+                <div class="fg-line">
+                  <input ng-model="vm.entity.strUnitArea" ng-readonly="!vm.can_edit" type="text" class="form-control wp=50">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="fg-line">
+                  <input ng-model="vm.entity.strUnitAreaDecription" ng-readonly="!vm.can_edit" type="text" class="form-control ">
+                </div>
               </div>
             </dd>
           </dl>
@@ -704,8 +711,6 @@
               </div>
             </dd>
           </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Extra 3</dt>
             <dd>
@@ -714,6 +719,8 @@
               </div>
             </dd>
           </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Extra 4</dt>
             <dd>
@@ -722,8 +729,24 @@
               </div>
             </dd>
           </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 5</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra5">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Extra 6</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strExtra6">
+              </div>
+            </dd>
+          </dl>
         </div>
-      </div>      
+      </div>
       <h4 class="m-t-25">Remarks</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
