@@ -50,11 +50,11 @@ denningOnline
         self.popoutUrl = $state.href('properties.edit', { id: self.entity.code });
 
         // wrapper attrs for auto complete
-        if (self.entity.strMukim) {
+        if (self.entity.clsMukim && self.entity.clsMukim.code) {
           self.strMukim_ = { 
-            mukim: self.entity.strMukim,
-            daerah: self.entity.strDaerah,
-            negeri: self.entity.strNegeri 
+            mukim: self.entity.clsMukim.strMukim,
+            daerah: self.entity.clsMukim.strDaerah,
+            negeri: self.entity.clsMukim.strNegeri 
           };
         }
 
@@ -158,9 +158,13 @@ denningOnline
 
     self.mukimChange = function (item) {
       if (item) {
-        self.entity.strMukim = item.mukim;
-        self.entity.strDaerah = item.daerah;
-        self.entity.strNegeri = item.negeri;
+        self.entity.clsMukim = {
+          code: item.code,
+          strDaerah: item.daerah,
+          strMukim: item.mukim,
+          strNegeri: item.negeri,
+          strSCode: item.sCode
+        }
       }
     }
 
