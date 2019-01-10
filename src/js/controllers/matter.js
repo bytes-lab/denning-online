@@ -574,6 +574,7 @@ denningOnline
       if (clsMatterCode) {
         matterCodeService.getItem(clsMatterCode.code).then(function (matterCode) {
           vm.model.intTurnaround = matterCode.intTurnaroundTime;
+          vm.model.clsPresetBill = matterCode.clsPresetBill;
         });
       }
 
