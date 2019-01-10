@@ -9,7 +9,7 @@
     defaultCountry: "",
     geoIpLookup: null,
     nationalMode: true,
-    numberType: "MOBILE",
+    numberType: "FIXED_LINE_OR_MOBILE",
     onlyCountries: void 0,
     preferredCountries: ['my', 'sg', 'au', 'cn', 'hk'],
     skipUtilScriptDownload: false,
@@ -92,6 +92,7 @@
             return value.replace(/[^\d]/g, '');
           });
           ctrl.$validators.internationalPhoneNumber = function(value) {
+            // return true;
             var selectedCountry;
             selectedCountry = element.intlTelInput('getSelectedCountryData');
             if (!value || (selectedCountry && selectedCountry.dialCode === value)) {

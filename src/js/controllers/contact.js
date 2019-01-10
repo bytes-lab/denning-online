@@ -283,6 +283,10 @@ denningOnline
           iso2 = self.entity.strPhone3CountryCode.substr(0, 2);
           $("input[ng-model='vm.entity.strPhone3No']").intlTelInput("setCountry", iso2);
         }
+        if (self.entity.strFax1CountryCode) {
+          iso2 = self.entity.strFax1CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strFax1No']").intlTelInput("setCountry", iso2);
+        }
 
         self.popoutUrl = $state.href('contacts.edit', { id: self.entity.code });
         self.IDTypeChange(self.entity.clsIDType);
@@ -351,6 +355,8 @@ denningOnline
       self.entity.strPhone2CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
       tmp = $("input[ng-model='vm.entity.strPhone3No']").intlTelInput("getSelectedCountryData");
       self.entity.strPhone3CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strFax1No']").intlTelInput("getSelectedCountryData");
+      self.entity.strFax1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
 
       entity = refactorService.getDiff(self.entity_, self.entity);
       contactService.save(entity).then(function (contact) {
