@@ -11,7 +11,7 @@
     nationalMode: true,
     numberType: "MOBILE",
     onlyCountries: void 0,
-    preferredCountries: ['my'],
+    preferredCountries: ['my', 'sg', 'au', 'cn', 'hk'],
     skipUtilScriptDownload: false,
     separateDialCode: true,
     utilsScript: "../vendors/intl-tel-input/js/utils.js"

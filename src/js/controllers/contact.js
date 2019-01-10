@@ -346,11 +346,11 @@ denningOnline
     self.save = function () {
       // get country codes
       var tmp = $("input[ng-model='vm.entity.strPhone1No']").intlTelInput("getSelectedCountryData");
-      self.entity.strPhone1CountryCode = tmp.iso2 + '-' + tmp.dialCode;
+      self.entity.strPhone1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
       tmp = $("input[ng-model='vm.entity.strPhone2No']").intlTelInput("getSelectedCountryData");
-      self.entity.strPhone2CountryCode = tmp.iso2 + '-' + tmp.dialCode;
+      self.entity.strPhone2CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
       tmp = $("input[ng-model='vm.entity.strPhone3No']").intlTelInput("getSelectedCountryData");
-      self.entity.strPhone3CountryCode = tmp.iso2 + '-' + tmp.dialCode;
+      self.entity.strPhone3CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
 
       entity = refactorService.getDiff(self.entity_, self.entity);
       contactService.save(entity).then(function (contact) {
