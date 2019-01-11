@@ -41,6 +41,12 @@ denningOnline
                     'RestrictionAgainst', 'TenureType', 'AreaType'];
     self.types = {};
     self.true = true;
+    self.is_west_malaysia = true;
+    self.strFormat = {
+        strCountry: "Malaysia",
+        strDescription: "West Malaysia",
+        strState: "West Malaysia"
+    };
 
     if(self.entityCode) {
       self.title = 'Edit Property';
@@ -95,6 +101,12 @@ denningOnline
 
     self.queryProjects = function (searchText) {
       return projectService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryFormats = function (searchText) {
+      return propertyService.getFormatList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     };
@@ -154,6 +166,10 @@ denningOnline
       if (item) {
         self.entity.strBuildingCultivationType = item.code;
       }
+    }
+
+    self.formatChange = function (item) {
+      self.is_west_malaysia = item && item.strState == "West Malaysia";
     }
 
     self.mukimChange = function (item) {

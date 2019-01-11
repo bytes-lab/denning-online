@@ -12,6 +12,16 @@ denningOnline
       });
     }
 
+    service.getFormatList = function (page, pagesize, keyword) {
+      return http.GET('v1/table/PropertyFormat', {
+        page: page,
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
+      });
+    }
+
     service.getTableList = function (page, pagesize, keyword) {
       return http.GET('v1/table/property', {
         page: page,
