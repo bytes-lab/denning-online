@@ -331,7 +331,7 @@ denningOnline
     };
 
     self.queryChecklist = function (searchText) {
-      return spaChecklistService.getTableList(1, 10, searchText).then(function (resp) {
+      return spaChecklistService.getList(1, 10, searchText).then(function (resp) {
         return resp.data;
       });
     };

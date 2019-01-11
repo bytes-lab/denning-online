@@ -48,7 +48,7 @@ denningOnline
     }
 
     function getPresetChecklist(page, pagesize, keyword) {
-      return spaChecklistService.getTableList(page, pagesize, keyword).then(function (resp) {
+      return spaChecklistService.getList(page, pagesize, keyword).then(function (resp) {
         return resp.data;
       });
     }
