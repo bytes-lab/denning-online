@@ -221,15 +221,17 @@ denningOnline
         $scope.removeParty = function(idx, start, end) {
           var last = end;
           for(var i = idx; i < end; i++) {           // shift 
-            if (!$scope.model['clsC'+(i+1)].code && !$scope.model.tmp['clsC'+(i+1)]) {
+            if (!$scope.model['clsC'+(i+1)] && !$scope.model.tmp['clsC'+(i+1)]) {
               last = i;
               break;
             }
             $scope.model['clsC'+i] = $scope.model['clsC'+(i+1)];
+            $scope.model['strShareC'+i] = $scope.model['strShareC'+(i+1)];            
             $scope.model.tmp['clsC'+i] = $scope.model.tmp['clsC'+(i+1)];
           }
           $scope.model.tmp['clsC'+last] = false;
           $scope.model['clsC'+last] = {};
+          $scope.model['strShareC'+last] = "";
         }
 
         $scope.queryShares = function (q) {
@@ -303,15 +305,17 @@ denningOnline
         $scope.removeProperty = function(idx, start, end) {
           var last = end;
           for(var i = idx; i < end; i++) {           // shift 
-            if (!$scope.model['clsP'+(i+1)].code && !$scope.model.tmp['clsP'+(i+1)]) {
+            if (!$scope.model['clsP'+(i+1)] && !$scope.model.tmp['clsP'+(i+1)]) {
               last = i;
               break;
             }
             $scope.model['clsP'+i] = $scope.model['clsP'+(i+1)];
+            $scope.model['strShare'+i] = $scope.model['strShare'+(i+1)];
             $scope.model.tmp['clsP'+i] = $scope.model.tmp['clsP'+(i+1)];
           }
           $scope.model.tmp['clsP'+last] = false;
           $scope.model['clsP'+last] = {};
+          $scope.model['strShare'+last] = "";          
         }
 
         $scope.queryProperties = function(searchText) {
