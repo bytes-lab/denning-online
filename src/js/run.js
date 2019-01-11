@@ -262,13 +262,19 @@ denningOnline
       templateUrl: 'property.html',
       controller: function ($scope, propertyService, $uibModal) {
         $scope.propertyTypes = { "1": "Landed", "2": "Strata" };
+        for (var i = 1; i <= 5; i++) {
+          if ($scope.model['clsP'+i] && $scope.model['clsP'+i].code) {
+            $scope.model.tmp['clsP'+i] = true;
+          }
+        }
+
         function initProperty(item) {
           if (item && item.code) {
             propertyService.getItem(item.code).then(function (item) {
               $scope.property = item;
             });
           } else {
-            $scope.property = {};
+            // $scope.property = {};
           }          
         }
 
