@@ -75,12 +75,6 @@ denningOnline
             strDescription: self.entity.strCountry
           };
         }
-
-        if (self.entity.strBuildingCultivationType) {
-          self.strBuildingCultivationType = {
-            code: self.entity.strBuildingCultivationType
-          };
-        }
       });
     } else {
       self.title = 'New Property';
@@ -159,12 +153,6 @@ denningOnline
     self.aaChange = function (item) {
       if (item) {
         self.entity.strApprovingAuthority = item.description;
-      }
-    }
-
-    self.bcChange = function (item) {
-      if (item) {
-        self.entity.strBuildingCultivationType = item.code;
       }
     }
 

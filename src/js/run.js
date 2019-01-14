@@ -635,8 +635,36 @@ denningOnline
     formlyConfig.setType({
       name: 'price',
       templateUrl: 'price.html',
-      controller: function ($scope, $timeout, refactorService, Auth) {
-        $scope.userInfo = Auth.getUserInfo();
+      controller: function ($scope, $timeout, refactorService, Auth, matterService) {
+        if ($scope.model.clsPurchasePriceSymbol && $scope.model.clsPurchasePriceSymbol.code) {
+          $scope.clsPurchasePriceSymbol = {
+            symbol: $scope.model.clsPurchasePriceSymbol.strSymbol,
+            code: $scope.model.clsPurchasePriceSymbol.code
+          };          
+        } else {
+          $scope.clsPurchasePriceSymbol = {
+            symbol: Auth.getUserInfo().currency,
+            code: '-'
+          };
+        }
+
+        $scope.queryCurrency = function (keyword) {
+          return matterService.getCurrencyList(1, 10, keyword).then(function (resp) {
+            return resp.data;
+          });
+        }
+
+        $scope.currencyChange = function (item) {
+          if (item && item.code) {
+            $scope.model.clsPurchasePriceSymbol = {
+              code: item.code,
+              strSymbol: item.symbol,
+              strName: item.description,
+              strSymbolNative: item.symbol
+            };
+          }
+        }
+
         $scope.calcDeposit = function (fixed_deposit) {
           if (fixed_deposit) {
             $scope.model.decRM18 = (refactorService.convertFloat($scope.model.decRM1) * 0.1 - refactorService.convertFloat($scope.model.decRM17)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -669,10 +697,39 @@ denningOnline
     formlyConfig.setType({
       name: 'loan',
       templateUrl: 'loan.html',
-      controller: function ($scope, $timeout, refactorService) {
+      controller: function ($scope, $timeout, refactorService, matterService, Auth) {
         $scope.loanTypes = ['Term Loan', 'Housing Loan', 'Overdraft', 'Trade finacing', 'Foreign Currency Loan',
                             'Guarantee', 'Others'];
         $scope.finacingTypes = ['Conventional', 'Islamic', 'Others'];
+
+        if ($scope.model.clsLoanPriceSymbol && $scope.model.clsLoanPriceSymbol.code) {
+          $scope.clsLoanPriceSymbol = {
+            symbol: $scope.model.clsLoanPriceSymbol.strSymbol,
+            code: $scope.model.clsLoanPriceSymbol.code
+          };          
+        } else {
+          $scope.clsLoanPriceSymbol = {
+            symbol: Auth.getUserInfo().currency,
+            code: '-'
+          };
+        }
+
+        $scope.queryCurrency = function (keyword) {
+          return matterService.getCurrencyList(1, 10, keyword).then(function (resp) {
+            return resp.data;
+          });
+        }
+
+        $scope.currencyChange = function (item) {
+          if (item && item.code) {
+            $scope.model.clsLoanPriceSymbol = {
+              code: item.code,
+              strSymbol: item.symbol,
+              strName: item.description,
+              strSymbolNative: item.symbol
+            };
+          }
+        }
 
         $scope.calcForm = function (model) {
           $timeout(function () {

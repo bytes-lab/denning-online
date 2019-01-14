@@ -145,6 +145,11 @@ md-autocomplete input:not(.md-input) {
     font-size: 13px;
 }
 
+md-autocomplete.currency-select input:not(.md-input) {
+    padding-right: 0px;
+    padding-left: 7px;
+}
+
 .md-whiteframe-1dp, .md-whiteframe-z1 {
     box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.12), 0px 1px 0px 0px rgba(0, 0, 0, 0.24), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
 }
@@ -340,6 +345,18 @@ tr.selected {
 
 .attr-label {
     background: #fafafa !important;
+}
+
+.currency-select {
+    width: 40px;
+    min-width: 120px;
+    display: inline-block;
+    margin-top: -5px;
+    height: 27px !important;
+}
+
+md-autocomplete.currency-select md-autocomplete-wrap {
+    height: 27px !important;
 }
 
 md-autocomplete.md-default-theme[disabled]:not([md-floating-label]), md-autocomplete[disabled]:not([md-floating-label]) {

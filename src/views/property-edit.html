@@ -322,11 +322,10 @@
               <div class="fg-line">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.strBuildingCultivationType"
+                  md-selected-item="vm.entity.clsBuildingCultivationType"
                   md-search-text="qsbc"
                   md-items="item in vm.queryBCs(qsbc)"
-                  md-selected-item-change="vm.bcChange(item)"
-                  md-item-text="item.code"
+                  md-item-text="item.strDescription"
                   md-min-length="0"
                   class="default-input">
                   <md-item-template>
