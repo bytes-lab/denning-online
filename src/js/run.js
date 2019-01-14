@@ -636,10 +636,10 @@ denningOnline
       name: 'price',
       templateUrl: 'price.html',
       controller: function ($scope, $timeout, refactorService, Auth, matterService) {
-        if ($scope.model.clsPurchasePriceSymbol && $scope.model.clsPurchasePriceSymbol.code) {
+        if ($scope.model.strPurchasePriceSymbol) {
           $scope.clsPurchasePriceSymbol = {
-            symbol: $scope.model.clsPurchasePriceSymbol.strSymbol,
-            code: $scope.model.clsPurchasePriceSymbol.code
+            symbol: $scope.model.strPurchasePriceSymbol,
+            code: '-'
           };          
         } else {
           $scope.clsPurchasePriceSymbol = {
@@ -656,12 +656,7 @@ denningOnline
 
         $scope.currencyChange = function (item) {
           if (item && item.code) {
-            $scope.model.clsPurchasePriceSymbol = {
-              code: item.code,
-              strSymbol: item.symbol,
-              strName: item.description,
-              strSymbolNative: item.symbol
-            };
+            $scope.model.strPurchasePriceSymbol = item.symbol;
           }
         }
 
@@ -702,10 +697,10 @@ denningOnline
                             'Guarantee', 'Others'];
         $scope.finacingTypes = ['Conventional', 'Islamic', 'Others'];
 
-        if ($scope.model.clsLoanPriceSymbol && $scope.model.clsLoanPriceSymbol.code) {
+        if ($scope.model.strLoanPriceSymbol) {
           $scope.clsLoanPriceSymbol = {
-            symbol: $scope.model.clsLoanPriceSymbol.strSymbol,
-            code: $scope.model.clsLoanPriceSymbol.code
+            symbol: $scope.model.strLoanPriceSymbol,
+            code: '-'
           };          
         } else {
           $scope.clsLoanPriceSymbol = {
@@ -722,12 +717,7 @@ denningOnline
 
         $scope.currencyChange = function (item) {
           if (item && item.code) {
-            $scope.model.clsLoanPriceSymbol = {
-              code: item.code,
-              strSymbol: item.symbol,
-              strName: item.description,
-              strSymbolNative: item.symbol
-            };
+            $scope.model.strLoanPriceSymbol = item.symbol;
           }
         }
 
@@ -740,6 +730,56 @@ denningOnline
                 v24 = refactorService.convertFloat(angular.element('.rm24').val());
 
             model.decRM25 = v4 + v5 + v6 + v23 + v24;
+          }, 200);
+        };
+
+        $scope.calcForm($scope.model);
+      }
+    });
+
+    formlyConfig.setType({
+      name: 'trade_loan',
+      templateUrl: 'trade_loan.html',
+      controller: function ($scope, $timeout, refactorService, matterService, Auth) {
+        $scope.loanTypes = ['Term Loan', 'Housing Loan', 'Overdraft', 'Trade finacing', 'Foreign Currency Loan',
+                            'Guarantee', 'Others'];
+        $scope.finacingTypes = ['Conventional', 'Islamic', 'Others'];
+
+        if ($scope.model.strLoanPriceSymbol) {
+          $scope.clsLoanPriceSymbol = {
+            symbol: $scope.model.strLoanPriceSymbol,
+            code: '-'
+          };          
+        } else {
+          $scope.clsLoanPriceSymbol = {
+            symbol: Auth.getUserInfo().currency,
+            code: '-'
+          };
+        }
+
+        $scope.queryCurrency = function (keyword) {
+          return matterService.getCurrencyList(1, 10, keyword).then(function (resp) {
+            return resp.data;
+          });
+        }
+
+        $scope.currencyChange = function (item) {
+          if (item && item.code) {
+            $scope.model.strLoanPriceSymbol = item.symbol;
+          }
+        }
+
+        $scope.calcForm = function (model) {
+          $timeout(function () {
+            var v4 = refactorService.convertFloat(angular.element('.rm4').val()),
+                v5 = refactorService.convertFloat(angular.element('.rm5').val()),
+                v6 = refactorService.convertFloat(angular.element('.rm6').val()),
+                v16 = refactorService.convertFloat(angular.element('.rm16').val()),
+                v17 = refactorService.convertFloat(angular.element('.rm17').val()),
+                v13 = refactorService.convertFloat(angular.element('.rm13').val()),
+                v11 = refactorService.convertFloat(angular.element('.rm11').val());
+
+            model.decRM25 = v4 + v5 + v6 + v16 + v17 + v13 + v11;
           }, 200);
         };
 

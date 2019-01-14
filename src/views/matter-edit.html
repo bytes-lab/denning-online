@@ -1514,6 +1514,149 @@
   </div>
 </script>
 
+<script type="text/ng-template" id="trade_loan.html">
+  <h4 class="m-b-15 group-label">{{ to.label }}</h4>
+  <div class="form-group col-md-12">
+    <div class="d-flex">
+      <label class="form-control attr-label">Type of Loan</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.strF3"
+        md-search-text="qslt"
+        md-items="item in loanTypes"
+        md-item-text="item"
+        md-min-length="0"
+        class="default-input wp-45">
+        <md-item-template>
+          <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+            {{ item }}
+          </span>
+        </md-item-template>
+      </md-autocomplete>
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div class="d-flex">
+      <label class="form-control attr-label">Type of Finacing</label>
+      <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.strF4"
+        md-search-text="qsft"
+        md-items="item in finacingTypes"
+        md-item-text="item"
+        md-min-length="0"
+        class="default-input wp-45">
+        <md-item-template>
+          <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+            {{ item }}
+          </span>
+        </md-item-template>
+      </md-autocomplete>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Trade Finacing <span class="pull-right m-r-30 f-14 c-black">Currency :         
+    <md-autocomplete
+      ng-disabled="!model.tmp.can_edit"
+      md-selected-item="clsLoanPriceSymbol"
+      md-search-text="qslps"
+      md-items="item in queryCurrency(qslps)"
+      md-item-text="item.symbol+' ( '+item.code+' )'"
+      md-min-length="0"
+      md-selected-item-change="currencyChange(item)"
+      class="default-input currency-select">
+      <md-item-template>
+        <span md-highlight-text="searchText" md-highlight-flags="i">
+          {{ item.symbol }} ( {{ item.code }} )
+        </span>
+      </md-item-template>
+    </md-autocomplete>
+  </span></h4>
+  <div class="col-md-12">
+    <div class="col-md-7">
+      <div class="col-md-5">
+        <div class="attr-label-1 f-500 m-t-30">Term Loan</div>
+        <div class="attr-label-1 f-500 m-t-15">OD Loan</div>
+        <div class="attr-label-1 f-500 m-t-20">Banker Acceptance (BA)</div>
+        <div class="attr-label-1 f-500 m-t-20">Bank Guarantee (BG)</div>
+        <div class="attr-label-1 f-500 m-t-20">Letter of Credit (LC)</div>
+        <div class="attr-label-1 f-500 m-t-20">Trust Receipt (TR)</div>
+        <div class="attr-label-1 f-500 m-t-15">Others</div>
+        <div class="attr-label-1 f-500 m-t-15 m-b-15">Total</div>
+      </div>
+      <div class="col-md-4">
+        <div class="attr-label-1 f-500">Amount</div>
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-10 form-control text-right rm4" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM4" ng-blur="calcForm(model)">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm5" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM5" ng-blur="calcForm(model)">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm6" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM6" ng-blur="calcForm(model)">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm16" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM16" ng-blur="calcForm(model)">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm11" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM11" ng-blur="calcForm(model)">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm17" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" ng-blur="calcForm(model)">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm13" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM13" ng-blur="calcForm(model)">
+        <label class="form-control m-t-5- p-t-5 text-right">{{ model.decRM25|number:2 }}</label>
+      </div>
+      <div class="col-md-3">
+        <div class="attr-label-1 f-500">Interest (%)</div>
+        <input type="text" class="form-control m-t-10" ng-readonly="!model.tmp.can_edit" ng-model="model.strF2">
+        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF8">
+        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF9">
+        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF10">
+        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF11">
+        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF12">
+        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF13">
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="col-md-6">
+        <div class="attr-label-1 f-500">Repayment</div>
+        <input type="text" class="form-control m-t-10" ng-readonly="!model.tmp.can_edit" ng-model="model.strF1">
+        <div class="col-md-6 p-0 m-t-40">
+          <div class="attr-label-1 f-500 m-t-10">Tier 1</div>
+          <div class="attr-label-1 f-500 m-t-15">Tier 2</div>
+          <div class="attr-label-1 f-500 m-t-15">Tier 3</div>
+          <div class="attr-label-1 f-500 m-t-20">Tier 4</div>
+          <div class="attr-label-1 f-500 m-t-20">Tier 5</div>
+        </div>
+        <div class="col-md-6 p-0 m-t-40">
+          <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn2">
+          <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn3">
+          <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn4">
+          <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn5">
+          <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn6">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="attr-label-1 f-500">Monthly</div>
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-10 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM7">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-40 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM26">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM27">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM28">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM29">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM30">
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+  <h4 class="m-b-15 group-label">Islamic Loan</h4>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Selling Price</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm9" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM9">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail3" class="col-sm-4 attr-label-1">Purchase Price</label>
+    <div class="col-sm-8">
+      <div class="fg-line">
+        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm8" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM8">
+      </div>
+    </div>
+  </div>
+</script>
+
 <script type="text/ng-template" id="loan.html">
   <h4 class="m-b-15 group-label">{{ to.label }}</h4>
   <div class="form-group col-md-12">
@@ -1669,72 +1812,6 @@
     <div class="col-sm-8">
       <div class="fg-line">
         <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm8" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM8">
-      </div>
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <h4 class="m-b-15 group-label">Trade Financing</h4>
-  <div class="col-md-12">
-    <div class="col-md-7">
-      <div class="col-md-5">
-        <div class="attr-label-1 f-500 m-t-30">Term Loan</div>
-        <div class="attr-label-1 f-500 m-t-15">OD Loan</div>
-        <div class="attr-label-1 f-500 m-t-20">Banker Acceptance (BA)</div>
-        <div class="attr-label-1 f-500 m-t-20">Bank Guarantee (BG)</div>
-        <div class="attr-label-1 f-500 m-t-20">Letter of Credit (LC)</div>
-        <div class="attr-label-1 f-500 m-t-20">Trust Receipt (TR)</div>
-        <div class="attr-label-1 f-500 m-t-15">Others</div>
-        <div class="attr-label-1 f-500 m-t-15 m-b-15">Total</div>
-      </div>
-      <div class="col-md-4">
-        <div class="attr-label-1 f-500">Amount</div>
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-10 form-control text-right rm4" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM4" ng-blur="calcForm1(model)">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm5" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM5" ng-blur="calcForm1(model)">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm6" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM6" ng-blur="calcForm1(model)">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm16" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM16" ng-blur="calcForm1(model)">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm11" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM11" ng-blur="calcForm1(model)">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm17" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" ng-blur="calcForm1(model)">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm13" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM13" ng-blur="calcForm1(model)">
-        <label class="form-control m-t-5- p-t-5 text-right">{{ model.decRM25|number:2 }}</label>
-      </div>
-      <div class="col-md-3">
-        <div class="attr-label-1 f-500">Interest (%)</div>
-        <input type="text" class="form-control m-t-10" ng-readonly="!model.tmp.can_edit" ng-model="model.strF2">
-        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF8">
-        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF9">
-        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF10">
-        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF11">
-        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF12">
-        <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF13">
-      </div>
-    </div>
-    <div class="col-md-5">
-      <div class="col-md-6">
-        <div class="attr-label-1 f-500">Repayment</div>
-        <input type="text" class="form-control m-t-10" ng-readonly="!model.tmp.can_edit" ng-model="model.strF1">
-        <div class="col-md-6 p-0 m-t-40">
-          <div class="attr-label-1 f-500 m-t-10">Tier 1</div>
-          <div class="attr-label-1 f-500 m-t-15">Tier 2</div>
-          <div class="attr-label-1 f-500 m-t-15">Tier 3</div>
-          <div class="attr-label-1 f-500 m-t-20">Tier 4</div>
-          <div class="attr-label-1 f-500 m-t-20">Tier 5</div>
-        </div>
-        <div class="col-md-6 p-0 m-t-40">
-          <input type="text" class="form-control" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn2">
-          <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn3">
-          <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn4">
-          <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn5">
-          <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strPn6">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="attr-label-1 f-500">Monthly</div>
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-10 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM7">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-40 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM26">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM27">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM28">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM29">
-        <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM30">
       </div>
     </div>
   </div>

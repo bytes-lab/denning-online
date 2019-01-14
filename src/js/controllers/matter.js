@@ -375,6 +375,16 @@ denningOnline
             }
           ]
         }, 
+        "Loan (T)": {
+          "groups": [
+            {
+              "type": "trade_loan",
+              "templateOptions": {
+                "label": "Loan Type",
+              }
+            }
+          ]
+        }, 
         "Property": {
           "groups": [
             {
