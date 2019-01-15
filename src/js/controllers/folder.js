@@ -14,6 +14,8 @@ denningOnline
 
     self.type = $stateParams.type;
     self.code = $stateParams.id;  // for contact / property
+    self.keyboard = '';
+    self.fileType = 'all';
 
     // watch for check all checkbox
     $scope.$watch(function() {
@@ -61,9 +63,8 @@ denningOnline
       var id = 0;
 
       angular.forEach(data.documents, function(value, key) {
-        id = id + 1;
         value['folder'] = 'FILES';
-        value['id'] = id;
+        value['id'] = ++id;
         self.data.push(value);
       })
 
@@ -71,18 +72,17 @@ denningOnline
         self.folders.push(folder);
 
         if (folder.documents.length == 0) {
-            self.data.push({ id: ++id, folder: folder.name });
+          self.data.push({ id: ++id, folder: folder.name });
         } else {
           angular.forEach(folder.documents, function(value, key) {
             value['folder'] = folder.name;
-            id = id + 1;
-            value['id'] = id;
+            value['id'] = ++id;
             self.data.push(value);
           })
         }
       })
 
-      initializeTable();
+      self.initializeTable();
     });
 
     self.download = function (file) {
@@ -141,8 +141,12 @@ denningOnline
       });
     }
 
-    function initializeTable () {
-      //Filtering
+    self.initializeTable = function () {
+      var _data = self.data.filter(function (item) {
+        return !item.name || item.name.search(new RegExp(self.keyword, "i")) > -1 && 
+                            (self.fileType == 'all' || self.fileType.indexOf(item.ext) > -1);
+      });
+
       self.tableFilter = new NgTableParams({
         page: 1,
         count: 5,
@@ -151,7 +155,7 @@ denningOnline
         },
         group: "folder"
       }, {
-        dataset: self.data
+        dataset: _data
       })
     }
 
