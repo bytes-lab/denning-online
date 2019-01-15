@@ -39,6 +39,8 @@ denningOnline
 
     self.refList = ['MukimType', 'LotType', 'TitleType', 'ParcelType', 'LandUse', 
                     'RestrictionAgainst', 'TenureType', 'AreaType'];
+    self.storeyList = ["Single Storey", "1 1/2 Storey", "Double Storey", "2  1/2 storey",
+                       "Three Storey", "Four Storey", "Five Storey", "Multi-storey"];
     self.types = {};
     self.true = true;
     self.is_west_malaysia = true;
@@ -155,6 +157,19 @@ denningOnline
         self.entity.strApprovingAuthority = item.description;
       }
     }
+
+    self.queryList = function (labels, q, obj, attr) {
+      var arr = labels.filter(function(item) {
+        return item.search(new RegExp(q, "i")) > -1;
+      });
+
+      if (arr && arr.length == 0) {
+        obj[attr] = q;
+        return [q];
+      } else {
+        return arr;
+      }
+    };
 
     self.formatChange = function (item) {
       self.is_west_malaysia = item && item.strState == "West Malaysia";

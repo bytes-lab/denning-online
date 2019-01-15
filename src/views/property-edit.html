@@ -337,6 +337,26 @@
               </div>
             </dd>
           </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Storey No.</dt>
+            <dd>
+              <div class="fg-line">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.entity.strStoreyNo_"
+                  md-search-text="qp0"
+                  md-items="item in vm.queryList(vm.storeyList, qp0, vm.entity, 'strStoreyNo_')"
+                  md-item-text="item"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qp1" class="col-1" md-highlight-flags="i">{{ item }}</span>
+                </md-item-template>
+                </md-autocomplete>
+              </div>
+            </dd>
+          </dl>
           <dl class="dl-horizontal" ng-if="vm.is_west_malaysia">
             <dt class="p-t-10">Age of Building / Trees</dt>
             <dd>
@@ -394,7 +414,7 @@
             <dt class="p-t-10">Storey No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.storeyNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strFloorNo">
               </div>
             </dd>
           </dl>
@@ -410,7 +430,7 @@
             <dt class="p-t-10">Accessory Parcel No.</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strUnitAccessoryParcelNo" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strAccessoryParcelNo" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -418,7 +438,7 @@
             <dt class="p-t-10">Accessory Storey No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.accStoreyNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAccessoryFloorNo">
               </div>
             </dd>
           </dl>
@@ -618,7 +638,7 @@
             <dt class="p-t-10">Multiple Master Titles</dt>
             <dd>
               <div class="fg-line">
-                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strBlockMasterTitleAdd" placeholder="type here...."></textarea>
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="5" ng-model="vm.entity.strBlockMasterTitleAdd" placeholder="type here...."></textarea>
               </div>
             </dd>
           </dl>

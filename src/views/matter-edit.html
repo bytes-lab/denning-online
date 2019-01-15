@@ -414,7 +414,7 @@
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Building / Cultivation Type</dt>
-      <dd>{{ property.strBuildingCultivationType }}</dd>
+      <dd>{{ property.clsBuildingCultivationType.strDescription }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Type</dt>
@@ -434,11 +434,15 @@
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Developer</dt>
-      <dd>{{ property.clsProject.clsDeveloper.strName }}</dd>
+      <dd>{{ property.clsDeveloper.strName }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Proprietor</dt>
-      <dd>{{ property.clsProject.clsProprietor.strName }}</dd>
+      <dd>{{ property.clsProprietor.strName }}</dd>
+    </dl>
+    <dl class="dl-horizontal m-b-10">
+      <dt>Master title</dt>
+      <dd>{{ property.strBlockMasterTitleAdd }}</dd>
     </dl>
   </div>
 </script>
@@ -2480,7 +2484,7 @@
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Building / Cultivation Type</dt>
-        <dd>{{ property.strBuildingCultivationType }}</dd>
+        <dd>{{ property.clsBuildingCultivationType.strDescription }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Type</dt>
@@ -2505,6 +2509,10 @@
       <dl class="dl-horizontal m-b-10">
         <dt>Proprietor</dt>
         <dd>{{ property.clsProprietor.strName }}</dd>
+      </dl>
+      <dl class="dl-horizontal m-b-10">
+        <dt>Master title</dt>
+        <dd>{{ property.strBlockMasterTitleAdd }}</dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20">Price</h4>
