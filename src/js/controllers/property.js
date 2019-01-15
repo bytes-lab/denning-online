@@ -44,11 +44,10 @@ denningOnline
     self.types = {};
     self.true = true;
     self.is_west_malaysia = true;
-    self.strFormat = {
-        strCountry: "Malaysia",
-        strDescription: "West Malaysia",
-        strState: "West Malaysia"
-    };
+
+    propertyService.getFormatList(1, 10, '').then(function (resp) {
+      self.formatList = resp.data;
+    });
 
     if(self.entityCode) {
       self.title = 'Edit Property';
@@ -77,14 +76,28 @@ denningOnline
             strDescription: self.entity.strCountry
           };
         }
+
+        angular.forEach(self.formatList, function (value, key) {
+          if (value.code == self.entity.intPropertyFormat) {
+            self.strFormat = value;
+          }
+        });
       });
     } else {
       self.title = 'New Property';
       self.popoutUrl = $state.href('properties.new');
 
+      self.strFormat = {
+        code: "1",
+        strCountry: "Malaysia",
+        strDescription: "West Malaysia",
+        strState: "West Malaysia"
+      };
+
       self.entity = {
         strMukimType: 'Mukim',
-        strPropertyType: '1'
+        strPropertyType: '1',
+        intPropertyFormat: '1'
       };
     }
 
@@ -102,9 +115,9 @@ denningOnline
     };
 
     self.queryFormats = function (searchText) {
-      return propertyService.getFormatList(1, 10, searchText).then(function (resp) {
-        return resp.data;
-      });
+      return self.formatList.filter(function (item) {
+        return (item.strCountry + item.strState).search(new RegExp(searchText, "i")) > -1;
+      })
     };
 
     self.queryBanks = function (searchText) {
@@ -172,7 +185,10 @@ denningOnline
     };
 
     self.formatChange = function (item) {
-      self.is_west_malaysia = item && item.strState == "West Malaysia";
+      if (item) {
+        self.is_west_malaysia = item && item.strState == "West Malaysia";
+        self.entity.intPropertyFormat = item.code;        
+      }
     }
 
     self.mukimChange = function (item) {
