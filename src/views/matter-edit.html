@@ -87,8 +87,23 @@
     <div class="clearfix"></div>
     <div class="form-group m-l-30">
       <div class="d-flex">
-        <label class="form-control attr-label">Bank Name</label>
+        <label class="form-control attr-label">Bank</label>
         <input type="text" class="form-control wp-45" readonly="true" ng-model="model['clsBank1'].clsBankCode.strName">
+      </div>
+    </div>
+    <div class="form-group m-l-30">
+      <div class="d-flex">
+        <label class="form-control attr-label">Branch Address</label>
+        <input type="text" class="form-control wp-45" readonly="true" ng-model="model['clsBank1'].clsBankCode.strRegAdd">
+      </div>
+    </div>
+    <div class="form-group m-l-30">
+      <div class="d-flex">
+        <label class="form-control attr-label">CAC / LDC</label>
+        <input type="text" class="form-control wp-45" readonly="" ng-model="model['clsBank1'].clsCACCode.strName">
+        <a class="btn btn-primary short-btn" ng-click="bankCACDialog()" ng-if="model['clsBank1'].clsCACCode && model['clsBank2'].clsCACCode.code">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the bank CAC"></span>
+        </a>
       </div>
     </div>
     <div class="form-group m-l-30">
@@ -162,7 +177,7 @@
     </div>
     <div class="form-group col-md-12 m-l-15">
       <div class="d-flex">
-        <label class="form-control attr-label">Address</label>
+        <label class="form-control attr-label">Branch Address</label>
         <input type="text" class="form-control wp-45" readonly="true" ng-model="model['clsBank2'].clsBankCode.strRegAdd">
       </div>
     </div>
@@ -662,7 +677,7 @@
         md-selected-item="model.clsPartnerInCharge"
         md-search-text="qspic"
         md-items="item in queryStaffs(qspic)"
-        md-item-text="item.strInitials ? item.strInitials: ' '"
+        md-item-text="item.strInitials+' ( '+item.strName+' )'"
         md-min-length="0"
         md-autoselect="false"
         class="default-input wp-45">
@@ -682,7 +697,7 @@
         md-selected-item="model.clsLAInCharge"
         md-search-text="qslic"
         md-items="item in queryStaffs(qslic)"
-        md-item-text="item.strInitials ? item.strInitials: ' '"
+        md-item-text="item.strInitials+' ( '+item.strName+' )'"
         md-min-length="0"
         md-autoselect="false"
         class="default-input wp-45">
@@ -702,7 +717,7 @@
         md-selected-item="model.clsClerkInCharge"
         md-search-text="qscic"
         md-items="item in queryStaffs(qscic)"
-        md-item-text="item.strInitials ? item.strInitials: ' '"
+        md-item-text="item.strInitials+' ( '+item.strName+' )'"
         md-min-length="0"
         md-autoselect="false"
         class="default-input wp-45">
@@ -722,7 +737,7 @@
         md-selected-item="model.team"
         md-search-text="qsctc"
         md-items="item in queryStaffs(qsctc)"
-        md-item-text="item.strInitials ? item.strInitials: ' '"
+        md-item-text="item.strInitials+' ( '+item.strName+' )'"
         md-min-length="0"
         md-autoselect="false"
         class="default-input wp-45">
@@ -1572,17 +1587,17 @@
       </md-item-template>
     </md-autocomplete>
   </span></h4>
-  <div class="col-md-12">
-    <div class="col-md-7">
-      <div class="col-md-5">
-        <div class="attr-label-1 f-500 m-t-30">Term Loan</div>
-        <div class="attr-label-1 f-500 m-t-15">OD Loan</div>
-        <div class="attr-label-1 f-500 m-t-20">Banker Acceptance (BA)</div>
-        <div class="attr-label-1 f-500 m-t-20">Bank Guarantee (BG)</div>
-        <div class="attr-label-1 f-500 m-t-20">Letter of Credit (LC)</div>
-        <div class="attr-label-1 f-500 m-t-20">Trust Receipt (TR)</div>
-        <div class="attr-label-1 f-500 m-t-15">Others</div>
-        <div class="attr-label-1 f-500 m-t-15 m-b-15">Total</div>
+  <div class="col-md-12 p-0">
+    <div class="col-md-7 p-0">
+      <div class="col-md-5 p-r-0">
+        <div class="attr-label-1 inline-label f-500 m-t-30">Term Loan</div>
+        <div class="attr-label-1 inline-label f-500 m-t-15">OD Loan</div>
+        <div class="attr-label-1 inline-label f-500 m-t-20" title="Banker Acceptance (BA)">Banker Acceptance (BA)</div>
+        <div class="attr-label-1 inline-label f-500 m-t-20">Bank Guarantee (BG)</div>
+        <div class="attr-label-1 inline-label f-500 m-t-20">Letter of Credit (LC)</div>
+        <div class="attr-label-1 inline-label f-500 m-t-20">Trust Receipt (TR)</div>
+        <div class="attr-label-1 inline-label f-500 m-t-15">Others</div>
+        <div class="attr-label-1 inline-label f-500 m-t-15 m-b-15">Total Loan</div>
       </div>
       <div class="col-md-4">
         <div class="attr-label-1 f-500">Amount</div>
@@ -1593,9 +1608,9 @@
         <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm11" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM11" ng-blur="calcForm(model)">
         <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm17" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM17" ng-blur="calcForm(model)">
         <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="m-t-5 form-control text-right rm13" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM13" ng-blur="calcForm(model)">
-        <label class="form-control m-t-5- p-t-5 text-right">{{ model.decRM25|number:2 }}</label>
+        <label class="form-control m-t-5 p-t-5 text-right">{{ model.decRM25|number:2 }}</label>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 p-0">
         <div class="attr-label-1 f-500">Interest (%)</div>
         <input type="text" class="form-control m-t-10" ng-readonly="!model.tmp.can_edit" ng-model="model.strF2">
         <input type="text" class="form-control m-t-5" ng-readonly="!model.tmp.can_edit" ng-model="model.strF8">

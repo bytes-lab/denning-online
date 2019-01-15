@@ -25,7 +25,7 @@ denningOnline
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-    self._type = 'bank-CAC';
+    self._type = 'bank-cac';
 
     self.isDialog = isDialog;
     self.can_edit = isNew;
