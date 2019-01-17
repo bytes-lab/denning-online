@@ -636,6 +636,7 @@ denningOnline
       name: 'price',
       templateUrl: 'price.html',
       controller: function ($scope, $timeout, refactorService, Auth, matterService) {
+        $scope.userInfo = Auth.getUserInfo();
         if ($scope.model.strPurchasePriceSymbol) {
           $scope.clsPurchasePriceSymbol = {
             symbol: $scope.model.strPurchasePriceSymbol,
@@ -648,6 +649,28 @@ denningOnline
           };
         }
 
+        $scope.taxType = "1";
+
+        $scope.calcTax = function () {
+          var R = refactorService.convertFloat($scope.model.decPriceGst)
+              A = refactorService.convertFloat($scope.model.decRM1);
+
+          if ($scope.taxType == "1") {
+            $scope.n1d = A.toFixed(2);
+            $scope.model.decRM36 = 0;
+            $scope.n3d = A.toFixed(2);
+          } else if ($scope.taxType == "2") {
+            $scope.n1d = (A * 100 / (100 + R)).toFixed(2);
+            $scope.model.decRM36 = (A * R / (100 + R)).toFixed(2);
+            $scope.n3d = A.toFixed(2);
+          } else {
+            $scope.n1d = A.toFixed(2);
+            $scope.model.decRM36 = (A * R / 100).toFixed(2);
+            $scope.n3d = (A + A * R / 100).toFixed(2);
+          }
+        }
+
+        $scope.calcTax();
         $scope.queryCurrency = function (keyword) {
           return matterService.getCurrencyList(1, 10, keyword).then(function (resp) {
             return resp.data;

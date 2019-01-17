@@ -23,8 +23,16 @@
 
 .attr-label-210 {
   border: 0; 
-  background: #fafafa;  
+  background: #fafafa;
   width: 210px;
+  margin: 0px;
+  -webkit-box-shadow: none; 
+}
+
+.attr-label-220 {
+  border: 0; 
+  background: #fafafa;  
+  width: 220px;
   margin: 0px;
   -webkit-box-shadow: none; 
 }
