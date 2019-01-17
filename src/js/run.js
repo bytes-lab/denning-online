@@ -671,6 +671,16 @@ denningOnline
         }
 
         $scope.calcTax();
+
+        $scope.queryTaxes = function () {
+          var data = [];
+          for (var i = 0; i < 11; i++) {
+            data.push(i+' %');
+          }
+
+          return data;
+        }
+
         $scope.queryCurrency = function (keyword) {
           return matterService.getCurrencyList(1, 10, keyword).then(function (resp) {
             return resp.data;

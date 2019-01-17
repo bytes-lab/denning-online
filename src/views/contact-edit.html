@@ -180,6 +180,15 @@
           </dl>
           <dl class="dl-horizontal">
             <div class="checkbox">
+              <label ng-class="{'c-red':vm.entity.bankrupt}">
+                <input type="checkbox" ng-model="vm.entity.bankrupt" ng-disabled="!vm.can_edit">
+                <i class="input-helper"></i>
+                Bankrupt
+              </label>
+            </div>
+          </dl>
+          <dl class="dl-horizontal">
+            <div class="checkbox">
               <label>
                 <input type="checkbox" ng-model="vm.entity.add_favourite" ng-disabled="!vm.can_edit">
                 <i class="input-helper"></i>
@@ -187,7 +196,7 @@
               </label>
             </div>
           </dl>
-          <dl class="dl-horizontal" style="padding-top: 1px;">
+          <dl class="dl-horizontal">
             <div class="checkbox">
               <label>
                 <input type="checkbox" ng-model="vm.entity.InviteToDenning" ng-disabled="!vm.can_edit">
@@ -453,8 +462,9 @@
         </div>
       </div>
 
-      <h4 class="m-t-25 p-t-5">GST / SST/ VAT Information</h4>
-      <div class="row">
+      <h4 class="m-t-25 p-t-5">Mailing Address</h4>
+      <h4 class="m-t-25 p-t-5" ng-click="vm.showGSTk=!vm.showGSTk">GST / SST/ VAT Information&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="!vm.showGSTk"></i><i class="zmdi zmdi-minus" ng-if="vm.showGSTk"></i></h4>
+      <div class="row" ng-show="vm.showGSTk">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <div class="checkbox">
