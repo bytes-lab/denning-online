@@ -651,6 +651,10 @@ denningOnline
 
         $scope.taxType = "1";
 
+        if ($scope.model.decPriceGst) {
+          $scope.model.tmp.decPriceGst = parseInt($scope.model.decPriceGst) + ' %';
+        }
+
         $scope.calcTax = function () {
           var R = refactorService.convertFloat($scope.model.decPriceGst)
               A = refactorService.convertFloat($scope.model.decRM1);
@@ -679,6 +683,13 @@ denningOnline
           }
 
           return data;
+        }
+
+        $scope.taxChange = function (item) {
+          if (item) {
+            $scope.model.decPriceGst = item.replace(' %', '.00');
+            $scope.calcTax();
+          }
         }
 
         $scope.queryCurrency = function (keyword) {
@@ -763,6 +774,7 @@ denningOnline
                 v24 = refactorService.convertFloat(angular.element('.rm24').val());
 
             model.decRM25 = v4 + v5 + v6 + v23 + v24;
+            model.tmp.tlod = v4 + v5;
           }, 200);
         };
 

@@ -1055,7 +1055,7 @@
     <h4 class="m-b-15 group-label">{{ userInfo.TaxName }} on Price <span class="pull-right m-r-30 f-14 c-black">Rate : 
       <md-autocomplete
       ng-disabled="!model.tmp.can_edit"
-      md-selected-item="model.decPriceGst"
+      md-selected-item="model.tmp.decPriceGst"
       md-items="item in queryTaxes()"
       md-item-text="item"
       md-min-length="0"
@@ -1779,7 +1779,7 @@
     <label for="inputEmail3" class="col-sm-4 attr-label-1">TL + OD</label>
     <div class="col-sm-8">
       <div class="fg-line">
-        <input type="text" ng-model="model.strF100" ng-readonly="!model.tmp.can_edit" class="form-control input-sm text-right">
+        <label class="form-control text-right">{{ model.tmp.tlod|number:2 }}</label>
       </div>
     </div>
   </div>
