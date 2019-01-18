@@ -775,6 +775,7 @@ denningOnline
 
             model.decRM25 = v4 + v5 + v6 + v23 + v24;
             model.tmp.tlod = v4 + v5;
+            model.tmp.diffSum = refactorService.convertFloat(model.decRM19) - v4 - v5;
           }, 200);
         };
 

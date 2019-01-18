@@ -2578,19 +2578,19 @@
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Deposit</dt>
-        <dd>{{ model.decRM2 }}</dd>
+        <dd>{{ model.decRM2|number:2 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Balance PP</dt>
-        <dd>{{ model.decRM19 }}</dd>
+        <dd>{{ model.decRM19|number:2 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
-        <dt>Loan</dt>
-        <dd>{{ model.strName1 }}</dd>
+        <dt>Loan [TL + OD]</dt>
+        <dd>{{ model.tmp.tlod|number:2 }}</dd>
       </dl>
       <dl class="dl-horizontal m-b-10">
         <dt>Diff Sum</dt>
-        <dd>{{ model.strName1 }}</dd>
+        <dd>{{ model.tmp.diffSum|number:2 }}</dd>
       </dl>
 
       <h4 class="m-t-25 m-b-20">Loan</h4>
