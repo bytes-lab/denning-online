@@ -91,7 +91,7 @@ denningOnline
 
     service.convertCls = function (model) {
       for (var ii in model) {
-        if (ii.startsWith('cls') && model[ii] && !model[ii].code) {
+        if (ii.startsWith('cls') && model[ii] && !model[ii].code && !model[ii].strFileNo1) {
           model[ii] = null;
         }
       }

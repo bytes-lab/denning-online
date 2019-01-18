@@ -18,7 +18,7 @@
 
     <div class="card-body card-padding">
       <div class="clearfix"></div>
-      <h4>Court Diary Information</h4>
+      <h4>Enter Hearing Date</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
@@ -64,10 +64,25 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Place</dt>
+            <dt class="p-t-10">Counsel Assigned</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.clsCourtPlace.strPlace">
+              <div class="d-flex">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strCounselAssigned"
+                  md-search-text="qsca"
+                  md-items="item in vm.queryStaff(qsca)"
+                  md-item-text="item.strName"
+                  md-min-length="0"
+                  md-selected-item-change="vm.caChange(item)"
+                  class="default-input wp-100-btn-1">
+                  <md-item-template>
+                    <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
+                  </md-item-template>
+                </md-autocomplete>
+                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.staffDialog('strCounselAssigned')">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
+                </a>
               </div>
             </dd>
           </dl>
@@ -115,11 +130,20 @@
               </div>
             </dd>
           </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Place</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.clsCourtPlace.strPlace">
+              </div>
+            </dd>
+          </dl>
         </div>
       </div>
       <div class="clearfix"></div>
+      <h4>Enter Court Attendance</h4>
       <div class="row">
-        <div class="col-md-10 m-b-5" style="margin-left: 190px;">
+        <div class="col-md-10 m-b-5 m-t-10" style="margin-left: 190px;">
           <label class="radio radio-inline m-b-15 m-l-0 m-r-25">
             <input type="radio" value="1-Attended" ng-model="vm.clsAttendedStatus" ng-disabled="!vm.can_edit">
             <i class="input-helper"></i>
@@ -255,18 +279,29 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt>
-              <div class="checkbox">
-                <label class="f-700">
-                  <input type="checkbox" ng-model="vm.entity.boolChkNextDate" ng-disabled="!vm.can_edit" ng-change="vm.checkNextDate();">
-                  <i class="input-helper"></i>
-                  Next Date
-                </label>
-              </div>
-            </dt>
+            <dt class="p-t-10">Next Date</dt>
             <dd>
               <div class="fg-line">
                 <input ng-click="open($event, 'ctopenednd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="ctopenednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit || !vm.entity.boolChkNextDate" ng-required="true" close-text="Close" placeholder="Select Date" />
+              </div>
+              <div class="m-b-10">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="propertyType" value="1" ng-model="vm.entity.strPropertyType">
+                    <i class="input-helper"></i>
+                    No next date
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="propertyType" value="2" ng-model="vm.entity.strPropertyType">
+                    <i class="input-helper"></i>
+                    Next date to be given
+                  </label>
+                </div>
+                <div>
+                  <a class="btn bgm-cyan btn-sm m-l-5" ng-click="" ng-if="vm.userInfo.priority.courtdiary.update && !vm.can_edit">Save New Hearing Date</a>
+                </div>
               </div>
             </dd>
           </dl>

@@ -73,9 +73,9 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
 
-        if (self.entity.strFileNo1) {
+        if (self.entity.clsFileNo1 && self.entity.clsFileNo1.strFileNo1) {
           self.rmatter = {
-            key: self.entity.strFileNo1
+            key: self.entity.clsFileNo1.strFileNo1
           }
         }
 
@@ -114,7 +114,7 @@ denningOnline
 
     self.matterChange = function (item) {
       if (item) {
-        self.entity.strFileNo1 = item.key;
+        self.entity.clsFileNo1.strFileNo1 = item.key;
       }
     }
 
