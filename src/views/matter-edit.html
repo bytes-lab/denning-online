@@ -990,7 +990,7 @@
   <div class="form-group">
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label-220">Purchase Price [A]</label>
+        <label class="form-control attr-label-220">Price [A]</label>
         <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm1 wp-30" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM1" ng-blur="calcForm(model)">
       </div>
     </div>
@@ -1021,7 +1021,7 @@
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label-220">Balance Purchase Price [E] = A - D</label>
+        <label class="form-control attr-label-220">Balance Price [E] = A - D</label>
         <label class="form-control text-right wp-30">{{ model.decRM19|number:2 }}</label>
       </div>
     </div>
@@ -1034,28 +1034,45 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    <h4 class="m-b-15 group-label">{{ userInfo.TaxName }} on Price <span class="pull-right m-r-30 f-14 c-black">Rate : 
-      <md-autocomplete
-      ng-disabled="!model.tmp.can_edit"
-      md-selected-item="model.tmp.decPriceGst"
-      md-items="item in queryTaxes()"
-      md-item-text="item"
-      md-min-length="0"
-      md-selected-item-change="taxChange(item)"
-      class="default-input currency-select">
-      <md-item-template>
-        <span md-highlight-text="searchText" md-highlight-flags="i">
-          {{ item }}
-        </span>
-      </md-item-template>
-    </md-autocomplete>
-    </span></h4>
+    <h4 class="m-b-15 group-label">{{ userInfo.TaxName }} on Price 
+      <span class="pull-right m-r-30 m-l-30 f-14 c-black">Rate : 
+        <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.tmp.decPriceGst"
+        md-items="item in queryTaxes()"
+        md-item-text="item"
+        md-min-length="0"
+        md-selected-item-change="taxChange(item)"
+        class="default-input currency-select">
+        <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="i">
+            {{ item }}
+          </span>
+        </md-item-template>
+      </md-autocomplete>
+      </span>
+      <span class="pull-right m-r-30 f-14 c-black">Type : 
+        <md-autocomplete
+        ng-disabled="!model.tmp.can_edit"
+        md-selected-item="model.strTaxKind"
+        md-items="item in ['SST', 'GST', 'VAT']"
+        md-item-text="item"
+        md-min-length="0"
+        class="default-input currency-select">
+        <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="i">
+            {{ item }}
+          </span>
+        </md-item-template>
+      </md-autocomplete>
+      </span>
+    </h4>
     <div class="col-md-12">
       <div class="col-md-2 p-l-5">
         <div class="form-control f-500 attr-label-210"></div>
         <div class="form-control f-500 attr-label-210 m-t-15">Price Before Tax [G]</div>
-        <div class="form-control f-500 attr-label-210 m-t-10">Tax Amount [H]</div>
-        <div class="form-control f-500 attr-label-210 m-t-15">Price + Tax [ G + H ]</div>
+        <div class="form-control f-500 attr-label-210 m-t-5">Tax Amount [H]</div>
+        <div class="form-control f-500 attr-label-210 m-t-5">Price + Tax [ I ] = G + H</div>
       </div>
       <div class="col-md-3 p-l-5">
         <div class="form-control f-500 attr-label-210">
@@ -1067,9 +1084,9 @@
             </label>
           </div>
         </div>
-        <input type="text" class="form-control text-right m-t-10" readonly ng-model="n1d">
-        <input type="text" class="form-control text-right m-t-10" readonly ng-model="model.decRM36">
-        <input type="text" class="form-control text-right m-t-10" readonly ng-model="n3d">
+        <label class="form-control text-right p-t-5">{{ n1d|number:2 }}</label>
+        <label class="form-control text-right p-t-5">{{ model.decRM36|number:2 }}</label>
+        <label class="form-control text-right p-t-5">{{ n3d|number:2 }}</label>
       </div>
       <div class="col-md-3 p-l-5">
         <div class="form-control f-500 attr-label-210">
@@ -1098,25 +1115,25 @@
     <h4 class="m-b-15 group-label">Extra Price</h4>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label-210">Extra 1 [ I ]</label>
+        <label class="form-control attr-label-210">Extra 1 [J]</label>
         <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm3 wp-30" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM3" ng-change="calcForm(model)">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label-210">Extra 2 [J]</label>
+        <label class="form-control attr-label-210">Extra 2 [K]</label>
         <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm20 wp-30" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM20" ng-change="calcForm(model)">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label-210">Extra 3 [K]</label>
+        <label class="form-control attr-label-210">Extra 3 [L]</label>
         <input type="text" data-input-mask="{ mask: '000,000,000,000,000.00', reverse: true }" class="form-control text-right rm21 wp-30" ng-readonly="!model.tmp.can_edit" ng-model="model.decRM21" ng-change="calcForm(model)">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label-210">Total [ A + I + J + K ]</label>
+        <label class="form-control attr-label-210">Total [ A + J + K + L ]</label>
         <label class="form-control text-right wp-30">{{ model.decRM22|number:2 }}</label>
       </div>
     </div>  

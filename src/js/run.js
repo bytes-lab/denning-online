@@ -654,6 +654,7 @@ denningOnline
         }
 
         $scope.taxType = "1";
+        $scope.model.strTaxKind = 'SST';
 
         if ($scope.model.decPriceGst) {
           $scope.model.tmp.decPriceGst = parseInt($scope.model.decPriceGst) + ' %';
@@ -664,17 +665,17 @@ denningOnline
               A = refactorService.convertFloat($scope.model.decRM1);
 
           if ($scope.taxType == "1") {
-            $scope.n1d = A.toFixed(2);
+            $scope.n1d = A;
             $scope.model.decRM36 = 0;
-            $scope.n3d = A.toFixed(2);
+            $scope.n3d = A;
           } else if ($scope.taxType == "2") {
-            $scope.n1d = (A * 100 / (100 + R)).toFixed(2);
-            $scope.model.decRM36 = (A * R / (100 + R)).toFixed(2);
-            $scope.n3d = A.toFixed(2);
+            $scope.n1d = A * 100 / (100 + R);
+            $scope.model.decRM36 = A * R / (100 + R);
+            $scope.n3d = A;
           } else {
-            $scope.n1d = A.toFixed(2);
-            $scope.model.decRM36 = (A * R / 100).toFixed(2);
-            $scope.n3d = (A + A * R / 100).toFixed(2);
+            $scope.n1d = A;
+            $scope.model.decRM36 = A * R / 100;
+            $scope.n3d = A + A * R / 100;
           }
         }
 
