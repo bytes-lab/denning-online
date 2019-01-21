@@ -612,6 +612,7 @@ denningOnline
             $scope.model.strF2 = item.strTypeE;
           } else {
             $scope.model.strF2 = null;
+            $scope.courtPlace = null;
           }
         }
 
@@ -619,6 +620,9 @@ denningOnline
           if (item) {
             $scope.model.strF1 = item.code;
             $scope.model.strF8 = item.strPlace + ' ' + item.strState;
+          } else {
+            $scope.model.strF1 = '';
+            $scope.model.strF8 = '';
           }
         }
 

@@ -462,14 +462,14 @@
         </div>
       </div>
 
-      <h4 class="m-t-25 p-t-5">Mailing Address</h4>
-      <div class="row">
+      <h4 class="m-t-25 p-t-5" ng-click="vm.showMailingAddress=!vm.showMailingAddress">Mailing Address&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="vm.showMailingAddress"></i><i class="zmdi zmdi-minus" ng-if="!vm.showMailingAddress"></i></h4>
+      <div class="row" ng-show="!vm.showMailingAddress">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Client Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strName" readonly type="text" class="form-control" camel-case-tail-comma>
+                <input value="{{ vm.entity.strName|uppercase }}" readonly type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -532,10 +532,10 @@
             </dd>
           </dl>
           <dl class="dl-horizontal p-t-10">
-            <dt class="p-t-10">Registered Address</dt>
+            <dt class="p-t-10">Full Address</dt>
             <dd>
               <div class="fg-line">
-                <textarea class="form-control p-l-10" readonly rows="4" ng-model="vm.entity.strRegOff" camel-case></textarea>
+                <textarea class="form-control p-l-10" readonly rows="4">{{ vm.entity.strAddressLine1 }}{{ vm.entity.strAddressLine2 }}{{ vm.entity.strAddressLine3 }}{{ vm.entity.strPostCode }} {{ vm.entity.strCity }}, {{ vm.entity.strState }}, {{ vm.entity.strCountry }}</textarea>
               </div>
             </dd>
           </dl>

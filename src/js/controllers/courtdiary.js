@@ -61,7 +61,7 @@ denningOnline
 
   .controller('courtdiaryEditCtrl', function($state, $uibModal, $stateParams, refactorService, staffService,
                                              Auth, $scope, growlService, courtdiaryService, judgeService,
-                                             matterService, contactService) 
+                                             matterService, contactService, courtService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -75,7 +75,7 @@ denningOnline
 
         if (self.entity.clsFileNo1 && self.entity.clsFileNo1.strFileNo1) {
           self.rmatter = {
-            key: self.entity.clsFileNo1.strFileNo1
+            Title: self.entity.clsFileNo1.strFileNo1 + ' (' + self.entity.clsFileNo1.clsPrimaryClient.strName + ')'
           }
         }
 
@@ -100,9 +100,17 @@ denningOnline
         if (self.entity.clsAttendedStatus) {
           self.clsAttendedStatus = self.entity.clsAttendedStatus.code+"-"+self.entity.clsAttendedStatus.description;
         }
+
+        if (self.entity.clsCourtPlace && self.entity.clsCourtPlace) {
+          self.court = {
+            strTypeE: self.entity.clsCourtPlace.strTypeE
+          }
+        }
       });
     } else {
-      self.entity = {};
+      self.entity = {
+        clsFileNo1: {}
+      };
       self.clsAttendedStatus = '0-None';
     }
 
@@ -114,7 +122,32 @@ denningOnline
 
     self.matterChange = function (item) {
       if (item) {
+        if (!self.entity.clsFileNo1) {
+          self.entity.clsFileNo1 = {};
+        }
         self.entity.clsFileNo1.strFileNo1 = item.key;
+      }
+    }
+
+    self.queryCourts = function (searchText) {
+      return courtService.getTypeList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      })
+    }
+
+    self.queryCourtPlaces = function (searchText) {
+      if (self.court) {
+        return courtService.getList(1, 10, searchText, self.court.strTypeE).then(function (resp) {
+          return resp.data;
+        })        
+      } else {
+        return [];
+      }
+    }
+
+    self.courtChange = function (item) {
+      if (!item) {
+        self.entity.clsCourtPlace = null;
       }
     }
 
@@ -248,6 +281,32 @@ denningOnline
       });
     }
 
+    self.save_new_hearing = function () {
+      self.entity.clsAttendedStatus = {
+        code: self.clsAttendedStatus.split('-')[0],
+        description: self.clsAttendedStatus.split('-')[1]
+      }
+
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      courtdiaryService.save(entity).then(function (entity) {
+        self.entity.dtPreviousDate = self.entity.dtEventDate;
+        self.entity.dtEventDate = self.entity.dtNextDate;
+
+        self.create_new = true;
+        self.can_edit = true;
+        self.entity_ = null;
+        self.entity = refactorService.removeEmpty(self.entity);
+
+        var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'clsEnteredBy',
+                          'clsUpdatedBy', 'dtNextDate'];
+        for (ii in deleteList) {
+          key = deleteList[ii];
+          delete self.entity[key];
+        }
+      });
+
+    }
+
     self.cancel = function () {
       $state.go('courtdiary');
     }
@@ -271,7 +330,7 @@ denningOnline
         keyboard: true,
         resolve: {
           entity: function () {
-            return entity;
+            return self.entity;
           }, 
           on_list: function () {
             return false;

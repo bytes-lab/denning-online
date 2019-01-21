@@ -19,28 +19,54 @@ denningOnline
     }   
   })
 
-  .controller('occupationEditCtrl', function($filter, $stateParams, occupationService, $state) {
+  .controller('occupationEditCtrl', function($stateParams, occupationService, $state, refactorService, 
+                                             growlService, $uibModalInstance, Auth,
+                                             entityCode, isDialog, isNew) {
     var self = this;
-    self.save = save;
+    self.userInfo = Auth.getUserInfo();
+    self._type = 'occupation';
 
-    if($stateParams.id) {
-      occupationService.getItem($stateParams.id)
-      .then(function(item){
-        self.occupation = item;
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
+
+    if (self.entityCode) {
+      self.title = 'Edit Occupation';
+      occupationService.getItem(self.entityCode).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+        self.popoutUrl = $state.href('occupations.edit', { id: self.entity.code });
       });
     } else {
-      self.occupation = {};
+      self.title = 'New Occupation';
+      self.entity = {}
+      self.popoutUrl = $state.href('occupations.new');
     }
 
-    function save() {
-      occupationService.save(self.occupation).then(function(occupation) {
-        self.occupation = occupation;
-        $state.go('occupations.list');
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.occupationInfo.$error.push({meessage:''});
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      occupationService.save(entity).then(function (item) {
+        if (item) {
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('occupations.edit', { 'id': item.code });
+            }
+            growlService.growl('Saved successfully!', 'success');
+          }
+        }
       });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('occupations.list');
+      }
     }
   })

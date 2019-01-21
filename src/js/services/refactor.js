@@ -8,7 +8,7 @@ denningOnline
 
     service.removeEmpty = function (model) {
       angular.forEach(model, function(value, key) {
-        if (!value || value.code !== undefined && !value.code) {
+        if (!value || value.code == "" || value.strFileNo1 == "") {
           delete model[key];
         }
       })

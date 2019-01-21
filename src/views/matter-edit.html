@@ -861,7 +861,7 @@
       <div class="d-flex">
         <label class="form-control attr-label">Place</label>
         <md-autocomplete
-          ng-disabled="!model.tmp.can_edit"
+          ng-disabled="!model.tmp.can_edit || !court"
           md-selected-item="courtPlace"
           md-search-text="qscp"
           md-items="item in queryCourtPlaces(qscp)"

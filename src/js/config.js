@@ -967,7 +967,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'occupationEditCtrl as vm',
-        templateUrl: 'views/occupation-edit.html'
+        templateUrl: 'views/occupation-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('occupations.new', {
         data: {
@@ -975,7 +989,21 @@ denningOnline
         },
         url: '/new',
         controller: 'occupationEditCtrl as vm',
-        templateUrl: 'views/occupation-edit.html'
+        templateUrl: 'views/occupation-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       }) 
 
 
