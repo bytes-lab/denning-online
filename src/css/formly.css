@@ -21,6 +21,13 @@
   -webkit-box-shadow: none; 
 }
 
+.attr-label-flex {
+  border: 0; 
+  background: #fafafa;
+  margin: 0px;
+  -webkit-box-shadow: none; 
+}
+
 .attr-label-210 {
   border: 0; 
   background: #fafafa;
