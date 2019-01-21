@@ -156,9 +156,30 @@ denningOnline
           "groups": [
             {
               "type": "summary",
-              "templateOptions": { }
+              "templateOptions": { 
+              }
             }
-          ]          
+          ]
+        },
+        "Summary (L)": {
+          "groups": [
+            {
+              "type": "summary",
+              "templateOptions": {
+                type: "L"
+              }
+            }
+          ]
+        },
+        "Summary (A)": {
+          "groups": [
+            {
+              "type": "summary",
+              "templateOptions": {
+                type: "A"
+              }
+            }
+          ]
         },
         "Parties-S": {
           "groups": [

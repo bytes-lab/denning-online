@@ -36,7 +36,7 @@ denningOnline
       selected: []
     };
 
-    self.tabList = ['Summary', 'Matter', 'Parties-S', 'Parties', 'Solicitors', 
+    self.tabList = ['Summary', 'Summary (L)', 'Summary (A)', 'Matter', 'Parties-S', 'Parties', 'Solicitors', 
                     'Case', 'Price', 'Loan', 'Loan (T)', 'Property', 'Bank', '$', 'Date', 'Text',
                     'Template', 'Premises & Rent', 'Term', 'Tenancy', 'Vehicles', 
                     'Others', 'Estate Agent', 'Reports', 'Arrears', 'Beneficiary',

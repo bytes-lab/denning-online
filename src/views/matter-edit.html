@@ -2584,117 +2584,124 @@
         <dd>{{ property.strBlockMasterTitleAdd }}</dd>
       </dl>
 
-      <h4 class="m-t-25 m-b-20">Price</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Purchase Price</dt>
-        <dd>{{ model.decRM1 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Earnest Deposit</dt>
-        <dd>{{ model.decRM17 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Balance Deposit</dt>
-        <dd>{{ model.decRM18 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Deposit</dt>
-        <dd>{{ model.decRM2|number:2 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Balance PP</dt>
-        <dd>{{ model.decRM19|number:2 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Loan [TL + OD]</dt>
-        <dd>{{ model.tmp.tlod|number:2 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Diff Sum</dt>
-        <dd>{{ model.tmp.diffSum|number:2 }}</dd>
-      </dl>
+      <h4 class="m-t-25 m-b-20" ng-if="to.type != 'L'">Price</h4>
+      <div ng-if="to.type != 'L'">
+        <dl class="dl-horizontal m-b-10">
+          <dt>Purchase Price</dt>
+          <dd>{{ model.decRM1 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Earnest Deposit</dt>
+          <dd>{{ model.decRM17 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Balance Deposit</dt>
+          <dd>{{ model.decRM18 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Deposit</dt>
+          <dd>{{ model.decRM2|number:2 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Balance PP</dt>
+          <dd>{{ model.decRM19|number:2 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Loan [TL + OD]</dt>
+          <dd>{{ model.tmp.tlod|number:2 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Diff Sum</dt>
+          <dd>{{ model.tmp.diffSum|number:2 }}</dd>
+        </dl>
+      </div>
 
-      <h4 class="m-t-25 m-b-20">Loan</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Loan Type</dt>
-        <dd>{{ model.strF3 }} <span ng-if="model.strF4"> ( {{ model.strF4 }} )</span></dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Term Loan</dt>
-        <dd>{{ model.decRM4 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>OD Loan</dt>
-        <dd>{{ model.decRM5 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>+ MRTA</dt>
-        <dd>{{ model.decRM6 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>+ Legal Fee</dt>
-        <dd>{{ model.decRM23 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>+ Other</dt>
-        <dd>{{ model.decRM24 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-25">
-        <dt>Total Loan</dt>
-        <dd>{{ model.decRM25 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Bank Purchase Price</dt>
-        <dd>{{ model.decRM8 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Bank Selling Price</dt>
-        <dd>{{ model.decRM9 }}</dd>
-      </dl>
+      <h4 class="m-t-25 m-b-20" ng-if="to.type != 'A'">Loan</h4>
+      <div ng-if="to.type != 'A'">
+        <dl class="dl-horizontal m-b-10">
+          <dt>Loan Type</dt>
+          <dd>{{ model.strF3 }} <span ng-if="model.strF4"> ( {{ model.strF4 }} )</span></dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Term Loan</dt>
+          <dd>{{ model.decRM4 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>OD Loan</dt>
+          <dd>{{ model.decRM5 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>+ MRTA</dt>
+          <dd>{{ model.decRM6 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>+ Legal Fee</dt>
+          <dd>{{ model.decRM23 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>+ Other</dt>
+          <dd>{{ model.decRM24 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-25">
+          <dt>Total Loan</dt>
+          <dd>{{ model.decRM25 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Bank Purchase Price</dt>
+          <dd>{{ model.decRM8 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Bank Selling Price</dt>
+          <dd>{{ model.decRM9 }}</dd>
+        </dl>
+      </div>
 
-      <h4 class="m-t-25 m-b-20">{{ getLabel('clsBank1') }} </h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Bank</dt>
-        <dd>{{ model.clsBank1.clsBankCode.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Branch</dt>
-        <dd>{{ model.clsBank1.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Ref</dt>
-        <dd>{{ model.strBank1Ref }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Redemption Amt</dt>
-        <dd>{{ model.decRM10 }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Redemption Date</dt>
-        <dd>{{ model.dtDate15|ddate }}</dd>
-      </dl>
+      <h4 class="m-t-25 m-b-20" ng-if="to.type != 'A'">{{ getLabel('clsBank1') }} </h4>
+      <div ng-if="to.type != 'A'">
+        <dl class="dl-horizontal m-b-10">
+          <dt>Bank</dt>
+          <dd>{{ model.clsBank1.clsBankCode.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Branch</dt>
+          <dd>{{ model.clsBank1.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Ref</dt>
+          <dd>{{ model.strBank1Ref }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Redemption Amt</dt>
+          <dd>{{ model.decRM10 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Redemption Date</dt>
+          <dd>{{ model.dtDate15|ddate }}</dd>
+        </dl>
 
-      <h4 class="m-t-25 m-b-20">{{ getLabel('clsBank2') }}</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Bank</dt>
-        <dd>{{ model.clsBank2.clsBankCode.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Branch</dt>
-        <dd>{{ model.clsBank2.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Ref</dt>
-        <dd>{{ model.strBank2Ref }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>LO Date</dt>
-        <dd>{{ model.dtDate8|ddate }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Instruction Date</dt>
-        <dd>{{ model.dtDate9|ddate }}</dd>
-      </dl>
+      <h4 class="m-t-25 m-b-20" ng-if="to.type != 'A'">{{ getLabel('clsBank2') }}</h4>
+      <div ng-if="to.type != 'A'">
+        <dl class="dl-horizontal m-b-10">
+          <dt>Bank</dt>
+          <dd>{{ model.clsBank2.clsBankCode.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Branch</dt>
+          <dd>{{ model.clsBank2.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Ref</dt>
+          <dd>{{ model.strBank2Ref }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>LO Date</dt>
+          <dd>{{ model.dtDate8|ddate }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Instruction Date</dt>
+          <dd>{{ model.dtDate9|ddate }}</dd>
+        </dl>
+      </div>
     </div>
   </div>
 </script>
