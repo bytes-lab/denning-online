@@ -865,7 +865,7 @@
           md-selected-item="courtPlace"
           md-search-text="qscp"
           md-items="item in queryCourtPlaces(qscp)"
-          md-item-text="item.strPlace+', '+item.strState"
+          md-item-text="item.strPlace"
           md-no-cache="true"
           md-min-length="0"
           md-selected-item-change="courtPlaceChange(item)"
@@ -912,8 +912,8 @@
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label">Case Name</label>
-        <input type="text" class="form-control wp-45" ng-model="model.strF5">
+        <label class="form-control attr-label">Full Case Name</label>
+        <input type="text" class="form-control wp-45" ng-model="model.strF50">
       </div>
     </div>
     <div class="form-group col-md-12">

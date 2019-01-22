@@ -562,11 +562,15 @@ denningOnline
         }
 
         if ($scope.model.strF3) {
-          $scope.caseType = { strEnglish: $scope.model.strF3 };
+          caseService.getItem($scope.model.strF3).then(function (resp) {
+            $scope.caseType = resp;
+          })
         }
 
-        if ($scope.model.strF8) {
-          $scope.courtPlace = { strPlace: $scope.model.strF8 };
+        if ($scope.model.strF1) {
+          courtService.getItem($scope.model.strF1).then(function (resp) {
+            $scope.courtPlace = resp;
+          })
         }
 
         $scope.judgeDialog = function(key, viewMode) {
@@ -617,19 +621,16 @@ denningOnline
         }
 
         $scope.courtPlaceChange = function (item) {
+          $scope.model.strF1 = '';
           if (item) {
             $scope.model.strF1 = item.code;
-            $scope.model.strF8 = item.strPlace + ' ' + item.strState;
-          } else {
-            $scope.model.strF1 = '';
-            $scope.model.strF8 = '';
           }
         }
 
         $scope.caseTypeChange = function (item) {
           $scope.model.strF3 = null;
           if (item) {
-            $scope.model.strF3 = item.strEnglish;
+            $scope.model.strF3 = item.code;
           }
         }
       }
