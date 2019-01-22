@@ -238,6 +238,7 @@
         md-item-text="item.strName ? item.strName+' ( '+item.strIDNo+' )': ' '"
         md-min-length="0"
         md-autoselect="false"
+        md-selected-item-change="getFullCaseName()"
         class="default-input wp-70">
       <md-item-template>
         <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{item.strName}}</span>
@@ -862,7 +863,7 @@
         <label class="form-control attr-label">Place</label>
         <md-autocomplete
           ng-disabled="!model.tmp.can_edit || !court"
-          md-selected-item="courtPlace"
+          md-selected-item="model.tmp.courtPlace"
           md-search-text="qscp"
           md-items="item in queryCourtPlaces(qscp)"
           md-item-text="item.strPlace"
@@ -889,7 +890,7 @@
         <label class="form-control attr-label">Case Type</label>
         <md-autocomplete
           ng-disabled="!model.tmp.can_edit"
-          md-selected-item="caseType"
+          md-selected-item="model.tmp.caseType"
           md-search-text="qsct"
           md-items="item in queryCaseTypes(qsct)"
           md-item-text="item.strEnglish"
@@ -907,13 +908,13 @@
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Case No.</label>
-        <input type="text" class="form-control wp-45" ng-model="model.strF4">
+        <input type="text" class="form-control wp-45" ng-model="model.strF4" ng-readonly="!model.tmp.can_edit">
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
         <label class="form-control attr-label">Full Case Name</label>
-        <input type="text" class="form-control wp-45" ng-model="model.strF50">
+        <label class="form-control wp-45 p-t-5">{{ model.tmp.caseFullName }}</label>
       </div>
     </div>
     <div class="form-group col-md-12">
@@ -2511,19 +2512,41 @@
     </div>
     <div class="col-md-5 second">
       <div ng-if="model.strF2">
-        <h4 class="m-t-25 m-b-20">Case Name</h4>
-        <dl class="dl-horizontal m-b-10">
-          <dt>Full Case Name</dt>
-          <dd>{{ model.strF211 }}</dd>
-        </dl>
-        <dl class="dl-horizontal m-b-10">
-          <dt>Court</dt>
-          <dd>{{ model.strF2 }}</dd>
-        </dl>
-        <dl class="dl-horizontal m-b-10">
-          <dt>Case No</dt>
-          <dd>{{ model.strF4 }}</dd>
-        </dl>
+        <h4 class="m-t-25 m-b-20" ng-if="to.case">Case Name</h4>
+        <div ng-if="to.case">
+          <dl class="dl-horizontal m-b-10">
+            <dt>Full Case Name</dt>
+            <dd>{{ model.tmp.caseFullName }}</dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Court</dt>
+            <dd>{{ model.strF2 }}</dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Place</dt>
+            <dd>{{ model.tmp.courtPlace.strPlace }}</dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Case No</dt>
+            <dd>{{ model.strF4 }}</dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Court No</dt>
+            <dd>{{ model.strPn4 }}</dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Case Type</dt>
+            <dd>{{ model.tmp.caseType.strEnglish }}</dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>SAR</dt>
+            <dd>{{ model.clsJ1_F6.strName }}</dd>
+          </dl>
+          <dl class="dl-horizontal m-b-10">
+            <dt>Judge</dt>
+            <dd>{{ model.clsJ2_F7.strName }}</dd>
+          </dl>
+        </div>
       </div>
 
       <h4 class="m-t-25 m-b-20">{{ getLabel('clsP1') }}</h4>
@@ -2584,8 +2607,8 @@
         <dd>{{ property.strBlockMasterTitleAdd }}</dd>
       </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="to.type != 'L'">Price</h4>
-      <div ng-if="to.type != 'L'">
+      <h4 class="m-t-25 m-b-20" ng-if="to.price">Price</h4>
+      <div ng-if="to.price">
         <dl class="dl-horizontal m-b-10">
           <dt>Purchase Price</dt>
           <dd>{{ model.decRM1 }}</dd>
@@ -2616,8 +2639,8 @@
         </dl>
       </div>
 
-      <h4 class="m-t-25 m-b-20" ng-if="to.type != 'A'">Loan</h4>
-      <div ng-if="to.type != 'A'">
+      <h4 class="m-t-25 m-b-20" ng-if="to.loan">Loan</h4>
+      <div ng-if="to.loan">
         <dl class="dl-horizontal m-b-10">
           <dt>Loan Type</dt>
           <dd>{{ model.strF3 }} <span ng-if="model.strF4"> ( {{ model.strF4 }} )</span></dd>
@@ -2656,8 +2679,8 @@
         </dl>
       </div>
 
-      <h4 class="m-t-25 m-b-20" ng-if="to.type != 'A'">{{ getLabel('clsBank1') }} </h4>
-      <div ng-if="to.type != 'A'">
+      <h4 class="m-t-25 m-b-20" ng-if="to.loan">{{ getLabel('clsBank1') }} </h4>
+      <div ng-if="to.loan">
         <dl class="dl-horizontal m-b-10">
           <dt>Bank</dt>
           <dd>{{ model.clsBank1.clsBankCode.strName }}</dd>
@@ -2679,8 +2702,8 @@
           <dd>{{ model.dtDate15|ddate }}</dd>
         </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="to.type != 'A'">{{ getLabel('clsBank2') }}</h4>
-      <div ng-if="to.type != 'A'">
+      <h4 class="m-t-25 m-b-20" ng-if="to.loan">{{ getLabel('clsBank2') }}</h4>
+      <div ng-if="to.loan">
         <dl class="dl-horizontal m-b-10">
           <dt>Bank</dt>
           <dd>{{ model.clsBank2.clsBankCode.strName }}</dd>

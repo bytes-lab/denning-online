@@ -192,6 +192,34 @@ denningOnline
           }
         }
 
+        $scope.getFullCaseName = function () {
+          var plantiff = '', defendant = '';
+          if ($scope.model.clsC1) {
+            plantiff = $scope.model.clsC1.strName;
+            if ($scope.model.clsC2) {
+              if ($scope.model.clsC3) {
+                plantiff += ' & others';
+              } else {
+                plantiff += ' & another';
+              }
+            }
+          }
+
+          if ($scope.model.clsC6) {
+            defendant = $scope.model.clsC6.strName;
+            if ($scope.model.clsC7) {
+              if ($scope.model.clsC8) {
+                defendant += ' & others';
+              } else {
+                defendant += ' & another';
+              }
+            }
+          }
+
+          $scope.model.tmp.caseFullName = plantiff + ' vs ' + defendant;
+        }
+
+        $scope.getFullCaseName();
         $scope.range = function (min, max, step) {
           return range(min, max, step);
         };
@@ -563,13 +591,13 @@ denningOnline
 
         if ($scope.model.strF3) {
           caseService.getItem($scope.model.strF3).then(function (resp) {
-            $scope.caseType = resp;
+            $scope.model.tmp.caseType = resp;
           })
         }
 
         if ($scope.model.strF1) {
           courtService.getItem($scope.model.strF1).then(function (resp) {
-            $scope.courtPlace = resp;
+            $scope.model.tmp.courtPlace = resp;
           })
         }
 
@@ -616,7 +644,7 @@ denningOnline
             $scope.model.strF2 = item.strTypeE;
           } else {
             $scope.model.strF2 = null;
-            $scope.courtPlace = null;
+            $scope.model.tmp.courtPlace = null;
           }
         }
 

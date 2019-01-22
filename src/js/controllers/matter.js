@@ -156,7 +156,10 @@ denningOnline
           "groups": [
             {
               "type": "summary",
-              "templateOptions": { 
+              "templateOptions": {
+                case: true,
+                price: true,
+                loan: true
               }
             }
           ]
@@ -166,7 +169,21 @@ denningOnline
             {
               "type": "summary",
               "templateOptions": {
-                type: "L"
+                case: false,
+                price: false,
+                loan: true
+              }
+            }
+          ]
+        },
+        "Summary (LT)": {
+          "groups": [
+            {
+              "type": "summary",
+              "templateOptions": {
+                case: true,
+                price: false,
+                loan: false
               }
             }
           ]
@@ -176,7 +193,9 @@ denningOnline
             {
               "type": "summary",
               "templateOptions": {
-                type: "A"
+                case: false,
+                price: false,
+                loan: false
               }
             }
           ]
