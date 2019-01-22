@@ -157,7 +157,7 @@ denningOnline
             {
               "type": "summary",
               "templateOptions": {
-                case: true,
+                case: false,
                 price: true,
                 loan: true
               }

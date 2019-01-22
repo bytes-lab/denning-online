@@ -324,10 +324,19 @@ denningOnline
       }
     };
 
+    var mfs = [];
+    mfs.push(matterFormService.getList(1, 50, '', '360'));
+    mfs.push(matterFormService.getList(1, 50, '', 'Online'));
+
+    Promise.all(mfs).then(function (resp) {
+      self.forms = resp[0].data.concat(resp[1].data); 
+    });
+
     self.queryForms = function (searchText) {
-      return matterFormService.getList(1, 10, searchText, '360').then(function (resp) {
-        return resp.data; 
-      });
+      return self.forms.filter(function(c) {
+        return c.code.search(new RegExp(searchText, "i")) > -1 || 
+               c.strDisplayName.search(new RegExp(searchText, "i")) > -1;
+      });;
     };
 
     self.queryChecklist = function (searchText) {
