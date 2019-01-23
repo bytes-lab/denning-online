@@ -63,7 +63,7 @@ denningOnline
       var id = 0;
 
       angular.forEach(data.documents, function(value, key) {
-        value['folder'] = 'FILES';
+        value['folder'] = 'FILES (' + data.documents.length + ')';
         value['id'] = ++id;
         self.data.push(value);
       })
@@ -75,7 +75,7 @@ denningOnline
           self.data.push({ id: ++id, folder: folder.name });
         } else {
           angular.forEach(folder.documents, function(value, key) {
-            value['folder'] = folder.name;
+            value['folder'] = folder.name + ' ('+ folder.documents.length +')';
             value['id'] = ++id;
             self.data.push(value);
           })

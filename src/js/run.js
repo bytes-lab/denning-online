@@ -407,8 +407,16 @@ denningOnline
 
         if ($scope.model.strRelatedFile) {
           $scope.rmatter = {
+            key: $scope.model.strRelatedFile,
             Title: ': ' + $scope.model.strRelatedFile
-          }
+          };
+
+          matterService.getItem($scope.model.strRelatedFile).then(function (resp) {
+            $scope.rmatter.Title = ': ' + resp.strFileNo1 + ' (' + resp.clsPrimaryClient.strName + ')';
+            $scope.rmatterReady = true;
+          });
+        } else {
+          $scope.rmatterReady = true;
         }
 
         matterService.getFileStatusList().then(function (resp) {

@@ -781,6 +781,7 @@
       <label class="form-control attr-label">Related Matter</label>
       <md-autocomplete
         ng-disabled="!model.tmp.can_edit"
+        ng-if="rmatterReady"
         md-selected-item="rmatter"
         md-search-text="qstl"
         md-items="item in queryMatters(qstl)"
