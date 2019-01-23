@@ -584,7 +584,9 @@ denningOnline
     formlyConfig.setType({
       name: 'case',
       templateUrl: 'case.html',
-      controller: function ($scope, caseService, judgeService, courtService, sarService) {
+      controller: function ($scope, caseService, judgeService, courtService, sarService, 
+                            courtdiaryService, staffService) 
+      {
         if ($scope.model.strF2) {
           $scope.court = { strTypeE: $scope.model.strF2 };
         }
@@ -599,6 +601,22 @@ denningOnline
           courtService.getItem($scope.model.strF1).then(function (resp) {
             $scope.model.tmp.courtPlace = resp;
           })
+        }
+
+        if ($scope.model.strFileNo1) {
+          courtdiaryService.getCalendar('1900-01-01', '2999-01-01', '0All', 1, 1, $scope.model.strFileNo1)
+          .then(function (data) {
+            if (data.data.length) {
+              $scope.model.tmp.courtDiary = data.data[0];
+              courtdiaryService.getItem(data.data[0].code).then(function (resp) {
+                if (resp.strCounselAssigned) {
+                  staffService.getItem(resp.strCounselAssigned).then(function (resp) {
+                    $scope.model.tmp.courtDiary.strCounselAssigned = resp.strName;
+                  });
+                }
+              });
+            }
+          });
         }
 
         $scope.judgeDialog = function(key, viewMode) {

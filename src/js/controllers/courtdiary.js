@@ -86,15 +86,15 @@ denningOnline
         }
 
         if (self.entity.strCounselAssigned) {
-          self.strCounselAssigned = {
-            strName: self.entity.strCounselAssigned
-          }
+          staffService.getItem(self.entity.strCounselAssigned).then(function (resp) {
+            self.strCounselAssigned = resp;
+          });
         }
 
         if (self.entity.strCounselAttended) {
-          self.strCounselAttended = {
-            strName: self.entity.strCounselAttended
-          }
+          staffService.getItem(self.entity.strCounselAttended).then(function (resp) {
+            self.strCounselAttended = resp;
+          });
         }
 
         if (self.entity.clsAttendedStatus) {

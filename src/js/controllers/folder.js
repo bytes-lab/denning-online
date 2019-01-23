@@ -115,8 +115,7 @@ denningOnline
 
     self.preview = function (file) {
       var openFiles = ['.jpg', '.png', '.jpeg'];
-      folderService.getLink(file.URL.replace('/document/', '/getOneTimeLink/'))
-      .then(function (data) {
+      folderService.getLink(file.URL.replace('/document/', '/getOneTimeLink/')).then(function (data) {
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'preview-doc.html',

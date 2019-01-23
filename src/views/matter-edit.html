@@ -2415,7 +2415,7 @@
       </dl>
 
       <div ng-if="model.clsLawyer1.strName">
-        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer1') }}</h4>
+        <h4 class="m-t-25 m-b-20">{{ model.clsMatterCode.strGroupL1 }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer1.strName }}</dd>
@@ -2439,7 +2439,7 @@
       </div>
 
       <div ng-if="model.clsLawyer2.strName">
-        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer2') }}</h4>
+        <h4 class="m-t-25 m-b-20">{{ model.clsMatterCode.strGroupL2 }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer2.strName }}</dd>
@@ -2463,7 +2463,7 @@
       </div>
 
       <div ng-if="model.clsLawyer3.strName">
-        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer3') }}</h4>
+        <h4 class="m-t-25 m-b-20">{{ model.clsMatterCode.strGroupL3 }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer3.strName }}</dd>
@@ -2487,7 +2487,7 @@
       </div>
 
       <div ng-if="model.clsLawyer4.strName">
-        <h4 class="m-t-25 m-b-20">{{ getLabel('clsLawyer4') }}</h4>
+        <h4 class="m-t-25 m-b-20">{{ model.clsMatterCode.strGroupL4 }}</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Firm</dt>
           <dd>{{ model.clsLawyer4.strName }}</dd>
@@ -2511,44 +2511,56 @@
       </div>
     </div>
     <div class="col-md-5 second">
-      <div ng-if="model.strF2">
-        <h4 class="m-t-25 m-b-20" ng-if="to.case">Case Name</h4>
-        <div ng-if="to.case">
-          <dl class="dl-horizontal m-b-10">
-            <dt>Full Case Name</dt>
-            <dd>{{ model.tmp.caseFullName }}</dd>
-          </dl>
-          <dl class="dl-horizontal m-b-10">
-            <dt>Court</dt>
-            <dd>{{ model.strF2 }}</dd>
-          </dl>
-          <dl class="dl-horizontal m-b-10">
-            <dt>Place</dt>
-            <dd>{{ model.tmp.courtPlace.strPlace }}</dd>
-          </dl>
-          <dl class="dl-horizontal m-b-10">
-            <dt>Case No</dt>
-            <dd>{{ model.strF4 }}</dd>
-          </dl>
-          <dl class="dl-horizontal m-b-10">
-            <dt>Court No</dt>
-            <dd>{{ model.strPn4 }}</dd>
-          </dl>
-          <dl class="dl-horizontal m-b-10">
-            <dt>Case Type</dt>
-            <dd>{{ model.tmp.caseType.strEnglish }}</dd>
-          </dl>
-          <dl class="dl-horizontal m-b-10">
-            <dt>SAR</dt>
-            <dd>{{ model.clsJ1_F6.strName }}</dd>
-          </dl>
-          <dl class="dl-horizontal m-b-10">
-            <dt>Judge</dt>
-            <dd>{{ model.clsJ2_F7.strName }}</dd>
-          </dl>
-        </div>
+      <h4 class="m-t-25 m-b-20" ng-if="to.case">Case Name</h4>
+      <div ng-if="to.case">
+        <dl class="dl-horizontal m-b-10">
+          <dt>Full Case Name</dt>
+          <dd>{{ model.tmp.caseFullName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Court</dt>
+          <dd>{{ model.strF2 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Place</dt>
+          <dd>{{ model.tmp.courtPlace.strPlace }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Case No</dt>
+          <dd>{{ model.strF4 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Court No</dt>
+          <dd>{{ model.strPn4 }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Case Type</dt>
+          <dd>{{ model.tmp.caseType.strEnglish }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>SAR</dt>
+          <dd>{{ model.clsJ1_F6.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Judge</dt>
+          <dd>{{ model.clsJ2_F7.strName }}</dd>
+        </dl>
       </div>
-
+      <h4 class="m-t-25 m-b-20" ng-if="to.case">Hearing Date</h4>
+      <div ng-if="to.case">
+        <dl class="dl-horizontal m-b-10">
+          <dt>Next Date</dt>
+          <dd ng-if="model.tmp.courtDiary">{{ model.tmp.courtDiary.eventStart|ddate }} ( {{ model.tmp.courtDiary.strHearingType }} )</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Previous Date</dt>
+          <dd>{{ model.tmp.courtDiary.dtPreviousDate|ddate }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Counsel Assigned</dt>
+          <dd>{{ model.tmp.courtDiary.strCounselAssigned }}</dd>
+        </dl>
+      </div>
       <h4 class="m-t-25 m-b-20">{{ getLabel('clsP1') }}</h4>
       <dl class="dl-horizontal m-b-10">
         <dt>Title</dt>
