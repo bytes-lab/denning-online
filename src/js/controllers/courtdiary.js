@@ -101,9 +101,9 @@ denningOnline
           self.clsAttendedStatus = self.entity.clsAttendedStatus.code+"-"+self.entity.clsAttendedStatus.description;
         }
 
-        if (self.entity.clsCourtPlace && self.entity.clsCourtPlace) {
+        if (self.entity.clsCourtPlace || self.entity.courtInfo) {
           self.court = {
-            strTypeE: self.entity.clsCourtPlace.strTypeE
+            strTypeE: self.entity.clsCourtPlace.strTypeE || self.entity.courtInfo.Court || ' '
           }
         }
       });

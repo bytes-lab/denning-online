@@ -120,6 +120,7 @@ var objPath = {
         "vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css",
         "vendors/bower_components/angular-material/angular-material.css",
         "vendors/bower_components/fullcalendar/dist/fullcalendar.min.css",
+        "vendors/intl-tel-input/css/intlTelInput.css",
 
         "src/css/app.min.1.css",
         "src/css/app.min.2.css",
@@ -166,6 +167,9 @@ var objPath = {
         "vendors/angular-formly/angular-formly-templates-bootstrap.js",
         "vendors/ngClipboard.js",
         "vendors/bootstrap-growl/bootstrap-growl.min.js",
+        "vendors/intl-tel-input/js/intlTelInput.min.js",
+        "vendors/intl-tel-input/js/utils.js",
+        "vendors/intl-tel-input/js/international-phone-number.js"
     ],
     JS: [
         'src/js/**/*.js',
