@@ -1787,13 +1787,13 @@
       md-selected-item="clsLoanPriceSymbol"
       md-search-text="qslps"
       md-items="item in queryCurrency(qslps)"
-      md-item-text="item.symbol+' ( '+item.code+' )'"
+      md-item-text="item.symbol"
       md-min-length="0"
       md-selected-item-change="currencyChange(item)"
       class="default-input currency-select">
       <md-item-template>
         <span md-highlight-text="searchText" md-highlight-flags="i">
-          {{ item.symbol }} ( {{ item.code }} )
+          {{ item.code }}
         </span>
       </md-item-template>
     </md-autocomplete>
@@ -2512,10 +2512,10 @@
       </div>
     </div>
     <div class="col-md-5 second">
-      <h4 class="m-t-25 m-b-20" ng-if="to.case">Case Name</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="to.case">Court Case</h4>
       <div ng-if="to.case">
         <dl class="dl-horizontal m-b-10">
-          <dt>Full Case Name</dt>
+          <dt>Case Name</dt>
           <dd>{{ model.tmp.caseFullName }}</dd>
         </dl>
         <dl class="dl-horizontal m-b-10">
@@ -2531,7 +2531,7 @@
           <dd>{{ model.strF4 }}</dd>
         </dl>
         <dl class="dl-horizontal m-b-10">
-          <dt>Court No</dt>
+          <dt>Court Room</dt>
           <dd>{{ model.strPn4 }}</dd>
         </dl>
         <dl class="dl-horizontal m-b-10">
@@ -2539,7 +2539,7 @@
           <dd>{{ model.tmp.caseType.strEnglish }}</dd>
         </dl>
         <dl class="dl-horizontal m-b-10">
-          <dt>SAR</dt>
+          <dt>SAR / DR</dt>
           <dd>{{ model.clsJ1_F6.strName }}</dd>
         </dl>
         <dl class="dl-horizontal m-b-10">

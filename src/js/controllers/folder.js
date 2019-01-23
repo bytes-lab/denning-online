@@ -15,6 +15,7 @@ denningOnline
     self.type = $stateParams.type;
     self.code = $stateParams.id;  // for contact / property
     self.keyboard = '';
+    self.keyword = '';
     self.fileType = 'all';
 
     // watch for check all checkbox
@@ -154,7 +155,10 @@ denningOnline
         },
         group: "folder"
       }, {
-        dataset: _data
+        dataset: _data,
+        groupOptions: {
+          isExpanded: self.keyword.trim()
+        }
       })
     }
 

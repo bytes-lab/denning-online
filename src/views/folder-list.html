@@ -72,7 +72,7 @@
                 </div>
               </td>
             </tr>
-            <tr ng-hide="!group.$hideRows" ng-if="file.name" ng-repeat="file in group.data" ng-repeat-end ng-click="vm.preview(file);">
+            <tr ng-hide="group.$hideRows" ng-if="file.name" ng-repeat="file in group.data" ng-repeat-end ng-click="vm.preview(file);">
               <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.checkboxes.items[file.id]" ng-click="$event.stopPropagation();"></td>
               <td data-title="'Name'" class="wp-50">
                 <i class="zmdi zmdi-collection-pdf" ng-if="file.ext=='.pdf'"></i>

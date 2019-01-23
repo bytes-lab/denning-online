@@ -803,13 +803,11 @@ denningOnline
 
         if ($scope.model.strLoanPriceSymbol) {
           $scope.clsLoanPriceSymbol = {
-            symbol: $scope.model.strLoanPriceSymbol,
-            code: '-'
+            symbol: $scope.model.strLoanPriceSymbol
           };          
         } else {
           $scope.clsLoanPriceSymbol = {
-            symbol: Auth.getUserInfo().currency,
-            code: '-'
+            symbol: Auth.getUserInfo().currency
           };
         }
 
