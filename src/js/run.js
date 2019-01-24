@@ -1054,7 +1054,7 @@ denningOnline
 
         $scope.getLabel = function (key) {
           for (var i = 0; i < $scope.matterCode.length; i++) {
-            if ($scope.matterCode[i].JsonField == key) {
+            if ($scope.matterCode[i].Field == key) {
               return $scope.matterCode[i].Label;
             }
           }
