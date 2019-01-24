@@ -975,16 +975,16 @@
   <h4 class="m-b-15 group-label">{{ to.label }} <span class="pull-right m-r-30 f-14 c-black">Currency :
     <md-autocomplete
       ng-disabled="!model.tmp.can_edit"
-      md-selected-item="clsPurchasePriceSymbol"
+      md-selected-item="model.tmp.clsPurchasePriceSymbol"
       md-search-text="qspps"
       md-items="item in queryCurrency(qspps)"
-      md-item-text="item.symbol+' ( '+item.code+' )'"
+      md-item-text="item.code"
       md-min-length="0"
       md-selected-item-change="currencyChange(item)"
       class="default-input currency-select">
       <md-item-template>
         <span md-highlight-text="searchText" md-highlight-flags="i">
-          {{ item.symbol }} ( {{ item.code }} )
+          {{ item.code }}
         </span>
       </md-item-template>
     </md-autocomplete>
@@ -1784,10 +1784,10 @@
   <h4 class="m-b-15 group-label">Loan Amount <span class="pull-right m-r-30 f-14 c-black">Currency :         
     <md-autocomplete
       ng-disabled="!model.tmp.can_edit"
-      md-selected-item="clsLoanPriceSymbol"
+      md-selected-item="model.tmp.clsLoanPriceSymbol"
       md-search-text="qslps"
       md-items="item in queryCurrency(qslps)"
-      md-item-text="item.symbol"
+      md-item-text="item.code"
       md-min-length="0"
       md-selected-item-change="currencyChange(item)"
       class="default-input currency-select">
@@ -2620,7 +2620,7 @@
         <dd>{{ property.strBlockMasterTitleAdd }}</dd>
       </dl>
 
-      <h4 class="m-t-25 m-b-20" ng-if="to.price">Price</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="to.price">Price ({{ model.tmp.clsPurchasePriceSymbol.code }})</h4>
       <div ng-if="to.price">
         <dl class="dl-horizontal m-b-10">
           <dt>Purchase Price</dt>
@@ -2652,7 +2652,7 @@
         </dl>
       </div>
 
-      <h4 class="m-t-25 m-b-20" ng-if="to.loan">Loan</h4>
+      <h4 class="m-t-25 m-b-20" ng-if="to.loan">Loan ({{ model.tmp.clsLoanPriceSymbol.code }})</h4>
       <div ng-if="to.loan">
         <dl class="dl-horizontal m-b-10">
           <dt>Loan Type</dt>

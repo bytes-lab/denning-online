@@ -42,6 +42,12 @@ denningOnline
       });
     }
 
+    service.getCurrency = function (code) {
+      return http.GET('v1/Currency/'+code).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     service.getItem = function (code) {
       return http.GET('v1/table/File/'+code).then(function (resp) {
         return resp.data;

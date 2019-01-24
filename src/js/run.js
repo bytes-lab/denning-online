@@ -697,14 +697,12 @@ denningOnline
       controller: function ($scope, $timeout, refactorService, Auth, matterService) {
         $scope.userInfo = Auth.getUserInfo();
         if ($scope.model.strPurchasePriceSymbol) {
-          $scope.clsPurchasePriceSymbol = {
-            symbol: $scope.model.strPurchasePriceSymbol,
-            code: '-'
+          $scope.model.tmp.clsPurchasePriceSymbol = {
+            code: $scope.model.strPurchasePriceSymbol
           };          
         } else {
-          $scope.clsPurchasePriceSymbol = {
-            symbol: Auth.getUserInfo().currency,
-            code: '-'
+          $scope.model.tmp.clsPurchasePriceSymbol = {
+            code: Auth.getUserInfo().currency
           };
         }
 
@@ -801,15 +799,16 @@ denningOnline
                             'Guarantee', 'Others'];
         $scope.finacingTypes = ['Conventional', 'Islamic', 'Others'];
 
+        var currencySymbol;
         if ($scope.model.strLoanPriceSymbol) {
-          $scope.clsLoanPriceSymbol = {
-            symbol: $scope.model.strLoanPriceSymbol
-          };          
+          currencySymbol = $scope.model.strLoanPriceSymbol;
         } else {
-          $scope.clsLoanPriceSymbol = {
-            symbol: Auth.getUserInfo().currency
-          };
+          currencySymbol = Auth.getUserInfo().currency;
         }
+
+        $scope.model.tmp.clsLoanPriceSymbol = {
+          code: currencySymbol
+        };
 
         $scope.queryCurrency = function (keyword) {
           return matterService.getCurrencyList(1, 10, keyword).then(function (resp) {
