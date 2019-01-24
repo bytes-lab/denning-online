@@ -120,13 +120,13 @@ var objPath = {
         "vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css",
         "vendors/bower_components/angular-material/angular-material.css",
         "vendors/bower_components/fullcalendar/dist/fullcalendar.min.css",
-        "vendors/intl-tel-input/css/intlTelInput.css",
 
         "src/css/app.min.1.css",
         "src/css/app.min.2.css",
-        "src/css/demo.css",
+        "src/css/chat.css",
         "src/css/extra.css",
-        "src/css/formly.css"
+        "src/css/formly.css",
+        "vendors/intl-tel-input/css/intlTelInput.css"
     ],
     VENDOR_ALL: [
         "vendors/bower_components/jquery/dist/jquery.min.js",
