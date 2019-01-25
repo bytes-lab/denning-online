@@ -289,7 +289,8 @@ denningOnline
       name: 'property',
       templateUrl: 'property.html',
       controller: function ($scope, propertyService, $uibModal) {
-        $scope.propertyTypes = { "1": "Landed", "2": "Strata" };
+        var propertyType = { "1": "Landed", "2": "Strata" };
+
         for (var i = 1; i <= 5; i++) {
           if ($scope.model['clsP'+i] && $scope.model['clsP'+i].code) {
             $scope.model.tmp['clsP'+i] = true;
@@ -299,11 +300,12 @@ denningOnline
         function initProperty(item) {
           if (item && item.code) {
             propertyService.getItem(item.code).then(function (item) {
-              $scope.property = item;
+              $scope.model.tmp.property = item;
+              $scope.model.tmp.property.strPropertyType = propertyType[$scope.model.tmp.property.strPropertyType];
             });
           } else {
-            // $scope.property = {};
-          }          
+            $scope.model.tmp.property = {};
+          }
         }
 
         $scope.queryShares = function (q) {
@@ -319,7 +321,7 @@ denningOnline
         };
 
         $scope.range = function (min, max, step) {
-            return range(min, max, step);
+          return range(min, max, step);
         };
 
         $scope.addProperty = function(start, end) {
@@ -349,7 +351,8 @@ denningOnline
           }
           $scope.model.tmp['clsP'+last] = false;
           $scope.model['clsP'+last] = {};
-          $scope.model['strShare'+last] = "";          
+          $scope.model['strShare'+last] = "";
+          $scope.propertyChange($scope.model['clsP'+(idx+1)], idx);
         }
 
         $scope.queryProperties = function(searchText) {
@@ -1034,15 +1037,6 @@ denningOnline
             size: 'lg',
             keyboard: true
           }).result.then(function () {}, function (res) {});
-        }
-
-        var propertyType = { "1": "Landed", "2": "Strata" };
-        // property detail
-        if ($scope.model.clsP1 && $scope.model.clsP1.code) {
-          propertyService.getItem($scope.model.clsP1.code).then(function (item) {
-            $scope.property = item;
-            $scope.property.strPropertyType = propertyType[$scope.property.strPropertyType];
-          });
         }
 
         // group labels from matter code

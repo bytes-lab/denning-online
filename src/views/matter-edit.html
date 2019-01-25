@@ -391,59 +391,59 @@
   <div class="col-sm-offset-1 col-sm-9 m-t-20 m-b-20">
     <dl class="dl-horizontal m-b-10">
       <dt>Property 1</dt>
-      <dd>{{ property.strAddress }}</dd>
+      <dd>{{ model.tmp.property.strAddress }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Area</dt>
-      <dd>{{ property.strArea }} {{ property.strAreaDescription }}</dd>
+      <dd>{{ model.tmp.property.strArea }} {{ model.tmp.property.strAreaDescription }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Tenure</dt>
-      <dd>{{ property.strLandTenure }}</dd>
+      <dd>{{ model.tmp.property.strLandTenure }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Expiry Date</dt>
-      <dd>{{ property.dtLeaseExpDate|ddate }}</dd>
+      <dd>{{ model.tmp.property.dtLeaseExpDate|ddate }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Restriction</dt>
-      <dd>{{ property.strRestrictionAgainst }} <span ng-if="property.strApprovingAuthority">( {{ property.strApprovingAuthority }} )</span></dd>
+      <dd>{{ model.tmp.property.strRestrictionAgainst }} <span ng-if="model.tmp.property.strApprovingAuthority">( {{ model.tmp.property.strApprovingAuthority }} )</span></dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Use</dt>
-      <dd>{{ property.strPropertyUse }}</dd>
+      <dd>{{ model.tmp.property.strPropertyUse }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Building / Cultivation Type</dt>
-      <dd>{{ property.clsBuildingCultivationType.strDescription }}</dd>
+      <dd>{{ model.tmp.property.clsBuildingCultivationType.strDescription }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Type</dt>
-      <dd>{{ propertyTypes[property.strPropertyType] }}</dd>
+      <dd>{{ model.tmp.property.strPropertyType }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Postal Add</dt>
-      <dd>{{ property.strPropertyAdr }}</dd>
+      <dd>{{ model.tmp.property.strPropertyAdr }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Unit</dt>
-      <dd>{{ property.strUnitParcelLabel }} {{ property.strUnitParcelNo }}</dd>
+      <dd>{{ model.tmp.property.strUnitParcelLabel }} {{ model.tmp.property.strUnitParcelNo }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Project</dt>
-      <dd>{{ property.strProjectName }}</dd>
+      <dd>{{ model.tmp.property.strProjectName }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Developer</dt>
-      <dd>{{ property.clsDeveloper.strName }}</dd>
+      <dd>{{ model.tmp.property.clsDeveloper.strName }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Proprietor</dt>
-      <dd>{{ property.clsProprietor.strName }}</dd>
+      <dd>{{ model.tmp.property.clsProprietor.strName }}</dd>
     </dl>
     <dl class="dl-horizontal m-b-10">
       <dt>Master title</dt>
-      <dd>{{ property.strBlockMasterTitleAdd }}</dd>
+      <dd>{{ model.tmp.property.strBlockMasterTitleAdd }}</dd>
     </dl>
   </div>
 </script>
@@ -882,7 +882,7 @@
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label">Court No.</label>
+        <label class="form-control attr-label">Court Room</label>
         <input type="text" class="form-control wp-45" ng-model="model.strPn4" ng-readonly="!model.tmp.can_edit">
       </div>
     </div>
@@ -914,13 +914,13 @@
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label">Full Case Name</label>
+        <label class="form-control attr-label">Case Name</label>
         <label class="form-control wp-45 p-t-5">{{ model.tmp.caseFullName }}</label>
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="d-flex">
-        <label class="form-control attr-label">SAR</label>
+        <label class="form-control attr-label">SAR / DR</label>
         <md-autocomplete
           ng-disabled="!model.tmp.can_edit"
           md-selected-item="model.clsJ1_F6"
@@ -2562,63 +2562,66 @@
           <dd>{{ model.tmp.courtDiary.strCounselAssigned }}</dd>
         </dl>
       </div>
-      <h4 class="m-t-25 m-b-20">{{ getLabel('P1') }}</h4>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Title</dt>
-        <dd>{{ property.strAddress }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Area</dt>
-        <dd>{{ property.strArea }} {{ property.strAreaDescription }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Tenure</dt>
-        <dd>{{ property.strLandTenure }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Expiry Date</dt>
-        <dd>{{ property.dtLeaseExpDate|ddate }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Restriction</dt>
-        <dd>{{ property.strRestrictionAgainst }} <span ng-if="property.strApprovingAuthority">( {{ property.strApprovingAuthority }} )</span></dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Use</dt>
-        <dd>{{ property.strPropertyUse }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Building / Cultivation Type</dt>
-        <dd>{{ property.clsBuildingCultivationType.strDescription }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Type</dt>
-        <dd>{{ property.strPropertyType }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Postal Add</dt>
-        <dd>{{ property.strPropertyAdr }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Unit</dt>
-        <dd>{{ property.strUnitParcelLabel }} {{ property.strUnitParcelNo }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Project</dt>
-        <dd>{{ property.strProjectName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Developer</dt>
-        <dd>{{ property.clsDeveloper.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Proprietor</dt>
-        <dd>{{ property.clsProprietor.strName }}</dd>
-      </dl>
-      <dl class="dl-horizontal m-b-10">
-        <dt>Master title</dt>
-        <dd>{{ property.strBlockMasterTitleAdd }}</dd>
-      </dl>
+
+      <div ng-if="model.tmp.property.code">
+        <h4 class="m-t-25 m-b-20">{{ getLabel('P1') }}</h4>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Title</dt>
+          <dd>{{ model.tmp.property.strAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Area</dt>
+          <dd>{{ model.tmp.property.strArea }} {{ model.tmp.property.strAreaDescription }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Tenure</dt>
+          <dd>{{ model.tmp.property.strLandTenure }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Expiry Date</dt>
+          <dd>{{ model.tmp.property.dtLeaseExpDate|ddate }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Restriction</dt>
+          <dd>{{ model.tmp.property.strRestrictionAgainst }} <span ng-if="model.tmp.property.strApprovingAuthority">( {{ model.tmp.property.strApprovingAuthority }} )</span></dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Use</dt>
+          <dd>{{ model.tmp.property.strPropertyUse }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Building / Cultivation Type</dt>
+          <dd>{{ model.tmp.property.clsBuildingCultivationType.strDescription }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Type</dt>
+          <dd>{{ model.tmp.property.strPropertyType }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Postal Add</dt>
+          <dd>{{ model.tmp.property.strPropertyAdr }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Unit</dt>
+          <dd>{{ model.tmp.property.strUnitParcelLabel }} {{ model.tmp.property.strUnitParcelNo }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Project</dt>
+          <dd>{{ model.tmp.property.strProjectName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Developer</dt>
+          <dd>{{ model.tmp.property.clsDeveloper.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Proprietor</dt>
+          <dd>{{ model.tmp.property.clsProprietor.strName }}</dd>
+        </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt>Master title</dt>
+          <dd>{{ model.tmp.property.strBlockMasterTitleAdd }}</dd>
+        </dl>
+      </div>
 
       <h4 class="m-t-25 m-b-20" ng-if="to.price">Price ({{ model.tmp.clsPurchasePriceSymbol.code }})</h4>
       <div ng-if="to.price">
@@ -2652,8 +2655,8 @@
         </dl>
       </div>
 
-      <h4 class="m-t-25 m-b-20" ng-if="to.loan">Loan ({{ model.tmp.clsLoanPriceSymbol.code }})</h4>
       <div ng-if="to.loan">
+        <h4 class="m-t-25 m-b-20" ng-if="to.loan">Loan ({{ model.tmp.clsLoanPriceSymbol.code }})</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Loan Type</dt>
           <dd>{{ model.strF3 }} <span ng-if="model.strF4"> ( {{ model.strF4 }} )</span></dd>
@@ -2678,10 +2681,12 @@
           <dt>+ Other</dt>
           <dd>{{ model.decRM24 }}</dd>
         </dl>
-        <dl class="dl-horizontal m-b-25">
+        <dl class="dl-horizontal m-b-10">
           <dt>Total Loan</dt>
-          <dd>{{ model.decRM25 }}</dd>
+          <dd>{{ model.decRM25|number:2 }}</dd>
         </dl>
+        
+        <h4 class="m-t-25 m-b-20" ng-if="to.loan">Islamic Loan ({{ model.tmp.clsLoanPriceSymbol.code }})</h4>
         <dl class="dl-horizontal m-b-10">
           <dt>Bank Purchase Price</dt>
           <dd>{{ model.decRM8 }}</dd>
