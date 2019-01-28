@@ -296,6 +296,7 @@ denningOnline
         self.can_edit = true;
         self.entity_ = null;
         self.entity = refactorService.removeEmpty(self.entity);
+        self.clsAttendedStatus = '0-None';
 
         var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'clsEnteredBy',
                           'clsUpdatedBy', 'dtNextDate'];
