@@ -99,6 +99,29 @@
               </div>
             </dd>
           </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Counsel Assigned</dt>
+            <dd>
+              <div class="d-flex">
+                <md-autocomplete
+                  ng-disabled="!vm.can_edit"
+                  md-selected-item="vm.strCounselAssigned"
+                  md-search-text="qsca"
+                  md-items="item in vm.queryStaff(qsca)"
+                  md-item-text="item.strName"
+                  md-min-length="0"
+                  md-selected-item-change="vm.caChange(item)"
+                  class="default-input wp-100-btn-1">
+                  <md-item-template>
+                    <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
+                  </md-item-template>
+                </md-autocomplete>
+                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.staffDialog('strCounselAssigned')">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
+                </a>
+              </div>
+            </dd>
+          </dl>
         </div>
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
@@ -136,33 +159,18 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Enclosure</dt>
+            <dt class="p-t-10">Hearing Details</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strEnclosure" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strDetails">
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Counsel Assigned</dt>
+            <dt class="p-t-10">Enclosure</dt>
             <dd>
-              <div class="d-flex">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.strCounselAssigned"
-                  md-search-text="qsca"
-                  md-items="item in vm.queryStaff(qsca)"
-                  md-item-text="item.strName"
-                  md-min-length="0"
-                  md-selected-item-change="vm.caChange(item)"
-                  class="default-input wp-100-btn-1">
-                  <md-item-template>
-                    <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
-                  </md-item-template>
-                </md-autocomplete>
-                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.staffDialog('strCounselAssigned')">
-                  <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
-                </a>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strEnclosure" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -311,7 +319,7 @@
             <dd>
               <div class="col-md-6 p-0">
                 <div class="fg-line">
-                  <input ng-click="open($event, 'ctopenednd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="ctopenednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit || !vm.entity.boolChkNextDate" ng-required="true" close-text="Close" placeholder="Select Date" />
+                  <input ng-click="open($event, 'ctopenednd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="ctopenednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
                 </div>
               </div>
               <div class="col-md-6">
