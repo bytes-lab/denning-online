@@ -2,7 +2,8 @@
   <div class="card">
     <div class="card-header" style="display: flex;">
       <div class="col-md-10 col-sm-12 no-padding" ng-if="!vm.viewMode">
-        <h2 class="f-20 f-500 c-purple" style="display: inline;">Court Diary Edit</h2>
+        <span class="d-header">Court Diary Edit</span>
+        <ul class="actions matter-action m-l-20" data-ng-include src="'matter-action.html'" ng-if="vm.fileNo"></ul>
         <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
         <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.courtdiary.delete && !vm.create_new">Delete</a>
         <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.courtdiary.update && vm.can_edit">Save</a>
@@ -11,7 +12,8 @@
         <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="courtdiaries.new" ng-if="vm.userInfo.priority.courtdiary.update && !vm.create_new && !vm.viewMode"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
       </div>
       <div class="col-md-10 col-sm-11 no-padding" ng-if="vm.viewMode">
-        <h2 style="display: inline;">Court Diary Detail</h2>
+        <span class="d-header">Court Diary Detail</span>
+        <!-- <ul class="actions matter-action m-l-20" data-ng-include src="'matter-action.html'"></ul> -->
         <a class="btn btn-default btn-sm pull-right" ng-click="vm.cancel()" >Close</a>
       </div>
     </div>
@@ -105,18 +107,17 @@
               <div class="d-flex">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.strCounselAssigned"
+                  md-selected-item="vm.entity.clsCounselAssigned"
                   md-search-text="qsca"
                   md-items="item in vm.queryStaff(qsca)"
                   md-item-text="item.strName"
                   md-min-length="0"
-                  md-selected-item-change="vm.caChange(item)"
                   class="default-input wp-100-btn-1">
                   <md-item-template>
                     <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
                   </md-item-template>
                 </md-autocomplete>
-                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.staffDialog('strCounselAssigned')">
+                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.staffDialog('clsCounselAssigned')">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
                 </a>
               </div>
@@ -217,18 +218,17 @@
               <div class="d-flex">
                 <md-autocomplete
                   ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.strCounselAssigned"
+                  md-selected-item="vm.entity.clsCounselAssigned"
                   md-search-text="qsca"
                   md-items="item in vm.queryStaff(qsca)"
                   md-item-text="item.strName"
                   md-min-length="0"
-                  md-selected-item-change="vm.caChange(item)"
                   class="default-input wp-100-btn-1">
                   <md-item-template>
                     <span md-highlight-text="qsca" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
                   </md-item-template>
                 </md-autocomplete>
-                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.staffDialog('strCounselAssigned')">
+                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.staffDialog('clsCounselAssigned')">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
                 </a>
               </div>
@@ -237,24 +237,19 @@
           <dl class="dl-horizontal" ng-show="vm.clsAttendedStatus!='0-None'">
             <dt class="p-t-10">Counsel Attended</dt>
             <dd>
-              <div class="d-flex">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.strCounselAttended"
-                  md-search-text="qscd"
-                  md-items="item in vm.queryStaff(qscd)"
-                  md-item-text="item.strName"
-                  md-min-length="0"
-                  md-selected-item-change="vm.cdChange(item)"
-                  class="default-input wp-100-btn-1">
-                  <md-item-template>
-                    <span md-highlight-text="qscd" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
-                  </md-item-template>
-                </md-autocomplete>
-                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.staffDialog('strCounselAttended')">
-                  <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
-                </a>
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strCounselAttended"
+                md-search-text="qscd"
+                md-items="item in vm.queryStaffAttended(qscd)"
+                md-item-text="item.strName"
+                md-min-length="0"
+                md-selected-item-change="vm.cdChange(item)"
+                class="default-input wp-100-btn-1">
+                <md-item-template>
+                  <span md-highlight-text="qscd" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
+                </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
  

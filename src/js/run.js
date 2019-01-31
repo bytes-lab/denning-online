@@ -851,17 +851,16 @@ denningOnline
                             'Guarantee', 'Others'];
         $scope.finacingTypes = ['Conventional', 'Islamic', 'Others'];
 
+        var currencySymbol;
         if ($scope.model.strLoanPriceSymbol) {
-          $scope.clsLoanPriceSymbol = {
-            symbol: $scope.model.strLoanPriceSymbol,
-            code: '-'
-          };          
+          currencySymbol = $scope.model.strLoanPriceSymbol;
         } else {
-          $scope.clsLoanPriceSymbol = {
-            symbol: Auth.getUserInfo().currency,
-            code: '-'
-          };
+          currencySymbol = Auth.getUserInfo().currency;
         }
+
+        $scope.model.tmp.clsLoanPriceSymbol = {
+          code: currencySymbol
+        };
 
         $scope.queryCurrency = function (keyword) {
           return matterService.getCurrencyList(1, 10, keyword).then(function (resp) {

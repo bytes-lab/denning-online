@@ -74,8 +74,12 @@ denningOnline
         self.entity_ = angular.copy(self.entity);
 
         if (self.entity.clsFileNo1 && self.entity.clsFileNo1.strFileNo1) {
+          self.fileNo = self.entity.clsFileNo1.strFileNo1;
+          self.fileName = self.entity.clsFileNo1.clsPrimaryClient.strName;
+
           self.rmatter = {
-            Title: self.entity.clsFileNo1.strFileNo1 + ' (' + self.entity.clsFileNo1.clsPrimaryClient.strName + ')'
+            Title: self.fileNo + ' (' + self.fileName + ')',
+            key: self.fileNo
           }
         }
 
@@ -85,16 +89,10 @@ denningOnline
           }
         }
 
-        if (self.entity.strCounselAssigned) {
-          staffService.getItem(self.entity.strCounselAssigned).then(function (resp) {
-            self.strCounselAssigned = resp;
-          });
-        }
-
         if (self.entity.strCounselAttended) {
-          staffService.getItem(self.entity.strCounselAttended).then(function (resp) {
-            self.strCounselAttended = resp;
-          });
+          self.strCounselAttended = {
+            strName: self.entity.strCounselAttended
+          };
         }
 
         if (self.entity.clsAttendedStatus) {
@@ -126,6 +124,11 @@ denningOnline
           self.entity.clsFileNo1 = {};
         }
         self.entity.clsFileNo1.strFileNo1 = item.key;
+        self.fileNo = item.key;
+        self.fileName = item.Title.replace('Matter: ', '').slice(11, -1);
+      } else {
+        self.fileNo = '';
+        self.fileName = '';
       }
     }
 
@@ -166,6 +169,17 @@ denningOnline
     self.queryStaff = function (search) {
       return staffService.getList(1, 10, search).then(function (resp) {
         return resp.data;
+      })
+    }
+
+    self.queryStaffAttended = function (search) {
+      return staffService.getList(1, 10, search).then(function (resp) {
+        if (resp.data.length == 0) {
+          self.entity.strCounselAttended = search;
+          return [{ strName: search }];
+        } else {
+          return resp.data;
+        }
       })
     }
 
@@ -226,9 +240,7 @@ denningOnline
 
       modalInstance.result.then(function (entity) {
         if (entity) {
-          self.entity[field] = {
-            strName: entity.strName
-          };
+          self.entity[field] = entity;
         }
       })
     }
@@ -236,12 +248,6 @@ denningOnline
     self.hearingTypeChange = function (item) {
       if (item) {
         self.entity.strHearingType = item.description
-      }
-    }
-
-    self.caChange = function (item) {
-      if (item) {
-        self.entity.strCounselAssigned = item.strName
       }
     }
 
