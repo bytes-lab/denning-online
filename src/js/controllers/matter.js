@@ -444,12 +444,14 @@ denningOnline
               "type": "bank1",
               "templateOptions": {
                 "label": clsMatterCode ? getLabel(matter_code, 'Bank1') : '',
+                "field": "clsBank1"
               }
             },
             {
               "type": "bank2",
               "templateOptions": {
                 "label": clsMatterCode ? getLabel(matter_code, 'Bank2') : '',
+                "field": "clsBank2"
               }
             }
           ]

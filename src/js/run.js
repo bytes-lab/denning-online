@@ -701,11 +701,13 @@ denningOnline
         $scope.userInfo = Auth.getUserInfo();
         if ($scope.model.strPurchasePriceSymbol) {
           $scope.model.tmp.clsPurchasePriceSymbol = {
-            code: $scope.model.strPurchasePriceSymbol
-          };          
+            code: $scope.model.strPurchasePriceSymbol,
+            symbol: $scope.model.strPurchasePriceSymbol
+          };
         } else {
           $scope.model.tmp.clsPurchasePriceSymbol = {
-            code: Auth.getUserInfo().currency
+            code: Auth.getUserInfo().currency,
+            symbol: Auth.getUserInfo().currency
           };
         }
 
@@ -810,7 +812,8 @@ denningOnline
         }
 
         $scope.model.tmp.clsLoanPriceSymbol = {
-          code: currencySymbol
+          code: currencySymbol,
+          symbol: currencySymbol
         };
 
         $scope.queryCurrency = function (keyword) {
@@ -859,7 +862,8 @@ denningOnline
         }
 
         $scope.model.tmp.clsLoanPriceSymbol = {
-          code: currencySymbol
+          code: currencySymbol,
+          symbol: currencySymbol
         };
 
         $scope.queryCurrency = function (keyword) {
@@ -1171,7 +1175,7 @@ denningOnline
     }
 
     // bank group
-    function bankCtrl ($scope, $uibModal) {
+    function bankCtrl ($scope, $uibModal, bankBranchService) {
       $scope.open = function($event, opened) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -1183,6 +1187,19 @@ denningOnline
         return getBankBranches(1, 10, searchText)
       };
 
+      $scope.branchAddr = '';
+      $scope.getBranchAddr = function (item) {
+        if (item) {
+          bankBranchService.getItem(item.code).then(function (resp) {
+            $scope.branchAddr = resp.strAddressLine1+' '+resp.strAddressLine2+' '+
+              resp.strCity+' '+resp.strCountry;
+          })
+        } else {
+          $scope.branchAddr = '';
+        }
+      }
+
+      $scope.getBranchAddr($scope.model[$scope.to.field]);
       $scope.bankDialog = function(key, viewMode) {
         bankDialog($scope.model, key, viewMode);
       }
