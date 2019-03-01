@@ -256,7 +256,7 @@ denningOnline
 
       var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'strIDNo', 'strIDNoOld', 
                         'strName', 'strEmailAddress', 'strWebSite', 'dtDateBirth', 'dtDateDeceased', 
-                        'strTaxFileNo'];
+                        'strTaxFileNo', 'clsEnteredBy', 'clsUpdatedBy'];
       for (ii in deleteList) {
         key = deleteList[ii];
         delete self.entity[key];
