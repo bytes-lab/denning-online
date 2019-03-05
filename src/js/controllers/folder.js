@@ -91,11 +91,13 @@ denningOnline
         var fileName = file.name + file.ext;
         var contentTypes = {
           '.jpg': 'image/jpeg',
-          '.png': 'image/png'
+          '.png': 'image/png',
+          '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         };
 
         var contentType = contentTypes[file.ext] || response.headers('content-type');
-
+        alert(contentType);
         try {
           var blob = new Blob([response.data], {type: contentType});
 
