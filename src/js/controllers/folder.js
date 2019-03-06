@@ -97,13 +97,14 @@ denningOnline
         };
 
         var contentType = contentTypes[file.ext] || response.headers('content-type');
-        alert(contentType);
+
         try {
           var blob = new Blob([response.data], {type: contentType});
 
           if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             window.navigator.msSaveOrOpenBlob(blob, fileName);
           } else {
+            saveAs(blob, fileName);
             Object.assign(document.createElement('a'), { 
               href: URL.createObjectURL(blob), 
               download: fileName})
