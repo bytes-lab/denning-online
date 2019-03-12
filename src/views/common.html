@@ -3,7 +3,6 @@
 <section id="main">
   <aside id="sidebar" data-ng-include src="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
   <section id="content" class="page-view" data-ui-view></section>
-  <div id="folderControllerWrap" data-ng-controller="folderListCtrl as vm"></div>
 </section>
 
 <footer id="footer" data-ng-include src="'template/footer.html'"></footer>
@@ -18,18 +17,6 @@
   <div class="modal-footer">
     <button class="btn btn-link" ng-click="ok()">OK</button>
     <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-  </div>
-</script>
-
-<script type="text/ng-template" id="preview-doc.html">
-  <div class="modal-header">
-    <span class="modal-title f-16 f-500 c-black m-r-10">{{ filename }}</span>
-    <a class="btn btn-default btn-sm m-l-25 bgm-gray" title="Download" ng-click="download()">
-      <i class="zmdi zmdi-download"></i>
-    </a>
-  </div>
-  <div style="height: calc(100vh - 135px);">
-    <iframe ng-src="{{ url }}" style="width: 100%; height: 100%; border: 1px solid #aaa;"></iframe>
   </div>
 </script>
 
