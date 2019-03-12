@@ -428,4 +428,8 @@ denningOnline
     this.range = bestsellingService.range; 
     
     this.bsResult = bestsellingService.getBestselling(this.img, this.name, this.range);
-  })
+  });
+
+window.preview = function (file) {
+  $('#folderControllerWrap').scope().vm.preview(file);
+}

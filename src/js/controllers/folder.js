@@ -52,39 +52,41 @@ denningOnline
       }
     }, true);
 
-    folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
-      if (self.type == 'matter') {
-        self.fileNo = refactorService.parseFileNo(data.name).no;
-        self.fileName = refactorService.parseFileNo(data.name).name;        
-      }
-
-      self.data = [];
-      self.folders = [];
-
-      var id = 0;
-
-      angular.forEach(data.documents, function(value, key) {
-        value['folder'] = 'FILES (' + data.documents.length + ')';
-        value['id'] = ++id;
-        self.data.push(value);
-      })
-
-      angular.forEach(data.folders, function(folder, key) {
-        self.folders.push(folder);
-
-        if (folder.documents.length == 0) {
-          self.data.push({ id: ++id, folder: folder.name });
-        } else {
-          angular.forEach(folder.documents, function(value, key) {
-            value['folder'] = folder.name + ' ('+ folder.documents.length +')';
-            value['id'] = ++id;
-            self.data.push(value);
-          })
+    if ($stateParams.id && $stateParams.type) {
+      folderService.getList($stateParams.id, $stateParams.type).then(function (data) {
+        if (self.type == 'matter') {
+          self.fileNo = refactorService.parseFileNo(data.name).no;
+          self.fileName = refactorService.parseFileNo(data.name).name;        
         }
-      })
 
-      self.initializeTable();
-    });
+        self.data = [];
+        self.folders = [];
+
+        var id = 0;
+
+        angular.forEach(data.documents, function(value, key) {
+          value['folder'] = 'FILES (' + data.documents.length + ')';
+          value['id'] = ++id;
+          self.data.push(value);
+        })
+
+        angular.forEach(data.folders, function(folder, key) {
+          self.folders.push(folder);
+
+          if (folder.documents.length == 0) {
+            self.data.push({ id: ++id, folder: folder.name });
+          } else {
+            angular.forEach(folder.documents, function(value, key) {
+              value['folder'] = folder.name + ' ('+ folder.documents.length +')';
+              value['id'] = ++id;
+              self.data.push(value);
+            })
+          }
+        })
+
+        self.initializeTable();
+      });      
+    }
 
     self.download = function (file) {
       folderService.download(file.URL).then(function(response) {

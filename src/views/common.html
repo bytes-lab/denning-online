@@ -3,6 +3,7 @@
 <section id="main">
   <aside id="sidebar" data-ng-include src="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
   <section id="content" class="page-view" data-ui-view></section>
+  <div id="folderControllerWrap" data-ng-controller="folderListCtrl as vm"></div>
 </section>
 
 <footer id="footer" data-ng-include src="'template/footer.html'"></footer>
