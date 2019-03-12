@@ -106,7 +106,6 @@ denningOnline
           if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             window.navigator.msSaveOrOpenBlob(blob, fileName);
           } else {
-            saveAs(blob, fileName);
             Object.assign(document.createElement('a'), { 
               href: URL.createObjectURL(blob), 
               download: fileName})
