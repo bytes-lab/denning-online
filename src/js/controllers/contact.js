@@ -103,9 +103,10 @@ denningOnline
       if (self.entity.strAddressLine3)
         fullAddress += self.entity.strAddressLine3.trim()+'\n';
       if (self.entity.strPostCode)
-        fullAddress += self.entity.strPostCode.trim()+'\n';
+        fullAddress += self.entity.strPostCode.trim();
       if (self.entity.strCity)
-        fullAddress += self.entity.strCity.trim()+',\n';
+        fullAddress += ' ' + self.entity.strCity.trim();
+      fullAddress += ',\n';
       if (self.entity.strState)
         fullAddress += self.entity.strState.trim()+',\n';
       if (self.entity.strCountry)
