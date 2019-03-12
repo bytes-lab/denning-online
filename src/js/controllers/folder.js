@@ -170,7 +170,7 @@ denningOnline
       $state.reload();
     }
 
-    getSelectedFiles = function () {
+    self.getSelectedFiles = function () {
       var files = [],
           ids = [];
 
@@ -189,7 +189,7 @@ denningOnline
     }
 
     self.moveFile = function(operation) {
-      var files = getSelectedFiles();
+      var files = self.getSelectedFiles();
       if (files.length == 0) {
         alert('Please select files to move / copy.');
         return false;
@@ -346,7 +346,7 @@ denningOnline
     }
 
     self.deleteFiles = function () {
-      var files = getSelectedFiles();
+      var files = self.getSelectedFiles();
       self.deleteFile_(files);
     }
 
@@ -355,7 +355,7 @@ denningOnline
     }
 
     self.attachFile = function() {
-      var files = getSelectedFiles();
+      var files = self.getSelectedFiles();
       if (files.length == 0) {
         alert('Please select files to attach.');
         return;
