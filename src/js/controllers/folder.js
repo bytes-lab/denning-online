@@ -446,15 +446,17 @@ denningOnline
     $scope.files = files;
     $scope.getLink = function () {
       $scope.glink = true;
-      var links = [];
+      var links = [], fileNames = [];
       angular.forEach(files, function(value, key) {
         links.push(folderService.getLink(value.URL.replace('/document/', '/getOneTimeLink/')));
+        fileNames.push(value.name + value.ext);
       })
 
       Promise.all(links).then(function (data) {
         $scope.links = ''
         for (ii in data) {
-          $scope.links += 'https://denningchat.com.my/denningwcf/' + data[ii] + '\n';
+          var link = 'https://denningchat.com.my/denningwcf/' + data[ii];
+          $scope.links += '<a href="' + link +'">' + fileNames[ii] + '</a><br>';
         }
       })
     }
