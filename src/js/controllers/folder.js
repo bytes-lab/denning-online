@@ -181,7 +181,7 @@ denningOnline
       }
 
       angular.forEach(self.data, function(value, key) {
-        if (ids.indexOf(value.id.toString()) > -1) {
+        if (ids.indexOf(value.id.toString()) > -1 && value.URL) {
           files.push(value);
         }
       })
@@ -444,22 +444,22 @@ denningOnline
                                          folderService, files, ngClipboard) 
   {
     $scope.files = files;
-    $scope.getLink = function () {
-      $scope.glink = true;
-      var links = [], fileNames = [];
-      angular.forEach(files, function(value, key) {
-        links.push(folderService.getLink(value.URL.replace('/document/', '/getOneTimeLink/')));
-        fileNames.push(value.name + value.ext);
-      })
+    $scope.glink = false;
+    var links = [], fileNames = [];
+    angular.forEach(files, function(value, key) {
+      links.push(folderService.getLink(value.URL.replace('/document/', '/getOneTimeLink/')));
+      fileNames.push(value.name + value.ext);          
+    })
 
-      Promise.all(links).then(function (data) {
-        $scope.links = ''
-        for (ii in data) {
-          var link = 'https://denningchat.com.my/denningwcf/' + data[ii];
-          $scope.links += '<a href="' + link +'">' + fileNames[ii] + '</a><br>';
-        }
-      })
-    }
+    Promise.all(links).then(function (data) {
+      $scope.links = '<ul>'
+      for (ii in data) {
+        var link = 'https://denningchat.com.my/denningwcf/' + data[ii];
+        $scope.links += '<li><a href="' + link +'">' + fileNames[ii] + '</a></li>';
+      }
+      $scope.links += '</ul><br>';
+      $scope.glink = true;
+    })
 
     $scope.copyLink = function () {
       ngClipboard.toClipboard($scope.links);
