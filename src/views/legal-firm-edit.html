@@ -52,37 +52,29 @@
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office 1</dt>
+            <dt class="p-t-10">Phone Home</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhone1">
-              </div>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhone1No" ng-readonly="!vm.can_edit">
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office 2</dt>
+            <dt class="p-t-10">Phone Office</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhone2">
-              </div>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhone2No" ng-readonly="!vm.can_edit">
             </dd>
           </dl>
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Mobile</dt>
+            <dt class="p-t-10">Phone Mobile</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhoneMobile">
-              </div>
+              <input type="text" international-phone-number ng-model="vm.entity.strPhone3No" ng-readonly="!vm.can_edit">
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Fax</dt>
             <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhoneFax">
-              </div>
+              <input type='text' international-phone-number ng-model="vm.entity.strFax1No" ng-readonly="!vm.can_edit">
             </dd>
-          </dl>
+          </dl>          
           <dl class="dl-horizontal">
             <dt class="p-t-10">Website</dt>
             <dd>
@@ -96,6 +88,22 @@
             <dd>
               <div class="fg-line">
                 <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strBranchName">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Note 1</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote1">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Note 2</dt>
+            <dd>
+              <div class="fg-line">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote2">
               </div>
             </dd>
           </dl>
@@ -189,19 +197,11 @@
               </md-autocomplete>
             </dd>
           </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Note 1</dt>
+          <dl class="dl-horizontal p-t-15">
+            <dt class="p-t-0">Full Address</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote1">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Note 2</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strNote2">
+                <textarea class="form-control p-l-10" readonly rows="8" ng-bind="vm.fullAddress()"></textarea>
               </div>
             </dd>
           </dl>
