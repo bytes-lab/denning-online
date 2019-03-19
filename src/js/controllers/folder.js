@@ -442,8 +442,9 @@ denningOnline
 
   .controller('linksModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
                                           folderService, files, ngClipboard, AWSACCESSKEY,
-                                          AWSSECRETACCESSKEY) 
+                                          AWSSECRETACCESSKEY, Auth) 
   {
+    var userInfo = Auth.getUserInfo();
     $scope.progress = 0;
 
     // amazon aws credentials
@@ -486,18 +487,18 @@ denningOnline
       });
     };
 
-    // Promise.all(files.map(function(file) {
-    //   return uploadS3(file);
-    // })).then(function(s3Files) {
-    //   $scope.links = '<ul>'
-    //   for (ii in s3Files) {
-    //     var link = s3Files[ii],
-    //         fileName = files[ii].name + files[ii].ext;
-    //     $scope.links += '<li><a href="' + link +'">' + fileName + '</a></li>';
-    //   }
-    //   $scope.links += '</ul><br>';
-    //   $scope.glink = true;
-    // });
+    Promise.all(files.map(function(file) {
+      return uploadS3(file);
+    })).then(function(s3Files) {
+      $scope.links = '<ul>'
+      for (ii in s3Files) {
+        var link = s3Files[ii],
+            fileName = files[ii].name + files[ii].ext;
+        $scope.links += '<li><a href="' + link +'">' + fileName + '</a></li>';
+      }
+      $scope.links += '</ul><br>';
+      $scope.glink = true;
+    });
 
     $scope.files = files;
     $scope.glink = false;
@@ -505,6 +506,22 @@ denningOnline
     $scope.copyLink = function () {
       ngClipboard.toClipboard($scope.links);
       growlService.growl('Links copied successfully!', 'success'); 
+    }
+
+    $scope.sendEmail = function () {
+      var emailData = {
+        awsLinkAttachment: $scope.links,
+        bodyHTML: $scope.emailBody,
+        denningOriginalAttachment: files.map(function(file) { return file.URL; }),
+        emailFrom: userInfo.email,
+        emailTo: $scope.emailTo.split(','),
+        subject: $scope.emailSubject
+      }
+      console.log(emailData);
+
+      folderService.sendEmail(emailData).then(function (resp) {
+        growlService.growl('Email sent successfully!', 'success'); 
+      })
     }
   })
 

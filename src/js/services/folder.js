@@ -72,5 +72,11 @@ denningOnline
       });      
     }
 
+    service.sendEmail = function(data) {
+      return http.POST('SendAttachmentMail', data).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     return service;
   })

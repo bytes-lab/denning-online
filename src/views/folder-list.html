@@ -310,7 +310,7 @@
           <dt class="p-t-10">Send To</dt>
           <dd>
             <div class="fg-line">
-              <input type='text' class="form-control" ng-model="vm.entity.registeredOffice">
+              <input type='text' class="form-control" ng-model="emailTo">
             </div>
           </dd>
         </dl>
@@ -318,7 +318,7 @@
           <dt class="p-t-10">Subject</dt>
           <dd>
             <div class="fg-line">
-              <input type='text' class="form-control" ng-model="vm.entity.registeredOffice">
+              <input type='text' class="form-control" ng-model="emailSubject">
             </div>
           </dd>
         </dl>
@@ -328,7 +328,7 @@
           <dt class="p-t-10">Body</dt>
           <dd>
             <!-- <div class="fg-line"> -->
-              <div text-angular ng-model="htmlVariable"></div>
+              <div text-angular ng-model="emailBody"></div>
             <!-- </div> -->
           </dd>
         </dl>
@@ -341,7 +341,7 @@
       </div>
     </div>
     <button class="btn btn-info btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-mail-send"></i></button>
-    <a href="" class="m-l-15 f-15" ng-disabled="!glink" ng-click="copyLink()"> Send</a>
+    <a href="" class="m-l-15 f-15" ng-disabled="!glink" ng-click="sendEmail()"> Send</a>
   </div>
 </script>
 
