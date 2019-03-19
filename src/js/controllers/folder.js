@@ -365,7 +365,7 @@ denningOnline
         animation: true,
         templateUrl: 'linksModal.html',
         controller: 'linksModalCtrl',
-        size: '',
+        size: 'lg',
         keyboard: true,
         resolve: {
           files: function () {
@@ -486,18 +486,18 @@ denningOnline
       });
     };
 
-    Promise.all(files.map(function(file) {
-      return uploadS3(file);
-    })).then(function(s3Files) {
-      $scope.links = '<ul>'
-      for (ii in s3Files) {
-        var link = s3Files[ii],
-            fileName = files[ii].name + files[ii].ext;
-        $scope.links += '<li><a href="' + link +'">' + fileName + '</a></li>';
-      }
-      $scope.links += '</ul><br>';
-      $scope.glink = true;
-    });
+    // Promise.all(files.map(function(file) {
+    //   return uploadS3(file);
+    // })).then(function(s3Files) {
+    //   $scope.links = '<ul>'
+    //   for (ii in s3Files) {
+    //     var link = s3Files[ii],
+    //         fileName = files[ii].name + files[ii].ext;
+    //     $scope.links += '<li><a href="' + link +'">' + fileName + '</a></li>';
+    //   }
+    //   $scope.links += '</ul><br>';
+    //   $scope.glink = true;
+    // });
 
     $scope.files = files;
     $scope.glink = false;

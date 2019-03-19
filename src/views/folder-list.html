@@ -302,16 +302,46 @@
 
 <script type="text/ng-template" id="linksModal.html">
   <div class="modal-header">
-    <h4 class="modal-title">Link of Files</h4>
   </div>
   <div class="modal-body p-b-20">
-    <dl class="dl-horizontal">
-      <ul class="f-15 c-black">
-        <li ng-repeat="file in files track by $index">{{ file.name }}{{ file.ext }}</li>
-      </ul>
-    </dl>
+    <div class="row">
+      <div class="col-md-12 p-l-25">
+        <dl class="dl-horizontal">
+          <dt class="p-t-10">Send To</dt>
+          <dd>
+            <div class="fg-line">
+              <input type='text' class="form-control" ng-model="vm.entity.registeredOffice">
+            </div>
+          </dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt class="p-t-10">Subject</dt>
+          <dd>
+            <div class="fg-line">
+              <input type='text' class="form-control" ng-model="vm.entity.registeredOffice">
+            </div>
+          </dd>
+        </dl>
+      </div>
+      <div class="col-md-12 p-l-25">
+        <dl class="dl-horizontal">
+          <dt class="p-t-10">Body</dt>
+          <dd>
+            <div class="fg-line">
+              <textarea class="form-control p-l-10" rows="8" ng-model="vm.entity.strRemarks" placeholder="type here...."></textarea>
+            </div>
+          </dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <label class="text-primary f-15">+ Attachments</label>
+          <ul class="f-15 c-black">
+            <li ng-repeat="file in files track by $index">{{ file.name }}{{ file.ext }}</li>
+          </ul>
+        </dl>
+      </div>
+    </div>
     <button class="btn btn-info btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-link"></i></button>
-    <a href="" class="m-l-15 f-15" ng-disabled="!glink" ng-click="copyLink()"> Copy Files for Email</a>
+    <a href="" class="m-l-15 f-15" ng-disabled="!glink" ng-click="copyLink()"> Send</a>
   </div>
 </script>
 
