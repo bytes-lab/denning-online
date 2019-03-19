@@ -13,6 +13,7 @@ var denningOnline = angular.module('denningOnline', [
     'naif.base64',
     'ngclipboard',
     'ngClipboard',
+    'textAngular',
     'internationalPhoneNumber'
 ])
  

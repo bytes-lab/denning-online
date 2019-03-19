@@ -1,5 +1,7 @@
 denningOnline
   .config(function ($stateProvider, $urlRouterProvider){
+    angular.lowercase = angular.$$lowercase;  
+    
     $urlRouterProvider.otherwise("/home");
 
     $stateProvider

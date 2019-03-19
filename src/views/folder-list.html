@@ -327,9 +327,9 @@
         <dl class="dl-horizontal">
           <dt class="p-t-10">Body</dt>
           <dd>
-            <div class="fg-line">
-              <textarea class="form-control p-l-10" rows="8" ng-model="vm.entity.strRemarks" placeholder="type here...."></textarea>
-            </div>
+            <!-- <div class="fg-line"> -->
+              <div text-angular ng-model="htmlVariable"></div>
+            <!-- </div> -->
           </dd>
         </dl>
         <dl class="dl-horizontal">
@@ -340,7 +340,7 @@
         </dl>
       </div>
     </div>
-    <button class="btn btn-info btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-link"></i></button>
+    <button class="btn btn-info btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-mail-send"></i></button>
     <a href="" class="m-l-15 f-15" ng-disabled="!glink" ng-click="copyLink()"> Send</a>
   </div>
 </script>
