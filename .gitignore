@@ -2,3 +2,4 @@ vendors/bower_components/
 chat/
 node_modules/
 dist/
+consts.js

@@ -1,7 +1,7 @@
 denningOnline
   .controller('folderListCtrl', function(NgTableParams, $sce, $stateParams, $uibModal, 
                                          $state, Auth, $scope, $element, 
-                                         growlService, refactorService, folderService) 
+                                         growlService, refactorService, folderService, AWSACCESSKEY) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -441,25 +441,66 @@ denningOnline
   })
 
   .controller('linksModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
-                                         folderService, files, ngClipboard) 
+                                          folderService, files, ngClipboard, AWSACCESSKEY,
+                                          AWSSECRETACCESSKEY) 
   {
-    $scope.files = files;
-    $scope.glink = false;
-    var links = [], fileNames = [];
-    angular.forEach(files, function(value, key) {
-      links.push(folderService.getLink(value.URL.replace('/document/', '/getOneTimeLink/')));
-      fileNames.push(value.name + value.ext);          
-    })
+    $scope.progress = 0;
 
-    Promise.all(links).then(function (data) {
+    // amazon aws credentials
+    AWS.config.update({
+      accessKeyId : AWSACCESSKEY,
+      secretAccessKey : AWSSECRETACCESSKEY
+    });
+    // amazon s3 region
+    AWS.config.region = 'us-east-2';
+    //amazon s3 bucket name
+    var bucket = new AWS.S3({params: {Bucket: 'mlb-denning'}});
+
+    const uploadS3 = function (file) {
+      return new Promise(function (resolve, reject) {
+        folderService.download(file.URL).then(function(response) {
+          var fileName = file.name + file.ext;
+          var contentTypes = {
+            '.jpg': 'image/jpeg',
+            '.png': 'image/png',
+            '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          };
+
+          var contentType = contentTypes[file.ext] || response.headers('content-type');
+
+          try {
+            var blob = new Blob([response.data], {type: contentType});
+            var params = {Key:   fileName, ContentType: contentType, Body: blob};
+            bucket.upload(params).send(function(err, data) {
+              if (data) {
+                //displays the image location on amazon s3 bucket
+                resolve(data.Location);
+              }
+            });
+          } catch (exc) {
+            console.log("Save Blob method failed with the following exception.");
+            reject(exc);
+          }
+        })
+      });
+    };
+
+    Promise.all(files.map(function(file) {
+      return uploadS3(file);
+    })).then(function(s3Files) {
       $scope.links = '<ul>'
-      for (ii in data) {
-        var link = 'https://denningchat.com.my/denningwcf/' + data[ii];
-        $scope.links += '<li><a href="' + link +'">' + fileNames[ii] + '</a></li>';
+      for (ii in s3Files) {
+        var link = s3Files[ii],
+            fileName = files[ii].name + files[ii].ext;
+        $scope.links += '<li><a href="' + link +'">' + fileName + '</a></li>';
       }
       $scope.links += '</ul><br>';
       $scope.glink = true;
-    })
+    });
+
+    $scope.files = files;
+    $scope.glink = false;
 
     $scope.copyLink = function () {
       ngClipboard.toClipboard($scope.links);
