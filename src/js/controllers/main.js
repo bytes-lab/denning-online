@@ -346,8 +346,7 @@ denningOnline
   .controller('headerCtrl', function($scope, $state, Auth, searchService, $sce) {
     $scope.app.loadChat = true;
     $scope.app.userInfo = Auth.getUserInfo();
-    url = '/chat/index.html?uid=';
-    // url = 'http://localhost:7000/?uid=';
+    url = '/chat/index.html';
     $scope.app.chat_url = $sce.trustAsResourceUrl(url);
 
     $scope.app.getCls = function (mitem) {
@@ -369,12 +368,6 @@ denningOnline
     searchService.getMenu().then(function (data) {
       $scope.app.menu = data;
     });
-
-    if ($scope.app.userInfo != null) {
-      url += $scope.app.userInfo.email; 
-      // url = 'http://localhost:7000/?uid=' + $scope.app.userInfo.email;
-      $scope.app.chat_url = $sce.trustAsResourceUrl(url);
-    }
   })
 
 

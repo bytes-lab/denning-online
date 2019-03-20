@@ -261,6 +261,7 @@ denningOnline
     }
 
     service.logout = function () {
+      $window.localStorage.clear();
       service.setUserInfo({});
     };
     return service;
