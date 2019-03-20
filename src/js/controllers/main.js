@@ -360,7 +360,7 @@ denningOnline
             cls += 'active toggled';
             break;
           }
-        }        
+        }
       }
 
       return cls;
