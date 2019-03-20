@@ -126,7 +126,8 @@ var objPath = {
         "src/css/chat.css",
         "src/css/extra.css",
         "src/css/formly.css",
-        "vendors/intl-tel-input/css/intlTelInput.css"
+        "vendors/intl-tel-input/css/intlTelInput.css",
+        "vendors/textAngular/textAngular.css"
     ],
     VENDOR_ALL: [
         "vendors/bower_components/jquery/dist/jquery.min.js",
@@ -169,7 +170,11 @@ var objPath = {
         "vendors/bootstrap-growl/bootstrap-growl.min.js",
         "vendors/intl-tel-input/js/intlTelInput.min.js",
         "vendors/intl-tel-input/js/utils.js",
-        "vendors/intl-tel-input/js/international-phone-number.js"
+        "vendors/intl-tel-input/js/international-phone-number.js",
+        "vendors/textAngular/textAngular-rangy.min.js",
+        "vendors/textAngular/textAngular-sanitize.min.js",
+        "vendors/textAngular/textAngular.min.js",
+        "vendors/aws-sdk-2.1.24.min.js"
     ],
     JS: [
         'src/js/**/*.js',
