@@ -491,11 +491,17 @@ denningOnline
       return uploadS3(file);
     })).then(function(s3Files) {
       $scope.links = [];
+      $scope.links_ = '<ul>';
+
       for (ii in s3Files) {
         var link = s3Files[ii],
-            fileName = files[ii].name + files[ii].ext;
-        $scope.links.push('<a href="' + link +'">' + fileName + '</a>');
+            fileName = files[ii].name + files[ii].ext,
+            anchor = '<a href="' + link +'">' + fileName + '</a>';
+        $scope.links.push(anchor);
+        $scope.links_ += '<li>' + anchor + '</li>';
       }
+
+      $scope.links_ += '</ul><br>';
       $scope.glink = true;
     });
 
@@ -503,7 +509,7 @@ denningOnline
     $scope.glink = false;
 
     $scope.copyLink = function () {
-      ngClipboard.toClipboard($scope.links);
+      ngClipboard.toClipboard($scope.links_);
       growlService.growl('Links copied successfully!', 'success'); 
     }
 
