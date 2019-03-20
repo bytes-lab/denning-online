@@ -490,13 +490,12 @@ denningOnline
     Promise.all(files.map(function(file) {
       return uploadS3(file);
     })).then(function(s3Files) {
-      $scope.links = '<ul>'
+      $scope.links = [];
       for (ii in s3Files) {
         var link = s3Files[ii],
             fileName = files[ii].name + files[ii].ext;
-        $scope.links += '<li><a href="' + link +'">' + fileName + '</a></li>';
+        $scope.links.push('<a href="' + link +'">' + fileName + '</a>');
       }
-      $scope.links += '</ul><br>';
       $scope.glink = true;
     });
 
