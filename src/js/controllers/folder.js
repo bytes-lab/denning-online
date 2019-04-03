@@ -453,9 +453,9 @@ denningOnline
       secretAccessKey : AWSSECRETACCESSKEY
     });
     // amazon s3 region
-    AWS.config.region = 'us-east-2';
+    AWS.config.region = 'ap-southeast-1';
     //amazon s3 bucket name
-    var bucket = new AWS.S3({params: {Bucket: 'mlb-denning'}});
+    var bucket = new AWS.S3({params: {Bucket: 'denning.mailattachment'}});
 
     const uploadS3 = function (file) {
       return new Promise(function (resolve, reject) {
