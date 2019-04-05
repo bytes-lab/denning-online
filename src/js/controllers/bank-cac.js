@@ -37,6 +37,25 @@ denningOnline
       bankCACService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
+
+        // set country codes
+        if (self.entity.strPhone1CountryCode) {
+          iso2 = self.entity.strPhone1CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strPhone1No']").intlTelInput("setCountry", iso2);
+        }
+        if (self.entity.strPhone2CountryCode) {
+          iso2 = self.entity.strPhone2CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strPhone2No']").intlTelInput("setCountry", iso2);
+        }
+        if (self.entity.strPhone3CountryCode) {
+          iso2 = self.entity.strPhone3CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strPhone3No']").intlTelInput("setCountry", iso2);
+        }
+        if (self.entity.strFax1CountryCode) {
+          iso2 = self.entity.strFax1CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strFax1No']").intlTelInput("setCountry", iso2);
+        }
+
         self.popoutUrl = $state.href('bank-CACs.edit', { id: self.entity.code });
 
         if (self.entity.strPostCode) {
@@ -89,6 +108,16 @@ denningOnline
     }
 
     self.save = function () {
+      // get country codes
+      var tmp = $("input[ng-model='vm.entity.strPhone1No']").intlTelInput("getSelectedCountryData");
+      self.entity.strPhone1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strPhone2No']").intlTelInput("getSelectedCountryData");
+      self.entity.strPhone2CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strPhone3No']").intlTelInput("getSelectedCountryData");
+      self.entity.strPhone3CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strFax1No']").intlTelInput("getSelectedCountryData");
+      self.entity.strFax1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+
       entity = refactorService.getDiff(self.entity_, self.entity);
       bankCACService.save(entity).then(function (item) {
         if (item) {
