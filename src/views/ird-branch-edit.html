@@ -1,14 +1,16 @@
-<div class="container">
+<div ng-class="vm.isDialog ? '' : 'container'">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" ng-if="!vm.isDialog">
       <div class="row">
-      <div class="col-md-10 col-sm-11">
-        <h2 class="c-purple f-500 f-20" style="display: inline;">Edit IRB Branch</h2>
-        <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()" >Cancel</a>
-        <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.irbbranch)" ng-if="vm.userInfo.priority.irbbranch.delete && !vm.create_new && !vm.viewMode">Delete</a>
-        <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.irbbranch.update && vm.can_edit">Save</a>
-        <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.irbbranch.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-      </div>  
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.irbbranch.delete && !vm.isNew">Delete</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.irbbranch.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.irbbranch.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.irbbranch.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="IRD-branches.new" ng-if="vm.userInfo.priority.irbbranch.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        </div>
       </div>
     </div>
     <div class="card-body card-padding">
@@ -16,18 +18,10 @@
       <div class="row">
         <div class="col-md-5 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Code</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.IRDBranch.code" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -35,7 +29,7 @@
             <dt class="p-t-10">Contact Person</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strContactPerson">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strContactPerson">
               </div>
             </dd>
           </dl>
@@ -43,7 +37,7 @@
             <dt class="p-t-10">Phone Office 1</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strPhone1">
+                <input type="text" international-phone-number ng-model="vm.entity.strPhone1No" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
@@ -51,7 +45,7 @@
             <dt class="p-t-10">Phone Office 2</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strPhone2">
+                <input type="text" international-phone-number ng-model="vm.entity.strPhone2No" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
@@ -59,15 +53,7 @@
             <dt class="p-t-10">Fax</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strPhoneFax">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Remarks</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strRemarks">
+                <input type='text' international-phone-number ng-model="vm.entity.strFax1No" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
@@ -77,7 +63,7 @@
             <dt class="p-t-10">State</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strState">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strState">
               </div>
             </dd>
           </dl>
@@ -85,7 +71,7 @@
             <dt class="p-t-10">Postcode</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -93,7 +79,7 @@
             <dt class="p-t-10">City</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strCity">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strCity">
               </div>
             </dd>
           </dl>              
@@ -101,7 +87,7 @@
             <dt class="p-t-10">Address (Line 1)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.IRDBranch.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control">
+                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -109,7 +95,7 @@
             <dt class="p-t-10">Address (Line 2)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strAddressLine2">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine2">
               </div>
             </dd>
           </dl>
@@ -117,29 +103,42 @@
             <dt class="p-t-10">Address (Line 3)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.IRDBranch.strAddressLine3">
+                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine3">
               </div>
             </dd>
           </dl>
         </div>
       </div>
       <div class="clearfix"></div>
-      
+      <h4 class="m-t-25">Remarks</h4>
       <div class="row">
-        <div class="col-md-10 col-sm-11 no-padding">
-          <div class="m-t-30">
-            <a class="btn btn-link btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Cancel</a>
-            <a class="btn btn-danger btn-sm pull-right m-l-10" type="submit" ng-click="vm.openDelete($event, vm.contact)" ng-if="vm.userInfo.priority.irbbranch.delete && !vm.create_new && !vm.viewMode">Delete</a>
-            <a class="btn btn-primary btn-sm pull-right m-l-10" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.irbbranch.update && vm.can_edit">Save</a>
-            <a class="btn bgm-cyan btn-sm pull-right" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.irbbranch.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
-          </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Remark</dt>
+            <dd>
+              <div class="fg-line">
+                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strRemarks" placeholder="type here...."></textarea>
+              </div>
+            </dd>
+          </dl>
         </div>
-        <div class="col-md-10" ng-if="vm.viewMode">
-          <div class="m-t-30">
-            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+      </div>
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-danger btn-sm pull-right m-l-5" type="submit" ng-click="vm.openDelete($event, vm.entity)" ng-if="vm.userInfo.priority.irbbranch.delete && !vm.isNew">Delete</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.irbbranch.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.irbbranch.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.irbbranch.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="IRD-branches.new" ng-if="vm.userInfo.priority.irbbranch.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+

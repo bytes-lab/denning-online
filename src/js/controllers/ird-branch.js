@@ -19,23 +19,92 @@ denningOnline
     }
   })
 
-  .controller('IRDBranchEditCtrl', function($stateParams, IRDBranchService, $state, Auth) {
+  .controller('IRDBranchEditCtrl', function($stateParams, IRDBranchService, $state, Auth, refactorService,
+                                            $uibModalInstance, entityCode, isDialog, isNew, growlService) 
+  {
     var self = this;
     self.userInfo = Auth.getUserInfo();
-    self.cancel = cancel;
-    self.create_new = $state.$current.data.can_edit;
-    self.can_edit = $state.$current.data.can_edit;
-    self.viewMode = false;
+    self._type = 'irbbranch';
+    
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
 
-    if ($stateParams.id) {
-      IRDBranchService.getItem($stateParams.id).then(function(item){
-        self.IRDBranch = item;
+    if (self.entityCode) {
+      self.title = 'Edit IRB Branch';
+
+      IRDBranchService.getItem(self.entityCode).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+
+        // set country codes
+        if (self.entity.strPhone1CountryCode) {
+          iso2 = self.entity.strPhone1CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strPhone1No']").intlTelInput("setCountry", iso2);
+        }
+        if (self.entity.strPhone2CountryCode) {
+          iso2 = self.entity.strPhone2CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strPhone2No']").intlTelInput("setCountry", iso2);
+        }
+        if (self.entity.strFax1CountryCode) {
+          iso2 = self.entity.strFax1CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strFax1No']").intlTelInput("setCountry", iso2);
+        }
+
+        self.popoutUrl = $state.href('IRD-branches.edit', { id: self.entity.code });
       });
     } else {
-      self.IRDBranch = {};
+      self.title = 'New IRB Branch';
+
+      self.entity = {};
+      
+      self.popoutUrl = $state.href('IRD-branches.new');
     }
 
-    function cancel() {
-      $state.go('IRD-branches.list');
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'clsEnteredBy', 'clsUpdatedBy'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
+    self.save = function () {
+      // get country codes
+      var tmp = $("input[ng-model='vm.entity.strPhone1No']").intlTelInput("getSelectedCountryData");
+      self.entity.strPhone1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strPhone2No']").intlTelInput("getSelectedCountryData");
+      self.entity.strPhone2CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strFax1No']").intlTelInput("getSelectedCountryData");
+      self.entity.strFax1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      IRDBranchService.save(entity).then(function (res) {
+        if (res) {  // ignore when errors
+          if (self.isDialog) {
+            $uibModalInstance.close(res);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('IRD-branches.edit', { 'id': res.code });
+            }
+            growlService.growl('Saved successfully!', 'success');
+          }
+        }
+      });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('IRD-branches.list');
+      }
     }
   })

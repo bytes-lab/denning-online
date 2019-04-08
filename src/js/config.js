@@ -1036,16 +1036,43 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'IRDBranchEditCtrl as vm',
-        templateUrl: 'views/ird-branch-edit.html'
+        templateUrl: 'views/ird-branch-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('IRD-branches.new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },
         url: '/new',
         controller: 'IRDBranchEditCtrl as vm',
-        templateUrl: 'views/ird-branch-edit.html'
+        templateUrl: 'views/ird-branch-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 
