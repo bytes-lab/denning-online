@@ -155,8 +155,12 @@ denningOnline
     }
 
     self.checkNextDate = function () {
-      if (!self.entity.boolChkNextDate) {
-        self.entity.dtNextDate= '';
+      self.entity.dtNextDate= '';
+    }
+
+    self.chooseNextDate = function () {
+      if(self.entity.dtNextDate) {
+        self.entity.boolChkNextDate = null;
       }
     }
 

@@ -314,11 +314,11 @@
             <dd>
               <div class="col-md-6 p-0">
                 <div class="fg-line">
-                  <input ng-click="open($event, 'ctopenednd')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="ctopenednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                  <input ng-click="open($event, 'ctopenednd')" ng-change="vm.chooseNextDate()" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtNextDate" is-open="ctopenednd" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
                 </div>
               </div>
               <div class="col-md-6">
-                <button class="btn bgm-cyan btn-sm m-l-5" ng-click="vm.save_new_hearing();" ng-if="vm.entity.boolChkNextDate && vm.entity.dtNextDate" ng-disabled="!vm.can_edit">Save New Hearing Date</button>
+                <button class="btn bgm-cyan btn-sm m-l-5" ng-click="vm.save_new_hearing();" ng-if="vm.entity.dtNextDate" ng-disabled="!vm.can_edit">Save New Hearing Date</button>
               </div>
               <div class="clearfix"></div>
               <div class="m-b-10">
