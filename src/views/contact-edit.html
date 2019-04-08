@@ -174,7 +174,7 @@
             </dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'copened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateDeceased" is-open="copened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date of death" />
+                <input ng-click="open($event, 'copened_d')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateDeceased" is-open="copened_d" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit || !vm.entity.boolDeceased" ng-required="true" close-text="Close" placeholder="Select Date of death" />
               </div>
             </dd>
           </dl>

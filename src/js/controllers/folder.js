@@ -496,7 +496,7 @@ denningOnline
       for (ii in s3Files) {
         var link = s3Files[ii],
             fileName = files[ii].name + files[ii].ext,
-            anchor = '<a href="' + link +'">' + fileName + '</a>';
+            anchor = '<a href="https://docs.google.com/gview?url=' + link +'">' + fileName + '</a>';
         $scope.links.push(anchor);
         $scope.links_ += '<li>' + anchor + '</li>';
       }
