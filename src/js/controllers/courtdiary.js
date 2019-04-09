@@ -267,7 +267,11 @@ denningOnline
       self.entity_ = null;
 
       var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'dtPreviousDate', 'clsEnteredBy',
-                        'clsUpdatedBy'];
+                        'clsUpdatedBy', 'strCounselAttended', 'clsCoram', 'strOpponentCounsel',
+                        'strCourtDecision', 'strRemarks', 'strActionRequired', 'dtActionEndDate',
+                        'dtNextDate', 'boolChkNextDate'];                        
+      self.strCounselAttended = null;
+
       for (ii in deleteList) {
         key = deleteList[ii];
         delete self.entity[key];
