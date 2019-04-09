@@ -102,7 +102,7 @@ denningOnline
       for (var ii in model) {
         if (ii.startsWith('bool')) {
           if (toBool) {
-            model[ii] = model[ii] == "1" ? true: false;
+            model[ii] = model[ii] == "1" ? true: model[ii] == "0" ? false: null;
           } else {
             model[ii] = model[ii] ? "1": "0";
           }
