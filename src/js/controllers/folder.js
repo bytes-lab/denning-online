@@ -487,6 +487,8 @@ denningOnline
       });
     };
 
+    $scope.emailSubject = 'Documents of Matter 6000-7777';
+
     Promise.all(files.map(function(file) {
       return uploadS3(file);
     })).then(function(s3Files) {
@@ -525,6 +527,7 @@ denningOnline
       console.log(emailData);
 
       folderService.sendEmail(emailData).then(function (resp) {
+        $uibModalInstance.close();
         growlService.growl('Email sent successfully!', 'success'); 
       })
     }

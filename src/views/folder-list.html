@@ -315,6 +315,14 @@
           </dd>
         </dl>
         <dl class="dl-horizontal">
+          <dt class="p-t-10">CC</dt>
+          <dd>
+            <div class="fg-line">
+              <input type='text' class="form-control" ng-model="emailCC">
+            </div>
+          </dd>
+        </dl>
+        <dl class="dl-horizontal">
           <dt class="p-t-10">Subject</dt>
           <dd>
             <div class="fg-line">
@@ -340,9 +348,9 @@
         </dl>
       </div>
     </div>
-    <button class="btn btn-info btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-mail-send"></i></button>
+    <button class="btn btn-info btn-icon waves-effect waves-circle waves-float" ng-click="sendEmail()"><i class="zmdi zmdi-mail-send"></i></button>
     <a href="" class="m-l-10 f-15" ng-disabled="!glink" ng-click="sendEmail()"> Send</a>
-    <button class="btn btn-info m-l-30 btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-link"></i></button>
+    <button class="btn btn-info m-l-30 btn-icon waves-effect waves-circle waves-float" ng-click="copyLink()"><i class="zmdi zmdi-link"></i></button>
     <a href="" class="m-l-10 f-15" ng-disabled="!glink" ng-click="copyLink()"> Copy Files for Email</a>
   </div>
 </script>
