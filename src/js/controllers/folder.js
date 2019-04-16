@@ -522,6 +522,7 @@ denningOnline
         denningOriginalAttachment: files.map(function(file) { return file.URL; }),
         emailFrom: userInfo.email,
         emailTo: $scope.emailTo.split(','),
+        emailTo_cc: $scope.emailCC.split(','),
         subject: $scope.emailSubject
       }
       console.log(emailData);
