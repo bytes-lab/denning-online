@@ -370,7 +370,13 @@ denningOnline
         resolve: {
           files: function () {
             return files;
-          }
+          },
+          type: function () {
+            return self.type;
+          },
+          code: function () {
+            return self.code;
+          },
         }
       }).result.then(function () {}, function (res) {});
     }
@@ -442,7 +448,7 @@ denningOnline
 
   .controller('linksModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
                                           folderService, files, ngClipboard, AWSACCESSKEY,
-                                          AWSSECRETACCESSKEY, Auth, contactService) 
+                                          AWSSECRETACCESSKEY, Auth, contactService, type, code) 
   {
     var userInfo = Auth.getUserInfo();
     var self = this;
@@ -508,23 +514,23 @@ denningOnline
       });
     };
 
-    $scope.emailSubject = 'Documents of Matter 6000-7777';
+    $scope.emailSubject = 'Documents of ' + type + ' ( '+code+' )';
 
     Promise.all(files.map(function(file) {
       return uploadS3(file);
     })).then(function(s3Files) {
       $scope.links = [];
-      $scope.links_ = '<ul>';
+      $scope.links_ = '';
 
       for (ii in s3Files) {
         var link = s3Files[ii],
             fileName = files[ii].name + files[ii].ext,
-            anchor = '<a href="https://docs.google.com/gview?url=' + link +'">' + fileName + '</a>';
+            glink = 'https://docs.google.com/gview?url=' + link,
+            anchor = '<a href="' + glink +'">' + fileName + '</a>';
         $scope.links.push(anchor);
-        $scope.links_ += '<li>' + anchor + '</li>';
+        $scope.links_ += fileName + '<br>' + glink + '<br>';
       }
 
-      $scope.links_ += '</ul><br>';
       $scope.glink = true;
     });
 
