@@ -364,7 +364,7 @@ denningOnline
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'linksModal.html',
-        controller: 'linksModalCtrl',
+        controller: 'linksModalCtrl as ctrl',
         size: 'lg',
         keyboard: true,
         resolve: {
@@ -445,8 +445,56 @@ denningOnline
                                           AWSSECRETACCESSKEY, Auth) 
   {
     var userInfo = Auth.getUserInfo();
+    var self = this;
     $scope.progress = 0;
 
+    var pendingSearch, cancelSearch = angular.noop;
+    var cachedQuery, lastSearch;
+
+    self.allContacts = loadContacts();
+    self.contacts = [self.allContacts[0]];
+
+    self.filterSelected = true;
+    self.querySearch = querySearch;
+    function querySearch (criteria) {
+      cachedQuery = cachedQuery || criteria;
+      return cachedQuery ? self.allContacts.filter(createFilterFor(cachedQuery)) : [];
+    }
+
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(contact) {
+        return (contact._lowername.indexOf(lowercaseQuery) != -1);;
+      };
+
+    }
+
+    function loadContacts() {
+      var contacts = [
+        'Marina Augustine',
+        'Oddr Sarno',
+        'Nick Giannopoulos',
+        'Narayana Garner',
+        'Anita Gros',
+        'Megan Smith',
+        'Tsvetko Metzger',
+        'Hector Simek',
+        'Some-guy withalongalastaname'
+      ];
+
+      return contacts.map(function (c, index) {
+        var cParts = c.split(' ');
+        var contact = {
+          name: c,
+          email: cParts[0][0].toLowerCase() + '.' + cParts[1].toLowerCase() + '@example.com',
+          image: 'http://lorempixel.com/50/50/people?' + index
+        };
+        contact._lowername = contact.name.toLowerCase();
+        return contact;
+      });
+    }
+  
     // amazon aws credentials
     AWS.config.update({
       accessKeyId : AWSACCESSKEY,

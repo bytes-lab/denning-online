@@ -309,9 +309,17 @@
         <dl class="dl-horizontal">
           <dt class="p-t-10">Send To</dt>
           <dd>
-            <div class="fg-line">
-              <input type='text' class="form-control" ng-model="emailTo">
-            </div>
+            <md-contact-chips
+                ng-model="ctrl.contacts"
+                md-contacts="ctrl.querySearch($query)"
+                md-contact-name="name"
+                md-contact-image="image"
+                md-contact-email="email"
+                md-require-match="true"
+                md-highlight-flags="i"
+                filter-selected="ctrl.filterSelected"
+                placeholder="To">
+            </md-contact-chips>
           </dd>
         </dl>
         <dl class="dl-horizontal">
