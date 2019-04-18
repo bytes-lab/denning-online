@@ -453,21 +453,14 @@ denningOnline
 
     self.allContacts = loadContacts();
     self.contacts = [self.allContacts[0]];
+    self.contacts_cc = [self.allContacts[1]];
+    self.contacts_from = [];
 
     self.filterSelected = true;
-    self.querySearch = querySearch;
-    function querySearch (criteria) {
-      cachedQuery = cachedQuery || criteria;
-      return cachedQuery ? self.allContacts.filter(createFilterFor(cachedQuery)) : [];
-    }
-
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-
-      return function filterFn(contact) {
-        return (contact._lowername.indexOf(lowercaseQuery) != -1);;
-      };
-
+    self.querySearch = function (criteria) {
+      return self.allContacts.filter(function(contact) {
+        return (contact._lowername.indexOf(criteria.toLowerCase()) != -1);
+      });
     }
 
     function loadContacts() {
@@ -488,7 +481,7 @@ denningOnline
         var contact = {
           name: c,
           email: cParts[0][0].toLowerCase() + '.' + cParts[1].toLowerCase() + '@example.com',
-          image: 'http://lorempixel.com/50/50/people?' + index
+          image: null
         };
         contact._lowername = contact.name.toLowerCase();
         return contact;
@@ -564,21 +557,21 @@ denningOnline
     }
 
     $scope.sendEmail = function () {
-      var emailData = {
-        awsLinkAttachment: $scope.links,
-        bodyHTML: $scope.emailBody,
-        denningOriginalAttachment: files.map(function(file) { return file.URL; }),
-        emailFrom: userInfo.email,
-        emailTo: $scope.emailTo.split(','),
-        emailTo_cc: $scope.emailCC.split(','),
-        subject: $scope.emailSubject
-      }
-      console.log(emailData);
+      // var emailData = {
+      //   awsLinkAttachment: $scope.links,
+      //   bodyHTML: $scope.emailBody,
+      //   denningOriginalAttachment: files.map(function(file) { return file.URL; }),
+      //   emailFrom: userInfo.email,
+      //   emailTo: $scope.emailTo.split(','),
+      //   emailTo_cc: $scope.emailCC.split(','),
+      //   subject: $scope.emailSubject
+      // }
+      console.log(self.contacts);
 
-      folderService.sendEmail(emailData).then(function (resp) {
-        $uibModalInstance.close();
-        growlService.growl('Email sent successfully!', 'success'); 
-      })
+      // folderService.sendEmail(emailData).then(function (resp) {
+      //   $uibModalInstance.close();
+      //   growlService.growl('Email sent successfully!', 'success'); 
+      // })
     }
   })
 
