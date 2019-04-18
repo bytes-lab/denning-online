@@ -537,16 +537,26 @@ denningOnline
     }
 
     $scope.sendEmail = function () {
+      if (self.sendFrom.length == 0) {
+        alert("Please choose a from email.");
+        return;
+      }
+
+      var sendTo = self.sendTo.map(function (contact) { return contact.emailAddress; }).filter(function(email) { return email != ''; });
+      if (sendTo.length == 0) {
+        alert("Please choose contacts with email.");
+        return;
+      }
+
       var emailData = {
         awsLinkAttachment: $scope.links,
         bodyHTML: $scope.emailBody,
         denningOriginalAttachment: files.map(function(file) { return file.URL; }),
         emailFrom: self.sendFrom[0].strEmail,
-        emailTo: self.sendTo.map(function (contact) { return contact.emailAddress; }),
-        emailTo_cc: self.sendCC.map(function (contact) { return contact.emailAddress; }),
+        emailTo: sendTo,
+        emailTo_cc: self.sendCC.map(function (contact) { return contact.emailAddress; }).filter(function(email) { return email != ''; }),
         subject: $scope.emailSubject
       }
-      console.log(emailData);
 
       folderService.sendEmail(emailData).then(function (resp) {
         $uibModalInstance.close();
