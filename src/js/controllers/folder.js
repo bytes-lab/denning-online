@@ -364,7 +364,7 @@ denningOnline
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'linksModal.html',
-        controller: 'linksModalCtrl as ctrl',
+        controller: 'linksModalCtrl as vm',
         size: 'lg',
         keyboard: true,
         resolve: {
@@ -442,7 +442,7 @@ denningOnline
 
   .controller('linksModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
                                           folderService, files, ngClipboard, AWSACCESSKEY,
-                                          AWSSECRETACCESSKEY, Auth) 
+                                          AWSSECRETACCESSKEY, Auth, contactService) 
   {
     var userInfo = Auth.getUserInfo();
     var self = this;
@@ -451,43 +451,23 @@ denningOnline
     var pendingSearch, cancelSearch = angular.noop;
     var cachedQuery, lastSearch;
 
-    self.allContacts = loadContacts();
-    self.contacts = [self.allContacts[0]];
-    self.contacts_cc = [self.allContacts[1]];
-    self.contacts_from = [];
+    self.sendTo = [];
+    self.sendCC = [];
+    self.sendFrom = [];
 
     self.filterSelected = true;
-    self.querySearch = function (criteria) {
-      return self.allContacts.filter(function(contact) {
-        return (contact._lowername.indexOf(criteria.toLowerCase()) != -1);
-      });
-    }
-
-    function loadContacts() {
-      var contacts = [
-        'Marina Augustine',
-        'Oddr Sarno',
-        'Nick Giannopoulos',
-        'Narayana Garner',
-        'Anita Gros',
-        'Megan Smith',
-        'Tsvetko Metzger',
-        'Hector Simek',
-        'Some-guy withalongalastaname'
-      ];
-
-      return contacts.map(function (c, index) {
-        var cParts = c.split(' ');
-        var contact = {
-          name: c,
-          email: cParts[0][0].toLowerCase() + '.' + cParts[1].toLowerCase() + '@example.com',
-          image: null
-        };
-        contact._lowername = contact.name.toLowerCase();
-        return contact;
-      });
+    self.filterContacts = function (keyword) {
+      return contactService.getList(1, 5, keyword).then(function (resp) {
+        return resp.data
+      })
     }
   
+    self.filterMailServer = function (keyword) {
+      return contactService.getMailServerList().then(function (resp) {
+        return resp.data
+      })
+    }
+
     // amazon aws credentials
     AWS.config.update({
       accessKeyId : AWSACCESSKEY,
@@ -557,21 +537,21 @@ denningOnline
     }
 
     $scope.sendEmail = function () {
-      // var emailData = {
-      //   awsLinkAttachment: $scope.links,
-      //   bodyHTML: $scope.emailBody,
-      //   denningOriginalAttachment: files.map(function(file) { return file.URL; }),
-      //   emailFrom: userInfo.email,
-      //   emailTo: $scope.emailTo.split(','),
-      //   emailTo_cc: $scope.emailCC.split(','),
-      //   subject: $scope.emailSubject
-      // }
-      console.log(self.contacts);
+      var emailData = {
+        awsLinkAttachment: $scope.links,
+        bodyHTML: $scope.emailBody,
+        denningOriginalAttachment: files.map(function(file) { return file.URL; }),
+        emailFrom: self.sendFrom[0].strEmail,
+        emailTo: self.sendTo.map(function (contact) { return contact.emailAddress; }),
+        emailTo_cc: self.sendCC.map(function (contact) { return contact.emailAddress; }),
+        subject: $scope.emailSubject
+      }
+      console.log(emailData);
 
-      // folderService.sendEmail(emailData).then(function (resp) {
-      //   $uibModalInstance.close();
-      //   growlService.growl('Email sent successfully!', 'success'); 
-      // })
+      folderService.sendEmail(emailData).then(function (resp) {
+        $uibModalInstance.close();
+        growlService.growl('Email sent successfully!', 'success'); 
+      })
     }
   })
 

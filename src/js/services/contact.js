@@ -60,5 +60,11 @@ denningOnline
       });
     }
 
+    service.getMailServerList = function () {
+      return http.GET('v1/table/MailServer', {}).then(function (resp) {
+        return resp;
+      });
+    }
+
     return service;
   })

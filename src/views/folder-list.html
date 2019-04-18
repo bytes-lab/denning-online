@@ -306,50 +306,50 @@
   <div class="modal-body p-b-20">
     <div class="row">
       <div class="col-md-12 p-l-25">
-        <dl class="dl-horizontal">
+        <dl class="dl-horizontal m-b-0">
           <dt class="p-t-10">Send From</dt>
           <dd>
             <md-contact-chips
-              ng-model="ctrl.contacts_from"
-              md-contacts="ctrl.querySearch($query)"
-              md-contact-name="name"
+              ng-model="vm.sendFrom"
+              md-contacts="vm.filterMailServer($query)"
+              md-contact-name="strInternalName"
               md-contact-image="image"
-              md-contact-email="email"
+              md-contact-email="strEmail"
               md-require-match="true"
               md-highlight-flags="i"
-              filter-selected="ctrl.filterSelected"
+              filter-selected="vm.filterSelected"
               placeholder="From">
             </md-contact-chips>
           </dd>
         </dl>
-        <dl class="dl-horizontal">
+        <dl class="dl-horizontal m-b-0">
           <dt class="p-t-10">Send To</dt>
           <dd>
             <md-contact-chips
-              ng-model="ctrl.contacts"
-              md-contacts="ctrl.querySearch($query)"
+              ng-model="vm.sendTo"
+              md-contacts="vm.filterContacts($query)"
               md-contact-name="name"
               md-contact-image="image"
-              md-contact-email="email"
+              md-contact-email="emailAddress"
               md-require-match="true"
               md-highlight-flags="i"
-              filter-selected="ctrl.filterSelected"
+              filter-selected="vm.filterSelected"
               placeholder="To">
             </md-contact-chips>
           </dd>
         </dl>
-        <dl class="dl-horizontal">
+        <dl class="dl-horizontal m-b-10">
           <dt class="p-t-10">CC</dt>
           <dd>
             <md-contact-chips
-              ng-model="ctrl.contacts_cc"
-              md-contacts="ctrl.querySearch($query)"
+              ng-model="vm.sendCC"
+              md-contacts="vm.filterContacts($query)"
               md-contact-name="name"
               md-contact-image="image"
-              md-contact-email="email"
+              md-contact-email="emailAddress"
               md-require-match="true"
               md-highlight-flags="i"
-              filter-selected="ctrl.filterSelected"
+              filter-selected="vm.filterSelected"
               placeholder="CC">
             </md-contact-chips>
           </dd>
@@ -367,9 +367,7 @@
         <dl class="dl-horizontal">
           <dt class="p-t-10">Body</dt>
           <dd>
-            <!-- <div class="fg-line"> -->
-              <div text-angular ng-model="emailBody"></div>
-            <!-- </div> -->
+            <div text-angular ng-model="emailBody"></div>
           </dd>
         </dl>
         <dl class="dl-horizontal">
