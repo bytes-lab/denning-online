@@ -309,17 +309,20 @@
         <dl class="dl-horizontal m-b-0">
           <dt class="p-t-10">Send From</dt>
           <dd>
-            <md-contact-chips
-              ng-model="vm.sendFrom"
-              md-contacts="vm.filterMailServer($query)"
-              md-contact-name="strInternalName"
-              md-contact-image="image"
-              md-contact-email="strEmail"
-              md-require-match="true"
-              md-highlight-flags="i"
-              filter-selected="vm.filterSelected"
-              placeholder="From">
-            </md-contact-chips>
+            <md-autocomplete
+              md-selected-item="vm.sendFrom"
+              md-search-text="qssf"
+              md-items="item in vm.mailServers"
+              md-item-text="item.strInternalName"
+              md-min-length="0"
+              placeholder="Choose a mail server"
+              class="default-input mail-server">
+              <md-item-template>
+                <span md-highlight-text="qstl" class="col-1" md-highlight-flags="i">
+                  {{ item.strInternalName }} ( {{ item.strEmail }} )
+                </span>
+              </md-item-template>
+            </md-autocomplete>
           </dd>
         </dl>
         <dl class="dl-horizontal m-b-0">

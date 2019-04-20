@@ -459,7 +459,7 @@ denningOnline
 
     self.sendTo = [];
     self.sendCC = [];
-    self.sendFrom = [];
+    self.sendFrom = null;
 
     self.filterSelected = true;
     self.filterContacts = function (keyword) {
@@ -468,11 +468,9 @@ denningOnline
       })
     }
   
-    self.filterMailServer = function (keyword) {
-      return contactService.getMailServerList().then(function (resp) {
-        return resp.data
-      })
-    }
+    contactService.getMailServerList().then(function (resp) {
+      self.mailServers = resp.data;
+    })
 
     // amazon aws credentials
     AWS.config.update({
@@ -543,8 +541,8 @@ denningOnline
     }
 
     $scope.sendEmail = function () {
-      if (self.sendFrom.length == 0) {
-        alert("Please choose a from email.");
+      if (self.sendFrom == null) {
+        alert("Please choose a mail server.");
         return;
       }
 
@@ -558,7 +556,7 @@ denningOnline
         awsLinkAttachment: $scope.links,
         bodyHTML: $scope.emailBody,
         denningOriginalAttachment: files.map(function(file) { return file.URL; }),
-        emailFrom: self.sendFrom[0].strEmail,
+        emailFrom: self.sendFrom,
         emailTo: sendTo,
         emailTo_cc: self.sendCC.map(function (contact) { return contact.emailAddress; }).filter(function(email) { return email != ''; }),
         subject: $scope.emailSubject
