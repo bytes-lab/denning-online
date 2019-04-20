@@ -113,11 +113,15 @@ denningOnline
 
     service.convertDate = function (model, convert) {
       for (var ii in model) {
-        if (ii.startsWith('dt') && model[ii]) {
-          if (convert) {
-            model[ii] = uibDateParser.parse(model[ii], 'yyyy-MM-dd HH:mm:ss');
+        if (ii.startsWith('dt')) {
+          if (model[ii]) {
+            if (convert) {
+              model[ii] = uibDateParser.parse(model[ii], 'yyyy-MM-dd HH:mm:ss');
+            } else {
+              model[ii] = moment(model[ii]).format('YYYY-MM-DD');
+            }            
           } else {
-            model[ii] = moment(model[ii]).format('YYYY-MM-DD');
+            model[ii] = null;
           }
         }
       }

@@ -126,10 +126,52 @@ denningOnline
         self.entity.clsFileNo1.strFileNo1 = item.key;
         self.fileNo = item.key;
         self.fileName = item.Title.replace('Matter: ', '').slice(11, -1);
+
+        matterService.getItem(self.fileNo).then(function (item) {
+          if (item.strF2) {
+            self.court = { strTypeE: item.strF2 };
+          } else {
+            self.court = null;
+          }
+
+          if (!self.entity.courtInfo) {
+            self.entity.courtInfo = {};
+          }
+
+          self.entity.courtInfo.CaseNo = item.strF4;
+          self.entity.courtInfo.CaseName = self.getFullCaseName(item);
+        });
       } else {
         self.fileNo = '';
         self.fileName = '';
       }
+    }
+
+    self.getFullCaseName = function (matter) {
+      var plantiff = '', defendant = '';
+      if (matter.clsC1) {
+        plantiff = matter.clsC1.strName;
+        if (matter.clsC2) {
+          if (matter.clsC3) {
+            plantiff += ' & others';
+          } else {
+            plantiff += ' & another';
+          }
+        }
+      }
+
+      if (matter.clsC6) {
+        defendant = matter.clsC6.strName;
+        if (matter.clsC7) {
+          if (matter.clsC8) {
+            defendant += ' & others';
+          } else {
+            defendant += ' & another';
+          }
+        }
+      }
+
+      return plantiff + ' vs ' + defendant;
     }
 
     self.queryCourts = function (searchText) {
@@ -149,8 +191,13 @@ denningOnline
     }
 
     self.courtChange = function (item) {
-      if (!item) {
-        self.entity.clsCourtPlace = null;
+      if (item) {
+        if (!self.entity.courtInfo) {
+          self.entity.courtInfo = {};
+        }
+        self.entity.courtInfo.Court = item.strTypeE;
+      } else {
+        self.entity.clsCourtPlace = null;        
       }
     }
 
@@ -258,6 +305,8 @@ denningOnline
     self.cdChange = function (item) {
       if (item) {
         self.entity.strCounselAttended = item.strName
+      } else {
+        self.entity.strCounselAttended = '';
       }
     }
 
@@ -315,11 +364,14 @@ denningOnline
         self.clsAttendedStatus = '0-None';
 
         var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'clsEnteredBy',
-                          'clsUpdatedBy', 'dtNextDate'];
+                          'clsUpdatedBy', 'dtNextDate', 'strRemarks', 'strCourtDecision',
+                          'strActionRequired', 'dtActionEndDate'];
         for (ii in deleteList) {
           key = deleteList[ii];
           delete self.entity[key];
         }
+
+        self.clsAttendedStatus = '0-None';
       });
 
     }
