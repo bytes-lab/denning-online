@@ -270,6 +270,8 @@ denningOnline
                         'clsUpdatedBy', 'strCounselAttended', 'clsCoram', 'strOpponentCounsel',
                         'strCourtDecision', 'strRemarks', 'strActionRequired', 'dtActionEndDate',
                         'dtNextDate', 'boolChkNextDate'];                        
+
+      self.strCounselAttended = null;
       self.clsAttendedStatus = '0-None';
 
       for (ii in deleteList) {
