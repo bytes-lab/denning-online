@@ -33,6 +33,31 @@ denningOnline
     self.isNew = isNew;
     self.entityCode = isDialog ? entityCode : $stateParams.id;
 
+    self.fullAddress = function () {
+      fullAddress = '';
+      if (self.entity) {
+        if (self.entity.strName)
+          fullAddress = self.entity.strName.trim().toUpperCase()+'\n';
+        if (self.entity.strAddressLine1)
+          fullAddress += self.entity.strAddressLine1.trim()+'\n';
+        if (self.entity.strAddressLine2)
+          fullAddress += self.entity.strAddressLine2.trim()+'\n';
+        if (self.entity.strAddressLine3)
+          fullAddress += self.entity.strAddressLine3.trim()+'\n';
+        if (self.entity.strPostCode)
+          fullAddress += self.entity.strPostCode.trim();
+        if (self.entity.strCity)
+          fullAddress += ' ' + self.entity.strCity.trim();
+        fullAddress += ',\n';
+        if (self.entity.strState)
+          fullAddress += self.entity.strState.trim()+',\n';
+        if (self.entity.strCountry)
+          fullAddress += self.entity.strCountry.trim()+'\n';        
+      }
+
+      return fullAddress;
+    };
+
     self.queryBanks = function(searchText) {
       return bankService.getTableList(1, 10, searchText).then(function(resp) {
         return resp.data;

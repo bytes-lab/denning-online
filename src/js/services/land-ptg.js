@@ -17,7 +17,7 @@ denningOnline
     }
 
     service.getItem = function (code) {
-      return http.GET('v1/app/GovOffice/PTG/'+code).then(function (resp) {
+      return http.GET('v1/table/landregistry(ptg)/'+code).then(function (resp) {
         return resp.data;
       });
     }

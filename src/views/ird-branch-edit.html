@@ -15,114 +15,30 @@
     </div>
     <div class="card-body card-padding">
       <div class="clearfix"></div>
+      <h4>IRB Branch Detail</h4>
       <div class="row">
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Contact Person</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strContactPerson">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office 1</dt>
-            <dd>
-              <div class="fg-line">
-                <input type="text" international-phone-number ng-model="vm.entity.strPhone1No" ng-readonly="!vm.can_edit">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office 2</dt>
-            <dd>
-              <div class="fg-line">
-                <input type="text" international-phone-number ng-model="vm.entity.strPhone2No" ng-readonly="!vm.can_edit">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' international-phone-number ng-model="vm.entity.strFax1No" ng-readonly="!vm.can_edit">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-5 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strState">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strPostCode" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">City</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strCity">
-              </div>
-            </dd>
-          </dl>              
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 1)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 2)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine2">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 3)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-readonly="!vm.can_edit" ng-model="vm.entity.strAddressLine3">
+                <input ng-model="vm.entity.strName" type="text" class="form-control" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
         </div>
       </div>
+
       <div class="clearfix"></div>
+      <h4 class="m-t-25">Contact Information</h4>
+      <div class="row" data-ng-include src="'contact-info-0.html'"></div>
+
+      <h4 class="m-t-25 p-t-5" ng-click="vm.showMailingAddress=!vm.showMailingAddress">Mailing Address&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="vm.showMailingAddress"></i><i class="zmdi zmdi-minus" ng-if="!vm.showMailingAddress"></i></h4>
+      <div class="row" ng-show="!vm.showMailingAddress" data-ng-include src="'mailing-address.html'"></div>
+
       <h4 class="m-t-25">Remarks</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Remark</dt>
-            <dd>
-              <div class="fg-line">
-                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strRemarks" placeholder="type here...."></textarea>
-              </div>
-            </dd>
-          </dl>
-        </div>
-      </div>
+      <div class="row" data-ng-include src="'remarks.html'"></div>
+
       <h4 class="m-t-25 m-b-15">Office Use</h4>
       <div class="row" data-ng-include src="'office-use.html'"></div>
 

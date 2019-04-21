@@ -1649,7 +1649,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'courtEditCtrl as vm',
-        templateUrl: 'views/court-edit.html'
+        templateUrl: 'views/court-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('courts.new', {
         data: {
@@ -1657,7 +1671,21 @@ denningOnline
         },
         url: '/new',
         controller: 'courtEditCtrl as vm',
-        templateUrl: 'views/court-edit.html'
+        templateUrl: 'views/court-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
       //------------------------------
@@ -1687,7 +1715,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'landOfficeEditCtrl as vm',
-        templateUrl: 'views/land-office-edit.html'
+        templateUrl: 'views/land-office-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('land-offices.new', {
         data: {
@@ -1696,7 +1738,21 @@ denningOnline
         },
         url: '/new',
         controller: 'landOfficeEditCtrl as vm',
-        templateUrl: 'views/land-office-edit.html'
+        templateUrl: 'views/land-office-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 
@@ -1725,16 +1781,43 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'landPTGEditCtrl as vm',
-        templateUrl: 'views/land-ptg-edit.html'
+        templateUrl: 'views/land-ptg-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('land-PTGs.new', {
         data: {
-          access: '@',
-          can_edit: true
+          access: '@'
         },
         url: '/new',
         controller: 'landPTGEditCtrl as vm',
-        templateUrl: 'views/land-ptg-edit.html'
+        templateUrl: 'views/land-ptg-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
       //------------------------------

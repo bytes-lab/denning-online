@@ -1,140 +1,55 @@
-<div class="container">
+<div ng-class="vm.isDialog ? '' : 'container'">
   <div class="card">
+    <div class="card-header" ng-if="!vm.isDialog">
+      <div class="row">
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="land-PTGs.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+        </div>
+      </div>
+    </div>
+
     <div class="card-body card-padding">
       <div class="clearfix"></div>
       <h4 class="m-t-25">Land PTG Information</h4>
       <div class="row">
-        <div class="col-md-5 p-l-25">
+        <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
-            <dt class="p-t-10">Code</dt>
+            <dt class="p-t-10">Register</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.landPTG.code" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Name</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landPTG.name" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Email</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.emailAddress">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Home</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.phoneHome">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Mobile</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.phoneMobile">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.phoneOffice">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.phoneFax">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Website</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.webSite">
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-5 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landPTG.address.country" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.address.state">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landPTG.address.postcode" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">City</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.address.city">
-              </div>
-            </dd>
-          </dl>              
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 1)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.landPTG.address.line1" type="text" class="form-control">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 2)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.address.line2">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 3)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.landPTG.address.line3">
+                <input ng-model="vm.entity.strRegistrar" type="text" class="form-control" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>
         </div>
       </div>
+
       <div class="clearfix"></div>
-      
-      <div class="row">
-        <div class="col-md-10">
-          <div class="m-t-30">
-            <a class="btn btn-default btn-sm pull-right m-l-10" ng-click="vm.cancel()" >Close</a>
+      <h4 class="m-t-25">Contact Information</h4>
+      <div class="row" data-ng-include src="'contact-info-0.html'"></div>
+
+      <h4 class="m-t-25 p-t-5" ng-click="vm.showMailingAddress=!vm.showMailingAddress">Mailing Address&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="vm.showMailingAddress"></i><i class="zmdi zmdi-minus" ng-if="!vm.showMailingAddress"></i></h4>
+      <div class="row" ng-show="!vm.showMailingAddress" data-ng-include src="'mailing-address.html'"></div>
+
+      <h4 class="m-t-25">Remarks</h4>
+      <div class="row" data-ng-include src="'remarks.html'"></div>
+
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="land-PTGs.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
           </div>
         </div>
       </div>
