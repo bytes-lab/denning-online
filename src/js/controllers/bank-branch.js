@@ -21,7 +21,7 @@ denningOnline
   })
 
   .controller('bankBranchEditCtrl', function($stateParams, bankBranchService, $state, Auth, cityService,
-                                             bankService, bankCACService, $uibModalInstance, 
+                                             bankService, bankCACService, $uibModalInstance, $uibModal, 
                                              entityCode, isDialog, isNew, refactorService, growlService) 
   {
     var self = this;
@@ -36,8 +36,8 @@ denningOnline
     self.fullAddress = function () {
       fullAddress = '';
       if (self.entity) {
-        if (self.entity.strName)
-          fullAddress = self.entity.strName.trim().toUpperCase()+'\n';
+        if (self.entity.clsBankCode)
+          fullAddress = self.entity.clsBankCode.strName.trim().toUpperCase()+'\n';
         if (self.entity.strAddressLine1)
           fullAddress += self.entity.strAddressLine1.trim()+'\n';
         if (self.entity.strAddressLine2)
@@ -56,6 +56,34 @@ denningOnline
       }
 
       return fullAddress;
+    };
+
+    self.bankCACDialog = function() {
+      var entityCode = self.entity.clsCACCode ? self.entity.clsCACCode.code : null;
+      var isNew = self.entity.clsCACCode ? false : true;
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'bankCACEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: isNew,
+          entityCode: function () {
+            return entityCode;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (entity) {
+          self.entity.clsCACCode = entity;
+        }
+      })
     };
 
     self.queryBanks = function(searchText) {

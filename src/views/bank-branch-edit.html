@@ -134,24 +134,29 @@
         </div>
       </div>
       <div class="clearfix"></div>
-      <h4 class="m-t-25 m-b-20">Credit Administration Centre (CAC)</h4>
+      <h4 class="m-t-25 m-b-20">Credit Administration Centre (CAC) / Loan Doc Center (LDC)</h4>
       <div class="row">
         <div class="col-md-6 p-l-25">
           <dl class="dl-horizontal">
             <dt class="p-t-10">CAC Code</dt>
             <dd>
-              <md-autocomplete
-                md-selected-item="vm.entity.clsCACCode"
-                md-search-text="qsca"
-                md-items="item in vm.queryBankCACs(qsca)"
-                md-item-text="item.strName ? item.strName: ' '"
-                md-min-length="1"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="qsca" md-highlight-flags="i">{{item.strName}}</span>
-              </md-item-template>
-              </md-autocomplete>
+              <div class="d-flex">              
+                <md-autocomplete
+                  md-selected-item="vm.entity.clsCACCode"
+                  md-search-text="qsca"
+                  md-items="item in vm.queryBankCACs(qsca)"
+                  md-item-text="item.strName ? item.strName: ' '"
+                  md-min-length="1"
+                  md-autoselect="false"
+                  class="default-input wp-100-btn-1">
+                <md-item-template>
+                  <span md-highlight-text="qsca" md-highlight-flags="i">{{item.strName}}</span>
+                </md-item-template>
+                </md-autocomplete>
+                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.bankCACDialog()">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank CAC and choose it"></span>
+                </a>
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
