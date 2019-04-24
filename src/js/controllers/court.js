@@ -39,8 +39,8 @@ denningOnline
     self.fullAddress = function () {
       fullAddress = '';
       if (self.entity) {
-        if (self.entity.strName)
-          fullAddress = self.entity.strName.trim().toUpperCase()+'\n';
+        if (self.entity.strTypeM)
+          fullAddress = self.entity.strTypeM.trim().toUpperCase()+'\n';
         if (self.entity.strAddressLine1)
           fullAddress += self.entity.strAddressLine1.trim()+'\n';
         if (self.entity.strAddressLine2)

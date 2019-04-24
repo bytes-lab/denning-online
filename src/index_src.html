@@ -354,13 +354,15 @@
                 </dd>
               </dl>
               <dl class="dl-horizontal">
-                <dt class="p-t-10">Phone Home</dt>
+                <dt class="p-t-10" ng-if="vm._type=='contact'">Phone Home</dt>
+                <dt class="p-t-10" ng-if="vm._type!='contact'">Phone 1</dt>
                 <dd>
                   <input type="text" international-phone-number ng-model="vm.entity.strPhone1No" ng-readonly="!vm.can_edit">
                 </dd>
               </dl>
               <dl class="dl-horizontal">
-                <dt class="p-t-10">Phone Office</dt>
+                <dt class="p-t-10" ng-if="vm._type=='contact'">Phone Office</dt>
+                <dt class="p-t-10" ng-if="vm._type!='contact'">Phone 2</dt>
                 <dd>
                   <input type="text" international-phone-number ng-model="vm.entity.strPhone2No" ng-readonly="!vm.can_edit">
                 </dd>
