@@ -34,8 +34,8 @@ denningOnline
     self.fullAddress = function () {
       fullAddress = '';
       if (self.entity) {
-        if (self.entity.strName)
-          fullAddress = self.entity.strName.trim().toUpperCase()+'\n';
+        if (self.entity.strBranch)
+          fullAddress = self.entity.strBranch.trim().toUpperCase()+'\n';
         if (self.entity.strAddressLine1)
           fullAddress += self.entity.strAddressLine1.trim()+'\n';
         if (self.entity.strAddressLine2)
@@ -55,6 +55,11 @@ denningOnline
 
       return fullAddress;
     };
+
+    self.names = [
+      'Inland Revenue Department',
+      'Lembaga Hasil Dalam Negeri'
+    ];
 
     if (self.entityCode) {
       self.title = 'Edit IRB Branch';
