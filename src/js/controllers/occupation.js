@@ -44,6 +44,18 @@ denningOnline
       self.popoutUrl = $state.href('occupations.new');
     }
 
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'clsEnteredBy', 'clsUpdatedBy'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
+
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
       occupationService.save(entity).then(function (item) {

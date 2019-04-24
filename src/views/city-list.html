@@ -29,11 +29,11 @@
           <div class="table-responsive table-div p-15"> 
             <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle">
               <tr ng-repeat="w in $data">
-                <td data-title="'City'" sortable="'city'">
-                  {{ w.city }}
-                </td>
                 <td data-title="'Postcode'" sortable="'postcode'">
                   {{ w.postcode }}
+                </td>
+                <td data-title="'City'" sortable="'city'">
+                  {{ w.city }}
                 </td>
                 <td data-title="'State'" sortable="'state'">
                   {{ w.state }}
