@@ -3,8 +3,8 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md-12">
-          <span class="f-20 f-500 c-purple">Building List</span>
-          <a ui-sref="bank-branches.new" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
+          <span class="f-20 f-500 c-purple">Building & Cultivation Type List</span>
+          <a ui-sref="buildings.new" class="btn btn-info btn-header"><i class="zmdi zmdi-plus"></i></a>
         </div>
       </div>
     </div>
@@ -25,6 +25,9 @@
           <div class="table-responsive table-div p-15"> 
             <table ng-table="vm.tableFilter" class="table table-striped table-vmiddle">
               <tr ng-repeat="w in $data" ui-sref="buildings.edit({id: w.code})">
+                <td data-title="'Code'">
+                  {{ w.code }}
+                </td>
                 <td data-title="'Type'">
                   {{ w.strType }}
                 </td>
