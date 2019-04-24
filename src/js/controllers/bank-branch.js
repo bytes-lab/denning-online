@@ -58,9 +58,13 @@ denningOnline
       return fullAddress;
     };
 
-    self.bankCACDialog = function() {
+    self.bankCACDialog = function(viewMode) {
       var entityCode = self.entity.clsCACCode ? self.entity.clsCACCode.code : null;
-      var isNew = self.entity.clsCACCode ? false : true;
+
+      if (viewMode && (!entityCode)) {
+        alert('Please select a bank CAC.');
+        return false;
+      }
 
       var modalInstance = $uibModal.open({
         animation: true,
@@ -71,16 +75,16 @@ denningOnline
         backdrop: 'static',
         keyboard: true,
         resolve: {
-          isNew: isNew,
+          isNew: !viewMode,
           entityCode: function () {
-            return entityCode;
+            return viewMode ? entityCode : null;
           },
           isDialog: true
         }
       });
 
       modalInstance.result.then(function (entity) {
-        if (entity) {
+        if (!viewMode && entity) {
           self.entity.clsCACCode = entity;
         }
       })

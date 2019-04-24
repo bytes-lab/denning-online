@@ -148,13 +148,16 @@
                   md-item-text="item.strName ? item.strName: ' '"
                   md-min-length="1"
                   md-autoselect="false"
-                  class="default-input wp-100-btn-1">
+                  class="default-input wp-100-btn-2">
                 <md-item-template>
                   <span md-highlight-text="qsca" md-highlight-flags="i">{{item.strName}}</span>
                 </md-item-template>
                 </md-autocomplete>
-                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.bankCACDialog()">
+                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.bankCACDialog(false)">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank CAC and choose it"></span>
+                </a>
+                <a class="btn btn-primary short-btn" ng-click="vm.bankCACDialog(true)">
+                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of bank CAC"></span>
                 </a>
               </div>
             </dd>
