@@ -19,3 +19,9 @@ denningOnline
       self.tableFilter.reload();
     }
   })
+
+  .controller('mukimEditCtrl', function($stateParams, mukimService, $state, refactorService, 
+                                         growlService, Auth) 
+  {
+    var self = this;
+  })

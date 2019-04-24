@@ -19,3 +19,7 @@ denningOnline
       self.tableFilter.reload();
     }
   })
+
+  .controller('cityEditCtrl', function(NgTableParams, cityService) {
+    var self = this;
+  })
