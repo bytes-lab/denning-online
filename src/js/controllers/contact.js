@@ -199,6 +199,11 @@ denningOnline
         self.entity.strCity = item.city;
         self.entity.strState = item.state;
         self.entity.strCountry = item.country;
+      } else {
+        self.entity.strPostCode = '';
+        self.entity.strCity = '';
+        self.entity.strState = '';
+        self.entity.strCountry = '';        
       }
     }
 

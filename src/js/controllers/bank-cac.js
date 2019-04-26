@@ -35,8 +35,8 @@ denningOnline
     self.fullAddress = function () {
       fullAddress = '';
       if (self.entity) {
-        if (self.entity.strName)
-          fullAddress = self.entity.strName.trim().toUpperCase()+'\n';
+        if (self.entity.clsBankCode && self.entity.clsBankCode.strName)
+          fullAddress = self.entity.clsBankCode.strName.trim().toUpperCase()+'\n';
         if (self.entity.strAddressLine1)
           fullAddress += self.entity.strAddressLine1.trim()+'\n';
         if (self.entity.strAddressLine2)
@@ -58,7 +58,7 @@ denningOnline
     };
 
     if (self.entityCode) {
-      self.title = 'Edit Bank CAC';
+      self.title = 'Edit Bank CAC / LDC';
       bankCACService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
@@ -93,7 +93,7 @@ denningOnline
         }
       });
     } else {
-      self.title = 'New Bank CAC';
+      self.title = 'New Bank CAC / LDC';
       self.entity = { };
       self.popoutUrl = $state.href('bank-CACs.new');
     }

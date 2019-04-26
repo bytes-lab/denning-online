@@ -132,7 +132,7 @@ denningOnline
       self.entity.strFax1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
 
       entity = refactorService.getDiff(self.entity_, self.entity);
-      contactService.save(entity).then(function (contact) {
+      courtService.save(entity).then(function (contact) {
         if (contact) {  // ignore when errors
           if (self.isDialog) {
             $uibModalInstance.close(contact);

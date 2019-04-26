@@ -1,60 +1,74 @@
-<div class="container">
-
-    <div class="card">
-        <div class="card-body card-padding">
-            <div class="clearfix"></div>
-
-            <span class="f-20 f-500 c-purple">Postcode</span>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                   
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Postcode</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.city.postcode" type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                            </div>
-
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">City / Town</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.city.city" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.city.state" placeholder="Lawyer">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Country</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input ng-model="vm.city.country" type="text" class="form-control" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                </div>
-            </div>            
-               
-            <div class="row">     
-                <div class="col-md-10">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="cities.list" data-ng-click="vm.editInfo = 0" >Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
-                    </div>        
-                </div>
-            </div>
+<div ng-class="vm.isDialog ? '' : 'container'">
+  <div class="card">
+    <div class="card-header" ng-if="!vm.isDialog">
+      <div class="row">
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="cities.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
         </div>
+      </div>
     </div>
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+      <h4>Detail</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Postcode</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.code" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">City / Town</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strCity" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strState" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Country</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strCountry" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
          
+      <h4 class="m-t-25">Remarks</h4>
+      <div class="row" data-ng-include src="'remarks.html'"></div>
+
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="cities.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-

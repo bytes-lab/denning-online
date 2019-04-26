@@ -20,7 +20,8 @@ denningOnline
   })
 
   .controller('IRDBranchEditCtrl', function($stateParams, IRDBranchService, $state, Auth, refactorService,
-                                            $uibModalInstance, entityCode, isDialog, isNew, growlService) 
+                                            $uibModalInstance, entityCode, isDialog, isNew, growlService,
+                                            cityService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -34,8 +35,8 @@ denningOnline
     self.fullAddress = function () {
       fullAddress = '';
       if (self.entity) {
-        if (self.entity.strBranch)
-          fullAddress = self.entity.strBranch.trim().toUpperCase()+'\n';
+        if (self.entity.strTypeE)
+          fullAddress = self.entity.strTypeE.trim().toUpperCase()+'\n';
         if (self.entity.strAddressLine1)
           fullAddress += self.entity.strAddressLine1.trim()+'\n';
         if (self.entity.strAddressLine2)
@@ -61,6 +62,26 @@ denningOnline
       'Lembaga Hasil Dalam Negeri'
     ];
 
+    self.queryPostcodes = function (searchText) {
+      return cityService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
+
+    self.postcodeChange = function (item) {
+      if (item) {
+        self.entity.strPostCode = item.postcode;
+        self.entity.strCity = item.city;
+        self.entity.strState = item.state;
+        self.entity.strCountry = item.country;
+      } else {
+        self.entity.strPostCode = '';
+        self.entity.strCity = '';
+        self.entity.strState = '';
+        self.entity.strCountry = '';        
+      }
+    }
+
     if (self.entityCode) {
       self.title = 'Edit IRB Branch';
 
@@ -80,6 +101,15 @@ denningOnline
         if (self.entity.strFax1CountryCode) {
           iso2 = self.entity.strFax1CountryCode.substr(0, 2);
           $("input[ng-model='vm.entity.strFax1No']").intlTelInput("setCountry", iso2);
+        }
+
+        if (self.entity.strPostCode) {
+          self.strPostCode_ = {
+            postcode: self.entity.strPostCode,
+            city: self.entity.strCity,
+            state: self.entity.strState,
+            country: self.entity.strCountry
+          };
         }
 
         self.popoutUrl = $state.href('IRD-branches.edit', { id: self.entity.code });

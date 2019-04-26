@@ -6,7 +6,7 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md-8">
-          <h2 class="f-20 f-500 c-purple">Land PTG List</h2>
+          <h2 class="f-20 f-500 c-purple">State PTG List</h2>
         </div>
       </div>
     </div>
@@ -17,20 +17,20 @@
             <td data-title="'State'" filter="{ 'IDNo': 'text' }" sortable="'IDNo'">
               {{ w.IDNo }}
             </td>
-            <td data-title="'Address'" filter="{ 'address.fullAddress': 'text' }" sortable="'address.fullAddress'">
-              {{ w.address.fullAddress }}
+            <td data-title="'Name'" filter="{ 'name': 'text' }" sortable="'name'">
+              {{ w.name }}
             </td>
-            <td data-title="'Phone Mobile'" filter="{ 'phoneMobile': 'text' }" sortable="'phoneMobile'">
-              {{ w.phoneMobile }}
+            <td data-title="'Address'">
+              {{ w.address.line1 }} {{ w.address.line2 }} {{ w.address.line3 }} {{ w.address.postcode }} {{ w.address.city }}, {{ w.address.state }}
+            </td>
+            <td data-title="'Phone Office'" filter="{ 'phoneMobile': 'text' }" sortable="'phoneMobile'">
+              {{ w.phoneOffice }}
             </td>
             <td data-title="'Phone Home'" filter="{ 'phoneHome': 'text' }" sortable="'phoneHome'">
               {{ w.phoneHome }}
             </td>
             <td data-title="'Fax'" filter="{ 'phoneFax': 'text' }" sortable="'phoneFax'">
               {{ w.phoneFax }}
-            </td>
-            <td data-title="'Email'" filter="{ 'emailAddress': 'text' }" sortable="'emailAddress'">
-              {{ w.emailAddress }}
             </td>
           </tr>
         </table>

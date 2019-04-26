@@ -1103,7 +1103,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'cityEditCtrl as vm',
-        templateUrl: 'views/city-edit.html'
+        templateUrl: 'views/city-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('cities.new', {
         data: {
@@ -1111,7 +1125,21 @@ denningOnline
         },
         url: '/new',
         controller: 'cityEditCtrl as vm',
-        templateUrl: 'views/city-edit.html'
+        templateUrl: 'views/city-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 
