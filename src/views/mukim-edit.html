@@ -1,68 +1,85 @@
-<div class="container">
-
-    <div class="card">
-        <div class="card-body card-padding">
-            <span class="f-20 f-500 c-purple">Mukim</span>
-            <div class="row">
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Mukim</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.mukim.mukim" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">District</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.mukim.district" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="vm.mukim.favourite">
-                                <i class="input-helper"></i>
-                                Add to Favourites
-                            </label>
-                        </div>
-                    </dl>                    
-                </div>
-                <div class="col-md-6 p-l-25">
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">State</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.mukim.state" placeholder="UA203453">
-                            </div>
-                        </dd>
-                    </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="p-t-10">Code (For Sarawak)</dt>
-                        <dd>
-                            <div class="fg-line">
-                                <input type='text' class="form-control" ng-model="vm.mukim.code_sarawak" placeholder="">
-                            </div>
-                        </dd>
-                    </dl>                   
-                </div>                
-            </div>   
-            <div class="clearfix"></div>
-        
-            <div class="row">     
-                <div class="col-md-10">
-                    <div class="m-t-30">
-                        <a class="btn btn-link btn-sm pull-right m-l-10" ui-sref="mukims.list">Cancel</a>
-                        <a class="btn btn-primary btn-sm pull-right" type="submit" ng-click="vm.save()">Save</a>
-                    </div>        
-                </div>
-            </div>
+<div ng-class="vm.isDialog ? '' : 'container'">
+  <div class="card">
+    <div class="card-header" ng-if="!vm.isDialog">
+      <div class="row">
+        <div class="col-md-11 col-sm-12">
+          <span class="f-20 f-500 c-purple">{{ vm.title }}</span>
+          <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+          <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+          <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+          <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+          <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="mukims.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
         </div>
+      </div>
     </div>
-         
+    <div class="card-body card-padding">
+      <div class="clearfix"></div>
+      <h4>Detail</h4>
+      <div class="row">
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Mukim</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strMukim" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">District</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strDistrict" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Negeri</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strNegeri" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-6 p-l-25">
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">State</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strState" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Code (For Sarawak)</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strSCode" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    
+      <h4 class="m-t-25">Remarks</h4>
+      <div class="row" data-ng-include src="'remarks.html'"></div>
+
+      <h4 class="m-t-25 m-b-15">Office Use</h4>
+      <div class="row" data-ng-include src="'office-use.html'"></div>
+
+      <div class="row" ng-if="!vm.isDialog">
+        <div class="col-md-11 col-sm-12 no-padding">
+          <div class="m-t-30 p-l-15">
+            <a class="btn btn-link btn-sm pull-right m-l-5" ng-click="vm.cancel()">Cancel</a>
+            <a class="btn btn-primary btn-sm pull-right m-l-5" type="submit" ng-click="vm.save()" ng-if="vm.userInfo.priority.contact.update && vm.can_edit">Save</a>
+            <a class="btn bgm-cyan btn-sm pull-right m-l-5" type="submit" ng-click="vm.can_edit=true;" ng-if="vm.userInfo.priority.contact.update && !vm.can_edit"><i class="zmdi zmdi-edit"></i>&nbsp;&nbsp;Edit</a>
+            <a class="btn bgm-green btn-sm pull-right m-l-5" type="submit" ng-click="vm.copy()" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-copy"></i>&nbsp;&nbsp;Duplicate</a>
+            <a class="btn bgm-cyan btn-sm pull-right" type="submit" data-ui-sref="mukims.new" ng-if="vm.userInfo.priority.contact.update && !vm.isNew"><i class="zmdi zmdi-plus"></i>&nbsp;&nbsp;New</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-

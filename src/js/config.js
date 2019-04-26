@@ -1954,7 +1954,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'mukimEditCtrl as vm',
-        templateUrl: 'views/mukim-edit.html'
+        templateUrl: 'views/mukim-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('mukims.new', {
         data: {
@@ -1962,7 +1976,21 @@ denningOnline
         },
         url: '/new',
         controller: 'mukimEditCtrl as vm',
-        templateUrl: 'views/mukim-edit.html'
+        templateUrl: 'views/mukim-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 

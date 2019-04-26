@@ -20,9 +20,8 @@ denningOnline
     }
   })
 
-  .controller('cityEditCtrl', function($stateParams, cityService, $state, $uibModalInstance, 
-                                       entityCode, isDialog, isNew, refactorService, growlService,
-                                       cityService, Auth) 
+  .controller('cityEditCtrl', function($stateParams, cityService, $state, $uibModalInstance, Auth, 
+                                       entityCode, isDialog, isNew, refactorService, growlService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
