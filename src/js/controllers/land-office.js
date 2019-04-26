@@ -2,11 +2,6 @@ denningOnline
   .controller('landOfficeListCtrl', function(NgTableParams, landOfficeService, $state) {
     var self = this;
     self.dataReady = false;
-    self.clickHandler = clickHandler;
-
-    function clickHandler(item) {
-      $state.go('land-offices.edit', {'id': item.code});
-    }
 
     landOfficeService.getList(1, 500).then(function(data) {
       self.data = data;
