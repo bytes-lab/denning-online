@@ -1903,7 +1903,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'buildingEditCtrl as vm',
-        templateUrl: 'views/building-edit.html'
+        templateUrl: 'views/building-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('buildings.new', {
         data: {
@@ -1911,7 +1925,21 @@ denningOnline
         },
         url: '/new',
         controller: 'buildingEditCtrl as vm',
-        templateUrl: 'views/building-edit.html'
+        templateUrl: 'views/building-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
 

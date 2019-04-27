@@ -20,28 +20,70 @@ denningOnline
     }
   })
 
-  .controller('buildingEditCtrl', function($filter, $stateParams, buildingService, $state) {
+  .controller('buildingEditCtrl', function($stateParams, buildingService, $state, $uibModalInstance, Auth, 
+                                           entityCode, isDialog, isNew, refactorService, growlService) 
+  {
     var self = this;
-    self.save = save;
+    self.userInfo = Auth.getUserInfo();
+    self._type = 'building';
 
-    if($stateParams.id) {
-      buildingService.getItem($stateParams.id)
-      .then(function(item){
-        self.building = item;
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
+
+    if (self.entityCode) {
+      self.title = 'Edit Building / Cultivation';
+
+      buildingService.getItem(self.entityCode).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+
+        self.popoutUrl = $state.href('buildings.edit', { id: self.entity.code });
       });
     } else {
-      self.building = {};
+      self.title = 'New Building / Cultivation';
+
+      self.entity = {};
+      
+      self.popoutUrl = $state.href('buildings.new');
     }
 
-    function save() {
-      buildingService.save(self.building).then(function(building) {
-        self.building = building;
-        $state.go('buildings.list');
-      })
-      .catch(function(err){
-        //Handler
-
-        //$scope.formname.buildingInfo.$error.push({meessage:''});
+    self.save = function () {
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      buildingService.save(entity).then(function (contact) {
+        if (contact) {  // ignore when errors
+          if (self.isDialog) {
+            $uibModalInstance.close(contact);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('buildings.edit', { 'id': contact.code });
+            }
+            growlService.growl('Saved successfully!', 'success');
+          }
+        }
       });
+    }
+
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('buildings.list');
+      }
+    }
+
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
+
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated', 'clsEnteredBy', 'clsUpdatedBy'];
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
     }
   })
