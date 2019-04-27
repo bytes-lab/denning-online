@@ -67,7 +67,13 @@
             <dt class="p-t-10">Position</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPositionTitle">
+                <div class="select">
+                  <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strPositionTitle">
+                    <option>Judge</option>
+                    <option>Senior Assistant Registrar</option>
+                    <option>Deputy Registrar</option>
+                  </select>
+                </div>
               </div>
             </dd>
           </dl>
@@ -75,14 +81,20 @@
             <dt class="p-t-10">Position ( Malay )</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPositionBM">
+                <div class="select">
+                  <select class="form-control" ng-disabled="!vm.can_edit" ng-model="vm.entity.strPositionBM">
+                    <option>Hakim</option>
+                    <option>Penolong Kanan Pendaftar</option>
+                    <option>Timbalan Pendaftar</option>
+                  </select>
+                </div>
               </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Place</dt>
             <dd>
-              <input type="text" ng-model="vm.entity.strCourtName" ng-readonly="!vm.can_edit" class="form-control">
+              <input type="text" ng-model="vm.entity.clsCourt.strPlace" ng-readonly="!vm.can_edit" class="form-control">
             </dd>
           </dl>
         </div>
