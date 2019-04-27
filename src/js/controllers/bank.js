@@ -1,104 +1,209 @@
 denningOnline
-    .controller('bankListCtrl', function($filter, $sce, $uibModal, NgTableParams, bankService) {
-        var self = this;
-        self.dataReady = false;
-        self.openDelete = openDelete;
+  .controller('bankListCtrl', function(NgTableParams, bankService) {
+    var self = this;
 
-        bankService.getList().then(function(data) {
-            self.data = data;
-            self.dataReady = true;
-            initializeTable();
-        });        
-        
-        function initializeTable () {
-            //Filtering
-            self.tableFilter = new NgTableParams({
-                page: 1,            // show first page
-                count: 10,
-                sorting: {
-                    name: 'asc'     // initial sorting
-                }
-            }, {
-                total: self.data.length, // length of data
-                getData: function(params) {
-                    // use build-in angular filter
-                    var orderedData = params.filter() ? $filter('filter')(self.data, params.filter()) : self.data;
-                    orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 10
+    }, {
+      getData: function(params) {
+        return bankService.getTableList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
+    });
 
-                    this.code = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.name = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.email = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                    this.phone = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+    self.search = function () {
+      self.tableFilter.reload();
+    }
+  })
 
-                    params.total(orderedData.length); // set total for recalc pagination
-                    return this.code, this.name, this.email, this.phone;
-                }
-            })      
+  .controller('bankEditCtrl', function($stateParams, bankService, $state, Auth, cityService,
+                                             bankService, bankCACService, $uibModalInstance, $uibModal, 
+                                             entityCode, isDialog, isNew, refactorService, growlService) 
+  {
+    var self = this;
+    self.userInfo = Auth.getUserInfo();
+    self._type = 'bank';
+
+    self.isDialog = isDialog;
+    self.can_edit = isNew;
+    self.isNew = isNew;
+    self.entityCode = isDialog ? entityCode : $stateParams.id;
+
+    self.fullAddress = function () {
+      fullAddress = '';
+      if (self.entity) {
+        if (self.entity.clsBankCode)
+          fullAddress = self.entity.clsBankCode.strName.trim().toUpperCase()+'\n';
+        if (self.entity.strAddressLine1)
+          fullAddress += self.entity.strAddressLine1.trim()+'\n';
+        if (self.entity.strAddressLine2)
+          fullAddress += self.entity.strAddressLine2.trim()+'\n';
+        if (self.entity.strAddressLine3)
+          fullAddress += self.entity.strAddressLine3.trim()+'\n';
+        if (self.entity.strPostCode)
+          fullAddress += self.entity.strPostCode.trim();
+        if (self.entity.strCity)
+          fullAddress += ' ' + self.entity.strCity.trim();
+        fullAddress += ',\n';
+        if (self.entity.strState)
+          fullAddress += self.entity.strState.trim()+',\n';
+        if (self.entity.strCountry)
+          fullAddress += self.entity.strCountry.trim()+'\n';        
+      }
+
+      return fullAddress;
+    };
+
+    self.bankCACDialog = function(viewMode) {
+      var entityCode = self.entity.clsCACCode ? self.entity.clsCACCode.code : null;
+
+      if (viewMode && (!entityCode)) {
+        alert('Please select a bank CAC.');
+        return false;
+      }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'bankCACEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: !viewMode,
+          entityCode: function () {
+            return viewMode ? entityCode : null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (!viewMode && entity) {
+          self.entity.clsCACCode = entity;
+        }
+      })
+    };
+
+    self.queryBanks = function(searchText) {
+      return bankService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    self.queryBankCACs = function(searchText) {
+      return bankCACService.getTableList(1, 10, searchText).then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    if (self.entityCode) {
+      self.title = 'Edit Bank';
+      bankService.getItem(self.entityCode).then(function (item) {
+        self.entity = refactorService.preConvert(item, true);
+        self.entity_ = angular.copy(self.entity);
+
+        // set country codes
+        if (self.entity.strPhone1CountryCode) {
+          iso2 = self.entity.strPhone1CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strPhone1No']").intlTelInput("setCountry", iso2);
+        }
+        if (self.entity.strPhone2CountryCode) {
+          iso2 = self.entity.strPhone2CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strPhone2No']").intlTelInput("setCountry", iso2);
+        }
+        if (self.entity.strPhone3CountryCode) {
+          iso2 = self.entity.strPhone3CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strPhone3No']").intlTelInput("setCountry", iso2);
+        }
+        if (self.entity.strFax1CountryCode) {
+          iso2 = self.entity.strFax1CountryCode.substr(0, 2);
+          $("input[ng-model='vm.entity.strFax1No']").intlTelInput("setCountry", iso2);
         }
 
-        //Create Modal
-        function modalInstances(animation, size, backdrop, keyboard, bank) {
-            var modalInstance = $uibModal.open({
-                animation: animation,
-                templateUrl: 'myModalContent.html',
-                controller: 'bankDeleteModalCtrl',
-                size: size,
-                backdrop: backdrop,
-                keyboard: keyboard,
-                resolve: {
-                    bank: function () {
-                        return bank;
-                    }
-                }
-            
-            });
+        self.popoutUrl = $state.href('banks.edit', { id: self.entity.code });
+
+        if (self.entity.strPostCode) {
+          self.strPostCode_ = {
+            postcode: self.entity.strPostCode,
+            city: self.entity.strCity,
+            state: self.entity.strState,
+            country: self.entity.strCountry
+          };
         }
-        //Prevent Outside Click
-        function openDelete(bank) {
-            modalInstances(true, '', 'static', true, bank)
-        };        
-    })
+      });
+    } else {
+      self.title = 'New Bank';
+      self.entity = { };
+      self.popoutUrl = $state.href('banks.new');
+    }
 
-    .controller('bankDeleteModalCtrl', function ($scope, $uibModalInstance, bank, bankService, $state) {
-        $scope.ok = function () {
-            bankService.delete(bank).then(function(bank) {
-                $state.reload();
-            })
-            .catch(function(err){
-                //Handler
+    self.queryPostcodes = function (searchText) {
+      return cityService.getList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      });
+    }
 
-                //$scope.formname.bankInfo.$error.push({meessage:''});
-            });
-            $uibModalInstance.close();
-        };
+    self.postcodeChange = function (item) {
+      if (item) {
+        self.entity.strPostCode = item.postcode;
+        self.entity.strCity = item.city;
+        self.entity.strState = item.state;
+        self.entity.strCountry = item.country;
+      }
+    }
 
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
-    })
+    self.copy = function () {
+      self.isNew = true;
+      self.can_edit = true;
+      self.entity_ = null;
 
-    .controller('bankEditCtrl', function($filter, $stateParams, bankService, $state) {
-        var self = this;
-        self.save = save;
+      var deleteList = ['code', 'dtDateEntered', 'dtDateUpdated'];
+      
+      for (ii in deleteList) {
+        key = deleteList[ii];
+        delete self.entity[key];
+      }
+    }
 
-        if($stateParams.id) {
-            bankService.getItem($stateParams.id)
-            .then(function(item){
-                self.bank = item;
-            });
-        } else {
-            self.bank = {};
+    self.save = function () {
+      // get country codes
+      var tmp = $("input[ng-model='vm.entity.strPhone1No']").intlTelInput("getSelectedCountryData");
+      self.entity.strPhone1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strPhone2No']").intlTelInput("getSelectedCountryData");
+      self.entity.strPhone2CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strPhone3No']").intlTelInput("getSelectedCountryData");
+      self.entity.strPhone3CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+      tmp = $("input[ng-model='vm.entity.strFax1No']").intlTelInput("getSelectedCountryData");
+      self.entity.strFax1CountryCode = tmp.iso2.toUpperCase() + '+' + tmp.dialCode;
+
+      entity = refactorService.getDiff(self.entity_, self.entity);
+      bankService.save(entity).then(function (item) {
+        if (item) {
+          if (self.isDialog) {
+            $uibModalInstance.close(item);
+          } else {
+            if (self.entity_) {
+              $state.reload();
+            } else {
+              $state.go('banks.edit', { 'id': item.code });
+            }
+            growlService.growl('Saved successfully!', 'success');          
+          }
         }
+      });
+    }
 
-        function save() {
-            bankService.save(self.bank).then(function(bank) {
-                self.bank = bank;
-                $state.go('banks.list');
-            })
-            .catch(function(err){
-                //Handler
-
-                //$scope.formname.bankInfo.$error.push({meessage:''});
-            });
-        }
-    })
+    self.cancel = function () {
+      if (self.isDialog) {
+        $uibModalInstance.close();
+      } else {
+        $state.go('banks.list');
+      }
+    }
+  })

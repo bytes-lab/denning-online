@@ -1237,7 +1237,21 @@ denningOnline
         },
         url: '/edit/:id',
         controller: 'bankEditCtrl as vm',
-        templateUrl: 'views/bank-edit.html'
+        templateUrl: 'views/bank-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return false;
+          }
+        }
       })
       .state ('banks.new', {
         data: {
@@ -1245,7 +1259,21 @@ denningOnline
         },
         url: '/new',
         controller: 'bankEditCtrl as vm',
-        templateUrl: 'views/bank-edit.html'
+        templateUrl: 'views/bank-edit.html',
+        resolve: {
+          "$uibModalInstance": function () {
+            return null;
+          },
+          entityCode: function () {
+            return null;
+          },
+          isDialog: function () {
+            return false;
+          },
+          isNew: function () {
+            return true;
+          }
+        }
       })
 
       //------------------------------
