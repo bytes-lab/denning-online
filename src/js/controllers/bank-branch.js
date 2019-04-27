@@ -85,7 +85,42 @@ denningOnline
 
       modalInstance.result.then(function (entity) {
         if (!viewMode && entity) {
-          self.entity.clsCACCode = entity;
+          self.entity.clsCACCode = { code: entity.code };
+        }
+      })
+    };
+
+
+    self.bankDialog = function(viewMode) {
+      var entityCode = self.entity.clsBankCode ? self.entity.clsBankCode.code : null;
+
+      if (viewMode && (!entityCode)) {
+        alert('Please select a bank.');
+        return false;
+      }
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'entity-modal.html',
+        controller: 'bankEditCtrl',
+        controllerAs: 'vm',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: true,
+        resolve: {
+          isNew: !viewMode,
+          entityCode: function () {
+            return viewMode ? entityCode : null;
+          },
+          isDialog: true
+        }
+      });
+
+      modalInstance.result.then(function (entity) {
+        if (!viewMode && entity) {
+          self.entity.clsBankCode = {
+            code: entity.code
+          };
         }
       })
     };

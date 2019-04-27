@@ -20,18 +20,26 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Master Bank Code</dt>
             <dd>
-              <md-autocomplete
-                md-selected-item="vm.entity.clsBankCode"
-                md-search-text="searchText"
-                md-items="item in vm.queryBanks(searchText)"
-                md-item-text="item.code ? item.code: ' '"
-                md-min-length="0"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
-              </md-item-template>
-              </md-autocomplete>
+              <div class="d-flex">
+                <md-autocomplete
+                  md-selected-item="vm.entity.clsBankCode"
+                  md-search-text="searchText"
+                  md-items="item in vm.queryBanks(searchText)"
+                  md-item-text="item.code ? item.code: ' '"
+                  md-min-length="0"
+                  md-autoselect="false"
+                  class="default-input wp-100-btn-2">
+                <md-item-template>
+                  <span md-highlight-text="searchText" md-highlight-flags="i">{{item.code}}</span>
+                </md-item-template>
+                </md-autocomplete>
+                <a class="btn btn-primary short-btn bgm-lightgreen" ng-click="vm.bankDialog(false)">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true" title="Create a new bank and choose it"></span>
+                </a>
+                <a class="btn btn-primary short-btn" ng-click="vm.bankDialog(true)">
+                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of bank"></span>
+                </a>
+              </div>
             </dd>
           </dl>
           <dl class="dl-horizontal">
@@ -140,7 +148,7 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">CAC Code</dt>
             <dd>
-              <div class="d-flex">              
+              <div class="d-flex">
                 <md-autocomplete
                   md-selected-item="vm.entity.clsCACCode"
                   md-search-text="qsca"
