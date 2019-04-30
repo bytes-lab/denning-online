@@ -21,17 +21,46 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Type (English)</dt>
             <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strTypeE" type="text" class="form-control" ng-readonly="!vm.can_edit">
-              </div>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.strCourtType"
+                md-search-text="qscr"
+                md-items="item in vm.queryCourts(qscr)"
+                md-item-text="item.strTypeE"
+                md-min-length="0"
+                md-selected-item-change="vm.courtChange(item)"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">
+                    {{ item.strTypeE }}
+                  </span>
+                </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
           <dl class="dl-horizontal">
             <dt class="p-t-10">Type (Malay)</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strTypeM" type="text" class="form-control" ng-readonly="!vm.can_edit">
+                <input ng-model="vm.strCourtType.strTypeM" type="text" class="form-control" ng-readonly="true">
               </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal" ng-show="vm.clsAttendedStatus!='0-None'">
+            <dt class="p-t-10">Judge</dt>
+            <dd>
+              <md-autocomplete
+                ng-disabled="!vm.can_edit"
+                md-selected-item="vm.entity.clsJudge"
+                md-search-text="qsic"
+                md-items="item in vm.queryJudge(qsic)"
+                md-item-text="item.strName"
+                md-min-length="0"
+                class="default-input">
+                <md-item-template>
+                  <span md-highlight-text="qsic" class="col-1" md-highlight-flags="i">{{ item.strName }}</span>
+                </md-item-template>
+              </md-autocomplete>
             </dd>
           </dl>
         </div>
@@ -41,6 +70,14 @@
             <dd>
               <div class="fg-line">
                 <input ng-model="vm.entity.strPlace" type="text" class="form-control" ng-readonly="!vm.can_edit">
+              </div>
+            </dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt class="p-t-10">Registrar</dt>
+            <dd>
+              <div class="fg-line">
+                <input ng-model="vm.entity.strRegistrar" type="text" class="form-control" ng-readonly="!vm.can_edit">
               </div>
             </dd>
           </dl>

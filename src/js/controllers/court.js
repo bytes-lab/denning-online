@@ -25,7 +25,7 @@ denningOnline
 
   .controller('courtEditCtrl', function($stateParams, courtService, $state, $uibModalInstance, 
                                         entityCode, isDialog, isNew, refactorService, growlService,
-                                        cityService, Auth) 
+                                        cityService, Auth, judgeService) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -61,6 +61,22 @@ denningOnline
       return fullAddress;
     };
 
+    self.queryCourts = function (searchText) {
+      return courtService.getTypeList(1, 10, searchText).then(function (resp) {
+        return resp.data;
+      })
+    }
+
+    self.courtChange = function (item) {
+      if (item) {
+        self.entity.strTypeE = item.strTypeE;
+        self.entity.strTypeM = item.strTypeM;
+      } else {
+        self.entity.strTypeE = null;
+        self.entity.strTypeM = null;
+      }
+    }
+
     self.postcodeChange = function (item) {
       if (item) {
         self.entity.strPostCode = item.postcode;
@@ -68,6 +84,12 @@ denningOnline
         self.entity.strState = item.state;
         self.entity.strCountry = item.country;
       }
+    }
+
+    self.queryJudge = function (search) {
+      return judgeService.getList(1, 10, search).then(function (resp) {
+        return resp.data;
+      })
     }
 
     self.queryPostcodes = function (searchText) {
@@ -107,6 +129,13 @@ denningOnline
             city: self.entity.strCity,
             state: self.entity.strState,
             country: self.entity.strCountry
+          };
+        }
+
+        if (self.entity.strTypeE) {
+          self.strCourtType = { 
+            strTypeE: self.entity.strTypeE,
+            strTypeM: self.entity.strTypeM,
           };
         }
 
