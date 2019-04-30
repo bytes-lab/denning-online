@@ -45,11 +45,28 @@ denningOnline
       })
     }
 
+    self.queryCourtPlaces = function (searchText) {
+      if (self.strCourtType) {
+        return courtService.getList(1, 10, searchText, self.strCourtType.strTypeE).then(function (resp) {
+          return resp.data;
+        })        
+      } else {
+        return [];
+      }
+    }
+
     self.courtChange = function (item) {
       if (item) {
         self.entity.strCourtType = item.strTypeE;
       } else {
         self.entity.strCourtType = null;
+      }
+    }
+
+    self.courtPlaceChange = function (item) {
+      self.entity.strCourtName = '';
+      if (item) {
+        self.entity.strCourtName = item.code;
       }
     }
 
