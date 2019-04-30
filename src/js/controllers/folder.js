@@ -463,7 +463,7 @@ denningOnline
 
     self.filterSelected = true;
     self.filterContacts = function (keyword) {
-      return contactService.getList(1, 5, keyword).then(function (resp) {
+      return contactService.searchEmail(keyword).then(function (resp) {
         return resp.data
       })
     }
@@ -546,7 +546,7 @@ denningOnline
         return;
       }
 
-      var sendTo = self.sendTo.map(function (contact) { return contact.emailAddress; }).filter(function(email) { return email != ''; });
+      var sendTo = self.sendTo.map(function (contact) { return contact.strEmailAddress; }).filter(function(email) { return email != ''; });
       if (sendTo.length == 0) {
         alert("Please choose contacts with email.");
         return;
@@ -558,7 +558,7 @@ denningOnline
         denningOriginalAttachment: files.map(function(file) { return file.URL; }),
         emailFrom: self.sendFrom,
         emailTo: sendTo,
-        emailTo_cc: self.sendCC.map(function (contact) { return contact.emailAddress; }).filter(function(email) { return email != ''; }),
+        emailTo_cc: self.sendCC.map(function (contact) { return contact.strEmailAddress; }).filter(function(email) { return email != ''; }),
         subject: $scope.emailSubject
       }
 
