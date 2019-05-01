@@ -57,11 +57,6 @@ denningOnline
       return fullAddress;
     };
 
-    self.names = [
-      'Inland Revenue Department',
-      'Lembaga Hasil Dalam Negeri'
-    ];
-
     self.queryPostcodes = function (searchText) {
       return cityService.getList(1, 10, searchText).then(function (resp) {
         return resp.data;
@@ -117,7 +112,10 @@ denningOnline
     } else {
       self.title = 'New IRB Branch';
 
-      self.entity = {};
+      self.entity = {
+        strTypeM: 'Lembaga Hasil Dalam Negeri',
+        strTypeE: 'Inland Revenue Department'
+      };
       
       self.popoutUrl = $state.href('IRD-branches.new');
     }

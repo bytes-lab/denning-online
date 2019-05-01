@@ -82,7 +82,7 @@ denningOnline
     }
 
     if (self.entityCode) {
-      self.title = 'Edit Land PTG';
+      self.title = 'Edit State PTG';
 
       landPTGService.getItem(self.entityCode).then(function (item) {
         self.entity = refactorService.preConvert(item, true);
@@ -118,7 +118,7 @@ denningOnline
         self.popoutUrl = $state.href('land-PTGs.edit', { id: self.entity.code });
       });
     } else {
-      self.title = 'New Land PTG';
+      self.title = 'New State PTG';
 
       self.entity = {};
       
