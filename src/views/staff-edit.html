@@ -46,8 +46,8 @@
             <dt class="p-t-10">ID No</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' data-input-mask="{ mask: '000000-00-0000' }" ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" placeholder="000000-00-0000" ng-if="vm.myIC">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIDNo" ng-if="!vm.myIC">
+                <input type='text' data-input-mask="{ mask: '000000-00-0000' }" ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIdNo" placeholder="000000-00-0000" ng-if="vm.myIC">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strIdNo" ng-if="!vm.myIC">
               </div>
             </dd>
           </dl>
@@ -55,7 +55,7 @@
             <dt class="p-t-10">Name</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control f-500" camel-case>
+                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
               </div>
             </dd>
           </dl>
@@ -63,7 +63,7 @@
             <dt class="p-t-10">Nickname</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control f-500" camel-case>
+                <input ng-model="vm.entity.strInitials" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -93,7 +93,7 @@
             <dt class="p-t-10">Marital Status</dt>
             <dd>
               <div class="fg-line">
-                <input ng-model="vm.entity.strName" ng-readonly="!vm.can_edit" type="text" class="form-control f-500" camel-case>
+                <input ng-model="vm.entity.strMarital" ng-readonly="!vm.can_edit" type="text" class="form-control">
               </div>
             </dd>
           </dl>
@@ -101,7 +101,7 @@
             <dt class="p-t-10">Spouse's Name</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSpouseName">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSpouse">
               </div>
             </dd>
           </dl>
@@ -109,7 +109,7 @@
             <dt class="p-t-10">No. of Children</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSpouseName">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.intChildrenNo">
               </div>
             </dd>
           </dl>
@@ -134,21 +134,9 @@
           <dl class="dl-horizontal">
             <dt class="p-t-10">Qualification</dt>
             <dd>
-              <md-autocomplete
-                ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsOccupation"
-                md-search-text="qsop"
-                md-items="item in vm.queryOccupation(qsop)"
-                md-item-text="item.strEnglish ? item.strEnglish: ' '"
-                md-min-length="0"
-                md-autoselect="false"
-                class="default-input">
-              <md-item-template>
-                <span md-highlight-text="qsop" class="col-1" md-highlight-flags="i">
-                  {{ item.strEnglish }}
-                </span>
-              </md-item-template>
-              </md-autocomplete>
+              <div class="fg-line">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strQualification">
+              </div>
             </dd>
           </dl>
         </div>
@@ -156,132 +144,8 @@
 
       <div class="clearfix"></div>
       <h4 class="m-t-25">Contact Information</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 1)</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strAddressLine1" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case-tail-comma>
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 2)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAddressLine2" camel-case-tail-comma>
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Address (Line 3)</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAddressLine3" camel-case-tail-comma>
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Postcode</dt>
-            <dd>
-              <div class="fg-line">
-                <md-autocomplete
-                  ng-disabled="!vm.can_edit"
-                  md-selected-item="vm.strPostCode_"
-                  md-search-text="qsct"
-                  md-items="item in vm.queryPostcodes(qsct)"
-                  md-selected-item-change="vm.postcodeChange(item)"
-                  md-item-text="item.postcode"
-                  md-min-length="0"
-                  class="default-input">
-                  <md-item-template>
-                    <span md-highlight-text="qsct" class="col-1" md-highlight-flags="i">
-                      {{ item.postcode }}
-                    </span>
-                  </md-item-template>
-                </md-autocomplete>
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Town</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strCity" camel-case>
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">State</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strState" camel-case>
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Country</dt>
-            <dd>
-              <div class="fg-line">
-                <input ng-model="vm.entity.strCountry" ng-readonly="!vm.can_edit" type="text" class="form-control" camel-case>
-              </div>
-            </dd>
-          </dl>
-        </div>
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Contact Person</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strContactPerson">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Home</dt>
-            <dd>
-              <input type="text" international-phone-number ng-model="vm.entity.strPhone1" ng-readonly="!vm.can_edit">
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Mobile</dt>
-            <dd>
-              <input type="text" international-phone-number ng-model="vm.entity.strPhoneMobile" ng-readonly="!vm.can_edit">
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Phone Office</dt>
-            <dd>
-              <input type="text" international-phone-number ng-model="vm.entity.strPhone3" ng-readonly="!vm.can_edit">
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Fax</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' international-phone-number ng-readonly="!vm.can_edit" ng-model="vm.entity.strPhoneFax">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Email</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strEmailAddress">
-              </div>
-            </dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Mail Preference</dt>
-            <dd>
-              <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strWebSite">
-              </div>
-            </dd>
-          </dl>
-        </div>
-      </div>
+      <div class="row" data-ng-include src="'contact-info-0.html'"></div>
+
       <div class="clearfix"></div>
       <h4 class="m-t-25 p-t-5">Employment Information</h4>
       <div class="row">
@@ -290,7 +154,7 @@
             <dt class="p-t-10">Department</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strDepartment">
               </div>
             </dd>
           </dl>
@@ -298,7 +162,7 @@
             <dt class="p-t-10">Position Type</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strPositionTitle">
               </div>
             </dd>
           </dl>
@@ -306,7 +170,7 @@
             <dt class="p-t-10">Monthly Salary</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.decMonthlySalary">
               </div>
             </dd>
           </dl>
@@ -314,7 +178,7 @@
             <dt class="p-t-10">Previous Adjustment Date</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'ctopeneded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtActionEndDate" is-open="ctopeneded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'padopen')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtPrevAdjustDate" is-open="padopen" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -322,7 +186,7 @@
             <dt class="p-t-10">Anual Leave (Days)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strAnnualLeave">
               </div>
             </dd>
           </dl>
@@ -330,7 +194,7 @@
             <dt class="p-t-10">Date Commenced</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'ctopeneded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtActionEndDate" is-open="ctopeneded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'dcopened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateCommenced" is-open="dcopened" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -338,7 +202,7 @@
             <dt class="p-t-10">Date Ceased</dt>
             <dd>
               <div class="fg-line">
-                <input ng-click="open($event, 'ctopeneded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtActionEndDate" is-open="ctopeneded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
+                <input ng-click="open($event, 'ctopeneded')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="vm.entity.dtDateCeased" is-open="ctopeneded" min-date="'1900-1-1'" datepicker-options="dateOptions" ng-disabled="!vm.can_edit" ng-required="true" close-text="Close" placeholder="Select Date" />
               </div>
             </dd>
           </dl>
@@ -348,7 +212,7 @@
             <dt class="p-t-10">Tenure Employed</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTenureEmployed">
               </div>
             </dd>
           </dl>
@@ -356,7 +220,7 @@
             <dt class="p-t-10">Status</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strStatus">
               </div>
             </dd>
           </dl>
@@ -394,7 +258,7 @@
             <dt class="p-t-10">Socso No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strSocsoNo">
               </div>
             </dd>
           </dl>
@@ -402,26 +266,19 @@
             <dt class="p-t-10">EPF No.</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strTaxFileNo">
+                <input type='text' ng-readonly="!vm.can_edit" class="form-control" ng-model="vm.entity.strEpfNo">
               </div>
             </dd>
           </dl>
         </div>
       </div>
 
+      <h4 class="m-t-25 p-t-5" ng-click="vm.showMailingAddress=!vm.showMailingAddress">Mailing Address&nbsp;&nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-plus" ng-if="vm.showMailingAddress"></i><i class="zmdi zmdi-minus" ng-if="!vm.showMailingAddress"></i></h4>
+      <div class="row" ng-show="!vm.showMailingAddress" data-ng-include src="'mailing-address.html'"></div>
+
       <h4 class="m-t-25">Remarks</h4>
-      <div class="row">
-        <div class="col-md-6 p-l-25">
-          <dl class="dl-horizontal">
-            <dt class="p-t-10">Remark</dt>
-            <dd>
-              <div class="fg-line">
-                <textarea class="form-control p-l-10" ng-readonly="!vm.can_edit" rows="8" ng-model="vm.entity.strRemarks" placeholder="type here...."></textarea>
-              </div>
-            </dd>
-          </dl>
-        </div>
-      </div>
+      <div class="row" data-ng-include src="'remarks.html'"></div>
+
       <h4 class="m-t-25 m-b-15">Office Use</h4>
       <div class="row" data-ng-include src="'office-use.html'"></div>
 
