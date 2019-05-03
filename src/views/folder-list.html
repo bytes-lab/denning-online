@@ -302,6 +302,7 @@
 
 <script type="text/ng-template" id="linksModal.html">
   <div class="modal-header">
+    <span class="c-purple f-500 f-19">Send Email</span>
   </div>
   <div class="modal-body p-b-20">
     <div class="row">
@@ -357,6 +358,22 @@
             </md-contact-chips>
           </dd>
         </dl>
+        <dl class="dl-horizontal m-b-10">
+          <dt class="p-t-10">BCC</dt>
+          <dd>
+            <md-contact-chips
+              ng-model="vm.sendBCC"
+              md-contacts="vm.filterContacts($query)"
+              md-contact-name="strName"
+              md-contact-image="image"
+              md-contact-email="strEmailAddress"
+              md-require-match="true"
+              md-highlight-flags="i"
+              filter-selected="vm.filterSelected"
+              placeholder="BCC">
+            </md-contact-chips>
+          </dd>
+        </dl>
         <dl class="dl-horizontal">
           <dt class="p-t-10">Subject</dt>
           <dd>
@@ -384,7 +401,7 @@
     <button class="btn btn-info btn-icon waves-effect waves-circle waves-float" ng-click="sendEmail()"><i class="zmdi zmdi-mail-send"></i></button>
     <a href="" class="m-l-10 f-15" ng-disabled="!glink" ng-click="sendEmail()"> Send</a>
     <button class="btn btn-info m-l-30 btn-icon waves-effect waves-circle waves-float" ng-click="copyLink()"><i class="zmdi zmdi-link"></i></button>
-    <a href="" class="m-l-10 f-15" ng-disabled="!glink" ng-click="copyLink()"> Copy Files for Email</a>
+    <a href="" class="m-l-10 f-15" ng-disabled="!glink" ng-click="copyLink()"> Copy Links for Email</a>
   </div>
 </script>
 

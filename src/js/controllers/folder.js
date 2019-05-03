@@ -459,6 +459,7 @@ denningOnline
 
     self.sendTo = [];
     self.sendCC = [];
+    self.sendBCC = [];
     self.sendFrom = null;
 
     self.filterSelected = true;
@@ -559,6 +560,7 @@ denningOnline
         emailFrom: self.sendFrom,
         emailTo: sendTo,
         emailTo_cc: self.sendCC.map(function (contact) { return contact.strEmailAddress; }).filter(function(email) { return email != ''; }),
+        emailTo_bcc: self.sendBCC.map(function (contact) { return contact.strEmailAddress; }).filter(function(email) { return email != ''; }),
         subject: $scope.emailSubject
       }
 
