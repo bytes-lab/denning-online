@@ -21,7 +21,7 @@ denningOnline
         var searchRes = resp.data.map(function (item) {
           var newItem = angular.copy(item);
           try {
-            newItem.parseJSON = JSON.parse(item.JSON);
+            newItem.parseJSON = JSON.parse(item.JSON.replace(/[\u0000-\u0019]+/g,""));
           } catch(err) {
             newItem.parseJSON = '';
           }
