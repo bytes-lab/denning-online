@@ -30,12 +30,12 @@ denningOnline
           params.total(data.headers('x-total-count'));
           return data.data.map(function (item) {
             var item_ = angular.copy(item);
-            item_.tax = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
-                        refactorService.convertFloat(item.decTaxofFee);
-            item_.total = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
-                          refactorService.convertFloat(item.decTaxofFee) +
-                          refactorService.convertFloat(item.decDisb) +
-                          refactorService.convertFloat(item.decDisbWithTax) +
+            item_.tax = refactorService.convertFloat(item.decDisbTaxGST) + 
+                        refactorService.convertFloat(item.decFeeGST);
+            item_.total = refactorService.convertFloat(item.decDisbTaxGST) + 
+                          refactorService.convertFloat(item.decFeeGST) +
+                          refactorService.convertFloat(item.decDisbOnly) +
+                          refactorService.convertFloat(item.decDisbTax) +
                           refactorService.convertFloat(item.decFee);
             return item_;
           });
@@ -53,12 +53,12 @@ denningOnline
           params.total(data.headers('x-total-count'));
           return data.data.map(function (item) {
             var item_ = angular.copy(item);
-            item_.tax = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
-                        refactorService.convertFloat(item.decTaxofFee);
-            item_.total = refactorService.convertFloat(item.decTaxofDisbWithTax) + 
-                          refactorService.convertFloat(item.decTaxofFee) +
-                          refactorService.convertFloat(item.decDisb) +
-                          refactorService.convertFloat(item.decDisbWithTax) +
+            item_.tax = refactorService.convertFloat(item.decDisbTaxGST) + 
+                        refactorService.convertFloat(item.decFeeGST);
+            item_.total = refactorService.convertFloat(item.decDisbTaxGST) + 
+                          refactorService.convertFloat(item.decFeeGST) +
+                          refactorService.convertFloat(item.decDisbOnly) +
+                          refactorService.convertFloat(item.decDisbTax) +
                           refactorService.convertFloat(item.decFee);
             return item_;
           });
