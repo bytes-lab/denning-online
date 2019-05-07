@@ -116,7 +116,7 @@
             <dd>
               <md-autocomplete
                 ng-disabled="!vm.can_edit"
-                md-selected-item="vm.entity.clsMatterCode"
+                md-selected-item="vm.entity.clsFileNo.clsMatterCode"
                 md-search-text="qmc"
                 md-items="item in vm.queryCodes(qmc)"
                 md-selected-item-change="vm.matterCodeChange(item)"
@@ -166,7 +166,7 @@
                 md-selected-item="vm.entity.clsPresetBill"
                 md-search-text="qpsb1"
                 md-items="item in vm.queryBills(qpsb1)"
-                md-item-text="item.code"
+                md-item-text="item.strDescription+' ( '+item.code+' )'"
                 md-min-length="0"
                 md-selected-item-change="vm.presetBillChange(item)"
                 md-autoselect="false"
