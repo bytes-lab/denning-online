@@ -110,7 +110,7 @@ denningOnline
     self.presetBillChange = function (item) {
       if (item && self.entity.clsPresetBill.code != item.code) {
         presetbillService.getItem(item.code).then(function (item) {
-          self.entity.listBilledItems = item.listBilledItems;
+          self.entity.clsDetails.listBilledItems = item.listBilledItems;
           self.refreshItems();
         });
       }
@@ -150,8 +150,8 @@ denningOnline
           },
           excludes: function () {
             var arr = [];
-            for (ii in self.entity.listBilledItems) {
-              var item = self.entity.listBilledItems[ii];
+            for (ii in self.entity.clsDetails.listBilledItems) {
+              var item = self.entity.clsDetails.listBilledItems[ii];
               arr.push(item.strItemCode);
             }
             return arr;
@@ -161,9 +161,9 @@ denningOnline
         if (res && res.length > 0) {
           for (ii in res) {
             if (idx != -1) {
-              self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
+              self.entity.clsDetails.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
             } else {
-              self.entity.listBilledItems.push(res[ii]);
+              self.entity.clsDetails.listBilledItems.push(res[ii]);
             }
           }
           self.refreshItems();
@@ -174,21 +174,21 @@ denningOnline
     self.move = function (x, y) {
       if (x < 0) {
         return;
-      } else if (y == self.entity.listBilledItems.length) {
+      } else if (y == self.entity.clsDetails.listBilledItems.length) {
         return;
       }
 
-      var b = self.entity.listBilledItems[y];
-      self.entity.listBilledItems[y] = self.entity.listBilledItems[x];
-      self.entity.listBilledItems[x] = b;
+      var b = self.entity.clsDetails.listBilledItems[y];
+      self.entity.clsDetails.listBilledItems[y] = self.entity.clsDetails.listBilledItems[x];
+      self.entity.clsDetails.listBilledItems[x] = b;
       self.tableFilter.reload();
     };
 
     self.remove = function (code) {
-      for (ii in self.entity.listBilledItems) {
-        var item = self.entity.listBilledItems[ii];
+      for (ii in self.entity.clsDetails.listBilledItems) {
+        var item = self.entity.clsDetails.listBilledItems[ii];
         if (item.strItemCode == code) {
-          self.entity.listBilledItems.splice(ii, 1);
+          self.entity.clsDetails.listBilledItems.splice(ii, 1);
           break;
         }
       }
@@ -205,7 +205,7 @@ denningOnline
       }, {
         counts: [],
         getData: function (params) {
-          return self.entity.listBilledItems.filter(function (item) {
+          return self.entity.clsDetails.listBilledItems.filter(function (item) {
             return self.itemType == 'All' || 
                    item.strBillItemType == self.itemType || 
                    item.strTaxCode == self.taxType;
@@ -235,8 +235,8 @@ denningOnline
       };
 
       var G0001 = null;
-      for (ii in self.entity.listBilledItems) {
-        var item = self.entity.listBilledItems[ii];
+      for (ii in self.entity.clsDetails.listBilledItems) {
+        var item = self.entity.clsDetails.listBilledItems[ii];
         if (item.strItemCode != 'G0001') {
           item.decUnitCost = parseFFloat(item.decUnitPrice) * parseFFloat(item.decUnit);
           item.decUnitTax = parseFFloat(item.decTaxRate) * item.decUnitCost;
@@ -332,7 +332,9 @@ denningOnline
       self.entity = {
         strState: 'Common',
         dtCreateDate: uibDateParser.parse(new Date()),
-        listBilledItems: []
+        clsDetails: {
+          listBilledItems: []
+        }
       };
 
       if ($stateParams.fileNo) {
@@ -363,9 +365,9 @@ denningOnline
 
     self.save = function () {
       entity = refactorService.getDiff(self.entity_, self.entity);
-      for (ii in entity.listBilledItems) {
-        var item = entity.listBilledItems[ii];
-        entity.listBilledItems[ii] = refactorService.convertDouble(item);
+      for (ii in entity.clsDetails.listBilledItems) {
+        var item = entity.clsDetails.listBilledItems[ii];
+        entity.clsDetails.listBilledItems[ii] = refactorService.convertDouble(item);
       }
 
       invoiceService.save(entity).then(function (item) {
