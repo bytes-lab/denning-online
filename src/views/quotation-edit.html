@@ -125,7 +125,7 @@
                 md-selected-item="vm.entity.clsPresetBill"
                 md-search-text="qpsb1"
                 md-items="item in vm.queryBills(qpsb1)"
-                md-item-text="item.code"
+                md-item-text="item.strDescription+' ( '+item.code+' )'"
                 md-min-length="0"
                 md-selected-item-change="vm.presetBillChange(item)"
                 md-autoselect="false"
@@ -192,7 +192,7 @@
             <dt class="p-t-10">Monthly Rent</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decRentMonthly">
+                <input type='text' class="form-control" ng-model="vm.entity.clsDetails.decMonthlyRent">
               </div>
             </dd>
           </dl>
@@ -200,7 +200,7 @@
             <dt class="p-t-10">Rental Period (yr)</dt>
             <dd>
               <div class="fg-line">
-                <input type='text' class="form-control" ng-model="vm.entity.decRentYearly">
+                <input type='text' class="form-control" ng-model="vm.entity.clsDetails.decAnnualRent">
               </div>
             </dd>
           </dl>
