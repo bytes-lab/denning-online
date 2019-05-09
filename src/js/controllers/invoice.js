@@ -39,7 +39,7 @@ denningOnline
 
   .controller('invoiceEditCtrl', function($stateParams, invoiceService, $state, Auth,
                                           refactorService, matterService, growlService,
-                                          matterCodeService, presetbillService,
+                                          matterCodeService, presetbillService, contactService,
                                           uibDateParser, $uibModal, NgTableParams) 
   {
     var self = this;
@@ -277,6 +277,7 @@ denningOnline
       Disb: 0.00
     };
 
+    self.strClientName = '';
     if ($stateParams.id) {
       self.title = 'Edit Invoice';
       invoiceService.getItem($stateParams.id).then(function (item) {
@@ -305,6 +306,12 @@ denningOnline
             name: self.entity.strBillTo,
             group: false
           }
+        }
+
+        if (self.entity.strClientID) {
+          contactService.getItem(self.entity.strClientID).then(function (client) {
+            self.strClientName = client.strName;
+          }); 
         }
       });
 
