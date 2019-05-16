@@ -404,22 +404,15 @@ denningOnline
       name: 'info',
       templateUrl: 'info.html',
       controller: function ($scope, legalFirmService, matterCodeService, Auth, $uibModal, 
-                            matterService) 
+                            matterService, refactorService) 
       {
         $scope.userInfo = Auth.getUserInfo();
 
         if ($scope.model.strRelatedFile) {
           $scope.rmatter = {
             key: $scope.model.strRelatedFile,
-            Title: ': ' + $scope.model.strRelatedFile
+            Title: ': ' + $scope.model.strRelatedFile + ' (' + $scope.model.strRelatedFileName + ')'
           };
-
-          matterService.getItem($scope.model.strRelatedFile).then(function (resp) {
-            $scope.rmatter.Title = ': ' + resp.strFileNo1 + ' (' + resp.clsPrimaryClient.strName + ')';
-            $scope.rmatterReady = true;
-          });
-        } else {
-          $scope.rmatterReady = true;
         }
 
         matterService.getFileStatusList().then(function (resp) {
@@ -433,7 +426,7 @@ denningOnline
         };
 
         $scope.queryMatters = function (search) {
-          return matterService.getList(1, 5, search).then(function (resp) {
+          return matterService.getList(1, 10, search).then(function (resp) {
             return resp.data
           })
         }
@@ -447,6 +440,10 @@ denningOnline
         $scope.matterChange = function (matter) {
           if (matter) {
             $scope.model.strRelatedFile = matter.key;
+            $scope.model.strRelatedFileName = refactorService.parseFileNo(matter.Title).name;
+          } else {
+            $scope.model.strRelatedFile = '';
+            $scope.model.strRelatedFileName = null;
           }
         }
 

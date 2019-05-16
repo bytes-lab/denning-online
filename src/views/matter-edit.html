@@ -783,7 +783,6 @@
       <label class="form-control attr-label">Related Matter</label>
       <md-autocomplete
         ng-disabled="!model.tmp.can_edit"
-        ng-if="rmatterReady"
         md-selected-item="rmatter"
         md-search-text="qstl"
         md-items="item in queryMatters(qstl)"
@@ -795,7 +794,7 @@
           <span md-highlight-text="searchText" class="col-1" md-highlight-flags="i">{{ item.Title }}</span>
         </md-item-template>
       </md-autocomplete>
-      <a class="btn btn-primary short-btn" target="_new" ui-sref="file-matters.edit({ fileNo: rmatter.key })" ng-if="rmatter.key.trim()">
+      <a class="btn btn-primary short-btn" target="_blank" ui-sref="file-matters.edit({ fileNo: rmatter.key })" ng-if="rmatter.key.trim()">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="See detail of the matter"></span>
       </a>
     </div>
