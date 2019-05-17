@@ -100,7 +100,7 @@ denningOnline
             } else {
               $state.go('billing.items-edit', { 'id': item.strItemCode });
             }
-            growlService.growl('Saved successfully!', 'success');          
+            growlService.growl('Saved successfully!', 'success');
           }
         }
       });

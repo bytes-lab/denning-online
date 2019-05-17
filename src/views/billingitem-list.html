@@ -35,14 +35,11 @@
             <td data-title="'Description'">
               {{ w.strDescription }}
             </td>
-            <td data-title="'Supply Tax'">
+            <td data-title="'Tax'">
               {{ w.strTaxCode }}
             </td>
-            <td data-title="'S.Rate'">
+            <td data-title="'Rate (%)'">
               {{ w.decTaxRate * 100 }}
-            </td>
-            <td data-title="'Purchase Tax'">
-              {{ w.fileNo1 }}
             </td>
             <td data-title="'P.Rate'">
               {{ w.decPricePerUnit }}
@@ -58,7 +55,7 @@
                 </label>
               </div>
             </td>
-            <td data-title="'Price'" class="text-right">
+            <td data-title="'Unit Price'" class="text-right">
               {{ w.decPricePerUnit | number:2 }}
             </td>
             <td data-title="'Unit'" class="text-right">
@@ -66,6 +63,14 @@
             </td>
             <td data-title="'Inherit from'">
               {{ w.strInherit }}
+            </td>
+            <td data-title="'Applicable'" class="p-l-10">
+              <div class="checkbox m-5">
+                <label>
+                  <input type="checkbox" ng-checked="w.boolFormula1=='1'" readonly>
+                  <i class="input-helper"></i>
+                </label>
+              </div>
             </td>
           </tr>
         </table>

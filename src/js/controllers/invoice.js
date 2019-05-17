@@ -244,7 +244,7 @@ denningOnline
 
           self.gross[item.strBillItemType] += item.decUnitCost;
           self.sst[item.strBillItemType] += item.decUnitTax;
-          self.gross['All'] += item.decUnitCost;          
+          self.gross['All'] += item.decUnitCost;
         } else {
           G0001 = item;
         }
@@ -341,6 +341,9 @@ denningOnline
         dtCreateDate: uibDateParser.parse(new Date()),
         clsDetails: {
           listBilledItems: []
+        },
+        clsFileNo: { 
+          strFileNo1: ' '
         }
       };
 
