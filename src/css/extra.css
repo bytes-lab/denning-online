@@ -437,3 +437,8 @@ td.cell-edit {
 .md-contact-suggestion .md-contact-name, .md-contact-suggestion .md-contact-email {
      margin-top: 3px; 
 }
+
+.virtualRepeatSearchInfiniteScroll #vertical-container {
+  height: calc(100vh - 100px);
+  width: 100%;
+}

@@ -134,16 +134,55 @@ denningOnline
       }
     }
 
+    self.infiniteSearchItems = {
+      numLoaded_: 0,
+      toLoad_: 0,
+      items: [],
+      keyword: '',
+
+      // Required.
+      getItemAtIndex: function (index) {
+        if (index > this.numLoaded_) {
+          this.fetchMoreItems_(index);
+          return null;
+        }
+        return this.items[index];
+      },
+
+      // Required.
+      getLength: function () {
+        return this.numLoaded_ + 5;
+      },
+
+      init: function(keyword) {
+        this.numLoaded_ = 0;
+        this.toLoad_ = 0;
+        this.items = [];
+        this.keyword = keyword;
+      },
+
+      fetchMoreItems_: function (index) {
+        if (this.toLoad_ < index && this.keyword) {
+          this.toLoad_ += 5;
+          this_ = this;
+          searchService.search(this.keyword, self.searchCategory, 1, 5).then(function (data) {
+            this_.items = this_.items.concat(data);
+            this_.numLoaded_ = this_.toLoad_;
+          });
+        }
+      }
+    }
+
     self.selectedItemChange = function (item) {
       if(angular.isUndefined(item)) {
         return;
       }
 
-      searchService.search(item.keyword, self.searchCategory).then(function (data) {
-        self.searchRes = data;
-        if ($state.current.name != 'search')
-          $state.go('search');
-      });
+      self.infiniteSearchItems.init(item.keyword);
+
+      if ($state.current.name != 'search') {
+        $state.go('search');
+      }
     }
 
     self.payments = function(item) {

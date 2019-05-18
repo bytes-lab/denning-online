@@ -15,7 +15,7 @@ denningOnline
         search: keyword,
         category: category,
         page: page,
-        pagesize: 20,
+        pagesize: pagesize,
         isAutoComplete: 1
       }).then(function (resp) {
         var searchRes = resp.data.map(function (item) {
