@@ -5,12 +5,13 @@
   <section id="content">
     <div class="container">
       <div class="block-header">
-        <h2>Search result: 235</h2>
+        <h2>Search result: {{ mactrl.totalSearchResult }}</h2>
       </div>
       <md-content layout="column" class="virtualRepeatSearchInfiniteScroll">
         <md-virtual-repeat-container id="vertical-container" flex>
           <div md-virtual-repeat="item in mactrl.infiniteSearchItems" md-on-demand class="repeated-item" flex>
-            <md-list-item class="md-3-line p-10" ng-click="mactrl.navItem(item)" ng-if="true || item.parseJSON!=''">
+            <div style="height: 10vh;" ng-if="item==undefined"></div>
+            <md-list-item class="md-3-line p-10" ng-click="mactrl.navItem(item)" ng-if="item.key!==undefined">
               <div class="md-list-item-text" layout="column">
                 <span class="f-20 f-500 c-purple p-l-10 m-b-5">{{ item.Title }}</span>
                 <div class="row p-l-10">
@@ -47,7 +48,7 @@
                 </section>
               </div>
             </md-list-item>
-            <md-divider ng-if="!$last"></md-divider>
+            <md-divider ng-if="!$last && item.key!==undefined"></md-divider>
           </div>
         </md-virtual-repeat-container>
       </md-content>

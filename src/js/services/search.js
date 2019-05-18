@@ -18,7 +18,7 @@ denningOnline
         pagesize: pagesize,
         isAutoComplete: 1
       }).then(function (resp) {
-        var searchRes = resp.data.map(function (item) {
+        var data = resp.data.map(function (item) {
           var newItem = angular.copy(item);
           try {
             newItem.parseJSON = JSON.parse(item.JSON.replace(/[\u0000-\u0019]+/g,""));
@@ -28,7 +28,7 @@ denningOnline
           return newItem;
         });
         
-        return searchRes;
+        return { data: data, total: resp.headers('x-total-count') };
       });
     };
 

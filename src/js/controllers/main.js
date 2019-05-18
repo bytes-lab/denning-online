@@ -100,7 +100,6 @@ denningOnline
     };
 
     self.states    = [];
-    self.searchRes = [];
     self.selectedItem = '';
     self.currentText = '';
 
@@ -129,16 +128,17 @@ denningOnline
     self.searchTextChange = function (text) {
       self.searchCategory = 0;
       self.currentText = { keyword: text, display: text };
-      if (text.trim() == '') {
-        self.searchRes = [];
-      }
     }
 
+    self.totalSearchResult = 0;
     self.infiniteSearchItems = {
       numLoaded_: 0,
       toLoad_: 0,
       items: [],
       keyword: '',
+      page: 1,
+      hasMoreData: true,
+      hold: false,
 
       // Required.
       getItemAtIndex: function (index) {
@@ -151,7 +151,7 @@ denningOnline
 
       // Required.
       getLength: function () {
-        return this.numLoaded_ + 5;
+        return this.numLoaded_ + 10;
       },
 
       init: function(keyword) {
@@ -159,15 +159,28 @@ denningOnline
         this.toLoad_ = 0;
         this.items = [];
         this.keyword = keyword;
+        this.page = 1;
+        this.hasMoreData = true;
+        this.hold = false;
       },
 
       fetchMoreItems_: function (index) {
-        if (this.toLoad_ < index && this.keyword) {
-          this.toLoad_ += 5;
+        if (this.toLoad_ < index && this.keyword && this.hasMoreData && !this.hold) {
           this_ = this;
-          searchService.search(this.keyword, self.searchCategory, 1, 5).then(function (data) {
-            this_.items = this_.items.concat(data);
-            this_.numLoaded_ = this_.toLoad_;
+          this_.hold = true;
+
+          searchService.search(this.keyword, self.searchCategory, this.page, 10).then(function (resp) {
+            this_.hold = false;
+
+            if (resp.total == '0') {
+              this_.hasMoreData = false;
+            } else {
+              this_.toLoad_ += 10;
+              this_.page += 1;
+              self.totalSearchResult = resp.total;
+              this_.items = this_.items.concat(resp.data);
+              this_.numLoaded_ = this_.toLoad_;
+            }
           });
         }
       }
@@ -178,7 +191,9 @@ denningOnline
         return;
       }
 
+      self.totalSearchResult = 0;
       self.infiniteSearchItems.init(item.keyword);
+      self.infiniteSearchItems.getItemAtIndex(1);
 
       if ($state.current.name != 'search') {
         $state.go('search');
