@@ -3,55 +3,57 @@
 <section id="main">
   <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
   <section id="content">
-    <div class="container">
+    <div class="container virtualRepeatSearchInfiniteScroll">
       <div class="block-header">
         <h2>Search result: {{ mactrl.totalSearchResult }}</h2>
       </div>
-      <md-content layout="column" class="virtualRepeatSearchInfiniteScroll">
-        <md-virtual-repeat-container id="vertical-container" flex>
-          <div md-virtual-repeat="item in mactrl.infiniteSearchItems" md-on-demand class="repeated-item" flex>
-            <div style="height: 10vh;" ng-if="item==undefined"></div>
-            <md-list-item class="md-3-line p-10" ng-click="mactrl.navItem(item)" ng-if="item.key!==undefined">
-              <div class="md-list-item-text" layout="column">
-                <span class="f-20 f-500 c-purple p-l-10 m-b-5">{{ item.Title }}</span>
-                <div class="row p-l-10">
-                  <div class="col-md-6 col-lg-5 f-14" ng-repeat="entry in item.parseJSON" ng-if="entry.value!=''" style="line-height: 16px;">
-                    <label class="m-r-5">{{entry.label}}:</label>
-                    <span>{{entry.value}}</span>
+      <div class="card">
+        <div class="card-body">
+          <md-virtual-repeat-container id="vertical-container" flex>
+            <div md-virtual-repeat="item in mactrl.infiniteSearchItems" md-on-demand class="repeated-item" flex>
+              <div style="height: 10vh;" ng-if="item==undefined"></div>
+              <md-list-item class="md-3-line p-10" ng-click="mactrl.navItem(item)" ng-if="item.key!==undefined">
+                <div class="md-list-item-text" layout="column">
+                  <span class="f-20 f-500 c-purple p-l-10 m-b-5">{{ item.Title }}</span>
+                  <div class="row p-l-10">
+                    <div class="col-md-6 col-lg-5 f-14" ng-repeat="entry in item.parseJSON" ng-if="entry.value!=''" style="line-height: 16px;">
+                      <label class="m-r-5">{{entry.label}}:</label>
+                      <span>{{entry.value}}</span>
+                    </div>
                   </div>
+                  <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Property')==0" style="line-height: 25px;">
+                    <div class="col-sm-12 no-padding">
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.relatedMatter(item.key, 'property')">Matters</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="folders.list({ id: item.key, type: 'property' })">Folder</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.upload(item.key, 'property')">Upload</md-button>
+                    </div>
+                  </section>
+                  <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Contact')==0" style="line-height: 25px;">
+                    <div class="col-sm-12 no-padding">
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.relatedMatter(item.key, 'contact')">Matters</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="folders.list({ id: item.key, type: 'contact' })">Folder</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.upload(item.key, 'contact')">Upload</md-button>
+                    </div>
+                  </section>
+                  <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('File No')==0 || item.Title.indexOf('Matter')==0" style="line-height: 25px;">
+                    <div class="col-sm-12 col-md-10 no-padding">
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="folders.list({ id: item.key, type: 'matter' })">Folder</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.accounts(item)">Accounts</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.notes(item)">Notes</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.payments(item)">Payments</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="file-matters.edit({ fileNo: item.key, tab: 'template' })">Templates</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.upload(item.key, 'matter')">Upload</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="courtdiary({ keyword: item.key })">Calendar</md-button>
+                      <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;">Checklist</md-button>
+                    </div>
+                  </section>
                 </div>
-                <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Property')==0" style="line-height: 25px;">
-                  <div class="col-sm-12 no-padding">
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.relatedMatter(item.key, 'property')">Matters</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="folders.list({ id: item.key, type: 'property' })">Folder</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.upload(item.key, 'property')">Upload</md-button>
-                  </div>
-                </section>
-                <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('Contact')==0" style="line-height: 25px;">
-                  <div class="col-sm-12 no-padding">
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.relatedMatter(item.key, 'contact')">Matters</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="folders.list({ id: item.key, type: 'contact' })">Folder</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.upload(item.key, 'contact')">Upload</md-button>
-                  </div>
-                </section>
-                <section layout="row" layout-sm="column" layout-align="start center" layout-wrap ng-if="item.Title.indexOf('File No')==0 || item.Title.indexOf('Matter')==0" style="line-height: 25px;">
-                  <div class="col-sm-12 col-md-10 no-padding">
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="folders.list({ id: item.key, type: 'matter' })">Folder</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.accounts(item)">Accounts</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.notes(item)">Notes</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.payments(item)">Payments</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="file-matters.edit({ fileNo: item.key, tab: 'template' })">Templates</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" ng-click="mactrl.upload(item.key, 'matter')">Upload</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;" data-ui-sref="courtdiary({ keyword: item.key })">Calendar</md-button>
-                    <md-button class="f-13 md-warn btn-sm m-0" style="min-height: 27px; min-width: 50px;">Checklist</md-button>
-                  </div>
-                </section>
-              </div>
-            </md-list-item>
-            <md-divider ng-if="!$last && item.key!==undefined"></md-divider>
-          </div>
-        </md-virtual-repeat-container>
-      </md-content>
+              </md-list-item>
+              <md-divider ng-if="!$last && item.key!==undefined"></md-divider>
+            </div>
+          </md-virtual-repeat-container>
+        </div>
+      </div>
     </div>
   </section>
 </section>
