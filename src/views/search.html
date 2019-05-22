@@ -10,7 +10,7 @@
       <div class="card">
         <div class="card-body">
           <md-virtual-repeat-container id="vertical-container" flex>
-            <div md-virtual-repeat="item in mactrl.infiniteSearchItems" md-on-demand class="repeated-item" flex>
+            <div md-virtual-repeat="item in mactrl.infiniteSearchItems" md-on-demand md-item-size="100" class="repeated-item" flex>
               <div style="height: 10vh;" ng-if="item==undefined"></div>
               <md-list-item class="md-3-line p-10" ng-click="mactrl.navItem(item)" ng-if="item.key!==undefined">
                 <div class="md-list-item-text" layout="column">
