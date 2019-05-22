@@ -394,7 +394,7 @@ denningOnline
           }
         }
       }).result.then(function () {}, function (res) {});
-    }  
+    }
   })
 
   .controller('linkModalCtrl', function ($scope, $uibModalInstance, $state, growlService, 
@@ -603,10 +603,10 @@ denningOnline
         $scope.data.choosen = null;
         $scope.data.searchRes = [];
 
-        searchService.search(item.keyword, $scope.searchCategory, 1, 0).then(function (data) {
-          $scope.data.searchRes = data;
-          if ($scope.searchCategory == '1' && data.length > 0) {
-            $scope.data.choosen = data[0];
+        searchService.search(item.keyword, $scope.searchCategory, 1, 0).then(function (resp) {
+          $scope.data.searchRes = resp.data;
+          if ($scope.searchCategory == '1' && resp.data.length > 0) {
+            $scope.data.choosen = resp.data[0];
           }
         });
       }
