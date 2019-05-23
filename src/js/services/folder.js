@@ -62,14 +62,14 @@ denningOnline
       url = url.replace('document/matter', 'table/SharedDocument');
       return http.GET(url).then(function (resp) {
         return resp.data;
-      });      
+      });
     }
 
     service.share = function(url, data) {
       url = url.replace('document/matter', 'table/SharedDocument');
       return http.PUT(url, data).then(function (resp) {
         return resp;
-      });      
+      });
     }
 
     service.sendEmail = function(data) {

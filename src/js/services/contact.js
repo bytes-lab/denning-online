@@ -66,12 +66,19 @@ denningOnline
       });
     }
 
+    service.getMailServerBccList = function () {
+      return http.GET('v1/table/MailServerBcc', {}).then(function (resp) {
+        return resp;
+      });
+    }
+
     service.searchEmail = function(keyword) {
       return http.GET('v1/searchemail', {
         search: keyword
       }).then(function (resp) {
         return resp;
-      });      
+      });
     }
+
     return service;
   })

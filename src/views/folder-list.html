@@ -327,7 +327,7 @@
           </dd>
         </dl>
         <dl class="dl-horizontal m-b-0">
-          <dt class="p-t-10">Send To</dt>
+          <dt class="p-t-20">Send To</dt>
           <dd>
             <md-contact-chips
               ng-model="vm.sendTo"
@@ -361,17 +361,19 @@
         <dl class="dl-horizontal m-b-10">
           <dt class="p-t-10">BCC</dt>
           <dd>
-            <md-contact-chips
-              ng-model="vm.sendBCC"
-              md-contacts="vm.filterContacts($query)"
-              md-contact-name="strName"
-              md-contact-image="image"
-              md-contact-email="strEmailAddress"
-              md-require-match="true"
-              md-highlight-flags="i"
-              filter-selected="vm.filterSelected"
-              placeholder="BCC">
-            </md-contact-chips>
+            <md-autocomplete
+              md-selected-item="vm.sendBCC"
+              md-items="item in vm.mailServersBcc"
+              md-item-text="item.strInternalName"
+              md-min-length="0"
+              placeholder="Choose a BCC"
+              class="default-input mail-server">
+              <md-item-template>
+                <span md-highlight-text="qstl" class="col-1" md-highlight-flags="i">
+                  {{ item.strInternalName }} ( {{ item.strEmail }} )
+                </span>
+              </md-item-template>
+            </md-autocomplete>
           </dd>
         </dl>
         <dl class="dl-horizontal">

@@ -1,6 +1,5 @@
 denningOnline
-  .controller('billingitemListCtrl', function(NgTableParams, billingitemService, Auth, 
-                                              $state) 
+  .controller('billingitemListCtrl', function(NgTableParams, billingitemService, Auth, $state) 
   {
     var self = this;
     self.userInfo = Auth.getUserInfo();
@@ -36,10 +35,6 @@ denningOnline
     self.can_edit = isNew;
     self.isNew = isNew;
     self.entityCode = isDialog ? entityCode: $stateParams.id;
-
-    self.isDialog = false;
-    self.can_edit = $state.$current.data.can_edit;
-    self.isNew = $state.$current.data.can_edit;
 
     self.categories = [
         'Conveyancing',

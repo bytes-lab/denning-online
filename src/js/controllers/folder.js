@@ -459,7 +459,7 @@ denningOnline
 
     self.sendTo = [];
     self.sendCC = [];
-    self.sendBCC = [];
+    self.sendBCC = null;
     self.sendFrom = null;
 
     self.filterSelected = true;
@@ -471,6 +471,10 @@ denningOnline
   
     contactService.getMailServerList().then(function (resp) {
       self.mailServers = resp.data;
+    })
+
+    contactService.getMailServerBccList().then(function (resp) {
+      self.mailServersBcc = resp.data;
     })
 
     // amazon aws credentials
@@ -560,7 +564,7 @@ denningOnline
         emailFrom: self.sendFrom,
         emailTo: sendTo,
         emailTo_cc: self.sendCC.map(function (contact) { return contact.strEmailAddress; }).filter(function(email) { return email != ''; }),
-        emailTo_bcc: self.sendBCC.map(function (contact) { return contact.strEmailAddress; }).filter(function(email) { return email != ''; }),
+        emailTo_bcc: self.sendBCC,
         subject: $scope.emailSubject
       }
 
