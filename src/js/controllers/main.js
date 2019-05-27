@@ -99,28 +99,21 @@ denningOnline
       $scope[opened] = true;
     };
 
-    self.states    = [];
-    self.selectedItem = '';
-    self.currentText = '';
-
-    self.newState = function (state) {
-    }
-
     self.searchKeyPressed = function (events, item) {
       if(event.which == 13) {
         // hide list for not keyword
         $('#search_filter').focus();
-        self.selectedItemChange(self.selectedItem || self.currentText);
+        self.selectedItemChange();
       }
     }
 
     self.searchFilterChange = function (category) {
       self.searchCategory = category;
-      self.selectedItemChange(self.selectedItem || self.currentText);
+      self.selectedItemChange();
     }
 
     self.querySearch = function (query) {
-      return searchService.keyword(query).then(function (data) {
+      return searchService.keywordV2(query).then(function (data) {
         return data;
       });
     }
@@ -139,6 +132,7 @@ denningOnline
       page: 1,
       hasMoreData: true,
       hold: false,
+      auto: 1,
 
       // Required.
       getItemAtIndex: function (index) {
@@ -154,7 +148,7 @@ denningOnline
         return this.numLoaded_ + 10;
       },
 
-      init: function(keyword) {
+      init: function(keyword, auto) {
         this.numLoaded_ = 0;
         this.toLoad_ = 0;
         this.items = [];
@@ -162,6 +156,7 @@ denningOnline
         this.page = 1;
         this.hasMoreData = true;
         this.hold = false;
+        this.auto = auto;
       },
 
       fetchMoreItems_: function (index) {
@@ -169,7 +164,7 @@ denningOnline
           this_ = this;
           this_.hold = true;
 
-          searchService.search(this.keyword, self.searchCategory, this.page, 10).then(function (resp) {
+          searchService.searchV2(this.keyword, self.searchCategory, this.page, 10, this.auto).then(function (resp) {
             this_.hold = false;
 
             if (resp.total == '0') {
@@ -186,13 +181,20 @@ denningOnline
       }
     }
 
-    self.selectedItemChange = function (item) {
-      if(angular.isUndefined(item)) {
+    self.selectedItemChange = function () {
+      var _keyword, _auto;
+      if (self.selectedItem) {
+        _keyword = self.selectedItem.key;
+        _auto = 1;
+      } else if (self.currentText) {
+        _keyword = self.currentText.keyword;
+        _auto = 0;
+      } else {
         return;
       }
 
       self.totalSearchResult = 0;
-      self.infiniteSearchItems.init(item.keyword);
+      self.infiniteSearchItems.init(_keyword, _auto);
       self.infiniteSearchItems.getItemAtIndex(1);
 
       if ($state.current.name != 'search') {
