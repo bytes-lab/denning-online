@@ -37,7 +37,8 @@
         ng-keypress="mactrl.searchKeyPressed($event)"
         placeholder="Search for matters, contacts, properties ...">
         <md-item-template>
-          <span md-highlight-text="mactrl.searchText" md-highlight-flags="^i">{{ item.keyword }}</span>
+          <span md-highlight-text="mactrl.searchText" class="col-1" md-highlight-flags="i">{{ item.keyword }}</span>
+          <span md-highlight-text="mactrl.searchText" md-highlight-flags="i">{{ item.description }}</span>
         </md-item-template>
         <md-not-found>
           No results matching "{{ mactrl.searchText }}" were found.

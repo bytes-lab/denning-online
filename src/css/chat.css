@@ -158,18 +158,6 @@
     vertical-align: top;
 }
 
-.chat_frame {
-    box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
-    background: #fff;
-    width: 360px;
-    position: fixed;
-    top: 68px;
-    height: calc(100vh - 67px);
-    right: 0;
-    margin-left: auto;   
-    z-index: 5;
-}
-
 a.new_object {
     margin-left: 100px;
     height: 32px;
@@ -198,4 +186,95 @@ a.top_button_first {
 .box-title-detail {
     font-size: 36px;
     text-align: right;
+}
+
+.chat_frame {
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
+    background: #fff;
+    width: 360px;
+    position: fixed;
+    top: 68px;
+    height: calc(100vh - 67px);
+    right: 0;
+    margin-left: auto;   
+    z-index: 5;
+}
+
+/* fix iOS bug not displaying 100vh correctly */
+
+/* Ipad Pro - Landscape-breakpoint */
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1024px) and (min-device-height : 1366px) and (max-device-height : 1366px) and (min-width: 1366px) and (max-width: 1366px) {
+    .chat_frame {
+        height: 957px;
+    }
+}
+
+/* Ipad Pro - Portrait-breakpoint */
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1024px) and (min-device-height : 1366px) and (max-device-height : 1366px) and (min-width: 1024px) and (max-width: 1024px) {
+    .chat_frame {
+        height: 1299px;
+    }
+}
+
+/* iPad - Landscape-breakpoint */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    .chat_frame {
+        height: 701px;
+    }
+}
+/* iPad - Portrait-breakpoint */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .chat_frame {
+        height: 957px;
+    }
+}
+
+/* iPhone 6/7 plus - Landscape-breakpoint  */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+    .chat_frame {
+        height: 347px;
+    }
+}
+/* iPhone 6/7 plus - Portrait-breakpoint  */
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+    .chat_frame {
+        height: 669px;
+    }
+}
+
+/* iPhone 6/7 - Landscape-breakpoint  */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+    .chat_frame {
+        height: 308px;
+    }
+}
+/* iPhone 6/7 - Portrait-breakpoint  */
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+    .chat_frame {
+        height: 600px;
+    }
+}
+
+/* iPhone5 */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+    .chat_frame {
+        height: 253px;
+    }
+}
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+    .chat_frame {
+        height: 501px;
+    }
+}
+
+/* iPhone 4 */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+    .chat_frame {
+        height: 253px;
+    }
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+    .chat_frame {
+        height: 413px;
+    }
 }
