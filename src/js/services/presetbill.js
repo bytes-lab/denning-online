@@ -32,6 +32,12 @@ denningOnline
       });
     }
 
+    service.getItemV2 = function (code) {
+      return http.GET('v2/table/PresetBill/'+code).then(function (resp) {
+        return resp.data;
+      });
+    }
+
     service.save = function (entity, isUpdate) {
       var method = isUpdate ? 'PUT': 'POST';
 

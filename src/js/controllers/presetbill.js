@@ -72,8 +72,8 @@ denningOnline
           },
           excludes: function () {
             var arr = [];
-            for (ii in self.entity.listBilledItems) {
-              var item = self.entity.listBilledItems[ii];
+            for (ii in self.entity.listMainItems) {
+              var item = self.entity.listMainItems[ii];
               arr.push(item.strItemCode);
             }
             return arr;
@@ -83,9 +83,9 @@ denningOnline
         if (res && res.length > 0) {
           for (ii in res) {
             if (idx != -1) {
-              self.entity.listBilledItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
+              self.entity.listMainItems.splice(idx+parseInt(ii)+1, 0, res[ii]);
             } else {
-              self.entity.listBilledItems.push(res[ii]);
+              self.entity.listMainItems.push(res[ii]);
             }
           }
           refreshItems();
@@ -96,21 +96,21 @@ denningOnline
     self.move = function (x, y) {
       if (x < 0) {
         return;
-      } else if (y == self.entity.listBilledItems.length) {
+      } else if (y == self.entity.listMainItems.length) {
         return;
       }
 
-      var b = self.entity.listBilledItems[y];
-      self.entity.listBilledItems[y] = self.entity.listBilledItems[x];
-      self.entity.listBilledItems[x] = b;
+      var b = self.entity.listMainItems[y];
+      self.entity.listMainItems[y] = self.entity.listMainItems[x];
+      self.entity.listMainItems[x] = b;
       self.tableFilter.reload();
     };
 
     self.remove = function (code) {
-      for (ii in self.entity.listBilledItems) {
-        var item = self.entity.listBilledItems[ii];
+      for (ii in self.entity.listMainItems) {
+        var item = self.entity.listMainItems[ii];
         if (item.strItemCode == code) {
-          self.entity.listBilledItems.splice(ii, 1);
+          self.entity.listMainItems.splice(ii, 1);
           break;
         }
       }
@@ -127,7 +127,7 @@ denningOnline
       }, {
         counts: [],
         getData: function (params) {
-          return self.entity.listBilledItems.filter(function (item) {
+          return self.entity.listMainItems.filter(function (item) {
             return self.itemType == 'All' || item.strBillItemType == self.itemType;
           })
         } 
@@ -144,8 +144,8 @@ denningOnline
         DisbWithTax: 0.0
       };
 
-      for (ii in self.entity.listBilledItems) {
-        var item = self.entity.listBilledItems[ii];
+      for (ii in self.entity.listMainItems) {
+        var item = self.entity.listMainItems[ii];
         self.typeSum[item.strBillItemType] += parseFloat(item.decUnitCost);
         self.typeSum['All'] += parseFloat(item.decUnitCost);
       }
@@ -160,7 +160,7 @@ denningOnline
 
     if (self.entityCode) {
       self.title = 'Preset Bill Edit';
-      presetbillService.getItem(self.entityCode).then(function (item){
+      presetbillService.getItemV2(self.entityCode).then(function (item){
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         initializeTable();
@@ -170,7 +170,7 @@ denningOnline
       self.entity = {
         strState: 'Common',
         strCategory: 'Conveyancing',
-        listBilledItems: []
+        listMainItems: []
       };
 
       initializeTable();
