@@ -202,6 +202,19 @@ a.top_button_first {
 
 /* fix iOS bug not displaying 100vh correctly */
 
+/* iPad - Landscape-breakpoint */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    .chat_frame {
+        height: 635px;
+    }
+}
+/* iPad - Portrait-breakpoint */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .chat_frame {
+        height: 891px;
+    }
+}
+
 /* Ipad Pro - Landscape-breakpoint */
 @media only screen and (min-device-width : 1024px) and (max-device-width : 1024px) and (min-device-height : 1366px) and (max-device-height : 1366px) and (min-width: 1366px) and (max-width: 1366px) {
     .chat_frame {
@@ -213,18 +226,5 @@ a.top_button_first {
 @media only screen and (min-device-width : 1024px) and (max-device-width : 1024px) and (min-device-height : 1366px) and (max-device-height : 1366px) and (min-width: 1024px) and (max-width: 1024px) {
     .chat_frame {
         height: 1233px;
-    }
-}
-
-/* iPad - Landscape-breakpoint */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-    .chat_frame {
-        height: 635px;
-    }
-}
-/* iPad - Portrait-breakpoint */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-    .chat_frame {
-        height: 891px;
     }
 }

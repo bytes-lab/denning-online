@@ -71,8 +71,6 @@ denningOnline
         }
       }).result.then(function (res) {
         if (res && res.length > 0) {
-          console.log(res);
-
           Promise.all(res.map(function(bill) {
             return presetbillService.getItemV2(bill.code);
           })).then(function(bills) {
@@ -202,6 +200,7 @@ denningOnline
       self.entity = {
         strState: 'Common',
         strCategory: 'Conveyancing',
+        listAddOn: [],
         listMainItems: []
       };
 
