@@ -1,24 +1,25 @@
 denningOnline
-  .controller('presetbillListCtrl', function($filter, $uibModal, NgTableParams, $state, 
-                                             presetbillService) 
+  .controller('presetbillListCtrl', function($filter, $uibModal, NgTableParams, $state, presetbillService)
   {
     var self = this;
 
-    presetbillService.getList(1, 500).then(function(data) {
-      self.data = data;
-      initializeTable();
+    self.tableFilter = new NgTableParams({}, {
+      getData: function(params) {
+        return presetbillService.getList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
+          params.total(data.headers('x-total-count'));
+          return data.data;
+        });
+      }
     });
 
-    function initializeTable () {
-      self.tableFilter = new NgTableParams({
-        page: 1,
-        count: 10,
-        sorting: {
-          name: 'asc' 
+    self.search = function (event, clear) {
+      if(event.which == 13 || clear) { 
+        if (clear) {
+          self.keyword='';
         }
-      }, {
-        dataset: self.data
-      })
+        self.tableFilter.reload();
+      }
     }
   })
 

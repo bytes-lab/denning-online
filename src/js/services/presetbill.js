@@ -6,12 +6,13 @@ denningOnline
   .service('presetbillService', function(http) {
     var service = {};
 
-    service.getList = function (page, pagesize) {
+    service.getList = function (page, pagesize, keyword) {
       return http.GET('v1/PresetBill', {
         page: page,
-        pagesize: pagesize})
-      .then(function (resp) {
-        return resp.data;
+        pagesize: pagesize,
+        search: keyword
+      }).then(function (resp) {
+        return resp;
       });
     }
 
