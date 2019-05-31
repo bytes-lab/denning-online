@@ -137,7 +137,29 @@
         </div>
       </div>
 
-      <h4 class="m-t-25">Add on Preset Bills</h4>
+      <div class="row">
+        <div class="col-md-8 p-l-15 m-t-25">
+          <span class="m-t-25 f-17 f-700 c-black">Add on Preset Bills</span>
+          <div class="item-type pull-right bgm-cyan c-white f-700 f-16 m-r-25 m-t-0" ng-click="vm.insertAddOn();" style="padding: 2px 7px;" title="Add Item">
+            <i class="zmdi zmdi-plus"></i>
+          </div>
+          <div ng-repeat="bill in vm.entity.listAddOn" class="m-t-10">
+            <span class="m-l-10 f-16 f-500 c-black" ng-click="vm[bill.code]=!vm[bill.code]"><i class="zmdi zmdi-plus" ng-if="!vm[bill.code]"></i><i class="zmdi zmdi-minus" ng-if="vm[bill.code]"></i> <span class="m-l-5">{{ bill.strDescription }}</span></span>
+            <div class="item-type pull-right bgm-red c-white f-700 f-16 m-r-25" ng-click="vm.removeAddOn($index);" style="padding: 1px 6px;" title="Add Item">
+              <i class="zmdi zmdi-close"></i>
+            </div>
+            <div ng-repeat="item in bill.listAddOnItems" ng-show="vm[bill.code]">
+              <div class="checkbox m-5 m-l-25 f-16">
+                <label>
+                  <input type="checkbox" ng-checked="w.boolIsFormula=='1'" readonly>
+                  <i class="input-helper"></i>
+                  {{ item.strDescription }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <h4 class="m-t-25">Remark</h4>
       <div class="row">

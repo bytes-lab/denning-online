@@ -74,7 +74,7 @@ denningOnline
 
     self.queryBills = function (keyword) {
       return presetbillService.getTableList(1, 10, keyword).then(function (resp) {
-        return resp;
+        return resp.data;
       });
     }
 

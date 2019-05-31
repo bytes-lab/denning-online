@@ -56,6 +56,38 @@ denningOnline
       'Common'
     ];
 
+    self.insertAddOn = function () {
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'addOnBillModal.html',
+        controller: 'addOnBillModalCtrl as vm',
+        size: 'md',
+        keyboard: true,
+        resolve: {
+          excludes: function () {
+            var arr = [];
+            return arr;
+          }
+        }
+      }).result.then(function (res) {
+        if (res && res.length > 0) {
+          console.log(res);
+
+          Promise.all(res.map(function(bill) {
+            return presetbillService.getItemV2(bill.code);
+          })).then(function(bills) {
+            for (ii in bills) {
+              self.entity.listAddOn.push({
+                code: bills[ii].code,
+                strDescription: bills[ii].strDescription,
+                listAddOnItems: bills[ii].listMainItems
+              })
+            }
+          });
+        }
+      }, function (res) {});
+    };
+
     self.insert = function (idx) {
       var modalInstance = $uibModal.open({
         animation: true,
@@ -176,6 +208,10 @@ denningOnline
       initializeTable();
     }
 
+    self.removeAddOn = function(idx) {
+      self.entity.listAddOn.splice(idx, 1);
+    }
+
     self.copy = function () {
       self.isNew = true;
       self.can_edit = true;
@@ -213,5 +249,53 @@ denningOnline
       } else {
         $state.go('billing.presetbills-list');
       }
+    }
+  })
+
+  .controller('addOnBillModalCtrl', function($filter, $stateParams, presetbillService, 
+                                             $state, billingitemService, refactorService,
+                                             NgTableParams, $uibModal, $uibModalInstance,
+                                             growlService, excludes) 
+  {
+    var self = this;
+    self.items = {};
+
+    self.tableFilter = new NgTableParams({
+      page: 1,
+      count: 5,
+    }, {
+      getData: function(params) {
+        return presetbillService.getTableList(params.page(), params.count(), self.keyword)
+        .then(function (data) {
+          params.total(data.headers('x-total-count') - excludes.length);
+          return data.data.filter(function (item) {
+            return excludes.indexOf(item.strItemCode) == -1;
+          });
+        });
+      }
+    })
+
+    self.search = function () {
+      self.tableFilter.reload();
+    }
+
+    self.addBills = function () {
+      var items = [];
+      for (key in self.items) {
+        if (self.items[key]) {
+          for (ii in self.tableFilter.data) {
+            item = self.tableFilter.data[ii];
+            if (item.code == key) {
+              items.push(item);
+            }
+          }
+        }
+      }
+
+      $uibModalInstance.close(items);
+    }
+
+    self.cancel = function () {
+      $uibModalInstance.close();
     }
   })

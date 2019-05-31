@@ -43,7 +43,7 @@ denningOnline
 
     function getPresetBills(page, pagesize, keyword) {
       return presetbillService.getTableList(page, pagesize, keyword).then(function (resp) {
-        return resp;
+        return resp.data;
       });
     }
 
