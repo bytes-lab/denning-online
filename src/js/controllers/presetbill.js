@@ -41,6 +41,7 @@ denningOnline
     })
 
     self.itemType = 'All';
+    self.taxType = 'NoTax';
 
     self.categories = [
       'Conveyancing',
@@ -158,7 +159,9 @@ denningOnline
         counts: [],
         getData: function (params) {
           return self.entity.listMainItems.filter(function (item) {
-            return self.itemType == 'All' || item.strBillItemType == self.itemType;
+            return self.itemType == 'All' || 
+                   item.strBillItemType == self.itemType || 
+                   item.strTaxCode == self.taxType;
           })
         } 
       });
@@ -167,24 +170,47 @@ denningOnline
     }
 
     function refreshItems () {
-      self.typeSum = {
+      self.gross = {
         All: 0.0,
         Fees: 0.0,
         Disb: 0.0,
         DisbWithTax: 0.0
       };
 
+      self.sst = {
+        Fees: 0.0,
+        Disb: 0.0,
+        DisbWithTax: 0.0
+      };
+
+      var G0001 = null;
       for (ii in self.entity.listMainItems) {
         var item = self.entity.listMainItems[ii];
-        self.typeSum[item.strBillItemType] += parseFloat(item.decUnitCost);
-        self.typeSum['All'] += parseFloat(item.decUnitCost);
+        if (item.strItemCode != 'G0001') {
+          item.decUnitCost = refactorService.convertFloat(item.decUnitPrice) * refactorService.convertFloat(item.decUnit);
+          item.decUnitTax = refactorService.convertFloat(item.decTaxRate) * item.decUnitCost;
+          item.decTotal = item.decUnitCost + item.decUnitTax;
+
+          self.gross[item.strBillItemType] += item.decUnitCost;
+          self.sst[item.strBillItemType] += item.decUnitTax;
+          self.gross['All'] += item.decUnitCost;
+        } else {
+          G0001 = item;
+        }
+      }
+
+      if (G0001) {
+        G0001.decUnitPrice = self.sst.Fees + self.sst.DisbWithTax;
+        G0001.decUnitCost = self.sst.Fees + self.sst.DisbWithTax;
+        G0001.decTotal = item.decUnitCost + item.decUnitTax;
       }
 
       self.tableFilter.reload();
     }
 
-    self.filterItem = function (type) {
+    self.filterItem = function (type, tax) {
       self.itemType = type;
+      self.taxType = tax;
       self.tableFilter.reload();
     }
 
@@ -261,7 +287,7 @@ denningOnline
 
     self.tableFilter = new NgTableParams({
       page: 1,
-      count: 5,
+      count: 10,
     }, {
       getData: function(params) {
         return presetbillService.getTableList(params.page(), params.count(), self.keyword)

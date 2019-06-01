@@ -232,10 +232,6 @@ denningOnline
       self.refreshItems();
     }
 
-    function parseFFloat(strVal) {
-      return parseFloat(strVal.replace(',', '').replace('(', '').replace(')', ''));
-    }
-
     self.refreshItems = function () {
       self.gross = {
         All: 0.0,
@@ -254,13 +250,13 @@ denningOnline
       for (ii in self.entity.clsDetails.listBilledItems) {
         var item = self.entity.clsDetails.listBilledItems[ii];
         if (item.strItemCode != 'G0001') {
-          item.decUnitCost = parseFFloat(item.decUnitPrice) * parseFFloat(item.decUnit);
-          item.decUnitTax = parseFFloat(item.decTaxRate) * item.decUnitCost;
+          item.decUnitCost = refactorService.convertFloat(item.decUnitPrice) * refactorService.convertFloat(item.decUnit);
+          item.decUnitTax = refactorService.convertFloat(item.decTaxRate) * item.decUnitCost;
           item.decTotal = item.decUnitCost + item.decUnitTax;
 
           self.gross[item.strBillItemType] += item.decUnitCost;
           self.sst[item.strBillItemType] += item.decUnitTax;
-          self.gross['All'] += item.decUnitCost;          
+          self.gross['All'] += item.decUnitCost;
         } else {
           G0001 = item;
         }
@@ -325,7 +321,7 @@ denningOnline
         strState: 'Common',
         dtCreateDate: uibDateParser.parse(new Date()),
         clsDetails: {
-          listBilledItems: []          
+          listBilledItems: []
         }
       };
 
@@ -369,7 +365,7 @@ denningOnline
           } else {
             $state.go('billing.quotations-edit', { 'id': item.code });
           }
-          growlService.growl('Saved successfully!', 'success');          
+          growlService.growl('Saved successfully!', 'success');
         }
       });
     }
