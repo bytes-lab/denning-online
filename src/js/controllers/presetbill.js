@@ -82,6 +82,8 @@ denningOnline
                 listAddOnItems: bills[ii].listMainItems
               })
             }
+
+            self.initAddOnBillItemTables();
           });
         }
       }, function (res) {});
@@ -146,6 +148,27 @@ denningOnline
         }
       }
       refreshItems();
+    }
+
+    self.initAddOnBillItemTables = function () {
+      self.addOnTables = {};
+
+      for (ii in self.entity.listAddOn) {
+        bill = self.entity.listAddOn[ii];
+
+        self.addOnTables[bill.code] = new NgTableParams({
+          page: 1,
+          count: 10,
+          sorting: {
+            name: 'asc' 
+          }
+        }, {
+          counts: [],
+          getData: function (params) {
+            return bill.listAddOnItems;
+          } 
+        });
+      }
     }
 
     function initializeTable () {
@@ -220,6 +243,7 @@ denningOnline
         self.entity = refactorService.preConvert(item, true);
         self.entity_ = angular.copy(self.entity);
         initializeTable();
+        self.initAddOnBillItemTables();
       });
     } else {
       self.title = 'New Preset Bill';
@@ -231,6 +255,7 @@ denningOnline
       };
 
       initializeTable();
+      self.initAddOnBillItemTables();
     }
 
     self.removeAddOn = function(idx) {
