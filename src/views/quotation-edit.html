@@ -309,13 +309,13 @@
                     </label>
                   </div>
                 </td>
-                <td data-title="'Unit'" class="cell-edit text-right">
-                  <input type="form-control" ng-model="w.decUnit" ng-readonly="!vm.can_edit" ng-change="vm.refreshItems()" style="width: 50px;" ng-if="w.strItemCode!='G0001'">
-                  <span class="p-r-5" ng-if="w.strItemCode=='G0001'">{{ w.decUnit|number:2 }}</span>
-                </td>
                 <td data-title="'Unit Price'" class="cell-edit text-right">
                   <input type="form-control" ng-model="w.decUnitPrice" ng-readonly="!vm.can_edit" ng-change="vm.refreshItems()" style="width: 80px;" ng-if="w.strItemCode!='G0001'">
                   <span class="p-r-5" ng-if="w.strItemCode=='G0001'">{{ w.decUnitPrice|number:2 }}</span>
+                </td>
+                <td data-title="'Unit'" class="cell-edit text-right">
+                  <input type="form-control" ng-model="w.decUnit" ng-readonly="!vm.can_edit" ng-change="vm.refreshItems()" style="width: 50px;" ng-if="w.strItemCode!='G0001'">
+                  <span class="p-r-5" ng-if="w.strItemCode=='G0001'">{{ w.decUnit|number:2 }}</span>
                 </td>
                 <td data-title="'Charges'" class="text-right">
                   {{ w.decUnitCost|number:2 }}
